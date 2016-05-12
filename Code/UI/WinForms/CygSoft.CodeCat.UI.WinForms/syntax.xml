@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Syntax>
+  <!--<SyntaxMapping Language="Java" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Java.syn" />
+  <SyntaxMapping Language="C#" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\C#.syn" />
+  <SyntaxMapping Language="Javascript" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\JavaScript.syn" />
+  <SyntaxMapping Language="SQL" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\SQLServer2K_SQL.syn" />
+  <SyntaxMapping Language="SQL Server 2K" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\SQLServer2K_SQL.syn" />
+  <SyntaxMapping Language="Text" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Text.syn" />-->
+
+  <SyntaxMapping Language="6502" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\6502.syn" />
+  <SyntaxMapping Language="ASP" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\ASP.syn" />
+  <SyntaxMapping Language="C#" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\C#.syn" />
+  <SyntaxMapping Language="C++" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\C++.syn" />
+  <SyntaxMapping Language="Cobol" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Cobol.syn" />
+  <SyntaxMapping Language="CSS" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\CSS.syn" />
+  <SyntaxMapping Language="DataFlex" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\DataFlex.syn" />
+  <SyntaxMapping Language="Delphi" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Delphi.syn" />
+  <SyntaxMapping Language="DOSBatch" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\DOSBatch.syn" />
+  <SyntaxMapping Language="Fortran90" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Fortran90.syn" />
+  <SyntaxMapping Language="FoxPro" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\FoxPro.syn" />
+  <SyntaxMapping Language="HTML" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Text.syn" />
+  <SyntaxMapping Language="JSON" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\JavaScript.syn" />
+  <SyntaxMapping Language="Java" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Java.syn" />
+  <SyntaxMapping Language="JavaScript" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\JavaScript.syn" />
+  <SyntaxMapping Language="JSP" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\JSP.syn" />
+  <SyntaxMapping Language="LotusScript" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\LotusScript.syn" />
+  <SyntaxMapping Language="MSIL" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\MSIL.syn" />
+  <SyntaxMapping Language="MySQL_SQL" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\MySQL_SQL.syn" />
+  <SyntaxMapping Language="npath" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\npath.syn" />
+  <SyntaxMapping Language="Oracle_SQL" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Oracle_SQL.syn" />
+  <SyntaxMapping Language="Perl" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Perl.syn" />
+  <SyntaxMapping Language="PHP" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\PHP.syn" />
+  <SyntaxMapping Language="Povray" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Povray.syn" />
+  <SyntaxMapping Language="Python" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Python.syn" />
+  <SyntaxMapping Language="rtf" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\rtf.syn" />
+  <SyntaxMapping Language="SmallTalk" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\SmallTalk.syn" />
+  <SyntaxMapping Language="SQL" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\SQLServer2K_SQL.syn" />
+  <SyntaxMapping Language="SQLServer2K_SQL" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\SQLServer2K_SQL.syn" />
+  <SyntaxMapping Language="SQLServer7_SQL" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\SQLServer7_SQL.syn" />
+  <SyntaxMapping Language="SystemPolicies" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\SystemPolicies.syn" />
+  <SyntaxMapping Language="Template" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Template.syn" />
+  <SyntaxMapping Language="Text" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\Text.syn" />
+  <SyntaxMapping Language="TurboPascal" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\TurboPascal.syn" />
+  <SyntaxMapping Language="VB.NET" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\VB.NET.syn" />
+  <SyntaxMapping Language="VB" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\VB.syn" />
+  <SyntaxMapping Language="VBScript" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\VBScript.syn" />
+  <SyntaxMapping Language="VRML97" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\VRML97.syn" />
+  <SyntaxMapping Language="XML" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\XML.syn" />
+  <SyntaxMapping Language="XAML" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\XML.syn" />
+  
+
+<!--
+  <SyntaxMapping Language="6502" FilePath="syntax\6502.syn" />
+  <SyntaxMapping Language="ASP" FilePath="syntax\ASP.syn" />
+  <SyntaxMapping Language="C#" FilePath="syntax\C#.syn" />
+  <SyntaxMapping Language="C++" FilePath="syntax\C++.syn" />
+  <SyntaxMapping Language="Cobol" FilePath="syntax\Cobol.syn" />
+  <SyntaxMapping Language="CSS" FilePath="syntax\CSS.syn" />
+  <SyntaxMapping Language="DataFlex" FilePath="syntax\DataFlex.syn" />
+  <SyntaxMapping Language="Delphi" FilePath="syntax\Delphi.syn" />
+  <SyntaxMapping Language="DOSBatch" FilePath="syntax\DOSBatch.syn" />
+  <SyntaxMapping Language="Fortran90" FilePath="syntax\Fortran90.syn" />
+  <SyntaxMapping Language="FoxPro" FilePath="syntax\FoxPro.syn" />
+  <SyntaxMapping Language="Java" FilePath="syntax\Java.syn" />
+  <SyntaxMapping Language="JavaScript" FilePath="syntax\JavaScript.syn" />
+  <SyntaxMapping Language="JSP" FilePath="syntax\JSP.syn" />
+  <SyntaxMapping Language="LotusScript" FilePath="syntax\LotusScript.syn" />
+  <SyntaxMapping Language="MSIL" FilePath="syntax\MSIL.syn" />
+  <SyntaxMapping Language="MySQL_SQL" FilePath="syntax\MySQL_SQL.syn" />
+  <SyntaxMapping Language="npath" FilePath="syntax\npath.syn" />
+  <SyntaxMapping Language="Oracle_SQL" FilePath="syntax\Oracle_SQL.syn" />
+  <SyntaxMapping Language="Perl" FilePath="syntax\Perl.syn" />
+  <SyntaxMapping Language="PHP" FilePath="syntax\PHP.syn" />
+  <SyntaxMapping Language="Povray" FilePath="syntax\Povray.syn" />
+  <SyntaxMapping Language="Python" FilePath="syntax\Python.syn" />
+  <SyntaxMapping Language="rtf" FilePath="syntax\rtf.syn" />
+  <SyntaxMapping Language="SmallTalk" FilePath="syntax\SmallTalk.syn" />
+  <SyntaxMapping Language="SQL" FilePath="syntax\SQLServer2K_SQL.syn" />
+  <SyntaxMapping Language="SQLServer2K_SQL" FilePath="syntax\SQLServer2K_SQL.syn" />
+  <SyntaxMapping Language="SQLServer7_SQL" FilePath="syntax\SQLServer7_SQL.syn" />
+  <SyntaxMapping Language="SystemPolicies" FilePath="syntax\SystemPolicies.syn" />
+  <SyntaxMapping Language="Template" FilePath="syntax\Template.syn" />
+  <SyntaxMapping Language="Text" FilePath="syntax\Text.syn" />
+  <SyntaxMapping Language="TurboPascal" FilePath="syntax\TurboPascal.syn" />
+  <SyntaxMapping Language="VB.NET" FilePath="syntax\VB.NET.syn" />
+  <SyntaxMapping Language="VB" FilePath="syntax\VB.syn" />
+  <SyntaxMapping Language="VBScript" FilePath="syntax\VBScript.syn" />
+  <SyntaxMapping Language="VRML97" FilePath="syntax\VRML97.syn" />
+  <SyntaxMapping Language="XML" FilePath="syntax\XML.syn" />
+  <SyntaxMapping Language="XAML" FilePath="syntax\XML.syn" />
+  -->
+   
+</Syntax>

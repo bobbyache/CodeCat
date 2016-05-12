@@ -1,0 +1,87 @@
+﻿using CygSoft.CodeCat.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CygSoft.CodeCat.Search.KeywordIndex
+{
+    /// <summary>
+    /// A single code index item that points to a single code snippet resource.
+    /// </summary>
+    public class KeywordIndexItem : PersistableObject, IKeywordIndexItem
+    {
+        public KeywordIndexItem()
+        {
+            this.title = string.Empty;
+            this.NoOfHits = 0;
+            this.KeywordsFromDelimitedList(string.Empty);
+        }
+
+        public KeywordIndexItem(string id, string title, int noOfHits, DateTime dateCreated, DateTime dateModified, string commaDelimitedKeywords)
+            : base(id, dateCreated, dateModified)
+        {
+            this.title = title;
+            this.NoOfHits = noOfHits;
+            this.KeywordsFromDelimitedList(commaDelimitedKeywords);
+        }
+
+        public KeywordIndexItem(string title, int noOfHits, string commaDelimitedKeywords)
+            : base()
+        {
+            this.title = title;
+            this.NoOfHits = noOfHits;
+            this.SetKeywords(commaDelimitedKeywords);
+        }
+
+        private KeyPhrases keyPhrases;
+
+        public string FileTitle { get { return base.Id + ".xml"; } }
+
+        public string[] Keywords
+        {
+            get { return this.keyPhrases.Phrases; }
+        }
+
+        public string CommaDelimitedKeywords
+        {
+            get { return this.keyPhrases.DelimitKeyPhraseList(); }
+        }
+
+        private string title;
+        public string Title
+        {
+            get { return title; }
+            set { title = value; this.DateModified = DateTime.Now; }
+        }
+
+        public int NoOfHits { get; set; }
+
+        public void SetKeywords(string commaDelimitedKeywords)
+        {
+            this.KeywordsFromDelimitedList(commaDelimitedKeywords);
+            this.DateModified = DateTime.Now;
+        }
+
+        public void AddKeywords(string commaDelimitedKeywords)
+        {
+            this.keyPhrases.AddKeyPhrases(commaDelimitedKeywords);
+        }
+
+        public void RemoveKeywords(string[] keywords)
+        {
+            this.keyPhrases.RemovePhrases(keywords);
+        }
+
+        public bool AllKeywordsFound(string[] keywords)
+        {
+            return keyPhrases.AllPhrasesExist(keywords);
+        }
+
+        private void KeywordsFromDelimitedList(string commaDelimitedKeywords)
+        {
+            this.keyPhrases = new KeyPhrases(commaDelimitedKeywords);
+        }
+    }
+}

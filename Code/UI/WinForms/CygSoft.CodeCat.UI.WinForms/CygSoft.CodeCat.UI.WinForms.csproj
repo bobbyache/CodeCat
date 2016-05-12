@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4FDD2CB6-3FFE-458B-A186-2C57375F4AC0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CygSoft.CodeCat.Ui.WinForms</RootNamespace>
+    <AssemblyName>CygSoft.CodeCat.UI.WinForms</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>GEARWEEL.ICO</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CygX1.UI.WinForms.RecentFileMenu">
+      <HintPath>..\..\..\External\CygX1.UI.WinForms.RecentFileMenu.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxBox">
+      <HintPath>..\..\..\External\SyntaxBox.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBoxDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBoxDialog.designer.cs">
+      <DependentUpon>AboutBoxDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BrokenLinksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrokenLinksForm.Designer.cs">
+      <DependentUpon>BrokenLinksForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigSettings.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Dialogs.cs" />
+    <Compile Include="EnterKeywordsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterKeywordsForm.Designer.cs">
+      <DependentUpon>EnterKeywordsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ItemFormController.cs" />
+    <Compile Include="ListviewHelper.cs" />
+    <Compile Include="ListViewItemComparer.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrySettings.cs" />
+    <Compile Include="SelectKeywordsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectKeywordsForm.Designer.cs">
+      <DependentUpon>SelectKeywordsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Resources.cs" />
+    <Compile Include="SnapshotDescForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SnapshotDescForm.Designer.cs">
+      <DependentUpon>SnapshotDescForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SnapshotListCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SnapshotListCtrl.Designer.cs">
+      <DependentUpon>SnapshotListCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SnippetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SnippetForm.Designer.cs">
+      <DependentUpon>SnippetForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UiResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UiResource.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AboutBoxDialog.resx">
+      <DependentUpon>AboutBoxDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrokenLinksForm.resx">
+      <DependentUpon>BrokenLinksForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterKeywordsForm.resx">
+      <DependentUpon>EnterKeywordsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="SelectKeywordsForm.resx">
+      <DependentUpon>SelectKeywordsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SnapshotDescForm.resx">
+      <DependentUpon>SnapshotDescForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SnapshotListCtrl.resx">
+      <DependentUpon>SnapshotListCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SnippetForm.resx">
+      <DependentUpon>SnippetForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UiResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UiResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Domain\CygSoft.CodeCat.Domain.csproj">
+      <Project>{7a97514d-bb47-49aa-8785-260f355d6f96}</Project>
+      <Name>CygSoft.CodeCat.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
+      <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
+      <Name>CygSoft.CodeCat.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GEARWEEL.ICO" />
+    <None Include="Resources\find.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\page_edit.png" />
+    <None Include="Resources\page_delete.png" />
+    <None Include="Resources\page_add.png" />
+    <None Include="Resources\page_white.png" />
+    <None Include="Resources\Download.png" />
+    <None Include="Resources\folder_page_white.png" />
+    <None Include="Resources\pin_red.png" />
+    <Content Include="syntax.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
