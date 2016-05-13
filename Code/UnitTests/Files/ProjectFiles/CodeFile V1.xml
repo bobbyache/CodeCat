@@ -1,0 +1,772 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Snippet ID="39253d56-9867-4747-9a2c-d67da6c3854a">
+  <Code>
+    <![CDATA[USE MSDF_DM
+
+/* =============================================================================================================================
+pDashboardUsage_UserActivity_ByEntity
+User Dashboard (Website) Activity (Entity Level)
+
+	- Doesn't work at the school level
+	- Gets the "count of unique URL hits p/ entity
+
+	- Y Axis - No. of hits
+	- X Axis - users
+	
+
+
+Why do we remove UserHasEntity, EntityDataAvailable from the joins and filters?
+Appears that all webhits are returned as null and therefore nothing shows up on the
+FE bar areas. Might need to look into this...
+============================================================================================================================= */
+
+
+DECLARE 
+	@EntityId INT = 6,
+	@OnlyActiveUsers BIT = 0,
+	@IgnoreSchoolUsers BIT = 0,
+	@QuarterKey VARCHAR(8) = '2015-Q3',
+	--@QuarterKey VARCHAR(8) = '',
+	@UserName VARCHAR(50) = 'DevUser',
+	@NotNull BIT = 0, -- Just set to 0, not quite sure what this does.
+	@ChildLevel INT = 1
+
+-------------------------------------------------------------------------------------------------------------------------------
+-- Paste into stored proc from here:
+-------------------------------------------------------------------------------------------------------------------------------
+
+	DECLARE @DataLoaded BIT = 1
+	DECLARE @Year INT = 0
+	DECLARE @QuarterId INT = 0
+	DECLARE @YearTerm INT = MSDF_ADMIN.dbo.fGetYearTerm(null, null, null, @EntityId);
+
+	SELECT 
+		@Year = Year,
+		@QuarterId = TermId 
+	FROM MSDF_DM.dbo.YearTerm WHERE YearTermId = @YearTerm
+/*
+	DECLARE @SchoolsByEntity TABLE
+	(
+			ParentEntityId int,
+			SchoolEntityId int
+	)
+	INSERT INTO @SchoolsByEntity
+	exec MSDF_ADMIN.dbo.pEntity_SchoolsOfChildEntities @UserName, @EntityId, @Year, @QuarterId
+*/
+	--------------------------------------------------------------------------------------------------------------------
+	-- Required in order to get high and low potential users
+	--------------------------------------------------------------------------------------------------------------------
+	DECLARE @ValidUser TABLE 
+	( 
+		UserId UNIQUEIDENTIFIER,
+		RootEntityId INT,
+		EntityId INT
+	)
+	INSERT INTO @ValidUser
+	EXEC MSDF_ADMIN.dbo.pDashboardUsage_ValidUsersBelowEntity @EntityId, @OnlyActiveUsers, @IgnoreSchoolUsers
+	--SELECT * FROM @ValidUser
+	--------------------------------------------------------------------------------------------------------------------
+
+	--------------------------------------------------------------------------------------------------------------------
+	-- Build up year quarters (generate)
+	--------------------------------------------------------------------------------------------------------------------
+	DECLARE @QuartersTable TABLE
+	(
+		Year INT,
+		Quarter INT,
+		QuarterKey VARCHAR(8),
+		StartDate DATETIME,
+		EndDate DATETIME
+	)
+	INSERT INTO @QuartersTable
+	EXEC MSDF_ADMIN.dbo.pDashboardUsage_GenerateYearQuarter
+	--SELECT * FROM @QuartersTable
+
+	DECLARE @StartDate DATETIME = NULL, @EndDate DATETIME = NULL
+	IF @QuarterKey != ''
+		SELECT @StartDate = StartDate, @EndDate = EndDate FROM @QuartersTable WHERE QuarterKey = @QuarterKey
+	
+	--------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		A.Entity, 
+		A.EntityId, 
+		A.EntityType, 
+		CASE WHEN A.HitCount IS NULL THEN 0 ELSE A.HitCount END AS WebHitCount, 
+		CASE WHEN B.HitCount IS NULL THEN 0 ELSE B.HitCount END AS ReportHitCount 
+	FROM
+	(
+		SELECT E.Name AS Entity, E.EntityId, E.Description AS EntityType, T.HitCount
+		FROM 
+			(
+				SELECT E1.Name, E1.EntityId, ET1.Description 
+				FROM 
+					MSDF_DM.dbo.Entity E1 
+					INNER JOIN MSDF_DM.dbo.EntityType ET1 ON E1.EntityTypeId = ET1.EntityTypeid
+				WHERE
+					E1.EntityId IN 
+					(
+						SELECT E.EntityId 
+						FROM MSDF_DM.dbo.EntityRelationship ER
+							INNER JOIN MSDF_DM.dbo.Entity E ON ER.ChildEntityId = E.EntityId
+							INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+						WHERE 
+							ER.ParentEntityId = @EntityId
+					)
+			) E
+			LEFT OUTER JOIN
+			(
+				-- Have the schools and the entities a level below this entity, now we need to group these child entities and
+				-- calculate their dashboard hit counts
+				SELECT DC.Name, DC.EntityId, DC.Description AS EntityType, COUNT(DC.HitCount) AS HitCount 
+				FROM
+				(
+					SELECT DISTINCT E.Name, E.EntityId, ET.Description, CAST(UAE.EventTime AS DATE) As EventDate, VU.UserId, UAE.Url as HitCount
+					FROM MSDF_DM.dbo.UserSessionActivity USA
+					INNER JOIN MSDF_DM.dbo.UserSessionActivityEvent UAE ON USA.UserSessionId = UAE.UserSessionId
+					INNER JOIN @ValidUser VU ON VU.UserId = USA.UserId
+					--INNER JOIN MSDF_DM.dbo.UserHasEntity UHE ON UHE.UserId = VU.UserId
+					INNER JOIN MSDF_DM.dbo.Entity E ON E.EntityId = VU.RootEntityId
+					--INNER JOIN MSDF_DM.dbo.EntityDataAvailable EDA ON EDA.EntityId = E.EntityId AND EDA.YearTermId = @YearTerm
+					INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+					WHERE
+						--EDA.HaveData = @DataLoaded
+						--AND 
+						--UHE.UserHasEntityTypeId = 1 -- (linked table value is View (Login Level))
+						--AND 
+						NOT EXISTS 
+						(
+							-- don't want the following roles to count...
+							SELECT R.RoleId 
+							FROM MSDF_DM.dbo.Roles R
+							INNER JOIN MSDF_DM.dbo.UsersInRoles UIR ON R.RoleId = UIR.RoleId
+							WHERE 
+								RoleName = 'Project Role' 
+								AND UIR.UserId = VU.UserId
+						)
+						AND UAE.EventTypeId = 2 -- see UserSessionActivityEventType (Page).
+						AND @QuarterKey = '' OR (UAE.EventTime >= @StartDate AND UAE.EventTime <= @EndDate)
+				) DC
+				GROUP BY
+					DC.Name, DC.EntityId, DC.Description
+			) T ON T.EntityId = E.EntityId
+		) A
+		INNER JOIN
+		(
+			SELECT E.Name AS Entity, E.EntityId, E.Description AS EntityType, T.HitCount
+			FROM 
+				(
+					SELECT E1.Name, E1.EntityId, ET1.Description 
+					FROM 
+						MSDF_DM.dbo.Entity E1 
+						INNER JOIN MSDF_DM.dbo.EntityType ET1 ON E1.EntityTypeId = ET1.EntityTypeid
+					WHERE
+						E1.EntityId IN 
+						(
+							SELECT E.EntityId 
+							FROM MSDF_DM.dbo.EntityRelationship ER
+								INNER JOIN MSDF_DM.dbo.Entity E ON ER.ChildEntityId = E.EntityId
+								INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+							WHERE 
+								ER.ParentEntityId = @EntityId
+						)
+				) E
+				LEFT OUTER JOIN
+				(
+					-- Have the schools and the entities a level below this entity, now we need to group these child entities and
+					-- calculate their dashboard hit counts
+					SELECT
+						E.Name, E.EntityId, ET.Description, COUNT(RU.RunDate) AS HitCount
+					FROM 
+						MSDF_DM.dbo.ReportUsage RU
+						INNER JOIN MSDF_DM.dbo.Report RP ON RP.ReportId = RU.ReportId 
+						--INNER JOIN MSDF_DM.dbo.EntityDataAvailable EDA ON EDA.EntityId = S.EntityId AND EDA.YearTermId = @YearTerm
+						INNER JOIN @ValidUser VU ON VU.UserId = RU.UserId
+						INNER JOIN MSDF_DM.dbo.Entity E ON E.EntityId = VU.RootEntityId
+						INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+					WHERE
+						--EDA.HaveData = @DataLoaded
+						--UHE.UserHasEntityTypeId = 1 -- (linked table value is View (Login Level))
+						--AND 
+						NOT EXISTS 
+						(
+							-- don't want the following roles to count...
+							SELECT R.RoleId 
+							FROM MSDF_DM.dbo.Roles R
+							INNER JOIN MSDF_DM.dbo.UsersInRoles UIR ON R.RoleId = UIR.RoleId
+							WHERE 
+								RoleName = 'Project Role' 
+								AND UIR.UserId = VU.UserId
+						)
+						AND @QuarterKey = '' OR (RU.RunDate >= @StartDate AND RU.RunDate <= @EndDate)
+					GROUP BY
+						E.Name, E.EntityId, ET.Description
+				) T ON T.EntityId = E.EntityId
+		) B
+		ON A.EntityId = B.EntityId
+
+		ORDER BY A.Entity]]>
+  </Code>
+  <Snapshots>
+    <Snapshot ID="0ae24969-1d62-4759-900b-d29741a0ecaa" SnapDate="2016-01-12T14:33:58.2682023+02:00">
+      <Description>Before returning all direct children entities.</Description>
+      <Code>
+        <![CDATA[USE MSDF_DM
+
+/* =============================================================================================================================
+pDashboardUsage_UserActivity_ByEntity
+User Dashboard (Website) Activity (Entity Level)
+
+	- Doesn't work at the school level
+	- Gets the "count of unique URL hits p/ entity
+
+	- Y Axis - No. of hits
+	- X Axis - users
+	
+	
+Why do we remove UserHasEntity, EntityDataAvailable from the joins and filters?
+Appears that all webhits are returned as null and therefore nothing shows up on the
+FE bar areas. Might need to look into this...
+============================================================================================================================= */
+
+
+DECLARE 
+	@EntityId INT = 1002,
+	@OnlyActiveUsers BIT = 0,
+	@IgnoreSchoolUsers BIT = 0,
+	@QuarterKey VARCHAR(8) = '2015-Q3',
+	--@QuarterKey VARCHAR(8) = '',
+	@UserName VARCHAR(50) = 'DevUser',
+	@NotNull BIT = 0, -- Just set to 0, not quite sure what this does.
+	@ChildLevel INT = 1
+
+-------------------------------------------------------------------------------------------------------------------------------
+-- Paste into stored proc from here:
+-------------------------------------------------------------------------------------------------------------------------------
+
+	DECLARE @DataLoaded BIT = 1
+	DECLARE @Year INT = 0
+	DECLARE @QuarterId INT = 0
+	DECLARE @YearTerm INT = MSDF_ADMIN.dbo.fGetYearTerm(null, null, null, @EntityId);
+
+	SELECT 
+		@Year = Year,
+		@QuarterId = TermId 
+	FROM MSDF_DM.dbo.YearTerm WHERE YearTermId = @YearTerm
+/*
+	DECLARE @SchoolsByEntity TABLE
+	(
+			ParentEntityId int,
+			SchoolEntityId int
+	)
+	INSERT INTO @SchoolsByEntity
+	exec MSDF_ADMIN.dbo.pEntity_SchoolsOfChildEntities @UserName, @EntityId, @Year, @QuarterId
+*/
+	--------------------------------------------------------------------------------------------------------------------
+	-- Required in order to get high and low potential users
+	--------------------------------------------------------------------------------------------------------------------
+	DECLARE @ValidUser TABLE 
+	( 
+		UserId UNIQUEIDENTIFIER,
+		RootEntityId INT,
+		EntityId INT
+	)
+	INSERT INTO @ValidUser
+	EXEC MSDF_ADMIN.dbo.pDashboardUsage_ValidUsersBelowEntity @EntityId, @OnlyActiveUsers, @IgnoreSchoolUsers 
+	--SELECT * FROM @ValidUser
+	--------------------------------------------------------------------------------------------------------------------
+
+	--------------------------------------------------------------------------------------------------------------------
+	-- Build up year quarters (generate)
+	--------------------------------------------------------------------------------------------------------------------
+	DECLARE @QuartersTable TABLE
+	(
+		Year INT,
+		Quarter INT,
+		QuarterKey VARCHAR(8),
+		StartDate DATETIME,
+		EndDate DATETIME
+	)
+	INSERT INTO @QuartersTable
+	EXEC MSDF_ADMIN.dbo.pDashboardUsage_GenerateYearQuarter
+	--SELECT * FROM @QuartersTable
+
+	DECLARE @StartDate DATETIME = NULL, @EndDate DATETIME = NULL
+	IF @QuarterKey != ''
+		SELECT @StartDate = StartDate, @EndDate = EndDate FROM @QuartersTable WHERE QuarterKey = @QuarterKey
+	
+	--------------------------------------------------------------------------------------------------------------------
+
+	SELECT A.Entity, A.EntityId, A.EntityType, A.HitCount AS WebHitCount, B.HitCount AS ReportHitCount FROM
+	(
+		SELECT E.Name AS Entity, E.EntityId, E.Description AS EntityType, T.HitCount
+		FROM 
+			(
+				SELECT E1.Name, E1.EntityId, ET1.Description 
+				FROM 
+					MSDF_DM.dbo.Entity E1 
+					INNER JOIN MSDF_DM.dbo.EntityType ET1 ON E1.EntityTypeId = ET1.EntityTypeid
+				WHERE
+					E1.EntityId IN (SELECT DISTINCT RootEntityId FROM @ValidUser)
+			) E
+			LEFT OUTER JOIN
+			(
+				-- Have the schools and the entities a level below this entity, now we need to group these child entities and
+				-- calculate their dashboard hit counts
+				SELECT DC.Name, DC.EntityId, DC.Description AS EntityType, COUNT(DC.HitCount) AS HitCount 
+				FROM
+				(
+					SELECT DISTINCT E.Name, E.EntityId, ET.Description, CAST(UAE.EventTime AS DATE) As EventDate, VU.UserId, UAE.Url as HitCount
+					FROM MSDF_DM.dbo.UserSessionActivity USA
+					INNER JOIN MSDF_DM.dbo.UserSessionActivityEvent UAE ON USA.UserSessionId = UAE.UserSessionId
+					INNER JOIN @ValidUser VU ON VU.UserId = USA.UserId
+					--INNER JOIN MSDF_DM.dbo.UserHasEntity UHE ON UHE.UserId = VU.UserId
+					INNER JOIN MSDF_DM.dbo.Entity E ON E.EntityId = VU.RootEntityId
+					--INNER JOIN MSDF_DM.dbo.EntityDataAvailable EDA ON EDA.EntityId = E.EntityId AND EDA.YearTermId = @YearTerm
+					INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+					WHERE
+						--EDA.HaveData = @DataLoaded
+						--AND 
+						--UHE.UserHasEntityTypeId = 1 -- (linked table value is View (Login Level))
+						--AND 
+						NOT EXISTS 
+						(
+							-- don't want the following roles to count...
+							SELECT R.RoleId 
+							FROM MSDF_DM.dbo.Roles R
+							INNER JOIN MSDF_DM.dbo.UsersInRoles UIR ON R.RoleId = UIR.RoleId
+							WHERE 
+								RoleName = 'Project Role' 
+								AND UIR.UserId = VU.UserId
+						)
+						AND UAE.EventTypeId = 2 -- see UserSessionActivityEventType (Page).
+						AND @QuarterKey = '' OR (UAE.EventTime >= @StartDate AND UAE.EventTime <= @EndDate)
+				) DC
+				GROUP BY
+					DC.Name, DC.EntityId, DC.Description
+			) T ON T.EntityId = E.EntityId
+		) A
+		INNER JOIN
+		(
+			SELECT E.Name AS Entity, E.EntityId, E.Description AS EntityType, T.HitCount
+			FROM 
+				(
+					SELECT E1.Name, E1.EntityId, ET1.Description 
+					FROM 
+						MSDF_DM.dbo.Entity E1 
+						INNER JOIN MSDF_DM.dbo.EntityType ET1 ON E1.EntityTypeId = ET1.EntityTypeid
+					WHERE
+						E1.EntityId IN (SELECT DISTINCT RootEntityId FROM @ValidUser)
+				) E
+				LEFT OUTER JOIN
+				(
+					-- Have the schools and the entities a level below this entity, now we need to group these child entities and
+					-- calculate their dashboard hit counts
+					SELECT
+						E.Name, E.EntityId, ET.Description, COUNT(RU.RunDate) AS HitCount
+					FROM 
+						MSDF_DM.dbo.ReportUsage RU
+						INNER JOIN MSDF_DM.dbo.Report RP ON RP.ReportId = RU.ReportId 
+						--INNER JOIN MSDF_DM.dbo.EntityDataAvailable EDA ON EDA.EntityId = S.EntityId AND EDA.YearTermId = @YearTerm
+						INNER JOIN @ValidUser VU ON VU.UserId = RU.UserId
+						INNER JOIN MSDF_DM.dbo.Entity E ON E.EntityId = VU.RootEntityId
+						INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+					WHERE
+						--EDA.HaveData = @DataLoaded
+						--UHE.UserHasEntityTypeId = 1 -- (linked table value is View (Login Level))
+						--AND 
+						NOT EXISTS 
+						(
+							-- don't want the following roles to count...
+							SELECT R.RoleId 
+							FROM MSDF_DM.dbo.Roles R
+							INNER JOIN MSDF_DM.dbo.UsersInRoles UIR ON R.RoleId = UIR.RoleId
+							WHERE 
+								RoleName = 'Project Role' 
+								AND UIR.UserId = VU.UserId
+						)
+						AND @QuarterKey = '' OR (RU.RunDate >= @StartDate AND RU.RunDate <= @EndDate)
+					GROUP BY
+						E.Name, E.EntityId, ET.Description
+				) T ON T.EntityId = E.EntityId
+		) B
+		ON A.EntityId = B.EntityId
+
+		ORDER BY A.Entity]]>
+      </Code>
+    </Snapshot>
+    <Snapshot ID="eb821c0a-2103-442b-bc6d-ef219c321a2e" SnapDate="2015-12-17T10:22:55.6586967+02:00">
+      <Description>Before adding "QuarterKey" as a parameter to find user activity between quarter dates.</Description>
+      <Code>
+        <![CDATA[USE MSDF_DM
+
+/* =============================================================================================================================
+pDashboardUsage_UserActivity_ByEntity
+User Dashboard (Website) Activity (Entity Level)
+
+	- Doesn't work at the school level
+	- Gets the "count of unique URL hits p/ entity
+
+	- Y Axis - No. of hits
+	- X Axis - users
+	
+	
+Why do we remove UserHasEntity, EntityDataAvailable from the joins and filters?
+Appears that all webhits are returned as null and therefore nothing shows up on the
+FE bar areas. Might need to look into this...
+============================================================================================================================= */
+
+
+DECLARE @EntityId INT = 1002
+DECLARE @OnlyActiveUsers BIT = 0
+DECLARE @IgnoreSchoolUsers BIT = 0
+
+DECLARE @UserName VARCHAR(50) = 'DevUser'
+DECLARE @NotNull BIT = 0 -- Just set to 0, not quite sure what this does.
+DECLARE @ChildLevel INT = 1
+
+-------------------------------------------------------------------------------------------------------------------------------
+-- Paste into stored proc from here:
+-------------------------------------------------------------------------------------------------------------------------------
+
+	DECLARE @DataLoaded BIT = 1
+	DECLARE @Year INT = 0
+	DECLARE @QuarterId INT = 0
+	DECLARE @YearTerm INT = MSDF_ADMIN.dbo.fGetYearTerm(null, null, null, @EntityId);
+
+	SELECT 
+		@Year = Year,
+		@QuarterId = TermId 
+	FROM MSDF_DM.dbo.YearTerm WHERE YearTermId = @YearTerm
+/*
+	DECLARE @SchoolsByEntity TABLE
+	(
+			ParentEntityId int,
+			SchoolEntityId int
+	)
+	INSERT INTO @SchoolsByEntity
+	exec MSDF_ADMIN.dbo.pEntity_SchoolsOfChildEntities @UserName, @EntityId, @Year, @QuarterId
+*/
+	--------------------------------------------------------------------------------------------------------------------
+	-- Required in order to get high and low potential users
+	--------------------------------------------------------------------------------------------------------------------
+	DECLARE @ValidUser TABLE 
+	( 
+		UserId UNIQUEIDENTIFIER,
+		RootEntityId INT,
+		EntityId INT
+	)
+	INSERT INTO @ValidUser
+	EXEC MSDF_ADMIN.dbo.pDashboardUsage_ValidUsersBelowEntity @EntityId, @OnlyActiveUsers, @IgnoreSchoolUsers 
+	--SELECT * FROM @ValidUser
+	--------------------------------------------------------------------------------------------------------------------
+
+	SELECT A.Entity, A.EntityId, A.EntityType, A.HitCount AS WebHitCount, B.HitCount AS ReportHitCount FROM
+	(
+		SELECT E.Name AS Entity, E.EntityId, E.Description AS EntityType, T.HitCount
+		FROM 
+			(
+				SELECT E1.Name, E1.EntityId, ET1.Description 
+				FROM 
+					MSDF_DM.dbo.Entity E1 
+					INNER JOIN MSDF_DM.dbo.EntityType ET1 ON E1.EntityTypeId = ET1.EntityTypeid
+				WHERE
+					E1.EntityId IN (SELECT DISTINCT RootEntityId FROM @ValidUser)
+			) E
+			LEFT OUTER JOIN
+			(
+				-- Have the schools and the entities a level below this entity, now we need to group these child entities and
+				-- calculate their dashboard hit counts
+				SELECT DC.Name, DC.EntityId, DC.Description AS EntityType, COUNT(DC.HitCount) AS HitCount 
+				FROM
+				(
+					SELECT DISTINCT E.Name, E.EntityId, ET.Description, CAST(EventTime AS DATE) As EventDate, VU.UserId, UAE.Url as HitCount
+					FROM MSDF_DM.dbo.UserSessionActivity USA
+					INNER JOIN MSDF_DM.dbo.UserSessionActivityEvent UAE ON USA.UserSessionId = UAE.UserSessionId
+					INNER JOIN @ValidUser VU ON VU.UserId = USA.UserId
+					--INNER JOIN MSDF_DM.dbo.UserHasEntity UHE ON UHE.UserId = VU.UserId
+					INNER JOIN MSDF_DM.dbo.Entity E ON E.EntityId = VU.RootEntityId
+					--INNER JOIN MSDF_DM.dbo.EntityDataAvailable EDA ON EDA.EntityId = E.EntityId AND EDA.YearTermId = @YearTerm
+					INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+					WHERE
+						--EDA.HaveData = @DataLoaded
+						--AND 
+						--UHE.UserHasEntityTypeId = 1 -- (linked table value is View (Login Level))
+						--AND 
+						NOT EXISTS 
+						(
+							-- don't want the following roles to count...
+							SELECT R.RoleId 
+							FROM MSDF_DM.dbo.Roles R
+							INNER JOIN MSDF_DM.dbo.UsersInRoles UIR ON R.RoleId = UIR.RoleId
+							WHERE 
+								RoleName = 'Project Role' 
+								AND UIR.UserId = VU.UserId
+						)
+						AND 
+							UAE.EventTypeId = 2 -- see UserSessionActivityEventType (Page).
+				) DC
+				GROUP BY
+					DC.Name, DC.EntityId, DC.Description
+			) T ON T.EntityId = E.EntityId
+		) A
+		INNER JOIN
+		(
+			SELECT E.Name AS Entity, E.EntityId, E.Description AS EntityType, T.HitCount
+			FROM 
+				(
+					SELECT E1.Name, E1.EntityId, ET1.Description 
+					FROM 
+						MSDF_DM.dbo.Entity E1 
+						INNER JOIN MSDF_DM.dbo.EntityType ET1 ON E1.EntityTypeId = ET1.EntityTypeid
+					WHERE
+						E1.EntityId IN (SELECT DISTINCT RootEntityId FROM @ValidUser)
+				) E
+				LEFT OUTER JOIN
+				(
+					-- Have the schools and the entities a level below this entity, now we need to group these child entities and
+					-- calculate their dashboard hit counts
+					SELECT
+						E.Name, E.EntityId, ET.Description, COUNT(RU.RunDate) AS HitCount
+					FROM 
+						MSDF_DM.dbo.ReportUsage RU
+						INNER JOIN MSDF_DM.dbo.Report RP ON RP.ReportId = RU.ReportId 
+						--INNER JOIN MSDF_DM.dbo.EntityDataAvailable EDA ON EDA.EntityId = S.EntityId AND EDA.YearTermId = @YearTerm
+						INNER JOIN @ValidUser VU ON VU.UserId = RU.UserId
+						INNER JOIN MSDF_DM.dbo.Entity E ON E.EntityId = VU.RootEntityId
+						INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+					WHERE
+						--EDA.HaveData = @DataLoaded
+						--UHE.UserHasEntityTypeId = 1 -- (linked table value is View (Login Level))
+						--AND 
+						NOT EXISTS 
+						(
+							-- don't want the following roles to count...
+							SELECT R.RoleId 
+							FROM MSDF_DM.dbo.Roles R
+							INNER JOIN MSDF_DM.dbo.UsersInRoles UIR ON R.RoleId = UIR.RoleId
+							WHERE 
+								RoleName = 'Project Role' 
+								AND UIR.UserId = VU.UserId
+						)
+					GROUP BY
+						E.Name, E.EntityId, ET.Description
+				) T ON T.EntityId = E.EntityId
+		) B
+		ON A.EntityId = B.EntityId
+
+		ORDER BY A.Entity]]>
+      </Code>
+    </Snapshot>
+    <Snapshot ID="93a9dd93-dbfa-4f59-a0c1-e319622e733c" SnapDate="2016-02-25T11:34:44.656117+02:00">
+      <Description>Before cleaning out comments in target stored proc.</Description>
+      <Code>
+        <![CDATA[USE MSDF_DM
+
+/* =============================================================================================================================
+pDashboardUsage_UserActivity_ByEntity
+User Dashboard (Website) Activity (Entity Level)
+
+	- Doesn't work at the school level
+	- Gets the "count of unique URL hits p/ entity
+
+	- Y Axis - No. of hits
+	- X Axis - users
+	
+
+
+Why do we remove UserHasEntity, EntityDataAvailable from the joins and filters?
+Appears that all webhits are returned as null and therefore nothing shows up on the
+FE bar areas. Might need to look into this...
+============================================================================================================================= */
+
+
+DECLARE 
+	@EntityId INT = 6,
+	@OnlyActiveUsers BIT = 0,
+	@IgnoreSchoolUsers BIT = 0,
+	@QuarterKey VARCHAR(8) = '2015-Q3',
+	--@QuarterKey VARCHAR(8) = '',
+	@UserName VARCHAR(50) = 'DevUser',
+	@NotNull BIT = 0, -- Just set to 0, not quite sure what this does.
+	@ChildLevel INT = 1
+
+-------------------------------------------------------------------------------------------------------------------------------
+-- Paste into stored proc from here:
+-------------------------------------------------------------------------------------------------------------------------------
+
+	DECLARE @DataLoaded BIT = 1
+	DECLARE @Year INT = 0
+	DECLARE @QuarterId INT = 0
+	DECLARE @YearTerm INT = MSDF_ADMIN.dbo.fGetYearTerm(null, null, null, @EntityId);
+
+	SELECT 
+		@Year = Year,
+		@QuarterId = TermId 
+	FROM MSDF_DM.dbo.YearTerm WHERE YearTermId = @YearTerm
+/*
+	DECLARE @SchoolsByEntity TABLE
+	(
+			ParentEntityId int,
+			SchoolEntityId int
+	)
+	INSERT INTO @SchoolsByEntity
+	exec MSDF_ADMIN.dbo.pEntity_SchoolsOfChildEntities @UserName, @EntityId, @Year, @QuarterId
+*/
+	--------------------------------------------------------------------------------------------------------------------
+	-- Required in order to get high and low potential users
+	--------------------------------------------------------------------------------------------------------------------
+	DECLARE @ValidUser TABLE 
+	( 
+		UserId UNIQUEIDENTIFIER,
+		RootEntityId INT,
+		EntityId INT
+	)
+	INSERT INTO @ValidUser
+	EXEC MSDF_ADMIN.dbo.pDashboardUsage_ValidUsersBelowEntity @EntityId, @OnlyActiveUsers, @IgnoreSchoolUsers
+	--SELECT * FROM @ValidUser
+	--------------------------------------------------------------------------------------------------------------------
+
+	--------------------------------------------------------------------------------------------------------------------
+	-- Build up year quarters (generate)
+	--------------------------------------------------------------------------------------------------------------------
+	DECLARE @QuartersTable TABLE
+	(
+		Year INT,
+		Quarter INT,
+		QuarterKey VARCHAR(8),
+		StartDate DATETIME,
+		EndDate DATETIME
+	)
+	INSERT INTO @QuartersTable
+	EXEC MSDF_ADMIN.dbo.pDashboardUsage_GenerateYearQuarter
+	--SELECT * FROM @QuartersTable
+
+	DECLARE @StartDate DATETIME = NULL, @EndDate DATETIME = NULL
+	IF @QuarterKey != ''
+		SELECT @StartDate = StartDate, @EndDate = EndDate FROM @QuartersTable WHERE QuarterKey = @QuarterKey
+	
+	--------------------------------------------------------------------------------------------------------------------
+
+	SELECT 
+		A.Entity, 
+		A.EntityId, 
+		A.EntityType, 
+		CASE WHEN A.HitCount IS NULL THEN 0 ELSE A.HitCount END AS WebHitCount, 
+		CASE WHEN B.HitCount IS NULL THEN 0 ELSE B.HitCount END AS ReportHitCount 
+	FROM
+	(
+		SELECT E.Name AS Entity, E.EntityId, E.Description AS EntityType, T.HitCount
+		FROM 
+			(
+				SELECT E1.Name, E1.EntityId, ET1.Description 
+				FROM 
+					MSDF_DM.dbo.Entity E1 
+					INNER JOIN MSDF_DM.dbo.EntityType ET1 ON E1.EntityTypeId = ET1.EntityTypeid
+				WHERE
+					E1.EntityId IN 
+					(
+						SELECT E.EntityId 
+						FROM MSDF_DM.dbo.EntityRelationship ER
+							INNER JOIN MSDF_DM.dbo.Entity E ON ER.ChildEntityId = E.EntityId
+							INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+						WHERE 
+							ER.ParentEntityId = @EntityId
+					)
+			) E
+			LEFT OUTER JOIN
+			(
+				-- Have the schools and the entities a level below this entity, now we need to group these child entities and
+				-- calculate their dashboard hit counts
+				SELECT DC.Name, DC.EntityId, DC.Description AS EntityType, COUNT(DC.HitCount) AS HitCount 
+				FROM
+				(
+					SELECT DISTINCT E.Name, E.EntityId, ET.Description, CAST(UAE.EventTime AS DATE) As EventDate, VU.UserId, UAE.Url as HitCount
+					FROM MSDF_DM.dbo.UserSessionActivity USA
+					INNER JOIN MSDF_DM.dbo.UserSessionActivityEvent UAE ON USA.UserSessionId = UAE.UserSessionId
+					INNER JOIN @ValidUser VU ON VU.UserId = USA.UserId
+					--INNER JOIN MSDF_DM.dbo.UserHasEntity UHE ON UHE.UserId = VU.UserId
+					INNER JOIN MSDF_DM.dbo.Entity E ON E.EntityId = VU.RootEntityId
+					--INNER JOIN MSDF_DM.dbo.EntityDataAvailable EDA ON EDA.EntityId = E.EntityId AND EDA.YearTermId = @YearTerm
+					INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+					WHERE
+						--EDA.HaveData = @DataLoaded
+						--AND 
+						--UHE.UserHasEntityTypeId = 1 -- (linked table value is View (Login Level))
+						--AND 
+						NOT EXISTS 
+						(
+							-- don't want the following roles to count...
+							SELECT R.RoleId 
+							FROM MSDF_DM.dbo.Roles R
+							INNER JOIN MSDF_DM.dbo.UsersInRoles UIR ON R.RoleId = UIR.RoleId
+							WHERE 
+								RoleName = 'Project Role' 
+								AND UIR.UserId = VU.UserId
+						)
+						AND UAE.EventTypeId = 2 -- see UserSessionActivityEventType (Page).
+						AND @QuarterKey = '' OR (UAE.EventTime >= @StartDate AND UAE.EventTime <= @EndDate)
+				) DC
+				GROUP BY
+					DC.Name, DC.EntityId, DC.Description
+			) T ON T.EntityId = E.EntityId
+		) A
+		INNER JOIN
+		(
+			SELECT E.Name AS Entity, E.EntityId, E.Description AS EntityType, T.HitCount
+			FROM 
+				(
+					SELECT E1.Name, E1.EntityId, ET1.Description 
+					FROM 
+						MSDF_DM.dbo.Entity E1 
+						INNER JOIN MSDF_DM.dbo.EntityType ET1 ON E1.EntityTypeId = ET1.EntityTypeid
+					WHERE
+						E1.EntityId IN 
+						(
+							SELECT E.EntityId 
+							FROM MSDF_DM.dbo.EntityRelationship ER
+								INNER JOIN MSDF_DM.dbo.Entity E ON ER.ChildEntityId = E.EntityId
+								INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+							WHERE 
+								ER.ParentEntityId = @EntityId
+						)
+				) E
+				LEFT OUTER JOIN
+				(
+					-- Have the schools and the entities a level below this entity, now we need to group these child entities and
+					-- calculate their dashboard hit counts
+					SELECT
+						E.Name, E.EntityId, ET.Description, COUNT(RU.RunDate) AS HitCount
+					FROM 
+						MSDF_DM.dbo.ReportUsage RU
+						INNER JOIN MSDF_DM.dbo.Report RP ON RP.ReportId = RU.ReportId 
+						--INNER JOIN MSDF_DM.dbo.EntityDataAvailable EDA ON EDA.EntityId = S.EntityId AND EDA.YearTermId = @YearTerm
+						INNER JOIN @ValidUser VU ON VU.UserId = RU.UserId
+						INNER JOIN MSDF_DM.dbo.Entity E ON E.EntityId = VU.RootEntityId
+						INNER JOIN MSDF_DM.dbo.EntityType ET ON ET.EntityTypeId = E.EntityTypeId
+					WHERE
+						--EDA.HaveData = @DataLoaded
+						--UHE.UserHasEntityTypeId = 1 -- (linked table value is View (Login Level))
+						--AND 
+						NOT EXISTS 
+						(
+							-- don't want the following roles to count...
+							SELECT R.RoleId 
+							FROM MSDF_DM.dbo.Roles R
+							INNER JOIN MSDF_DM.dbo.UsersInRoles UIR ON R.RoleId = UIR.RoleId
+							WHERE 
+								RoleName = 'Project Role' 
+								AND UIR.UserId = VU.UserId
+						)
+						AND @QuarterKey = '' OR (RU.RunDate >= @StartDate AND RU.RunDate <= @EndDate)
+					GROUP BY
+						E.Name, E.EntityId, ET.Description
+				) T ON T.EntityId = E.EntityId
+		) B
+		ON A.EntityId = B.EntityId
+
+		ORDER BY A.Entity]]>
+      </Code>
+    </Snapshot>
+  </Snapshots>
+</Snippet>
