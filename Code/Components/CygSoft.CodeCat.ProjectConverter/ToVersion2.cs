@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,39 +10,6 @@ namespace CygSoft.CodeCat.ProjectConverter
 {
     internal class ToVersion2
     {
-        public XElement ConvertIndex(XElement previousVersion)
-        {
-            XElement newVersion = new XElement(previousVersion.Name);
-
-            // leave out the "Language" attribute...
-            newVersion.Add(new XAttribute("ID", previousVersion.Attribute("ID").Value));
-            newVersion.Add(new XElement("Title", previousVersion.Element("Title").Value));
-            newVersion.Add(new XElement("Hits", previousVersion.Element("Hits").Value));
-            newVersion.Add(new XElement("DateCreated", previousVersion.Element("DateCreated").Value));
-            newVersion.Add(new XElement("DateModified", previousVersion.Element("DateModified").Value));
-            newVersion.Add(new XElement("Keywords", previousVersion.Element("Keywords").Value));
-
-            return newVersion;
-        }
-
-        public XDocument ConvertCodeFile(string oldCodeFilePath, XDocument oldCodeIndexDocument)
-        {
-            XDocument oldDocument = XDocument.Load(oldCodeFilePath);
-
-            XElement oldIndex = oldCodeIndexDocument.Element("CodeCat_CodeIndex").Elements()
-                .Where(e => e.Attribute("ID").Value == oldDocument.Element("Snippet").Attribute("ID").Value).SingleOrDefault();
-
-
-            XDocument newDocument = XDocument.Parse(oldDocument.ToString());
-
-            XElement rootElement = newDocument.Element("Snippet");
-            rootElement.Add(new XAttribute("Syntax", oldIndex.Element("Language").Value));
-
-            newDocument.Declaration = oldDocument.Declaration;
-
-            return newDocument;
-        }
-
         public XDocument CreateProjectDocument()
         {
             XElement projectElement = new XElement("CodeCat_Project", new XAttribute("Version", "2"),
@@ -80,6 +48,53 @@ namespace CygSoft.CodeCat.ProjectConverter
             }
 
             return newDocument;
+        }
+
+        public XDocument ConvertCodeFile(string oldCodeFilePath, XDocument oldCodeIndexDocument)
+        {
+            XDocument newDocument = null;
+            XDocument oldDocument = XDocument.Load(oldCodeFilePath);
+
+
+            
+            XElement oldIndex = oldCodeIndexDocument.Element("CodeCat_CodeIndex").Elements()
+                .Where(e => e.Attribute("ID").Value == oldDocument.Element("Snippet").Attribute("ID").Value).SingleOrDefault();
+
+            if (oldIndex != null)
+            {
+                newDocument = XDocument.Parse(oldDocument.ToString());
+                XElement rootElement = newDocument.Element("Snippet");
+                XElement oldSyntaxElement = oldIndex.Element("Language");
+
+                if (oldSyntaxElement != null)
+                    rootElement.Add(new XAttribute("Syntax", oldIndex.Element("Language").Value));
+
+                newDocument.Declaration = oldDocument.Declaration;
+            }
+            else
+            {
+                // The old link was already broken and the old index knows nothing about
+                // this code file !!!
+                // we'll have to copy it anyway !!!
+                newDocument = XDocument.Parse(oldDocument.ToString());
+            }
+
+            return newDocument;
+        }
+
+        private XElement ConvertIndex(XElement previousVersion)
+        {
+            XElement newVersion = new XElement(previousVersion.Name);
+
+            // leave out the "Language" attribute...
+            newVersion.Add(new XAttribute("ID", previousVersion.Attribute("ID").Value));
+            newVersion.Add(new XElement("Title", previousVersion.Element("Title").Value));
+            newVersion.Add(new XElement("Hits", previousVersion.Element("Hits").Value));
+            newVersion.Add(new XElement("DateCreated", previousVersion.Element("DateCreated").Value));
+            newVersion.Add(new XElement("DateModified", previousVersion.Element("DateModified").Value));
+            newVersion.Add(new XElement("Keywords", previousVersion.Element("Keywords").Value));
+
+            return newVersion;
         }
     }
 }
