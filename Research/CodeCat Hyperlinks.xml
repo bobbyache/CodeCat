@@ -33,6 +33,14 @@
       <KeyPhraseList>,STRETCH,TOOLSTRIP,TOOLSTRIPTEXTBOX</KeyPhraseList>
       <Description><![CDATA[When you set the Stretch property of a ToolStrip control to true, the control fills its container from end to end, and resizes when its container resizes. In this configuration, you may find it useful to stretch an item in the control, such as a ToolStripTextBox, to fill the available space and to resize when the control resizes. This stretching is useful, for example, if you want to achieve appearance and behavior similar to the address bar in Microsoft® Internet Explorer.]]></Description>
     </Hyperlink>
+    <Hyperlink ID="63861ba1-2b3a-4e16-a90b-ba7c0e44a2c8" Topic="ArchaicSoft DockPanel" Url="https://www.nuget.org/packages/DockPanelSuite/" State="New">
+      <KeyPhraseList>,DOCK,DOCKING,WINDOWS</KeyPhraseList>
+      <Description><![CDATA[This looks like it might be a newer version of the old Weifen Luo dock panel suite. Check it out for the future.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="e00518f1-4223-4442-a379-1fb4a925c147" Topic="dockpanelsuite: Focus tracking does not restore properly with floating panels. #21" Url="https://github.com/dockpanelsuite/dockpanelsuite/issues/21" State="New">
+      <KeyPhraseList>,ACTIVATE,BUG,DOCKED,FLOATING,ISSUE,WINDOW</KeyPhraseList>
+      <Description><![CDATA[We have a layout that updates tool windows whenever a dockpanel form is activated, notifying other dockpanels to clear their controls from the tool windows, which are reused. (Deactivates never seem to come in, so we went with a document declaring focus scheme).]]></Description>
+    </Hyperlink>
   </Hyperlinks>
-  <KeyPhrases>,CUSTOM,DOCK,DOCKING,EDITOR,EXTEND,EXTENDED,GRID,INTERNAL,INTERNALS,LISTVIEW,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STRETCH,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOWS FORMS</KeyPhrases>
+  <KeyPhrases>,ACTIVATE,BUG,CUSTOM,DOCK,DOCKED,DOCKING,EDITOR,EXTEND,EXTENDED,FLOATING,GRID,INTERNAL,INTERNALS,ISSUE,LISTVIEW,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STRETCH,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOW,WINDOWS,WINDOWS FORMS</KeyPhrases>
 </OfflineSource>
