@@ -25,6 +25,14 @@
       <KeyPhraseList>,INTERNAL,INTERNALS,TEST,UNIT,UNIT TEST</KeyPhraseList>
       <Description><![CDATA[This question seems to come up repeatedly: I have some internal (package-private in Java) code. How do I unit test it? The short answer is: you unit test it as you unit test all other code: through the public API of the System Under Test (SUT). Also see: http://stackoverflow.com/questions/9122708/unit-testing-private-methods-in-c-sharp]]></Description>
     </Hyperlink>
+    <Hyperlink ID="91a5ba54-439f-4b04-999d-295f5fd5eb13" Topic="Better ListView Express (Visual Studio Gallery) - Extended Listview you should look at." Url="https://visualstudiogallery.msdn.microsoft.com/f46bc2cb-9ba3-4ad6-91fd-55f0eadba6ea" State="New">
+      <KeyPhraseList>,EXTEND,EXTENDED,LISTVIEW</KeyPhraseList>
+      <Description><![CDATA[Managed ListView control replacement. Supports data binding, embedded controls, images in columns and more.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="2b62f77a-ff51-4601-870d-adeee7cf3db3" Topic="How to: Stretch a ToolStripTextBox to Fill the Remaining Width of a ToolStrip (Windows Forms)" Url="https://msdn.microsoft.com/en-us/library/ms404304(v=vs.110).aspx" State="New">
+      <KeyPhraseList>,STRETCH,TOOLSTRIP,TOOLSTRIPTEXTBOX</KeyPhraseList>
+      <Description><![CDATA[When you set the Stretch property of a ToolStrip control to true, the control fills its container from end to end, and resizes when its container resizes. In this configuration, you may find it useful to stretch an item in the control, such as a ToolStripTextBox, to fill the available space and to resize when the control resizes. This stretching is useful, for example, if you want to achieve appearance and behavior similar to the address bar in Microsoft® Internet Explorer.]]></Description>
+    </Hyperlink>
   </Hyperlinks>
-  <KeyPhrases>,CUSTOM,DOCK,DOCKING,EDITOR,GRID,INTERNAL,INTERNALS,PDF,PROPERTY,PROPERTYGRID,REFERENCE,TEST,UNIT,UNIT TEST,WINDOWS FORMS</KeyPhrases>
+  <KeyPhrases>,CUSTOM,DOCK,DOCKING,EDITOR,EXTEND,EXTENDED,GRID,INTERNAL,INTERNALS,LISTVIEW,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STRETCH,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOWS FORMS</KeyPhrases>
 </OfflineSource>
