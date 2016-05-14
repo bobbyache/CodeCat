@@ -12,7 +12,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         public static DialogResult SaveSnippetChangesDialogPrompt(IWin32Window owner)
         {
             return MessageBox.Show(owner, string.Format("{0}\n You currently have changes. Would you like to save these changes?", (owner as SnippetForm).Text), 
-                string.Format("{0}: {1}", ConfigSettings.ApplicationTitle,(owner as SnippetForm).SnippetTitle),
+                string.Format("{0}: {1}", ConfigSettings.ApplicationTitle,(owner as SnippetForm).Text),
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
         }
 

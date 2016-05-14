@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms;
 using CygX1.UI.WinForms.RecentFileMenu;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,10 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
@@ -21,99 +22,45 @@ namespace CygSoft.CodeCat.UI.WinForms
         private RecentProjectMenu recentProjectMenu;
         private RegistrySettings registrySettings;
         private AppFacade application = new AppFacade();
-        private ItemFormController<SnippetForm> formController;
+        private SearchForm searchForm;
 
         public MainForm()
         {
             InitializeComponent();
-            this.formController = new ItemFormController<SnippetForm>(this);
-            this.formController.ItemFormClosed += formController_SnippetFormClosed;
+
+            //dockPanel.SaveAsXml(
+            //dockPanel.LoadFromXml(
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
             this.application.CodeSyntaxFolderPath = ConfigSettings.SyntaxFilePath;
-            InitializeIconImages();
+
             InitializeRecentProjectMenu();
-            
-            if (!LoadLastProject())
-            {
-                this.Text = WindowCaption();
-                EnableControls();
-            }
+            InitializeSearchForm();
+
+            EnableControls();
+
+            searchForm.Activate();
         }
 
-        private void InitializeIconImages()
+        private void CreateNewSnippet()
         {
-            Resources.Namespace = "CygSoft.CodeCat.UI.WinForms.UiResource";
-            Resources.ExecutingAssembly = Assembly.GetExecutingAssembly();
+            CodeFile codeFile = application.CreateCodeSnippet();
+            codeFile.Title = "New Code Snippet";
+            codeFile.Syntax = "JavaScript";
 
-            openFileMenuItem.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
-            createNewFileMenuItem.Image = Resources.GetImage(Constants.ImageKeys.NewProject);
-            addSnippetMenuItem.Image = Resources.GetImage(Constants.ImageKeys.AddSnippet);
-            deleteSnippetMenuItem.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            viewSnippetMenuItem.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            findButton.Image = Resources.GetImage(Constants.ImageKeys.FindSnippets);
+            SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxFile("JavaScript"));
+            snippetForm.Text = codeFile.Title;
+            snippetForm.Show(dockPanel, DockState.Document);
         }
 
-
-        private void formController_SnippetFormClosed(object sender, ItemFormEventArgs e)
+        private void InitializeSearchForm()
         {
-            this.application.CloseCodeSnippet(e.Id);
-            ExecuteSearch(keywordsTextBox.Text);
-            ListviewHelper.SelectItem(listView1, e.Id);
-        }
-
-        private void createNewFileMenuItem_Click(object sender, EventArgs e)
-        {
-            string filePath;
-            DialogResult result = Dialogs.CreateIndexDialog(this, out filePath);
-
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                CreateProject(filePath);
-            }
-        }
-
-        private void openFileMenuItem_Click(object sender, EventArgs e)
-        {
-            string filePath;
-            DialogResult result = Dialogs.OpenIndexDialog(this, out filePath);
-
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                OpenProject(filePath);
-            }
-        }
-
-        private void EnableControls()
-        {
-            bool projectLoaded = this.application.Loaded;
-            bool itemSelected = this.listView1.SelectedItems.Count == 1;
-            bool itemsSelected = this.listView1.SelectedItems.Count > 1;
-
-            findButton.Enabled = projectLoaded;
-
-            viewSnippetMenuItem.Enabled = projectLoaded && itemSelected;
-            addSnippetMenuItem.Enabled = projectLoaded;
-            deleteSnippetMenuItem.Enabled = projectLoaded && itemSelected;
-            openFolderMenuItem.Enabled = projectLoaded;
-            brokenLinksMenuItem.Enabled = projectLoaded;
-
-            addKeywordsMenuItem.Enabled = projectLoaded && (itemSelected || itemsSelected);
-            removeKeywordsMenuItem.Enabled = projectLoaded && (itemSelected || itemsSelected);
-
-            copyIdentifierMenuItem.Enabled = projectLoaded && itemSelected;
-            copyKeywordsMenuItem.Enabled = projectLoaded && (itemSelected || itemsSelected);
-        }
-
-        private void EnableContextMenuItems()
-        {
-            bool singleSelection = listView1.SelectedItems.Count == 1;
-
-            menuContextCopyIdentifier.Enabled = singleSelection;
-            menuContextCopyKeywords.Enabled = true;
-            menuContextDelete.Enabled = singleSelection;
-            menuContextViewSnippet.Enabled = singleSelection;
-            menuContextAddKeywords.Enabled = true;
-            menuContextRemoveKeywords.Enabled = true;
+            searchForm = new SearchForm();
+            searchForm.OpenSnippet += searchForm_OpenSnippet;
+            searchForm.SearchExecuted += (s, e) => ExecuteSearch(e.Keywords);
+            searchForm.SelectSnippet += (s, e) => EnableControls();
+            searchForm.Show(dockPanel, DockState.DockLeft);
+            //searchForm.CloseButton = false;
+            //searchForm.CloseButtonVisible = false;
         }
 
         private void InitializeRecentProjectMenu()
@@ -148,13 +95,18 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 this.application.Open(filePath, ConfigSettings.CodeLibraryIndexFileVersion);
                 this.Text = WindowCaption();
-                keywordsTextBox.Text = string.Empty;
-                ExecuteSearch(keywordsTextBox.Text);
+
+                searchForm.KeywordSearchText = string.Empty;
+                ExecuteSearch(searchForm.KeywordSearchText);
                 recentProjectMenu.Notify(filePath);
                 recentProjectMenu.CurrentlyOpenedFile = filePath;
                 ConfigSettings.LastProject = filePath;
                 registrySettings.InitialDirectory = Path.GetDirectoryName(filePath);
+
+                CreateNewSnippet();
                 EnableControls();
+
+                searchForm.Activate();
             }
             catch (Exception exception)
             {
@@ -162,81 +114,25 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void CreateProject(string filePath)
+        private void EnableControls()
         {
-            this.application.Create(filePath, ConfigSettings.CodeLibraryIndexFileVersion);
-            this.Text = WindowCaption();
-            keywordsTextBox.Text = string.Empty;
-            ExecuteSearch(keywordsTextBox.Text);
-            recentProjectMenu.Notify(filePath);
-            recentProjectMenu.CurrentlyOpenedFile = filePath;
-            ConfigSettings.LastProject = filePath;
-            registrySettings.InitialDirectory = Path.GetDirectoryName(filePath);
-            EnableControls();
-        }
+            bool projectLoaded = this.application.Loaded;
+            bool itemSelected = searchForm.SingleSnippetSelected;
+            bool itemsSelected = searchForm.MultipleSnippetsSelected;
 
-        private bool LoadLastProject()
-        {
-            try
-            {
-                string lastProject = ConfigSettings.LastProject;
-                if (!string.IsNullOrEmpty(lastProject))
-                {
-                    OpenProject(lastProject);
-                    return true;
-                }
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(this, exception.Message, ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return false;
-        }
+            searchForm.SearchEnabled = projectLoaded;
 
-        private void DeleteSnippet()
-        {
-            IKeywordIndexItem codeItem = ListviewHelper.SelectedItem(listView1);
+            viewSnippetMenuItem.Enabled = projectLoaded && itemSelected;
+            addSnippetMenuItem.Enabled = projectLoaded;
+            deleteSnippetMenuItem.Enabled = projectLoaded && itemSelected;
+            openFolderMenuItem.Enabled = projectLoaded;
+            brokenLinksMenuItem.Enabled = projectLoaded;
 
-            if (codeItem != null)
-            {
-                if (this.formController.ItemFormIsOpen(codeItem.Id))
-                {
-                    MessageBox.Show(this, "Cannot delete an open snippet.",
-                        ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            addKeywordsMenuItem.Enabled = projectLoaded && (itemSelected || itemsSelected);
+            removeKeywordsMenuItem.Enabled = projectLoaded && (itemSelected || itemsSelected);
 
-                    return;
-                }
-
-                DialogResult result = MessageBox.Show(this, "Sure you want to delete this snippet?",
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-                if (result == System.Windows.Forms.DialogResult.Yes)
-                {
-                    this.application.RemoveCodeSnippet(codeItem.Id);
-                    ListviewHelper.DeleteSelectedItem(listView1);
-                    ExecuteSearch(keywordsTextBox.Text);
-                }
-            }
-        }
-
-        private void ViewSnippet()
-        {
-            IKeywordIndexItem codeItem = ListviewHelper.SelectedItem(listView1);
-            if (codeItem != null)
-            {
-                formController.OpenCodeWindow(this.application.OpenCodeSnippet(codeItem), this.application);
-            }
-        }
-
-        private void CopySelectedKeyphrases()
-        {
-            Clipboard.Clear();
-            Clipboard.SetText(application.CopyAllKeywords(ListviewHelper.SelectedItems(listView1)));
-        }
-
-        private void CopyIdentifier()
-        {
-            Clipboard.Clear();
-            Clipboard.SetText(ListviewHelper.SelectedItem(listView1).Id);
+            copyIdentifierMenuItem.Enabled = projectLoaded && itemSelected;
+            copyKeywordsMenuItem.Enabled = projectLoaded && (itemSelected || itemsSelected);
         }
 
         private string WindowCaption()
@@ -247,6 +143,71 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return ConfigSettings.ApplicationTitle + " - [" + this.application.GetContextFileTitle() + "]";
         }
 
+        private void searchForm_OpenSnippet(object sender, OpenSnippetEventArgs e)
+        {
+            OpenSnippet(e.Item);
+            // Note dockPanel.Documents handles the management of your documents. It maintains a collection.
+            // This does not include your docked windows, just your "document" windows. This is excellent because
+            // you can use this existing collection property to maintain your code snippets.
+        }
+
+        private void OpenSnippet(IKeywordIndexItem snippetIndex)
+        {
+            if (!SnippetIsOpen(snippetIndex))
+            {
+                CodeFile codeFile = application.OpenCodeSnippet(snippetIndex);
+                SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxFile(codeFile.Syntax));
+                //snippetForm.MoveNext += snippetForm_MoveNext;
+                //snippetForm.MovePrevious += snippetForm_MovePrevious;
+                snippetForm.Text = snippetIndex.Title;
+                snippetForm.Tag = snippetIndex.Id;
+
+                snippetForm.Show(dockPanel, DockState.Document);
+            }
+            else
+            {
+                ActivateSnippet(snippetIndex);
+            }
+        }
+
+        private SnippetForm GetOpenDocument(string snippetId)
+        {
+            SnippetForm document = dockPanel.Documents
+                .Where(doc => (doc as SnippetForm).SnippetId == snippetId)
+                .OfType<SnippetForm>().SingleOrDefault();
+
+            return document;
+        }
+
+        private void ActivateSnippet(IKeywordIndexItem snippetIndex)
+        {
+            SnippetForm document = GetOpenDocument(snippetIndex.Id);
+            if (document != null)
+                document.Activate();
+        }
+
+        private bool SnippetIsOpen(IKeywordIndexItem snippetIndex)
+        {
+            return dockPanel.Documents.Any(doc => (doc as SnippetForm).SnippetId == snippetIndex.Id);
+        }
+
+        void snippetForm_MovePrevious(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void snippetForm_MoveNext(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteSearch(string delimitedKeywords)
+        {
+            IKeywordIndexItem[] IndexItems = this.application.FindIndeces(delimitedKeywords);
+            searchForm.ReloadListview(IndexItems);
+            this.indexCountLabel.Text = ItemCountCaption(IndexItems.Length);
+        }
+
         private string ItemCountCaption(int foundItems)
         {
             if (!this.application.Loaded)
@@ -255,7 +216,36 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return string.Format("{0} of {1} available items found.", foundItems, this.application.GetIndexCount().ToString());
         }
 
-        private void AddKeywordsToItems()
+        private void openFileMenuItem_Click(object sender, EventArgs e)
+        {
+            string filePath;
+            DialogResult result = Dialogs.OpenIndexDialog(this, out filePath);
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                OpenProject(filePath);
+            }
+        }
+
+        private void keywordSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            searchForm.Activate();
+        }
+
+        private void addSnippetMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateNewSnippet();
+        }
+
+        private void viewSnippetMenuItem_Click(object sender, EventArgs e)
+        {
+            if (searchForm.SingleSnippetSelected && searchForm.SelectedSnippet != null)
+            {
+                OpenSnippet(searchForm.SelectedSnippet);
+            }
+        }
+
+        private void addKeywordsMenuItem_Click(object sender, EventArgs e)
         {
             EnterKeywordsForm frm = new EnterKeywordsForm();
             DialogResult result = frm.ShowDialog(this);
@@ -263,184 +253,27 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 string delimitedKeywordList = frm.Keywords;
-                IKeywordIndexItem[] IndexItems = ListviewHelper.SelectedItems(listView1);
-                application.AddKeywords(IndexItems, delimitedKeywordList);
+                IKeywordIndexItem[] indexItems = searchForm.SelectedSnippets;
+
+                application.AddKeywords(indexItems, delimitedKeywordList);
+
+                foreach (IKeywordIndexItem indexItem in indexItems)
+                {
+                    SnippetForm snippetForm = GetOpenDocument(indexItem.Id);
+                    if (snippetForm != null)
+                    {
+                        snippetForm.AddKeywords(delimitedKeywordList);
+                    }
+                }
             }
-        }
-
-        private void RemoveKeywordFromItems()
-        {
-            SelectKeywordsForm frm = new SelectKeywordsForm();
-            frm.Text = "Remove Keywords";
-            IKeywordIndexItem[] IndexItems = ListviewHelper.SelectedItems(listView1);
-            frm.Keywords = application.AllKeywords(IndexItems);
-            DialogResult result = frm.ShowDialog(this);
-
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                string[] keywords = frm.Keywords;
-                application.RemoveKeywords(IndexItems, keywords);
-            }
-        }
-
-        private void ViewKeywordFromItems()
-        {
-            SelectKeywordsForm frm = new SelectKeywordsForm();
-            frm.Text = "View Keywords";
-            IKeywordIndexItem[] IndexItems = ListviewHelper.SelectedItems(listView1);
-            frm.Keywords = application.AllKeywords(IndexItems);
-            DialogResult result = frm.ShowDialog(this);
-        }
-
-        private void findButton_Click(object sender, EventArgs e)
-        {
-            ExecuteSearch(keywordsTextBox.Text);
-        }
-
-        private void ExecuteSearch(string delimitedKeywords)
-        {
-            IKeywordIndexItem[] IndexItems = this.application.FindIndeces(delimitedKeywords);
-            ListviewHelper.ReloadListview(listView1, IndexItems);
-            this.indexCountLabel.Text = ItemCountCaption(IndexItems.Length);
-        }
-
-        private void exitAppMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void addSnippetMenuItem_Click(object sender, EventArgs e)
-        {
-            formController.OpenCodeWindow(this.application.CreateCodeSnippet(), this.application);
-        }
-
-        private void viewSnippetMenuItem_Click(object sender, EventArgs e)
-        {
-            ViewSnippet();
-        }
-
-        private void deleteSnippetMenuItem_Click(object sender, EventArgs e)
-        {
-            DeleteSnippet();
-        }
-
-        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            IKeywordIndexItem codeItem = ListviewHelper.SelectedItem(listView1);
-            if (codeItem != null)
-            {
-                formController.OpenCodeWindow(this.application.OpenCodeSnippet(codeItem), this.application);
-            }
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //if (formController.OpenSnippetsExist
-            //if (!formController.RequestExit())
-            //{
-            //    e.Cancel = true;
-            //}
-        }
-
-        private void openFolderMenuItem_Click(object sender, EventArgs e)
-        {
-            this.application.OpenContextFolder();
-        }
-
-        private void brokenLinksMenuItem_Click(object sender, EventArgs e)
-        {
-            BrokenLinksForm frm = new BrokenLinksForm(this.application, this.formController);
-            frm.ShowDialog(this);
-        }
-
-        private void aboutMenuItem_Click(object sender, EventArgs e)
-        {
-            AboutBoxDialog dialog = new AboutBoxDialog();
-            dialog.ShowDialog(this);
-        }
-
-        private void keywordsTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (this.application.Loaded)
-                ExecuteSearch(keywordsTextBox.Text);
-        }
-
-        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            ListviewHelper.SortColumn(listView1, e.Column);
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            EnableControls();
-        }
-
-        private void menuContextViewSnippet_Click(object sender, EventArgs e)
-        {
-            ViewSnippet();
-        }
-
-        private void menuContextDelete_Click(object sender, EventArgs e)
-        {
-            DeleteSnippet();
-        }
-
-        private void listView1_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (!this.application.Loaded)
-                return;
-
-            if (e.Button == MouseButtons.Right)
-            {
-                EnableContextMenuItems();
-                if (listView1.FocusedItem.Bounds.Contains(e.Location) == true)
-                    contextMenu.Show(Cursor.Position);
-            } 
-        }
-
-        private void copyKeywordsMenuItem_Click(object sender, EventArgs e)
-        {
-            CopySelectedKeyphrases();
-        }
-
-        private void copyIdentifierMenuItem_Click(object sender, EventArgs e)
-        {
-            CopyIdentifier();
-        }
-
-        private void menuContextCopyKeywords_Click(object sender, EventArgs e)
-        {
-            CopySelectedKeyphrases();
-        }
-
-        private void menuContextCopyIdentifier_Click(object sender, EventArgs e)
-        {
-            CopyIdentifier();
-        }
-
-        private void menuContextAddKeywords_Click(object sender, EventArgs e)
-        {
-            AddKeywordsToItems();
-        }
-
-        private void menuContextRemoveKeywords_Click(object sender, EventArgs e)
-        {
-            RemoveKeywordFromItems();
-        }
-
-        private void addKeywordsMenuItem_Click(object sender, EventArgs e)
-        {
-            AddKeywordsToItems();
         }
 
         private void removeKeywordsMenuItem_Click(object sender, EventArgs e)
         {
-            RemoveKeywordFromItems();
-        }
-
-        private void menuContextViewKeywords_Click(object sender, EventArgs e)
-        {
-            ViewKeywordFromItems();
+            // Here, you will do exactly the same thing as you did with addKeywordsMenuItem_Click
+            // except you'll call application.RemoveKeywords() instead.
+            // you overloaded the method in the AppFacade to remove keywords from a single snippet
+            // but you can just as well remove from all of them at the same time.
         }
     }
 }
