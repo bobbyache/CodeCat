@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OfflineSource>
+  <Hyperlinks>
+    <Hyperlink ID="c17b18e9-4f6f-4e14-925a-94efb950cdbb" Topic="PropertyGrid utilities" Url="http://www.codeproject.com/Articles/7852/PropertyGrid-utilities" State="New">
+      <KeyPhraseList>,CUSTOM,GRID,PROPERTY,PROPERTYGRID</KeyPhraseList>
+      <Description><![CDATA[I ripped code from two projects, fused and improved them. The sorting idea was ripped from Paul Tingey, his PropertySorter class. Globalization was ripped from Globalized Property Grid by Gerd Klevesaat. He, however, used inheritance from GlobalizationObject, which makes the mechanism not so flexible. ]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="cc2261c2-c3c0-4822-9762-c3c12c90d631" Topic="Property Grid - Dynamic List ComboBox, Validation, and More" Url="http://www.codeproject.com/Articles/23242/Property-Grid-Dynamic-List-ComboBox-Validation-and" State="New">
+      <KeyPhraseList>,CUSTOM,PROPERTY,PROPERTYGRID</KeyPhraseList>
+      <Description><![CDATA[While working on a project, I was asked to include a PropertyGrid control to a screen to allow for configuration of equipment and to do validation. As I had not used a PropertyGrid control before, I started searching for examples, and was dismayed at what I was finding, or in the case of validation, not finding.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="8147867f-8f01-4cb2-bd11-71ce9b70aea2" Topic="How to create custom PropertyGrid editor item which opens a form?" Url="http://stackoverflow.com/questions/1016239/how-to-create-custom-propertygrid-editor-item-which-opens-a-form" State="New">
+      <KeyPhraseList>,CUSTOM,EDITOR,GRID,PROPERTY,PROPERTYGRID</KeyPhraseList>
+      <Description><![CDATA[I have a List<> (my custom class). I want to display a specific item in this list in a box on the PropertyGrid control. At the end of the box I would like the [...] button. When clicked, it would open up a form which, among other things, would allow them to pick one of the items from the List. When closed, the PropertyGrid would be updated to reflect the selected value.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="7359b049-21f9-4bb9-89d9-09a2531119a2" Topic="Getting the Most Out of the .NET Framework PropertyGrid Control" Url="https://msdn.microsoft.com/en-us/library/aa302326.aspx" State="New">
+      <KeyPhraseList>,GRID,PROPERTY,PROPERTYGRID</KeyPhraseList>
+      <Description><![CDATA[MICROSOFT MSDN - (Excellent starter resource) - The .NET Framework PropertyGrid control is core to the property browser that is in Visual Studio .NET. The PropertyGrid control displays properties for any object or type, and it retrieves the item's properties, primarily using reflection. (Reflection is a technology that provides type information at run time.)]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="f9e15a86-6717-47a1-ad98-57756db27693" Topic="DockPanel Suite Documentation" Url="https://media.readthedocs.org/pdf/dockpanelsuite/latest/dockpanelsuite.pdf" State="New">
+      <KeyPhraseList>,DOCK,DOCKING,PDF,REFERENCE,WINDOWS FORMS</KeyPhraseList>
+      <Description><![CDATA[DockPanel Suite Documentation, Ryan Rastedt, Lex Li, and others.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="f67d03f8-1cdd-4648-8ab7-e5e4349520b9" Topic="Unit testing internals by Mark Seemann (Only unit test the public interface)" Url="http://blog.ploeh.dk/2015/09/22/unit-testing-internals/" State="New">
+      <KeyPhraseList>,INTERNAL,INTERNALS,TEST,UNIT,UNIT TEST</KeyPhraseList>
+      <Description><![CDATA[This question seems to come up repeatedly: I have some internal (package-private in Java) code. How do I unit test it? The short answer is: you unit test it as you unit test all other code: through the public API of the System Under Test (SUT). Also see: http://stackoverflow.com/questions/9122708/unit-testing-private-methods-in-c-sharp]]></Description>
+    </Hyperlink>
+  </Hyperlinks>
+  <KeyPhrases>,CUSTOM,DOCK,DOCKING,EDITOR,GRID,INTERNAL,INTERNALS,PDF,PROPERTY,PROPERTYGRID,REFERENCE,TEST,UNIT,UNIT TEST,WINDOWS FORMS</KeyPhrases>
+</OfflineSource>
