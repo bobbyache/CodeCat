@@ -25,15 +25,15 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
             syntaxBox.ReadOnly = true;
-            btnDelete.Click += btnDelete_Click;
             listviewSnapshots.SelectedIndexChanged += listviewSnapshots_SelectedIndexChanged;
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        public void DeleteSnapshot()
         {
             if (listviewSnapshots.SelectedItems.Count == 1)
             {
-                DialogResult dialogResult = MessageBox.Show(this, "Sure you want to delete this snapshot?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                DialogResult dialogResult = MessageBox.Show(this, "Sure you want to delete this snapshot?", "Delete", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
                 if (dialogResult == DialogResult.Yes)
                 {

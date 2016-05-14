@@ -33,6 +33,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
             this.application.CodeSyntaxFolderPath = ConfigSettings.SyntaxFilePath;
 
+            InitializeMenuClickEvents();
             InitializeRecentProjectMenu();
             InitializeSearchForm();
 
@@ -41,15 +42,14 @@ namespace CygSoft.CodeCat.UI.WinForms
             searchForm.Activate();
         }
 
-        private void CreateNewSnippet()
+        private void InitializeMenuClickEvents()
         {
-            CodeFile codeFile = application.CreateCodeSnippet();
-            codeFile.Title = "New Code Snippet";
-            codeFile.Syntax = "JavaScript";
-
-            SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxFile("JavaScript"));
-            snippetForm.Text = codeFile.Title;
-            snippetForm.Show(dockPanel, DockState.Document);
+            mnuFileOpen.Click += mnuFileOpen_Click;
+            mnuWindowKeywordSearch.Click += mnuWindowKeywordSearch_Click;
+            mnuResultsDeleteSelection.Click += mnuResultsDeleteSelection_Click;
+            mnuSnippetsAdd.Click += mnuSnippetsAdd_Click;
+            mnuSnippetsViewModify.Click += mnuSnippetsViewModify_Click;
+            mnuResultsAddKeywords.Click += mnuResultsAddKeywords_Click;
         }
 
         private void InitializeSearchForm()
@@ -71,7 +71,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             recentFiles.RegistrySubFolder = RegistrySettings.RecentFilesFolder;
             recentFiles.MaxDisplayNameLength = 80;
 
-            recentProjectMenu = new RecentProjectMenu(openRecentMenuItem, recentFiles);
+            recentProjectMenu = new RecentProjectMenu(mnuFileOpenRecent, recentFiles);
             recentProjectMenu.RecentProjectOpened += recentProjectMenu_RecentProjectOpened;
         }
 
@@ -122,17 +122,16 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             searchForm.SearchEnabled = projectLoaded;
 
-            viewSnippetMenuItem.Enabled = projectLoaded && itemSelected;
-            addSnippetMenuItem.Enabled = projectLoaded;
-            deleteSnippetMenuItem.Enabled = projectLoaded && itemSelected;
-            openFolderMenuItem.Enabled = projectLoaded;
-            brokenLinksMenuItem.Enabled = projectLoaded;
+            mnuSnippetsViewModify.Enabled = projectLoaded && itemSelected;
+            mnuSnippetsAdd.Enabled = projectLoaded;
+            mnuResultsDeleteSelection.Enabled = projectLoaded && itemSelected;
+            mnuFileOpenProjectFolder.Enabled = projectLoaded;
 
-            addKeywordsMenuItem.Enabled = projectLoaded && (itemSelected || itemsSelected);
-            removeKeywordsMenuItem.Enabled = projectLoaded && (itemSelected || itemsSelected);
+            mnuResultsAddKeywords.Enabled = projectLoaded && (itemSelected || itemsSelected);
+            mnuResultsRemoveKeywords.Enabled = projectLoaded && (itemSelected || itemsSelected);
 
-            copyIdentifierMenuItem.Enabled = projectLoaded && itemSelected;
-            copyKeywordsMenuItem.Enabled = projectLoaded && (itemSelected || itemsSelected);
+            mnuResultsCopyIdentifier.Enabled = projectLoaded && itemSelected;
+            mnuResultsCopyKeywords.Enabled = projectLoaded && (itemSelected || itemsSelected);
         }
 
         private string WindowCaption()
@@ -157,8 +156,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 CodeFile codeFile = application.OpenCodeSnippet(snippetIndex);
                 SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxFile(codeFile.Syntax));
-                //snippetForm.MoveNext += snippetForm_MoveNext;
-                //snippetForm.MovePrevious += snippetForm_MovePrevious;
                 snippetForm.Text = snippetIndex.Title;
                 snippetForm.Tag = snippetIndex.Id;
 
@@ -168,6 +165,17 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 ActivateSnippet(snippetIndex);
             }
+        }
+
+        private void CreateNewSnippet()
+        {
+            CodeFile codeFile = application.CreateCodeSnippet();
+            codeFile.Title = "New Code Snippet";
+            codeFile.Syntax = "JavaScript";
+
+            SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxFile("JavaScript"));
+            snippetForm.Text = codeFile.Title;
+            snippetForm.Show(dockPanel, DockState.Document);
         }
 
         private SnippetForm GetOpenDocument(string snippetId)
@@ -191,16 +199,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             return dockPanel.Documents.Any(doc => (doc as SnippetForm).SnippetId == snippetIndex.Id);
         }
 
-        void snippetForm_MovePrevious(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        void snippetForm_MoveNext(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void ExecuteSearch(string delimitedKeywords)
         {
             IKeywordIndexItem[] IndexItems = this.application.FindIndeces(delimitedKeywords);
@@ -216,7 +214,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return string.Format("{0} of {1} available items found.", foundItems, this.application.GetIndexCount().ToString());
         }
 
-        private void openFileMenuItem_Click(object sender, EventArgs e)
+        private void mnuFileOpen_Click(object sender, EventArgs e)
         {
             string filePath;
             DialogResult result = Dialogs.OpenIndexDialog(this, out filePath);
@@ -227,17 +225,17 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void keywordSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        private void mnuWindowKeywordSearch_Click(object sender, EventArgs e)
         {
             searchForm.Activate();
         }
 
-        private void addSnippetMenuItem_Click(object sender, EventArgs e)
+        private void mnuSnippetsAdd_Click(object sender, EventArgs e)
         {
             CreateNewSnippet();
         }
 
-        private void viewSnippetMenuItem_Click(object sender, EventArgs e)
+        private void mnuSnippetsViewModify_Click(object sender, EventArgs e)
         {
             if (searchForm.SingleSnippetSelected && searchForm.SelectedSnippet != null)
             {
@@ -245,7 +243,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void addKeywordsMenuItem_Click(object sender, EventArgs e)
+        private void mnuResultsAddKeywords_Click(object sender, EventArgs e)
         {
             EnterKeywordsForm frm = new EnterKeywordsForm();
             DialogResult result = frm.ShowDialog(this);
@@ -268,7 +266,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void removeKeywordsMenuItem_Click(object sender, EventArgs e)
+        private void mnuResultsDeleteSelection_Click(object sender, EventArgs e)
         {
             // Here, you will do exactly the same thing as you did with addKeywordsMenuItem_Click
             // except you'll call application.RemoveKeywords() instead.

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.splitter = new System.Windows.Forms.SplitContainer();
             this.listviewSnapshots = new System.Windows.Forms.ListView();
             this.colDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -41,16 +40,6 @@
             this.splitter.Panel2.SuspendLayout();
             this.splitter.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Location = new System.Drawing.Point(621, 339);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // splitter
             // 
@@ -68,8 +57,8 @@
             // splitter.Panel2
             // 
             this.splitter.Panel2.Controls.Add(this.syntaxBox);
-            this.splitter.Size = new System.Drawing.Size(696, 333);
-            this.splitter.SplitterDistance = 73;
+            this.splitter.Size = new System.Drawing.Size(696, 362);
+            this.splitter.SplitterDistance = 79;
             this.splitter.TabIndex = 3;
             // 
             // listviewSnapshots
@@ -82,7 +71,7 @@
             this.listviewSnapshots.HideSelection = false;
             this.listviewSnapshots.Location = new System.Drawing.Point(0, 0);
             this.listviewSnapshots.Name = "listviewSnapshots";
-            this.listviewSnapshots.Size = new System.Drawing.Size(696, 73);
+            this.listviewSnapshots.Size = new System.Drawing.Size(696, 79);
             this.listviewSnapshots.TabIndex = 2;
             this.listviewSnapshots.UseCompatibleStateImageBehavior = false;
             this.listviewSnapshots.View = System.Windows.Forms.View.Details;
@@ -117,7 +106,7 @@
             this.syntaxBox.LockCursorUpdate = false;
             this.syntaxBox.Name = "syntaxBox";
             this.syntaxBox.ShowScopeIndicator = false;
-            this.syntaxBox.Size = new System.Drawing.Size(696, 256);
+            this.syntaxBox.Size = new System.Drawing.Size(696, 279);
             this.syntaxBox.SmoothScroll = false;
             this.syntaxBox.SplitviewH = -4;
             this.syntaxBox.SplitviewV = -4;
@@ -139,7 +128,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitter);
-            this.Controls.Add(this.btnDelete);
             this.Name = "SnapshotListCtrl";
             this.Size = new System.Drawing.Size(696, 362);
             this.splitter.Panel1.ResumeLayout(false);
@@ -152,7 +140,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.SplitContainer splitter;
         private System.Windows.Forms.ListView listviewSnapshots;
         private System.Windows.Forms.ColumnHeader colDate;
