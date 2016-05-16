@@ -208,6 +208,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             codeFile.Syntax = application.GetSyntaxFile(ConfigSettings.DefaultSyntax);
 
             SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxes(), application.GetSyntaxFile(ConfigSettings.DefaultSyntax));
+            snippetForm.EditMode = true;
             snippetForm.Show(dockPanel, DockState.Document);
         }
 

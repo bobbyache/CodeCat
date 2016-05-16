@@ -37,28 +37,29 @@
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.txtIdentifier = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolstripTitle = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.cboSyntax = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.toolstripKeywords = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.txtKeywords = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
-            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.toolstripCommands = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnTakeSnapshot = new System.Windows.Forms.ToolStripButton();
             this.btnDeleteSnapshot = new System.Windows.Forms.ToolStripButton();
+            this.chkEdit = new System.Windows.Forms.ToolStripButton();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageCode = new System.Windows.Forms.TabPage();
             this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.tabPageSnapshots = new System.Windows.Forms.TabPage();
             this.snapshotListCtrl1 = new CygSoft.CodeCat.UI.WinForms.SnapshotListCtrl();
             this.toolStrip1.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
-            this.toolStrip3.SuspendLayout();
-            this.toolStrip4.SuspendLayout();
+            this.toolstripTitle.SuspendLayout();
+            this.toolstripKeywords.SuspendLayout();
+            this.toolstripCommands.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPageCode.SuspendLayout();
             this.tabPageSnapshots.SuspendLayout();
@@ -131,18 +132,18 @@
             this.txtIdentifier.Size = new System.Drawing.Size(568, 25);
             this.txtIdentifier.Text = "fc61a31d-b0dd-4b91-8c7a-9a8125d8c4bc";
             // 
-            // toolStrip2
+            // toolstripTitle
             // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolstripTitle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.txtTitle,
             this.toolStripLabel5,
             this.cboSyntax});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(821, 25);
-            this.toolStrip2.TabIndex = 10;
-            this.toolStrip2.Text = "toolStrip2";
+            this.toolstripTitle.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitle.Name = "toolstripTitle";
+            this.toolstripTitle.Size = new System.Drawing.Size(821, 25);
+            this.toolstripTitle.TabIndex = 10;
+            this.toolstripTitle.Text = "toolStrip2";
             // 
             // toolStripLabel1
             // 
@@ -169,15 +170,15 @@
             this.cboSyntax.Name = "cboSyntax";
             this.cboSyntax.Size = new System.Drawing.Size(121, 25);
             // 
-            // toolStrip3
+            // toolstripKeywords
             // 
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolstripKeywords.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel4,
             this.txtKeywords});
-            this.toolStrip3.Location = new System.Drawing.Point(0, 25);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(821, 25);
-            this.toolStrip3.TabIndex = 11;
+            this.toolstripKeywords.Location = new System.Drawing.Point(0, 25);
+            this.toolstripKeywords.Name = "toolstripKeywords";
+            this.toolstripKeywords.Size = new System.Drawing.Size(821, 25);
+            this.toolstripKeywords.TabIndex = 11;
             // 
             // toolStripLabel4
             // 
@@ -193,18 +194,19 @@
             this.txtKeywords.Name = "txtKeywords";
             this.txtKeywords.Size = new System.Drawing.Size(713, 25);
             // 
-            // toolStrip4
+            // toolstripCommands
             // 
-            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolstripCommands.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
             this.toolStripSeparator1,
             this.btnTakeSnapshot,
-            this.btnDeleteSnapshot});
-            this.toolStrip4.Location = new System.Drawing.Point(0, 50);
-            this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(821, 25);
-            this.toolStrip4.TabIndex = 12;
-            this.toolStrip4.Text = "toolStrip4";
+            this.btnDeleteSnapshot,
+            this.chkEdit});
+            this.toolstripCommands.Location = new System.Drawing.Point(0, 50);
+            this.toolstripCommands.Name = "toolstripCommands";
+            this.toolstripCommands.Size = new System.Drawing.Size(821, 25);
+            this.toolstripCommands.TabIndex = 12;
+            this.toolstripCommands.Text = "toolStrip4";
             // 
             // btnSave
             // 
@@ -237,6 +239,16 @@
             this.btnDeleteSnapshot.Size = new System.Drawing.Size(112, 22);
             this.btnDeleteSnapshot.Text = "Delete Snapshot";
             this.btnDeleteSnapshot.Click += new System.EventHandler(this.btnDeleteSnapshot_Click);
+            // 
+            // chkEdit
+            // 
+            this.chkEdit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.chkEdit.CheckOnClick = true;
+            this.chkEdit.Image = ((System.Drawing.Image)(resources.GetObject("chkEdit.Image")));
+            this.chkEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.chkEdit.Name = "chkEdit";
+            this.chkEdit.Size = new System.Drawing.Size(81, 22);
+            this.chkEdit.Text = "Edit Mode";
             // 
             // tabControl
             // 
@@ -315,9 +327,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 496);
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.toolStrip4);
-            this.Controls.Add(this.toolStrip3);
-            this.Controls.Add(this.toolStrip2);
+            this.Controls.Add(this.toolstripCommands);
+            this.Controls.Add(this.toolstripKeywords);
+            this.Controls.Add(this.toolstripTitle);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SnippetForm";
@@ -325,12 +337,12 @@
             this.Activated += new System.EventHandler(this.SnippetForm_Activated);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
-            this.toolStrip4.ResumeLayout(false);
-            this.toolStrip4.PerformLayout();
+            this.toolstripTitle.ResumeLayout(false);
+            this.toolstripTitle.PerformLayout();
+            this.toolstripKeywords.ResumeLayout(false);
+            this.toolstripKeywords.PerformLayout();
+            this.toolstripCommands.ResumeLayout(false);
+            this.toolstripCommands.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabPageCode.ResumeLayout(false);
             this.tabPageSnapshots.ResumeLayout(false);
@@ -346,13 +358,13 @@
         private System.Windows.Forms.ToolStripComboBox cboFontSize;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
-        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStrip toolstripTitle;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox txtTitle;
-        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStrip toolstripKeywords;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox txtKeywords;
-        private System.Windows.Forms.ToolStrip toolStrip4;
+        private System.Windows.Forms.ToolStrip toolstripCommands;
         private System.Windows.Forms.ToolStripButton btnTakeSnapshot;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPageCode;
@@ -366,5 +378,6 @@
         private System.Windows.Forms.ToolStripComboBox cboSyntax;
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton chkEdit;
     }
 }

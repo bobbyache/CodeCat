@@ -40,6 +40,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             cboSyntax.Items.Clear();
             cboSyntax.Items.AddRange(syntaxes);
 
+            btnDeleteSnapshot.Enabled = false;
+
+            toolstripKeywords.Visible = false;
+            toolstripTitle.Visible = false;
+            
             this.Text = codeFile.Title;
             this.Tag = codeFile.Id;
             this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
@@ -47,12 +52,32 @@ namespace CygSoft.CodeCat.UI.WinForms
             SelectSyntax(codeFile.Syntax);
             cboFontSize.SelectedIndex = 4;
 
+            snapshotListCtrl1.Attach(codeFile);
+            UpdateSnapshotsTab();
+
             // -----------------------------------------------------------
             // these events MUST go after all properties are set...
             // -----------------------------------------------------------
             //syntaxDoc.Change += (s, e) => {
             //    this.IsModified = true;
             //} ;
+
+            this.snapshotListCtrl1.SnapshotSelectionChanged += (s, e) =>
+            {
+                this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab);
+            };
+
+            this.tabControl.Selected += (s, e) =>
+            {
+                this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab);
+            };
+
+            chkEdit.Click += (s, e) =>
+                {
+                    toolstripTitle.Visible = chkEdit.Checked;
+                    toolstripKeywords.Visible = chkEdit.Checked;
+                };
+
             this.codeFile.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
             this.codeFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
 
@@ -65,9 +90,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.syntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
                 this.snapshotListCtrl1.EditorFontSize = this.syntaxBox.FontSize;
             };
-
-            snapshotListCtrl1.Attach(codeFile);
-            UpdateSnapshotsTab();
 
             this.IsModified = false;
 
@@ -111,6 +133,18 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+
+        public bool EditMode
+        {
+            get { return this.chkEdit.Checked; }
+            set
+            {
+                this.chkEdit.Checked = value;
+                this.toolstripKeywords.Visible = value;
+                this.toolstripTitle.Visible = value;
+            }
+        }
+
         public bool IsNew { get; private set; }
         
         public bool SaveChanges()
@@ -123,17 +157,17 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 MessageBox.Show("Keywords are mandatory. Please enter some searchable keywords.");
             }
-            //else if (string.IsNullOrWhiteSpace(this.languageComboBox.Text))
-            //{
-            //    MessageBox.Show("Invalid data.");
-            //}
+            else if (string.IsNullOrWhiteSpace(this.cboSyntax.Text))
+            {
+                MessageBox.Show("Invalid data.");
+            }
             else
             {
                 try
                 {
                     this.codeFile.Title = this.txtTitle.Text.Trim();
                     this.codeFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
-                    //this.codeFile.Syntax = this.languageComboBox.Text.Trim();
+                    this.codeFile.Syntax = this.cboSyntax.Text.Trim();
                     this.codeFile.Text = syntaxBox.Document.Text;
                     this.codeFile.Save();
                     this.txtKeywords.Text = this.codeFile.CommaDelimitedKeywords;

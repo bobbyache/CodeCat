@@ -14,12 +14,27 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class SnapshotListCtrl : UserControl
     {
+        public event EventHandler SnapshotSelectionChanged;
+
         public string SyntaxFile
         {
             set { this.syntaxBox.Document.SyntaxFile = value; }
         }
 
         public float EditorFontSize { set { this.syntaxBox.FontSize = value; } }
+
+        public CodeSnapshot SelectedSnapshot
+        {
+            get
+            {
+                if (listviewSnapshots.SelectedItems.Count == 1)
+                {
+                    return (CodeSnapshot)listviewSnapshots.SelectedItems[0].Tag;
+                }
+                else
+                    return null;
+            }
+        }
 
         public SnapshotListCtrl()
         {
@@ -47,9 +62,14 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void listviewSnapshots_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listviewSnapshots.SelectedItems.Count == 1)
+            {
                 syntaxBox.Document.Text = ((CodeSnapshot)listviewSnapshots.SelectedItems[0].Tag).Text;
+            }
             else
                 syntaxBox.Document.Text = string.Empty;
+
+            if (SnapshotSelectionChanged != null)
+                SnapshotSelectionChanged(this, new EventArgs());
         }
 
         private CodeFile codeFile = null;
