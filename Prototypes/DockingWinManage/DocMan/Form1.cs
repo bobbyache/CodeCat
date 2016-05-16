@@ -48,9 +48,23 @@ namespace Weif_1_Test
 {
     public partial class Form1 : Form
     {
+        private SearchForm searchForm;
+
         public Form1()
         {
             InitializeComponent();
+
+            dockPanel1.ContentRemoved += dockPanel1_ContentRemoved;
+
+            searchForm = new SearchForm();
+            searchForm.Show(dockPanel1, DockState.DockLeft);
+
+            CreateSnippetIfNone();
+        }
+
+        private void dockPanel1_ContentRemoved(object sender, DockContentEventArgs e)
+        {
+            CreateSnippetIfNone();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -69,6 +83,12 @@ namespace Weif_1_Test
                 else
                     ClearSnippetDocuments();
             }
+        }
+
+        private void CreateSnippetIfNone()
+        {
+            if (!this.dockPanel1.Contents.OfType<ISnippetDocument>().Any())
+                CreateSnippetDocument();
         }
 
         private void CreateSnippetDocument()
@@ -211,6 +231,11 @@ namespace Weif_1_Test
         {
             if (dockPanel1.ActiveDocument != null && dockPanel1.ActiveDocument is ISnippetDocument)
                 (dockPanel1.ActiveDocument as SnippetDocument).Close();
+        }
+
+        private void mnuSearchPane_Click(object sender, EventArgs e)
+        {
+            searchForm.Activate();
         }
     }
 }

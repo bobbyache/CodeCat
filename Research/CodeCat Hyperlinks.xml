@@ -59,6 +59,10 @@ Check out the Avalon library.]]></Description>
       <KeyPhraseList>,DOCK,DOCKING,WPF</KeyPhraseList>
       <Description><![CDATA[AvalonDock is a docking windows control for WPF that lets you create customizable layouts using a full featured window docking system similar to what is found in many popular integrated development environements (IDEs) such as Visual Studio. It includes themes and samples to get you started.]]></Description>
     </Hyperlink>
+    <Hyperlink ID="186fabd4-ed4a-4d0a-b009-101b92bfb071" Topic="Closing the Application: this.close() Vs Application.Exit()" Url="https://social.msdn.microsoft.com/Forums/windows/en-US/f23247b8-e0ca-46eb-afb0-dbf22d4c84ac/thisclose-vs-applicationexit?forum=winforms" State="New">
+      <KeyPhraseList>,APPLICATION,CLOSE,EXIT,MANAGEMENT,WINDOW</KeyPhraseList>
+      <Description><![CDATA[This Microsoft site informs you of the difference between Applictation.Exit() and this.Close()]]></Description>
+    </Hyperlink>
   </Hyperlinks>
-  <KeyPhrases>,ACTIVATE,BUG,CONSTRAIN,CUSTOM,DOCK,DOCKED,DOCKING,EDITOR,EXTEND,EXTENDED,FLOAT,FLOATING,GRID,HIGHLIGHT,HIGHLIGHTING,INTERNAL,INTERNALS,ISSUE,LISTVIEW,LOAD,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STATE,STRETCH,SYNTAX,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOW,WINDOWS,WINDOWS FORMS,WINFORMS,WPF</KeyPhrases>
+  <KeyPhrases>,ACTIVATE,APPLICATION,BUG,CLOSE,CONSTRAIN,CUSTOM,DOCK,DOCKED,DOCKING,EDITOR,EXIT,EXTEND,EXTENDED,FLOAT,FLOATING,GRID,HIGHLIGHT,HIGHLIGHTING,INTERNAL,INTERNALS,ISSUE,LISTVIEW,LOAD,MANAGEMENT,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STATE,STRETCH,SYNTAX,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOW,WINDOWS,WINDOWS FORMS,WINFORMS,WPF</KeyPhrases>
 </OfflineSource>

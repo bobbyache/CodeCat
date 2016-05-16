@@ -60,6 +60,12 @@
     <Compile Include="SaveSnippetDialog.Designer.cs">
       <DependentUpon>SaveSnippetDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SnippetDocument.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SaveSnippetDialog.resx">
       <DependentUpon>SaveSnippetDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SnippetDocument.resx">
       <DependentUpon>SnippetDocument.cs</DependentUpon>
