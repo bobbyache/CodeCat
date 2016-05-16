@@ -55,14 +55,6 @@
             this.mnuSnippets = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSnippetsAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSnippetsViewModify = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuResults = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuResultsAddKeywords = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuResultsRemoveKeywords = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuResultsCopyKeywords = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuResultsCopyIdentifier = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuResultsDeleteSelection = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindowKeywordSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTools = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +74,6 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFile,
             this.mnuSnippets,
-            this.mnuResults,
             this.mnuWindow,
             this.mnuTools,
             this.mnuHelp});
@@ -175,61 +166,6 @@
             this.mnuSnippetsViewModify.Size = new System.Drawing.Size(192, 22);
             this.mnuSnippetsViewModify.Text = "View/Modify...";
             // 
-            // mnuResults
-            // 
-            this.mnuResults.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuResultsAddKeywords,
-            this.mnuResultsRemoveKeywords,
-            this.toolStripMenuItem7,
-            this.mnuResultsCopyKeywords,
-            this.mnuResultsCopyIdentifier,
-            this.toolStripMenuItem6,
-            this.mnuResultsDeleteSelection});
-            this.mnuResults.Name = "mnuResults";
-            this.mnuResults.Size = new System.Drawing.Size(56, 20);
-            this.mnuResults.Text = "Results";
-            // 
-            // mnuResultsAddKeywords
-            // 
-            this.mnuResultsAddKeywords.Name = "mnuResultsAddKeywords";
-            this.mnuResultsAddKeywords.Size = new System.Drawing.Size(196, 22);
-            this.mnuResultsAddKeywords.Text = "Add Keywords";
-            // 
-            // mnuResultsRemoveKeywords
-            // 
-            this.mnuResultsRemoveKeywords.Name = "mnuResultsRemoveKeywords";
-            this.mnuResultsRemoveKeywords.Size = new System.Drawing.Size(196, 22);
-            this.mnuResultsRemoveKeywords.Text = "Remove Keywords";
-            // 
-            // toolStripMenuItem7
-            // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(193, 6);
-            // 
-            // mnuResultsCopyKeywords
-            // 
-            this.mnuResultsCopyKeywords.Name = "mnuResultsCopyKeywords";
-            this.mnuResultsCopyKeywords.Size = new System.Drawing.Size(196, 22);
-            this.mnuResultsCopyKeywords.Text = "Copy Keywords";
-            // 
-            // mnuResultsCopyIdentifier
-            // 
-            this.mnuResultsCopyIdentifier.Name = "mnuResultsCopyIdentifier";
-            this.mnuResultsCopyIdentifier.Size = new System.Drawing.Size(196, 22);
-            this.mnuResultsCopyIdentifier.Text = "Copy Identifier";
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(193, 6);
-            // 
-            // mnuResultsDeleteSelection
-            // 
-            this.mnuResultsDeleteSelection.Name = "mnuResultsDeleteSelection";
-            this.mnuResultsDeleteSelection.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D)));
-            this.mnuResultsDeleteSelection.Size = new System.Drawing.Size(196, 22);
-            this.mnuResultsDeleteSelection.Text = "Delete Selection";
-            // 
             // mnuWindow
             // 
             this.mnuWindow.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -254,6 +190,7 @@
             // 
             // mnuToolsConvertVersion
             // 
+            this.mnuToolsConvertVersion.Enabled = false;
             this.mnuToolsConvertVersion.Name = "mnuToolsConvertVersion";
             this.mnuToolsConvertVersion.Size = new System.Drawing.Size(199, 22);
             this.mnuToolsConvertVersion.Text = "Convert Older Version...";
@@ -271,14 +208,16 @@
             // 
             this.mnuHelpHelpTopics.Name = "mnuHelpHelpTopics";
             this.mnuHelpHelpTopics.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.mnuHelpHelpTopics.Size = new System.Drawing.Size(145, 22);
+            this.mnuHelpHelpTopics.Size = new System.Drawing.Size(152, 22);
             this.mnuHelpHelpTopics.Text = "Help";
+            this.mnuHelpHelpTopics.Click += new System.EventHandler(this.mnuHelpHelpTopics_Click);
             // 
             // mnuHelpAbout
             // 
             this.mnuHelpAbout.Name = "mnuHelpAbout";
-            this.mnuHelpAbout.Size = new System.Drawing.Size(145, 22);
+            this.mnuHelpAbout.Size = new System.Drawing.Size(152, 22);
             this.mnuHelpAbout.Text = "About...";
+            this.mnuHelpAbout.Click += new System.EventHandler(this.mnuHelpAbout_Click);
             // 
             // statusStrip1
             // 
@@ -382,14 +321,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuFileOpenProjectFolder;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuFileExit;
-        private System.Windows.Forms.ToolStripMenuItem mnuResults;
-        private System.Windows.Forms.ToolStripMenuItem mnuResultsAddKeywords;
-        private System.Windows.Forms.ToolStripMenuItem mnuResultsRemoveKeywords;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem mnuResultsCopyKeywords;
-        private System.Windows.Forms.ToolStripMenuItem mnuResultsCopyIdentifier;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
-        private System.Windows.Forms.ToolStripMenuItem mnuResultsDeleteSelection;
         private System.Windows.Forms.ToolStripMenuItem mnuTools;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp;
         private System.Windows.Forms.ToolStripMenuItem mnuHelpAbout;

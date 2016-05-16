@@ -102,7 +102,6 @@
             this.columnHeader4,
             this.columnHeader5});
             this.listView.FullRowSelect = true;
-            this.listView.GridLines = true;
             this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(0, 28);
             this.listView.Name = "listView";
@@ -140,7 +139,7 @@
             this.toolStripMenuItem4,
             this.menuContextDelete});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(186, 198);
+            this.contextMenu.Size = new System.Drawing.Size(186, 176);
             // 
             // menuContextViewSnippet
             // 
@@ -159,18 +158,21 @@
             this.menuContextViewKeywords.Name = "menuContextViewKeywords";
             this.menuContextViewKeywords.Size = new System.Drawing.Size(185, 22);
             this.menuContextViewKeywords.Text = "View Keywords";
+            this.menuContextViewKeywords.Click += new System.EventHandler(this.menuContextViewKeywords_Click);
             // 
             // menuContextAddKeywords
             // 
             this.menuContextAddKeywords.Name = "menuContextAddKeywords";
             this.menuContextAddKeywords.Size = new System.Drawing.Size(185, 22);
             this.menuContextAddKeywords.Text = "Add Keywords";
+            this.menuContextAddKeywords.Click += new System.EventHandler(this.menuContextAddKeywords_Click);
             // 
             // menuContextRemoveKeywords
             // 
             this.menuContextRemoveKeywords.Name = "menuContextRemoveKeywords";
             this.menuContextRemoveKeywords.Size = new System.Drawing.Size(185, 22);
             this.menuContextRemoveKeywords.Text = "Remove Keywords";
+            this.menuContextRemoveKeywords.Click += new System.EventHandler(this.menuContextRemoveKeywords_Click);
             // 
             // toolStripMenuItem5
             // 
@@ -182,12 +184,14 @@
             this.menuContextCopyKeywords.Name = "menuContextCopyKeywords";
             this.menuContextCopyKeywords.Size = new System.Drawing.Size(185, 22);
             this.menuContextCopyKeywords.Text = "Copy Keywords";
+            this.menuContextCopyKeywords.Click += new System.EventHandler(this.menuContextCopyKeywords_Click);
             // 
             // menuContextCopyIdentifier
             // 
             this.menuContextCopyIdentifier.Name = "menuContextCopyIdentifier";
             this.menuContextCopyIdentifier.Size = new System.Drawing.Size(185, 22);
             this.menuContextCopyIdentifier.Text = "Copy Identifier";
+            this.menuContextCopyIdentifier.Click += new System.EventHandler(this.menuContextCopyIdentifier_Click);
             // 
             // toolStripMenuItem4
             // 
@@ -199,6 +203,7 @@
             this.menuContextDelete.Name = "menuContextDelete";
             this.menuContextDelete.Size = new System.Drawing.Size(185, 22);
             this.menuContextDelete.Text = "Delete";
+            this.menuContextDelete.Click += new System.EventHandler(this.menuContextDelete_Click);
             // 
             // SearchForm
             // 

@@ -49,4 +49,16 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.Keywords = keywords;
         }
     }
+
+    public class DeleteCodeFileEventArgs : EventArgs
+    {
+        public SnippetForm Document { get; private set; }
+        public CodeFile Item { get; private set; }
+
+        public DeleteCodeFileEventArgs(CodeFile item, SnippetForm document)
+        {
+            this.Document = document;
+            this.Item = item;
+        }
+    }
 }

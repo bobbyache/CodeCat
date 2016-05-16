@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.Infrastructure;
+﻿using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,10 +16,13 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class SearchForm : DockContent
     {
-        public SearchForm()
+        private AppFacade application;
+
+        public SearchForm(AppFacade application)
         {
             InitializeComponent();
 
+            this.application = application;
             this.HideOnClose = true;
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight;
 
@@ -97,6 +101,19 @@ namespace CygSoft.CodeCat.UI.WinForms
             listView.Items.Clear();
             foreach (IKeywordIndexItem item in indexItems)
                 CreateListviewItem(listView, item);
+        }
+
+        public void RemoveSnippet(string snippetId)
+        {
+            ListViewItem selected = null;
+
+            foreach (ListViewItem lv in listView.Items)
+            {
+                if (lv.Name == snippetId)
+                    selected = lv;
+            }
+            if (selected != null)
+                listView.Items.Remove(selected);
         }
 
         public int SortingColumn { get; set; }
@@ -251,6 +268,83 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 OpenSelectedSnippet();
             }
+        }
+
+        private void menuContextViewKeywords_Click(object sender, EventArgs e)
+        {
+            SelectKeywordsForm frm = new SelectKeywordsForm();
+            frm.Text = "View Keywords";
+            IKeywordIndexItem[] IndexItems = this.SelectedSnippets;
+            frm.Keywords = application.AllKeywords(IndexItems);
+            DialogResult result = frm.ShowDialog(this);
+        }
+
+        private void menuContextAddKeywords_Click(object sender, EventArgs e)
+        {
+            EnterKeywordsForm frm = new EnterKeywordsForm();
+            DialogResult result = frm.ShowDialog(this);
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                string delimitedKeywordList = frm.Keywords;
+                IKeywordIndexItem[] IndexItems = this.SelectedSnippets;
+                application.AddKeywords(IndexItems, delimitedKeywordList);
+            }
+        }
+
+        private void menuContextRemoveKeywords_Click(object sender, EventArgs e)
+        {
+            SelectKeywordsForm frm = new SelectKeywordsForm();
+            frm.Text = "Remove Keywords";
+            IKeywordIndexItem[] IndexItems = this.SelectedSnippets;
+            frm.Keywords = application.AllKeywords(IndexItems);
+            DialogResult result = frm.ShowDialog(this);
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                string[] keywords = frm.Keywords;
+                application.RemoveKeywords(IndexItems, keywords);
+            }
+        }
+
+        private void menuContextCopyKeywords_Click(object sender, EventArgs e)
+        {
+            Clipboard.Clear();
+            Clipboard.SetText(application.CopyAllKeywords(this.SelectedSnippets));
+        }
+
+        private void menuContextCopyIdentifier_Click(object sender, EventArgs e)
+        {
+            if (this.SelectedSnippet != null)
+            {
+                Clipboard.Clear();
+                Clipboard.SetText(this.SelectedSnippet.Id);
+            }
+        }
+
+        private void menuContextDelete_Click(object sender, EventArgs e)
+        {
+            //IKeywordIndexItem codeItem = this.SelectedSnippet;
+
+            //if (codeItem != null)
+            //{
+            //    if (this.formController.ItemFormIsOpen(codeItem.Id))
+            //    {
+            //        MessageBox.Show(this, "Cannot delete an open snippet.",
+            //            ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            //        return;
+            //    }
+
+            //    DialogResult result = MessageBox.Show(this, "Sure you want to delete this snippet?",
+            //        ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            //    if (result == System.Windows.Forms.DialogResult.Yes)
+            //    {
+            //        this.application.RemoveCodeSnippet(codeItem.Id);
+            //        ListviewHelper.DeleteSelectedItem(listView1);
+            //        ExecuteSearch(keywordsTextBox.Text);
+            //    }
+            //}
         }
     }
 }

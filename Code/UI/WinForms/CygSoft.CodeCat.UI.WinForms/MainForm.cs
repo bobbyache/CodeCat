@@ -48,15 +48,13 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             mnuFileOpen.Click += mnuFileOpen_Click;
             mnuWindowKeywordSearch.Click += mnuWindowKeywordSearch_Click;
-            mnuResultsDeleteSelection.Click += mnuResultsDeleteSelection_Click;
             mnuSnippetsAdd.Click += mnuSnippetsAdd_Click;
             mnuSnippetsViewModify.Click += mnuSnippetsViewModify_Click;
-            mnuResultsAddKeywords.Click += mnuResultsAddKeywords_Click;
         }
 
         private void InitializeSearchForm()
         {
-            searchForm = new SearchForm();
+            searchForm = new SearchForm(this.application);
             searchForm.OpenSnippet += searchForm_OpenSnippet;
             searchForm.SearchExecuted += (s, e) => ExecuteSearch(e.Keywords);
             searchForm.SelectSnippet += (s, e) => EnableControls();
@@ -156,14 +154,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             mnuSnippetsViewModify.Enabled = projectLoaded && itemSelected;
             mnuSnippetsAdd.Enabled = projectLoaded;
-            mnuResultsDeleteSelection.Enabled = projectLoaded && itemSelected;
             mnuFileOpenProjectFolder.Enabled = projectLoaded;
-
-            mnuResultsAddKeywords.Enabled = projectLoaded && (itemSelected || itemsSelected);
-            mnuResultsRemoveKeywords.Enabled = projectLoaded && (itemSelected || itemsSelected);
-
-            mnuResultsCopyIdentifier.Enabled = projectLoaded && itemSelected;
-            mnuResultsCopyKeywords.Enabled = projectLoaded && (itemSelected || itemsSelected);
         }
 
         private string WindowCaption()
@@ -188,11 +179,24 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 CodeFile codeFile = application.OpenCodeSnippet(snippetIndex);
                 SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxes(),  application.GetSyntaxFile(codeFile.Syntax));
+                snippetForm.DeleteSnippetDocument += snippetForm_DeleteSnippetDocument;
                 snippetForm.Show(dockPanel, DockState.Document);
             }
             else
             {
                 ActivateSnippet(snippetIndex);
+            }
+        }
+
+        private void snippetForm_DeleteSnippetDocument(object sender, DeleteCodeFileEventArgs e)
+        {
+            DialogResult result = MessageBox.Show(this, "Sure you want to delete this snippet?",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                e.Document.Delete();
+                searchForm.RemoveSnippet(e.Item.Id);
+                application.RemoveCodeSnippet(e.Item.Id);
             }
         }
 
@@ -204,10 +208,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateSnippetDocument()
         {
-            CodeFile codeFile = application.CreateCodeSnippet();
-            codeFile.Syntax = application.GetSyntaxFile(ConfigSettings.DefaultSyntax);
+            CodeFile codeFile = application.CreateCodeSnippet(ConfigSettings.DefaultSyntax);
+            //codeFile.Syntax = application.GetSyntaxFile(ConfigSettings.DefaultSyntax);
 
-            SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxes(), application.GetSyntaxFile(ConfigSettings.DefaultSyntax));
+            SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxes(), application.GetSyntaxFile(ConfigSettings.DefaultSyntax), true);
+            snippetForm.DeleteSnippetDocument += snippetForm_DeleteSnippetDocument;
             snippetForm.EditMode = true;
             snippetForm.Show(dockPanel, DockState.Document);
         }
@@ -449,6 +454,18 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void mnuFileOpenProjectFolder_Click(object sender, EventArgs e)
         {
             this.application.OpenContextFolder();
+        }
+
+        private void mnuHelpHelpTopics_Click(object sender, EventArgs e)
+        {
+            AboutBoxDialog dialog = new AboutBoxDialog();
+            dialog.ShowDialog(this);
+        }
+
+        private void mnuHelpAbout_Click(object sender, EventArgs e)
+        {
+            AboutBoxDialog dialog = new AboutBoxDialog();
+            dialog.ShowDialog(this);
         }
     }
 }

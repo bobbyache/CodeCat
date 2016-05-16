@@ -56,6 +56,8 @@
             this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.tabPageSnapshots = new System.Windows.Forms.TabPage();
             this.snapshotListCtrl1 = new CygSoft.CodeCat.UI.WinForms.SnapshotListCtrl();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
@@ -139,7 +141,7 @@
             this.txtTitle,
             this.toolStripLabel5,
             this.cboSyntax});
-            this.toolstripTitle.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitle.Location = new System.Drawing.Point(0, 50);
             this.toolstripTitle.Name = "toolstripTitle";
             this.toolstripTitle.Size = new System.Drawing.Size(821, 25);
             this.toolstripTitle.TabIndex = 10;
@@ -199,10 +201,12 @@
             this.toolstripCommands.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
             this.toolStripSeparator1,
+            this.btnDelete,
+            this.toolStripSeparator2,
             this.btnTakeSnapshot,
             this.btnDeleteSnapshot,
             this.chkEdit});
-            this.toolstripCommands.Location = new System.Drawing.Point(0, 50);
+            this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
             this.toolstripCommands.Size = new System.Drawing.Size(821, 25);
             this.toolstripCommands.TabIndex = 12;
@@ -321,6 +325,19 @@
             this.snapshotListCtrl1.Size = new System.Drawing.Size(807, 364);
             this.snapshotListCtrl1.TabIndex = 0;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(60, 22);
+            this.btnDelete.Text = "Delete";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // SnippetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -379,5 +396,7 @@
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton chkEdit;
+        private System.Windows.Forms.ToolStripButton btnDelete;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

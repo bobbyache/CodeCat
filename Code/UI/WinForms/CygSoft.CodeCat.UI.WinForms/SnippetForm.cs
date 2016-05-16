@@ -18,11 +18,14 @@ namespace CygSoft.CodeCat.UI.WinForms
         private TabPage snapshotsTab;
         private CodeFile codeFile;
         private bool flagSilentClose = false;
+        private bool flagForDelete = false;
+
+        public event EventHandler<DeleteCodeFileEventArgs> DeleteSnippetDocument;
 
         //public event EventHandler MovePrevious;
         //public event EventHandler MoveNext;
 
-        public SnippetForm(CodeFile codeFile, string[] syntaxes, string syntaxFile)
+        public SnippetForm(CodeFile codeFile, string[] syntaxes, string syntaxFile, bool isNew = false)
         {
             InitializeComponent();
 
@@ -30,6 +33,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabControl.Alignment = TabAlignment.Left;
             this.snapshotsTab = this.tabPageSnapshots;
 
+            this.IsNew = isNew;
             this.codeFile = codeFile;
             //this.syntaxBox.GotFocus += (s, e) => { Console.Write(this.IsActivated.ToString()); };
 
@@ -40,7 +44,10 @@ namespace CygSoft.CodeCat.UI.WinForms
             cboSyntax.Items.Clear();
             cboSyntax.Items.AddRange(syntaxes);
 
+            btnTakeSnapshot.Enabled = !IsNew;
             btnDeleteSnapshot.Enabled = false;
+            btnSave.Enabled = false;
+            btnDelete.Enabled = !isNew;
 
             toolstripKeywords.Visible = false;
             toolstripTitle.Visible = false;
@@ -64,12 +71,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             this.snapshotListCtrl1.SnapshotSelectionChanged += (s, e) =>
             {
-                this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab);
+                this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab && !this.isNew);
             };
 
             this.tabControl.Selected += (s, e) =>
             {
-                this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab);
+                this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab && !this.isNew);
             };
 
             chkEdit.Click += (s, e) =>
@@ -82,13 +89,22 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.codeFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
 
             txtTitle.TextChanged += (s, e) => this.IsModified = true;
-            txtTitle.TextChanged += (s, e) => this.IsModified = true;
+            txtKeywords.TextChanged += (s, e) => this.IsModified = true;
             syntaxBox.TextChanged += (s, e) => this.IsModified = true;
             cboSyntax.SelectedIndexChanged += (s, e) => this.IsModified = true;
             cboFontSize.SelectedIndexChanged += (s, e) =>
             {
                 this.syntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
                 this.snapshotListCtrl1.EditorFontSize = this.syntaxBox.FontSize;
+            };
+
+            btnDelete.Click += (s, e) => 
+            {
+                if (this.IsNew)
+                    return;
+
+                if (DeleteSnippetDocument != null)
+                    DeleteSnippetDocument(this, new DeleteCodeFileEventArgs(this.codeFile, this));
             };
 
             this.IsModified = false;
@@ -128,11 +144,25 @@ namespace CygSoft.CodeCat.UI.WinForms
                     //btnSave.Enabled = hasChanges ? true : false;
                     lblEditStatus.Text = value ? "Edited" : "Saved";
                     lblEditStatus.ForeColor = value ? Color.DarkRed : Color.Black;
+                    btnSave.Enabled = value;
                     this.isModified = value;
                 }
             }
         }
 
+        private bool isNew;
+        public bool IsNew 
+        {
+            get { return this.isNew; }
+            private set
+            {
+                if (this.isNew != value)
+                {
+                    this.btnDelete.Enabled = !value;
+                    this.isNew = value;
+                }
+            }
+        }
 
         public bool EditMode
         {
@@ -144,8 +174,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.toolstripTitle.Visible = value;
             }
         }
-
-        public bool IsNew { get; private set; }
         
         public bool SaveChanges()
         {
@@ -170,8 +198,11 @@ namespace CygSoft.CodeCat.UI.WinForms
                     this.codeFile.Syntax = this.cboSyntax.Text.Trim();
                     this.codeFile.Text = syntaxBox.Document.Text;
                     this.codeFile.Save();
+                    this.btnTakeSnapshot.Enabled = true;
+                    this.Text = codeFile.Title;
                     this.txtKeywords.Text = this.codeFile.CommaDelimitedKeywords;
                     this.IsModified = false;
+                    this.IsNew = false;
                     return true;
                 }
                 catch (Exception ex)
@@ -185,6 +216,12 @@ namespace CygSoft.CodeCat.UI.WinForms
         public void FlagSilentClose()
         {
             flagSilentClose = true;
+        }
+
+        public void Delete()
+        {
+            flagForDelete = true;
+            this.Close();
         }
 
         public void DiscardChanges()
@@ -201,11 +238,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.codeFile.CommaDelimitedKeywords += ("," + keywords);
         }
 
-        private void SelectSyntax(string language)
+        private void SelectSyntax(string syntax)
         {
+            string syn = syntax.ToUpper();
+
             foreach (object item in cboSyntax.Items)
             {
-                if (item.ToString() == language)
+                if (item.ToString() == syn)
                     cboSyntax.SelectedItem = item;
             }
         }
@@ -239,7 +278,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             // if one of these forms cancel, it also seems to stop the application
             // from closing!
 
-            if (!flagSilentClose)
+            if (!flagSilentClose && !flagForDelete)
             {
                 if (this.IsModified)
                 {

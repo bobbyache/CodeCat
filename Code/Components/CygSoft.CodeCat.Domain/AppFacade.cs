@@ -105,10 +105,11 @@ namespace CygSoft.CodeCat.Domain
             this.codeLibrary.RemoveKeywords(indeces, keywords);
         }
 
-        public CodeFile CreateCodeSnippet()
+        public CodeFile CreateCodeSnippet(string syntax)
         {
             CodeFile codeFile = this.codeLibrary.CreateFile() as CodeFile;
             codeFile.Title = "New Snippet";
+            codeFile.Syntax = syntax;
             return codeFile;
         }
 
