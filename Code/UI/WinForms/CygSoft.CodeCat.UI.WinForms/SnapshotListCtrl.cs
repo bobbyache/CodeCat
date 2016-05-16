@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class SnapshotListCtrl : UserControl
     {
-        public string EditorSyntaxFile
+        public string SyntaxFile
         {
             set { this.syntaxBox.Document.SyntaxFile = value; }
         }

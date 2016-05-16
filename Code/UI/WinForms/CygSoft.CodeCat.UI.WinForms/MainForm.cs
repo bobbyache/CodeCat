@@ -187,7 +187,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!SnippetIsOpen(snippetIndex))
             {
                 CodeFile codeFile = application.OpenCodeSnippet(snippetIndex);
-                SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxFile(codeFile.Syntax));
+                SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxes(),  application.GetSyntaxFile(codeFile.Syntax));
                 snippetForm.Show(dockPanel, DockState.Document);
             }
             else
@@ -207,7 +207,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             CodeFile codeFile = application.CreateCodeSnippet();
             codeFile.Syntax = application.GetSyntaxFile(ConfigSettings.DefaultSyntax);
 
-            SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxFile(ConfigSettings.DefaultSyntax));
+            SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxes(), application.GetSyntaxFile(ConfigSettings.DefaultSyntax));
             snippetForm.Show(dockPanel, DockState.Document);
         }
 
@@ -390,8 +390,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 }
                 else if (result == System.Windows.Forms.DialogResult.Cancel)
                     e.Cancel = true;
-                else
-                    ClearSnippetDocuments();
             }
         }
 
@@ -435,6 +433,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 SnippetForm snippetDoc = snippetDocs.First();
                 snippetDocs.Remove(snippetDoc);
+                // important, otherwise snippet for will throw a messagebox.
+                // we should have already been through the IsModified check process.
+                snippetDoc.FlagSilentClose();
                 snippetDoc.Close();
             }
         }

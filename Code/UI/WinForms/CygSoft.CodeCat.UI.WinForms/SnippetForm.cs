@@ -15,23 +15,37 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class SnippetForm : DockContent
     {
-        public SnippetForm(CodeFile codeFile, string syntaxFile)
+        private TabPage snapshotsTab;
+        private CodeFile codeFile;
+        private bool flagSilentClose = false;
+
+        //public event EventHandler MovePrevious;
+        //public event EventHandler MoveNext;
+
+        public SnippetForm(CodeFile codeFile, string[] syntaxes, string syntaxFile)
         {
             InitializeComponent();
 
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
             tabControl.Alignment = TabAlignment.Left;
+            this.snapshotsTab = this.tabPageSnapshots;
 
             this.codeFile = codeFile;
-            this.syntaxBox.GotFocus += (s, e) => { Console.Write(this.IsActivated.ToString()); };
+            //this.syntaxBox.GotFocus += (s, e) => { Console.Write(this.IsActivated.ToString()); };
 
             this.syntaxBox.Document.Text = codeFile.Text;
             this.syntaxBox.Document.SyntaxFile = syntaxFile;
+            this.snapshotListCtrl1.SyntaxFile = syntaxFile;
+
+            cboSyntax.Items.Clear();
+            cboSyntax.Items.AddRange(syntaxes);
 
             this.Text = codeFile.Title;
             this.Tag = codeFile.Id;
             this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
             this.txtTitle.Text = codeFile.Title;
+            SelectSyntax(codeFile.Syntax);
+            cboFontSize.SelectedIndex = 4;
 
             // -----------------------------------------------------------
             // these events MUST go after all properties are set...
@@ -39,18 +53,27 @@ namespace CygSoft.CodeCat.UI.WinForms
             //syntaxDoc.Change += (s, e) => {
             //    this.IsModified = true;
             //} ;
+            this.codeFile.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
+            this.codeFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
+
             txtTitle.TextChanged += (s, e) => this.IsModified = true;
             txtTitle.TextChanged += (s, e) => this.IsModified = true;
             syntaxBox.TextChanged += (s, e) => this.IsModified = true;
+            cboSyntax.SelectedIndexChanged += (s, e) => this.IsModified = true;
+            cboFontSize.SelectedIndexChanged += (s, e) =>
+            {
+                this.syntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
+                this.snapshotListCtrl1.EditorFontSize = this.syntaxBox.FontSize;
+            };
+
+            snapshotListCtrl1.Attach(codeFile);
+            UpdateSnapshotsTab();
+
+            this.IsModified = false;
 
             this.CloseButtonVisible = true;
             this.CloseButton = true;
         }
-
-        private CodeFile codeFile;
-
-        //public event EventHandler MovePrevious;
-        //public event EventHandler MoveNext;
 
         public string SnippetId
         {
@@ -89,7 +112,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         public bool IsNew { get; private set; }
-
+        
         public bool SaveChanges()
         {
             if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
@@ -125,6 +148,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             return false;
         }
 
+        public void FlagSilentClose()
+        {
+            flagSilentClose = true;
+        }
+
         public void DiscardChanges()
         {
             // discard all changes...
@@ -139,9 +167,33 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.codeFile.CommaDelimitedKeywords += ("," + keywords);
         }
 
+        private void SelectSyntax(string language)
+        {
+            foreach (object item in cboSyntax.Items)
+            {
+                if (item.ToString() == language)
+                    cboSyntax.SelectedItem = item;
+            }
+        }
+
+        private void UpdateSnapshotsTab()
+        {
+            snapshotsTab.Text = string.Format("Snapshots ({0})", codeFile.Snapshots.Length);
+            if (!codeFile.HasSnapshots)
+            {
+                if (tabControl.TabPages.Contains(snapshotsTab))
+                    tabControl.TabPages.Remove(snapshotsTab);
+            }
+            else
+            {
+                if (!tabControl.TabPages.Contains(snapshotsTab))
+                    tabControl.TabPages.Add(snapshotsTab);
+            }
+        }
+
         private void SnippetForm_Activated(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(string.Format("Activated: {1}, Document: {0}", this.Text, this.IsActivated.ToString()));
+            //System.Diagnostics.Debug.WriteLine(string.Format("Activated: {1}, Document: {0}", this.Text, this.IsActivated.ToString()));
             // There's a bug here. It seems that if you activate a docked Document
             // from a floating Document the activated event doesn't fire ???
             // However this only happens when you click in the SyntaxBox control and 
@@ -152,9 +204,23 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             // if one of these forms cancel, it also seems to stop the application
             // from closing!
-            bool cancel = false;
-            e.Cancel = cancel;
 
+            if (!flagSilentClose)
+            {
+                if (this.IsModified)
+                {
+                    if (e.CloseReason != CloseReason.MdiFormClosing && !flagSilentClose)
+                    {
+                        DialogResult result = MessageBox.Show(this, "You have not saved this snippet. Would you like to save it first?", "",
+                            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+
+                        if (result == System.Windows.Forms.DialogResult.Yes)
+                            this.SaveChanges();
+                        else if (result == System.Windows.Forms.DialogResult.Cancel)
+                            e.Cancel = true;
+                    }
+                }
+            }
             base.OnFormClosing(e);
         }
 
@@ -177,6 +243,38 @@ namespace CygSoft.CodeCat.UI.WinForms
             //        MoveNext(this, new EventArgs());
             //}
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void btnTakeSnapshot_Click(object sender, EventArgs e)
+        {
+            // Important: that changes are saved. because the snapshot will immediately save the file
+            // in order to keep integrity intact.
+            // because we're only taking a snapshot, the Date Modified of the code index does not
+            // necessarily have to change.
+            if (this.IsModified)
+            {
+                MessageBox.Show("Must save or discard changes before you can make a snapshot.");
+                return;
+            }
+
+            // ok to continue...
+            SnapshotDescForm frm = new SnapshotDescForm();
+            DialogResult result = frm.ShowDialog(this);
+
+            if (result == DialogResult.OK)
+            {
+                this.codeFile.TakeSnapshot(frm.Description);
+            }
+        }
+
+        private void btnDeleteSnapshot_Click(object sender, EventArgs e)
+        {
+            this.snapshotListCtrl1.DeleteSnapshot();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            this.SaveChanges();
         }
     }
 }

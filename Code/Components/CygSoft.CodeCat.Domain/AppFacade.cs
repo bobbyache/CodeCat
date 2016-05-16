@@ -70,7 +70,7 @@ namespace CygSoft.CodeCat.Domain
                 project.GetLibraryFolder(), currentVersion);
         }
 
-        public string[] GetLanguages()
+        public string[] GetSyntaxes()
         {
             return this.codeLibrary.GetLanguages();
         }
