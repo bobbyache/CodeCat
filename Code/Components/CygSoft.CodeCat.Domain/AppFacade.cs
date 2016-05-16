@@ -107,7 +107,9 @@ namespace CygSoft.CodeCat.Domain
 
         public CodeFile CreateCodeSnippet()
         {
-            return this.codeLibrary.CreateFile() as CodeFile;
+            CodeFile codeFile = this.codeLibrary.CreateFile() as CodeFile;
+            codeFile.Title = "New Snippet";
+            return codeFile;
         }
 
         public CodeFile OpenCodeSnippet(IKeywordIndexItem index)

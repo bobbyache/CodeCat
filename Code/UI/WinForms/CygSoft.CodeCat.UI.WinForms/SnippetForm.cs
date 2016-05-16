@@ -18,18 +18,18 @@ namespace CygSoft.CodeCat.UI.WinForms
         public SnippetForm(CodeFile codeFile, string syntaxFile)
         {
             InitializeComponent();
+
+            this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
             tabControl.Alignment = TabAlignment.Left;
 
             this.codeFile = codeFile;
-            this.syntaxBox.GotFocus += (s, e) =>
-                {
-                    Console.Write(this.IsActivated.ToString());
-                };
+            this.syntaxBox.GotFocus += (s, e) => { Console.Write(this.IsActivated.ToString()); };
 
-            
             this.syntaxBox.Document.Text = codeFile.Text;
             this.syntaxBox.Document.SyntaxFile = syntaxFile;
 
+            this.Text = codeFile.Title;
+            this.Tag = codeFile.Id;
             this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
             this.txtTitle.Text = codeFile.Title;
 
@@ -60,6 +60,19 @@ namespace CygSoft.CodeCat.UI.WinForms
                     return this.codeFile.CommaDelimitedKeywords;
                 return null;
             }
+        }
+
+        public bool IsModified { get; private set; }
+        public bool IsNew { get; private set; }
+
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DiscardChanges()
+        {
+            throw new NotImplementedException();
         }
 
         public void AddKeywords(string keywords, bool flagModified = true)

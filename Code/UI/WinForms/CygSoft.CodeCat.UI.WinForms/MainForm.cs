@@ -28,6 +28,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
+            dockPanel.ContentRemoved += (s, e) => CreateSnippetDocumentIfNone();
+
             //dockPanel.SaveAsXml(
             //dockPanel.LoadFromXml(
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
@@ -72,20 +74,28 @@ namespace CygSoft.CodeCat.UI.WinForms
             recentFiles.MaxDisplayNameLength = 80;
 
             recentProjectMenu = new RecentProjectMenu(mnuFileOpenRecent, recentFiles);
-            recentProjectMenu.RecentProjectOpened += recentProjectMenu_RecentProjectOpened;
+            recentProjectMenu.RecentProjectOpened += RecentProjectOpened;
         }
 
-        private void recentProjectMenu_RecentProjectOpened(object sender, RecentProjectEventArgs e)
+        private void PromptOpenProject()
         {
-            if (File.Exists(e.RecentFile.FullPath))
+            string filePath;
+            DialogResult result = Dialogs.OpenIndexDialog(this, out filePath);
+
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
-                OpenProject(e.RecentFile.FullPath);
+                OpenProject(filePath);
             }
-            else
+        }
+
+        private void PromptCreateProject()
+        {
+            string filePath;
+            DialogResult result = Dialogs.CreateIndexDialog(this, out filePath);
+
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
-                DialogResult result = Dialogs.RemoveRecentMenuItemDialogPrompt(this);
-                if (result == System.Windows.Forms.DialogResult.Yes)
-                    recentProjectMenu.Remove(e.RecentFile.FullPath);
+                CreateProject(filePath);
             }
         }
 
@@ -93,6 +103,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             try
             {
+                ClearSnippetDocuments();
+
                 this.application.Open(filePath, ConfigSettings.CodeLibraryIndexFileVersion);
                 this.Text = WindowCaption();
 
@@ -103,7 +115,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.LastProject = filePath;
                 registrySettings.InitialDirectory = Path.GetDirectoryName(filePath);
 
-                CreateNewSnippet();
+                CreateSnippetDocumentIfNone();
                 EnableControls();
 
                 searchForm.Activate();
@@ -112,6 +124,26 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 Dialogs.ProjectFileLoadErrorNotification(this, exception);
             }
+        }
+
+        private void CreateProject(string filePath)
+        {
+            ClearSnippetDocuments();
+
+            this.application.Create(filePath, ConfigSettings.CodeLibraryIndexFileVersion);
+            this.Text = WindowCaption();
+            searchForm.KeywordSearchText = string.Empty;
+            ExecuteSearch(searchForm.KeywordSearchText);
+            recentProjectMenu.Notify(filePath);
+            recentProjectMenu.CurrentlyOpenedFile = filePath;
+
+            ConfigSettings.LastProject = filePath;
+            registrySettings.InitialDirectory = Path.GetDirectoryName(filePath);
+
+            CreateSnippetDocumentIfNone();
+            EnableControls();
+
+            searchForm.Activate();
         }
 
         private void EnableControls()
@@ -144,21 +176,18 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void searchForm_OpenSnippet(object sender, OpenSnippetEventArgs e)
         {
-            OpenSnippet(e.Item);
+            OpenSnippetDocument(e.Item);
             // Note dockPanel.Documents handles the management of your documents. It maintains a collection.
             // This does not include your docked windows, just your "document" windows. This is excellent because
             // you can use this existing collection property to maintain your code snippets.
         }
 
-        private void OpenSnippet(IKeywordIndexItem snippetIndex)
+        private void OpenSnippetDocument(IKeywordIndexItem snippetIndex)
         {
             if (!SnippetIsOpen(snippetIndex))
             {
                 CodeFile codeFile = application.OpenCodeSnippet(snippetIndex);
                 SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxFile(codeFile.Syntax));
-                snippetForm.Text = snippetIndex.Title;
-                snippetForm.Tag = snippetIndex.Id;
-
                 snippetForm.Show(dockPanel, DockState.Document);
             }
             else
@@ -167,14 +196,18 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void CreateNewSnippet()
+        private void CreateSnippetDocumentIfNone()
+        {
+            if (!this.dockPanel.Contents.OfType<SnippetForm>().Any())
+                CreateSnippetDocument();
+        }
+
+        private void CreateSnippetDocument()
         {
             CodeFile codeFile = application.CreateCodeSnippet();
-            codeFile.Title = "New Code Snippet";
-            codeFile.Syntax = "JavaScript";
+            codeFile.Syntax = application.GetSyntaxFile(ConfigSettings.DefaultSyntax);
 
-            SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxFile("JavaScript"));
-            snippetForm.Text = codeFile.Title;
+            SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxFile(ConfigSettings.DefaultSyntax));
             snippetForm.Show(dockPanel, DockState.Document);
         }
 
@@ -214,15 +247,83 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return string.Format("{0} of {1} available items found.", foundItems, this.application.GetIndexCount().ToString());
         }
 
+        private void RecentProjectOpened(object sender, RecentProjectEventArgs e)
+        {
+            if (File.Exists(e.RecentFile.FullPath))
+            {
+                if (AnyUnsavedDocuments())
+                {
+                    DialogResult promptResult = PromptSaveChanges();
+
+                    if (promptResult == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        SaveAllDocuments();
+                        OpenProject(e.RecentFile.FullPath);
+                    }
+                    else if (promptResult == System.Windows.Forms.DialogResult.No)
+                    {
+                        OpenProject(e.RecentFile.FullPath);
+                    }
+                    // else, use has cancelled the request.
+                }
+                else
+                {
+                    OpenProject(e.RecentFile.FullPath);
+                }
+            }
+            else
+            {
+                DialogResult result = Dialogs.RemoveRecentMenuItemDialogPrompt(this);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                    recentProjectMenu.Remove(e.RecentFile.FullPath);
+            }
+        }
+
         private void mnuFileOpen_Click(object sender, EventArgs e)
         {
-            string filePath;
-            DialogResult result = Dialogs.OpenIndexDialog(this, out filePath);
-
-            if (result == System.Windows.Forms.DialogResult.OK)
+            if (AnyUnsavedDocuments())
             {
-                OpenProject(filePath);
+                DialogResult promptResult = PromptSaveChanges();
+
+                if (promptResult == System.Windows.Forms.DialogResult.Yes)
+                {
+                    SaveAllDocuments();
+                    PromptOpenProject();
+                }
+                else if (promptResult == System.Windows.Forms.DialogResult.No)
+                {
+                    PromptOpenProject();
+                }
+                // else, use has cancelled the request.
             }
+            else
+            {
+                PromptOpenProject();
+            }
+        }
+
+        private void mnuFileCreateNew_Click(object sender, EventArgs e)
+        {
+            if (AnyUnsavedDocuments())
+            {
+                DialogResult promptResult = PromptSaveChanges();
+
+                if (promptResult == System.Windows.Forms.DialogResult.Yes)
+                {
+                    SaveAllDocuments();
+                    PromptCreateProject();
+                }
+                else if (promptResult == System.Windows.Forms.DialogResult.No)
+                {
+                    PromptCreateProject();
+                }
+                // else, use has cancelled the request.
+            }
+            else
+            {
+                PromptCreateProject();
+            }
+
         }
 
         private void mnuWindowKeywordSearch_Click(object sender, EventArgs e)
@@ -232,14 +333,14 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void mnuSnippetsAdd_Click(object sender, EventArgs e)
         {
-            CreateNewSnippet();
+            CreateSnippetDocument();
         }
 
         private void mnuSnippetsViewModify_Click(object sender, EventArgs e)
         {
             if (searchForm.SingleSnippetSelected && searchForm.SelectedSnippet != null)
             {
-                OpenSnippet(searchForm.SelectedSnippet);
+                OpenSnippetDocument(searchForm.SelectedSnippet);
             }
         }
 
@@ -272,6 +373,71 @@ namespace CygSoft.CodeCat.UI.WinForms
             // except you'll call application.RemoveKeywords() instead.
             // you overloaded the method in the AppFacade to remove keywords from a single snippet
             // but you can just as well remove from all of them at the same time.
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (AnyUnsavedDocuments())
+            {
+                DialogResult result = PromptSaveChanges();
+
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    SaveAllDocuments();
+                    ClearSnippetDocuments();
+                }
+                else if (result == System.Windows.Forms.DialogResult.Cancel)
+                    e.Cancel = true;
+                else
+                    ClearSnippetDocuments();
+            }
+        }
+
+        private bool AnyUnsavedDocuments()
+        {
+            return this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true).Any();
+        }
+
+        private void SaveAllDocuments()
+        {
+            IEnumerable<SnippetForm> documents = this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true);
+            foreach (SnippetForm document in documents)
+                document.SaveChanges();
+        }
+
+        private DialogResult PromptSaveChanges()
+        {
+            SaveSnippetDialog dialog = new SaveSnippetDialog(UnsavedDocuments());
+            DialogResult result = dialog.ShowDialog(this);
+
+            return result;
+        }
+
+        private SnippetForm[] UnsavedDocuments()
+        {
+            return this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true).ToArray();
+        }
+
+        private void ClearSnippetDocuments()
+        {
+            var snippetDocs = this.dockPanel.Contents.OfType<SnippetForm>().ToList();
+
+            while (snippetDocs.Count() > 0)
+            {
+                SnippetForm snippetDoc = snippetDocs.First();
+                snippetDocs.Remove(snippetDoc);
+                snippetDoc.Close();
+            }
+        }
+
+        private void mnuFileExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void mnuFileOpenProjectFolder_Click(object sender, EventArgs e)
+        {
+            this.application.OpenContextFolder();
         }
     }
 }

@@ -19,6 +19,9 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
+            this.HideOnClose = true;
+            this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight;
+
             listView.ColumnClick += listView_ColumnClick;
             listView.SelectedIndexChanged += listView_SelectedIndexChanged;
             listView.MouseClick += listView_MouseClick;
