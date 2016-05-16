@@ -33,6 +33,16 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
             this.txtTitle.Text = codeFile.Title;
 
+            // -----------------------------------------------------------
+            // these events MUST go after all properties are set...
+            // -----------------------------------------------------------
+            //syntaxDoc.Change += (s, e) => {
+            //    this.IsModified = true;
+            //} ;
+            txtTitle.TextChanged += (s, e) => this.IsModified = true;
+            txtTitle.TextChanged += (s, e) => this.IsModified = true;
+            syntaxBox.TextChanged += (s, e) => this.IsModified = true;
+
             this.CloseButtonVisible = true;
             this.CloseButton = true;
         }
@@ -62,16 +72,62 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        public bool IsModified { get; private set; }
+        private bool isModified;
+        public bool IsModified 
+        {
+            get { return this.isModified; }
+            private set
+            {
+                if (this.isModified != value)
+                {
+                    //btnSave.Enabled = hasChanges ? true : false;
+                    lblEditStatus.Text = value ? "Edited" : "Saved";
+                    lblEditStatus.ForeColor = value ? Color.DarkRed : Color.Black;
+                    this.isModified = value;
+                }
+            }
+        }
+
         public bool IsNew { get; private set; }
 
-        public void SaveChanges()
+        public bool SaveChanges()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
+            {
+                MessageBox.Show("Title is mandatory. Please enter a title.");
+            }
+            else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
+            {
+                MessageBox.Show("Keywords are mandatory. Please enter some searchable keywords.");
+            }
+            //else if (string.IsNullOrWhiteSpace(this.languageComboBox.Text))
+            //{
+            //    MessageBox.Show("Invalid data.");
+            //}
+            else
+            {
+                try
+                {
+                    this.codeFile.Title = this.txtTitle.Text.Trim();
+                    this.codeFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
+                    //this.codeFile.Syntax = this.languageComboBox.Text.Trim();
+                    this.codeFile.Text = syntaxBox.Document.Text;
+                    this.codeFile.Save();
+                    this.txtKeywords.Text = this.codeFile.CommaDelimitedKeywords;
+                    this.IsModified = false;
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Dialogs.SnippetSaveErrorNotification(this, ex);
+                }
+            }
+            return false;
         }
 
         public void DiscardChanges()
         {
+            // discard all changes...
             throw new NotImplementedException();
         }
 

@@ -383,8 +383,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                    SaveAllDocuments();
-                    ClearSnippetDocuments();
+                    if (SaveAllDocuments())
+                        ClearSnippetDocuments();
+                    else
+                        e.Cancel = true;
                 }
                 else if (result == System.Windows.Forms.DialogResult.Cancel)
                     e.Cancel = true;
@@ -398,11 +400,18 @@ namespace CygSoft.CodeCat.UI.WinForms
             return this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true).Any();
         }
 
-        private void SaveAllDocuments()
+        private bool SaveAllDocuments()
         {
             IEnumerable<SnippetForm> documents = this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true);
             foreach (SnippetForm document in documents)
-                document.SaveChanges();
+            {
+                if (!document.SaveChanges())
+                {
+                    document.Activate();
+                    return false;
+                }
+            }
+            return true;
         }
 
         private DialogResult PromptSaveChanges()

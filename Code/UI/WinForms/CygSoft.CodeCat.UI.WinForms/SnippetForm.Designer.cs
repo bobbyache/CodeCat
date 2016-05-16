@@ -35,7 +35,7 @@
             this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.txtIdentifier = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -45,12 +45,12 @@
             this.txtKeywords = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageCode = new System.Windows.Forms.TabPage();
             this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.tabPageSnapshots = new System.Windows.Forms.TabPage();
             this.snapshotListCtrl1 = new CygSoft.CodeCat.UI.WinForms.SnapshotListCtrl();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.toolStrip3.SuspendLayout();
@@ -76,7 +76,7 @@
             this.cboFontSize,
             this.toolStripLabel2,
             this.toolStripLabel3,
-            this.toolStripLabel5,
+            this.lblEditStatus,
             this.txtIdentifier});
             this.toolStrip1.Location = new System.Drawing.Point(0, 471);
             this.toolStrip1.Name = "toolStrip1";
@@ -114,11 +114,11 @@
             this.toolStripLabel3.Size = new System.Drawing.Size(36, 22);
             this.toolStripLabel3.Text = "CAPS";
             // 
-            // toolStripLabel5
+            // lblEditStatus
             // 
-            this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(72, 22);
-            this.toolStripLabel5.Text = "No Changes";
+            this.lblEditStatus.Name = "lblEditStatus";
+            this.lblEditStatus.Size = new System.Drawing.Size(72, 22);
+            this.lblEditStatus.Text = "No Changes";
             // 
             // txtIdentifier
             // 
@@ -193,6 +193,14 @@
             this.toolStripButton1.Size = new System.Drawing.Size(104, 22);
             this.toolStripButton1.Text = "Take Snapshot";
             // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(112, 22);
+            this.toolStripButton2.Text = "Delete Snapshot";
+            // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPageCode);
@@ -264,14 +272,6 @@
             this.snapshotListCtrl1.Size = new System.Drawing.Size(807, 364);
             this.snapshotListCtrl1.TabIndex = 0;
             // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(112, 22);
-            this.toolStripButton2.Text = "Delete Snapshot";
-            // 
             // SnippetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,7 +321,7 @@
         private System.Windows.Forms.TabPage tabPageCode;
         private Alsing.Windows.Forms.SyntaxBoxControl syntaxBox;
         private System.Windows.Forms.TabPage tabPageSnapshots;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel5;
+        private System.Windows.Forms.ToolStripLabel lblEditStatus;
         private CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox txtIdentifier;
         private SnapshotListCtrl snapshotListCtrl1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
