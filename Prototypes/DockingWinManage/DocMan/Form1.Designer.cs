@@ -109,7 +109,6 @@
             dockPanelSkin6.DockPaneStripSkin = dockPaneStripSkin6;
             this.dockPanel1.Skin = dockPanelSkin6;
             this.dockPanel1.TabIndex = 1;
-            this.dockPanel1.Click += new System.EventHandler(this.dockPanel1_Click);
             // 
             // menuStrip1
             // 

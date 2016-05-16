@@ -9,6 +9,41 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
+// -------------------------------------------------------------------------------
+// ---> will never return anything because the forms are owned by the dockPanel.
+// -------------------------------------------------------------------------------
+//var unsavedDocs = this.OwnedForms.OfType<ISnippetDocument>()
+//    .Where(doc => doc.IsModified == true);
+
+// -------------------------------------------------------------------------------
+// ---> returns the number of "docked" document forms, anything undocked will not
+// be returned.
+// -------------------------------------------------------------------------------
+//var unsavedDocs = dockPanel1.Documents.OfType<ISnippetDocument>()
+//    .Where(doc => doc.IsModified == true);
+
+
+// -------------------------------------------------------------------------------
+// ---> return the number of free floating windows that are not docked...
+// however, if one of these is docked with another floating window, they are both
+// removed from the "FloatingWindows" collection.
+// -------------------------------------------------------------------------------
+//var unsavedDocs = dockPanel1.FloatWindows.OfType<ISnippetDocument>()
+//    .Where(doc => doc.IsModified == true);
+
+// -------------------------------------------------------------------------------
+// ---> returns all docked and undocked forms!
+// -------------------------------------------------------------------------------
+//var unsavedDocs = this.dockPanel1.Contents.OfType<ISnippetDocument>()
+//    .Where(doc => doc.IsModified == true);
+// -------------------------------------------------------------------------------
+//var unsavedDocs = this.dockPanel1.Contents.OfType<ISnippetDocument>()
+//    .Where(doc => doc.IsModified == true);
+
+//var savedDocs = this.dockPanel1.Contents.OfType<ISnippetDocument>()
+//    .Where(doc => doc.IsModified == false);
+
+
 namespace Weif_1_Test
 {
     public partial class Form1 : Form
@@ -16,48 +51,24 @@ namespace Weif_1_Test
         public Form1()
         {
             InitializeComponent();
-
-            //var unsavedDocs = this.dockPanel1.Contents.OfType<ISnippetDocument>()
-            //    .Where(doc => doc.IsModified == true);
-
-            //var savedDocs = this.dockPanel1.Contents.OfType<ISnippetDocument>()
-            //    .Where(doc => doc.IsModified == false);
-        }
-
-        private void dockPanel1_Click(object sender, EventArgs e)
-        {
-           
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // -------------------------------------------------------------------------------
-            // ---> will never return anything because the forms are owned by the dockPanel.
-            // -------------------------------------------------------------------------------
-            //var unsavedDocs = this.OwnedForms.OfType<ISnippetDocument>()
-            //    .Where(doc => doc.IsModified == true);
+            if (UnsavedSnippetDocuments())
+            {
+                DialogResult result = PromptSaveChanges();
 
-            // -------------------------------------------------------------------------------
-            // ---> returns the number of "docked" document forms, anything undocked will not
-            // be returned.
-            // -------------------------------------------------------------------------------
-            //var unsavedDocs = dockPanel1.Documents.OfType<ISnippetDocument>()
-            //    .Where(doc => doc.IsModified == true);
-
-
-            // -------------------------------------------------------------------------------
-            // ---> return the number of free floating windows that are not docked...
-            // however, if one of these is docked with another floating window, they are both
-            // removed from the "FloatingWindows" collection.
-            // -------------------------------------------------------------------------------
-            //var unsavedDocs = dockPanel1.FloatWindows.OfType<ISnippetDocument>()
-            //    .Where(doc => doc.IsModified == true);
-
-            // -------------------------------------------------------------------------------
-            // ---> returns all docked and undocked forms!
-            // -------------------------------------------------------------------------------
-            var unsavedDocs = this.dockPanel1.Contents.OfType<ISnippetDocument>()
-                .Where(doc => doc.IsModified == true);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    SaveAllDocuments();
+                    ClearSnippetDocuments();
+                }
+                else if (result == System.Windows.Forms.DialogResult.Cancel)
+                    e.Cancel = true;
+                else
+                    ClearSnippetDocuments();
+            }
         }
 
         private void CreateSnippetDocument()
@@ -82,8 +93,27 @@ namespace Weif_1_Test
             }
             else
             {
-                MessageBox.Show("You have unsaved snippets. Please save these before continuing");
+                DialogResult result = PromptSaveChanges();
+
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    SaveAllDocuments();
+                    ClearSnippetDocuments();
+                    // create new project...
+                    CreateSnippetDocument();
+                }
+                else if (result == System.Windows.Forms.DialogResult.No)
+                {
+                    ClearSnippetDocuments();
+                    // create new project...
+                    CreateSnippetDocument();
+                }
             }
+        }
+
+        private SnippetDocument[] UnsavedDocuments()
+        {
+            return this.dockPanel1.Contents.OfType<SnippetDocument>().Where(doc => doc.IsModified == true).ToArray();
         }
 
         private bool UnsavedSnippetDocuments()
@@ -119,22 +149,51 @@ namespace Weif_1_Test
             }
             else
             {
-                MessageBox.Show("You have unsaved snippets. Please save these before continuing");
+                DialogResult result = PromptSaveChanges();
+
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    SaveAllDocuments();
+                    ClearSnippetDocuments();
+                    // load the last project...
+
+                    // load the last opened snippets.
+                    OpenSnippetDocument();
+                    OpenSnippetDocument();
+                }
+                else if (result == System.Windows.Forms.DialogResult.No)
+                {
+                    ClearSnippetDocuments();
+                    // load the last project...
+
+                    // load the last opened snippets.
+                    OpenSnippetDocument();
+                    OpenSnippetDocument();
+                }
             }
         }
 
         private void mnuExit_Click(object sender, EventArgs e)
         {
-            if (!UnsavedSnippetDocuments())
-            {
+            this.Close();
+            //Application.Exit(); // this causes an invalid operation exception !!!
+            // The Form.Closed and Form.Closing events are not raised when the Application.Exit method is called to exit your application.
+            // https://social.msdn.microsoft.com/Forums/windows/en-US/f23247b8-e0ca-46eb-afb0-dbf22d4c84ac/thisclose-vs-applicationexit?forum=winforms
+        }
 
-                ClearSnippetDocuments();
-                Application.Exit();
-            }
-            else
-            {
-                MessageBox.Show("You have unsaved snippets. Please save these before continuing");
-            }
+        private void SaveAllDocuments()
+        {
+            IEnumerable<SnippetDocument> documents = this.dockPanel1.Contents.OfType<SnippetDocument>().Where(doc => doc.IsModified == true);
+            foreach (SnippetDocument document in documents)
+                document.SaveChanges();
+        }
+
+        private DialogResult PromptSaveChanges()
+        {
+            SaveSnippetDialog dialog = new SaveSnippetDialog(UnsavedDocuments());
+            DialogResult result = dialog.ShowDialog(this);
+
+            return result;
         }
 
         private void mnuAddSnippet_Click(object sender, EventArgs e)

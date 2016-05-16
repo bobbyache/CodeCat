@@ -41,6 +41,24 @@
       <KeyPhraseList>,ACTIVATE,BUG,DOCKED,FLOATING,ISSUE,WINDOW</KeyPhraseList>
       <Description><![CDATA[We have a layout that updates tool windows whenever a dockpanel form is activated, notifying other dockpanels to clear their controls from the tool windows, which are reused. (Deactivates never seem to come in, so we went with a document declaring focus scheme).]]></Description>
     </Hyperlink>
+    <Hyperlink ID="ad09a24e-d888-4389-addf-2eeaacbbf0e2" Topic="DockPanelSuite - Is there a way to prevent floating windows #233" Url="https://github.com/dockpanelsuite/dockpanelsuite/issues/233" State="New">
+      <KeyPhraseList>,CONSTRAIN,DOCK,DOCKING,FLOAT,WINFORMS</KeyPhraseList>
+      <Description><![CDATA[I'm using a docking panel in a mdi form allowing docking. I need that the forms in the panel can only be moved between the docking positions so that they can never be floating.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="eeded0f2-c2d1-422e-91d4-3c658c8c6d77" Topic="DocPanelSuite - How to recreate panels just like the last time after reopening the software? #286" Url="https://github.com/dockpanelsuite/dockpanelsuite/issues/286" State="New">
+      <KeyPhraseList>,DOCK,DOCKING,LOAD,STATE</KeyPhraseList>
+      <Description><![CDATA[DockSample project is your friend. It has an example how DockPanel.SaveAsXml(...) and DockPanel.LoadAsXml(...) is used. That will save and restore the original structure of the layout when it closed.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="2de7c7fd-ad3e-4940-b4ea-b2ce9aba3852" Topic="SharpDevelop - for WPF syntaxbox" Url="http://www.icsharpcode.net/OpenSource/SD/Default.aspx" State="New">
+      <KeyPhraseList>,HIGHLIGHT,HIGHLIGHTING,SYNTAX,WPF</KeyPhraseList>
+      <Description><![CDATA[ #develop (short for SharpDevelop) is a free IDE for C#, VB.NET and Boo projects on Microsoft's .NET platform. It is open-source, and you can download both sourcecode and executables from this site. In addition, you can find the latest information and changes on #develop, as well as get in touch with the team in the forum.
+
+Check out the Avalon library.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="6fe3b583-b048-49cd-9bc3-6ebb2dacc780" Topic="Avalon WPF Forms Docking" Url="http://avalondock.codeplex.com" State="New">
+      <KeyPhraseList>,DOCK,DOCKING,WPF</KeyPhraseList>
+      <Description><![CDATA[AvalonDock is a docking windows control for WPF that lets you create customizable layouts using a full featured window docking system similar to what is found in many popular integrated development environements (IDEs) such as Visual Studio. It includes themes and samples to get you started.]]></Description>
+    </Hyperlink>
   </Hyperlinks>
-  <KeyPhrases>,ACTIVATE,BUG,CUSTOM,DOCK,DOCKED,DOCKING,EDITOR,EXTEND,EXTENDED,FLOATING,GRID,INTERNAL,INTERNALS,ISSUE,LISTVIEW,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STRETCH,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOW,WINDOWS,WINDOWS FORMS</KeyPhrases>
+  <KeyPhrases>,ACTIVATE,BUG,CONSTRAIN,CUSTOM,DOCK,DOCKED,DOCKING,EDITOR,EXTEND,EXTENDED,FLOAT,FLOATING,GRID,HIGHLIGHT,HIGHLIGHTING,INTERNAL,INTERNALS,ISSUE,LISTVIEW,LOAD,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STATE,STRETCH,SYNTAX,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOW,WINDOWS,WINDOWS FORMS,WINFORMS,WPF</KeyPhrases>
 </OfflineSource>
