@@ -17,17 +17,11 @@ namespace Weif_1_Test
         {
             InitializeComponent();
 
-            CreateSnippetDocument();
-            OpenSnippetDocument();
-            OpenSnippetDocument();
-            OpenSnippetDocument();
+            //var unsavedDocs = this.dockPanel1.Contents.OfType<ISnippetDocument>()
+            //    .Where(doc => doc.IsModified == true);
 
-
-            var unsavedDocs = this.dockPanel1.Contents.OfType<ISnippetDocument>()
-                .Where(doc => doc.IsModified == true);
-
-            var savedDocs = this.dockPanel1.Contents.OfType<ISnippetDocument>()
-                .Where(doc => doc.IsModified == false);
+            //var savedDocs = this.dockPanel1.Contents.OfType<ISnippetDocument>()
+            //    .Where(doc => doc.IsModified == false);
         }
 
         private void dockPanel1_Click(object sender, EventArgs e)
@@ -76,6 +70,88 @@ namespace Weif_1_Test
         {
             SnippetDocument form2 = new SnippetDocument(Guid.NewGuid().ToString());
             form2.Show(dockPanel1, DockState.Document);
+        }
+
+        private void mnuNewProject_Click(object sender, EventArgs e)
+        {
+            if (!UnsavedSnippetDocuments())
+            {
+                ClearSnippetDocuments();
+                // create new project...
+                CreateSnippetDocument();
+            }
+            else
+            {
+                MessageBox.Show("You have unsaved snippets. Please save these before continuing");
+            }
+        }
+
+        private bool UnsavedSnippetDocuments()
+        {
+            return this.dockPanel1.Contents.OfType<ISnippetDocument>().Where(doc => doc.IsModified == true).Any();
+            //bool unsavedDocs = this.dockPanel1.Contents.OfType<ISnippetDocument>()
+            //    .Where(doc => doc.IsModified == true).Count() 
+        }
+
+        private void ClearSnippetDocuments()
+        {
+            var snippetDocs = this.dockPanel1.Contents.OfType<SnippetDocument>().ToList();
+
+            while (snippetDocs.Count() > 0)
+            {
+                SnippetDocument snippetDoc = snippetDocs.First();
+                snippetDocs.Remove(snippetDoc);
+                snippetDoc.Close();
+            }
+        }
+
+        private void mnuOpenProject_Click(object sender, EventArgs e)
+        {
+            if (!UnsavedSnippetDocuments())
+            {
+                
+                ClearSnippetDocuments();
+                // load the last project...
+
+                // load the last opened snippets.
+                OpenSnippetDocument();
+                OpenSnippetDocument();
+            }
+            else
+            {
+                MessageBox.Show("You have unsaved snippets. Please save these before continuing");
+            }
+        }
+
+        private void mnuExit_Click(object sender, EventArgs e)
+        {
+            if (!UnsavedSnippetDocuments())
+            {
+
+                ClearSnippetDocuments();
+                Application.Exit();
+            }
+            else
+            {
+                MessageBox.Show("You have unsaved snippets. Please save these before continuing");
+            }
+        }
+
+        private void mnuAddSnippet_Click(object sender, EventArgs e)
+        {
+            CreateSnippetDocument();
+        }
+
+        private void mnuSaveSnippet_Click(object sender, EventArgs e)
+        {
+            if (dockPanel1.ActiveDocument != null && dockPanel1.ActiveDocument is ISnippetDocument)
+                (dockPanel1.ActiveDocument as ISnippetDocument).SaveChanges();
+        }
+
+        private void mnuCloseSnippet_Click(object sender, EventArgs e)
+        {
+            if (dockPanel1.ActiveDocument != null && dockPanel1.ActiveDocument is ISnippetDocument)
+                (dockPanel1.ActiveDocument as SnippetDocument).Close();
         }
     }
 }

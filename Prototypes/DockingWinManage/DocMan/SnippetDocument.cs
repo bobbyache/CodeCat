@@ -29,6 +29,7 @@ namespace Weif_1_Test
             this.Text = this.Id;
             this.IsNew = true;
             this.IsModified = false;
+            SetStatus();
         }
 
         public SnippetDocument(string id)
@@ -40,17 +41,25 @@ namespace Weif_1_Test
             this.Text = id;
             this.IsNew = false;
             this.IsModified = false;
+            SetStatus();
         }
 
         public void SaveChanges()
         {
             this.IsNew = false;
             this.IsModified = false;
+            SetStatus();
         }
 
         public void DiscardChanges()
         {
             this.IsModified = false;
+            SetStatus();
+        }
+
+        private void SetStatus()
+        {
+            lblStatus.Text = string.Format("New: {0}, Has Changes: {1}", this.IsNew, this.IsModified);
         }
 
         private void Form2_Activated(object sender, EventArgs e)
@@ -65,17 +74,20 @@ namespace Weif_1_Test
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.IsModified = false;
+            SaveChanges();
+            SetStatus();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.IsModified = false;
+            DiscardChanges();
+            SetStatus();
         }
 
         private void btnModify_Click(object sender, EventArgs e)
         {
             this.IsModified = true;
+            SetStatus();
         }
     }
 }
