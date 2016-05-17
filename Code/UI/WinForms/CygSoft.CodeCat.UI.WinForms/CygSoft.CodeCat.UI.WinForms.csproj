@@ -216,6 +216,7 @@
     <None Include="Resources\tag_blue.png" />
     <None Include="Resources\tag_blue_delete.png" />
     <None Include="Resources\page_save.png" />
+    <None Include="Resources\control_rewind.png" />
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

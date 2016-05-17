@@ -47,10 +47,9 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (listviewSnapshots.SelectedItems.Count == 1)
             {
-                DialogResult dialogResult = MessageBox.Show(this, "Sure you want to delete this snapshot?", "Delete", 
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                DialogResult result = Dialogs.DeleteSnapshotDialogPrompt(this);
 
-                if (dialogResult == DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
                     CodeSnapshot snapshot = (CodeSnapshot)listviewSnapshots.SelectedItems[0].Tag;
                     codeFile.DeleteSnapshot(snapshot.Id);

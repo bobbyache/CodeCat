@@ -123,6 +123,16 @@ namespace CygSoft.CodeCat.Ui.WinForms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DiscardSnippetChanges {
+            get {
+                object obj = ResourceManager.GetObject("DiscardSnippetChanges", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditSnippet {
             get {
                 object obj = ResourceManager.GetObject("EditSnippet", resourceCulture);

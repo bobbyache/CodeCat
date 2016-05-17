@@ -14,6 +14,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string SaveSnippet = "SaveSnippet";
             public const string AddSnippet = "AddSnippet";
             public const string DeleteSnippet = "DeleteSnippet";
+            public const string DiscardSnippetChanges = "DiscardSnippetChanges";
             public const string FindSnippets = "Find";
             public const string OpenProject = "OpenProject";
             public const string NewProject = "NewProject";

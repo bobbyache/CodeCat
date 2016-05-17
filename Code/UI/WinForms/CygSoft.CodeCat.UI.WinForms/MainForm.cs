@@ -186,7 +186,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!SnippetIsOpen(snippetIndex))
             {
                 CodeFile codeFile = application.OpenCodeSnippet(snippetIndex);
-                SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxes(),  application.GetSyntaxFile(codeFile.Syntax));
+                SnippetForm snippetForm = new SnippetForm(codeFile, application);
                 snippetForm.DeleteSnippetDocument += snippetForm_DeleteSnippetDocument;
                 snippetForm.Show(dockPanel, DockState.Document);
             }
@@ -207,7 +207,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             CodeFile codeFile = application.CreateCodeSnippet(ConfigSettings.DefaultSyntax);
             //codeFile.Syntax = application.GetSyntaxFile(ConfigSettings.DefaultSyntax);
 
-            SnippetForm snippetForm = new SnippetForm(codeFile, application.GetSyntaxes(), application.GetSyntaxFile(ConfigSettings.DefaultSyntax), true);
+            SnippetForm snippetForm = new SnippetForm(codeFile, application, true);
             snippetForm.DeleteSnippetDocument += snippetForm_DeleteSnippetDocument;
             snippetForm.EditMode = true;
             snippetForm.Show(dockPanel, DockState.Document);
@@ -298,14 +298,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void snippetForm_DeleteSnippetDocument(object sender, DeleteCodeFileEventArgs e)
         {
-            DialogResult result = MessageBox.Show(this, "Sure you want to delete this snippet?",
-                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                e.Document.Delete();
-                searchForm.RemoveSnippet(e.Item.Id);
-                application.RemoveCodeSnippet(e.Item.Id);
-            }
+            e.Document.Delete();
+            searchForm.RemoveSnippet(e.Item.Id);
+            application.RemoveCodeSnippet(e.Item.Id);
         }
 
         private void RecentProjectOpened(object sender, RecentProjectEventArgs e)

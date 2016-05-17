@@ -48,6 +48,8 @@
             this.toolstripCommands = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnTakeSnapshot = new System.Windows.Forms.ToolStripButton();
             this.btnDeleteSnapshot = new System.Windows.Forms.ToolStripButton();
             this.chkEdit = new System.Windows.Forms.ToolStripButton();
@@ -56,8 +58,7 @@
             this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.tabPageSnapshots = new System.Windows.Forms.TabPage();
             this.snapshotListCtrl1 = new CygSoft.CodeCat.UI.WinForms.SnapshotListCtrl();
-            this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnDiscardChange = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
@@ -200,6 +201,7 @@
             // 
             this.toolstripCommands.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
+            this.btnDiscardChange,
             this.toolStripSeparator1,
             this.btnDelete,
             this.toolStripSeparator2,
@@ -214,10 +216,11 @@
             // 
             // btnSave
             // 
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(51, 22);
+            this.btnSave.Size = new System.Drawing.Size(23, 22);
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -226,21 +229,37 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(23, 22);
+            this.btnDelete.Text = "Delete";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // btnTakeSnapshot
             // 
+            this.btnTakeSnapshot.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnTakeSnapshot.Image = ((System.Drawing.Image)(resources.GetObject("btnTakeSnapshot.Image")));
             this.btnTakeSnapshot.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTakeSnapshot.Name = "btnTakeSnapshot";
-            this.btnTakeSnapshot.Size = new System.Drawing.Size(104, 22);
+            this.btnTakeSnapshot.Size = new System.Drawing.Size(23, 22);
             this.btnTakeSnapshot.Text = "Take Snapshot";
             this.btnTakeSnapshot.Click += new System.EventHandler(this.btnTakeSnapshot_Click);
             // 
             // btnDeleteSnapshot
             // 
+            this.btnDeleteSnapshot.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnDeleteSnapshot.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteSnapshot.Image")));
             this.btnDeleteSnapshot.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDeleteSnapshot.Name = "btnDeleteSnapshot";
-            this.btnDeleteSnapshot.Size = new System.Drawing.Size(112, 22);
+            this.btnDeleteSnapshot.Size = new System.Drawing.Size(23, 22);
             this.btnDeleteSnapshot.Text = "Delete Snapshot";
             this.btnDeleteSnapshot.Click += new System.EventHandler(this.btnDeleteSnapshot_Click);
             // 
@@ -325,18 +344,15 @@
             this.snapshotListCtrl1.Size = new System.Drawing.Size(807, 364);
             this.snapshotListCtrl1.TabIndex = 0;
             // 
-            // btnDelete
+            // btnDiscardChange
             // 
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
-            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(60, 22);
-            this.btnDelete.Text = "Delete";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.btnDiscardChange.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDiscardChange.Image = ((System.Drawing.Image)(resources.GetObject("btnDiscardChange.Image")));
+            this.btnDiscardChange.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDiscardChange.Name = "btnDiscardChange";
+            this.btnDiscardChange.Size = new System.Drawing.Size(23, 22);
+            this.btnDiscardChange.Text = "Discard Changes";
+            this.btnDiscardChange.Click += new System.EventHandler(this.btnDiscardChange_Click);
             // 
             // SnippetForm
             // 
@@ -398,5 +414,6 @@
         private System.Windows.Forms.ToolStripButton chkEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton btnDiscardChange;
     }
 }

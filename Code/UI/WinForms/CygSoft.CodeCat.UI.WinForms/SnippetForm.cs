@@ -1,5 +1,5 @@
-﻿using CygSoft.CodeCat.Domain.Code;
-
+﻿using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Domain.Code;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,21 +19,25 @@ namespace CygSoft.CodeCat.UI.WinForms
         private CodeFile codeFile;
         private bool flagSilentClose = false;
         private bool flagForDelete = false;
+        private AppFacade application;
 
         public event EventHandler<DeleteCodeFileEventArgs> DeleteSnippetDocument;
 
         //public event EventHandler MovePrevious;
         //public event EventHandler MoveNext;
 
-        public SnippetForm(CodeFile codeFile, string[] syntaxes, string syntaxFile, bool isNew = false)
+        public SnippetForm(CodeFile codeFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
+
+            this.application = application;
 
             btnTakeSnapshot.Image = Resources.GetImage(Constants.ImageKeys.AddSnapshot);
             btnDeleteSnapshot.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnapshot);
             btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
             btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
             chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
 
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
             tabControl.Alignment = TabAlignment.Left;
@@ -43,26 +47,22 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.codeFile = codeFile;
             //this.syntaxBox.GotFocus += (s, e) => { Console.Write(this.IsActivated.ToString()); };
 
-            this.syntaxBox.Document.Text = codeFile.Text;
-            this.syntaxBox.Document.SyntaxFile = syntaxFile;
-            this.snapshotListCtrl1.SyntaxFile = syntaxFile;
-
             cboSyntax.Items.Clear();
-            cboSyntax.Items.AddRange(syntaxes);
+            cboSyntax.Items.AddRange(application.GetSyntaxes());
 
             btnTakeSnapshot.Enabled = !IsNew;
             btnDeleteSnapshot.Enabled = false;
             btnSave.Enabled = false;
+            btnDiscardChange.Enabled = false;
             btnDelete.Enabled = !isNew;
 
             toolstripKeywords.Visible = false;
             toolstripTitle.Visible = false;
-            
-            this.Text = codeFile.Title;
+
             this.Tag = codeFile.Id;
-            this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
-            this.txtTitle.Text = codeFile.Title;
-            SelectSyntax(codeFile.Syntax);
+
+            ResetFields();
+
             cboFontSize.SelectedIndex = 4;
 
             snapshotListCtrl1.Attach(codeFile);
@@ -104,14 +104,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.snapshotListCtrl1.EditorFontSize = this.syntaxBox.FontSize;
             };
 
-            btnDelete.Click += (s, e) => 
-            {
-                if (this.IsNew)
-                    return;
-
-                if (DeleteSnippetDocument != null)
-                    DeleteSnippetDocument(this, new DeleteCodeFileEventArgs(this.codeFile, this));
-            };
+            btnDelete.Click += btnDelete_Click;
 
             this.IsModified = false;
 
@@ -151,6 +144,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                     lblEditStatus.Text = value ? "Edited" : "Saved";
                     lblEditStatus.ForeColor = value ? Color.DarkRed : Color.Black;
                     btnSave.Enabled = value;
+                    btnDiscardChange.Enabled = value;
                     this.isModified = value;
                 }
             }
@@ -185,15 +179,21 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
             {
-                MessageBox.Show("Title is mandatory. Please enter a title.");
+                Dialogs.MandatoryFieldRequired(this, "Title");
+                this.EditMode = true;
+                this.txtTitle.Focus();
             }
             else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
             {
-                MessageBox.Show("Keywords are mandatory. Please enter some searchable keywords.");
+                Dialogs.MandatoryFieldRequired(this, "Keywords");
+                this.EditMode = true;
+                this.txtKeywords.Focus();
             }
             else if (string.IsNullOrWhiteSpace(this.cboSyntax.Text))
             {
-                MessageBox.Show("Invalid data.");
+                Dialogs.MandatoryFieldRequired(this, "Syntax");
+                this.EditMode = true;
+                this.cboSyntax.Focus();
             }
             else
             {
@@ -244,6 +244,20 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.codeFile.CommaDelimitedKeywords += ("," + keywords);
         }
 
+        private void ResetFields()
+        {
+            this.Text = codeFile.Title;
+            this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
+            this.txtTitle.Text = codeFile.Title;
+            SelectSyntax(codeFile.Syntax);
+
+            this.syntaxBox.Document.Text = codeFile.Text;
+
+            string syntaxFile = application.GetSyntaxFile(codeFile.Syntax);
+            this.syntaxBox.Document.SyntaxFile =  syntaxFile;
+            this.snapshotListCtrl1.SyntaxFile = syntaxFile;
+        }
+
         private void SelectSyntax(string syntax)
         {
             string syn = syntax.ToUpper();
@@ -290,8 +304,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 {
                     if (e.CloseReason != CloseReason.MdiFormClosing && !flagSilentClose)
                     {
-                        DialogResult result = MessageBox.Show(this, "You have not saved this snippet. Would you like to save it first?", "",
-                            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                        DialogResult result = Dialogs.SaveSnippetChangesDialogPrompt(this);
 
                         if (result == System.Windows.Forms.DialogResult.Yes)
                             this.SaveChanges();
@@ -332,7 +345,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             // necessarily have to change.
             if (this.IsModified)
             {
-                MessageBox.Show("Must save or discard changes before you can make a snapshot.");
+                Dialogs.TakeSnapshotInvalidInCurrentContext(this);
                 return;
             }
 
@@ -346,6 +359,20 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (this.IsNew)
+                return;
+
+            DialogResult result = Dialogs.DeleteSnippetDialogPrompt(this);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                if (DeleteSnippetDocument != null)
+                    DeleteSnippetDocument(this, new DeleteCodeFileEventArgs(this.codeFile, this));
+            }
+        }
+
         private void btnDeleteSnapshot_Click(object sender, EventArgs e)
         {
             this.snapshotListCtrl1.DeleteSnapshot();
@@ -354,6 +381,16 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void btnSave_Click(object sender, EventArgs e)
         {
             this.SaveChanges();
+        }
+
+        private void btnDiscardChange_Click(object sender, EventArgs e)
+        {
+            DialogResult result = Dialogs.DiscardSnippetChangesDialogPrompt(this);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                ResetFields();
+                this.IsModified = false;
+            }
         }
     }
 }

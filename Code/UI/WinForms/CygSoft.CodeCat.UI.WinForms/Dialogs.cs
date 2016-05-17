@@ -9,9 +9,45 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public class Dialogs
     {
+        public static void MandatoryFieldRequired(IWin32Window owner, string fieldName)
+        {
+            MessageBox.Show(owner, string.Format( "{0} is a mandatory field and must be supplied. Please enter a valid value.", fieldName), 
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void TakeSnapshotInvalidInCurrentContext(IWin32Window owner)
+        {
+            MessageBox.Show(owner, "Taking a snapshot is invalid in this context. You must save or discard changes before you can take a snapshot of this snippet.", 
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static DialogResult SaveSnippetDialogPrompt(IWin32Window owner)
+        {
+            return MessageBox.Show(owner, "Save this snippet?",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+        }
+
+        public static DialogResult DiscardSnippetChangesDialogPrompt(IWin32Window owner)
+        {
+            return MessageBox.Show(owner, "Sure you want to discard changes made to this snippet?",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+        }
+
+        public static DialogResult DeleteSnippetDialogPrompt(IWin32Window owner)
+        {
+            return MessageBox.Show(owner, "Sure you want to delete this snippet?",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+        }
+
+        public static DialogResult DeleteSnapshotDialogPrompt(IWin32Window owner)
+        {
+            return MessageBox.Show(owner, "Sure you want to delete this snapshot?",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+        }
+
         public static DialogResult SaveSnippetChangesDialogPrompt(IWin32Window owner)
         {
-            return MessageBox.Show(owner, string.Format("{0}\n You currently have changes. Would you like to save these changes?", (owner as SnippetForm).Text), 
+            return MessageBox.Show(owner, string.Format("{0}\n You have not saved this snippet. Would you like to save it first?", (owner as SnippetForm).Text), 
                 string.Format("{0}: {1}", ConfigSettings.ApplicationTitle,(owner as SnippetForm).Text),
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
         }
