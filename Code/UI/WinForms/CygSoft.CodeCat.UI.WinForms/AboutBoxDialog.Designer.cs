@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutBoxDialog));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelProductName = new System.Windows.Forms.Label();
-            this.labelVersion = new System.Windows.Forms.Label();
             this.labelCopyright = new System.Windows.Forms.Label();
+            this.labelVersion = new System.Windows.Forms.Label();
+            this.labelProductName = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -62,29 +62,17 @@
             this.panel1.Size = new System.Drawing.Size(249, 125);
             this.panel1.TabIndex = 1;
             // 
-            // label1
+            // labelCopyright
             // 
-            this.label1.BackColor = System.Drawing.Color.Silver;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkRed;
-            this.label1.Location = new System.Drawing.Point(3, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(239, 19);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Robbie Blake";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelProductName
-            // 
-            this.labelProductName.BackColor = System.Drawing.Color.Silver;
-            this.labelProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelProductName.ForeColor = System.Drawing.Color.DarkRed;
-            this.labelProductName.Location = new System.Drawing.Point(3, 41);
-            this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(239, 19);
-            this.labelProductName.TabIndex = 1;
-            this.labelProductName.Text = "Robbie Blake";
-            this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelCopyright.BackColor = System.Drawing.Color.Silver;
+            this.labelCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCopyright.ForeColor = System.Drawing.Color.DarkRed;
+            this.labelCopyright.Location = new System.Drawing.Point(3, 79);
+            this.labelCopyright.Name = "labelCopyright";
+            this.labelCopyright.Size = new System.Drawing.Size(239, 19);
+            this.labelCopyright.TabIndex = 3;
+            this.labelCopyright.Text = "Robbie Blake";
+            this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelVersion
             // 
@@ -98,17 +86,29 @@
             this.labelVersion.Text = "Robbie Blake";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelCopyright
+            // labelProductName
             // 
-            this.labelCopyright.BackColor = System.Drawing.Color.Silver;
-            this.labelCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCopyright.ForeColor = System.Drawing.Color.DarkRed;
-            this.labelCopyright.Location = new System.Drawing.Point(3, 79);
-            this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(239, 19);
-            this.labelCopyright.TabIndex = 3;
-            this.labelCopyright.Text = "Robbie Blake";
-            this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelProductName.BackColor = System.Drawing.Color.Silver;
+            this.labelProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelProductName.ForeColor = System.Drawing.Color.DarkRed;
+            this.labelProductName.Location = new System.Drawing.Point(3, 41);
+            this.labelProductName.Name = "labelProductName";
+            this.labelProductName.Size = new System.Drawing.Size(239, 19);
+            this.labelProductName.TabIndex = 1;
+            this.labelProductName.Text = "Robbie Blake";
+            this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Silver;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkRed;
+            this.label1.Location = new System.Drawing.Point(3, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(239, 19);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Robbie Blake";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AboutBoxDialog
             // 

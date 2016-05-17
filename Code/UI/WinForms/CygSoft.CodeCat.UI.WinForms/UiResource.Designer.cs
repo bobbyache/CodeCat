@@ -73,6 +73,16 @@ namespace CygSoft.CodeCat.Ui.WinForms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddSnapshot {
+            get {
+                object obj = ResourceManager.GetObject("AddSnapshot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AddSnippet {
             get {
                 object obj = ResourceManager.GetObject("AddSnippet", resourceCulture);
@@ -86,6 +96,16 @@ namespace CygSoft.CodeCat.Ui.WinForms {
         internal static System.Drawing.Bitmap delete {
             get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DeleteSnapshot {
+            get {
+                object obj = ResourceManager.GetObject("DeleteSnapshot", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +163,9 @@ namespace CygSoft.CodeCat.Ui.WinForms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Snapshot {
+        internal static System.Drawing.Bitmap SaveSnippet {
             get {
-                object obj = ResourceManager.GetObject("Snapshot", resourceCulture);
+                object obj = ResourceManager.GetObject("SaveSnippet", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.searchPanel = new System.Windows.Forms.Panel();
-            this.findButton = new System.Windows.Forms.Button();
+            this.btnFind = new System.Windows.Forms.Button();
             this.keywordsLabel = new System.Windows.Forms.Label();
             this.keywordsTextBox = new System.Windows.Forms.TextBox();
             this.listView = new System.Windows.Forms.ListView();
@@ -56,7 +56,7 @@
             // 
             this.searchPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchPanel.Controls.Add(this.findButton);
+            this.searchPanel.Controls.Add(this.btnFind);
             this.searchPanel.Controls.Add(this.keywordsLabel);
             this.searchPanel.Controls.Add(this.keywordsTextBox);
             this.searchPanel.Location = new System.Drawing.Point(0, 0);
@@ -64,14 +64,14 @@
             this.searchPanel.Size = new System.Drawing.Size(961, 27);
             this.searchPanel.TabIndex = 2;
             // 
-            // findButton
+            // btnFind
             // 
-            this.findButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.findButton.Location = new System.Drawing.Point(909, 2);
-            this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(47, 23);
-            this.findButton.TabIndex = 4;
-            this.findButton.UseVisualStyleBackColor = true;
+            this.btnFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFind.Location = new System.Drawing.Point(909, 2);
+            this.btnFind.Name = "btnFind";
+            this.btnFind.Size = new System.Drawing.Size(47, 23);
+            this.btnFind.TabIndex = 4;
+            this.btnFind.UseVisualStyleBackColor = true;
             // 
             // keywordsLabel
             // 
@@ -225,7 +225,7 @@
         #endregion
 
         private System.Windows.Forms.Panel searchPanel;
-        private System.Windows.Forms.Button findButton;
+        private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.Label keywordsLabel;
         private System.Windows.Forms.TextBox keywordsTextBox;
         private System.Windows.Forms.ListView listView;

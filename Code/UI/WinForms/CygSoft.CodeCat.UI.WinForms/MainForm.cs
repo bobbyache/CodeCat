@@ -10,6 +10,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,23 +29,10 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
-            //dockPanel.ContentRemoved += (s, e) =>
-            //    {
-            //        CreateSnippetDocumentIfNone();
-            //    };
+            InitializeIconImages();
 
             dockPanel.ContentAdded += dockPanel_ContentAdded;
             dockPanel.ContentRemoved += dockPanel_ContentRemoved;
-
-            //dockPanel.ContentAdded += (s, e) =>
-            //    {
-            //        if (e.Content is SnippetForm)
-            //        {
-            //            SnippetForm snippetForm = e.Content as SnippetForm;
-            //            ToolStripMenuItem menuItem = new ToolStripMenuItem(snippetForm.Text, null, 
-            //            //mnuDocuments.DropDownItems.Add(new ToolStripMenuItem(
-            //        }
-            //    };
 
             //dockPanel.SaveAsXml(
             //dockPanel.LoadFromXml(
@@ -58,6 +46,17 @@ namespace CygSoft.CodeCat.UI.WinForms
             EnableControls();
 
             searchForm.Activate();
+        }
+
+        private void InitializeIconImages()
+        {
+            Resources.Namespace = "CygSoft.CodeCat.UI.WinForms.UiResource";
+            Resources.ExecutingAssembly = Assembly.GetExecutingAssembly();
+
+            mnuFileOpen.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
+            mnuFileCreateNew.Image = Resources.GetImage(Constants.ImageKeys.NewProject);
+            mnuSnippetsViewModify.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            mnuSnippetsAdd.Image = Resources.GetImage(Constants.ImageKeys.AddSnippet);
         }
 
         private void InitializeMenuClickEvents()
@@ -483,9 +482,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 SnippetForm snippetForm = e.Content as SnippetForm;
                 ToolStripMenuItem menuItem = mnuDocuments.DropDownItems[snippetForm.SnippetId] as ToolStripMenuItem;
-                menuItem.Click -= mnuDocumentWindow_Click;
-                mnuDocuments.DropDownItems.Remove(menuItem);
-                CreateSnippetDocumentIfNone();
+                if (menuItem != null)
+                {
+                    menuItem.Click -= mnuDocumentWindow_Click;
+                    mnuDocuments.DropDownItems.Remove(menuItem);
+                    CreateSnippetDocumentIfNone();
+                }
             }
 
         }

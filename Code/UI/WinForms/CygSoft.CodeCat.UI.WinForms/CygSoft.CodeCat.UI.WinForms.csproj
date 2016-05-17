@@ -212,8 +212,10 @@
     <None Include="Resources\page_white.png" />
     <None Include="Resources\Download.png" />
     <None Include="Resources\folder_page_white.png" />
-    <None Include="Resources\pin_red.png" />
     <Content Include="license.txt" />
+    <None Include="Resources\tag_blue.png" />
+    <None Include="Resources\tag_blue_delete.png" />
+    <None Include="Resources\page_save.png" />
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

@@ -22,6 +22,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
+            btnFind.Image = Resources.GetImage(Constants.ImageKeys.FindSnippets);
+
             this.application = application;
             this.HideOnClose = true;
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight;
@@ -30,7 +32,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             listView.SelectedIndexChanged += listView_SelectedIndexChanged;
             listView.MouseClick += listView_MouseClick;
             listView.MouseDoubleClick += listView_MouseDoubleClick;
-            findButton.Click += ExecuteSearch;
+            btnFind.Click += ExecuteSearch;
             keywordsTextBox.TextChanged += ExecuteSearch;
         }
 
@@ -125,7 +127,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             set
             {
                 this.searchEnabled = value;
-                this.findButton.Enabled = value;
+                this.btnFind.Enabled = value;
             }
 
         }

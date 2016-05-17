@@ -29,6 +29,12 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
+            btnTakeSnapshot.Image = Resources.GetImage(Constants.ImageKeys.AddSnapshot);
+            btnDeleteSnapshot.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnapshot);
+            btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
+            chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
+
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
             tabControl.Alignment = TabAlignment.Left;
             this.snapshotsTab = this.tabPageSnapshots;

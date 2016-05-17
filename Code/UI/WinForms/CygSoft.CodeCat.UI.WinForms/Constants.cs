@@ -11,12 +11,15 @@ namespace CygSoft.CodeCat.UI.WinForms
         public class ImageKeys
         {
             public const string EditSnippet = "EditSnippet";
+            public const string SaveSnippet = "SaveSnippet";
             public const string AddSnippet = "AddSnippet";
             public const string DeleteSnippet = "DeleteSnippet";
             public const string FindSnippets = "Find";
             public const string OpenProject = "OpenProject";
             public const string NewProject = "NewProject";
-            public const string SnippetSnapshot = "Snapshot";
+            public const string AddSnapshot = "AddSnapshot";
+            public const string DeleteSnapshot = "DeleteSnapshot";
+            
             //public const string SaveProject = "SaveProject";
         }
     }

@@ -63,6 +63,14 @@ Check out the Avalon library.]]></Description>
       <KeyPhraseList>,APPLICATION,CLOSE,EXIT,MANAGEMENT,WINDOW</KeyPhraseList>
       <Description><![CDATA[This Microsoft site informs you of the difference between Applictation.Exit() and this.Close()]]></Description>
     </Hyperlink>
+    <Hyperlink ID="f3f1732d-11c4-4ccb-9cc3-4425d8fb5e11" Topic="PICOL - Icons in SVG format" Url="https://github.com/PicolSigns/Icons" State="New">
+      <KeyPhraseList>,GRAPHICS,ICON,ICONS,SVG</KeyPhraseList>
+      <Description><![CDATA[PICOL stands for PIctorial COmmunication Language and is a project to find a standard and reduced sign system for electronic communication. PICOL is free to use and open to alter. See https://github.com/PicolSigns/PICOL-Generator.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="f8b0f6d8-81d7-483e-bca7-1838f1e3d92c" Topic="Silk Icons" Url="http://www.famfamfam.com/lab/icons/silk/" State="New">
+      <KeyPhraseList>,GRAPHICS,ICON,ICONS</KeyPhraseList>
+      <Description><![CDATA[“Silk” is a smooth, free icon set, containing over 700 16-by-16 pixel icons in strokably-soft PNG format. Containing a large variety of icons, you're sure to find something that tickles your fancy. And all for a low low price of $0.00. You can't say fairer than that.]]></Description>
+    </Hyperlink>
   </Hyperlinks>
-  <KeyPhrases>,ACTIVATE,APPLICATION,BUG,CLOSE,CONSTRAIN,CUSTOM,DOCK,DOCKED,DOCKING,EDITOR,EXIT,EXTEND,EXTENDED,FLOAT,FLOATING,GRID,HIGHLIGHT,HIGHLIGHTING,INTERNAL,INTERNALS,ISSUE,LISTVIEW,LOAD,MANAGEMENT,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STATE,STRETCH,SYNTAX,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOW,WINDOWS,WINDOWS FORMS,WINFORMS,WPF</KeyPhrases>
+  <KeyPhrases>,ACTIVATE,APPLICATION,BUG,CLOSE,CONSTRAIN,CUSTOM,DOCK,DOCKED,DOCKING,EDITOR,EXIT,EXTEND,EXTENDED,FLOAT,FLOATING,GRAPHICS,GRID,HIGHLIGHT,HIGHLIGHTING,ICON,ICONS,INTERNAL,INTERNALS,ISSUE,LISTVIEW,LOAD,MANAGEMENT,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STATE,STRETCH,SVG,SYNTAX,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOW,WINDOWS,WINDOWS FORMS,WINFORMS,WPF</KeyPhrases>
 </OfflineSource>
