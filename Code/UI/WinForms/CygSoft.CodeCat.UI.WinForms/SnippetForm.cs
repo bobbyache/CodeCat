@@ -97,7 +97,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             txtTitle.TextChanged += (s, e) => this.IsModified = true;
             txtKeywords.TextChanged += (s, e) => this.IsModified = true;
             syntaxBox.TextChanged += (s, e) => this.IsModified = true;
-            cboSyntax.SelectedIndexChanged += (s, e) => this.IsModified = true;
+
+            cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
+
             cboFontSize.SelectedIndexChanged += (s, e) =>
             {
                 this.syntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
@@ -110,6 +112,16 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             this.CloseButtonVisible = true;
             this.CloseButton = true;
+        }
+
+        private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.IsModified = true;
+            string syntax = cboSyntax.SelectedItem.ToString();
+            SelectSyntax(syntax);
+            string syntaxFile = application.GetSyntaxFile(syntax);
+            this.syntaxBox.Document.SyntaxFile = syntaxFile;
+            this.snapshotListCtrl1.SyntaxFile = syntaxFile;
         }
 
         public string SnippetId
