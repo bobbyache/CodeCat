@@ -60,6 +60,18 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
     }
 
+    public class SaveCodeFileEventArgs : EventArgs
+    {
+        public SnippetForm Document { get; private set; }
+        public CodeFile Item { get; private set; }
+
+        public SaveCodeFileEventArgs(CodeFile item, SnippetForm document)
+        {
+            this.Document = document;
+            this.Item = item;
+        }
+    }
+
     public class DeleteCodeFileEventArgs : EventArgs
     {
         public SnippetForm Document { get; private set; }

@@ -22,6 +22,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private AppFacade application;
 
         public event EventHandler<DeleteCodeFileEventArgs> DeleteSnippetDocument;
+        public event EventHandler<SaveCodeFileEventArgs> SaveSnippetDocument;
 
         //public event EventHandler MovePrevious;
         //public event EventHandler MoveNext;
@@ -226,6 +227,10 @@ namespace CygSoft.CodeCat.UI.WinForms
                     this.txtKeywords.Text = this.codeFile.CommaDelimitedKeywords;
                     this.IsModified = false;
                     this.IsNew = false;
+
+                    if (SaveSnippetDocument != null)
+                        SaveSnippetDocument(this, new SaveCodeFileEventArgs(this.codeFile, this));
+
                     return true;
                 }
                 catch (Exception ex)

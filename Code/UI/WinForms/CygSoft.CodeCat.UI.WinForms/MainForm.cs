@@ -217,6 +217,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 CodeFile codeFile = application.OpenCodeSnippet(snippetIndex);
                 SnippetForm snippetForm = new SnippetForm(codeFile, application);
                 snippetForm.DeleteSnippetDocument += snippetForm_DeleteSnippetDocument;
+                snippetForm.SaveSnippetDocument += snippetForm_SaveSnippetDocument;
                 snippetForm.Show(dockPanel, DockState.Document);
             }
             else
@@ -238,6 +239,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             SnippetForm snippetForm = new SnippetForm(codeFile, application, true);
             snippetForm.DeleteSnippetDocument += snippetForm_DeleteSnippetDocument;
+            snippetForm.SaveSnippetDocument += snippetForm_SaveSnippetDocument;
             snippetForm.EditMode = true;
             snippetForm.Show(dockPanel, DockState.Document);
         }
@@ -325,13 +327,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             return this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true).Any();
         }
 
-        private void snippetForm_DeleteSnippetDocument(object sender, DeleteCodeFileEventArgs e)
-        {
-            e.Document.Delete();
-            searchForm.RemoveSnippet(e.Item.Id);
-            application.RemoveCodeSnippet(e.Item.Id);
-        }
-
         private void RecentProjectOpened(object sender, RecentProjectEventArgs e)
         {
             if (File.Exists(e.RecentFile.FullPath))
@@ -362,6 +357,18 @@ namespace CygSoft.CodeCat.UI.WinForms
                 if (result == System.Windows.Forms.DialogResult.Yes)
                     recentProjectMenu.Remove(e.RecentFile.FullPath);
             }
+        }
+
+        private void snippetForm_DeleteSnippetDocument(object sender, DeleteCodeFileEventArgs e)
+        {
+            e.Document.Delete();
+            searchForm.RemoveSnippet(e.Item.Id);
+            application.RemoveCodeSnippet(e.Item.Id);
+        }
+
+        private void snippetForm_SaveSnippetDocument(object sender, SaveCodeFileEventArgs e)
+        {
+            searchForm.ChangeSnippetTitle(e.Item.Id, e.Item.Title);
         }
 
         private void mnuFileOpen_Click(object sender, EventArgs e)

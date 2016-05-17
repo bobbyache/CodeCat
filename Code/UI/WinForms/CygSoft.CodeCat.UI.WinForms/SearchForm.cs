@@ -108,6 +108,23 @@ namespace CygSoft.CodeCat.UI.WinForms
                 CreateListviewItem(listView, item);
         }
 
+        public void ChangeSnippetTitle(string snippetId, string title)
+        {
+            ListViewItem selected = null;
+
+            foreach (ListViewItem lv in listView.Items)
+            {
+                if (lv.Name == snippetId)
+                    selected = lv;
+            }
+            if (selected != null)
+            {
+                IKeywordIndexItem item = selected.Tag as IKeywordIndexItem;
+                item.Title = title;
+                selected.Text = title;
+            }
+        }
+
         public void RemoveSnippet(string snippetId)
         {
             ListViewItem selected = null;
