@@ -75,6 +75,11 @@ namespace CygSoft.CodeCat.Domain
             return this.codeLibrary.GetLanguages();
         }
 
+        public SyntaxFile[] GetSyntaxFileInfo()
+        {
+            return this.codeLibrary.GetSyntaxFiles();
+        }
+
         public string GetSyntaxFile(string language)
         {
             return this.codeLibrary.GetSyntaxFile(language);

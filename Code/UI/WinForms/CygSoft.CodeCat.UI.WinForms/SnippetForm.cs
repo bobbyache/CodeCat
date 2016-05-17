@@ -21,6 +21,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         private bool flagForDelete = false;
         private AppFacade application;
 
+        public Image IconImage
+        {
+            get { return this.Icon.ToBitmap(); }
+        }
+
         public event EventHandler<DeleteCodeFileEventArgs> DeleteSnippetDocument;
         public event EventHandler<SaveCodeFileEventArgs> SaveSnippetDocument;
 
@@ -47,6 +52,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsNew = isNew;
             this.codeFile = codeFile;
             //this.syntaxBox.GotFocus += (s, e) => { Console.Write(this.IsActivated.ToString()); };
+
+            this.Icon = IconRepository.GetIcon(this.codeFile.Syntax);
 
             cboSyntax.Items.Clear();
             cboSyntax.Items.AddRange(application.GetSyntaxes());
@@ -128,6 +135,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             string syntaxFile = application.GetSyntaxFile(syntax);
             this.syntaxBox.Document.SyntaxFile = syntaxFile;
             this.snapshotListCtrl1.SyntaxFile = syntaxFile;
+            this.Icon = IconRepository.GetIcon(syntax);
         }
 
         public string SnippetId

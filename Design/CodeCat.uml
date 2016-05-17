@@ -23,7 +23,7 @@
 <XPD:REF name="DiagramOwner">BeMje4JBt02SPznTu3dNwwAA</XPD:REF>
 <XPD:OBJ name="DiagramView" type="UMLClassDiagramView" guid="zZJ8hQo0Q0eCjZZQobCvzwAA">
 <XPD:REF name="Diagram">xm8BjGit0E2PiNFhPbDn1wAA</XPD:REF>
-<XPD:ATTR name="#OwnedViews" type="integer">21</XPD:ATTR>
+<XPD:ATTR name="#OwnedViews" type="integer">22</XPD:ATTR>
 <XPD:OBJ name="OwnedViews[0]" type="RectangleView" guid="hANVhLUlMEGtv4JNMXhRYQAA">
 <XPD:ATTR name="Left" type="integer">848</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">292</XPD:ATTR>
@@ -508,8 +508,8 @@
 </XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[13]" type="UMLTextView" guid="Ga5utO2WWUGDgw4wO+qJTQAA">
-<XPD:ATTR name="Left" type="integer">400</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">28</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">576</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">104</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">375</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">113</XPD:ATTR>
 <XPD:ATTR name="Text" type="string">Need to find a way to aggregate indexes into a master index to save on the
@@ -663,6 +663,26 @@ keyword -&gt; index.id -&gt; item(s)
 <XPD:ATTR name="Distance" type="real">15</XPD:ATTR>
 <XPD:REF name="Model">8PWy7pVY6kCCi5vlzvjbogAA</XPD:REF>
 </XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[21]" type="UMLTextView" guid="vzDx7hvUmkq5Aibf8u9mNgAA">
+<XPD:ATTR name="Left" type="integer">4</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">80</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">384</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">218</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">In order to create another KeywordSearchIndex  in order to support
+another type of search (images... etc.) one would:
+
+- add another [Type]KeywordIndexRepository
+- add another interface that inherits from IKeywordIndexItem
+- add another [Type]KeywordIndexItem that inherits from KeywordIndexItem
+
+KeywordIndexItem is a &quot;generic&quot; index, that can be extended to take more
+properties like the way &quot;Syntax&quot; was added to:
+
+- CodeFileKeywordIndexItem
+- ICodeFileKeywordIndexItem
+- CodeFileKeywordIndexRepository
+</XPD:ATTR>
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>

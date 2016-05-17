@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.ProjectConverter", "Components\CygSoft.CodeCat.ProjectConverter\CygSoft.CodeCat.ProjectConverter.csproj", "{C908F626-1812-4119-B551-E14840100203}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Etier.IconHelper", "Components\Etier.IconHelper\Etier.IconHelper.csproj", "{44368ACC-95E7-4BE0-ADE4-ABB8AAE9B9D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{C908F626-1812-4119-B551-E14840100203}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C908F626-1812-4119-B551-E14840100203}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C908F626-1812-4119-B551-E14840100203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44368ACC-95E7-4BE0-ADE4-ABB8AAE9B9D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44368ACC-95E7-4BE0-ADE4-ABB8AAE9B9D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44368ACC-95E7-4BE0-ADE4-ABB8AAE9B9D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44368ACC-95E7-4BE0-ADE4-ABB8AAE9B9D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -71,6 +71,10 @@ Check out the Avalon library.]]></Description>
       <KeyPhraseList>,GRAPHICS,ICON,ICONS</KeyPhraseList>
       <Description><![CDATA[“Silk” is a smooth, free icon set, containing over 700 16-by-16 pixel icons in strokably-soft PNG format. Containing a large variety of icons, you're sure to find something that tickles your fancy. And all for a low low price of $0.00. You can't say fairer than that.]]></Description>
     </Hyperlink>
+    <Hyperlink ID="f5cda9c5-219d-49d1-9e29-c68d5564bccc" Topic="Obtaining (and managing) file and folder icons using SHGetFileInfo in C#" Url="http://www.codeproject.com/Articles/2532/Obtaining-and-managing-file-and-folder-icons-using" State="New">
+      <KeyPhraseList>,ICON,ICONS,MANAGER</KeyPhraseList>
+      <Description><![CDATA[You're using a simple version, but if you need more control have a look here: Article showing how to read file and folder icons from C#, and then building a management class to maintain file icons in up to two ImageList objects.]]></Description>
+    </Hyperlink>
   </Hyperlinks>
-  <KeyPhrases>,ACTIVATE,APPLICATION,BUG,CLOSE,CONSTRAIN,CUSTOM,DOCK,DOCKED,DOCKING,EDITOR,EXIT,EXTEND,EXTENDED,FLOAT,FLOATING,GRAPHICS,GRID,HIGHLIGHT,HIGHLIGHTING,ICON,ICONS,INTERNAL,INTERNALS,ISSUE,LISTVIEW,LOAD,MANAGEMENT,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STATE,STRETCH,SVG,SYNTAX,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOW,WINDOWS,WINDOWS FORMS,WINFORMS,WPF</KeyPhrases>
+  <KeyPhrases>,ACTIVATE,APPLICATION,BUG,CLOSE,CONSTRAIN,CUSTOM,DOCK,DOCKED,DOCKING,EDITOR,EXIT,EXTEND,EXTENDED,FLOAT,FLOATING,GRAPHICS,GRID,HIGHLIGHT,HIGHLIGHTING,ICON,ICONS,INTERNAL,INTERNALS,ISSUE,LISTVIEW,LOAD,MANAGEMENT,MANAGER,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STATE,STRETCH,SVG,SYNTAX,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOW,WINDOWS,WINDOWS FORMS,WINFORMS,WPF</KeyPhrases>
 </OfflineSource>

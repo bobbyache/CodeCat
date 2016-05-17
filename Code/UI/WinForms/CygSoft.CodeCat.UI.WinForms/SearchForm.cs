@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Collections;
@@ -17,6 +18,7 @@ namespace CygSoft.CodeCat.UI.WinForms
     public partial class SearchForm : DockContent
     {
         private AppFacade application;
+        private ImageList imageList = new ImageList();
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
@@ -35,12 +37,28 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.HideOnClose = true;
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight;
 
+            PopulateSystemIconsImageList();
+
+            listView.SmallImageList = imageList;
             listView.ColumnClick += listView_ColumnClick;
             listView.SelectedIndexChanged += listView_SelectedIndexChanged;
             listView.MouseClick += listView_MouseClick;
             listView.MouseDoubleClick += listView_MouseDoubleClick;
             btnFind.Click += ExecuteSearch;
             keywordsTextBox.TextChanged += ExecuteSearch;
+        }
+
+        private void PopulateSystemIconsImageList()
+        {
+            foreach (SyntaxFile syntaxFile in application.GetSyntaxFileInfo())
+            {
+                Icon icon = IconRepository.GetIcon(syntaxFile.Syntax);
+
+                if (!imageList.Images.ContainsKey(syntaxFile.Syntax))
+                {
+                    imageList.Images.Add(syntaxFile.Syntax, icon);
+                }
+            }
         }
 
         private class ListViewItemComparer : IComparer
@@ -108,7 +126,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 CreateListviewItem(listView, item);
         }
 
-        public void ChangeSnippetTitle(string snippetId, string title)
+        public void ChangeSnippet(string snippetId, string title, string syntax)
         {
             ListViewItem selected = null;
 
@@ -121,6 +139,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 IKeywordIndexItem item = selected.Tag as IKeywordIndexItem;
                 item.Title = title;
+                selected.ImageKey = syntax;
                 selected.Text = title;
             }
         }
@@ -158,13 +177,17 @@ namespace CygSoft.CodeCat.UI.WinForms
             set { this.keywordsTextBox.Text = value; }
         }
 
+        
+
         private void CreateListviewItem(ListView listView, IKeywordIndexItem item, bool select = false)
         {
             ICodeFileKeywordIndexItem codeItem = item as ICodeFileKeywordIndexItem;
             ListViewItem listItem = new ListViewItem();
             listItem.Name = item.Id;
             listItem.Tag = item;
+            listItem.ImageKey = codeItem.Syntax;
             listItem.Text = item.Title;
+
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
             listView.Items.Add(listItem);

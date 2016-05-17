@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Domain.Code
 {
-    internal class SyntaxMapping
+    public class SyntaxFile
     {
-        public string Language { get; private set; }
+        public string Syntax { get; private set; }
         public string FilePath { get; private set; }
+        public string Extension { get; private set; }
 
-        public SyntaxMapping(string language, string filePath)
+        public SyntaxFile(string syntax, string filePath, string extension)
         {
-            this.Language = language;
+            this.Syntax = syntax;
             this.FilePath = filePath;
+            this.Extension = extension;
         }
     }
 }

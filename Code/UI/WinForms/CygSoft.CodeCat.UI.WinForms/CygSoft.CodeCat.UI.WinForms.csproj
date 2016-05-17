@@ -77,6 +77,7 @@
     <Compile Include="EnterKeywordsForm.Designer.cs">
       <DependentUpon>EnterKeywordsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IconRepository.cs" />
     <Compile Include="InvalidRemoveDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,6 +216,10 @@
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\Etier.IconHelper\Etier.IconHelper.csproj">
+      <Project>{44368acc-95e7-4be0-ade4-abb8aae9b9d0}</Project>
+      <Name>Etier.IconHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

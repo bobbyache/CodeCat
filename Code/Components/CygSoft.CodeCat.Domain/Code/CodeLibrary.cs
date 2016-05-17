@@ -23,6 +23,17 @@ namespace CygSoft.CodeCat.Domain.Code.Base
             base.FileExtension = "*.xml";
         }
 
+        public SyntaxFile[] GetSyntaxFiles()
+        {
+            if (!string.IsNullOrEmpty(this.SyntaxFolderPath))
+            {
+                if (this.syntaxRepository == null)
+                    this.syntaxRepository = new SyntaxRepository(this.SyntaxFolderPath);
+                return syntaxRepository.SyntaxFiles;
+            }
+            return new SyntaxFile[0];
+        }
+
         public string[] GetLanguages()
         {
             if (!string.IsNullOrEmpty(this.SyntaxFolderPath))
@@ -34,15 +45,15 @@ namespace CygSoft.CodeCat.Domain.Code.Base
             return new string[0];
         }
 
-        public string GetSyntaxFile(string language)
+        public string GetSyntaxFile(string syntax)
         {
             string fpath = string.Empty;
 
-            if (!string.IsNullOrEmpty(language) && !string.IsNullOrEmpty(this.SyntaxFolderPath))
+            if (!string.IsNullOrEmpty(syntax) && !string.IsNullOrEmpty(this.SyntaxFolderPath))
             {
                 if (this.syntaxRepository == null)
                     this.syntaxRepository = new SyntaxRepository(this.SyntaxFolderPath);
-                fpath = this.syntaxRepository[language];
+                fpath = this.syntaxRepository[syntax].FilePath;
             }
             return fpath;
         }

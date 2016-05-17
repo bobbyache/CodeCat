@@ -29,15 +29,16 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
-            InitializeIconImages();
-
-            dockPanel.ContentAdded += dockPanel_ContentAdded;
-            dockPanel.ContentRemoved += dockPanel_ContentRemoved;
-
             //dockPanel.SaveAsXml(
             //dockPanel.LoadFromXml(
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
             this.application.CodeSyntaxFolderPath = ConfigSettings.SyntaxFilePath;
+
+            InitializeFileIcons();
+            InitializeIconImages();
+
+            dockPanel.ContentAdded += dockPanel_ContentAdded;
+            dockPanel.ContentRemoved += dockPanel_ContentRemoved;
 
             InitializeMenuClickEvents();
             InitializeRecentProjectMenu();
@@ -46,6 +47,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             EnableControls();
 
             searchForm.Activate();
+        }
+
+        private void InitializeFileIcons()
+        {
+            IconRepository.Load(application.GetSyntaxFileInfo());
+
         }
 
         private void InitializeIconImages()
@@ -368,7 +375,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void snippetForm_SaveSnippetDocument(object sender, SaveCodeFileEventArgs e)
         {
-            searchForm.ChangeSnippetTitle(e.Item.Id, e.Item.Title);
+            searchForm.ChangeSnippet(e.Item.Id, e.Item.Title, e.Item.Syntax);
+            mnuDocuments.DropDownItems[e.Item.Id].Image = e.Document.IconImage;
         }
 
         private void mnuFileOpen_Click(object sender, EventArgs e)
@@ -459,14 +467,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void mnuResultsDeleteSelection_Click(object sender, EventArgs e)
-        {
-            // Here, you will do exactly the same thing as you did with addKeywordsMenuItem_Click
-            // except you'll call application.RemoveKeywords() instead.
-            // you overloaded the method in the AppFacade to remove keywords from a single snippet
-            // but you can just as well remove from all of them at the same time.
-        }
-
         private void mnuFileExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -535,6 +535,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 SnippetForm snippetForm = e.Content as SnippetForm;
                 ToolStripMenuItem menuItem = new ToolStripMenuItem(snippetForm.Text, null, mnuDocumentWindow_Click);
+                menuItem.Image = snippetForm.IconImage;
                 menuItem.Name = snippetForm.SnippetId;
                 menuItem.Tag = snippetForm;
                 mnuDocuments.DropDownItems.Add(menuItem);

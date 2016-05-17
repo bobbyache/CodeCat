@@ -11,7 +11,7 @@ namespace CygSoft.CodeCat.Domain.Code
     internal class SyntaxRepository
     {
         private string filePath;
-        private Dictionary<string, SyntaxMapping> syntaxMappings;
+        private Dictionary<string, SyntaxFile> syntaxFiles;
 
         public SyntaxRepository(string filePath)
         {
@@ -19,40 +19,63 @@ namespace CygSoft.CodeCat.Domain.Code
             Refresh();
         }
 
+        public SyntaxFile[] SyntaxFiles
+        {
+            get
+            {
+                if (this.syntaxFiles == null)
+                    return new SyntaxFile[0];
+
+                return syntaxFiles.Select(r => r.Value).ToArray();
+            }
+        }
+
         public string[] Languages
         {
             get
             {
-                if (this.syntaxMappings == null)
+                if (this.syntaxFiles == null)
                     return new string[0];
 
-                return syntaxMappings.Select(r => r.Value.Language.Trim().ToUpper()).ToArray();
+                return syntaxFiles.Select(r => r.Value.Syntax.Trim().ToUpper()).ToArray();
             }
         }
 
-        public string this[string language]
+        public string[] FileExtensions
+        {
+            get
+            {
+                if (this.syntaxFiles == null)
+                    return new string[0];
+
+                return syntaxFiles.Select(r => r.Value.Extension.Trim().ToUpper()).ToArray();
+            }
+        }
+
+        public SyntaxFile this[string language]
         {
             get
             {
                 string key = language.ToUpper();
-                if (syntaxMappings.ContainsKey(key))
+                if (syntaxFiles.ContainsKey(key))
                 {
-                    if (File.Exists(syntaxMappings[key].FilePath))
-                        return syntaxMappings[key].FilePath;
+                    if (File.Exists(syntaxFiles[key].FilePath))
+                        return syntaxFiles[key];
                 }
-                return string.Empty;
+                return null;
             }
         }
 
         public void Refresh()
         {
             XElement xElement = XElement.Load(this.filePath);
-            syntaxMappings = (from m in xElement.Elements("SyntaxMapping")
-                                                  select new SyntaxMapping
-                                                  (
-                                                    (string)m.Attribute("Language"),
-                                                    (string)m.Attribute("FilePath")
-                                                  )).ToDictionary(r => r.Language.Trim().ToUpper(), r => r);
+            syntaxFiles = (from m in xElement.Elements("SyntaxMapping")
+                           select new SyntaxFile
+                           (
+                             (string)m.Attribute("Language"),
+                             (string)m.Attribute("FilePath"),
+                             (string)m.Attribute("FileExtension")
+                           )).ToDictionary(r => r.Syntax.Trim().ToUpper(), r => r);
         }
     }
 }
