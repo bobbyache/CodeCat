@@ -54,6 +54,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             //this.syntaxBox.GotFocus += (s, e) => { Console.Write(this.IsActivated.ToString()); };
 
             this.Icon = IconRepository.GetIcon(this.codeFile.Syntax);
+            lblEditStatus.Image = this.IconImage;
 
             cboSyntax.Items.Clear();
             cboSyntax.Items.AddRange(application.GetSyntaxes());
@@ -135,7 +136,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             string syntaxFile = application.GetSyntaxFile(syntax);
             this.syntaxBox.Document.SyntaxFile = syntaxFile;
             this.snapshotListCtrl1.SyntaxFile = syntaxFile;
+            
             this.Icon = IconRepository.GetIcon(syntax);
+            this.lblEditStatus.Image = IconRepository.GetIcon(syntax).ToBitmap();
         }
 
         public string SnippetId
@@ -307,6 +310,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             string syntaxFile = application.GetSyntaxFile(codeFile.Syntax);
             this.syntaxBox.Document.SyntaxFile =  syntaxFile;
             this.snapshotListCtrl1.SyntaxFile = syntaxFile;
+
+            this.Icon = IconRepository.GetIcon(codeFile.Syntax);
+            this.lblEditStatus.Image = IconRepository.GetIcon(codeFile.Syntax).ToBitmap();
         }
 
         private void SelectSyntax(string syntax)
