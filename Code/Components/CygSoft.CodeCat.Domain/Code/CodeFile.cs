@@ -75,9 +75,17 @@ namespace CygSoft.CodeCat.Domain.Code
             set { this.IndexItem.Title = value; }
         }
 
+        private string syntax;
         public string Syntax
         {
-            get; set;
+            get { return this.syntax; }
+            set
+            {
+                this.syntax = value;
+                ICodeFileKeywordIndexItem indexItem = this.indexItem as ICodeFileKeywordIndexItem;
+                if (indexItem != null)
+                    indexItem.Syntax = value;
+            }
         }
 
         public string CommaDelimitedKeywords

@@ -160,6 +160,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateListviewItem(ListView listView, IKeywordIndexItem item, bool select = false)
         {
+            ICodeFileKeywordIndexItem codeItem = item as ICodeFileKeywordIndexItem;
             ListViewItem listItem = new ListViewItem();
             listItem.Name = item.Id;
             listItem.Tag = item;

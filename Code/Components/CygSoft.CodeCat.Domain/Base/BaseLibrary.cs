@@ -13,7 +13,7 @@ namespace CygSoft.CodeCat.Domain
     internal abstract class BaseLibrary
     {
         protected IKeywordSearchIndex index;
-        private IKeywordSearchIndexRepository indexRepository = new KeywordSearchIndexRepository();
+        private IKeywordSearchIndexRepository indexRepository;
         protected Dictionary<string, IPersistableFile> openFiles;
 
         protected string FileExtension { get; set; }
@@ -42,8 +42,9 @@ namespace CygSoft.CodeCat.Domain
             }
         }
 
-        public BaseLibrary()
+        public BaseLibrary(IKeywordSearchIndexRepository indexRepository)
         {
+            this.indexRepository = indexRepository;
             this.FilePath = string.Empty;
         }
 
@@ -187,7 +188,7 @@ namespace CygSoft.CodeCat.Domain
 
         public IPersistableFile CreateFile()
         {
-            return GetFile(new KeywordIndexItem());
+            return GetFile(new CodeFileKeywordIndexItem());
         }
 
         public IPersistableFile OpenFile(IKeywordIndexItem indexItem)

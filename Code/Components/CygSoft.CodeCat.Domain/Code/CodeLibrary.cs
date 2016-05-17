@@ -18,6 +18,7 @@ namespace CygSoft.CodeCat.Domain.Code.Base
         public string SyntaxFolderPath { get; set; }
 
         public CodeLibrary()
+            : base(new CodeFileKeywordIndexRepository())
         {
             base.FileExtension = "*.xml";
         }

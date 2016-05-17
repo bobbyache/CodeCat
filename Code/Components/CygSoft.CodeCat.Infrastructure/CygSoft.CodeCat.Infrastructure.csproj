@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICodeFileKeywordIndexItem.cs" />
     <Compile Include="IKeywordIndexItem.cs" />
     <Compile Include="IKeywordSearchIndex.cs" />
     <Compile Include="IKeywordSearchIndexRepository.cs" />
