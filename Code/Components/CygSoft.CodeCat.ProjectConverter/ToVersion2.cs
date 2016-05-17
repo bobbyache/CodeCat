@@ -89,6 +89,7 @@ namespace CygSoft.CodeCat.ProjectConverter
             // leave out the "Language" attribute...
             newVersion.Add(new XAttribute("ID", previousVersion.Attribute("ID").Value));
             newVersion.Add(new XElement("Title", previousVersion.Element("Title").Value));
+            newVersion.Add(new XElement("Syntax", previousVersion.Element("Language").Value));
             newVersion.Add(new XElement("Hits", previousVersion.Element("Hits").Value));
             newVersion.Add(new XElement("DateCreated", previousVersion.Element("DateCreated").Value));
             newVersion.Add(new XElement("DateModified", previousVersion.Element("DateModified").Value));
