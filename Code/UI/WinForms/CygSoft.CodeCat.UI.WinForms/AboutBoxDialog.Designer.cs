@@ -35,6 +35,9 @@
             this.labelVersion = new System.Windows.Forms.Label();
             this.labelProductName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.rtfCredits = new System.Windows.Forms.RichTextBox();
+            this.txtLicense = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -45,7 +48,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(250, 68);
+            this.pictureBox1.Size = new System.Drawing.Size(249, 68);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -110,11 +113,43 @@
             this.label1.Text = "Robbie Blake";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(268, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 17);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Credits";
+            // 
+            // rtfCredits
+            // 
+            this.rtfCredits.Location = new System.Drawing.Point(272, 36);
+            this.rtfCredits.Name = "rtfCredits";
+            this.rtfCredits.ReadOnly = true;
+            this.rtfCredits.Size = new System.Drawing.Size(356, 177);
+            this.rtfCredits.TabIndex = 3;
+            this.rtfCredits.Text = "";
+            // 
+            // txtLicense
+            // 
+            this.txtLicense.Location = new System.Drawing.Point(12, 219);
+            this.txtLicense.Multiline = true;
+            this.txtLicense.Name = "txtLicense";
+            this.txtLicense.ReadOnly = true;
+            this.txtLicense.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtLicense.Size = new System.Drawing.Size(616, 232);
+            this.txtLicense.TabIndex = 4;
+            // 
             // AboutBoxDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(274, 221);
+            this.ClientSize = new System.Drawing.Size(640, 463);
+            this.Controls.Add(this.txtLicense);
+            this.Controls.Add(this.rtfCredits);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -124,6 +159,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -135,5 +171,8 @@
         private System.Windows.Forms.Label labelCopyright;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label labelProductName;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RichTextBox rtfCredits;
+        private System.Windows.Forms.TextBox txtLicense;
     }
 }

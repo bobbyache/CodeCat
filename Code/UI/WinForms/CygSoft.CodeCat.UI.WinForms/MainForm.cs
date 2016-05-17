@@ -449,6 +449,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             catch (Exception ex)
             {
+                Dialogs.HelpPageErrorNotification(this, ex);
             }
         }
 

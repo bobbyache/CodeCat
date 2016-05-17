@@ -175,6 +175,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UiResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="..\..\..\..\LICENSE">
+      <Link>LICENSE</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="credits.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

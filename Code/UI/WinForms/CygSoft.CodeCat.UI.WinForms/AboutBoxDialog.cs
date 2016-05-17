@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
+using System.IO;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
@@ -19,6 +20,10 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
+
+            rtfCredits.LoadFile("credits.rtf");
+            txtLicense.TextAlign = HorizontalAlignment.Center;
+            txtLicense.Text = File.ReadAllText("LICENSE");
             //this.textBoxDescription.Text = AssemblyDescription;
 
         }
