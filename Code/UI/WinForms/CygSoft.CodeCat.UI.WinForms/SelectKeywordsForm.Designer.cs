@@ -87,6 +87,8 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.checkedListBox);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SelectKeywordsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Keywords";

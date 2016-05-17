@@ -94,9 +94,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.codeFile.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
             this.codeFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
 
-            txtTitle.TextChanged += (s, e) => this.IsModified = true;
-            txtKeywords.TextChanged += (s, e) => this.IsModified = true;
-            syntaxBox.TextChanged += (s, e) => this.IsModified = true;
+            txtTitle.TextChanged += SetModified;
+            txtKeywords.TextChanged += SetModified;
+            syntaxBox.TextChanged += SetModified;
 
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
 
@@ -112,6 +112,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             this.CloseButtonVisible = true;
             this.CloseButton = true;
+        }
+
+        private void SetModified(object sender, EventArgs e)
+        {
+            this.IsModified = true;
         }
 
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
@@ -250,10 +255,31 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public void AddKeywords(string keywords, bool flagModified = true)
         {
-            // in the case that the keywords have already been saved to the repository, ie.
-            // we've added keywords to multiple items from the main menu's "Add Keywords"
-            // then there is no reason to flag this snippet as modified.
-            this.codeFile.CommaDelimitedKeywords += ("," + keywords);
+            // in fact, it seems that "codeFile" has already been updated because we have a reference to it in memory, but
+            // this is just a "defensive programming" approach.
+            if (flagModified)
+                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(this.codeFile.CommaDelimitedKeywords, keywords);
+            else
+            {
+                txtKeywords.TextChanged -= SetModified;
+                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(this.codeFile.CommaDelimitedKeywords, keywords);
+                txtKeywords.TextChanged += SetModified;
+            }
+        }
+
+        public void RemoveKeywords(string keywords, bool flagModified = true)
+        {
+            // in fact, it seems that "codeFile" has already been updated because we have a reference to it in memory, but
+            // this is just a "defensive programming" approach.
+            if (flagModified)
+                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(this.codeFile.CommaDelimitedKeywords, keywords);
+
+            else
+            {
+                txtKeywords.TextChanged -= SetModified;
+                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(this.codeFile.CommaDelimitedKeywords, keywords);
+                txtKeywords.TextChanged += SetModified;
+            }
         }
 
         private void ResetFields()

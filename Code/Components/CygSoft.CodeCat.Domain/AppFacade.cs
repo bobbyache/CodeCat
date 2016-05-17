@@ -100,9 +100,35 @@ namespace CygSoft.CodeCat.Domain
             this.codeLibrary.AddKeywords(indeces, delimitedKeywordList);
         }
 
-        public void RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords)
+        public bool RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidIndeces)
         {
-            this.codeLibrary.RemoveKeywords(indeces, keywords);
+            return this.codeLibrary.RemoveKeywords(indeces, keywords, out invalidIndeces);
+        }
+
+        public string KeywordArrayToDelimitedText(string[] keywords)
+        {
+            KeyPhrases keyPhrases = new KeyPhrases();
+            keyPhrases.AddKeyPhrases(keywords);
+
+            return keyPhrases.DelimitKeyPhraseList();
+        }
+
+        public string RemoveKeywordsFromDelimitedText(string keywords, string removeKeywords)
+        {
+            KeyPhrases keyPhrases = new KeyPhrases();
+            keyPhrases.AddKeyPhrases(keywords);
+            keyPhrases.RemovePhrases(removeKeywords);
+
+            return keyPhrases.DelimitKeyPhraseList();
+        }
+
+        public string AddKeywordsToDelimitedText(string keywords, string addKeywords)
+        {
+            KeyPhrases keyPhrases = new KeyPhrases();
+            keyPhrases.AddKeyPhrases(keywords);
+            keyPhrases.AddKeyPhrases(addKeywords);
+
+            return keyPhrases.DelimitKeyPhraseList();
         }
 
         public CodeFile CreateCodeSnippet(string syntax)

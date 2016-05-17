@@ -110,9 +110,14 @@ namespace CygSoft.CodeCat.Domain
             this.index.AddKeywords(indeces, delimitedKeywordList);
         }
 
-        public void RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords)
+        public bool RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidIndeces)
         {
-            this.index.RemoveKeywords(indeces, keywords);
+            if (this.index.ValidateRemoveKeywords(indeces, keywords, out invalidIndeces))
+            {
+                this.index.RemoveKeywords(indeces, keywords);
+                return true;
+            }
+            return false;
         }
 
         public IKeywordIndexItem[] FindMissingFiles()

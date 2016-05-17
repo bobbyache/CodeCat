@@ -40,13 +40,23 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
     }
 
-    public class SearchExecutedEventArgs : EventArgs
+    public class SearchDelimitedKeywordEventArgs : EventArgs
     {
         public string Keywords { get; private set; }
 
-        public SearchExecutedEventArgs(string keywords)
+        public SearchDelimitedKeywordEventArgs(string keywords)
         {
             this.Keywords = keywords;
+        }
+    }
+
+    public class SearchKeywordsModifiedEventArgs : SearchDelimitedKeywordEventArgs
+    {
+        public IKeywordIndexItem[] Items { get; private set; }
+
+        public SearchKeywordsModifiedEventArgs(string keywords, IKeywordIndexItem[] items) : base(keywords)
+        {
+            this.Items = items;
         }
     }
 

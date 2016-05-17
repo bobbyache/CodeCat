@@ -18,6 +18,13 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         private AppFacade application;
 
+        public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
+        public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
+
+        public event EventHandler<SearchDelimitedKeywordEventArgs> SearchExecuted;
+        public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
+        public event EventHandler<SelectSnippetEventArgs> SelectSnippet;
+
         public SearchForm(AppFacade application)
         {
             InitializeComponent();
@@ -62,10 +69,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return returnVal;
             }
         }
-
-        public event EventHandler<SearchExecutedEventArgs> SearchExecuted;
-        public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
-        public event EventHandler<SelectSnippetEventArgs> SelectSnippet;
 
         public bool SingleSnippetSelected { get { return this.listView.SelectedItems.Count == 1; } }
         public bool MultipleSnippetsSelected { get { return this.listView.SelectedItems.Count > 1; } }
@@ -162,7 +165,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             menuContextCopyIdentifier.Enabled = singleSelection;
             menuContextCopyKeywords.Enabled = true;
-            menuContextDelete.Enabled = singleSelection;
             menuContextViewSnippet.Enabled = singleSelection;
             menuContextAddKeywords.Enabled = true;
             menuContextRemoveKeywords.Enabled = true;
@@ -228,7 +230,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (this.searchEnabled)
             {
                 if (this.SearchExecuted != null)
-                    SearchExecuted(this, new SearchExecutedEventArgs(keywordsTextBox.Text));
+                    SearchExecuted(this, new SearchDelimitedKeywordEventArgs(keywordsTextBox.Text));
             }
         }
 
@@ -289,8 +291,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 string delimitedKeywordList = frm.Keywords;
-                IKeywordIndexItem[] IndexItems = this.SelectedSnippets;
-                application.AddKeywords(IndexItems, delimitedKeywordList);
+                IKeywordIndexItem[] indexItems = this.SelectedSnippets;
+                application.AddKeywords(indexItems, delimitedKeywordList);
+
+                if (KeywordsAdded != null)
+                    KeywordsAdded(this, new SearchKeywordsModifiedEventArgs(delimitedKeywordList, indexItems));
             }
         }
 
@@ -298,14 +303,30 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             SelectKeywordsForm frm = new SelectKeywordsForm();
             frm.Text = "Remove Keywords";
-            IKeywordIndexItem[] IndexItems = this.SelectedSnippets;
-            frm.Keywords = application.AllKeywords(IndexItems);
+            IKeywordIndexItem[] indexItems = this.SelectedSnippets;
+            frm.Keywords = application.AllKeywords(indexItems);
+            
             DialogResult result = frm.ShowDialog(this);
 
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 string[] keywords = frm.Keywords;
-                application.RemoveKeywords(IndexItems, keywords);
+                IKeywordIndexItem[] invalidItems;
+
+                bool validated = application.RemoveKeywords(indexItems, keywords, out invalidItems);
+
+                if (validated)
+                {
+                    string delimitedKeywordList = application.KeywordArrayToDelimitedText(keywords);
+
+                    if (KeywordsRemoved != null)
+                        KeywordsRemoved(this, new SearchKeywordsModifiedEventArgs(delimitedKeywordList, indexItems));
+                }
+                else
+                {
+                    InvalidRemoveDialog dialog = new InvalidRemoveDialog(invalidItems);
+                    dialog.ShowDialog(this);
+                }
             }
         }
 
@@ -322,31 +343,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 Clipboard.Clear();
                 Clipboard.SetText(this.SelectedSnippet.Id);
             }
-        }
-
-        private void menuContextDelete_Click(object sender, EventArgs e)
-        {
-            //IKeywordIndexItem codeItem = this.SelectedSnippet;
-
-            //if (codeItem != null)
-            //{
-            //    if (this.formController.ItemFormIsOpen(codeItem.Id))
-            //    {
-            //        MessageBox.Show(this, "Cannot delete an open snippet.",
-            //            ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-            //        return;
-            //    }
-
-            //    DialogResult result = MessageBox.Show(this, "Sure you want to delete this snippet?",
-            //        ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            //    if (result == System.Windows.Forms.DialogResult.Yes)
-            //    {
-            //        this.application.RemoveCodeSnippet(codeItem.Id);
-            //        ListviewHelper.DeleteSelectedItem(listView1);
-            //        ExecuteSearch(keywordsTextBox.Text);
-            //    }
-            //}
         }
     }
 }

@@ -19,6 +19,7 @@ namespace CygSoft.CodeCat.Infrastructure
 
         void AddKeywords(string commaDelimitedKeywords);
         bool AllKeywordsFound(string[] keywords);
+        bool ValidateRemoveKeywords(string[] keywords);
         void RemoveKeywords(string[] keywords);
         void SetKeywords(string commaDelimitedKeywords);
         

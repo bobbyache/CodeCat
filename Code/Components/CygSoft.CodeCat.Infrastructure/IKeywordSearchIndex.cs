@@ -27,6 +27,7 @@ namespace CygSoft.CodeCat.Infrastructure
         string[] Keywords { get; }
         string LibraryFolderPath { get; }
         void Remove(string id);
+        bool ValidateRemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidEmptyItems);
         void RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords);
         void Update();
         void Update(IKeywordIndexItem item);

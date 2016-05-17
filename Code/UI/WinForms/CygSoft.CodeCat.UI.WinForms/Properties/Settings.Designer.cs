@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CygSoft.CodeCat.Ui.WinForms.Properties {
+namespace CygSoft.CodeCat.UI.WinForms.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

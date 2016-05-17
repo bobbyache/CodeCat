@@ -69,6 +69,16 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             this.keyPhrases.AddKeyPhrases(commaDelimitedKeywords);
         }
 
+        public bool ValidateRemoveKeywords(string[] keywords)
+        {
+            // the rule is that a searchable item cannot have an empty keyword list!
+
+            KeyPhrases phrases = new KeyPhrases(this.CommaDelimitedKeywords);
+            phrases.RemovePhrases(keywords);
+
+            return phrases.Phrases.Length > 0;
+        }
+
         public void RemoveKeywords(string[] keywords)
         {
             this.keyPhrases.RemovePhrases(keywords);

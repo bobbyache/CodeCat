@@ -156,11 +156,32 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
         public void RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords)
         {
+            // the rule is that a searchable item cannot have an empty keyword list!
+
             foreach (IKeywordIndexItem index in indeces)
             {
                 index.RemoveKeywords(keywords);
             }
             this.Update();
+        }
+
+        public bool ValidateRemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidIndeces)
+        {
+            bool valid = true;
+
+            List<IKeywordIndexItem> invalidItems = new List<IKeywordIndexItem>();
+            foreach (IKeywordIndexItem index in indeces)
+            {
+                bool validated = index.ValidateRemoveKeywords(keywords);
+                if (!validated)
+                {
+                    invalidItems.Add(index);
+                    valid = false;
+                }
+            }
+            invalidIndeces = invalidItems.ToArray();
+
+            return valid;
         }
 
         private void Add(IKeywordIndexItem item)

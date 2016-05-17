@@ -94,6 +94,12 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             }
         }
 
+        public void RemovePhrases(string keyPhraseDelimitedList)
+        {
+            List<string> phrases = SplitKeyPhrases(keyPhraseDelimitedList);
+            RemovePhrases(phrases.ToArray());
+        }
+
         private List<string> SplitKeyPhrases(string keyPhrases)
         {
             string[] phrases = keyPhrases.Split(new char[] { ',' });

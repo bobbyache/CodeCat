@@ -7,7 +7,7 @@
     <ProjectGuid>{4FDD2CB6-3FFE-458B-A186-2C57375F4AC0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CygSoft.CodeCat.Ui.WinForms</RootNamespace>
+    <RootNamespace>CygSoft.CodeCat.UI.WinForms</RootNamespace>
     <AssemblyName>CygSoft.CodeCat.UI.WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -77,6 +77,12 @@
     <Compile Include="EnterKeywordsForm.Designer.cs">
       <DependentUpon>EnterKeywordsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InvalidRemoveDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InvalidRemoveDialog.Designer.cs">
+      <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ItemFormController.cs" />
     <Compile Include="ListviewHelper.cs" />
     <Compile Include="ListViewItemComparer.cs" />
@@ -139,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EnterKeywordsForm.resx">
       <DependentUpon>EnterKeywordsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InvalidRemoveDialog.resx">
+      <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

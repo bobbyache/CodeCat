@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CygSoft.CodeCat.Ui.WinForms {
+namespace CygSoft.CodeCat.UI.WinForms {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CygSoft.CodeCat.Ui.WinForms {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CygSoft.CodeCat.Ui.WinForms.UiResource", typeof(UiResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CygSoft.CodeCat.UI.WinForms.UiResource", typeof(UiResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

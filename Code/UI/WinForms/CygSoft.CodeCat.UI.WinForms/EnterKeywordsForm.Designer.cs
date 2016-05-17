@@ -75,6 +75,8 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnOk);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "EnterKeywordsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Enter Keywords";

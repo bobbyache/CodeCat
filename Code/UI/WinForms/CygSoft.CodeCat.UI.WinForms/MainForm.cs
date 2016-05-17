@@ -73,9 +73,38 @@ namespace CygSoft.CodeCat.UI.WinForms
             searchForm.OpenSnippet += searchForm_OpenSnippet;
             searchForm.SearchExecuted += (s, e) => ExecuteSearch(e.Keywords);
             searchForm.SelectSnippet += (s, e) => EnableControls();
+            searchForm.KeywordsAdded += searchForm_KeywordsAdded;
+            searchForm.KeywordsRemoved += searchForm_KeywordsRemoved;
+
             searchForm.Show(dockPanel, DockState.DockLeft);
             //searchForm.CloseButton = false;
             //searchForm.CloseButtonVisible = false;
+        }
+
+        private void searchForm_KeywordsRemoved(object sender, SearchKeywordsModifiedEventArgs e)
+        {
+            foreach (IKeywordIndexItem item in e.Items)
+            {
+                SnippetForm document = dockPanel.Documents
+                    .Where(doc => (doc as SnippetForm).SnippetId == item.Id)
+                    .OfType<SnippetForm>().SingleOrDefault();
+
+                if (document != null)
+                    document.RemoveKeywords(e.Keywords, false);
+            }
+        }
+
+        private void searchForm_KeywordsAdded(object sender, SearchKeywordsModifiedEventArgs e)
+        {
+            foreach (IKeywordIndexItem item in e.Items)
+            {
+                SnippetForm document = dockPanel.Documents
+                    .Where(doc => (doc as SnippetForm).SnippetId == item.Id)
+                    .OfType<SnippetForm>().SingleOrDefault();
+
+                if (document != null)
+                    document.AddKeywords(e.Keywords, false);
+            }
         }
 
         private void InitializeRecentProjectMenu()

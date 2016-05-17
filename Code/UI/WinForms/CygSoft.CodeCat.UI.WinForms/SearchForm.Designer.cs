@@ -46,8 +46,6 @@
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.menuContextCopyKeywords = new System.Windows.Forms.ToolStripMenuItem();
             this.menuContextCopyIdentifier = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuContextDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.searchPanel.SuspendLayout();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -135,11 +133,9 @@
             this.menuContextRemoveKeywords,
             this.toolStripMenuItem5,
             this.menuContextCopyKeywords,
-            this.menuContextCopyIdentifier,
-            this.toolStripMenuItem4,
-            this.menuContextDelete});
+            this.menuContextCopyIdentifier});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(186, 176);
+            this.contextMenu.Size = new System.Drawing.Size(186, 170);
             // 
             // menuContextViewSnippet
             // 
@@ -193,18 +189,6 @@
             this.menuContextCopyIdentifier.Text = "Copy Identifier";
             this.menuContextCopyIdentifier.Click += new System.EventHandler(this.menuContextCopyIdentifier_Click);
             // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(182, 6);
-            // 
-            // menuContextDelete
-            // 
-            this.menuContextDelete.Name = "menuContextDelete";
-            this.menuContextDelete.Size = new System.Drawing.Size(185, 22);
-            this.menuContextDelete.Text = "Delete";
-            this.menuContextDelete.Click += new System.EventHandler(this.menuContextDelete_Click);
-            // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -241,7 +225,5 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem menuContextCopyKeywords;
         private System.Windows.Forms.ToolStripMenuItem menuContextCopyIdentifier;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem menuContextDelete;
     }
 }
