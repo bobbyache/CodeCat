@@ -28,7 +28,23 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
-            dockPanel.ContentRemoved += (s, e) => CreateSnippetDocumentIfNone();
+            //dockPanel.ContentRemoved += (s, e) =>
+            //    {
+            //        CreateSnippetDocumentIfNone();
+            //    };
+
+            dockPanel.ContentAdded += dockPanel_ContentAdded;
+            dockPanel.ContentRemoved += dockPanel_ContentRemoved;
+
+            //dockPanel.ContentAdded += (s, e) =>
+            //    {
+            //        if (e.Content is SnippetForm)
+            //        {
+            //            SnippetForm snippetForm = e.Content as SnippetForm;
+            //            ToolStripMenuItem menuItem = new ToolStripMenuItem(snippetForm.Text, null, 
+            //            //mnuDocuments.DropDownItems.Add(new ToolStripMenuItem(
+            //        }
+            //    };
 
             //dockPanel.SaveAsXml(
             //dockPanel.LoadFromXml(
@@ -155,6 +171,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             mnuSnippetsViewModify.Enabled = projectLoaded && itemSelected;
             mnuSnippetsAdd.Enabled = projectLoaded;
             mnuFileOpenProjectFolder.Enabled = projectLoaded;
+            mnuDocuments.Enabled = projectLoaded;
         }
 
         private string WindowCaption()
@@ -163,14 +180,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return ConfigSettings.ApplicationTitle;
             else
                 return ConfigSettings.ApplicationTitle + " - [" + this.application.GetContextFileTitle() + "]";
-        }
-
-        private void searchForm_OpenSnippet(object sender, OpenSnippetEventArgs e)
-        {
-            OpenSnippetDocument(e.Item);
-            // Note dockPanel.Documents handles the management of your documents. It maintains a collection.
-            // This does not include your docked windows, just your "document" windows. This is excellent because
-            // you can use this existing collection property to maintain your code snippets.
         }
 
         private void OpenSnippetDocument(IKeywordIndexItem snippetIndex)
@@ -185,18 +194,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             else
             {
                 ActivateSnippet(snippetIndex);
-            }
-        }
-
-        private void snippetForm_DeleteSnippetDocument(object sender, DeleteCodeFileEventArgs e)
-        {
-            DialogResult result = MessageBox.Show(this, "Sure you want to delete this snippet?",
-                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                e.Document.Delete();
-                searchForm.RemoveSnippet(e.Item.Id);
-                application.RemoveCodeSnippet(e.Item.Id);
             }
         }
 
@@ -251,6 +248,65 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return "No items loaded";
             else
                 return string.Format("{0} of {1} available items found.", foundItems, this.application.GetIndexCount().ToString());
+        }
+
+        private bool SaveAllDocuments()
+        {
+            IEnumerable<SnippetForm> documents = this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true);
+            foreach (SnippetForm document in documents)
+            {
+                if (!document.SaveChanges())
+                {
+                    document.Activate();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private DialogResult PromptSaveChanges()
+        {
+            SaveSnippetDialog dialog = new SaveSnippetDialog(UnsavedDocuments());
+            DialogResult result = dialog.ShowDialog(this);
+
+            return result;
+        }
+
+        private SnippetForm[] UnsavedDocuments()
+        {
+            return this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true).ToArray();
+        }
+
+        private void ClearSnippetDocuments()
+        {
+            var snippetDocs = this.dockPanel.Contents.OfType<SnippetForm>().ToList();
+
+            while (snippetDocs.Count() > 0)
+            {
+                SnippetForm snippetDoc = snippetDocs.First();
+                snippetDocs.Remove(snippetDoc);
+                // important, otherwise snippet for will throw a messagebox.
+                // we should have already been through the IsModified check process.
+                snippetDoc.FlagSilentClose();
+                snippetDoc.Close();
+            }
+        }
+
+        private bool AnyUnsavedDocuments()
+        {
+            return this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true).Any();
+        }
+
+        private void snippetForm_DeleteSnippetDocument(object sender, DeleteCodeFileEventArgs e)
+        {
+            DialogResult result = MessageBox.Show(this, "Sure you want to delete this snippet?",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                e.Document.Delete();
+                searchForm.RemoveSnippet(e.Item.Id);
+                application.RemoveCodeSnippet(e.Item.Id);
+            }
         }
 
         private void RecentProjectOpened(object sender, RecentProjectEventArgs e)
@@ -381,71 +437,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             // but you can just as well remove from all of them at the same time.
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (AnyUnsavedDocuments())
-            {
-                DialogResult result = PromptSaveChanges();
-
-                if (result == System.Windows.Forms.DialogResult.Yes)
-                {
-                    if (SaveAllDocuments())
-                        ClearSnippetDocuments();
-                    else
-                        e.Cancel = true;
-                }
-                else if (result == System.Windows.Forms.DialogResult.Cancel)
-                    e.Cancel = true;
-            }
-        }
-
-        private bool AnyUnsavedDocuments()
-        {
-            return this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true).Any();
-        }
-
-        private bool SaveAllDocuments()
-        {
-            IEnumerable<SnippetForm> documents = this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true);
-            foreach (SnippetForm document in documents)
-            {
-                if (!document.SaveChanges())
-                {
-                    document.Activate();
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private DialogResult PromptSaveChanges()
-        {
-            SaveSnippetDialog dialog = new SaveSnippetDialog(UnsavedDocuments());
-            DialogResult result = dialog.ShowDialog(this);
-
-            return result;
-        }
-
-        private SnippetForm[] UnsavedDocuments()
-        {
-            return this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true).ToArray();
-        }
-
-        private void ClearSnippetDocuments()
-        {
-            var snippetDocs = this.dockPanel.Contents.OfType<SnippetForm>().ToList();
-
-            while (snippetDocs.Count() > 0)
-            {
-                SnippetForm snippetDoc = snippetDocs.First();
-                snippetDocs.Remove(snippetDoc);
-                // important, otherwise snippet for will throw a messagebox.
-                // we should have already been through the IsModified check process.
-                snippetDoc.FlagSilentClose();
-                snippetDoc.Close();
-            }
-        }
-
         private void mnuFileExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -466,6 +457,65 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             AboutBoxDialog dialog = new AboutBoxDialog();
             dialog.ShowDialog(this);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (AnyUnsavedDocuments())
+            {
+                DialogResult result = PromptSaveChanges();
+
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    if (SaveAllDocuments())
+                        ClearSnippetDocuments();
+                    else
+                        e.Cancel = true;
+                }
+                else if (result == System.Windows.Forms.DialogResult.Cancel)
+                    e.Cancel = true;
+            }
+        }
+
+        private void dockPanel_ContentRemoved(object sender, DockContentEventArgs e)
+        {
+            if (e.Content is SnippetForm)
+            {
+                SnippetForm snippetForm = e.Content as SnippetForm;
+                ToolStripMenuItem menuItem = mnuDocuments.DropDownItems[snippetForm.SnippetId] as ToolStripMenuItem;
+                menuItem.Click -= mnuDocumentWindow_Click;
+                mnuDocuments.DropDownItems.Remove(menuItem);
+                CreateSnippetDocumentIfNone();
+            }
+
+        }
+
+        private void dockPanel_ContentAdded(object sender, DockContentEventArgs e)
+        {
+            if (e.Content is SnippetForm)
+            {
+                SnippetForm snippetForm = e.Content as SnippetForm;
+                ToolStripMenuItem menuItem = new ToolStripMenuItem(snippetForm.Text, null, mnuDocumentWindow_Click);
+                menuItem.Name = snippetForm.SnippetId;
+                menuItem.Tag = snippetForm;
+                mnuDocuments.DropDownItems.Add(menuItem);
+            }
+        }
+
+        private void mnuDocumentWindow_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            string snippetId = menuItem.Name;
+            SnippetForm snippetForm = menuItem.Tag as SnippetForm;
+            snippetForm.Activate();
+        }
+
+        private void searchForm_OpenSnippet(object sender, OpenSnippetEventArgs e)
+        {
+            OpenSnippetDocument(e.Item);
+            // Note dockPanel.Documents handles the management of your documents. It maintains a collection.
+            // This does not include your docked windows, just your "document" windows. This is excellent because
+            // you can use this existing collection property to maintain your code snippets.
         }
     }
 }
