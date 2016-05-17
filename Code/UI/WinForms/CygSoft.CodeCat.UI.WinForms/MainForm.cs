@@ -443,8 +443,13 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void mnuHelpHelpTopics_Click(object sender, EventArgs e)
         {
-            AboutBoxDialog dialog = new AboutBoxDialog();
-            dialog.ShowDialog(this);
+            try
+            {
+                System.Diagnostics.Process.Start(ConfigSettings.HelpPageUrl);
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void mnuHelpAbout_Click(object sender, EventArgs e)

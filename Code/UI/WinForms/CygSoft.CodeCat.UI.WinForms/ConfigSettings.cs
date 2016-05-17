@@ -49,6 +49,18 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        private static string helpPageUrl = "";
+        public static string HelpPageUrl
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(helpPageUrl))
+                    helpPageUrl = ConfigurationManager.AppSettings["HelpPageUrl"];
+
+                return helpPageUrl;
+            }
+        }
+
         private static string lastProject;
         public static string LastProject
         {
@@ -113,6 +125,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             lastProject = ConfigurationManager.AppSettings["LastProject"];
             syntaxFilePath = ConfigurationManager.AppSettings["SyntaxFilePath"];
             defaultSyntax = ConfigurationManager.AppSettings["DefaultSyntax"];
+            helpPageUrl = ConfigurationManager.AppSettings["HelpPageUrl"];
             codeLibraryIndexFileVersion = Int32.Parse(ConfigurationManager.AppSettings["CodeLibraryIndexFileVersion"]);
         }
 

@@ -57,16 +57,14 @@
             this.mnuSnippetsViewModify = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindowKeywordSearch = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuTools = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuToolsConvertVersion = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuDocuments = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpHelpTopics = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.indexCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuDocuments = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -77,7 +75,6 @@
             this.mnuFile,
             this.mnuSnippets,
             this.mnuWindow,
-            this.mnuTools,
             this.mnuHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -184,20 +181,16 @@
             this.mnuWindowKeywordSearch.Size = new System.Drawing.Size(158, 22);
             this.mnuWindowKeywordSearch.Text = "Keyword Search";
             // 
-            // mnuTools
+            // toolStripMenuItem3
             // 
-            this.mnuTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuToolsConvertVersion});
-            this.mnuTools.Name = "mnuTools";
-            this.mnuTools.Size = new System.Drawing.Size(48, 20);
-            this.mnuTools.Text = "Tools";
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(155, 6);
             // 
-            // mnuToolsConvertVersion
+            // mnuDocuments
             // 
-            this.mnuToolsConvertVersion.Enabled = false;
-            this.mnuToolsConvertVersion.Name = "mnuToolsConvertVersion";
-            this.mnuToolsConvertVersion.Size = new System.Drawing.Size(199, 22);
-            this.mnuToolsConvertVersion.Text = "Convert Older Version...";
+            this.mnuDocuments.Name = "mnuDocuments";
+            this.mnuDocuments.Size = new System.Drawing.Size(158, 22);
+            this.mnuDocuments.Text = "Documents";
             // 
             // mnuHelp
             // 
@@ -212,14 +205,14 @@
             // 
             this.mnuHelpHelpTopics.Name = "mnuHelpHelpTopics";
             this.mnuHelpHelpTopics.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.mnuHelpHelpTopics.Size = new System.Drawing.Size(145, 22);
+            this.mnuHelpHelpTopics.Size = new System.Drawing.Size(152, 22);
             this.mnuHelpHelpTopics.Text = "Help";
             this.mnuHelpHelpTopics.Click += new System.EventHandler(this.mnuHelpHelpTopics_Click);
             // 
             // mnuHelpAbout
             // 
             this.mnuHelpAbout.Name = "mnuHelpAbout";
-            this.mnuHelpAbout.Size = new System.Drawing.Size(145, 22);
+            this.mnuHelpAbout.Size = new System.Drawing.Size(152, 22);
             this.mnuHelpAbout.Text = "About...";
             this.mnuHelpAbout.Click += new System.EventHandler(this.mnuHelpAbout_Click);
             // 
@@ -293,17 +286,6 @@
             this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 7;
             // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(155, 6);
-            // 
-            // mnuDocuments
-            // 
-            this.mnuDocuments.Name = "mnuDocuments";
-            this.mnuDocuments.Size = new System.Drawing.Size(158, 22);
-            this.mnuDocuments.Text = "Documents";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -336,7 +318,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuFileOpenProjectFolder;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuFileExit;
-        private System.Windows.Forms.ToolStripMenuItem mnuTools;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp;
         private System.Windows.Forms.ToolStripMenuItem mnuHelpAbout;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -347,7 +328,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuSnippets;
         private System.Windows.Forms.ToolStripMenuItem mnuSnippetsAdd;
         private System.Windows.Forms.ToolStripMenuItem mnuSnippetsViewModify;
-        private System.Windows.Forms.ToolStripMenuItem mnuToolsConvertVersion;
         private System.Windows.Forms.ToolStripMenuItem mnuHelpHelpTopics;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem mnuDocuments;

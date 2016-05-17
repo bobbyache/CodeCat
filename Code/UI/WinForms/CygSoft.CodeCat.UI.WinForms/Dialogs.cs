@@ -58,6 +58,12 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
+        public static void HelpPageErrorNotification(IWin32Window owner, Exception exception)
+        {
+            MessageBox.Show(owner, string.Format("An error occurred while trying to load the help page. \n{0}", exception.Message),
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         public static void SnippetSaveErrorNotification(IWin32Window owner, Exception exception)
         {
             MessageBox.Show(owner, string.Format("An error occurred while trying to save the snippet:\n{0}", exception.Message), 
