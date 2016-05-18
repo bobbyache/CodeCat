@@ -42,8 +42,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.application = application;
             this.codeFile = codeFile;
             this.Tag = codeFile.Id;
-            cboFontSize.SelectedIndex = 4;
 
+            SetDefaultFont();
+            
             InitializeImages();
             InitializeSyntaxList();
 
@@ -54,6 +55,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             // event registration after all properties are set...
             RegisterEvents();
 
+            // finally set the state of the document
             this.IsNew = isNew;
             this.IsModified = false;
         }
@@ -91,7 +93,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 if (this.isModified != value)
                 {
-                    //btnSave.Enabled = hasChanges ? true : false;
                     lblEditStatus.Text = value ? "Edited" : "Saved";
                     lblEditStatus.ForeColor = value ? Color.DarkRed : Color.Black;
                     btnSave.Enabled = value;
@@ -133,6 +134,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 try
                 {
                     SaveValues();
+
                     this.IsModified = false;
                     this.IsNew = false;
 
@@ -158,12 +160,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             flagForDelete = true;
             this.Close();
-        }
-
-        public void DiscardChanges()
-        {
-            // discard all changes...
-            throw new NotImplementedException();
         }
 
         public void AddKeywords(string keywords, bool flagModified = true)
@@ -309,6 +305,15 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return true;
         }
 
+        private void SetDefaultFont()
+        {
+            int index = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
+            if (index >= 0)
+                cboFontSize.SelectedIndex = index;
+            else
+                cboFontSize.SelectedIndex = 4;
+        }
+
         private void SelectSyntax(string syntax)
         {
             // ensures that all controls are up to date with the new syntax.
@@ -347,20 +352,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void SnippetForm_Activated(object sender, EventArgs e)
-        {
-            //System.Diagnostics.Debug.WriteLine(string.Format("Activated: {1}, Document: {0}", this.Text, this.IsActivated.ToString()));
-            // There's a bug here. It seems that if you activate a docked Document
-            // from a floating Document the activated event doesn't fire ???
-            // However this only happens when you click in the SyntaxBox control and 
-            //doesn't happen if you click the docked window tab.
-        }
-
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            // if one of these forms cancel, it also seems to stop the application
-            // from closing!
-
+            // if this form cancels close, seems to stop the application from closing!
+            // if forcing close (flagging for delete or closing from the main form)
+            // want any dialog boxes popping up. 
             if (!flagSilentClose && !flagForDelete)
             {
                 if (this.IsModified)

@@ -118,6 +118,25 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        private static int? defaultFontSize;
+        public static int DefaultFontSize
+        {
+            get
+            {
+                if (!defaultFontSize.HasValue)
+                    defaultFontSize = Int32.Parse(ConfigurationManager.AppSettings["DefaultFontSize"]);
+
+                return defaultFontSize.Value;
+            }
+            set
+            {
+                Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                configuration.AppSettings.Settings["DefaultFontSize"].Value = value.ToString();
+                configuration.Save();
+                ConfigurationManager.RefreshSection("appSettings");
+            }
+        }
+
         public static void Refresh()
         {
             registryFolder = ConfigurationManager.AppSettings["RegistryPath"];
@@ -126,6 +145,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             syntaxFilePath = ConfigurationManager.AppSettings["SyntaxFilePath"];
             defaultSyntax = ConfigurationManager.AppSettings["DefaultSyntax"];
             helpPageUrl = ConfigurationManager.AppSettings["HelpPageUrl"];
+            defaultFontSize = Int32.Parse(ConfigurationManager.AppSettings["DefaultFontSize"]);
             codeLibraryIndexFileVersion = Int32.Parse(ConfigurationManager.AppSettings["CodeLibraryIndexFileVersion"]);
         }
 
