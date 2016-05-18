@@ -9,6 +9,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public class Dialogs
     {
+        public static void LoadLastProjectErrorNotification(IWin32Window owner, Exception exception)
+        {
+            MessageBox.Show(owner, string.Format("An error occured while attempting to load the last project.\n{0}", exception.Message),
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         public static void MandatoryFieldRequired(IWin32Window owner, string fieldName)
         {
             MessageBox.Show(owner, string.Format( "{0} is a mandatory field and must be supplied. Please enter a valid value.", fieldName), 

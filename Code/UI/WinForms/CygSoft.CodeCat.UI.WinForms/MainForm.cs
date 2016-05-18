@@ -44,6 +44,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeRecentProjectMenu();
             InitializeSearchForm();
 
+            if (!LoadLastProject())
+            {
+                this.Text = WindowCaption();
+                EnableControls();
+            }
+
             EnableControls();
 
             searchForm.Activate();
@@ -146,6 +152,24 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 CreateProject(filePath);
             }
+        }
+
+        private bool LoadLastProject()
+        {
+            try
+            {
+                string lastProject = ConfigSettings.LastProject;
+                if (!string.IsNullOrEmpty(lastProject))
+                {
+                    OpenProject(lastProject);
+                    return true;
+                }
+            }
+            catch (Exception exception)
+            {
+                Dialogs.LoadLastProjectErrorNotification(this, exception);
+            }
+            return false;
         }
 
         private void OpenProject(string filePath)

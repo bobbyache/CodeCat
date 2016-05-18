@@ -20,8 +20,8 @@ namespace UnitTestFile
     [DeploymentItem(@"Files\ProjectFiles\ProjectFile V2.xml")]
     public class TestBench
     {
-        private string indexItem_v1_Path = "IndexItem V1.xml";
-        private string indexItem_v2_Path = "IndexItem V2.xml";
+        //private string indexItem_v1_Path = "IndexItem V1.xml";
+        //private string indexItem_v2_Path = "IndexItem V2.xml";
         private string codeIndex_v1_Path = "CodeIndex V1.xml";
         private string codeIndex_v2_Path = "CodeIndex V2.xml";
         private string codeFile_v1_Path = "CodeFile V1.xml";
