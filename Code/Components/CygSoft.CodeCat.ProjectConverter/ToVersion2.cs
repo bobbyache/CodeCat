@@ -23,7 +23,7 @@ namespace CygSoft.CodeCat.ProjectConverter
                 new XElement("CodeCat_Project", new XAttribute("Version", "2"),
                     new XElement("CodeLibrary",
                         new XAttribute("Library", "CODE"),
-                        new XAttribute("File", "_code.xml")
+                        new XAttribute("File", @"code\_code.xml")
                 )));
 
 

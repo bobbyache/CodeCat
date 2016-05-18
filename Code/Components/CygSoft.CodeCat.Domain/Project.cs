@@ -12,12 +12,13 @@ namespace CygSoft.CodeCat.Domain
     {
         private const string CODE_LIBRARY_ELEMENT = "CodeLibrary";
         private const string CODE_LIBRARY_INDEX_FILE = "_code.xml";
-        private const string CODE_LIBRARY_FOLDER = "_code";
+        private const string CODE_LIBRARY_FOLDER = "code";
 
         public string FilePath { get; private set; }
         public string FileTitle { get { return Path.GetFileName(this.FilePath); } }
         public string FolderPath { get { return Path.GetDirectoryName(this.FilePath); } }
         public int CurrentVersion { get; private set; }
+        public string ProjectFileExtension { get { return "codecat"; } }
 
         public void Open(string filePath, int currentVersion)
         {
@@ -35,7 +36,7 @@ namespace CygSoft.CodeCat.Domain
 
         public string GetIndexPath()
         {
-            return Path.Combine(this.FolderPath, CODE_LIBRARY_INDEX_FILE);
+            return Path.Combine(this.FolderPath, CODE_LIBRARY_FOLDER, CODE_LIBRARY_INDEX_FILE);
         }
 
         public string GetLibraryFolder()
@@ -71,7 +72,7 @@ namespace CygSoft.CodeCat.Domain
             XmlAttribute libraryAttribute = document.CreateAttribute("Library");
             libraryAttribute.Value = "CODE";
             XmlAttribute fileAttribute = document.CreateAttribute("File");
-            fileAttribute.Value = CODE_LIBRARY_INDEX_FILE;
+            fileAttribute.Value = Path.Combine(CODE_LIBRARY_FOLDER, CODE_LIBRARY_INDEX_FILE);
             
             element.Attributes.Append(libraryAttribute);
             element.Attributes.Append(fileAttribute);

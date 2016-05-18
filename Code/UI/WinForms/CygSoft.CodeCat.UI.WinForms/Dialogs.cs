@@ -82,13 +82,13 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public static DialogResult OpenIndexDialog(IWin32Window owner, out string filePath)
+        public static DialogResult OpenProjectFileDialog(IWin32Window owner, string projectFileExt, out string filePath)
         {
             OpenFileDialog openDialog = new OpenFileDialog();
 
-            openDialog.Filter = "Index Files *.xml (*.xml)|*.xml";
-            openDialog.DefaultExt = "*.xml";
-            openDialog.Title = string.Format("Open Index");
+            openDialog.Filter = CreateProjectFileFilter(projectFileExt);
+            openDialog.DefaultExt = "*.codecat";
+            openDialog.Title = string.Format("Open Code Cat Project File");
             openDialog.AddExtension = true;
             openDialog.FilterIndex = 0;
 
@@ -98,13 +98,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             return result;
         }
 
-        public static DialogResult CreateIndexDialog(IWin32Window owner, out string filePath)
+        public static DialogResult CreateProjectFileDialog(IWin32Window owner, string projectFileExt, out string filePath)
         {
             SaveFileDialog saveDialog = new SaveFileDialog();
 
-            saveDialog.Filter = "Index Files *.xml (*.xml)|*.xml";
-            saveDialog.DefaultExt = "*.xml";
-            saveDialog.Title = string.Format("Create Index");
+            saveDialog.Filter = CreateProjectFileFilter(projectFileExt);
+            saveDialog.DefaultExt = "*.codecat";
+            saveDialog.Title = string.Format("Create Code Cat Project File");
             saveDialog.AddExtension = true;
             saveDialog.FilterIndex = 0;
 
@@ -112,6 +112,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             filePath = saveDialog.FileName;
 
             return result;
+        }
+
+        private static string CreateProjectFileFilter(string projectFileExt)
+        {
+            return string.Format("Code Cat Project Files *.{0} (*.{0})|*.{0}", projectFileExt);
         }
     }
 }

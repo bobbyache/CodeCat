@@ -135,7 +135,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void PromptOpenProject()
         {
             string filePath;
-            DialogResult result = Dialogs.OpenIndexDialog(this, out filePath);
+            DialogResult result = Dialogs.OpenProjectFileDialog(this, application.ProjectFileExtension, out filePath);
 
             if (result == System.Windows.Forms.DialogResult.OK)
             {
@@ -146,7 +146,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void PromptCreateProject()
         {
             string filePath;
-            DialogResult result = Dialogs.CreateIndexDialog(this, out filePath);
+            DialogResult result = Dialogs.CreateProjectFileDialog(this, application.ProjectFileExtension, out filePath);
 
             if (result == System.Windows.Forms.DialogResult.OK)
             {

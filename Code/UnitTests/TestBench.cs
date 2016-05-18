@@ -40,12 +40,47 @@ namespace UnitTestFile
         // * If experience problems here, will need to set up new
         // * tests on "Converter" as it isn't currently covered!
         // * */
-        //[TestMethod]
-        //public void Version1_to_Version2_Convert_Project()
-        //{
-        //    Converter converter = new Converter();
-        //    converter.Convert(@"D:\Temporary\CodeCat\TestConversion\TESTINGPROJECTFILE.xml", "1", "2");
-        //}
+        [TestMethod]
+        public void Version1_to_Version2_Convert_Project()
+        {
+            Converter converter = new Converter(@"D:\Temporary\CodeCat\TestConversion\TEST\msdfScripts_TESTING.xml", "1", "2");
+            converter.Convert();
+        }
+
+
+        [TestMethod]
+        public void Version1_to_Version2_ConverterProperties()
+        {
+            Converter converter = new Converter(@"D:\Temporary\CodeCat\TestConversion\OldProject\TESTING.xml", "1", "2");
+
+            Assert.AreEqual("1", converter.FromVersion);
+            Assert.AreEqual("2", converter.ToVersion);
+
+            Assert.AreEqual("xml", converter.OldProjectFileExtension);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\TESTING.xml", converter.OldProjectFilePath);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject", converter.OldProjectFolder);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject", converter.OldCodeFolder);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject", converter.OldCodeIndexFolder);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\TESTING.xml", converter.OldCodeIndexFilePath);
+
+            Assert.AreEqual("codecat", converter.NewProjectFileExtension);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\TESTING.codecat", converter.NewProjectFilePath);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject", converter.NewProjectFolder);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\code", converter.NewCodeFolder);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\code", converter.NewCodeIndexFolder);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\code\_code.xml", converter.NewCodeIndexFilePath);
+
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\_temp", converter.TempProjectFolder);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\_temp\code", converter.TempCodeFolder);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\_temp\code\_code.xml", converter.TempCodeIndexFilePath);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\_temp\TESTING.codecat", converter.TempProjectFilePath);
+
+
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\_backup", converter.BackupProjectFolder);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\_backup\code", converter.BackupCodeFolder);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\_backup\TESTING.xml", converter.BackupCodeIndexFilePath);
+            Assert.AreEqual(@"D:\Temporary\CodeCat\TestConversion\OldProject\_backup\TESTING.xml", converter.BackupProjectFilePath);
+        }
 
         [TestMethod]
         public void Version1_to_Version2_Create_ProjectFile()

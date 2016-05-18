@@ -26,6 +26,11 @@ namespace CygSoft.CodeCat.Domain
             set { this.codeLibrary.SyntaxFolderPath = value; }
         }
 
+        public string ProjectFileExtension
+        {
+            get { return this.project.ProjectFileExtension; }
+        }
+
         public bool Loaded
         {
             get { return this.codeLibrary.Loaded; }
