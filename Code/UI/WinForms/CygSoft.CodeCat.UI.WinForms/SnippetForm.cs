@@ -29,116 +29,38 @@ namespace CygSoft.CodeCat.UI.WinForms
         public event EventHandler<DeleteCodeFileEventArgs> DeleteSnippetDocument;
         public event EventHandler<SaveCodeFileEventArgs> SaveSnippetDocument;
 
-        //public event EventHandler MovePrevious;
-        //public event EventHandler MoveNext;
-
         public SnippetForm(CodeFile codeFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
-            this.application = application;
-
-            btnTakeSnapshot.Image = Resources.GetImage(Constants.ImageKeys.AddSnapshot);
-            btnDeleteSnapshot.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnapshot);
-            btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
-            chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
-
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
             tabControl.Alignment = TabAlignment.Left;
             this.snapshotsTab = this.tabPageSnapshots;
-
-            this.IsNew = isNew;
-            this.codeFile = codeFile;
-            //this.syntaxBox.GotFocus += (s, e) => { Console.Write(this.IsActivated.ToString()); };
-
-            this.Icon = IconRepository.GetIcon(this.codeFile.Syntax);
-            lblEditStatus.Image = this.IconImage;
-
-            cboSyntax.Items.Clear();
-            cboSyntax.Items.AddRange(application.GetSyntaxes());
-
-            btnTakeSnapshot.Enabled = !IsNew;
-            btnDeleteSnapshot.Enabled = false;
-            btnSave.Enabled = false;
-            btnDiscardChange.Enabled = false;
-            btnDelete.Enabled = !isNew;
-
-            toolstripKeywords.Visible = false;
-            toolstripTitle.Visible = false;
-
-            this.Tag = codeFile.Id;
-
-            ResetFields();
-
-            cboFontSize.SelectedIndex = 4;
-
-            snapshotListCtrl1.Attach(codeFile);
-            UpdateSnapshotsTab();
-
-            // -----------------------------------------------------------
-            // these events MUST go after all properties are set...
-            // -----------------------------------------------------------
-            //syntaxDoc.Change += (s, e) => {
-            //    this.IsModified = true;
-            //} ;
-
-            this.snapshotListCtrl1.SnapshotSelectionChanged += (s, e) =>
-            {
-                this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab && !this.isNew);
-            };
-
-            this.tabControl.Selected += (s, e) =>
-            {
-                this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab && !this.isNew);
-            };
-
-            chkEdit.Click += (s, e) =>
-                {
-                    toolstripTitle.Visible = chkEdit.Checked;
-                    toolstripKeywords.Visible = chkEdit.Checked;
-                };
-
-            this.codeFile.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
-            this.codeFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
-
-            txtTitle.TextChanged += SetModified;
-            txtKeywords.TextChanged += SetModified;
-            syntaxBox.TextChanged += SetModified;
-
-            cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
-
-            cboFontSize.SelectedIndexChanged += (s, e) =>
-            {
-                this.syntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
-                this.snapshotListCtrl1.EditorFontSize = this.syntaxBox.FontSize;
-            };
-
-            btnDelete.Click += btnDelete_Click;
-
-            this.IsModified = false;
-
             this.CloseButtonVisible = true;
             this.CloseButton = true;
+
+            this.application = application;
+            this.codeFile = codeFile;
+            this.Tag = codeFile.Id;
+            cboFontSize.SelectedIndex = 4;
+
+            InitializeImages();
+            InitializeSyntaxList();
+
+            EnableControls();
+            ResetFields();
+            UpdateSnapshotsTab();
+
+            // event registration after all properties are set...
+            RegisterEvents();
+
+            this.IsNew = isNew;
+            this.IsModified = false;
         }
 
         private void SetModified(object sender, EventArgs e)
         {
             this.IsModified = true;
-        }
-
-        private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.IsModified = true;
-            string syntax = cboSyntax.SelectedItem.ToString();
-            SelectSyntax(syntax);
-            string syntaxFile = application.GetSyntaxFile(syntax);
-            this.syntaxBox.Document.SyntaxFile = syntaxFile;
-            this.snapshotListCtrl1.SyntaxFile = syntaxFile;
-            
-            this.Icon = IconRepository.GetIcon(syntax);
-            this.lblEditStatus.Image = IconRepository.GetIcon(syntax).ToBitmap();
         }
 
         public string SnippetId
@@ -203,39 +125,14 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.toolstripTitle.Visible = value;
             }
         }
-        
+
         public bool SaveChanges()
         {
-            if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
-            {
-                Dialogs.MandatoryFieldRequired(this, "Title");
-                this.EditMode = true;
-                this.txtTitle.Focus();
-            }
-            else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
-            {
-                Dialogs.MandatoryFieldRequired(this, "Keywords");
-                this.EditMode = true;
-                this.txtKeywords.Focus();
-            }
-            else if (string.IsNullOrWhiteSpace(this.cboSyntax.Text))
-            {
-                Dialogs.MandatoryFieldRequired(this, "Syntax");
-                this.EditMode = true;
-                this.cboSyntax.Focus();
-            }
-            else
+            if (ValidateChanges())
             {
                 try
                 {
-                    this.codeFile.Title = this.txtTitle.Text.Trim();
-                    this.codeFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
-                    this.codeFile.Syntax = this.cboSyntax.Text.Trim();
-                    this.codeFile.Text = syntaxBox.Document.Text;
-                    this.codeFile.Save();
-                    this.btnTakeSnapshot.Enabled = true;
-                    this.Text = codeFile.Title;
-                    this.txtKeywords.Text = this.codeFile.CommaDelimitedKeywords;
+                    SaveValues();
                     this.IsModified = false;
                     this.IsNew = false;
 
@@ -298,25 +195,123 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        private void InitializeImages()
+        {
+            btnTakeSnapshot.Image = Resources.GetImage(Constants.ImageKeys.AddSnapshot);
+            btnDeleteSnapshot.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnapshot);
+            btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
+            chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
+
+            this.Icon = IconRepository.GetIcon(this.codeFile.Syntax);
+            lblEditStatus.Image = this.IconImage;
+        }
+
+        private void RegisterEvents()
+        {
+            this.snapshotListCtrl1.SnapshotSelectionChanged += (s, e) =>
+            {
+                this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab && !this.isNew);
+            };
+
+            this.tabControl.Selected += (s, e) =>
+            {
+                this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab && !this.isNew);
+            };
+
+            this.chkEdit.Click += (s, e) =>
+            {
+                toolstripTitle.Visible = chkEdit.Checked;
+                toolstripKeywords.Visible = chkEdit.Checked;
+            };
+
+            cboFontSize.SelectedIndexChanged += (s, e) =>
+            {
+                this.syntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
+                this.snapshotListCtrl1.EditorFontSize = this.syntaxBox.FontSize;
+            };
+
+            this.codeFile.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
+            this.codeFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
+
+            txtTitle.TextChanged += SetModified;
+            txtKeywords.TextChanged += SetModified;
+            syntaxBox.TextChanged += SetModified;
+            btnDelete.Click += btnDelete_Click;
+            cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
+        }
+
+        private void InitializeSyntaxList()
+        {
+            cboSyntax.Items.Clear();
+            cboSyntax.Items.AddRange(application.GetSyntaxes());
+        }
+
+        private void EnableControls()
+        {
+            btnTakeSnapshot.Enabled = !IsNew;
+            btnDeleteSnapshot.Enabled = false;
+            btnSave.Enabled = false;
+            btnDiscardChange.Enabled = false;
+            btnDelete.Enabled = !this.IsNew;
+
+            toolstripKeywords.Visible = false;
+            toolstripTitle.Visible = false;
+        }
+
         private void ResetFields()
         {
             this.Text = codeFile.Title;
             this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
             this.txtTitle.Text = codeFile.Title;
-            SelectSyntax(codeFile.Syntax);
-
             this.syntaxBox.Document.Text = codeFile.Text;
 
-            string syntaxFile = application.GetSyntaxFile(codeFile.Syntax);
-            this.syntaxBox.Document.SyntaxFile =  syntaxFile;
-            this.snapshotListCtrl1.SyntaxFile = syntaxFile;
+            SelectSyntax(codeFile.Syntax);
+        }
 
-            this.Icon = IconRepository.GetIcon(codeFile.Syntax);
-            this.lblEditStatus.Image = IconRepository.GetIcon(codeFile.Syntax).ToBitmap();
+        private void SaveValues()
+        {
+            this.codeFile.Title = this.txtTitle.Text.Trim();
+            this.codeFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
+            this.codeFile.Syntax = this.cboSyntax.Text.Trim();
+            this.codeFile.Text = syntaxBox.Document.Text;
+            this.codeFile.Save();
+            this.btnTakeSnapshot.Enabled = true;
+            this.Text = codeFile.Title;
+            this.txtKeywords.Text = this.codeFile.CommaDelimitedKeywords;
+        }
+
+        private bool ValidateChanges()
+        {
+            if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
+            {
+                Dialogs.MandatoryFieldRequired(this, "Title");
+                this.EditMode = true;
+                this.txtTitle.Focus();
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
+            {
+                Dialogs.MandatoryFieldRequired(this, "Keywords");
+                this.EditMode = true;
+                this.txtKeywords.Focus();
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(this.cboSyntax.Text))
+            {
+                Dialogs.MandatoryFieldRequired(this, "Syntax");
+                this.EditMode = true;
+                this.cboSyntax.Focus();
+                return false;
+            }
+            else
+                return true;
         }
 
         private void SelectSyntax(string syntax)
         {
+            // ensures that all controls are up to date with the new syntax.
             string syn = syntax.ToUpper();
 
             foreach (object item in cboSyntax.Items)
@@ -324,12 +319,23 @@ namespace CygSoft.CodeCat.UI.WinForms
                 if (item.ToString() == syn)
                     cboSyntax.SelectedItem = item;
             }
+
+            string syntaxFile = application.GetSyntaxFile(syntax);
+            this.syntaxBox.Document.SyntaxFile = syntaxFile;
+            this.snapshotListCtrl1.SyntaxFile = syntaxFile;
+
+            this.Icon = IconRepository.GetIcon(syntax);
+            this.lblEditStatus.Image = IconRepository.GetIcon(syntax).ToBitmap();
         }
 
         private void UpdateSnapshotsTab()
         {
-            snapshotsTab.Text = string.Format("Snapshots ({0})", codeFile.Snapshots.Length);
-            if (!codeFile.HasSnapshots)
+            if (!snapshotListCtrl1.Attached)
+                snapshotListCtrl1.Attach(this.codeFile);
+
+            snapshotsTab.Text = string.Format("Snapshots ({0})", this.codeFile.Snapshots.Length);
+
+            if (!this.codeFile.HasSnapshots)
             {
                 if (tabControl.TabPages.Contains(snapshotsTab))
                     tabControl.TabPages.Remove(snapshotsTab);
@@ -371,27 +377,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 }
             }
             base.OnFormClosing(e);
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            // Isn't currently working, but you could apparently use this to "tab"
-            // between different windows...
-            // http://stackoverflow.com/questions/22873825/how-to-detect-shifttab-when-overriding-processcmdkey
-            // when the time comes, research something like handling multiple keys pressed at the same time etc.
-
-            //// combine any number of keys here
-            //if (keyData == (Keys.ControlKey | Keys.Back))
-            //{
-            //    if (MovePrevious != null)
-            //        MovePrevious(this, new EventArgs());
-            //}
-            //else if (keyData == (Keys.ControlKey | Keys.Next))
-            //{
-            //    if (MoveNext != null)
-            //        MoveNext(this, new EventArgs());
-            //}
-            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void btnTakeSnapshot_Click(object sender, EventArgs e)
@@ -448,6 +433,12 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ResetFields();
                 this.IsModified = false;
             }
+        }
+
+        private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.IsModified = true;
+            SelectSyntax(cboSyntax.SelectedItem.ToString());
         }
     }
 }

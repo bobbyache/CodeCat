@@ -16,11 +16,8 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         public event EventHandler SnapshotSelectionChanged;
 
-        public string SyntaxFile
-        {
-            set { this.syntaxBox.Document.SyntaxFile = value; }
-        }
-
+        public string SyntaxFile { set { this.syntaxBox.Document.SyntaxFile = value; } }
+        public bool Attached { get { return this.codeFile != null; } }
         public float EditorFontSize { set { this.syntaxBox.FontSize = value; } }
 
         public CodeSnapshot SelectedSnapshot
