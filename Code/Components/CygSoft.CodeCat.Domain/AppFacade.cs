@@ -31,24 +31,14 @@ namespace CygSoft.CodeCat.Domain
             get { return this.project.ProjectFileExtension; }
         }
 
+        public string ProjectFileTitle
+        {
+            get { return this.project.FileTitle; }
+        }
+
         public bool Loaded
         {
             get { return this.codeLibrary.Loaded; }
-        }
-
-        public string GetContextFilePath()
-        {
-            return this.codeLibrary.FilePath;
-        }
-
-        public string GetContextFileTitle()
-        {
-            return this.codeLibrary.FileTitle;
-        }
-
-        public string GetContextFolderPath()
-        {
-            return this.codeLibrary.FolderPath;
         }
 
         public int GetIndexCount()

@@ -238,7 +238,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!this.application.Loaded)
                 return ConfigSettings.ApplicationTitle;
             else
-                return ConfigSettings.ApplicationTitle + " - [" + this.application.GetContextFileTitle() + "]";
+                return ConfigSettings.ApplicationTitle + " - [" + this.application.ProjectFileTitle + "]";
         }
 
         private void OpenSnippetDocument(IKeywordIndexItem snippetIndex)
