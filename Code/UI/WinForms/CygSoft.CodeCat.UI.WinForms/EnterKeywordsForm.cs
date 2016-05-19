@@ -30,5 +30,10 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
+
+        private void EnterKeywordsForm_Activated(object sender, EventArgs e)
+        {
+            textBox1.Focus();
+        }
     }
 }

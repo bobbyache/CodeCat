@@ -49,6 +49,7 @@
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBox1.Location = new System.Drawing.Point(1, 2);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -80,6 +81,7 @@
             this.Name = "EnterKeywordsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Enter Keywords";
+            this.Activated += new System.EventHandler(this.EnterKeywordsForm_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 
