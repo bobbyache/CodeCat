@@ -135,7 +135,7 @@
             this.menuContextCopyKeywords,
             this.menuContextCopyIdentifier});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(186, 170);
+            this.contextMenu.Size = new System.Drawing.Size(186, 148);
             // 
             // menuContextViewSnippet
             // 
@@ -198,7 +198,7 @@
             this.Controls.Add(this.searchPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SearchForm";
-            this.Text = "SearchForm";
+            this.Text = "Keywords";
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
             this.contextMenu.ResumeLayout(false);

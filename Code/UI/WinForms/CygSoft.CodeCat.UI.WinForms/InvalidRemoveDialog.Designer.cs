@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvalidRemoveDialog));
             this.btnOk = new System.Windows.Forms.Button();
             this.lstInvalidItems = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -68,6 +69,7 @@
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.lstInvalidItems);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InvalidRemoveDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Invalid Removal Operation";
