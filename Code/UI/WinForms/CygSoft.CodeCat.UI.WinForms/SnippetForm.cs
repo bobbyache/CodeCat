@@ -216,11 +216,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab && !this.isNew);
             };
 
-            this.chkEdit.Click += (s, e) =>
-            {
-                toolstripTitle.Visible = chkEdit.Checked;
-                toolstripKeywords.Visible = chkEdit.Checked;
-            };
+            this.chkEdit.Click += (s, e) => { this.EditMode = chkEdit.Checked; };
 
             cboFontSize.SelectedIndexChanged += (s, e) =>
             {

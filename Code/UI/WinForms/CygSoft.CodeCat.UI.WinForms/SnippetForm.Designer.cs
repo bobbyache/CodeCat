@@ -33,8 +33,6 @@
             this.syntaxDoc = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.txtIdentifier = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.toolstripTitle = new System.Windows.Forms.ToolStrip();
@@ -47,6 +45,7 @@
             this.txtKeywords = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.toolstripCommands = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnDiscardChange = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -58,7 +57,6 @@
             this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.tabPageSnapshots = new System.Windows.Forms.TabPage();
             this.snapshotListCtrl1 = new CygSoft.CodeCat.UI.WinForms.SnapshotListCtrl();
-            this.btnDiscardChange = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
@@ -82,8 +80,6 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cboFontSize,
-            this.toolStripLabel2,
-            this.toolStripLabel3,
             this.lblEditStatus,
             this.txtIdentifier});
             this.toolStrip1.Location = new System.Drawing.Point(0, 471);
@@ -108,20 +104,6 @@
             this.cboFontSize.Name = "cboFontSize";
             this.cboFontSize.Size = new System.Drawing.Size(75, 25);
             // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(25, 22);
-            this.toolStripLabel2.Text = "INS";
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(36, 22);
-            this.toolStripLabel3.Text = "CAPS";
-            // 
             // lblEditStatus
             // 
             this.lblEditStatus.Name = "lblEditStatus";
@@ -132,7 +114,7 @@
             // 
             this.txtIdentifier.Name = "txtIdentifier";
             this.txtIdentifier.ReadOnly = true;
-            this.txtIdentifier.Size = new System.Drawing.Size(568, 25);
+            this.txtIdentifier.Size = new System.Drawing.Size(100, 22);
             this.txtIdentifier.Text = "fc61a31d-b0dd-4b91-8c7a-9a8125d8c4bc";
             // 
             // toolstripTitle
@@ -223,6 +205,16 @@
             this.btnSave.Size = new System.Drawing.Size(23, 22);
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnDiscardChange
+            // 
+            this.btnDiscardChange.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDiscardChange.Image = ((System.Drawing.Image)(resources.GetObject("btnDiscardChange.Image")));
+            this.btnDiscardChange.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDiscardChange.Name = "btnDiscardChange";
+            this.btnDiscardChange.Size = new System.Drawing.Size(23, 22);
+            this.btnDiscardChange.Text = "Discard Changes";
+            this.btnDiscardChange.Click += new System.EventHandler(this.btnDiscardChange_Click);
             // 
             // toolStripSeparator1
             // 
@@ -344,16 +336,6 @@
             this.snapshotListCtrl1.Size = new System.Drawing.Size(807, 364);
             this.snapshotListCtrl1.TabIndex = 0;
             // 
-            // btnDiscardChange
-            // 
-            this.btnDiscardChange.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnDiscardChange.Image = ((System.Drawing.Image)(resources.GetObject("btnDiscardChange.Image")));
-            this.btnDiscardChange.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDiscardChange.Name = "btnDiscardChange";
-            this.btnDiscardChange.Size = new System.Drawing.Size(23, 22);
-            this.btnDiscardChange.Text = "Discard Changes";
-            this.btnDiscardChange.Click += new System.EventHandler(this.btnDiscardChange_Click);
-            // 
             // SnippetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -388,8 +370,6 @@
         private Alsing.SourceCode.SyntaxDocument syntaxDoc;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripComboBox cboFontSize;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.ToolStrip toolstripTitle;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox txtTitle;
