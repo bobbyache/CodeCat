@@ -255,6 +255,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void ResetFields()
         {
             this.Text = codeFile.Title;
+            this.txtIdentifier.Text = codeFile.Id;
             this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
             this.txtTitle.Text = codeFile.Title;
             this.syntaxBox.Document.Text = codeFile.Text;
