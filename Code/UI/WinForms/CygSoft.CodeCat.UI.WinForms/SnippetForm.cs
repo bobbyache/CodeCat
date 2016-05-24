@@ -93,7 +93,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 if (this.isModified != value)
                 {
-                    lblEditStatus.Text = value ? "Edited" : "Saved";
+                    if (this.isNew)
+                        lblEditStatus.Text = value ? "Edited" : "No Changes";
+                    else
+                        lblEditStatus.Text = value ? "Edited" : "Saved";
+
                     lblEditStatus.ForeColor = value ? Color.DarkRed : Color.Black;
                     btnSave.Enabled = value;
                     btnDiscardChange.Enabled = value;

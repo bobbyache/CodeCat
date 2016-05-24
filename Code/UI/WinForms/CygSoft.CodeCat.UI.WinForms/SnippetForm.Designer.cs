@@ -106,15 +106,17 @@
             // 
             // lblEditStatus
             // 
+            this.lblEditStatus.AutoSize = false;
             this.lblEditStatus.Name = "lblEditStatus";
-            this.lblEditStatus.Size = new System.Drawing.Size(72, 22);
+            this.lblEditStatus.Size = new System.Drawing.Size(100, 22);
             this.lblEditStatus.Text = "No Changes";
+            this.lblEditStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtIdentifier
             // 
             this.txtIdentifier.Name = "txtIdentifier";
             this.txtIdentifier.ReadOnly = true;
-            this.txtIdentifier.Size = new System.Drawing.Size(100, 22);
+            this.txtIdentifier.Size = new System.Drawing.Size(601, 25);
             this.txtIdentifier.Text = "fc61a31d-b0dd-4b91-8c7a-9a8125d8c4bc";
             // 
             // toolstripTitle
