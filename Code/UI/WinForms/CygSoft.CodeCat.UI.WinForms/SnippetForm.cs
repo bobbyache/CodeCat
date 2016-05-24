@@ -247,9 +247,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnSave.Enabled = false;
             btnDiscardChange.Enabled = false;
             btnDelete.Enabled = !this.IsNew;
-
-            toolstripKeywords.Visible = false;
-            toolstripTitle.Visible = false;
         }
 
         private void ResetFields()
