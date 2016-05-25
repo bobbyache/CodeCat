@@ -373,6 +373,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.OnFormClosing(e);
         }
 
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            this.application.CloseCodeSnippet(this.codeFile.Id, false);
+            base.OnFormClosed(e);
+        }
+
         private void btnTakeSnapshot_Click(object sender, EventArgs e)
         {
             // Important: that changes are saved. because the snapshot will immediately save the file

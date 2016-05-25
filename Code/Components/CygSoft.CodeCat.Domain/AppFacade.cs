@@ -149,9 +149,9 @@ namespace CygSoft.CodeCat.Domain
             this.codeLibrary.CloseFile(snippetId, save);
         }
 
-        public void RemoveCodeSnippet(string snippetId)
+        public void DeleteCodeSnippet(string snippetId)
         {
-            this.codeLibrary.RemoveFile(snippetId);
+            this.codeLibrary.DeleteFile(snippetId);
         }
 
         public string[] FindOrphanedFiles()
