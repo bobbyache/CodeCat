@@ -3070,7 +3070,7 @@ IFileSnapshot consider having IPersistableFile inherit from it
 <XPD:REF name="Owner">/wGdnneyGEaMuTHsLSo/GAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Operations[24]" type="UMLOperation" guid="YzY1q94HeUu56dlYKLeWugAA">
-<XPD:ATTR name="Name" type="string">RemoveCodeSnippet</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">DeleteCodeSnippet</XPD:ATTR>
 <XPD:REF name="Owner">/wGdnneyGEaMuTHsLSo/GAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Operations[25]" type="UMLOperation" guid="+588ypseBUWcD06KKPDTkQAA">
@@ -3233,7 +3233,7 @@ IFileSnapshot consider having IPersistableFile inherit from it
 <XPD:REF name="Owner">5J7COYa1PUqHWIHSy8CE8gAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Operations[12]" type="UMLOperation" guid="WmzfXQNGMU+okZblMcblLwAA">
-<XPD:ATTR name="Name" type="string">RemoveFile</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">DeleteFile</XPD:ATTR>
 <XPD:REF name="Owner">5J7COYa1PUqHWIHSy8CE8gAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Operations[13]" type="UMLOperation" guid="sVBj4jDiV0C7NJ7ZbarRAQAA">

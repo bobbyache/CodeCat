@@ -394,7 +394,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             e.Document.Delete();
             searchForm.RemoveSnippet(e.Item.Id);
-            application.RemoveCodeSnippet(e.Item.Id);
+            application.DeleteCodeSnippet(e.Item.Id);
         }
 
         private void snippetForm_SaveSnippetDocument(object sender, SaveCodeFileEventArgs e)

@@ -151,7 +151,7 @@ namespace CygSoft.CodeCat.Domain
             return orphanedFiles.ToArray();
         }
 
-        public void RemoveFile(string id)
+        public void DeleteFile(string id)
         {
             IPersistableFile persistableFile;
 
