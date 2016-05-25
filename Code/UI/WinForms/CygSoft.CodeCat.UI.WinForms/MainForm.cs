@@ -25,6 +25,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         private AppFacade application = new AppFacade();
         private SearchForm searchForm;
 
+        // need this because we don't want to create a new document when
+        // when all documents are closing because we're either creating
+        // a new project or opening a new project.
+        private bool projectClosing = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -176,7 +181,14 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             try
             {
+                // important: we want to ensure that we don't create a new document
+                // because we're closing the project. Otherwise, when the project loads
+                // it will find that there is a new document open and will not create
+                // a new one... the old one from the old project will remain open and
+                // the index item will never be created.
+                this.projectClosing = true;
                 ClearSnippetDocuments();
+                this.projectClosing = false;
 
                 this.application.Open(filePath, ConfigSettings.CodeLibraryIndexFileVersion);
                 this.Text = WindowCaption();
@@ -201,7 +213,14 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateProject(string filePath)
         {
+            // important: we want to ensure that we don't create a new document
+            // because we're closing the project. Otherwise, when the project loads
+            // it will find that there is a new document open and will not create
+            // a new one... the old one from the old project will remain open and
+            // the index item will never be created.
+            this.projectClosing = true;
             ClearSnippetDocuments();
+            this.projectClosing = false;
 
             this.application.Create(filePath, ConfigSettings.CodeLibraryIndexFileVersion);
             this.Text = WindowCaption();
@@ -547,7 +566,11 @@ namespace CygSoft.CodeCat.UI.WinForms
                 {
                     menuItem.Click -= mnuDocumentWindow_Click;
                     mnuDocuments.DropDownItems.Remove(menuItem);
-                    CreateSnippetDocumentIfNone();
+                    // don't create a new snippet document if the project is closing!
+                    // this is important as it creates a bug that means that the keyword
+                    // index item 
+                    if (!projectClosing)
+                        CreateSnippetDocumentIfNone();
                 }
             }
 
