@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.ProjectConverter
 {
-    public class Converter
+    public class ToVersion2Converter
     {
         public string OldProjectFileExtension { get { return "xml"; } }
         public string OldProjectFilePath { get; private set; }
@@ -37,9 +37,12 @@ namespace CygSoft.CodeCat.ProjectConverter
         public string FromVersion { get; private set; }
         public string ToVersion { get; private set; }
 
-        public Converter(string filePath, string oldVersion, string newVersion)
+        public ToVersion2Converter(string filePath)
         {
+            this.FromVersion = "2";
+            this.ToVersion = "3";
             this.OldProjectFilePath = filePath;
+
             this.OldProjectFolder = Path.GetDirectoryName(filePath);
             this.OldCodeFolder = this.OldProjectFolder;
             this.OldCodeIndexFolder = this.OldProjectFolder;
@@ -60,9 +63,6 @@ namespace CygSoft.CodeCat.ProjectConverter
             this.BackupCodeFolder = Path.Combine(this.BackupProjectFolder, "code");
             this.BackupCodeIndexFilePath = Path.Combine(this.BackupProjectFolder, Path.GetFileName(filePath));
             this.BackupProjectFilePath = Path.Combine(this.BackupProjectFolder, Path.GetFileName(filePath));
-
-            this.FromVersion = oldVersion;
-            this.ToVersion = newVersion;
         }
 
         public void Convert()

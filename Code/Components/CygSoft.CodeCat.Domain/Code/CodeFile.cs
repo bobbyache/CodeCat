@@ -59,10 +59,14 @@ namespace CygSoft.CodeCat.Domain.Code
             this.indexItem = item;
             this.FolderPath = folderPath;
 
-            // open the code file (update the hit count and save).
-            this.ReadData();
-            this.IncrementHitCount();
-            this.WriteData();
+            // if this is a new file (ie. the file does not yet exist on disk, then
+            // there is no data to read. Don't write back to a non-existent file
+            //and the hit count does not need to be incremented.
+            if (this.ReadData())
+            {
+                this.IncrementHitCount();
+                this.WriteData();
+            }
         }
 
         public string Id { get { return this.IndexItem.Id; } }
@@ -117,7 +121,7 @@ namespace CygSoft.CodeCat.Domain.Code
                 if (syntaxAttribute != null)
                     this.Syntax = (string)syntaxAttribute.Value;
 
-                XAttribute hitCountAttribute = file.Element("Snippet").Attribute("HitCount");
+                XAttribute hitCountAttribute = file.Element("Snippet").Attribute("Hits");
                 if (hitCountAttribute != null)
                     this.HitCount = int.Parse(hitCountAttribute.Value);
 
@@ -190,7 +194,7 @@ namespace CygSoft.CodeCat.Domain.Code
             XElement snippetElement = new XElement("Snippet",
                     new XAttribute("ID", IndexItem.Id),
                     new XAttribute("Syntax", this.Syntax),
-                    new XAttribute("HitCount", this.HitCount),
+                    new XAttribute("Hits", this.HitCount),
                     new XElement("Code", new XCData(this.Text))
                  );
 

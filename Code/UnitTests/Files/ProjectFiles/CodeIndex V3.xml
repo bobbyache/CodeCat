@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CodeCat_CodeIndex Version="2">
+<CodeCat_CodeIndex Version="3">
   <IndexItem ID="39253d56-9867-4747-9a2c-d67da6c3854a">
     <Title>Instantiate a Backbone View</Title>
     <Syntax>JAVASCRIPT</Syntax>
-    <Hits>15</Hits>
     <DateCreated>2015-06-25T18:45:50.4965779+02:00</DateCreated>
     <DateModified>2015-11-27T10:58:22.2134912+02:00</DateModified>
     <Keywords>BACKBONE,CHILD VIEW,CREATE,INSTANTIATE,JAVASCRIPT,NEW,SUB VIEW,VIEW</Keywords>
@@ -11,7 +10,6 @@
   <IndexItem ID="bcca854e-01ad-4c9f-a332-253952a85397">
     <Title>Simple rendering of a Backbone View</Title>
     <Syntax>JAVASCRIPT</Syntax>
-    <Hits>6</Hits>
     <DateCreated>2015-06-25T18:47:02.7057981+02:00</DateCreated>
     <DateModified>2015-08-11T11:48:15.0639156+02:00</DateModified>
     <Keywords>BACKBONE,JAVASCRIPT,RENDER,VIEW</Keywords>

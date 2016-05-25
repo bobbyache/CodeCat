@@ -52,12 +52,17 @@
   <ItemGroup>
     <Compile Include="TestBench.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Converters\Version2ToVersion3_Tests.cs" />
+    <Compile Include="Tests\Converters\Version1ToVersion2_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Files\ProjectFiles\CodeFile V1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Files\ProjectFiles\CodeFile V2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\ProjectFiles\CodeFile V3.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Files\ProjectFiles\CodeIndex V1.xml">
@@ -68,6 +73,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Files\ProjectFiles\CodeIndex V3.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Files\ProjectFiles\IndexItem V1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -75,6 +83,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Files\ProjectFiles\ProjectFile V2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\ProjectFiles\ProjectFile V3.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
