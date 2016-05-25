@@ -21,7 +21,6 @@ namespace CygSoft.CodeCat.Infrastructure
         bool FindAllForEmptySearch { get; set; }
         IKeywordIndexItem FindById(string id);
         string FolderPath { get; }
-        void IncrementHitCount(string id);
         event EventHandler IndexModified;
         int ItemCount { get; }
         string[] Keywords { get; }

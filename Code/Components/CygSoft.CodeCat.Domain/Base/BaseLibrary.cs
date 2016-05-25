@@ -194,14 +194,12 @@ namespace CygSoft.CodeCat.Domain
         public IPersistableFile OpenFile(IKeywordIndexItem indexItem)
         {
             IPersistableFile persistableFile = GetFile(indexItem);
-            // increment the hit counter for this index... only if the item isn't being
-            this.index.IncrementHitCount(indexItem.Id);
             return persistableFile;
         }
 
         public IPersistableFile CreateFileFromOrphan(string id)
         {
-            IKeywordIndexItem IndexItem = new KeywordIndexItem(id, "Orphaned File", 0, DateTime.Now, DateTime.Now, "ORPHAN");
+            IKeywordIndexItem IndexItem = new KeywordIndexItem(id, "Orphaned File", DateTime.Now, DateTime.Now, "ORPHAN");
             IPersistableFile persistableFile = GetFile(IndexItem);
             return persistableFile;
         }

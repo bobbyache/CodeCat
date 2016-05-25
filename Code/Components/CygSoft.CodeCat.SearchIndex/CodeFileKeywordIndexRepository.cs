@@ -31,7 +31,6 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
                     new XAttribute("ID", item.Id),
                     new XElement("Title", item.Title),
                     new XElement("Syntax", item.Syntax),
-                    new XElement("Hits", item.NoOfHits.ToString()),
                     new XElement("DateCreated", item.DateCreated),
                     new XElement("DateModified", item.DateModified),
                     new XElement("Keywords", item.CommaDelimitedKeywords)
@@ -93,7 +92,6 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
                                                            (string)h.Attribute("ID"),
                                                            (string)h.Element("Title"),
                                                            (string)h.Element("Syntax"),
-                                                           NoOfHits(h.Element("Hits")),
                                                            (DateTime)h.Element("DateCreated"),
                                                            (DateTime)h.Element("DateModified"),
                                                            (string)h.Element("Keywords")
@@ -113,14 +111,6 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             {
                 throw new ApplicationException("Project file is incompatible with the current application release.");
             }
-        }
-
-        private int NoOfHits(XElement noOfHitsElement)
-        {
-            if (noOfHitsElement != null)
-                return (int)noOfHitsElement;
-
-            return 0;
         }
     }
 }

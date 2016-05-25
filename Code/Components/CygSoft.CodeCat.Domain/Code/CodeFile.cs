@@ -59,7 +59,10 @@ namespace CygSoft.CodeCat.Domain.Code
             this.indexItem = item;
             this.FolderPath = folderPath;
 
+            // open the code file (update the hit count and save).
             this.ReadData();
+            this.IncrementHitCount();
+            this.WriteData();
         }
 
         public string Id { get { return this.IndexItem.Id; } }
@@ -97,6 +100,12 @@ namespace CygSoft.CodeCat.Domain.Code
             }
         }
 
+        public int HitCount
+        {
+            get;
+            private set;
+        }
+
         private bool ReadData()
         {
             if (File.Exists(GetFilePath()))
@@ -104,9 +113,13 @@ namespace CygSoft.CodeCat.Domain.Code
                 XDocument file = XDocument.Load(GetFilePath());
                 this.Text = (string)file.Element("Snippet").Element("Code").Value;
 
-                XAttribute languageElement = file.Element("Snippet").Attribute("Syntax");
-                if (languageElement != null)
-                    this.Syntax = (string)languageElement.Value;
+                XAttribute syntaxAttribute = file.Element("Snippet").Attribute("Syntax");
+                if (syntaxAttribute != null)
+                    this.Syntax = (string)syntaxAttribute.Value;
+
+                XAttribute hitCountAttribute = file.Element("Snippet").Attribute("HitCount");
+                if (hitCountAttribute != null)
+                    this.HitCount = int.Parse(hitCountAttribute.Value);
 
                 this.snapshots.Clear();
 
@@ -165,6 +178,11 @@ namespace CygSoft.CodeCat.Domain.Code
             File.Delete(this.FilePath);
         }
 
+        private void IncrementHitCount()
+        {
+            this.HitCount++;
+        }
+
         private void WriteData()
         {
             XElement snapshotsElement = new XElement("Snapshots");
@@ -172,6 +190,7 @@ namespace CygSoft.CodeCat.Domain.Code
             XElement snippetElement = new XElement("Snippet",
                     new XAttribute("ID", IndexItem.Id),
                     new XAttribute("Syntax", this.Syntax),
+                    new XAttribute("HitCount", this.HitCount),
                     new XElement("Code", new XCData(this.Text))
                  );
 

@@ -821,7 +821,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 <XPD:ATTR name="#Associations" type="integer">1</XPD:ATTR>
 <XPD:REF name="Associations[0]">XuDphNLyJUu7xC8bKcqDtwAA</XPD:REF>
-<XPD:ATTR name="#Attributes" type="integer">5</XPD:ATTR>
+<XPD:ATTR name="#Attributes" type="integer">4</XPD:ATTR>
 <XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="iIPo/46x10uCVBmc0Ah3XwAA">
 <XPD:ATTR name="Name" type="string">CommaDelimitedKeywords</XPD:ATTR>
 <XPD:REF name="Owner">cRFjD3yaNkOs2+KfpQvlJQAA</XPD:REF>
@@ -834,11 +834,7 @@ properties like the way &quot;Syntax&quot; was added to:
 <XPD:ATTR name="Name" type="string">Keywords</XPD:ATTR>
 <XPD:REF name="Owner">cRFjD3yaNkOs2+KfpQvlJQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Attributes[3]" type="UMLAttribute" guid="JPZEsAxZhkuz5LKx75v/lgAA">
-<XPD:ATTR name="Name" type="string">NoOfHits</XPD:ATTR>
-<XPD:REF name="Owner">cRFjD3yaNkOs2+KfpQvlJQAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="Attributes[4]" type="UMLAttribute" guid="b/9jFiWv8UybZP5ivqsHYgAA">
+<XPD:OBJ name="Attributes[3]" type="UMLAttribute" guid="b/9jFiWv8UybZP5ivqsHYgAA">
 <XPD:ATTR name="Name" type="string">Title</XPD:ATTR>
 <XPD:REF name="Owner">cRFjD3yaNkOs2+KfpQvlJQAA</XPD:REF>
 </XPD:OBJ>
@@ -1882,10 +1878,15 @@ the CodeLibrary, this would be a CodeFile
 </XPD:OBJ>
 <XPD:OBJ name="OwnedDiagrams[1]" type="UMLClassDiagram" guid="rY+H8LxBTU2/fEg0gUvEZwAA">
 <XPD:ATTR name="Name" type="string">CodeLibrary</XPD:ATTR>
+<XPD:ATTR name="Documentation" type="string">IPersistableFile
+------------------
+All classes that realize this interface should know how to save and delete themselves. They are physical files and should know nothing about the rest of the system.
+
+CodeFile - A file that has its own syntax, text (code), and snapshots of older versions of that text..</XPD:ATTR>
 <XPD:REF name="DiagramOwner">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:OBJ name="DiagramView" type="UMLClassDiagramView" guid="bfilknl2xUKBoUnwBkKXXAAA">
 <XPD:REF name="Diagram">rY+H8LxBTU2/fEg0gUvEZwAA</XPD:REF>
-<XPD:ATTR name="#OwnedViews" type="integer">31</XPD:ATTR>
+<XPD:ATTR name="#OwnedViews" type="integer">33</XPD:ATTR>
 <XPD:OBJ name="OwnedViews[0]" type="RectangleView" guid="EVpHVo0mJUunNURQvti9qwAA">
 <XPD:ATTR name="Left" type="integer">1256</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">40</XPD:ATTR>
@@ -2210,9 +2211,9 @@ the CodeLibrary, this would be a CodeFile
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[11]" type="UMLInterfaceView" guid="Szym67v7NUuobMjXLpndwAAA">
 <XPD:ATTR name="Left" type="integer">988</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">44</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">36</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">205</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">193</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">201</XPD:ATTR>
 <XPD:ATTR name="StereotypeDisplay" type="UMLStereotypeDisplayKind">sdkDecoration</XPD:ATTR>
 <XPD:REF name="Model">SFFfHJScxk+QVBUEf3cOUgAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="hq7RF0tGBUGdDzJoSSwOOwAA">
@@ -2562,7 +2563,7 @@ the CodeLibrary, this would be a CodeFile
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[20]" type="UMLAssociationView" guid="eZIQZ/F8rEOHyuhD5bH2AQAA">
-<XPD:ATTR name="Points" type="Points">1126,236;1170,352</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">1127,236;1170,352</XPD:ATTR>
 <XPD:REF name="Model">Wq8nc8EPtEe4OYVkkjslhwAA</XPD:REF>
 <XPD:REF name="Head">hrGKe5dqvkC0zQBdo+VPBgAA</XPD:REF>
 <XPD:REF name="Tail">Szym67v7NUuobMjXLpndwAAA</XPD:REF>
@@ -2960,6 +2961,24 @@ IFileSnapshot consider having IPersistableFile inherit from it
 <XPD:ATTR name="Points" type="Points">536,632;458,612</XPD:ATTR>
 <XPD:REF name="Head">C8Aa1OTKukawYW2lZUiVJAAA</XPD:REF>
 <XPD:REF name="Tail">Xwpbe6JP4kSYRD1tKYpLYgAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[31]" type="UMLNoteView" guid="5ncjt9XnhEyujyFM8kIKIQAA">
+<XPD:ATTR name="Left" type="integer">908</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">264</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">200</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">98</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">HitCount is moved to the file itself,
+allowing the IKeywordSearchIndex to
+be as generic as possible.
+
+IPersistableFile handles all HitCount
+management.
+</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[32]" type="UMLNoteLinkView" guid="usrfUIoZ8ESqMe12X9dNJgAA">
+<XPD:ATTR name="Points" type="Points">1043,236;1030,264</XPD:ATTR>
+<XPD:REF name="Head">5ncjt9XnhEyujyFM8kIKIQAA</XPD:REF>
+<XPD:REF name="Tail">Szym67v7NUuobMjXLpndwAAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
@@ -3384,7 +3403,7 @@ IFileSnapshot consider having IPersistableFile inherit from it
 <XPD:ATTR name="#Associations" type="integer">2</XPD:ATTR>
 <XPD:REF name="Associations[0]">RwELrilPyUm9qHKVB4rDqQAA</XPD:REF>
 <XPD:REF name="Associations[1]">b+n334xIPEuVW8ZZYd3alwAA</XPD:REF>
-<XPD:ATTR name="#Attributes" type="integer">8</XPD:ATTR>
+<XPD:ATTR name="#Attributes" type="integer">9</XPD:ATTR>
 <XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="MsZXFUlKNE6Iu21VO1+aMQAA">
 <XPD:ATTR name="Name" type="string">Id</XPD:ATTR>
 <XPD:REF name="Owner">SFFfHJScxk+QVBUEf3cOUgAA</XPD:REF>
@@ -3415,6 +3434,10 @@ IFileSnapshot consider having IPersistableFile inherit from it
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[7]" type="UMLAttribute" guid="XOUfr0zcW0SnW8sNW1MsYwAA">
 <XPD:ATTR name="Name" type="string">IndexItem</XPD:ATTR>
+<XPD:REF name="Owner">SFFfHJScxk+QVBUEf3cOUgAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[8]" type="UMLAttribute" guid="1J9wD65cM0yNJzr0usiGeQAA">
+<XPD:ATTR name="Name" type="string">HitCount</XPD:ATTR>
 <XPD:REF name="Owner">SFFfHJScxk+QVBUEf3cOUgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>

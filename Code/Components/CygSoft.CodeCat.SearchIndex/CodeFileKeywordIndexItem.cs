@@ -16,14 +16,14 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             this.Syntax = string.Empty;
         }
 
-        public CodeFileKeywordIndexItem(string title, string syntax, int noOfHits, string commaDelimitedKeywords) 
-            : base(title, noOfHits, commaDelimitedKeywords)
+        public CodeFileKeywordIndexItem(string title, string syntax, string commaDelimitedKeywords) 
+            : base(title, commaDelimitedKeywords)
         {
             this.Syntax = syntax;
         }
 
-        public CodeFileKeywordIndexItem(string id, string title, string syntax, int noOfHits, DateTime dateCreated, DateTime dateModified, string commaDelimitedKeywords) 
-            : base(id, title, noOfHits, dateCreated, dateModified, commaDelimitedKeywords)
+        public CodeFileKeywordIndexItem(string id, string title, string syntax, DateTime dateCreated, DateTime dateModified, string commaDelimitedKeywords) 
+            : base(id, title, dateCreated, dateModified, commaDelimitedKeywords)
         {
             this.Syntax = syntax;
         }

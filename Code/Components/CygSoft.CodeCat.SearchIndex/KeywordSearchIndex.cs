@@ -204,15 +204,6 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
                 IndexModified(this, new EventArgs());
         }
 
-        public void IncrementHitCount(string id)
-        {
-            IKeywordIndexItem item = this.IndexItems.Where(cd => cd.Id == id).SingleOrDefault();
-            item.NoOfHits++;
-
-            if (IndexModified != null)
-                IndexModified(this, new EventArgs());
-        }
-
         private void CreateKeywordIndex()
         {
             keyPhrases = new KeyPhrases();

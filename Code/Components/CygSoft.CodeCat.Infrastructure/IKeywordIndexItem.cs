@@ -11,7 +11,6 @@ namespace CygSoft.CodeCat.Infrastructure
         string Id { get; set; }
         string FileTitle { get; }
         string[] Keywords { get; }
-        int NoOfHits { get; set; }
         string CommaDelimitedKeywords { get; }
         string Title { get; set; }
         DateTime DateModified { get; }
