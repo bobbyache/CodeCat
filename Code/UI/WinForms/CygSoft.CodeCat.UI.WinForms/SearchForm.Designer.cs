@@ -84,6 +84,7 @@
             // 
             this.keywordsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.keywordsTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.keywordsTextBox.Location = new System.Drawing.Point(106, 3);
             this.keywordsTextBox.Name = "keywordsTextBox";
             this.keywordsTextBox.Size = new System.Drawing.Size(797, 20);
