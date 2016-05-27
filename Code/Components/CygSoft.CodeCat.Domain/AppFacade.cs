@@ -65,6 +65,18 @@ namespace CygSoft.CodeCat.Domain
                 project.GetLibraryFolder(), currentVersion);
         }
 
+        public IKeywordIndexItem[] GetLastOpenedIds()
+        {
+            LastCodeFileRepository lastCodeFileRepo = new LastCodeFileRepository(project.GetLastOpenedPath());
+            return this.codeLibrary.FindIndecesByIds(lastCodeFileRepo.Load());
+        }
+
+        public void SetLastOpenedIds(string[] ids)
+        {
+            LastCodeFileRepository lastCodeFileRepo = new LastCodeFileRepository(project.GetLastOpenedPath());
+            lastCodeFileRepo.Save(ids);
+        }
+
         public string[] GetSyntaxes()
         {
             return this.codeLibrary.GetLanguages();

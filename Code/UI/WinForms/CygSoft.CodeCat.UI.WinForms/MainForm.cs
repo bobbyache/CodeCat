@@ -201,6 +201,8 @@ namespace CygSoft.CodeCat.UI.WinForms
                 registrySettings.InitialDirectory = Path.GetDirectoryName(filePath);
 
                 CreateSnippetDocumentIfNone();
+                LoadLastOpenedDocuments();
+
                 EnableControls();
 
                 searchForm.Activate();
@@ -208,6 +210,41 @@ namespace CygSoft.CodeCat.UI.WinForms
             catch (Exception exception)
             {
                 Dialogs.ProjectFileLoadErrorNotification(this, exception);
+            }
+        }
+
+        private void LoadLastOpenedDocuments()
+        {
+            try
+            {
+                IKeywordIndexItem[] indeces = application.GetLastOpenedIds();
+                foreach (IKeywordIndexItem index in indeces)
+                {
+                    OpenSnippetDocument(index);
+                }
+            }
+            catch (Exception exception)
+            {
+                Dialogs.LoadLastOpenedDocumentsErrorNotification(this, exception);
+            }
+        }
+
+        private void RecordOpenDocuments()
+        {
+            try
+            {
+                if (application.Loaded)
+                {
+                    string[] ids = this.dockPanel.Contents.OfType<SnippetForm>()
+                        .Where(doc => doc.IsNew == false)
+                        .Select(doc => doc.SnippetId).ToArray();
+
+                    application.SetLastOpenedIds(ids);
+                }
+            }
+            catch (Exception exception)
+            {
+                Dialogs.RecordLastOpenedDocumentsErrorNotification(this, exception);
             }
         }
 
@@ -538,12 +575,25 @@ namespace CygSoft.CodeCat.UI.WinForms
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     if (SaveAllDocuments())
-                        ClearSnippetDocuments();
+                    {
+                        RecordOpenDocuments();
+                        //ClearSnippetDocuments();
+                    }
                     else
                         e.Cancel = true;
                 }
+                else if (result == System.Windows.Forms.DialogResult.No)
+                {
+                    RecordOpenDocuments();
+                }
                 else if (result == System.Windows.Forms.DialogResult.Cancel)
+                {
                     e.Cancel = true;
+                }
+            }
+            else
+            {
+                RecordOpenDocuments();
             }
         }
 

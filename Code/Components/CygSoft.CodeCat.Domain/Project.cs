@@ -12,6 +12,7 @@ namespace CygSoft.CodeCat.Domain
     {
         private const string CODE_LIBRARY_ELEMENT = "CodeLibrary";
         private const string CODE_LIBRARY_INDEX_FILE = "_code.xml";
+        private const string CODE_LIBRARY_LAST_OPENED_FILE = "_lastopened.txt";
         private const string CODE_LIBRARY_FOLDER = "code";
 
         public string FilePath { get; private set; }
@@ -37,6 +38,11 @@ namespace CygSoft.CodeCat.Domain
         public string GetIndexPath()
         {
             return Path.Combine(this.FolderPath, CODE_LIBRARY_FOLDER, CODE_LIBRARY_INDEX_FILE);
+        }
+
+        public string GetLastOpenedPath()
+        {
+            return Path.Combine(this.FolderPath, CODE_LIBRARY_FOLDER, CODE_LIBRARY_LAST_OPENED_FILE);
         }
 
         public string GetLibraryFolder()

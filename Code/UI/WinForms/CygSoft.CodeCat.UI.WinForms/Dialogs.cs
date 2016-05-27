@@ -76,6 +76,18 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        public static void RecordLastOpenedDocumentsErrorNotification(IWin32Window owner, Exception exception)
+        {
+            MessageBox.Show(owner, string.Format("An error occurred while trying to record the last opened documents:\n{0}", exception.Message),
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public static void LoadLastOpenedDocumentsErrorNotification(IWin32Window owner, Exception exception)
+        {
+            MessageBox.Show(owner, string.Format("An error occurred while trying to load the last opened documents:\n{0}", exception.Message),
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         public static void ProjectFileLoadErrorNotification(IWin32Window owner, Exception exception)
         {
             MessageBox.Show(owner, string.Format("An error occurred while trying to open the project file. The target file is likely to be incompatible with this version:\n{0}", exception.Message),
