@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    
+
     public class OpenSnippetEventArgs : EventArgs
     {
         public IKeywordIndexItem Item { get; private set; }
@@ -25,16 +25,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         public IKeywordIndexItem Item { get; private set; }
 
         public SelectSnippetEventArgs(IKeywordIndexItem item)
-        {
-            this.Item = item;
-        }
-    }
-
-    public class SelectCodeFileEventArgs : EventArgs
-    {
-        public CodeFile Item { get; private set; }
-
-        public SelectCodeFileEventArgs(CodeFile item)
         {
             this.Item = item;
         }
