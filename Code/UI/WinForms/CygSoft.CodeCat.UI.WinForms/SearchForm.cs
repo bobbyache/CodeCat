@@ -142,19 +142,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             ExecuteSearch();
         }
 
-        public void RemoveSnippet(string snippetId)
-        {
-            ListViewItem selected = null;
-
-            foreach (ListViewItem lv in listView.Items)
-            {
-                if (lv.Name == snippetId)
-                    selected = lv;
-            }
-            if (selected != null)
-                listView.Items.Remove(selected);
-        }
-
         private void ReloadListview(IKeywordIndexItem[] indexItems)
         {
 

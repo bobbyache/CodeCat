@@ -26,8 +26,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             get { return this.Icon.ToBitmap(); }
         }
 
-        public event EventHandler<DeleteCodeFileEventArgs> DeleteSnippetDocument;
-        public event EventHandler<SaveCodeFileEventArgs> SaveSnippetDocument;
+        public event EventHandler DocumentDeleted;
+        public event EventHandler<DocumentSavedFileEventArgs> DocumentSaved;
 
         public SnippetForm(CodeFile codeFile, AppFacade application, bool isNew = false)
         {
@@ -143,8 +143,8 @@ namespace CygSoft.CodeCat.UI.WinForms
                     this.IsModified = false;
                     this.IsNew = false;
 
-                    if (SaveSnippetDocument != null)
-                        SaveSnippetDocument(this, new SaveCodeFileEventArgs(this.codeFile, this));
+                    if (DocumentSaved != null)
+                        DocumentSaved(this, new DocumentSavedFileEventArgs(this.codeFile, this));
 
                     return true;
                 }
@@ -159,12 +159,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         public void FlagSilentClose()
         {
             flagSilentClose = true;
-        }
-
-        public void Delete()
-        {
-            flagForDelete = true;
-            this.Close();
         }
 
         public void AddKeywords(string keywords, bool flagModified = true)
@@ -411,8 +405,14 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                if (DeleteSnippetDocument != null)
-                    DeleteSnippetDocument(this, new DeleteCodeFileEventArgs(this.codeFile, this));
+                string snippetId = this.SnippetId;
+                this.flagForDelete = true;
+                application.DeleteCodeSnippet(snippetId);
+
+                if (DocumentDeleted != null)
+                    DocumentDeleted(this, new EventArgs());
+
+                this.Close();
             }
         }
 

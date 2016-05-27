@@ -267,8 +267,8 @@ namespace CygSoft.CodeCat.UI.WinForms
                 CodeFile codeFile = application.OpenCodeSnippet(snippetIndex);
                 SnippetForm snippetForm = new SnippetForm(codeFile, application);
                 snippetForm.ShowIndexEditControls = false;
-                snippetForm.DeleteSnippetDocument += snippetForm_DeleteSnippetDocument;
-                snippetForm.SaveSnippetDocument += snippetForm_SaveSnippetDocument;
+                snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
+                snippetForm.DocumentSaved += snippetForm_DocumentSaved;
                 snippetForm.Show(dockPanel, DockState.Document);
             }
             else
@@ -286,11 +286,10 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void CreateSnippetDocument()
         {
             CodeFile codeFile = application.CreateCodeSnippet(ConfigSettings.DefaultSyntax);
-            //codeFile.Syntax = application.GetSyntaxFile(ConfigSettings.DefaultSyntax);
-
             SnippetForm snippetForm = new SnippetForm(codeFile, application, true);
-            snippetForm.DeleteSnippetDocument += snippetForm_DeleteSnippetDocument;
-            snippetForm.SaveSnippetDocument += snippetForm_SaveSnippetDocument;
+
+            snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
+            snippetForm.DocumentSaved += snippetForm_DocumentSaved;
             snippetForm.ShowIndexEditControls = true;
             snippetForm.Show(dockPanel, DockState.Document);
         }
@@ -403,14 +402,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void snippetForm_DeleteSnippetDocument(object sender, DeleteCodeFileEventArgs e)
+        private void snippetForm_DocumentDeleted(object sender, EventArgs e)
         {
-            e.Document.Delete();
-            searchForm.RemoveSnippet(e.Item.Id);
-            application.DeleteCodeSnippet(e.Item.Id);
+            searchForm.ExecuteSearch();
         }
 
-        private void snippetForm_SaveSnippetDocument(object sender, SaveCodeFileEventArgs e)
+        private void snippetForm_DocumentSaved(object sender, DocumentSavedFileEventArgs e)
         {
             searchForm.ExecuteSearch(e.Item.Id);
             mnuDocuments.DropDownItems[e.Item.Id].Image = e.Document.IconImage;

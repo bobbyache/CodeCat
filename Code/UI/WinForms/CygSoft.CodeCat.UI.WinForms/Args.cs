@@ -64,24 +64,12 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
     }
 
-    public class SaveCodeFileEventArgs : EventArgs
+    public class DocumentSavedFileEventArgs : EventArgs
     {
         public SnippetForm Document { get; private set; }
         public CodeFile Item { get; private set; }
 
-        public SaveCodeFileEventArgs(CodeFile item, SnippetForm document)
-        {
-            this.Document = document;
-            this.Item = item;
-        }
-    }
-
-    public class DeleteCodeFileEventArgs : EventArgs
-    {
-        public SnippetForm Document { get; private set; }
-        public CodeFile Item { get; private set; }
-
-        public DeleteCodeFileEventArgs(CodeFile item, SnippetForm document)
+        public DocumentSavedFileEventArgs(CodeFile item, SnippetForm document)
         {
             this.Document = document;
             this.Item = item;
