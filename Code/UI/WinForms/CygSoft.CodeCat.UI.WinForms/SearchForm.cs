@@ -27,40 +27,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
         public event EventHandler<SelectSnippetEventArgs> SelectSnippet;
 
-        public SearchForm(AppFacade application)
-        {
-            InitializeComponent();
-
-            btnFind.Image = Resources.GetImage(Constants.ImageKeys.FindSnippets);
-
-            this.application = application;
-            this.HideOnClose = true;
-            this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight;
-
-            PopulateSystemIconsImageList();
-
-            listView.SmallImageList = imageList;
-            listView.ColumnClick += listView_ColumnClick;
-            listView.SelectedIndexChanged += listView_SelectedIndexChanged;
-            listView.MouseClick += listView_MouseClick;
-            listView.MouseDoubleClick += listView_MouseDoubleClick;
-            btnFind.Click += ExecuteSearch;
-            keywordsTextBox.TextChanged += ExecuteSearch;
-        }
-
-        private void PopulateSystemIconsImageList()
-        {
-            foreach (SyntaxFile syntaxFile in application.GetSyntaxFileInfo())
-            {
-                Icon icon = IconRepository.GetIcon(syntaxFile.Syntax);
-
-                if (!imageList.Images.ContainsKey(syntaxFile.Syntax))
-                {
-                    imageList.Images.Add(syntaxFile.Syntax, icon);
-                }
-            }
-        }
-
         private class ListViewItemComparer : IComparer
         {
             private int col;
@@ -86,6 +52,26 @@ namespace CygSoft.CodeCat.UI.WinForms
                     returnVal = -(returnVal);
                 return returnVal;
             }
+        }
+
+        public int SortingColumn { get; set; }
+
+        private bool searchEnabled;
+        public bool SearchEnabled
+        {
+            get { return this.searchEnabled; }
+            set
+            {
+                this.searchEnabled = value;
+                this.btnFind.Enabled = value;
+            }
+
+        }
+
+        public string KeywordSearchText
+        {
+            get { return this.keywordsTextBox.Text; }
+            set { this.keywordsTextBox.Text = value; }
         }
 
         public bool SingleSnippetSelected { get { return this.listView.SelectedItems.Count == 1; } }
@@ -118,30 +104,42 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        public void ReloadListview(IKeywordIndexItem[] indexItems)
+        public SearchForm(AppFacade application)
         {
+            InitializeComponent();
 
-            listView.Items.Clear();
-            foreach (IKeywordIndexItem item in indexItems)
-                CreateListviewItem(listView, item);
+            btnFind.Image = Resources.GetImage(Constants.ImageKeys.FindSnippets);
+
+            this.application = application;
+            this.HideOnClose = true;
+            this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight;
+
+            PopulateSystemIconsImageList();
+
+            listView.SmallImageList = imageList;
+            listView.ColumnClick += listView_ColumnClick;
+            listView.SelectedIndexChanged += listView_SelectedIndexChanged;
+            listView.MouseClick += listView_MouseClick;
+            listView.MouseDoubleClick += listView_MouseDoubleClick;
+            btnFind.Click += (s, e) => ExecuteSearch();
+            keywordsTextBox.TextChanged += (s, e) => ExecuteSearch();
         }
 
-        public void ChangeSnippet(string snippetId, string title, string syntax)
+        public void ExecuteSearch()
         {
-            ListViewItem selected = null;
+            if (this.searchEnabled)
+            {
+                IKeywordIndexItem[] indexItems = this.application.FindIndeces(keywordsTextBox.Text);
+                this.ReloadListview(indexItems);
 
-            foreach (ListViewItem lv in listView.Items)
-            {
-                if (lv.Name == snippetId)
-                    selected = lv;
+                if (this.SearchExecuted != null)
+                    SearchExecuted(this, new SearchDelimitedKeywordEventArgs(keywordsTextBox.Text, indexItems.Length));
             }
-            if (selected != null)
-            {
-                IKeywordIndexItem item = selected.Tag as IKeywordIndexItem;
-                item.Title = title;
-                selected.ImageKey = syntax;
-                selected.Text = title;
-            }
+        }
+
+        public void ExecuteSearch(string selectedId)
+        {
+            ExecuteSearch();
         }
 
         public void RemoveSnippet(string snippetId)
@@ -157,27 +155,13 @@ namespace CygSoft.CodeCat.UI.WinForms
                 listView.Items.Remove(selected);
         }
 
-        public int SortingColumn { get; set; }
-
-        private bool searchEnabled;
-        public bool SearchEnabled
+        private void ReloadListview(IKeywordIndexItem[] indexItems)
         {
-            get { return this.searchEnabled; }
-            set
-            {
-                this.searchEnabled = value;
-                this.btnFind.Enabled = value;
-            }
 
+            listView.Items.Clear();
+            foreach (IKeywordIndexItem item in indexItems)
+                CreateListviewItem(listView, item);
         }
-
-        public string KeywordSearchText
-        {
-            get { return this.keywordsTextBox.Text; }
-            set { this.keywordsTextBox.Text = value; }
-        }
-
-        
 
         private void CreateListviewItem(ListView listView, IKeywordIndexItem item, bool select = false)
         {
@@ -197,6 +181,19 @@ namespace CygSoft.CodeCat.UI.WinForms
                 listItem.Selected = true;
                 listItem.Focused = true;
                 listItem.EnsureVisible();
+            }
+        }
+
+        private void PopulateSystemIconsImageList()
+        {
+            foreach (SyntaxFile syntaxFile in application.GetSyntaxFileInfo())
+            {
+                Icon icon = IconRepository.GetIcon(syntaxFile.Syntax);
+
+                if (!imageList.Images.ContainsKey(syntaxFile.Syntax))
+                {
+                    imageList.Images.Add(syntaxFile.Syntax, icon);
+                }
             }
         }
 
@@ -264,15 +261,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             OpenSelectedSnippet();
-        }
-
-        private void ExecuteSearch(object sender, EventArgs e)
-        {
-            if (this.searchEnabled)
-            {
-                if (this.SearchExecuted != null)
-                    SearchExecuted(this, new SearchDelimitedKeywordEventArgs(keywordsTextBox.Text));
-            }
         }
 
         private void listView_ColumnClick(object sender, ColumnClickEventArgs e)

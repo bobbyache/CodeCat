@@ -89,7 +89,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             searchForm = new SearchForm(this.application);
             searchForm.OpenSnippet += searchForm_OpenSnippet;
-            searchForm.SearchExecuted += (s, e) => ExecuteSearch(e.Keywords);
+            searchForm.SearchExecuted += (s, e) => { this.indexCountLabel.Text = ItemCountCaption(e.MatchedItemCount); };
             searchForm.SelectSnippet += (s, e) => EnableControls();
             searchForm.KeywordsAdded += searchForm_KeywordsAdded;
             searchForm.KeywordsRemoved += searchForm_KeywordsRemoved;
@@ -194,7 +194,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.Text = WindowCaption();
 
                 searchForm.KeywordSearchText = string.Empty;
-                ExecuteSearch(searchForm.KeywordSearchText);
+                searchForm.ExecuteSearch();
                 recentProjectMenu.Notify(filePath);
                 recentProjectMenu.CurrentlyOpenedFile = filePath;
                 ConfigSettings.LastProject = filePath;
@@ -225,7 +225,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.application.Create(filePath, ConfigSettings.CodeLibraryIndexFileVersion);
             this.Text = WindowCaption();
             searchForm.KeywordSearchText = string.Empty;
-            ExecuteSearch(searchForm.KeywordSearchText);
+            searchForm.ExecuteSearch();
             recentProjectMenu.Notify(filePath);
             recentProjectMenu.CurrentlyOpenedFile = filePath;
 
@@ -314,13 +314,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private bool SnippetIsOpen(IKeywordIndexItem snippetIndex)
         {
             return dockPanel.Documents.Any(doc => (doc as SnippetForm).SnippetId == snippetIndex.Id);
-        }
-
-        private void ExecuteSearch(string delimitedKeywords)
-        {
-            IKeywordIndexItem[] IndexItems = this.application.FindIndeces(delimitedKeywords);
-            searchForm.ReloadListview(IndexItems);
-            this.indexCountLabel.Text = ItemCountCaption(IndexItems.Length);
         }
 
         private string ItemCountCaption(int foundItems)
@@ -419,7 +412,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void snippetForm_SaveSnippetDocument(object sender, SaveCodeFileEventArgs e)
         {
-            searchForm.ChangeSnippet(e.Item.Id, e.Item.Title, e.Item.Syntax);
+            searchForm.ExecuteSearch(e.Item.Id);
             mnuDocuments.DropDownItems[e.Item.Id].Image = e.Document.IconImage;
         }
 

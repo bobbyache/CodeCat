@@ -32,7 +32,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         public SnippetForm(CodeFile codeFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
-
+            this.syntaxBox.AllowBreakPoints = false;
+            
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
             tabControl.Alignment = TabAlignment.Left;
             this.snapshotsTab = this.tabPageSnapshots;
