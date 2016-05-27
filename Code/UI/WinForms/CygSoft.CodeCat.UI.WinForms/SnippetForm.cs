@@ -119,8 +119,8 @@ namespace CygSoft.CodeCat.UI.WinForms
                 }
             }
         }
-
-        public bool EditMode
+        
+        public bool ShowIndexEditControls
         {
             get { return this.chkEdit.Checked; }
             set
@@ -220,7 +220,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab && !this.isNew);
             };
 
-            this.chkEdit.Click += (s, e) => { this.EditMode = chkEdit.Checked; };
+            this.chkEdit.Click += (s, e) => { this.ShowIndexEditControls = chkEdit.Checked; };
 
             cboFontSize.SelectedIndexChanged += (s, e) =>
             {
@@ -281,21 +281,21 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
             {
                 Dialogs.MandatoryFieldRequired(this, "Title");
-                this.EditMode = true;
+                this.ShowIndexEditControls = true;
                 this.txtTitle.Focus();
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
             {
                 Dialogs.MandatoryFieldRequired(this, "Keywords");
-                this.EditMode = true;
+                this.ShowIndexEditControls = true;
                 this.txtKeywords.Focus();
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.cboSyntax.Text))
             {
                 Dialogs.MandatoryFieldRequired(this, "Syntax");
-                this.EditMode = true;
+                this.ShowIndexEditControls = true;
                 this.cboSyntax.Focus();
                 return false;
             }

@@ -266,6 +266,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 CodeFile codeFile = application.OpenCodeSnippet(snippetIndex);
                 SnippetForm snippetForm = new SnippetForm(codeFile, application);
+                snippetForm.ShowIndexEditControls = false;
                 snippetForm.DeleteSnippetDocument += snippetForm_DeleteSnippetDocument;
                 snippetForm.SaveSnippetDocument += snippetForm_SaveSnippetDocument;
                 snippetForm.Show(dockPanel, DockState.Document);
@@ -290,7 +291,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             SnippetForm snippetForm = new SnippetForm(codeFile, application, true);
             snippetForm.DeleteSnippetDocument += snippetForm_DeleteSnippetDocument;
             snippetForm.SaveSnippetDocument += snippetForm_SaveSnippetDocument;
-            snippetForm.EditMode = true;
+            snippetForm.ShowIndexEditControls = true;
             snippetForm.Show(dockPanel, DockState.Document);
         }
 
