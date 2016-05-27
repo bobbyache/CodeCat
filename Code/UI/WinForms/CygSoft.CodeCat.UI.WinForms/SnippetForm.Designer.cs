@@ -85,7 +85,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 471);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(821, 25);
-            this.toolStrip1.TabIndex = 6;
+            this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // cboFontSize
@@ -129,7 +129,8 @@
             this.toolstripTitle.Location = new System.Drawing.Point(0, 50);
             this.toolstripTitle.Name = "toolstripTitle";
             this.toolstripTitle.Size = new System.Drawing.Size(821, 25);
-            this.toolstripTitle.TabIndex = 10;
+            this.toolstripTitle.TabIndex = 2;
+            this.toolstripTitle.TabStop = true;
             this.toolstripTitle.Text = "toolStrip2";
             // 
             // toolStripLabel1
@@ -165,7 +166,8 @@
             this.toolstripKeywords.Location = new System.Drawing.Point(0, 25);
             this.toolstripKeywords.Name = "toolstripKeywords";
             this.toolstripKeywords.Size = new System.Drawing.Size(821, 25);
-            this.toolstripKeywords.TabIndex = 11;
+            this.toolstripKeywords.TabIndex = 1;
+            this.toolstripKeywords.TabStop = true;
             // 
             // toolStripLabel4
             // 
@@ -195,7 +197,7 @@
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
             this.toolstripCommands.Size = new System.Drawing.Size(821, 25);
-            this.toolstripCommands.TabIndex = 12;
+            this.toolstripCommands.TabIndex = 0;
             this.toolstripCommands.Text = "toolStrip4";
             // 
             // btnSave
@@ -276,7 +278,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(821, 396);
-            this.tabControl.TabIndex = 13;
+            this.tabControl.TabIndex = 3;
             // 
             // tabPageCode
             // 
