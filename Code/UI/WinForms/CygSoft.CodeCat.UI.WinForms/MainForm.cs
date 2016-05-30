@@ -181,6 +181,10 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             try
             {
+                // first lets record any open documents of an already opened project.
+                if (this.application.Loaded)
+                    RecordOpenDocuments();
+
                 // important: we want to ensure that we don't create a new document
                 // because we're closing the project. Otherwise, when the project loads
                 // it will find that there is a new document open and will not create
@@ -250,6 +254,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateProject(string filePath)
         {
+            // first lets record any open documents of an already opened project.
+            if (this.application.Loaded)
+                RecordOpenDocuments();
             // important: we want to ensure that we don't create a new document
             // because we're closing the project. Otherwise, when the project loads
             // it will find that there is a new document open and will not create
@@ -488,7 +495,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 {
                     PromptCreateProject();
                 }
-                // else, use has cancelled the request.
+                // else, user has cancelled the request.
             }
             else
             {
