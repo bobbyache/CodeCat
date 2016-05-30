@@ -52,7 +52,6 @@
     <Hyperlink ID="2de7c7fd-ad3e-4940-b4ea-b2ce9aba3852" Topic="SharpDevelop - for WPF syntaxbox" Url="http://www.icsharpcode.net/OpenSource/SD/Default.aspx" State="New">
       <KeyPhraseList>,HIGHLIGHT,HIGHLIGHTING,SYNTAX,WPF</KeyPhraseList>
       <Description><![CDATA[ #develop (short for SharpDevelop) is a free IDE for C#, VB.NET and Boo projects on Microsoft's .NET platform. It is open-source, and you can download both sourcecode and executables from this site. In addition, you can find the latest information and changes on #develop, as well as get in touch with the team in the forum.
-
 Check out the Avalon library.]]></Description>
     </Hyperlink>
     <Hyperlink ID="6fe3b583-b048-49cd-9bc3-6ebb2dacc780" Topic="Avalon WPF Forms Docking" Url="http://avalondock.codeplex.com" State="New">
@@ -75,6 +74,55 @@ Check out the Avalon library.]]></Description>
       <KeyPhraseList>,ICON,ICONS,MANAGER</KeyPhraseList>
       <Description><![CDATA[You're using a simple version, but if you need more control have a look here: Article showing how to read file and folder icons from C#, and then building a management class to maintain file icons in up to two ImageList objects.]]></Description>
     </Hyperlink>
+    <Hyperlink ID="5beb9dc8-38ee-4cd3-8cf8-2ca17124cda7" Topic="antlr4cs - ANTLR4 with C#" Url="https://github.com/sharwell/antlr4cs" State="New">
+      <KeyPhraseList>,ANTLR,C#,TARGET</KeyPhraseList>
+      <Description><![CDATA[This is a (revised) attempt at a full summary of the steps needed to get ANTLR4 to generate a C# lexer, parser, and listener for a very simple grammar. The C# target is designed to work as a Visual Studio (VS) add-in only and cannot be used from the command line.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="c0b3f097-eeaa-448e-ada8-8b32faf81a13" Topic="Setting Up ANTLR4 C# Target in Visual Studio 2012 (Revised)" Url="https://groups.google.com/forum/#!msg/antlr-discussion/Gh_P6IiDrKU/5hqL_0Q0ZycJ" State="New">
+      <KeyPhraseList>,ANTLR,C#,PARSER,SETUP</KeyPhraseList>
+      <Description><![CDATA[This is a (revised) attempt at a full summary of the steps needed to get ANTLR4 to generate a C# lexer, parser, and listener for a very simple grammar. The C# target is designed to work as a Visual Studio (VS) add-in only and cannot be used from the command line.
+Terence Parr is the author of ANTLR and Sam Harwell is the author of the C# language target for ANTLR. Any errors in this document are mine alone.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="e1417f6b-3a86-4214-a522-e99729006105" Topic="ANTLR C# Overview - Part 1" Url="http://www.manuelabadia.com/blog/PermaLink,guid,ff1dc504-f854-40b4-bfe7-250ce91efad7.aspx" State="New">
+      <KeyPhraseList>,ANTLR,C#,LEXER,PARSER</KeyPhraseList>
+      <Description><![CDATA[There are some articles out there about ANTLR v3 that cover how to define grammars and tree parses but I haven’t seen any that gives a global vision about all the classes and interfaces involved, so I’ll try to fill that gap. I’m using the C# version of ANTLR 3.0b5 as it is what I use and it has better name conventions for interfaces and classes.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="92c8e5cf-20a1-44d4-b2b9-2e10bfd68be6" Topic="Visual AST for ANTLR Generated Parser Output" Url="http://www.codeproject.com/Articles/371453/Visual-AST-for-ANTLR-Generated-Parser-Output" State="New">
+      <KeyPhraseList>,ANTLR,AST,OUTPUT,PARSER,VISUAL</KeyPhraseList>
+      <Description><![CDATA[Building a concise Abstract Syntax Tree (AST) representing source code is a key step for conveniently producing any compiled program. The program presented here is written in C# using VS2010 and it uses .NET GDI+ library to draw an image for AST returned from parser after parsing input source code...]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="54c7a1dc-e0b2-4f69-bce8-29c51ddc9768" Topic="StringTemplate - A five minute introduction" Url="https://theantlrguy.atlassian.net/wiki/display/ST/Five+minute+Introduction" State="New">
+      <KeyPhraseList>,GENERATE,GENERATOR,INTRODUCTION,STRING,TEMPLATE</KeyPhraseList>
+      <Description><![CDATA[This short introduction to StringTemplate will hopefully help you answer the following: What is StringTemplate? What does StringTemplate do? What can I do with StringTemplate? How do I get started using StringTemplate? Where do I learn more about StringTemplate?]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="4bdd4879-9ab1-4927-9655-de73ce6021dc" Topic="StringTemplate 4 .NET C# - Getting Started" Url="http://blog.newslacker.net/2011/10/stringtemplate-4-net-c-getting-started.html" State="New">
+      <KeyPhraseList>,C#,GENERATE,GENERATOR,INTRODUCTION,STRING,TEMPLATE</KeyPhraseList>
+      <Description><![CDATA[Here's the basic idea for rendering a template in C#. String Template has weak .NET/C# documentation from what I can tell...]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="88f115f1-d353-4d06-8c97-9cbe8cc658d4" Topic="Run-Time Text Generation with T4 Text Templates" Url="https://msdn.microsoft.com/en-us/library/dd820620.aspx" State="New">
+      <KeyPhraseList>,C#,GENERATION,GENERATOR,T4,TEXT</KeyPhraseList>
+      <Description><![CDATA[You can generate text strings in your application at run time by using Visual Studio runtime text templates. The computer where the application executes does not have to have Visual Studio. ]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="91310c8f-0706-41e7-aa71-4b04ffe100ed" Topic="StringTemplate cheat sheet (String Template 3 Documentation)" Url="https://theantlrguy.atlassian.net/wiki/display/ST/StringTemplate+cheat+sheet" State="New">
+      <KeyPhraseList>,GENERATE,GENERATOR,STRING,TEMPLATE</KeyPhraseList>
+      <Description><![CDATA[Created by Terence Parr [Administrator], last modified by Unknown User (beckon) on Jul 01, 2009]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="0382bc94-64ce-4d0b-aa36-344cc9379014" Topic="StringTemplate - Expressions" Url="https://theantlrguy.atlassian.net/wiki/display/ST/Expressions" State="New">
+      <KeyPhraseList>,EXPRESSIONS,GENERATE,GENERATOR,STRING,TEMPLATE,TEXT</KeyPhraseList>
+      <Description><![CDATA[Created by Terence Parr [Administrator], last modified by Unknown User (cassou) on Jun 12, 2009. The most common thing in a template besides plain text is a simple named attribute reference such as...]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="fdd7fd5e-ba63-4bcb-b7a7-22035704fcc3" Topic="StringTemplate Part 3: Complex Data Types and Renderers" Url="https://dzone.com/articles/stringtemplate-part-3-complex" State="New">
+      <KeyPhraseList>,GENERATE,GENERATOR,STRING,TEMPLATE</KeyPhraseList>
+      <Description><![CDATA[In Part 1 and Part 2 we dealt with simple data types who's string representation is well known. Complex data types may not have a string representation that meets the needs of a particular template. (Part 1 appears to be a broken link).]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="e114fe00-f2be-4e26-b172-396ff78d90ec" Topic="StringTemplate Part 2: Collections and Template Groups Blog" Url="https://community.oracle.com/blogs/aberrant/2010/06/02/stringtemplate-part-2-collections-and-template-groups" State="New">
+      <KeyPhraseList>,GENERATE,GENERATOR,TEMPLATE,TEXT</KeyPhraseList>
+      <Description><![CDATA[In the first article we used a template file (.st file) to hold our template definition. In those examples we had defined a single template that spanned the entire file. When things get more complicated it's convenient to be able to define multiple smaller templates in one file. StringTemplate calls this file a “String Template Group” and recommends a filename ending in “.stg”.]]></Description>
+    </Hyperlink>
+    <Hyperlink ID="5bb68045-0738-49b6-9eef-c51831eb5b0a" Topic="Using StringTemplate: Part 1  &quot;An introduction to StringTemplate&quot; Blog" Url="https://community.oracle.com/people/aberrant/blog/2010/05/25/using-stringtemplate-part-1-introduction-stringtemplate?customTheme=otn" State="New">
+      <KeyPhraseList>,GENERATE,GENERATOR,STRING,TEMPLATE</KeyPhraseList>
+      <Description><![CDATA[A template engine (also known as a template processor or a template parser) is a software component that is designed to combine one or more templates with a data model to produce one or more result documents...]]></Description>
+    </Hyperlink>
   </Hyperlinks>
-  <KeyPhrases>,ACTIVATE,APPLICATION,BUG,CLOSE,CONSTRAIN,CUSTOM,DOCK,DOCKED,DOCKING,EDITOR,EXIT,EXTEND,EXTENDED,FLOAT,FLOATING,GRAPHICS,GRID,HIGHLIGHT,HIGHLIGHTING,ICON,ICONS,INTERNAL,INTERNALS,ISSUE,LISTVIEW,LOAD,MANAGEMENT,MANAGER,PDF,PROPERTY,PROPERTYGRID,REFERENCE,STATE,STRETCH,SVG,SYNTAX,TEST,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,WINDOW,WINDOWS,WINDOWS FORMS,WINFORMS,WPF</KeyPhrases>
+  <KeyPhrases>,ACTIVATE,ANTLR,APPLICATION,AST,BUG,C#,CLOSE,CONSTRAIN,CUSTOM,DOCK,DOCKED,DOCKING,EDITOR,EXIT,EXPRESSIONS,EXTEND,EXTENDED,FLOAT,FLOATING,GENERATE,GENERATION,GENERATOR,GRAPHICS,GRID,HIGHLIGHT,HIGHLIGHTING,ICON,ICONS,INTERNAL,INTERNALS,INTRODUCTION,ISSUE,LEXER,LISTVIEW,LOAD,MANAGEMENT,MANAGER,OUTPUT,PARSER,PDF,PROPERTY,PROPERTYGRID,REFERENCE,SETUP,STATE,STRETCH,STRING,SVG,SYNTAX,T4,TARGET,TEMPLATE,TEST,TEXT,TOOLSTRIP,TOOLSTRIPTEXTBOX,UNIT,UNIT TEST,VISUAL,WINDOW,WINDOWS,WINDOWS FORMS,WINFORMS,WPF</KeyPhrases>
 </OfflineSource>
