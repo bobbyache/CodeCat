@@ -16,10 +16,12 @@ namespace CygSoft.CodeCat.Domain.Base
         string FolderPath { get; }
         string FileTitle { get; }
         bool FileExists { get; }
+        int HitCount { get; }
         string CommaDelimitedKeywords { get; set; }
-        void Save();
-        void Delete();
         IKeywordIndexItem IndexItem { get; }
+
+        void Save();
+        void Delete();  
 
         event EventHandler ContentSaved;
     }

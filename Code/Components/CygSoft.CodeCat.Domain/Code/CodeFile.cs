@@ -59,7 +59,14 @@ namespace CygSoft.CodeCat.Domain.Code
             this.indexItem = item;
             this.FolderPath = folderPath;
 
-            this.ReadData();
+            // if this is a new file (ie. the file does not yet exist on disk, then
+            // there is no data to read. Don't write back to a non-existent file
+            //and the hit count does not need to be incremented.
+            if (this.ReadData())
+            {
+                this.IncrementHitCount();
+                this.WriteData();
+            }
         }
 
         public string Id { get { return this.IndexItem.Id; } }
@@ -97,6 +104,12 @@ namespace CygSoft.CodeCat.Domain.Code
             }
         }
 
+        public int HitCount
+        {
+            get;
+            private set;
+        }
+
         private bool ReadData()
         {
             if (File.Exists(GetFilePath()))
@@ -104,9 +117,13 @@ namespace CygSoft.CodeCat.Domain.Code
                 XDocument file = XDocument.Load(GetFilePath());
                 this.Text = (string)file.Element("Snippet").Element("Code").Value;
 
-                XAttribute languageElement = file.Element("Snippet").Attribute("Syntax");
-                if (languageElement != null)
-                    this.Syntax = (string)languageElement.Value;
+                XAttribute syntaxAttribute = file.Element("Snippet").Attribute("Syntax");
+                if (syntaxAttribute != null)
+                    this.Syntax = (string)syntaxAttribute.Value;
+
+                XAttribute hitCountAttribute = file.Element("Snippet").Attribute("Hits");
+                if (hitCountAttribute != null)
+                    this.HitCount = int.Parse(hitCountAttribute.Value);
 
                 this.snapshots.Clear();
 
@@ -165,6 +182,11 @@ namespace CygSoft.CodeCat.Domain.Code
             File.Delete(this.FilePath);
         }
 
+        private void IncrementHitCount()
+        {
+            this.HitCount++;
+        }
+
         private void WriteData()
         {
             XElement snapshotsElement = new XElement("Snapshots");
@@ -172,6 +194,7 @@ namespace CygSoft.CodeCat.Domain.Code
             XElement snippetElement = new XElement("Snippet",
                     new XAttribute("ID", IndexItem.Id),
                     new XAttribute("Syntax", this.Syntax),
+                    new XAttribute("Hits", this.HitCount),
                     new XElement("Code", new XCData(this.Text))
                  );
 

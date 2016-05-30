@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +7,13 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.ProjectConverter
 {
-    internal class ToVersion2
+    public class ToVersion3
     {
         public XDocument CreateProjectDocument()
         {
             XDocument projectDocument = new XDocument(
                 new XDeclaration("1.0", "utf-8", null),
-                new XElement("CodeCat_Project", new XAttribute("Version", "2"),
+                new XElement("CodeCat_Project", new XAttribute("Version", "3"),
                     new XElement("CodeLibrary",
                         new XAttribute("Library", "CODE"),
                         new XAttribute("File", @"code\_code.xml")
@@ -31,7 +30,7 @@ namespace CygSoft.CodeCat.ProjectConverter
 
             XElement rootElement = newDocument.Element("CodeCat_CodeIndex");
             rootElement.RemoveNodes();
-            rootElement.Add(new XAttribute("Version", "2"));
+            rootElement.Attribute("Version").Value = "3";
 
             newDocument.Declaration = oldDocument.Declaration;
 
@@ -50,7 +49,7 @@ namespace CygSoft.CodeCat.ProjectConverter
             XDocument oldDocument = XDocument.Load(oldCodeFilePath);
 
 
-            
+
             XElement oldIndex = oldCodeIndexDocument.Element("CodeCat_CodeIndex").Elements()
                 .Where(e => e.Attribute("ID").Value == oldDocument.Element("Snippet").Attribute("ID").Value).SingleOrDefault();
 
@@ -58,10 +57,10 @@ namespace CygSoft.CodeCat.ProjectConverter
             {
                 newDocument = XDocument.Parse(oldDocument.ToString());
                 XElement rootElement = newDocument.Element("Snippet");
-                XElement oldSyntaxElement = oldIndex.Element("Language");
+                XElement oldHitElement = oldIndex.Element("Hits");
 
-                if (oldSyntaxElement != null)
-                    rootElement.Add(new XAttribute("Syntax", oldIndex.Element("Language").Value));
+                if (oldHitElement != null)
+                    rootElement.Add(new XAttribute("Hits", oldIndex.Element("Hits").Value));
 
                 newDocument.Declaration = oldDocument.Declaration;
             }
@@ -83,8 +82,7 @@ namespace CygSoft.CodeCat.ProjectConverter
             // leave out the "Language" attribute...
             newVersion.Add(new XAttribute("ID", previousVersion.Attribute("ID").Value));
             newVersion.Add(new XElement("Title", previousVersion.Element("Title").Value));
-            newVersion.Add(new XElement("Syntax", previousVersion.Element("Language").Value));
-            newVersion.Add(new XElement("Hits", previousVersion.Element("Hits").Value));
+            newVersion.Add(new XElement("Syntax", previousVersion.Element("Syntax").Value));
             newVersion.Add(new XElement("DateCreated", previousVersion.Element("DateCreated").Value));
             newVersion.Add(new XElement("DateModified", previousVersion.Element("DateModified").Value));
             newVersion.Add(new XElement("Keywords", previousVersion.Element("Keywords").Value));
