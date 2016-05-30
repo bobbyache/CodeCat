@@ -39,8 +39,8 @@ namespace CygSoft.CodeCat.ProjectConverter
 
         public ToVersion2Converter(string filePath)
         {
-            this.FromVersion = "2";
-            this.ToVersion = "3";
+            this.FromVersion = "1";
+            this.ToVersion = "2";
             this.OldProjectFilePath = filePath;
 
             this.OldProjectFolder = Path.GetDirectoryName(filePath);

@@ -22,18 +22,18 @@ namespace UnitTests.Tests.Converters
         private string codeFile_v2_Path = "CodeFile V2.xml";
         private string projectFile_v2_Path = "ProjectFile V2.xml";
 
-        ///*
-        // * Used this to test the whole import procedure.
-        // * It's not really a test but it is somewhere to start
-        // * If experience problems here, will need to set up new
-        // * tests on "Converter" as it isn't currently covered!
-        // * */
-        [TestMethod]
-        public void Version1_to_Version2_Convert_Project()
-        {
-            ToVersion3Converter converter = new ToVersion3Converter(@"D:\Temporary\CodeCat\TestRepo III\TEST_ALL_HITCOUNT.codecat");
-            converter.Convert();
-        }
+        /////*
+        //// * Used this to test the whole import procedure.
+        //// * It's not really a test but it is somewhere to start
+        //// * If experience problems here, will need to set up new
+        //// * tests on "Converter" as it isn't currently covered!
+        //// * */
+        //[TestMethod]
+        //public void Version1_to_Version2_Convert_Project()
+        //{
+        //    ToVersion2Converter converter = new ToVersion2Converter(@"D:\Temporary\CodeCat\TestRepo III\TEST_ALL_HITCOUNT.codecat");
+        //    converter.Convert();
+        //}
 
 
         [TestMethod]
