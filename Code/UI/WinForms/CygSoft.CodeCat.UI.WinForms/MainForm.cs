@@ -193,8 +193,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.application.Open(filePath, ConfigSettings.CodeLibraryIndexFileVersion);
                 this.Text = WindowCaption();
 
-                searchForm.KeywordSearchText = string.Empty;
-                searchForm.ExecuteSearch();
                 recentProjectMenu.Notify(filePath);
                 recentProjectMenu.CurrentlyOpenedFile = filePath;
                 ConfigSettings.LastProject = filePath;
@@ -205,6 +203,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
                 EnableControls();
 
+                searchForm.KeywordSearchText = string.Empty;
+                searchForm.ExecuteSearch();
                 searchForm.Activate();
             }
             catch (Exception exception)
