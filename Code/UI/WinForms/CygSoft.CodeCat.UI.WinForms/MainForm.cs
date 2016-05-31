@@ -454,6 +454,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void snippetForm_DocumentSaved(object sender, DocumentSavedFileEventArgs e)
         {
             searchForm.ExecuteSearch(e.Item.Id);
+            mnuDocuments.DropDownItems[e.Item.Id].Text = e.Document.Text;
             mnuDocuments.DropDownItems[e.Item.Id].Image = e.Document.IconImage;
         }
 
