@@ -10,11 +10,6 @@ namespace CygSoft.CodeCat.Domain
 {
     internal class Project
     {
-        private const string CODE_LIBRARY_ELEMENT = "CodeLibrary";
-        private const string CODE_LIBRARY_INDEX_FILE = "_code.xml";
-        private const string CODE_LIBRARY_LAST_OPENED_FILE = "_lastopened.txt";
-        private const string CODE_LIBRARY_FOLDER = "code";
-
         public string FilePath { get; private set; }
         public string FileTitle { get { return Path.GetFileName(this.FilePath); } }
         public string FolderPath { get { return Path.GetDirectoryName(this.FilePath); } }
@@ -34,22 +29,6 @@ namespace CygSoft.CodeCat.Domain
             this.FilePath = filePath;
             this.CurrentVersion = currentVersion;
             CreateNew(filePath);
-            Directory.CreateDirectory(this.GetLibraryFolder());
-        }
-
-        //public string GetIndexPath()
-        //{
-        //    return Path.Combine(this.FolderPath, CODE_LIBRARY_FOLDER, CODE_LIBRARY_INDEX_FILE);
-        //}
-
-        public string GetLastOpenedPath()
-        {
-            return Path.Combine(this.FolderPath, CODE_LIBRARY_FOLDER, CODE_LIBRARY_LAST_OPENED_FILE);
-        }
-
-        private string GetLibraryFolder()
-        {
-            return Path.Combine(this.FolderPath, CODE_LIBRARY_FOLDER);
         }
 
         private void CreateNew(string filePath)
@@ -60,7 +39,6 @@ namespace CygSoft.CodeCat.Domain
             XmlElement root = document.CreateElement("CodeCat_Project");
 
             root.Attributes.Append(CreateVersionAttributes(document));
-            root.AppendChild(CreateCodeLibraryElement(document));
 
             document.InsertBefore(xmlDeclaration, document.DocumentElement);
             document.AppendChild(root);
@@ -72,20 +50,6 @@ namespace CygSoft.CodeCat.Domain
             XmlAttribute version = document.CreateAttribute("Version");
             version.Value = this.CurrentVersion.ToString();
             return version;
-        }
-
-        private XmlElement CreateCodeLibraryElement(XmlDocument document)
-        {
-            XmlElement element = document.CreateElement(CODE_LIBRARY_ELEMENT);
-            XmlAttribute libraryAttribute = document.CreateAttribute("Library");
-            libraryAttribute.Value = "CODE";
-            XmlAttribute fileAttribute = document.CreateAttribute("File");
-            fileAttribute.Value = Path.Combine(CODE_LIBRARY_FOLDER, CODE_LIBRARY_INDEX_FILE);
-            
-            element.Attributes.Append(libraryAttribute);
-            element.Attributes.Append(fileAttribute);
-
-            return element;
         }
     }
 }

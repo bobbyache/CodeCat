@@ -69,6 +69,8 @@ namespace CygSoft.CodeCat.Domain
         public void Create(string parentFolder, int currentVersion)
         {
             BeforeIndexLoad();
+
+            Directory.CreateDirectory(Path.Combine(parentFolder, subFolder));
             string indexPath = Path.Combine(parentFolder, subFolder, CODE_LIBRARY_INDEX_FILE);
             this.index = indexRepository.CreateIndex(indexPath, currentVersion);
             AfterIndexLoad();
