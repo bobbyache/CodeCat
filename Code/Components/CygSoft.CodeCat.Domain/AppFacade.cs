@@ -14,6 +14,7 @@ namespace CygSoft.CodeCat.Domain
     public class AppFacade
     {
         private CodeLibrary codeLibrary = new CodeLibrary();
+        private QikLibrary qikLibrary = new QikLibrary();
 
         private Project project = new Project();
 
@@ -55,27 +56,23 @@ namespace CygSoft.CodeCat.Domain
         public void Open(string filePath, int currentVersion)
         {
             project.Open(filePath, currentVersion);
-            this.codeLibrary.Open(project.GetIndexPath(), 
-                project.GetLibraryFolder(), currentVersion);
+            this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
         }
 
         public void Create(string filePath, int currentVersion)
         {
             project.Create(filePath, currentVersion);
-            this.codeLibrary.Create(project.GetIndexPath(), 
-                project.GetLibraryFolder(), currentVersion);
+            this.codeLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
         }
 
         public IKeywordIndexItem[] GetLastOpenedIds()
         {
-            LastCodeFileRepository lastCodeFileRepo = new LastCodeFileRepository(project.GetLastOpenedPath());
-            return this.codeLibrary.FindIndecesByIds(lastCodeFileRepo.Load());
+            return this.codeLibrary.GetLastOpenedIds();
         }
 
         public void SetLastOpenedIds(string[] ids)
         {
-            LastCodeFileRepository lastCodeFileRepo = new LastCodeFileRepository(project.GetLastOpenedPath());
-            lastCodeFileRepo.Save(ids);
+            this.codeLibrary.SetLastOpenedIds(ids);
         }
 
         public string[] GetSyntaxes()

@@ -2,23 +2,23 @@
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
+
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.Domain.Code.Base
+namespace CygSoft.CodeCat.Domain.Code
 {
-    internal class CodeLibrary : BaseLibrary
+    internal class QikLibrary : BaseLibrary
     {
         private SyntaxRepository syntaxRepository = null;
 
         public string SyntaxFolderPath { get; set; }
 
-        public CodeLibrary()
-            : base(new CodeFileKeywordIndexRepository(), "code")
+        public QikLibrary()
+            : base(new CodeFileKeywordIndexRepository(), "qik")
         {
             base.FileExtension = "*.xml";
         }

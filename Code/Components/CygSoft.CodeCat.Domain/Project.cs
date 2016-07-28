@@ -18,6 +18,7 @@ namespace CygSoft.CodeCat.Domain
         public string FilePath { get; private set; }
         public string FileTitle { get { return Path.GetFileName(this.FilePath); } }
         public string FolderPath { get { return Path.GetDirectoryName(this.FilePath); } }
+
         public int CurrentVersion { get; private set; }
         public string ProjectFileExtension { get { return "codecat"; } }
 
@@ -27,25 +28,26 @@ namespace CygSoft.CodeCat.Domain
             this.CurrentVersion = currentVersion;
         }
 
+
         public void Create(string filePath, int currentVersion)
         {
             this.FilePath = filePath;
             this.CurrentVersion = currentVersion;
             CreateNew(filePath);
-            Directory.CreateDirectory(this.GetLibraryFolder());            
+            Directory.CreateDirectory(this.GetLibraryFolder());
         }
 
-        public string GetIndexPath()
-        {
-            return Path.Combine(this.FolderPath, CODE_LIBRARY_FOLDER, CODE_LIBRARY_INDEX_FILE);
-        }
+        //public string GetIndexPath()
+        //{
+        //    return Path.Combine(this.FolderPath, CODE_LIBRARY_FOLDER, CODE_LIBRARY_INDEX_FILE);
+        //}
 
         public string GetLastOpenedPath()
         {
             return Path.Combine(this.FolderPath, CODE_LIBRARY_FOLDER, CODE_LIBRARY_LAST_OPENED_FILE);
         }
 
-        public string GetLibraryFolder()
+        private string GetLibraryFolder()
         {
             return Path.Combine(this.FolderPath, CODE_LIBRARY_FOLDER);
         }

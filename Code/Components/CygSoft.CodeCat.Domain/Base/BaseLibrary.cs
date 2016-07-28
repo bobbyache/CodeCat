@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain.Base;
+using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
 using System;
@@ -12,16 +13,22 @@ namespace CygSoft.CodeCat.Domain
 {
     internal abstract class BaseLibrary
     {
+        private const string CODE_LIBRARY_ELEMENT = "CodeLibrary";
+        private const string CODE_LIBRARY_INDEX_FILE = "_code.xml";
+        private const string CODE_LIBRARY_LAST_OPENED_FILE = "_lastopened.txt";
+
+        private string subFolder = null;
+
         protected IKeywordSearchIndex index;
         private IKeywordSearchIndexRepository indexRepository;
         protected Dictionary<string, IPersistableFile> openFiles;
 
         protected string FileExtension { get; set; }
 
-        public string FilePath { get; private set; }
+        public string FilePath { get { return this.index.FilePath; } }
         public string FileTitle { get { return this.index.FileTitle; } }
         public string FolderPath { get { return this.index.FolderPath; } }
-        public string LibraryFolderPath { get; private set; }
+
         public int IndexCount { get { return this.index.ItemCount; } }
         public int CurrentFileVersion
         {
@@ -42,20 +49,28 @@ namespace CygSoft.CodeCat.Domain
             }
         }
 
-        public BaseLibrary(IKeywordSearchIndexRepository indexRepository)
+        public BaseLibrary(IKeywordSearchIndexRepository indexRepository, string subFolder)
         {
             this.indexRepository = indexRepository;
-            this.FilePath = string.Empty;
+            this.subFolder = subFolder;
         }
 
         protected abstract IPersistableFile CreateFile(IKeywordIndexItem indexItem);
 
-        public void Open(string filePath, string libraryFolderPath, int currentVersion)
+        public void Open(string parentFolder, int currentVersion)
         {
             BeforeIndexLoad();
-            this.index = indexRepository.OpenIndex(filePath, currentVersion);
-            this.FilePath = filePath;
-            this.LibraryFolderPath = libraryFolderPath;
+
+            string indexPath = Path.Combine(parentFolder, subFolder, CODE_LIBRARY_INDEX_FILE);
+            this.index = indexRepository.OpenIndex(indexPath, currentVersion);
+            AfterIndexLoad();
+        }
+
+        public void Create(string parentFolder, int currentVersion)
+        {
+            BeforeIndexLoad();
+            string indexPath = Path.Combine(parentFolder, subFolder, CODE_LIBRARY_INDEX_FILE);
+            this.index = indexRepository.CreateIndex(indexPath, currentVersion);
             AfterIndexLoad();
         }
 
@@ -68,16 +83,6 @@ namespace CygSoft.CodeCat.Domain
         {
             BeforeIndexLoad();
             this.index = indexRepository.SaveIndexAs(this.index, filePath);
-            this.FilePath = filePath;
-            AfterIndexLoad();
-        }
-
-        public void Create(string filePath, string libraryFolderPath, int currentVersion)
-        {
-            BeforeIndexLoad();
-            this.index = indexRepository.CreateIndex(filePath, currentVersion);
-            this.FilePath = filePath;
-            this.LibraryFolderPath = libraryFolderPath;
             AfterIndexLoad();
         }
 
@@ -86,7 +91,7 @@ namespace CygSoft.CodeCat.Domain
             if (!string.IsNullOrEmpty(this.FilePath) && File.Exists(this.FilePath))
             {
                 System.Diagnostics.Process prc = new System.Diagnostics.Process();
-                prc.StartInfo.FileName = this.LibraryFolderPath;
+                prc.StartInfo.FileName = this.FolderPath;
                 prc.Start();
             }
         }
@@ -141,7 +146,7 @@ namespace CygSoft.CodeCat.Domain
             IKeywordIndexItem[] IndexItems = this.index.All();
             foreach (IKeywordIndexItem IndexItem in IndexItems)
             {
-                string fullPath = Path.Combine(this.LibraryFolderPath, IndexItem.FileTitle);
+                string fullPath = Path.Combine(this.FolderPath, IndexItem.FileTitle);
                 if (!File.Exists(fullPath))
                 {
                     missingItems.Add(IndexItem);
@@ -153,7 +158,7 @@ namespace CygSoft.CodeCat.Domain
         public string[] FindOrphanedFiles()
         {
             List<string> orphanedFiles = new List<string>();
-            List<string> files = Directory.EnumerateFiles(this.LibraryFolderPath, this.FileExtension).ToList();
+            List<string> files = Directory.EnumerateFiles(this.FolderPath, this.FileExtension).ToList();
             foreach (string file in files)
             {
                 if (!this.index.Contains(Path.GetFileNameWithoutExtension(file)))
@@ -163,6 +168,26 @@ namespace CygSoft.CodeCat.Domain
                 }
             }
             return orphanedFiles.ToArray();
+        }
+
+        public string LastOpenedFilePath
+        {
+            get { return Path.Combine(this.FolderPath, CODE_LIBRARY_LAST_OPENED_FILE); }
+        }
+
+        public IKeywordIndexItem[] GetLastOpenedIds()
+        {
+            LastCodeFileRepository lastCodeFileRepo = new LastCodeFileRepository(this.LastOpenedFilePath);
+            return this.FindIndecesByIds(lastCodeFileRepo.Load());
+        }
+
+        public void SetLastOpenedIds(string[] ids)
+        {
+            IKeywordIndexItem[] foundItems = this.FindIndecesByIds(ids);
+            string[] foundIds = foundItems.Select(k => k.Id).ToArray();
+
+            LastCodeFileRepository lastCodeFileRepo = new LastCodeFileRepository(this.LastOpenedFilePath);
+            lastCodeFileRepo.Save(ids);
         }
 
         public void DeleteFile(string id)

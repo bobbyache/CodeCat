@@ -49,6 +49,7 @@
     </Compile>
     <Compile Include="Base\IPersistableFile.cs" />
     <Compile Include="Code\LastCodeFileRepository.cs" />
+    <Compile Include="Code\QikLibrary.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Code\SyntaxFile.cs" />
