@@ -14,6 +14,7 @@ namespace CygSoft.CodeCat.Domain
     public class AppFacade
     {
         private CodeLibrary codeLibrary = new CodeLibrary();
+
         private Project project = new Project();
 
         public AppFacade()
