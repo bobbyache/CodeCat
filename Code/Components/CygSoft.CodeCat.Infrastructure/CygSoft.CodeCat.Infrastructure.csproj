@@ -43,8 +43,11 @@
     <Compile Include="IKeywordIndexItem.cs" />
     <Compile Include="IKeywordSearchIndex.cs" />
     <Compile Include="IKeywordSearchIndexRepository.cs" />
+    <Compile Include="LastCodeFileRepository.cs" />
     <Compile Include="PersistableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyntaxFile.cs" />
+    <Compile Include="SyntaxRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

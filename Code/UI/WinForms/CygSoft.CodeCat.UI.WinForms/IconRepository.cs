@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

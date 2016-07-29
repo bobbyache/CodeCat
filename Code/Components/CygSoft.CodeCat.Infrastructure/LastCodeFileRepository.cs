@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.Domain.Code
+namespace CygSoft.CodeCat.Infrastructure
 {
-    internal class LastCodeFileRepository
+    public class LastCodeFileRepository
     {
         private string filePath = "";
 

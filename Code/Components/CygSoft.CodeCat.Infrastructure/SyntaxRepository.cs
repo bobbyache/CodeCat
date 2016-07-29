@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace CygSoft.CodeCat.Domain.Code
+namespace CygSoft.CodeCat.Infrastructure
 {
-   internal class SyntaxRepository
+   public class SyntaxRepository
     {
         private Dictionary<string, SyntaxFile> syntaxFiles;
 
