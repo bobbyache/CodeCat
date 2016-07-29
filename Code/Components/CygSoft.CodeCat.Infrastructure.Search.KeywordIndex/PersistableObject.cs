@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Infrastructure.Search.KeywordIndex
 {
-    public class PersistableObject
+    public abstract class PersistableObject
     {
         private Guid identifyingGuid;
 
@@ -25,8 +25,8 @@ namespace CygSoft.CodeCat.Infrastructure.Search.KeywordIndex
             this.identifyingGuid = new Guid(guidString);
         }
 
-        public DateTime DateModified { get; protected set; }
-        public DateTime DateCreated { get; private set; }
+        public DateTime DateModified { get; set; }
+        public DateTime DateCreated { get; set; }
 
         [Browsable(false)]
         public string Id

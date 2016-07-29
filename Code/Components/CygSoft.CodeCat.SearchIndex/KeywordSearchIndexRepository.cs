@@ -28,6 +28,9 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
             foreach (IKeywordIndexItem item in Index.All())
             {
+                //XmlKeywordIndexItem indexItem = item as XmlKeywordIndexItem;
+                //xElement.Add(indexItem.Serialize());
+
                 xElement.Add(new XElement("IndexItem",
                     new XAttribute("ID", item.Id),
                     new XElement("Title", item.Title),
