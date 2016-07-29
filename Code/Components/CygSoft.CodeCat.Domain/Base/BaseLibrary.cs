@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.Domain
+namespace CygSoft.CodeCat.Domain.Base
 {
     internal abstract class BaseLibrary
     {
