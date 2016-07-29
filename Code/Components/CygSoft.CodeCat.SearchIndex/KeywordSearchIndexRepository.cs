@@ -13,6 +13,13 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 {
     public abstract class KeywordSearchIndexRepository<IndexItem> : IKeywordSearchIndexRepository where IndexItem : IKeywordIndexItem, new()
     {
+        public string RootElement { get; private set; }
+
+        public KeywordSearchIndexRepository(string rootElement)
+        {
+            this.RootElement = rootElement;
+        }
+
         public IKeywordSearchIndex OpenIndex(string filePath, int currentVersion)
         {
             List<IndexItem> items = LoadIndexItems(filePath, currentVersion);
@@ -23,7 +30,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         public void SaveIndex(IKeywordSearchIndex Index)
         {
             XDocument xmlDocument = XDocument.Load(Index.FilePath, LoadOptions.SetBaseUri | LoadOptions.SetLineInfo);
-            XElement xElement = xmlDocument.Element("CodeCat_CodeIndex");
+            XElement xElement = xmlDocument.Element(this.RootElement);
 
             xElement.Nodes().Remove();
 
@@ -62,7 +69,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             XmlDocument xmlDocument = new XmlDocument();
 
             XmlDeclaration xmlDeclaration = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
-            XmlElement root = xmlDocument.CreateElement("CodeCat_CodeIndex");
+            XmlElement root = xmlDocument.CreateElement(this.RootElement);
             XmlAttribute version = xmlDocument.CreateAttribute("Version");
             version.Value = currentVersion.ToString();
 

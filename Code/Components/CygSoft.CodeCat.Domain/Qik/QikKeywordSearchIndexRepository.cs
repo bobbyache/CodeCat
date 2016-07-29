@@ -10,6 +10,12 @@ namespace CygSoft.CodeCat.Domain.Qik
 {
     public class QikKeywordSearchIndexRepository : KeywordSearchIndexRepository<QikKeywordIndexItem>
     {
+        public QikKeywordSearchIndexRepository(string rootElement)
+            : base(rootElement)
+        {
+
+        }
+
         protected override List<QikKeywordIndexItem> LoadIndexItems(string filePath, int currentVersion)
         {
             XElement xElement = XElement.Load(filePath);

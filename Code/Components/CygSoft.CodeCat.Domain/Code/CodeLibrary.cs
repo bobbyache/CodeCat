@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.Domain.Code.Base
     internal class CodeLibrary : BaseLibrary
     {
         public CodeLibrary()
-            : base(new CodeKeywordSearchIndexRepository(), "code")
+            : base(new CodeKeywordSearchIndexRepository("CodeCat_CodeIndex"), "code")
         {
             base.FileExtension = "*.xml";
         }

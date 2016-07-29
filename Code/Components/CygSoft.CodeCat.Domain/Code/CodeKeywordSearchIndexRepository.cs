@@ -10,6 +10,11 @@ namespace CygSoft.CodeCat.Domain.Code
 {
     public class CodeKeywordSearchIndexRepository :  KeywordSearchIndexRepository<CodeKeywordIndexItem>
     {
+        public CodeKeywordSearchIndexRepository(string rootElement) : base(rootElement)
+        {
+
+        }
+
         protected override List<CodeKeywordIndexItem> LoadIndexItems(string filePath, int currentVersion)
         {
             XElement xElement = XElement.Load(filePath);
