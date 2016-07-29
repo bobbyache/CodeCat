@@ -47,7 +47,6 @@
     <Compile Include="Code\CodeSnapshot.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Base\IPersistableFile.cs" />
     <Compile Include="Qik\QikLibrary.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

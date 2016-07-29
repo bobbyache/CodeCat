@@ -1,8 +1,6 @@
-﻿using CygSoft.CodeCat.Domain.Base;
-using CygSoft.CodeCat.Domain.Code;
+﻿using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Search.KeywordIndex;
 
 namespace CygSoft.CodeCat.Domain.Code
@@ -98,7 +97,7 @@ namespace CygSoft.CodeCat.Domain.Code
         public string CommaDelimitedKeywords
         {
             get { return this.IndexItem.CommaDelimitedKeywords; }
-            set 
+            set
             {
                 this.IndexItem.SetKeywords(value);
             }
