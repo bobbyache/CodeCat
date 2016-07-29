@@ -8,14 +8,15 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Code
 {
-    internal class SyntaxRepository
+   internal class SyntaxRepository
     {
-        private string filePath;
         private Dictionary<string, SyntaxFile> syntaxFiles;
+
+        public string FilePath { get; private set; }
 
         public SyntaxRepository(string filePath)
         {
-            this.filePath = filePath;
+            this.FilePath = filePath;
             Refresh();
         }
 
@@ -68,7 +69,7 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Refresh()
         {
-            XElement xElement = XElement.Load(this.filePath);
+            XElement xElement = XElement.Load(this.FilePath);
             syntaxFiles = (from m in xElement.Elements("SyntaxMapping")
                            select new SyntaxFile
                            (

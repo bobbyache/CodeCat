@@ -22,7 +22,7 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         private RecentProjectMenu recentProjectMenu;
         private RegistrySettings registrySettings;
-        private AppFacade application = new AppFacade();
+        private AppFacade application = null;
         private SearchForm searchForm;
 
         // need this because we don't want to create a new document when
@@ -37,7 +37,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             //dockPanel.SaveAsXml(
             //dockPanel.LoadFromXml(
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
-            this.application.CodeSyntaxFolderPath = ConfigSettings.SyntaxFilePath;
+            this.application = new AppFacade(ConfigSettings.SyntaxFilePath);
 
             InitializeFileIcons();
             InitializeIconImages();

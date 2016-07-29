@@ -13,49 +13,10 @@ namespace CygSoft.CodeCat.Domain.Code
 {
     internal class QikLibrary : BaseLibrary
     {
-        private SyntaxRepository syntaxRepository = null;
-
-        public string SyntaxFolderPath { get; set; }
-
         public QikLibrary()
             : base(new CodeFileKeywordIndexRepository(), "qik")
         {
             base.FileExtension = "*.xml";
-        }
-
-        public SyntaxFile[] GetSyntaxFiles()
-        {
-            if (!string.IsNullOrEmpty(this.SyntaxFolderPath))
-            {
-                if (this.syntaxRepository == null)
-                    this.syntaxRepository = new SyntaxRepository(this.SyntaxFolderPath);
-                return syntaxRepository.SyntaxFiles;
-            }
-            return new SyntaxFile[0];
-        }
-
-        public string[] GetLanguages()
-        {
-            if (!string.IsNullOrEmpty(this.SyntaxFolderPath))
-            {
-                if (this.syntaxRepository == null)
-                    this.syntaxRepository = new SyntaxRepository(this.SyntaxFolderPath);
-                return syntaxRepository.Languages;
-            }
-            return new string[0];
-        }
-
-        public string GetSyntaxFile(string syntax)
-        {
-            string fpath = string.Empty;
-
-            if (!string.IsNullOrEmpty(syntax) && !string.IsNullOrEmpty(this.SyntaxFolderPath))
-            {
-                if (this.syntaxRepository == null)
-                    this.syntaxRepository = new SyntaxRepository(this.SyntaxFolderPath);
-                fpath = this.syntaxRepository[syntax].FilePath;
-            }
-            return fpath;
         }
 
         protected override IPersistableFile CreateFile(IKeywordIndexItem indexItem)

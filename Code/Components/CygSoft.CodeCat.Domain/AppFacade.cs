@@ -13,19 +13,22 @@ namespace CygSoft.CodeCat.Domain
 {
     public class AppFacade
     {
-        private CodeLibrary codeLibrary = new CodeLibrary();
-        private QikLibrary qikLibrary = new QikLibrary();
+        private SyntaxRepository syntaxRepository;
+        private CodeLibrary codeLibrary;
+        //private QikLibrary qikLibrary;
 
         private Project project = new Project();
 
-        public AppFacade()
+        public AppFacade(string syntaxFilePath)
         {
+            this.syntaxRepository = new SyntaxRepository(syntaxFilePath);
+            this.codeLibrary = new CodeLibrary();
+            //this.qikLibrary = new QikLibrary();
         }
 
         public string CodeSyntaxFolderPath 
         {
-            get { return this.codeLibrary.SyntaxFolderPath; }
-            set { this.codeLibrary.SyntaxFolderPath = value; }
+            get { return this.syntaxRepository.FilePath; }
         }
 
         public string ProjectFileExtension
@@ -65,30 +68,37 @@ namespace CygSoft.CodeCat.Domain
             this.codeLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
         }
 
+
+
         public IKeywordIndexItem[] GetLastOpenedIds()
         {
-            return this.codeLibrary.GetLastOpenedIds();
+            List<IKeywordIndexItem> lastOpenedItems = new List<IKeywordIndexItem>();
+            lastOpenedItems.AddRange(this.codeLibrary.GetLastOpenedIds());
+            //lastOpenedItems.AddRange(this.qikLibrary.GetLastOpenedIds());
+            return lastOpenedItems.ToArray();
         }
 
         public void SetLastOpenedIds(string[] ids)
         {
             this.codeLibrary.SetLastOpenedIds(ids);
+            //this.qikLibrary.SetLastOpenedIds(ids);
         }
 
         public string[] GetSyntaxes()
         {
-            return this.codeLibrary.GetLanguages();
+            return this.syntaxRepository.Languages;
         }
 
         public SyntaxFile[] GetSyntaxFileInfo()
         {
-            return this.codeLibrary.GetSyntaxFiles();
+            return this.syntaxRepository.SyntaxFiles;
         }
 
-        public string GetSyntaxFile(string language)
+        public string GetSyntaxFile(string syntax)
         {
-            return this.codeLibrary.GetSyntaxFile(language);
+            return this.syntaxRepository[syntax].FilePath;
         }
+
 
         public IKeywordIndexItem[] FindIndeces(string commaDelimitedKeywords)
         {
@@ -162,21 +172,6 @@ namespace CygSoft.CodeCat.Domain
         public void DeleteCodeSnippet(string snippetId)
         {
             this.codeLibrary.DeleteFile(snippetId);
-        }
-
-        public string[] FindOrphanedFiles()
-        {
-            return this.codeLibrary.FindOrphanedFiles();
-        }
-
-        public IKeywordIndexItem[] FindMissingFiles()
-        {
-            return this.codeLibrary.FindMissingFiles();
-        }
-
-        public CodeFile CreateCodeSnippetFromOrphan(string id)
-        {
-            return this.codeLibrary.CreateFileFromOrphan(id) as CodeFile;
         }
     }
 }
