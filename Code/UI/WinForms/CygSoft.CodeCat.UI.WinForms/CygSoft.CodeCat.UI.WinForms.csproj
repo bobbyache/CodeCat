@@ -211,6 +211,10 @@
       <Project>{7a97514d-bb47-49aa-8785-260f355d6f96}</Project>
       <Name>CygSoft.CodeCat.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex.csproj">
+      <Project>{9d7e248a-e4ef-42de-a624-9f18d827ba42}</Project>
+      <Name>CygSoft.CodeCat.Infrastructure.Search.KeywordIndex</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>

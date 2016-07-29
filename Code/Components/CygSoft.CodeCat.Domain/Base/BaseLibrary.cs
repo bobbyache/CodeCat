@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.CodeCat.Search.KeywordIndex;
 using System;
 using System.Collections.Generic;
@@ -266,8 +267,8 @@ namespace CygSoft.CodeCat.Domain
 
         private void File_ContentSaved(object sender, EventArgs e)
         {
-            IPersistableFile persistableFile = sender as IPersistableFile;
-            this.index.Update(persistableFile.IndexItem);
+            IKeywordTarget targetFile = sender as IKeywordTarget;
+            this.index.Update(targetFile.IndexItem);
         }
 
         private void BeforeIndexLoad()

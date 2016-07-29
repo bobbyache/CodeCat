@@ -17,7 +17,6 @@ namespace CygSoft.CodeCat.Infrastructure
         bool FileExists { get; }
         int HitCount { get; }
         string CommaDelimitedKeywords { get; set; }
-        IKeywordIndexItem IndexItem { get; }
 
         void Save();
         void Delete();  

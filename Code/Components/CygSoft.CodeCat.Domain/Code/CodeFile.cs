@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using System.IO;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
+using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 
 namespace CygSoft.CodeCat.Domain.Code
 {
-    public class CodeFile : IPersistableFile
+    public class CodeFile : IPersistableFile, IKeywordTarget
     {
         private class SnapshotDateComparer : IComparer<CodeSnapshot>
         {

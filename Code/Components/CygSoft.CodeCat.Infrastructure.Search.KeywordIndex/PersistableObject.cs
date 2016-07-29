@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure.Search.KeywordIndex
 {
     public class PersistableObject
     {

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A75E419A-7DF9-466E-8F5A-351310672CE6}</ProjectGuid>
+    <ProjectGuid>{9D7E248A-E4EF-42DE-A624-9F18D827BA42}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CygSoft.CodeCat.Search.KeywordIndex</RootNamespace>
-    <AssemblyName>CygSoft.CodeCat.Search.KeywordIndex</AssemblyName>
+    <RootNamespace>CygSoft.CodeCat.Infrastructure.Search.KeywordIndex</RootNamespace>
+    <AssemblyName>CygSoft.CodeCat.Infrastructure.Search.KeywordIndex</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,17 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KeywordSearchIndexRepository.cs" />
-    <Compile Include="KeywordSearchIndex.cs" />
-    <Compile Include="KeywordIndexItem.cs" />
-    <Compile Include="KeyPhrases.cs" />
+    <Compile Include="IKeywordIndexItem.cs" />
+    <Compile Include="IKeywordSearchIndex.cs" />
+    <Compile Include="IKeywordSearchIndexRepository.cs" />
+    <Compile Include="IKeywordTarget.cs" />
+    <Compile Include="PersistableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex.csproj">
-      <Project>{9d7e248a-e4ef-42de-a624-9f18d827ba42}</Project>
-      <Name>CygSoft.CodeCat.Infrastructure.Search.KeywordIndex</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
