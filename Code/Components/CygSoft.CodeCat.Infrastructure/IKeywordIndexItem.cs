@@ -16,6 +16,8 @@ namespace CygSoft.CodeCat.Infrastructure
         DateTime DateModified { get; }
         DateTime DateCreated { get; }
 
+        string Syntax { get; set; }
+
         void AddKeywords(string commaDelimitedKeywords);
         bool AllKeywordsFound(string[] keywords);
         bool ValidateRemoveKeywords(string[] keywords);

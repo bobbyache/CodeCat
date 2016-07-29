@@ -16,19 +16,22 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         {
             this.title = string.Empty;
             this.KeywordsFromDelimitedList(string.Empty);
+            this.Syntax = string.Empty;
         }
 
-        public KeywordIndexItem(string id, string title, DateTime dateCreated, DateTime dateModified, string commaDelimitedKeywords)
+        public KeywordIndexItem(string id, string title, string syntax, DateTime dateCreated, DateTime dateModified, string commaDelimitedKeywords)
             : base(id, dateCreated, dateModified)
         {
             this.title = title;
+            this.Syntax = syntax;
             this.KeywordsFromDelimitedList(commaDelimitedKeywords);
         }
 
-        public KeywordIndexItem(string title, string commaDelimitedKeywords)
+        public KeywordIndexItem(string title, string syntax, string commaDelimitedKeywords)
             : base()
         {
             this.title = title;
+            this.Syntax = syntax;
             this.SetKeywords(commaDelimitedKeywords);
         }
 
@@ -52,6 +55,8 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             get { return title; }
             set { title = value; this.DateModified = DateTime.Now; }
         }
+
+        public string Syntax { get; set; }
 
         public void SetKeywords(string commaDelimitedKeywords)
         {

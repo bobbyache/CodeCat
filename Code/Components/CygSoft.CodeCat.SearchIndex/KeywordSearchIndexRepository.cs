@@ -30,6 +30,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
                 xElement.Add(new XElement("IndexItem",
                     new XAttribute("ID", item.Id),
                     new XElement("Title", item.Title),
+                    new XElement("Syntax", item.Syntax),
                     new XElement("DateCreated", item.DateCreated),
                     new XElement("DateModified", item.DateModified),
                     new XElement("Keywords", item.CommaDelimitedKeywords)
@@ -90,6 +91,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
                                                        (
                                                            (string)h.Attribute("ID"),
                                                            (string)h.Element("Title"),
+                                                           (string)h.Element("Syntax"),
                                                            (DateTime)h.Element("DateCreated"),
                                                            (DateTime)h.Element("DateModified"),
                                                            (string)h.Element("Keywords")

@@ -88,7 +88,7 @@ namespace CygSoft.CodeCat.Domain.Code
             set
             {
                 this.syntax = value;
-                ICodeFileKeywordIndexItem indexItem = this.indexItem as ICodeFileKeywordIndexItem;
+                IKeywordIndexItem indexItem = this.indexItem as IKeywordIndexItem;
                 if (indexItem != null)
                     indexItem.Syntax = value;
             }

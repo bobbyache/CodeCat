@@ -39,8 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeFileKeywordIndexItem.cs" />
-    <Compile Include="CodeFileKeywordIndexRepository.cs" />
     <Compile Include="KeywordSearchIndexRepository.cs" />
     <Compile Include="KeywordSearchIndex.cs" />
     <Compile Include="KeywordIndexItem.cs" />

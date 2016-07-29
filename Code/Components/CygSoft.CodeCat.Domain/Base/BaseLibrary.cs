@@ -228,19 +228,12 @@ namespace CygSoft.CodeCat.Domain
 
         public IPersistableFile CreateFile()
         {
-            return GetFile(new CodeFileKeywordIndexItem());
+            return GetFile(new KeywordIndexItem());
         }
 
         public IPersistableFile OpenFile(IKeywordIndexItem indexItem)
         {
             IPersistableFile persistableFile = GetFile(indexItem);
-            return persistableFile;
-        }
-
-        public IPersistableFile CreateFileFromOrphan(string id)
-        {
-            IKeywordIndexItem IndexItem = new KeywordIndexItem(id, "Orphaned File", DateTime.Now, DateTime.Now, "ORPHAN");
-            IPersistableFile persistableFile = GetFile(IndexItem);
             return persistableFile;
         }
 
