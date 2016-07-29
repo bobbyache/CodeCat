@@ -13,7 +13,6 @@ namespace CygSoft.CodeCat.Domain
 {
     internal abstract class BaseLibrary
     {
-        private const string CODE_LIBRARY_ELEMENT = "CodeLibrary";
         private const string CODE_LIBRARY_INDEX_FILE = "_code.xml";
         private const string CODE_LIBRARY_LAST_OPENED_FILE = "_lastopened.txt";
 
@@ -55,7 +54,56 @@ namespace CygSoft.CodeCat.Domain
             this.subFolder = subFolder;
         }
 
-        protected abstract IPersistableFile CreateFile(IKeywordIndexItem indexItem);
+        public abstract IPersistableFile CreateFile(string title, string syntax);
+        public abstract IPersistableFile OpenFile(IKeywordIndexItem indexItem);
+
+        public void DeleteFile(string id)
+        {
+            IPersistableFile persistableFile = this.GetLibraryReferenceOrOpenFile(id);
+
+            persistableFile.Delete();
+            this.RemoveLibraryFileReference(id);
+            this.index.Remove(id);
+        }
+
+
+        public void CloseFile(string id, bool save)
+        {
+            this.RemoveLibraryFileReference(id, save);
+        }
+
+        private IPersistableFile GetLibraryReferenceOrOpenFile(string id)
+        {
+            IPersistableFile persistableFile;
+
+            if (this.openFiles != null && this.openFiles.ContainsKey(id))
+            {
+                persistableFile = this.openFiles[id];
+            }
+            else
+            {
+                IKeywordIndexItem indexItem = this.index.FindById(id);
+                persistableFile = OpenFile(indexItem);
+            }
+
+            return persistableFile;
+        }
+
+        protected void RemoveLibraryFileReference(string id, bool save = false)
+        {
+            if (this.openFiles == null)
+                return;
+
+            if (this.openFiles.ContainsKey(id))
+            {
+                if (save)
+                {
+                    this.openFiles[id].Save();
+                }
+                this.openFiles[id].ContentSaved -= File_ContentSaved;
+                this.openFiles.Remove(id);
+            }
+        }
 
         public void Open(string parentFolder, int currentVersion)
         {
@@ -192,77 +240,7 @@ namespace CygSoft.CodeCat.Domain
             lastCodeFileRepo.Save(ids);
         }
 
-        public void DeleteFile(string id)
-        {
-            IPersistableFile persistableFile;
-
-            if (this.openFiles != null && this.openFiles.ContainsKey(id))
-            {
-                persistableFile = this.openFiles[id];
-            }
-            else
-            {
-                IKeywordIndexItem indexItem = this.index.FindById(id);
-                persistableFile = CreateFile(indexItem);
-            }
-
-            persistableFile.Delete();
-            CloseFile(id);
-            this.index.Remove(id);
-        }
-
-        public void CloseFile(string id, bool save = false)
-        {
-            if (this.openFiles == null)
-                return;
-
-            if (this.openFiles.ContainsKey(id))
-            {
-                if (save)
-                {
-                    this.openFiles[id].Save();
-                }
-                this.openFiles[id].ContentSaved -= File_ContentSaved;
-                this.openFiles.Remove(id);
-            }
-        }
-
-        public abstract IPersistableFile CreateFile();
-
-        public IPersistableFile OpenFile(IKeywordIndexItem indexItem)
-        {
-            IPersistableFile persistableFile = GetFile(indexItem);
-            return persistableFile;
-        }
-
-        protected IPersistableFile GetFile(IKeywordIndexItem indexItem)
-        {
-            IPersistableFile persistableFile;
-
-            if (this.openFiles == null)
-                this.openFiles = new Dictionary<string, IPersistableFile>();
-
-            // first check to see if the file exists..
-            if (this.openFiles.ContainsKey(indexItem.Id))
-            {
-                persistableFile = this.openFiles[indexItem.Id];
-            }
-            else
-            {
-                // retrieve the file and add it to the opened code files.
-                persistableFile = this.CreateFile(indexItem);
-
-                if (this.openFiles == null)
-                    this.openFiles = new Dictionary<string, IPersistableFile>();
-                this.openFiles.Add(persistableFile.Id, persistableFile);
-
-                persistableFile.ContentSaved += File_ContentSaved;
-            }
-
-            return persistableFile;
-        }
-
-        private void File_ContentSaved(object sender, EventArgs e)
+        protected void File_ContentSaved(object sender, EventArgs e)
         {
             IKeywordTarget targetFile = sender as IKeywordTarget;
             this.index.Update(targetFile.IndexItem);
@@ -280,7 +258,7 @@ namespace CygSoft.CodeCat.Domain
             while (openFiles.Count > 0)
             {
                 KeyValuePair<string, IPersistableFile> persistableFile = openFiles.ElementAt(0);
-                CloseFile(persistableFile.Key);
+                RemoveLibraryFileReference(persistableFile.Key);
             }
         }
 

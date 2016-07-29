@@ -154,9 +154,7 @@ namespace CygSoft.CodeCat.Domain
 
         public CodeFile CreateCodeSnippet(string syntax)
         {
-            CodeFile codeFile = this.codeLibrary.CreateFile() as CodeFile;
-            codeFile.Title = "New Snippet";
-            codeFile.Syntax = syntax;
+            CodeFile codeFile = this.codeLibrary.CreateFile("New Snippet", syntax) as CodeFile;
             return codeFile;
         }
 
@@ -174,5 +172,7 @@ namespace CygSoft.CodeCat.Domain
         {
             this.codeLibrary.DeleteFile(snippetId);
         }
+
+        
     }
 }

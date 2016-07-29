@@ -18,15 +18,41 @@ namespace CygSoft.CodeCat.Domain.Qik
             base.FileExtension = "*.xml";
         }
 
-        protected override IPersistableFile CreateFile(IKeywordIndexItem indexItem)
+        public override IPersistableFile CreateFile(string title, string syntax)
         {
-            CodeFile codeFile = new CodeFile(indexItem, this.FolderPath);
-            return codeFile;
+            CodeFile codeFile = new CodeFile(new QikKeywordIndexItem(), this.FolderPath);
+            codeFile.Title = title;
+            codeFile.Syntax = syntax;
+
+            return codeFile as IPersistableFile;
         }
 
-        public override IPersistableFile CreateFile()
+        public override IPersistableFile OpenFile(IKeywordIndexItem indexItem)
         {
-            return GetFile(new QikKeywordIndexItem());
+            IPersistableFile persistableFile;
+
+            if (this.openFiles == null)
+                this.openFiles = new Dictionary<string, IPersistableFile>();
+
+            // first check to see if the file exists..
+            if (this.openFiles.ContainsKey(indexItem.Id))
+            {
+                persistableFile = this.openFiles[indexItem.Id];
+            }
+
+            else
+            {
+                // retrieve the file and add it to the opened code files.
+                persistableFile = new CodeFile(indexItem, this.FolderPath);
+
+                if (this.openFiles == null)
+                    this.openFiles = new Dictionary<string, IPersistableFile>();
+                this.openFiles.Add(persistableFile.Id, persistableFile);
+
+                persistableFile.ContentSaved += File_ContentSaved;
+            }
+
+            return persistableFile;
         }
     }
 }
