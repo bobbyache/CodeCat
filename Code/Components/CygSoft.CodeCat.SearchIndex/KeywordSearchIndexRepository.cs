@@ -28,17 +28,8 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
             foreach (IKeywordIndexItem item in Index.All())
             {
-                //XmlKeywordIndexItem indexItem = item as XmlKeywordIndexItem;
-                //xElement.Add(indexItem.Serialize());
-
-                xElement.Add(new XElement("IndexItem",
-                    new XAttribute("ID", item.Id),
-                    new XElement("Title", item.Title),
-                    new XElement("Syntax", item.Syntax),
-                    new XElement("DateCreated", item.DateCreated),
-                    new XElement("DateModified", item.DateModified),
-                    new XElement("Keywords", item.CommaDelimitedKeywords)
-                    ));
+                XmlKeywordIndexItem indexItem = item as XmlKeywordIndexItem;
+                xElement.Add(indexItem.Serialize());
             }
 
             xmlDocument.Save(Index.FilePath);
@@ -90,17 +81,19 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             XElement xElement = XElement.Load(filePath);
             CheckVersion(xElement, currentVersion);
 
-            IEnumerable<IKeywordIndexItem> items = from h in xElement.Elements("IndexItem")
-                                                   select new KeywordIndexItem
-                                                       (
-                                                           (string)h.Attribute("ID"),
-                                                           (string)h.Element("Title"),
-                                                           (string)h.Element("Syntax"),
-                                                           (DateTime)h.Element("DateCreated"),
-                                                           (DateTime)h.Element("DateModified"),
-                                                           (string)h.Element("Keywords")
-                                                       );
-            return items.ToList<IKeywordIndexItem>();
+            List<XmlKeywordIndexItem> indexItems = new List<XmlKeywordIndexItem>();
+
+            var items = from h in xElement.Elements("IndexItem")
+                        select h;
+
+            foreach (var item in items)
+            {
+                XmlKeywordIndexItem indexItem = new XmlKeywordIndexItem();
+                indexItem.Deserialize(item);
+                indexItems.Add(indexItem);
+            }
+
+            return indexItems.OfType<IKeywordIndexItem>().ToList();
         }
 
         private void CheckVersion(XElement xElement, int currentVersion)

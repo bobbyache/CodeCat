@@ -9,6 +9,21 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 {
     public class XmlKeywordIndexItem : KeywordIndexItem
     {
+
+        public XmlKeywordIndexItem() : base()
+        {
+        }
+
+        public XmlKeywordIndexItem(string id, string title, string syntax, DateTime dateCreated, DateTime dateModified, string commaDelimitedKeywords)
+            : base(id, title, syntax, dateCreated, dateModified, commaDelimitedKeywords)
+        {
+        }
+
+        public XmlKeywordIndexItem(string title, string syntax, string commaDelimitedKeywords)
+            : base(title, syntax, commaDelimitedKeywords)
+        {
+        }
+
         public void Deserialize(XElement element)
         {
             this.Id = (string)element.Attribute("ID");

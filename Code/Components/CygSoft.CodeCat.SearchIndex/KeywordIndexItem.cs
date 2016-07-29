@@ -11,7 +11,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
     /// <summary>
     /// A single code index item that points to a single code snippet resource.
     /// </summary>
-    public class KeywordIndexItem : PersistableObject, IKeywordIndexItem
+    public abstract class KeywordIndexItem : PersistableObject, IKeywordIndexItem
     {
         public KeywordIndexItem()
         {

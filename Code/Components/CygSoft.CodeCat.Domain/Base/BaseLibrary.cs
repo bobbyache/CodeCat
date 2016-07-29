@@ -229,7 +229,7 @@ namespace CygSoft.CodeCat.Domain
 
         public IPersistableFile CreateFile()
         {
-            return GetFile(new KeywordIndexItem());
+            return GetFile(new XmlKeywordIndexItem());
         }
 
         public IPersistableFile OpenFile(IKeywordIndexItem indexItem)
