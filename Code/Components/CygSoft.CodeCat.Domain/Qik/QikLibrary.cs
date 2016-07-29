@@ -13,7 +13,7 @@ namespace CygSoft.CodeCat.Domain.Qik
     internal class QikLibrary : BaseLibrary
     {
         public QikLibrary()
-            : base(new KeywordSearchIndexRepository(), "qik")
+            : base(new QikKeywordSearchIndexRepository(), "qik")
         {
             base.FileExtension = "*.xml";
         }
@@ -22,6 +22,11 @@ namespace CygSoft.CodeCat.Domain.Qik
         {
             CodeFile codeFile = new CodeFile(indexItem, this.FolderPath);
             return codeFile;
+        }
+
+        public override IPersistableFile CreateFile()
+        {
+            return GetFile(new QikKeywordIndexItem());
         }
     }
 }

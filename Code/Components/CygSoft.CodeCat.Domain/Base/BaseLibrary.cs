@@ -227,10 +227,7 @@ namespace CygSoft.CodeCat.Domain
             }
         }
 
-        public IPersistableFile CreateFile()
-        {
-            return GetFile(new XmlKeywordIndexItem());
-        }
+        public abstract IPersistableFile CreateFile();
 
         public IPersistableFile OpenFile(IKeywordIndexItem indexItem)
         {

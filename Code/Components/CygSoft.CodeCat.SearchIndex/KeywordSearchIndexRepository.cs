@@ -11,11 +11,12 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Search.KeywordIndex
 {
-    public class KeywordSearchIndexRepository : IKeywordSearchIndexRepository
+    public abstract class KeywordSearchIndexRepository<IndexItem> : IKeywordSearchIndexRepository where IndexItem : IKeywordIndexItem, new()
     {
         public IKeywordSearchIndex OpenIndex(string filePath, int currentVersion)
         {
-            IKeywordSearchIndex Index = new KeywordSearchIndex(filePath, currentVersion, LoadIndexItems(filePath, currentVersion));
+            List<IndexItem> items = LoadIndexItems(filePath, currentVersion);
+            IKeywordSearchIndex Index = new KeywordSearchIndex(filePath, currentVersion, items.Cast<IKeywordIndexItem>().ToList());
             return Index;
         }
 
@@ -26,7 +27,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
             xElement.Nodes().Remove();
 
-            foreach (IKeywordIndexItem item in Index.All())
+            foreach (IndexItem item in Index.All())
             {
                 XmlKeywordIndexItem indexItem = item as XmlKeywordIndexItem;
                 xElement.Add(indexItem.Serialize());
@@ -76,27 +77,9 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             File.Copy(sourcePath, destinationFilePath, true);
         }
 
-        private List<IKeywordIndexItem> LoadIndexItems(string filePath, int currentVersion)
-        {
-            XElement xElement = XElement.Load(filePath);
-            CheckVersion(xElement, currentVersion);
+        protected abstract List<IndexItem> LoadIndexItems(string filePath, int currentVersion);
 
-            List<XmlKeywordIndexItem> indexItems = new List<XmlKeywordIndexItem>();
-
-            var items = from h in xElement.Elements("IndexItem")
-                        select h;
-
-            foreach (var item in items)
-            {
-                XmlKeywordIndexItem indexItem = new XmlKeywordIndexItem();
-                indexItem.Deserialize(item);
-                indexItems.Add(indexItem);
-            }
-
-            return indexItems.OfType<IKeywordIndexItem>().ToList();
-        }
-
-        private void CheckVersion(XElement xElement, int currentVersion)
+        protected void CheckVersion(XElement xElement, int currentVersion)
         {
             try
             {

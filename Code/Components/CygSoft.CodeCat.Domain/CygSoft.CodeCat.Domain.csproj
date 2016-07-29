@@ -42,11 +42,15 @@
   <ItemGroup>
     <Compile Include="AppFacade.cs" />
     <Compile Include="Base\BaseLibrary.cs" />
+    <Compile Include="Code\CodeKeywordIndexItem.cs" />
+    <Compile Include="Code\CodeKeywordSearchIndexRepository.cs" />
     <Compile Include="Code\CodeLibrary.cs" />
     <Compile Include="Code\CodeFile.cs" />
     <Compile Include="Code\CodeSnapshot.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Qik\QikKeywordIndexItem.cs" />
+    <Compile Include="Qik\QikKeywordSearchIndexRepository.cs" />
     <Compile Include="Qik\QikLibrary.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

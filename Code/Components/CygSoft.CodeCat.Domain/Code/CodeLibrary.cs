@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.Domain.Code.Base
     internal class CodeLibrary : BaseLibrary
     {
         public CodeLibrary()
-            : base(new KeywordSearchIndexRepository(), "code")
+            : base(new CodeKeywordSearchIndexRepository(), "code")
         {
             base.FileExtension = "*.xml";
         }
@@ -23,6 +23,11 @@ namespace CygSoft.CodeCat.Domain.Code.Base
         {
             CodeFile codeFile = new CodeFile(indexItem, this.FolderPath);
             return codeFile;
+        }
+
+        public override IPersistableFile CreateFile()
+        {
+            return GetFile(new CodeKeywordIndexItem());
         }
     }
 }
