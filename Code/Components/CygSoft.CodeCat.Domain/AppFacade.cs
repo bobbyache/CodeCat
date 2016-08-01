@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Code.Base;
+using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.CodeCat.Search.KeywordIndex;
@@ -16,7 +17,7 @@ namespace CygSoft.CodeCat.Domain
     {
         private SyntaxRepository syntaxRepository;
         private CodeLibrary codeLibrary;
-        //private QikLibrary qikLibrary;
+        private QikLibrary qikLibrary;
 
         private Project project = new Project();
 
@@ -24,7 +25,7 @@ namespace CygSoft.CodeCat.Domain
         {
             this.syntaxRepository = new SyntaxRepository(syntaxFilePath);
             this.codeLibrary = new CodeLibrary();
-            //this.qikLibrary = new QikLibrary();
+            this.qikLibrary = new QikLibrary();
         }
 
         public string CodeSyntaxFolderPath 
@@ -61,6 +62,7 @@ namespace CygSoft.CodeCat.Domain
         {
             project.Open(filePath, currentVersion);
             this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
+            this.qikLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
         }
 
         public void Create(string filePath, int currentVersion)
@@ -104,7 +106,12 @@ namespace CygSoft.CodeCat.Domain
 
         public IKeywordIndexItem[] FindIndeces(string commaDelimitedKeywords)
         {
-            return this.codeLibrary.FindIndeces(commaDelimitedKeywords);
+            List<IKeywordIndexItem> keywordIndexItems = new List<IKeywordIndexItem>();
+
+            keywordIndexItems.AddRange(this.codeLibrary.FindIndeces(commaDelimitedKeywords));
+            keywordIndexItems.AddRange(this.qikLibrary.FindIndeces(commaDelimitedKeywords));
+
+            return keywordIndexItems.ToArray();
         }
 
         public string[] AllKeywords(IKeywordIndexItem[] indeces)
@@ -159,9 +166,14 @@ namespace CygSoft.CodeCat.Domain
             return codeFile;
         }
 
-        public CodeFile OpenCodeSnippet(IKeywordIndexItem index)
+        public CodeFile OpenCodeFileTarget(IKeywordIndexItem keywordIndexItem)
         {
-            return this.codeLibrary.OpenTarget(index) as CodeFile;
+            return this.codeLibrary.OpenTarget(keywordIndexItem) as CodeFile;
+        }
+
+        public QikFile OpenQikSnippet(IKeywordIndexItem keywordIndexItem)
+        {
+            return this.qikLibrary.OpenTarget(keywordIndexItem) as QikFile;
         }
     }
 }

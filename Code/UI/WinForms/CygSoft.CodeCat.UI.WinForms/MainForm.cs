@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.CodeCat.UI.WinForms;
@@ -309,12 +310,24 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (!SnippetIsOpen(snippetIndex))
             {
-                CodeFile codeFile = application.OpenCodeSnippet(snippetIndex);
-                IContentDocument snippetForm = new SnippetDocument(codeFile, application);
-                snippetForm.ShowIndexEditControls = false;
-                snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
-                snippetForm.DocumentSaved += snippetForm_DocumentSaved;
-                snippetForm.Show(dockPanel, DockState.Document);
+                if (snippetIndex is ICodeKeywordIndexItem)
+                {
+                    CodeFile codeFile = application.OpenCodeFileTarget(snippetIndex);
+                    IContentDocument snippetForm = new SnippetDocument(codeFile, application);
+                    snippetForm.ShowIndexEditControls = false;
+                    snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
+                    snippetForm.DocumentSaved += snippetForm_DocumentSaved;
+                    snippetForm.Show(dockPanel, DockState.Document);
+                }
+                else if (snippetIndex is IQikKeywordIndexItem)
+                {
+                    QikFile qikFile = application.OpenQikSnippet(snippetIndex);
+                    IContentDocument snippetForm = new QikCodeDocument(qikFile, application);
+                    snippetForm.ShowIndexEditControls = false;
+                    snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
+                    snippetForm.DocumentSaved += snippetForm_DocumentSaved;
+                    snippetForm.Show(dockPanel, DockState.Document);
+                }
             }
             else
             {

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace CygSoft.CodeCat.UI.WinForms.Documents
+namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class QikCodeDocument : DockContent, IContentDocument
     {
