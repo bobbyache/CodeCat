@@ -14,19 +14,53 @@ namespace CygSoft.CodeCat.Domain.Qik
     internal class QikLibrary : BaseLibrary
     {
         public QikLibrary()
-            : base(new QikKeywordSearchIndexRepository("CodeCat_CodeIndex"), "qik")
+            : base(new QikKeywordSearchIndexRepository("CodeCat_QikIndex"), "qik")
         {
             base.FileExtension = "*.xml";
         }
 
         protected override IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem)
         {
-            return null;
+            QikKeywordIndexItem qikIndexItem = indexItem as QikKeywordIndexItem;
+            QikFile qikFile = new QikFile(qikIndexItem, this.FolderPath);
+
+            if (this.openFiles == null)
+                this.openFiles = new Dictionary<string, IPersistableTarget>();
+
+            this.openFiles.Add(qikFile.Id, qikFile);
+
+            qikFile.Open();
+
+            return qikFile as IPersistableTarget;
         }
 
         protected override IPersistableTarget OpenSpecializedTarget(IKeywordIndexItem indexItem)
         {
-            return null;
+            QikKeywordIndexItem qikIndexItem = indexItem as QikKeywordIndexItem;
+            IPersistableTarget persistableFile;
+
+            if (this.openFiles == null)
+                this.openFiles = new Dictionary<string, IPersistableTarget>();
+
+            // first check to see if the file exists..
+            if (this.openFiles.ContainsKey(qikIndexItem.Id))
+            {
+                persistableFile = this.openFiles[qikIndexItem.Id];
+            }
+
+            else
+            {
+                // retrieve the file and add it to the opened code files.
+                persistableFile = new QikFile(qikIndexItem, this.FolderPath);
+
+                if (this.openFiles == null)
+                    this.openFiles = new Dictionary<string, IPersistableTarget>();
+                this.openFiles.Add(persistableFile.Id, persistableFile);
+
+                persistableFile.Open();
+            }
+
+            return persistableFile;
         }
     }
 }
