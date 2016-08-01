@@ -49,6 +49,8 @@
     <Compile Include="Code\CodeSnapshot.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Code\ICodeKeywordIndexItem.cs" />
+    <Compile Include="Qik\IQikKeywordIndexItem.cs" />
     <Compile Include="Qik\QikKeywordIndexItem.cs" />
     <Compile Include="Qik\QikKeywordSearchIndexRepository.cs" />
     <Compile Include="Qik\QikLibrary.cs" />

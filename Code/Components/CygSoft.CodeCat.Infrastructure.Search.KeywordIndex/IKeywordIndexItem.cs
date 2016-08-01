@@ -16,7 +16,7 @@ namespace CygSoft.CodeCat.Infrastructure.Search.KeywordIndex
         DateTime DateModified { get; }
         DateTime DateCreated { get; }
 
-        string Syntax { get; set; }
+        //string Syntax { get; set; }
 
         void AddKeywords(string commaDelimitedKeywords);
         bool AllKeywordsFound(string[] keywords);

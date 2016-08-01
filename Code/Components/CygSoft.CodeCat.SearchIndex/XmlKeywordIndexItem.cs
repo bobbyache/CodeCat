@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Search.KeywordIndex
 {
-    public class XmlKeywordIndexItem : KeywordIndexItem
+    public abstract class XmlKeywordIndexItem : KeywordIndexItem
     {
 
         public XmlKeywordIndexItem() : base()
@@ -24,22 +24,22 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         {
         }
 
-        public void Deserialize(XElement element)
+        public virtual void Deserialize(XElement element)
         {
             this.Id = (string)element.Attribute("ID");
             this.Title = (string)element.Element("Title");
-            this.Syntax = (string)element.Element("Syntax");
+            //this.Syntax = (string)element.Element("Syntax");
             this.DateCreated = (DateTime)element.Element("DateCreated");
             this.DateModified = (DateTime)element.Element("DateModified");
             this.SetKeywords((string)element.Element("Keywords"));
         }
 
-        public XElement Serialize()
+        public virtual XElement Serialize()
         {
             XElement element = new XElement("IndexItem",
                     new XAttribute("ID", this.Id),
                     new XElement("Title", this.Title),
-                    new XElement("Syntax", this.Syntax),
+                    //new XElement("Syntax", this.Syntax),
                     new XElement("DateCreated", this.DateCreated),
                     new XElement("DateModified", this.DateModified),
                     new XElement("Keywords", this.CommaDelimitedKeywords)

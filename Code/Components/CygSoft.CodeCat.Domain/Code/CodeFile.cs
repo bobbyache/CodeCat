@@ -89,7 +89,7 @@ namespace CygSoft.CodeCat.Domain.Code
             set
             {
                 this.syntax = value;
-                IKeywordIndexItem indexItem = this.indexItem as IKeywordIndexItem;
+                CodeKeywordIndexItem indexItem = this.indexItem as CodeKeywordIndexItem;
                 if (indexItem != null)
                     indexItem.Syntax = value;
             }
