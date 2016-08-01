@@ -52,18 +52,18 @@
             this.btnTakeSnapshot = new System.Windows.Forms.ToolStripButton();
             this.btnDeleteSnapshot = new System.Windows.Forms.ToolStripButton();
             this.chkEdit = new System.Windows.Forms.ToolStripButton();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPageCode = new System.Windows.Forms.TabPage();
-            this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.tabPageSnapshots = new System.Windows.Forms.TabPage();
             this.snapshotListCtrl1 = new CygSoft.CodeCat.UI.WinForms.SnapshotListCtrl();
+            this.tabPageCode = new System.Windows.Forms.TabPage();
+            this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.toolStrip1.SuspendLayout();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
-            this.tabControl.SuspendLayout();
-            this.tabPageCode.SuspendLayout();
             this.tabPageSnapshots.SuspendLayout();
+            this.tabPageCode.SuspendLayout();
+            this.tabControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // syntaxDoc
@@ -269,16 +269,24 @@
             this.chkEdit.Size = new System.Drawing.Size(81, 22);
             this.chkEdit.Text = "Edit Mode";
             // 
-            // tabControl
+            // tabPageSnapshots
             // 
-            this.tabControl.Controls.Add(this.tabPageCode);
-            this.tabControl.Controls.Add(this.tabPageSnapshots);
-            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 75);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(821, 396);
-            this.tabControl.TabIndex = 3;
+            this.tabPageSnapshots.Controls.Add(this.snapshotListCtrl1);
+            this.tabPageSnapshots.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSnapshots.Name = "tabPageSnapshots";
+            this.tabPageSnapshots.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSnapshots.Size = new System.Drawing.Size(813, 370);
+            this.tabPageSnapshots.TabIndex = 1;
+            this.tabPageSnapshots.Text = "Snapshots";
+            this.tabPageSnapshots.UseVisualStyleBackColor = true;
+            // 
+            // snapshotListCtrl1
+            // 
+            this.snapshotListCtrl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.snapshotListCtrl1.Location = new System.Drawing.Point(3, 3);
+            this.snapshotListCtrl1.Name = "snapshotListCtrl1";
+            this.snapshotListCtrl1.Size = new System.Drawing.Size(807, 364);
+            this.snapshotListCtrl1.TabIndex = 0;
             // 
             // tabPageCode
             // 
@@ -321,26 +329,18 @@
             this.syntaxBox.Text = "syntaxBoxControl1";
             this.syntaxBox.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
             // 
-            // tabPageSnapshots
+            // tabControl
             // 
-            this.tabPageSnapshots.Controls.Add(this.snapshotListCtrl1);
-            this.tabPageSnapshots.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSnapshots.Name = "tabPageSnapshots";
-            this.tabPageSnapshots.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSnapshots.Size = new System.Drawing.Size(813, 370);
-            this.tabPageSnapshots.TabIndex = 1;
-            this.tabPageSnapshots.Text = "Snapshots";
-            this.tabPageSnapshots.UseVisualStyleBackColor = true;
+            this.tabControl.Controls.Add(this.tabPageCode);
+            this.tabControl.Controls.Add(this.tabPageSnapshots);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(0, 75);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(821, 396);
+            this.tabControl.TabIndex = 3;
             // 
-            // snapshotListCtrl1
-            // 
-            this.snapshotListCtrl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.snapshotListCtrl1.Location = new System.Drawing.Point(3, 3);
-            this.snapshotListCtrl1.Name = "snapshotListCtrl1";
-            this.snapshotListCtrl1.Size = new System.Drawing.Size(807, 364);
-            this.snapshotListCtrl1.TabIndex = 0;
-            // 
-            // SnippetForm
+            // SnippetDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -351,7 +351,7 @@
             this.Controls.Add(this.toolstripCommands);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "SnippetForm";
+            this.Name = "SnippetDocument";
             this.Text = "Form4";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -361,9 +361,9 @@
             this.toolstripKeywords.PerformLayout();
             this.toolstripCommands.ResumeLayout(false);
             this.toolstripCommands.PerformLayout();
-            this.tabControl.ResumeLayout(false);
-            this.tabPageCode.ResumeLayout(false);
             this.tabPageSnapshots.ResumeLayout(false);
+            this.tabPageCode.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -382,13 +382,8 @@
         private CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox txtKeywords;
         private System.Windows.Forms.ToolStrip toolstripCommands;
         private System.Windows.Forms.ToolStripButton btnTakeSnapshot;
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabPageCode;
-        private Alsing.Windows.Forms.SyntaxBoxControl syntaxBox;
-        private System.Windows.Forms.TabPage tabPageSnapshots;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
         private CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox txtIdentifier;
-        private SnapshotListCtrl snapshotListCtrl1;
         private System.Windows.Forms.ToolStripButton btnDeleteSnapshot;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
         private System.Windows.Forms.ToolStripComboBox cboSyntax;
@@ -398,5 +393,10 @@
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton btnDiscardChange;
+        private System.Windows.Forms.TabPage tabPageSnapshots;
+        private SnapshotListCtrl snapshotListCtrl1;
+        private System.Windows.Forms.TabPage tabPageCode;
+        private Alsing.Windows.Forms.SyntaxBoxControl syntaxBox;
+        private System.Windows.Forms.TabControl tabControl;
     }
 }

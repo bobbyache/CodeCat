@@ -69,6 +69,12 @@
     </Compile>
     <Compile Include="Args.cs" />
     <Compile Include="Documents\IContentDocument.cs" />
+    <Compile Include="Documents\QikCodeDocument.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Documents\QikCodeDocument.Designer.cs">
+      <DependentUpon>QikCodeDocument.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings\ConfigSettings.cs" />
     <Compile Include="Settings\Constants.cs" />
     <Compile Include="Dialogs.cs" />
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InvalidRemoveDialog.resx">
       <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Documents\QikCodeDocument.resx">
+      <DependentUpon>QikCodeDocument.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
