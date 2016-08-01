@@ -61,27 +61,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBoxDialog.cs">
+    <Compile Include="Dialogs\AboutBoxDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutBoxDialog.designer.cs">
+    <Compile Include="Dialogs\AboutBoxDialog.designer.cs">
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Args.cs" />
-    <Compile Include="ConfigSettings.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Settings\ConfigSettings.cs" />
+    <Compile Include="Settings\Constants.cs" />
     <Compile Include="Dialogs.cs" />
-    <Compile Include="EnterKeywordsForm.cs">
+    <Compile Include="Dialogs\EnterKeywordsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EnterKeywordsForm.Designer.cs">
+    <Compile Include="Dialogs\EnterKeywordsForm.Designer.cs">
       <DependentUpon>EnterKeywordsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IconRepository.cs" />
-    <Compile Include="InvalidRemoveDialog.cs">
+    <Compile Include="Dialogs\InvalidRemoveDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InvalidRemoveDialog.Designer.cs">
+    <Compile Include="Dialogs\InvalidRemoveDialog.Designer.cs">
       <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ItemFormController.cs" />
@@ -93,45 +93,45 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrySettings.cs" />
-    <Compile Include="SaveSnippetDialog.cs">
+    <Compile Include="Settings\RegistrySettings.cs" />
+    <Compile Include="Dialogs\SaveSnippetDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SaveSnippetDialog.designer.cs">
+    <Compile Include="Dialogs\SaveSnippetDialog.designer.cs">
       <DependentUpon>SaveSnippetDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchForm.cs">
+    <Compile Include="Docked\SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchForm.Designer.cs">
+    <Compile Include="Docked\SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SelectKeywordsForm.cs">
+    <Compile Include="Dialogs\SelectKeywordsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelectKeywordsForm.Designer.cs">
+    <Compile Include="Dialogs\SelectKeywordsForm.Designer.cs">
       <DependentUpon>SelectKeywordsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Resources.cs" />
-    <Compile Include="SnapshotDescForm.cs">
+    <Compile Include="Dialogs\SnapshotDescForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SnapshotDescForm.Designer.cs">
+    <Compile Include="Dialogs\SnapshotDescForm.Designer.cs">
       <DependentUpon>SnapshotDescForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SnapshotListCtrl.cs">
+    <Compile Include="Controls\SnapshotListCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SnapshotListCtrl.Designer.cs">
+    <Compile Include="Controls\SnapshotListCtrl.Designer.cs">
       <DependentUpon>SnapshotListCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="SnippetForm.cs">
+    <Compile Include="Documents\SnippetForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SnippetForm.Designer.cs">
+    <Compile Include="Documents\SnippetForm.Designer.cs">
       <DependentUpon>SnippetForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolStripSpringTextBox.cs">
+    <Compile Include="Controls\ToolStripSpringTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UiResource.Designer.cs">
@@ -139,13 +139,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UiResource.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AboutBoxDialog.resx">
+    <EmbeddedResource Include="Dialogs\AboutBoxDialog.resx">
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EnterKeywordsForm.resx">
+    <EmbeddedResource Include="Dialogs\EnterKeywordsForm.resx">
       <DependentUpon>EnterKeywordsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InvalidRemoveDialog.resx">
+    <EmbeddedResource Include="Dialogs\InvalidRemoveDialog.resx">
       <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
@@ -161,22 +161,22 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SaveSnippetDialog.resx">
+    <EmbeddedResource Include="Dialogs\SaveSnippetDialog.resx">
       <DependentUpon>SaveSnippetDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchForm.resx">
+    <EmbeddedResource Include="Docked\SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SelectKeywordsForm.resx">
+    <EmbeddedResource Include="Dialogs\SelectKeywordsForm.resx">
       <DependentUpon>SelectKeywordsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SnapshotDescForm.resx">
+    <EmbeddedResource Include="Dialogs\SnapshotDescForm.resx">
       <DependentUpon>SnapshotDescForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SnapshotListCtrl.resx">
+    <EmbeddedResource Include="Controls\SnapshotListCtrl.resx">
       <DependentUpon>SnapshotListCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SnippetForm.resx">
+    <EmbeddedResource Include="Documents\SnippetForm.resx">
       <DependentUpon>SnippetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UiResource.resx">
@@ -245,6 +245,7 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
