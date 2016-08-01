@@ -28,6 +28,9 @@ namespace CygSoft.CodeCat.Domain.Code
         }
 
         public event EventHandler ContentSaved;
+        public event EventHandler ContentClosed;
+        public event EventHandler ContentDeleted;
+
         public event EventHandler SnapshotTaken;
         public event EventHandler SnapshotDeleted;
 
@@ -53,20 +56,11 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public string Text { get; set; }
 
-        public CodeFile(IKeywordIndexItem item, string folderPath)
+        public CodeFile(CodeKeywordIndexItem indexItem, string folderPath)
         {
             this.snapshots = new List<CodeSnapshot>();
-            this.indexItem = item;
+            this.indexItem = indexItem;
             this.FolderPath = folderPath;
-
-            // if this is a new file (ie. the file does not yet exist on disk, then
-            // there is no data to read. Don't write back to a non-existent file
-            //and the hit count does not need to be incremented.
-            if (this.ReadData())
-            {
-                this.IncrementHitCount();
-                this.WriteData();
-            }
         }
 
         public string Id { get { return this.IndexItem.Id; } }
@@ -82,13 +76,16 @@ namespace CygSoft.CodeCat.Domain.Code
             set { this.IndexItem.Title = value; }
         }
 
-        private string syntax;
         public string Syntax
         {
-            get { return this.syntax; }
+            get 
+            {
+                if (this.indexItem != null)
+                    return (this.indexItem as CodeKeywordIndexItem).Syntax;
+                return null;
+            }
             set
             {
-                this.syntax = value;
                 CodeKeywordIndexItem indexItem = this.indexItem as CodeKeywordIndexItem;
                 if (indexItem != null)
                     indexItem.Syntax = value;
@@ -110,16 +107,22 @@ namespace CygSoft.CodeCat.Domain.Code
             private set;
         }
 
-        //public bool Open()
-        //{
-        //    bool opened = this.ReadData();
-        //    if (opened)
-        //    {
-        //        this.IncrementHitCount();
-        //        this.WriteData();
-        //    }
-        //    return opened;
-        //}
+        public bool Open()
+        {
+            bool opened = this.ReadData();
+            if (opened)
+            {
+                this.IncrementHitCount();
+                this.WriteData();
+            }
+            return opened;
+        }
+
+        public void Close()
+        {
+            if (ContentClosed != null)
+                ContentClosed(this, new EventArgs());
+        }
 
         private bool ReadData()
         {
@@ -191,6 +194,8 @@ namespace CygSoft.CodeCat.Domain.Code
         public void Delete()
         {
             File.Delete(this.FilePath);
+            if (ContentDeleted != null)
+                ContentDeleted(this, new EventArgs());
         }
 
         private void IncrementHitCount()

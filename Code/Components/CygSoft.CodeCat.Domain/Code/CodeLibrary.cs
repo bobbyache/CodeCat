@@ -20,44 +20,45 @@ namespace CygSoft.CodeCat.Domain.Code.Base
             base.FileExtension = "*.xml";
         }
 
-        public override IPersistableTarget CreateFile(string title, string syntax)
+        protected override IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem)
         {
-            CodeFile codeFile = new CodeFile(new CodeKeywordIndexItem(), this.FolderPath);
-            codeFile.Title = title;
-            codeFile.Syntax = syntax;
+            CodeKeywordIndexItem codeIndexItem = indexItem as CodeKeywordIndexItem;
+            CodeFile codeFile = new CodeFile(codeIndexItem, this.FolderPath);
 
             if (this.openFiles == null)
                 this.openFiles = new Dictionary<string, IPersistableTarget>();
 
             this.openFiles.Add(codeFile.Id, codeFile);
-            codeFile.ContentSaved += File_ContentSaved;
+
+            codeFile.Open();
 
             return codeFile as IPersistableTarget;
         }
 
-        public override IPersistableTarget OpenFile(IKeywordIndexItem indexItem)
+        protected override IPersistableTarget OpenSpecializedTarget(IKeywordIndexItem indexItem)
         {
+            CodeKeywordIndexItem codeIndexItem = indexItem as CodeKeywordIndexItem;
             IPersistableTarget persistableFile;
 
             if (this.openFiles == null)
                 this.openFiles = new Dictionary<string, IPersistableTarget>();
 
             // first check to see if the file exists..
-            if (this.openFiles.ContainsKey(indexItem.Id))
+            if (this.openFiles.ContainsKey(codeIndexItem.Id))
             {
-                persistableFile = this.openFiles[indexItem.Id];
+                persistableFile = this.openFiles[codeIndexItem.Id];
             }
 
             else
             {
                 // retrieve the file and add it to the opened code files.
-                persistableFile = new CodeFile(indexItem, this.FolderPath);
+                persistableFile = new CodeFile(codeIndexItem, this.FolderPath);
 
                 if (this.openFiles == null)
                     this.openFiles = new Dictionary<string, IPersistableTarget>();
                 this.openFiles.Add(persistableFile.Id, persistableFile);
 
-                persistableFile.ContentSaved += File_ContentSaved;
+                persistableFile.Open();
             }
 
             return persistableFile;

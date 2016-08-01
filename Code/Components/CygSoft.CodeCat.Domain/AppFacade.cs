@@ -154,25 +154,13 @@ namespace CygSoft.CodeCat.Domain
 
         public CodeFile CreateCodeSnippet(string syntax)
         {
-            CodeFile codeFile = this.codeLibrary.CreateFile("New Snippet", syntax) as CodeFile;
+            CodeFile codeFile = this.codeLibrary.CreateTarget(new CodeKeywordIndexItem("New Snippet", syntax, string.Empty)) as CodeFile;
             return codeFile;
         }
 
         public CodeFile OpenCodeSnippet(IKeywordIndexItem index)
         {
-            return this.codeLibrary.OpenFile(index) as CodeFile;
+            return this.codeLibrary.OpenTarget(index) as CodeFile;
         }
-
-        public void CloseCodeSnippet(string snippetId, bool save = false)
-        {
-            this.codeLibrary.CloseFile(snippetId, save);
-        }
-
-        public void DeleteCodeSnippet(string snippetId)
-        {
-            this.codeLibrary.DeleteFile(snippetId);
-        }
-
-        
     }
 }

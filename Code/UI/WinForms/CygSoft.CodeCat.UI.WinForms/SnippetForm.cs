@@ -370,7 +370,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            this.application.CloseCodeSnippet(this.codeFile.Id, false);
+            this.codeFile.Close();
             base.OnFormClosed(e);
         }
 
@@ -407,7 +407,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 string snippetId = this.SnippetId;
                 this.flagForDelete = true;
-                application.DeleteCodeSnippet(snippetId);
+                this.codeFile.Delete();
 
                 if (DocumentDeleted != null)
                     DocumentDeleted(this, new EventArgs());

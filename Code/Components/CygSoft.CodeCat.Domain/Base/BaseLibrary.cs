@@ -54,55 +54,27 @@ namespace CygSoft.CodeCat.Domain.Base
             this.subFolder = subFolder;
         }
 
-        public abstract IPersistableTarget CreateFile(string title, string syntax);
-        public abstract IPersistableTarget OpenFile(IKeywordIndexItem indexItem);
+        protected abstract IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem);
+        protected abstract IPersistableTarget OpenSpecializedTarget(IKeywordIndexItem indexItem);
 
-        public void DeleteFile(string id)
+        public IPersistableTarget OpenTarget(IKeywordIndexItem indexItem)
         {
-            IPersistableTarget persistableFile = this.GetLibraryReferenceOrOpenFile(id);
-
-            persistableFile.Delete();
-            this.RemoveLibraryFileReference(id);
-            this.index.Remove(id);
+            IPersistableTarget target = OpenSpecializedTarget(indexItem);
+            
+            target.ContentClosed += target_ContentClosed;
+            target.ContentSaved += target_ContentSaved;
+            target.ContentDeleted += target_ContentDeleted;
+            return target;
         }
 
-
-        public void CloseFile(string id, bool save)
+        public IPersistableTarget CreateTarget(IKeywordIndexItem indexItem)
         {
-            this.RemoveLibraryFileReference(id, save);
-        }
-
-        private IPersistableTarget GetLibraryReferenceOrOpenFile(string id)
-        {
-            IPersistableTarget persistableFile;
-
-            if (this.openFiles != null && this.openFiles.ContainsKey(id))
-            {
-                persistableFile = this.openFiles[id];
-            }
-            else
-            {
-                IKeywordIndexItem indexItem = this.index.FindById(id);
-                persistableFile = OpenFile(indexItem);
-            }
-
-            return persistableFile;
-        }
-
-        protected void RemoveLibraryFileReference(string id, bool save = false)
-        {
-            if (this.openFiles == null)
-                return;
-
-            if (this.openFiles.ContainsKey(id))
-            {
-                if (save)
-                {
-                    this.openFiles[id].Save();
-                }
-                this.openFiles[id].ContentSaved -= File_ContentSaved;
-                this.openFiles.Remove(id);
-            }
+            IPersistableTarget target = CreateSpecializedTarget(indexItem);
+            
+            target.ContentClosed += target_ContentClosed;
+            target.ContentSaved += target_ContentSaved;
+            target.ContentDeleted += target_ContentDeleted;
+            return target;
         }
 
         public void Open(string parentFolder, int currentVersion)
@@ -240,10 +212,36 @@ namespace CygSoft.CodeCat.Domain.Base
             lastCodeFileRepo.Save(ids);
         }
 
-        protected void File_ContentSaved(object sender, EventArgs e)
+        private void RemoveLibraryFileReference(string id, bool save = false)
         {
-            IKeywordTarget targetFile = sender as IKeywordTarget;
-            this.index.Update(targetFile.IndexItem);
+            if (this.openFiles == null)
+                return;
+
+            if (this.openFiles.ContainsKey(id))
+            {
+                if (save)
+                {
+                    this.openFiles[id].Save();
+                }
+                this.openFiles.Remove(id);
+            }
+        }
+
+        private IPersistableTarget GetLibraryReferenceOrOpenFile(string id)
+        {
+            IPersistableTarget persistableFile;
+
+            if (this.openFiles != null && this.openFiles.ContainsKey(id))
+            {
+                persistableFile = this.openFiles[id];
+            }
+            else
+            {
+                IKeywordIndexItem indexItem = this.index.FindById(id);
+                persistableFile = OpenTarget(indexItem);
+            }
+
+            return persistableFile;
         }
 
         private void BeforeIndexLoad()
@@ -271,6 +269,35 @@ namespace CygSoft.CodeCat.Domain.Base
         private void Index_IndexModified(object sender, EventArgs e)
         {
             indexRepository.SaveIndex(this.index);
+        }
+
+        private void target_ContentDeleted(object sender, EventArgs e)
+        {
+            IPersistableTarget target = sender as IPersistableTarget;
+
+            target.ContentClosed -= target_ContentClosed;
+            target.ContentSaved -= target_ContentSaved;
+            target.ContentDeleted -= target_ContentDeleted;
+
+            this.RemoveLibraryFileReference(target.Id);
+            this.index.Remove(target.Id);
+        }
+
+        private void target_ContentSaved(object sender, EventArgs e)
+        {
+            IKeywordTarget targetFile = sender as IKeywordTarget;
+            this.index.Update(targetFile.IndexItem);
+        }
+
+        private void target_ContentClosed(object sender, EventArgs e)
+        {
+            IPersistableTarget target = sender as IPersistableTarget;
+
+            target.ContentClosed -= target_ContentClosed;
+            target.ContentSaved -= target_ContentSaved;
+            target.ContentDeleted -= target_ContentDeleted;
+
+            this.RemoveLibraryFileReference(target.Id);
         }
     }
 }

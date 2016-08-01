@@ -10,6 +10,15 @@ namespace CygSoft.CodeCat.Domain.Code
 {
     public class CodeKeywordIndexItem : XmlKeywordIndexItem, ICodeKeywordIndexItem
     {
+        public CodeKeywordIndexItem()
+        {
+            this.Syntax = string.Empty;
+        }
+        public CodeKeywordIndexItem(string title, string syntax, string commaDelimitedKeywords) : base(title, syntax, commaDelimitedKeywords)
+        {
+            this.Syntax = syntax;
+        }
+
         public string Syntax { get; set; }
 
         public override void Deserialize(System.Xml.Linq.XElement element)

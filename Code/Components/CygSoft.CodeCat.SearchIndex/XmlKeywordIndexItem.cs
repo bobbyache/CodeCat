@@ -15,12 +15,12 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         }
 
         public XmlKeywordIndexItem(string id, string title, string syntax, DateTime dateCreated, DateTime dateModified, string commaDelimitedKeywords)
-            : base(id, title, syntax, dateCreated, dateModified, commaDelimitedKeywords)
+            : base(id, title, dateCreated, dateModified, commaDelimitedKeywords)
         {
         }
 
         public XmlKeywordIndexItem(string title, string syntax, string commaDelimitedKeywords)
-            : base(title, syntax, commaDelimitedKeywords)
+            : base(title, commaDelimitedKeywords)
         {
         }
 
@@ -28,7 +28,6 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         {
             this.Id = (string)element.Attribute("ID");
             this.Title = (string)element.Element("Title");
-            //this.Syntax = (string)element.Element("Syntax");
             this.DateCreated = (DateTime)element.Element("DateCreated");
             this.DateModified = (DateTime)element.Element("DateModified");
             this.SetKeywords((string)element.Element("Keywords"));
@@ -39,7 +38,6 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             XElement element = new XElement("IndexItem",
                     new XAttribute("ID", this.Id),
                     new XElement("Title", this.Title),
-                    //new XElement("Syntax", this.Syntax),
                     new XElement("DateCreated", this.DateCreated),
                     new XElement("DateModified", this.DateModified),
                     new XElement("Keywords", this.CommaDelimitedKeywords)

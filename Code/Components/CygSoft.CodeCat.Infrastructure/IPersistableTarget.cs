@@ -18,10 +18,13 @@ namespace CygSoft.CodeCat.Infrastructure
         int HitCount { get; }
         string CommaDelimitedKeywords { get; set; }
 
-        //bool Open();
+        bool Open();
+        void Close();
         void Save();
         void Delete();  
 
         event EventHandler ContentSaved;
+        event EventHandler ContentClosed;
+        event EventHandler ContentDeleted;
     }
 }
