@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KeywordSearchIndexRepository.cs" />
+    <Compile Include="XmlKeywordSearchIndexRepository.cs" />
     <Compile Include="KeywordSearchIndex.cs" />
     <Compile Include="KeywordIndexItem.cs" />
     <Compile Include="KeyPhrases.cs" />

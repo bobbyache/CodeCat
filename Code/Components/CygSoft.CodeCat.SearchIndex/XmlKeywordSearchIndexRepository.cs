@@ -11,11 +11,11 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Search.KeywordIndex
 {
-    public abstract class KeywordSearchIndexRepository<IndexItem> : IKeywordSearchIndexRepository where IndexItem : IKeywordIndexItem, new()
+    public abstract class XmlKeywordSearchIndexRepository<IndexItem> : IKeywordSearchIndexRepository where IndexItem : XmlKeywordIndexItem, new()
     {
         public string RootElement { get; private set; }
 
-        public KeywordSearchIndexRepository(string rootElement)
+        public XmlKeywordSearchIndexRepository(string rootElement)
         {
             this.RootElement = rootElement;
         }
@@ -36,8 +36,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
             foreach (IndexItem item in Index.All())
             {
-                XmlKeywordIndexItem indexItem = item as XmlKeywordIndexItem;
-                xElement.Add(indexItem.Serialize());
+                xElement.Add(item.Serialize());
             }
 
             xmlDocument.Save(Index.FilePath);

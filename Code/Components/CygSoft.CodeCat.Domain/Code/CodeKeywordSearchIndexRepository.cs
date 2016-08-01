@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Code
 {
-    public class CodeKeywordSearchIndexRepository :  KeywordSearchIndexRepository<CodeKeywordIndexItem>
+    public class CodeKeywordSearchIndexRepository :  XmlKeywordSearchIndexRepository<CodeKeywordIndexItem>
     {
         public CodeKeywordSearchIndexRepository(string rootElement) : base(rootElement)
         {

@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    public class QikKeywordSearchIndexRepository : KeywordSearchIndexRepository<QikKeywordIndexItem>
+    public class QikKeywordSearchIndexRepository : XmlKeywordSearchIndexRepository<QikKeywordIndexItem>
     {
         public QikKeywordSearchIndexRepository(string rootElement)
             : base(rootElement)
