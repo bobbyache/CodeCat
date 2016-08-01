@@ -123,20 +123,6 @@ namespace CygSoft.CodeCat.Domain.Base
             return this.index.Find(commaDelimitedKeywords);
         }
 
-        public IKeywordIndexItem[] FindIndecesByIds(string[] ids)
-        {
-            List<IKeywordIndexItem> indeces = new List<IKeywordIndexItem>();
-            foreach (string id in ids)
-            {
-                IKeywordIndexItem indexItem = this.index.FindById(id);
-                if (indexItem != null)
-                {
-                    indeces.Add(indexItem);
-                }
-            }
-            return indeces.ToArray();
-        }
-
         public string[] AllKeywords(IKeywordIndexItem[] indeces)
         {
             return this.index.AllKeywords(indeces);
@@ -162,36 +148,6 @@ namespace CygSoft.CodeCat.Domain.Base
             return false;
         }
 
-        public IKeywordIndexItem[] FindMissingFiles()
-        {
-            List<IKeywordIndexItem> missingItems = new List<IKeywordIndexItem>();
-            IKeywordIndexItem[] IndexItems = this.index.All();
-            foreach (IKeywordIndexItem IndexItem in IndexItems)
-            {
-                string fullPath = Path.Combine(this.FolderPath, IndexItem.FileTitle);
-                if (!File.Exists(fullPath))
-                {
-                    missingItems.Add(IndexItem);
-                }
-            }
-            return missingItems.ToArray();
-        }
-
-        public string[] FindOrphanedFiles()
-        {
-            List<string> orphanedFiles = new List<string>();
-            List<string> files = Directory.EnumerateFiles(this.FolderPath, this.FileExtension).ToList();
-            foreach (string file in files)
-            {
-                if (!this.index.Contains(Path.GetFileNameWithoutExtension(file)))
-                {
-                    if (file != this.FilePath)
-                        orphanedFiles.Add(file);
-                }
-            }
-            return orphanedFiles.ToArray();
-        }
-
         public string LastOpenedFilePath
         {
             get { return Path.Combine(this.FolderPath, CODE_LIBRARY_LAST_OPENED_FILE); }
@@ -203,13 +159,32 @@ namespace CygSoft.CodeCat.Domain.Base
             return this.FindIndecesByIds(lastCodeFileRepo.Load());
         }
 
-        public void SetLastOpenedIds(string[] ids)
+        public void SetLastOpenedIds(IKeywordIndexItem[] keywordIndexItems)
         {
-            IKeywordIndexItem[] foundItems = this.FindIndecesByIds(ids);
+            LastCodeFileRepository lastCodeFileRepo = new LastCodeFileRepository(this.LastOpenedFilePath);
+            lastCodeFileRepo.Save(FindExistingIds(keywordIndexItems));
+        }
+
+        private string[] FindExistingIds(IKeywordIndexItem[] indeces)
+        {
+            IKeywordIndexItem[] foundItems = this.FindIndecesByIds(indeces.Select(r => r.Id).ToArray());
             string[] foundIds = foundItems.Select(k => k.Id).ToArray();
 
-            LastCodeFileRepository lastCodeFileRepo = new LastCodeFileRepository(this.LastOpenedFilePath);
-            lastCodeFileRepo.Save(ids);
+            return foundIds;
+        }
+
+        private IKeywordIndexItem[] FindIndecesByIds(string[] ids)
+        {
+            List<IKeywordIndexItem> indeces = new List<IKeywordIndexItem>();
+            foreach (string id in ids)
+            {
+                IKeywordIndexItem indexItem = this.index.FindById(id);
+                if (indexItem != null)
+                {
+                    indeces.Add(indexItem);
+                }
+            }
+            return indeces.ToArray();
         }
 
         private void RemoveLibraryFileReference(string id, bool save = false)

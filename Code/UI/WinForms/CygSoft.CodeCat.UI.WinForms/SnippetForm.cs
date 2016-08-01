@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -72,6 +73,16 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 if (this.codeFile != null)
                     return this.codeFile.Id;
+                return null;
+            }
+        }
+
+        public IKeywordIndexItem KeywordIndex
+        {
+            get
+            {
+                if (this.codeFile != null)
+                    return this.codeFile.IndexItem;
                 return null;
             }
         }

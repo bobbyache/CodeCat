@@ -240,11 +240,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 if (application.Loaded)
                 {
-                    string[] ids = this.dockPanel.Contents.OfType<SnippetForm>()
+                    IKeywordIndexItem[] keywordIndexItems = this.dockPanel.Contents.OfType<SnippetForm>()
                         .Where(doc => doc.IsNew == false)
-                        .Select(doc => doc.SnippetId).ToArray();
+                        .Select(doc => doc.KeywordIndex).ToArray();
 
-                    application.SetLastOpenedIds(ids);
+                    application.SetLastOpenedIds(keywordIndexItems);
                 }
             }
             catch (Exception exception)

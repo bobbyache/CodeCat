@@ -79,9 +79,10 @@ namespace CygSoft.CodeCat.Domain
             return lastOpenedItems.ToArray();
         }
 
-        public void SetLastOpenedIds(string[] ids)
+        public void SetLastOpenedIds(IKeywordIndexItem[] keywordIndexItems)
         {
-            this.codeLibrary.SetLastOpenedIds(ids);
+            // filter by type rather than just send in a bunch of ids.
+            this.codeLibrary.SetLastOpenedIds(keywordIndexItems);
             //this.qikLibrary.SetLastOpenedIds(ids);
         }
 
