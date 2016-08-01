@@ -14,7 +14,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class SnippetForm : DockContent
+    public partial class SnippetDocument : DockContent, IContentDocument
     {
         private TabPage snapshotsTab;
         private CodeFile codeFile;
@@ -30,7 +30,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         public event EventHandler DocumentDeleted;
         public event EventHandler<DocumentSavedFileEventArgs> DocumentSaved;
 
-        public SnippetForm(CodeFile codeFile, AppFacade application, bool isNew = false)
+        public SnippetDocument(CodeFile codeFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
             this.syntaxBox.AllowBreakPoints = false;

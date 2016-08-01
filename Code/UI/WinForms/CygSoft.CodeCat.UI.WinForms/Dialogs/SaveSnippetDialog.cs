@@ -12,7 +12,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class SaveSnippetDialog : Form
     {
-        public SaveSnippetDialog(SnippetForm[] unsavedDocuments)
+        public SaveSnippetDialog(IContentDocument[] unsavedDocuments)
         {
             InitializeComponent();
             lstUnsavedDocs.Items.AddRange(unsavedDocuments.Select(doc => doc.Text).ToArray());

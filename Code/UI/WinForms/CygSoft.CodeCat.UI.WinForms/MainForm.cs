@@ -104,9 +104,9 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             foreach (IKeywordIndexItem item in e.Items)
             {
-                SnippetForm document = dockPanel.Documents
-                    .Where(doc => (doc as SnippetForm).SnippetId == item.Id)
-                    .OfType<SnippetForm>().SingleOrDefault();
+                IContentDocument document = dockPanel.Documents
+                    .Where(doc => (doc as IContentDocument).SnippetId == item.Id)
+                    .OfType<IContentDocument>().SingleOrDefault();
 
                 if (document != null)
                     document.RemoveKeywords(e.Keywords, false);
@@ -117,9 +117,9 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             foreach (IKeywordIndexItem item in e.Items)
             {
-                SnippetForm document = dockPanel.Documents
-                    .Where(doc => (doc as SnippetForm).SnippetId == item.Id)
-                    .OfType<SnippetForm>().SingleOrDefault();
+                IContentDocument document = dockPanel.Documents
+                    .Where(doc => (doc as IContentDocument).SnippetId == item.Id)
+                    .OfType<IContentDocument>().SingleOrDefault();
 
                 if (document != null)
                     document.AddKeywords(e.Keywords, false);
@@ -240,7 +240,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 if (application.Loaded)
                 {
-                    IKeywordIndexItem[] keywordIndexItems = this.dockPanel.Contents.OfType<SnippetForm>()
+                    IKeywordIndexItem[] keywordIndexItems = this.dockPanel.Contents.OfType<IContentDocument>()
                         .Where(doc => doc.IsNew == false)
                         .Select(doc => doc.KeywordIndex).ToArray();
 
@@ -310,7 +310,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!SnippetIsOpen(snippetIndex))
             {
                 CodeFile codeFile = application.OpenCodeSnippet(snippetIndex);
-                SnippetForm snippetForm = new SnippetForm(codeFile, application);
+                IContentDocument snippetForm = new SnippetDocument(codeFile, application);
                 snippetForm.ShowIndexEditControls = false;
                 snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
                 snippetForm.DocumentSaved += snippetForm_DocumentSaved;
@@ -324,14 +324,14 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateSnippetDocumentIfNone()
         {
-            if (!this.dockPanel.Contents.OfType<SnippetForm>().Any())
+            if (!this.dockPanel.Contents.OfType<IContentDocument>().Any())
                 CreateSnippetDocument();
         }
 
         private void CreateSnippetDocument()
         {
             CodeFile codeFile = application.CreateCodeSnippet(ConfigSettings.DefaultSyntax);
-            SnippetForm snippetForm = new SnippetForm(codeFile, application, true);
+            IContentDocument snippetForm = new SnippetDocument(codeFile, application, true);
 
             snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
             snippetForm.DocumentSaved += snippetForm_DocumentSaved;
@@ -339,25 +339,25 @@ namespace CygSoft.CodeCat.UI.WinForms
             snippetForm.Show(dockPanel, DockState.Document);
         }
 
-        private SnippetForm GetOpenDocument(string snippetId)
+        private IContentDocument GetOpenDocument(string snippetId)
         {
-            SnippetForm document = dockPanel.Documents
-                .Where(doc => (doc as SnippetForm).SnippetId == snippetId)
-                .OfType<SnippetForm>().SingleOrDefault();
+            IContentDocument document = dockPanel.Documents
+                .Where(doc => (doc as IContentDocument).SnippetId == snippetId)
+                .OfType<IContentDocument>().SingleOrDefault();
 
             return document;
         }
 
         private void ActivateSnippet(IKeywordIndexItem snippetIndex)
         {
-            SnippetForm document = GetOpenDocument(snippetIndex.Id);
+            IContentDocument document = GetOpenDocument(snippetIndex.Id);
             if (document != null)
                 document.Activate();
         }
 
         private bool SnippetIsOpen(IKeywordIndexItem snippetIndex)
         {
-            return dockPanel.Documents.Any(doc => (doc as SnippetForm).SnippetId == snippetIndex.Id);
+            return dockPanel.Documents.Any(doc => (doc as IContentDocument).SnippetId == snippetIndex.Id);
         }
 
         private string ItemCountCaption(int foundItems)
@@ -370,8 +370,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private bool SaveAllDocuments()
         {
-            IEnumerable<SnippetForm> documents = this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true);
-            foreach (SnippetForm document in documents)
+            IEnumerable<IContentDocument> documents = this.dockPanel.Contents.OfType<IContentDocument>().Where(doc => doc.IsModified == true);
+            foreach (IContentDocument document in documents)
             {
                 if (!document.SaveChanges())
                 {
@@ -390,18 +390,18 @@ namespace CygSoft.CodeCat.UI.WinForms
             return result;
         }
 
-        private SnippetForm[] UnsavedDocuments()
+        private IContentDocument[] UnsavedDocuments()
         {
-            return this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true).ToArray();
+            return this.dockPanel.Contents.OfType<IContentDocument>().Where(doc => doc.IsModified == true).ToArray();
         }
 
         private void ClearSnippetDocuments()
         {
-            var snippetDocs = this.dockPanel.Contents.OfType<SnippetForm>().ToList();
+            var snippetDocs = this.dockPanel.Contents.OfType<IContentDocument>().ToList();
 
             while (snippetDocs.Count() > 0)
             {
-                SnippetForm snippetDoc = snippetDocs.First();
+                IContentDocument snippetDoc = snippetDocs.First();
                 snippetDocs.Remove(snippetDoc);
                 // important, otherwise snippet for will throw a messagebox.
                 // we should have already been through the IsModified check process.
@@ -412,7 +412,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private bool AnyUnsavedDocuments()
         {
-            return this.dockPanel.Contents.OfType<SnippetForm>().Where(doc => doc.IsModified == true).Any();
+            return this.dockPanel.Contents.OfType<IContentDocument>().Where(doc => doc.IsModified == true).Any();
         }
 
         private void RecentProjectOpened(object sender, RecentProjectEventArgs e)
@@ -538,7 +538,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
                 foreach (IKeywordIndexItem indexItem in indexItems)
                 {
-                    SnippetForm snippetForm = GetOpenDocument(indexItem.Id);
+                    IContentDocument snippetForm = GetOpenDocument(indexItem.Id);
                     if (snippetForm != null)
                     {
                         snippetForm.AddKeywords(delimitedKeywordList);
@@ -608,9 +608,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void dockPanel_ContentRemoved(object sender, DockContentEventArgs e)
         {
-            if (e.Content is SnippetForm)
+            if (e.Content is IContentDocument)
             {
-                SnippetForm snippetForm = e.Content as SnippetForm;
+                IContentDocument snippetForm = e.Content as IContentDocument;
                 ToolStripMenuItem menuItem = mnuDocuments.DropDownItems[snippetForm.SnippetId] as ToolStripMenuItem;
                 if (menuItem != null)
                 {
@@ -628,9 +628,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void dockPanel_ContentAdded(object sender, DockContentEventArgs e)
         {
-            if (e.Content is SnippetForm)
+            if (e.Content is IContentDocument)
             {
-                SnippetForm snippetForm = e.Content as SnippetForm;
+                IContentDocument snippetForm = e.Content as IContentDocument;
                 ToolStripMenuItem menuItem = new ToolStripMenuItem(snippetForm.Text, null, mnuDocumentWindow_Click);
                 menuItem.Image = snippetForm.IconImage;
                 menuItem.Name = snippetForm.SnippetId;
@@ -643,7 +643,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
             string snippetId = menuItem.Name;
-            SnippetForm snippetForm = menuItem.Tag as SnippetForm;
+            IContentDocument snippetForm = menuItem.Tag as IContentDocument;
             snippetForm.Activate();
         }
 

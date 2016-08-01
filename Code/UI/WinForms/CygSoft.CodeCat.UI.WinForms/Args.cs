@@ -56,10 +56,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
     public class DocumentSavedFileEventArgs : EventArgs
     {
-        public SnippetForm Document { get; private set; }
+        public IContentDocument Document { get; private set; }
         public CodeFile Item { get; private set; }
 
-        public DocumentSavedFileEventArgs(CodeFile item, SnippetForm document)
+        public DocumentSavedFileEventArgs(CodeFile item, IContentDocument document)
         {
             this.Document = document;
             this.Item = item;

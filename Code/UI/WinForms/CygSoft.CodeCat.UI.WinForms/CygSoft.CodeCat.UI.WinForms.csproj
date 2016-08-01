@@ -68,6 +68,7 @@
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Args.cs" />
+    <Compile Include="Documents\IContentDocument.cs" />
     <Compile Include="Settings\ConfigSettings.cs" />
     <Compile Include="Settings\Constants.cs" />
     <Compile Include="Dialogs.cs" />
@@ -125,11 +126,11 @@
     <Compile Include="Controls\SnapshotListCtrl.Designer.cs">
       <DependentUpon>SnapshotListCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\SnippetForm.cs">
+    <Compile Include="Documents\SnippetDocument.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\SnippetForm.Designer.cs">
-      <DependentUpon>SnippetForm.cs</DependentUpon>
+    <Compile Include="Documents\SnippetDocument.Designer.cs">
+      <DependentUpon>SnippetDocument.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ToolStripSpringTextBox.cs">
       <SubType>Component</SubType>
@@ -176,8 +177,8 @@
     <EmbeddedResource Include="Controls\SnapshotListCtrl.resx">
       <DependentUpon>SnapshotListCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\SnippetForm.resx">
-      <DependentUpon>SnippetForm.cs</DependentUpon>
+    <EmbeddedResource Include="Documents\SnippetDocument.resx">
+      <DependentUpon>SnippetDocument.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UiResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
