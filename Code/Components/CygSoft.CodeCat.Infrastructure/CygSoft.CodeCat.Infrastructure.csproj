@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPersistableFile.cs" />
+    <Compile Include="IPersistableTarget.cs" />
     <Compile Include="LastCodeFileRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyntaxFile.cs" />

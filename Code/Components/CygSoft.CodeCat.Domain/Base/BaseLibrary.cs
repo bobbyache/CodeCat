@@ -20,7 +20,7 @@ namespace CygSoft.CodeCat.Domain.Base
 
         protected IKeywordSearchIndex index;
         private IKeywordSearchIndexRepository indexRepository;
-        protected Dictionary<string, IPersistableFile> openFiles;
+        protected Dictionary<string, IPersistableTarget> openFiles;
 
         protected string FileExtension { get; set; }
 
@@ -54,12 +54,12 @@ namespace CygSoft.CodeCat.Domain.Base
             this.subFolder = subFolder;
         }
 
-        public abstract IPersistableFile CreateFile(string title, string syntax);
-        public abstract IPersistableFile OpenFile(IKeywordIndexItem indexItem);
+        public abstract IPersistableTarget CreateFile(string title, string syntax);
+        public abstract IPersistableTarget OpenFile(IKeywordIndexItem indexItem);
 
         public void DeleteFile(string id)
         {
-            IPersistableFile persistableFile = this.GetLibraryReferenceOrOpenFile(id);
+            IPersistableTarget persistableFile = this.GetLibraryReferenceOrOpenFile(id);
 
             persistableFile.Delete();
             this.RemoveLibraryFileReference(id);
@@ -72,9 +72,9 @@ namespace CygSoft.CodeCat.Domain.Base
             this.RemoveLibraryFileReference(id, save);
         }
 
-        private IPersistableFile GetLibraryReferenceOrOpenFile(string id)
+        private IPersistableTarget GetLibraryReferenceOrOpenFile(string id)
         {
-            IPersistableFile persistableFile;
+            IPersistableTarget persistableFile;
 
             if (this.openFiles != null && this.openFiles.ContainsKey(id))
             {
@@ -257,7 +257,7 @@ namespace CygSoft.CodeCat.Domain.Base
 
             while (openFiles.Count > 0)
             {
-                KeyValuePair<string, IPersistableFile> persistableFile = openFiles.ElementAt(0);
+                KeyValuePair<string, IPersistableTarget> persistableFile = openFiles.ElementAt(0);
                 RemoveLibraryFileReference(persistableFile.Key);
             }
         }

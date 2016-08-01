@@ -20,27 +20,27 @@ namespace CygSoft.CodeCat.Domain.Code.Base
             base.FileExtension = "*.xml";
         }
 
-        public override IPersistableFile CreateFile(string title, string syntax)
+        public override IPersistableTarget CreateFile(string title, string syntax)
         {
             CodeFile codeFile = new CodeFile(new CodeKeywordIndexItem(), this.FolderPath);
             codeFile.Title = title;
             codeFile.Syntax = syntax;
 
             if (this.openFiles == null)
-                this.openFiles = new Dictionary<string, IPersistableFile>();
+                this.openFiles = new Dictionary<string, IPersistableTarget>();
 
             this.openFiles.Add(codeFile.Id, codeFile);
             codeFile.ContentSaved += File_ContentSaved;
 
-            return codeFile as IPersistableFile;
+            return codeFile as IPersistableTarget;
         }
 
-        public override IPersistableFile OpenFile(IKeywordIndexItem indexItem)
+        public override IPersistableTarget OpenFile(IKeywordIndexItem indexItem)
         {
-            IPersistableFile persistableFile;
+            IPersistableTarget persistableFile;
 
             if (this.openFiles == null)
-                this.openFiles = new Dictionary<string, IPersistableFile>();
+                this.openFiles = new Dictionary<string, IPersistableTarget>();
 
             // first check to see if the file exists..
             if (this.openFiles.ContainsKey(indexItem.Id))
@@ -54,7 +54,7 @@ namespace CygSoft.CodeCat.Domain.Code.Base
                 persistableFile = new CodeFile(indexItem, this.FolderPath);
 
                 if (this.openFiles == null)
-                    this.openFiles = new Dictionary<string, IPersistableFile>();
+                    this.openFiles = new Dictionary<string, IPersistableTarget>();
                 this.openFiles.Add(persistableFile.Id, persistableFile);
 
                 persistableFile.ContentSaved += File_ContentSaved;

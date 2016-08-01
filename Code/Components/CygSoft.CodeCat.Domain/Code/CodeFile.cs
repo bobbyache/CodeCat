@@ -12,7 +12,7 @@ using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 
 namespace CygSoft.CodeCat.Domain.Code
 {
-    public class CodeFile : IPersistableFile, IKeywordTarget
+    public class CodeFile : IPersistableTarget, IKeywordTarget
     {
         private class SnapshotDateComparer : IComparer<CodeSnapshot>
         {
@@ -109,6 +109,17 @@ namespace CygSoft.CodeCat.Domain.Code
             get;
             private set;
         }
+
+        //public bool Open()
+        //{
+        //    bool opened = this.ReadData();
+        //    if (opened)
+        //    {
+        //        this.IncrementHitCount();
+        //        this.WriteData();
+        //    }
+        //    return opened;
+        //}
 
         private bool ReadData()
         {

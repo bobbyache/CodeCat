@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Infrastructure
 {
-    public interface IPersistableFile
+    public interface IPersistableTarget
     {
         string Id { get; }
         string Title { get; set; }
@@ -18,6 +18,7 @@ namespace CygSoft.CodeCat.Infrastructure
         int HitCount { get; }
         string CommaDelimitedKeywords { get; set; }
 
+        //bool Open();
         void Save();
         void Delete();  
 

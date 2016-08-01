@@ -13,7 +13,7 @@ namespace CygSoft.CodeCat.UI.WinForms
     public interface IItemForm
     {
         string Id { get; }
-        void Initialize(IPersistableFile persistableFile, AppFacade application);
+        void Initialize(IPersistableTarget persistableFile, AppFacade application);
     }
     public class ItemFormEventArgs : EventArgs
     {
@@ -54,7 +54,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             return false;
         }
 
-        public void OpenCodeWindow(IPersistableFile persistableFile, AppFacade application)
+        public void OpenCodeWindow(IPersistableTarget persistableFile, AppFacade application)
         {
             if (this.openForms.ContainsKey(persistableFile.Id))
             {
