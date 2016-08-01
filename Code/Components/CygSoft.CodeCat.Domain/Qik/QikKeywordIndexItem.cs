@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    public class QikKeywordIndexItem : XmlKeywordIndexItem
+    public class QikKeywordIndexItem : XmlKeywordIndexItem, IQikKeywordIndexItem
     {
         public string Syntax { get; set; }
 
