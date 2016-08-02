@@ -352,6 +352,17 @@ namespace CygSoft.CodeCat.UI.WinForms
             snippetForm.Show(dockPanel, DockState.Document);
         }
 
+        private void CreateQikTemplateDocument()
+        {
+            QikFile qikFile = application.CreateQikTemplate(ConfigSettings.DefaultSyntax);
+            IContentDocument snippetForm = new QikCodeDocument(qikFile, application, true);
+
+            snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
+            snippetForm.DocumentSaved += snippetForm_DocumentSaved;
+            snippetForm.ShowIndexEditControls = true;
+            snippetForm.Show(dockPanel, DockState.Document);
+        }
+
         private IContentDocument GetOpenDocument(string snippetId)
         {
             IContentDocument document = dockPanel.Documents
@@ -529,6 +540,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             CreateSnippetDocument();
         }
 
+        private void mnuAddQikTemplate_Click(object sender, EventArgs e)
+        {
+            CreateQikTemplateDocument();
+        }
+
         private void mnuSnippetsViewModify_Click(object sender, EventArgs e)
         {
             if (searchForm.SingleSnippetSelected && searchForm.SelectedSnippet != null)
@@ -667,5 +683,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             // This does not include your docked windows, just your "document" windows. This is excellent because
             // you can use this existing collection property to maintain your code snippets.
         }
+
+
     }
 }

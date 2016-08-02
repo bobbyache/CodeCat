@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Etier.IconHelper", "Compone
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Infrastructure.Search.KeywordIndex", "Components\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex.csproj", "{9D7E248A-E4EF-42DE-A624-9F18D827BA42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.Qik.FileManager", "Components\CygSoft.Qik.FileManager\CygSoft.Qik.FileManager.csproj", "{28B65E25-FC61-478C-B094-251C11757DCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,10 @@ Global
 		{9D7E248A-E4EF-42DE-A624-9F18D827BA42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D7E248A-E4EF-42DE-A624-9F18D827BA42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D7E248A-E4EF-42DE-A624-9F18D827BA42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B65E25-FC61-478C-B094-251C11757DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B65E25-FC61-478C-B094-251C11757DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B65E25-FC61-478C-B094-251C11757DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B65E25-FC61-478C-B094-251C11757DCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

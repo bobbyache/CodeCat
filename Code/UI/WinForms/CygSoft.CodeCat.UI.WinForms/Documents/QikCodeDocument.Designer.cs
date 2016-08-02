@@ -191,6 +191,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(23, 22);
             this.btnSave.Text = "Save";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // toolstripCommands
             // 
@@ -326,7 +327,7 @@
             this.tabBlueprint.Location = new System.Drawing.Point(4, 22);
             this.tabBlueprint.Name = "tabBlueprint";
             this.tabBlueprint.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBlueprint.Size = new System.Drawing.Size(325, 358);
+            this.tabBlueprint.Size = new System.Drawing.Size(501, 524);
             this.tabBlueprint.TabIndex = 0;
             this.tabBlueprint.Text = "Blueprint";
             this.tabBlueprint.UseVisualStyleBackColor = true;
@@ -351,7 +352,7 @@
             this.blueprintSyntaxBox.LockCursorUpdate = false;
             this.blueprintSyntaxBox.Name = "blueprintSyntaxBox";
             this.blueprintSyntaxBox.ShowScopeIndicator = false;
-            this.blueprintSyntaxBox.Size = new System.Drawing.Size(319, 352);
+            this.blueprintSyntaxBox.Size = new System.Drawing.Size(495, 518);
             this.blueprintSyntaxBox.SmoothScroll = false;
             this.blueprintSyntaxBox.SplitviewH = -4;
             this.blueprintSyntaxBox.SplitviewV = -4;
@@ -366,7 +367,7 @@
             this.tabOutput.Location = new System.Drawing.Point(4, 22);
             this.tabOutput.Name = "tabOutput";
             this.tabOutput.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOutput.Size = new System.Drawing.Size(325, 358);
+            this.tabOutput.Size = new System.Drawing.Size(501, 524);
             this.tabOutput.TabIndex = 1;
             this.tabOutput.Text = "Output";
             this.tabOutput.UseVisualStyleBackColor = true;
@@ -391,7 +392,7 @@
             this.outputSyntaxBox.LockCursorUpdate = false;
             this.outputSyntaxBox.Name = "outputSyntaxBox";
             this.outputSyntaxBox.ShowScopeIndicator = false;
-            this.outputSyntaxBox.Size = new System.Drawing.Size(319, 352);
+            this.outputSyntaxBox.Size = new System.Drawing.Size(495, 518);
             this.outputSyntaxBox.SmoothScroll = false;
             this.outputSyntaxBox.SplitviewH = -4;
             this.outputSyntaxBox.SplitviewV = -4;

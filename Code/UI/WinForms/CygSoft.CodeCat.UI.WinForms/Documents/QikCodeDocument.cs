@@ -236,7 +236,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void EnableControls()
         {
-            btnSave.Enabled = false;
+            //btnSave.Enabled = false;
             btnDiscardChange.Enabled = false;
             btnDelete.Enabled = !this.IsNew;
         }

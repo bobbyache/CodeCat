@@ -166,6 +166,12 @@ namespace CygSoft.CodeCat.Domain
             return codeFile;
         }
 
+        public QikFile CreateQikTemplate(string syntax)
+        {
+            QikFile qikFile = this.qikLibrary.CreateTarget(new QikKeywordIndexItem("New Qik Template", syntax, string.Empty)) as QikFile;
+            return qikFile;
+        }
+
         public CodeFile OpenCodeFileTarget(IKeywordIndexItem keywordIndexItem)
         {
             return this.codeLibrary.OpenTarget(keywordIndexItem) as CodeFile;

@@ -66,6 +66,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.indexCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.mnuAddQikTemplate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -147,7 +148,8 @@
             // 
             this.mnuSnippets.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSnippetsAdd,
-            this.mnuSnippetsViewModify});
+            this.mnuSnippetsViewModify,
+            this.mnuAddQikTemplate});
             this.mnuSnippets.Name = "mnuSnippets";
             this.mnuSnippets.Size = new System.Drawing.Size(64, 20);
             this.mnuSnippets.Text = "Snippets";
@@ -287,6 +289,13 @@
             this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 7;
             // 
+            // mnuAddQikTemplate
+            // 
+            this.mnuAddQikTemplate.Name = "mnuAddQikTemplate";
+            this.mnuAddQikTemplate.Size = new System.Drawing.Size(192, 22);
+            this.mnuAddQikTemplate.Text = "Add Qik Template";
+            this.mnuAddQikTemplate.Click += new System.EventHandler(this.mnuAddQikTemplate_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -333,6 +342,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuHelpHelpTopics;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem mnuDocuments;
+        private System.Windows.Forms.ToolStripMenuItem mnuAddQikTemplate;
 
     }
 }

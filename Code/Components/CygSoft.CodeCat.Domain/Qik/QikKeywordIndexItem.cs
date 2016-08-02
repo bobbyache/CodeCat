@@ -10,6 +10,17 @@ namespace CygSoft.CodeCat.Domain.Qik
 {
     public class QikKeywordIndexItem : XmlKeywordIndexItem, IQikKeywordIndexItem
     {
+        public QikKeywordIndexItem()
+        {
+            this.Syntax = string.Empty;
+        }
+        
+        public QikKeywordIndexItem(string title, string syntax, string commaDelimitedKeywords)
+                    : base(title, syntax, commaDelimitedKeywords)
+        {
+            this.Syntax = syntax;
+        }
+
         public string Syntax { get; set; }
 
         public override void Deserialize(System.Xml.Linq.XElement element)

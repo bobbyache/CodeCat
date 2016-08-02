@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
+using CygSoft.Qik.FileManager;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,40 +14,12 @@ namespace CygSoft.CodeCat.Domain.Qik
 {
     public class QikFile : IPersistableTarget, IKeywordTarget
     {
-        private class SnapshotDateComparer : IComparer<CodeSnapshot>
-        {
-
-            public int Compare(CodeSnapshot x, CodeSnapshot y)
-            {
-                if (x.DateCreated < y.DateCreated)
-                    return 1;
-                if (x.DateCreated > y.DateCreated)
-                    return -1;
-                return 0;
-            }
-        }
-
         public event EventHandler ContentSaved;
         public event EventHandler ContentClosed;
         public event EventHandler ContentDeleted;
 
-        public event EventHandler SnapshotTaken;
-        public event EventHandler SnapshotDeleted;
-
         private IKeywordIndexItem indexItem;
-
-        private List<CodeSnapshot> snapshots;
-
-        public CodeSnapshot[] Snapshots 
-        { 
-            get 
-            {
-                this.snapshots.Sort(new SnapshotDateComparer());
-                return this.snapshots.ToArray();
-            } 
-        }
-
-        public bool HasSnapshots { get { return this.snapshots.Count > 0; } }
+        private QikFileManager fileManager = null;
 
         public IKeywordIndexItem IndexItem
         {
@@ -57,17 +30,16 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public QikFile(QikKeywordIndexItem indexItem, string folderPath)
         {
-            this.snapshots = new List<CodeSnapshot>();
             this.indexItem = indexItem;
-            this.FolderPath = folderPath;
+            fileManager = new QikFileManager(folderPath, indexItem.Id);
         }
 
         public string Id { get { return this.IndexItem.Id; } }
-        public string FilePath { get { return GetFilePath(); } }
-        public string FileTitle { get { return this.IndexItem.FileTitle; } }
-        public string FolderPath { get; private set; }
+        public string FilePath { get { return fileManager.IndexFilePath; } }
+        public string FileTitle { get { return this.fileManager.IndexFileTitle; } }
+        public string FolderPath { get { return this.fileManager.ParentFolder; } }
 
-        public bool FileExists { get { return File.Exists(GetFilePath()); } }
+        public bool FileExists { get { return this.fileManager.IndexFileExists; } }
 
         public string Title
         {
@@ -108,13 +80,12 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public bool Open()
         {
-            bool opened = this.ReadData();
-            if (opened)
+            if (this.FileExists)
             {
-                this.IncrementHitCount();
-                this.WriteData();
+                fileManager.Load(this.FolderPath, this.Id);
+                return true;
             }
-            return opened;
+            return false;
         }
 
         public void Close()
@@ -123,76 +94,20 @@ namespace CygSoft.CodeCat.Domain.Qik
                 ContentClosed(this, new EventArgs());
         }
 
-        private bool ReadData()
-        {
-            if (File.Exists(GetFilePath()))
-            {
-                XDocument file = XDocument.Load(GetFilePath());
-                this.Text = (string)file.Element("Snippet").Element("Code").Value;
-
-                XAttribute syntaxAttribute = file.Element("Snippet").Attribute("Syntax");
-                if (syntaxAttribute != null)
-                    this.Syntax = (string)syntaxAttribute.Value;
-
-                XAttribute hitCountAttribute = file.Element("Snippet").Attribute("Hits");
-                if (hitCountAttribute != null)
-                    this.HitCount = int.Parse(hitCountAttribute.Value);
-
-                this.snapshots.Clear();
-
-                if ((string)file.Element("Snippet").Element("Snapshots") != null)
-                {
-                    foreach (XElement element in file.Element("Snippet").Element("Snapshots").Elements())
-                    {
-                        this.snapshots.Add(new CodeSnapshot(
-                                (string)element.Attribute("ID"),
-                                (string)element.Element("Description"),
-                                (string)element.Element("Code"),
-                                DateTime.Parse((string)element.Attribute("SnapDate")),
-                                DateTime.Parse((string)element.Attribute("SnapDate"))
-                            ));
-                    }
-                }
-
-                return true;
-            }
-            return false;
-        }
-
         public void Save()
         {
-            this.WriteData();
+            if (this.FileExists)
+                fileManager.Save();
+            else
+                fileManager.Create(this.FolderPath, this.Id);
+            
             if (this.ContentSaved != null)
                 ContentSaved(this, new EventArgs());
         }
 
-        public void TakeSnapshot(string description = "")
-        {
-            CodeSnapshot snapshot = new CodeSnapshot(this.Text);
-            if (description.Trim() != string.Empty)
-                snapshot.Description = description;
-            this.snapshots.Add(snapshot);
-
-            this.WriteData();
-
-            if (SnapshotTaken != null)
-                SnapshotTaken(this, new EventArgs());
-        }
-
-        public void DeleteSnapshot(string snapshotId)
-        {
-            CodeSnapshot snapshot = this.snapshots.Where(s => s.Id == snapshotId).SingleOrDefault();
-            this.snapshots.Remove(snapshot);
-
-            this.WriteData();
-
-            if (SnapshotDeleted != null)
-                SnapshotDeleted(this, new EventArgs());
-        }
-
         public void Delete()
         {
-            File.Delete(this.FilePath);
+            fileManager.Delete();
             if (ContentDeleted != null)
                 ContentDeleted(this, new EventArgs());
         }
@@ -201,37 +116,5 @@ namespace CygSoft.CodeCat.Domain.Qik
         {
             this.HitCount++;
         }
-
-        private void WriteData()
-        {
-            XElement snapshotsElement = new XElement("Snapshots");
-
-            XElement snippetElement = new XElement("Snippet",
-                    new XAttribute("ID", IndexItem.Id),
-                    new XAttribute("Syntax", this.Syntax),
-                    new XAttribute("Hits", this.HitCount),
-                    new XElement("Code", new XCData(this.Text))
-                 );
-
-            foreach (CodeSnapshot snapshot in this.snapshots)
-            {
-                snapshotsElement.Add(new XElement("Snapshot", 
-                    new XAttribute("ID", snapshot.Id),
-                    new XAttribute("SnapDate", snapshot.DateCreated),
-                    new XElement("Description", snapshot.Description),
-                    new XElement("Code", new XCData(snapshot.Text))));
-            }
-
-            snippetElement.Add(snapshotsElement);
-
-            XDocument document = new XDocument(snippetElement);
-            document.Save(GetFilePath());
-        }
-
-        private string GetFilePath()
-        {
-            return Path.Combine(this.FolderPath, IndexItem.FileTitle);
-        }
-
     }
 }
