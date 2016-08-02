@@ -28,6 +28,8 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public string Text { get; set; }
 
+        public string[] Templates { get { return this.fileManager.Templates; } }
+
         public QikFile(QikKeywordIndexItem indexItem, string folderPath)
         {
             this.indexItem = indexItem;
@@ -111,6 +113,22 @@ namespace CygSoft.CodeCat.Domain.Qik
             if (ContentDeleted != null)
                 ContentDeleted(this, new EventArgs());
         }
+
+        public string AddTemplate()
+        {
+            return fileManager.AddTemplate("New Template", "");
+        }
+
+        public void RemoveTemplate(string fileName)
+        {
+            fileManager.RemoveTemplate(fileName);
+        }
+
+        public string GetTemplateTitle(string fileName)
+        {
+            return fileManager.GetTemplateTitle(fileName);
+        }
+
 
         private void IncrementHitCount()
         {

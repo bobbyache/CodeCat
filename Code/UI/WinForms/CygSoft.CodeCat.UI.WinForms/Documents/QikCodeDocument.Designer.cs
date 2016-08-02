@@ -52,13 +52,9 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
-            this.tabScript = new System.Windows.Forms.TabPage();
-            this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
-            this.tabBlueprint = new System.Windows.Forms.TabPage();
-            this.blueprintSyntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
-            this.tabOutput = new System.Windows.Forms.TabPage();
-            this.outputSyntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
+            this.btnAddTemplate = new System.Windows.Forms.ToolStripButton();
+            this.btnRemoveTemplate = new System.Windows.Forms.ToolStripButton();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -67,10 +63,6 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tabControlFile.SuspendLayout();
-            this.tabScript.SuspendLayout();
-            this.tabBlueprint.SuspendLayout();
-            this.tabOutput.SuspendLayout();
             this.SuspendLayout();
             // 
             // syntaxDoc
@@ -201,7 +193,9 @@
             this.toolStripSeparator1,
             this.btnDelete,
             this.toolStripSeparator2,
-            this.chkEdit});
+            this.chkEdit,
+            this.btnAddTemplate,
+            this.btnRemoveTemplate});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
             this.toolstripCommands.Size = new System.Drawing.Size(878, 25);
@@ -272,134 +266,12 @@
             // 
             // tabControlFile
             // 
-            this.tabControlFile.Controls.Add(this.tabScript);
-            this.tabControlFile.Controls.Add(this.tabBlueprint);
-            this.tabControlFile.Controls.Add(this.tabOutput);
             this.tabControlFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlFile.Location = new System.Drawing.Point(0, 0);
             this.tabControlFile.Name = "tabControlFile";
             this.tabControlFile.SelectedIndex = 0;
             this.tabControlFile.Size = new System.Drawing.Size(509, 550);
             this.tabControlFile.TabIndex = 3;
-            // 
-            // tabScript
-            // 
-            this.tabScript.Controls.Add(this.syntaxBox);
-            this.tabScript.Location = new System.Drawing.Point(4, 22);
-            this.tabScript.Name = "tabScript";
-            this.tabScript.Size = new System.Drawing.Size(501, 524);
-            this.tabScript.TabIndex = 2;
-            this.tabScript.Text = "Script";
-            this.tabScript.UseVisualStyleBackColor = true;
-            // 
-            // syntaxBox
-            // 
-            this.syntaxBox.ActiveView = Alsing.Windows.Forms.ActiveView.BottomRight;
-            this.syntaxBox.AutoListPosition = null;
-            this.syntaxBox.AutoListSelectedText = "a123";
-            this.syntaxBox.AutoListVisible = false;
-            this.syntaxBox.BackColor = System.Drawing.Color.White;
-            this.syntaxBox.BorderStyle = Alsing.Windows.Forms.BorderStyle.None;
-            this.syntaxBox.CopyAsRTF = false;
-            this.syntaxBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.syntaxBox.FontName = "Courier new";
-            this.syntaxBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.syntaxBox.InfoTipCount = 1;
-            this.syntaxBox.InfoTipPosition = null;
-            this.syntaxBox.InfoTipSelectedIndex = 1;
-            this.syntaxBox.InfoTipVisible = false;
-            this.syntaxBox.Location = new System.Drawing.Point(0, 0);
-            this.syntaxBox.LockCursorUpdate = false;
-            this.syntaxBox.Name = "syntaxBox";
-            this.syntaxBox.ShowScopeIndicator = false;
-            this.syntaxBox.Size = new System.Drawing.Size(501, 524);
-            this.syntaxBox.SmoothScroll = false;
-            this.syntaxBox.SplitviewH = -4;
-            this.syntaxBox.SplitviewV = -4;
-            this.syntaxBox.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.syntaxBox.TabIndex = 3;
-            this.syntaxBox.Text = "syntaxBoxControl1";
-            this.syntaxBox.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
-            // 
-            // tabBlueprint
-            // 
-            this.tabBlueprint.Controls.Add(this.blueprintSyntaxBox);
-            this.tabBlueprint.Location = new System.Drawing.Point(4, 22);
-            this.tabBlueprint.Name = "tabBlueprint";
-            this.tabBlueprint.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBlueprint.Size = new System.Drawing.Size(501, 524);
-            this.tabBlueprint.TabIndex = 0;
-            this.tabBlueprint.Text = "Blueprint";
-            this.tabBlueprint.UseVisualStyleBackColor = true;
-            // 
-            // blueprintSyntaxBox
-            // 
-            this.blueprintSyntaxBox.ActiveView = Alsing.Windows.Forms.ActiveView.BottomRight;
-            this.blueprintSyntaxBox.AutoListPosition = null;
-            this.blueprintSyntaxBox.AutoListSelectedText = "a123";
-            this.blueprintSyntaxBox.AutoListVisible = false;
-            this.blueprintSyntaxBox.BackColor = System.Drawing.Color.White;
-            this.blueprintSyntaxBox.BorderStyle = Alsing.Windows.Forms.BorderStyle.None;
-            this.blueprintSyntaxBox.CopyAsRTF = false;
-            this.blueprintSyntaxBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.blueprintSyntaxBox.FontName = "Courier new";
-            this.blueprintSyntaxBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.blueprintSyntaxBox.InfoTipCount = 1;
-            this.blueprintSyntaxBox.InfoTipPosition = null;
-            this.blueprintSyntaxBox.InfoTipSelectedIndex = 1;
-            this.blueprintSyntaxBox.InfoTipVisible = false;
-            this.blueprintSyntaxBox.Location = new System.Drawing.Point(3, 3);
-            this.blueprintSyntaxBox.LockCursorUpdate = false;
-            this.blueprintSyntaxBox.Name = "blueprintSyntaxBox";
-            this.blueprintSyntaxBox.ShowScopeIndicator = false;
-            this.blueprintSyntaxBox.Size = new System.Drawing.Size(495, 518);
-            this.blueprintSyntaxBox.SmoothScroll = false;
-            this.blueprintSyntaxBox.SplitviewH = -4;
-            this.blueprintSyntaxBox.SplitviewV = -4;
-            this.blueprintSyntaxBox.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.blueprintSyntaxBox.TabIndex = 0;
-            this.blueprintSyntaxBox.Text = "syntaxBoxControl1";
-            this.blueprintSyntaxBox.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
-            // 
-            // tabOutput
-            // 
-            this.tabOutput.Controls.Add(this.outputSyntaxBox);
-            this.tabOutput.Location = new System.Drawing.Point(4, 22);
-            this.tabOutput.Name = "tabOutput";
-            this.tabOutput.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOutput.Size = new System.Drawing.Size(501, 524);
-            this.tabOutput.TabIndex = 1;
-            this.tabOutput.Text = "Output";
-            this.tabOutput.UseVisualStyleBackColor = true;
-            // 
-            // outputSyntaxBox
-            // 
-            this.outputSyntaxBox.ActiveView = Alsing.Windows.Forms.ActiveView.BottomRight;
-            this.outputSyntaxBox.AutoListPosition = null;
-            this.outputSyntaxBox.AutoListSelectedText = "a123";
-            this.outputSyntaxBox.AutoListVisible = false;
-            this.outputSyntaxBox.BackColor = System.Drawing.Color.White;
-            this.outputSyntaxBox.BorderStyle = Alsing.Windows.Forms.BorderStyle.None;
-            this.outputSyntaxBox.CopyAsRTF = false;
-            this.outputSyntaxBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outputSyntaxBox.FontName = "Courier new";
-            this.outputSyntaxBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.outputSyntaxBox.InfoTipCount = 1;
-            this.outputSyntaxBox.InfoTipPosition = null;
-            this.outputSyntaxBox.InfoTipSelectedIndex = 1;
-            this.outputSyntaxBox.InfoTipVisible = false;
-            this.outputSyntaxBox.Location = new System.Drawing.Point(3, 3);
-            this.outputSyntaxBox.LockCursorUpdate = false;
-            this.outputSyntaxBox.Name = "outputSyntaxBox";
-            this.outputSyntaxBox.ShowScopeIndicator = false;
-            this.outputSyntaxBox.Size = new System.Drawing.Size(495, 518);
-            this.outputSyntaxBox.SmoothScroll = false;
-            this.outputSyntaxBox.SplitviewH = -4;
-            this.outputSyntaxBox.SplitviewV = -4;
-            this.outputSyntaxBox.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.outputSyntaxBox.TabIndex = 1;
-            this.outputSyntaxBox.Text = "syntaxBoxControl2";
-            this.outputSyntaxBox.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
             // 
             // propertyGrid1
             // 
@@ -408,6 +280,24 @@
             this.propertyGrid1.Name = "propertyGrid1";
             this.propertyGrid1.Size = new System.Drawing.Size(365, 550);
             this.propertyGrid1.TabIndex = 0;
+            // 
+            // btnAddTemplate
+            // 
+            this.btnAddTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnAddTemplate.Image")));
+            this.btnAddTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddTemplate.Name = "btnAddTemplate";
+            this.btnAddTemplate.Size = new System.Drawing.Size(102, 22);
+            this.btnAddTemplate.Text = "Add Template";
+            this.btnAddTemplate.Click += new System.EventHandler(this.btnAddTemplate_Click);
+            // 
+            // btnRemoveTemplate
+            // 
+            this.btnRemoveTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveTemplate.Image")));
+            this.btnRemoveTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRemoveTemplate.Name = "btnRemoveTemplate";
+            this.btnRemoveTemplate.Size = new System.Drawing.Size(123, 22);
+            this.btnRemoveTemplate.Text = "Remove Template";
+            this.btnRemoveTemplate.Click += new System.EventHandler(this.btnRemoveTemplate_Click);
             // 
             // QikCodeDocument
             // 
@@ -434,10 +324,6 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.tabControlFile.ResumeLayout(false);
-            this.tabScript.ResumeLayout(false);
-            this.tabBlueprint.ResumeLayout(false);
-            this.tabOutput.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -467,12 +353,8 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabControl tabControlFile;
-        private System.Windows.Forms.TabPage tabScript;
-        private Alsing.Windows.Forms.SyntaxBoxControl syntaxBox;
-        private System.Windows.Forms.TabPage tabBlueprint;
-        private Alsing.Windows.Forms.SyntaxBoxControl blueprintSyntaxBox;
-        private System.Windows.Forms.TabPage tabOutput;
-        private Alsing.Windows.Forms.SyntaxBoxControl outputSyntaxBox;
         private System.Windows.Forms.PropertyGrid propertyGrid1;
+        private System.Windows.Forms.ToolStripButton btnAddTemplate;
+        private System.Windows.Forms.ToolStripButton btnRemoveTemplate;
     }
 }

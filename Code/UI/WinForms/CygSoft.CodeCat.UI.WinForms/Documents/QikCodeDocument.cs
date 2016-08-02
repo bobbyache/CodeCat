@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
+using CygSoft.CodeCat.UI.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.application = application;
             this.qikFile = qikFile;
             this.Tag = qikFile.Id;
+
+            BuildTabs();
 
             SetDefaultFont();
             
@@ -386,6 +389,48 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             this.IsModified = true;
             SelectSyntax(cboSyntax.SelectedItem.ToString());
+        }
+
+        private void btnAddTemplate_Click(object sender, EventArgs e)
+        {
+            string fileId = this.qikFile.AddTemplate();
+            string title = this.qikFile.GetTemplateTitle(fileId);
+
+            TabPage tabPage = NewTab(fileId, title);
+            tabControlFile.TabPages.Add(tabPage);
+            //tabControlFile.SelectedIndex = tabControlFile.tab
+            //tabPage.Select();
+            tabControlFile.SelectedTab = tabPage;
+        }
+
+        private void btnRemoveTemplate_Click(object sender, EventArgs e)
+        {
+            string fileTitle = tabControlFile.SelectedTab.Name;
+            this.qikFile.RemoveTemplate(fileTitle);
+            tabControlFile.TabPages.Remove(tabControlFile.SelectedTab);
+        }
+
+        private void BuildTabs()
+        {
+            tabControlFile.TabPages.Clear();
+
+            foreach (string fileId in this.qikFile.Templates)
+            {
+                string title = this.qikFile.GetTemplateTitle(fileId);
+                TabPage tabPage = NewTab(fileId, title);
+                tabControlFile.TabPages.Add(tabPage);
+            }
+        }
+
+        private TabPage NewTab(string id, string title)
+        {
+            TabPage tabPage = new TabPage(title);
+            tabPage.Name = id;
+            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl();
+            tabPage.Controls.Add(codeCtrl);
+            codeCtrl.Dock = DockStyle.Fill;
+
+            return tabPage;
         }
     }
 }

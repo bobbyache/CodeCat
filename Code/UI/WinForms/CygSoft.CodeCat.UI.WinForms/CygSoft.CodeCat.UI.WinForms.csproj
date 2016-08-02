@@ -36,11 +36,12 @@
     <ApplicationIcon>GEARWEEL.ICO</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Alsing.SyntaxBox, Version=1.4.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Alsing.SyntaxBox.1.4.10.1\lib\net45\Alsing.SyntaxBox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CygX1.UI.WinForms.RecentFileMenu">
       <HintPath>..\..\..\External\CygX1.UI.WinForms.RecentFileMenu.dll</HintPath>
-    </Reference>
-    <Reference Include="SyntaxBox">
-      <HintPath>..\..\..\External\SyntaxBox.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -61,6 +62,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\QikTemplateCodeCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\QikTemplateCodeCtrl.Designer.cs">
+      <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\AboutBoxDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +153,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UiResource.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\QikTemplateCodeCtrl.resx">
+      <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AboutBoxDialog.resx">
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>
     </EmbeddedResource>
