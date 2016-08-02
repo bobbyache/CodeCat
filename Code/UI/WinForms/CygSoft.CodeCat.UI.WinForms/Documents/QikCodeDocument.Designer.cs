@@ -35,8 +35,6 @@
             this.toolstripTitle = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
-            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
-            this.cboSyntax = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolstripKeywords = new System.Windows.Forms.ToolStrip();
@@ -46,19 +44,14 @@
             this.btnDiscardChange = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolstripCommands = new System.Windows.Forms.ToolStrip();
-            this.txtIdentifier = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
-            this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
-            this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnAddTemplate = new System.Windows.Forms.ToolStripButton();
+            this.btnRemoveTemplate = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.btnAddTemplate = new System.Windows.Forms.ToolStripButton();
-            this.btnRemoveTemplate = new System.Windows.Forms.ToolStripButton();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -87,9 +80,7 @@
             // 
             this.toolstripTitle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
-            this.txtTitle,
-            this.toolStripLabel5,
-            this.cboSyntax});
+            this.txtTitle});
             this.toolstripTitle.Location = new System.Drawing.Point(0, 50);
             this.toolstripTitle.Name = "toolstripTitle";
             this.toolstripTitle.Size = new System.Drawing.Size(878, 25);
@@ -108,19 +99,7 @@
             // txtTitle
             // 
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(606, 25);
-            // 
-            // toolStripLabel5
-            // 
-            this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(41, 22);
-            this.toolStripLabel5.Text = "Syntax";
-            // 
-            // cboSyntax
-            // 
-            this.cboSyntax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSyntax.Name = "cboSyntax";
-            this.cboSyntax.Size = new System.Drawing.Size(121, 25);
+            this.txtTitle.Size = new System.Drawing.Size(770, 25);
             // 
             // toolStripSeparator2
             // 
@@ -202,85 +181,6 @@
             this.toolstripCommands.TabIndex = 5;
             this.toolstripCommands.Text = "toolStrip4";
             // 
-            // txtIdentifier
-            // 
-            this.txtIdentifier.Name = "txtIdentifier";
-            this.txtIdentifier.ReadOnly = true;
-            this.txtIdentifier.Size = new System.Drawing.Size(658, 25);
-            this.txtIdentifier.Text = "fc61a31d-b0dd-4b91-8c7a-9a8125d8c4bc";
-            // 
-            // lblEditStatus
-            // 
-            this.lblEditStatus.AutoSize = false;
-            this.lblEditStatus.Name = "lblEditStatus";
-            this.lblEditStatus.Size = new System.Drawing.Size(100, 22);
-            this.lblEditStatus.Text = "No Changes";
-            this.lblEditStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cboFontSize
-            // 
-            this.cboFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFontSize.Items.AddRange(new object[] {
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16"});
-            this.cboFontSize.Name = "cboFontSize";
-            this.cboFontSize.Size = new System.Drawing.Size(75, 25);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.AutoSize = false;
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cboFontSize,
-            this.lblEditStatus,
-            this.txtIdentifier});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 625);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(878, 25);
-            this.toolStrip1.TabIndex = 9;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 75);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.tabControlFile);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.propertyGrid1);
-            this.splitContainer1.Size = new System.Drawing.Size(878, 550);
-            this.splitContainer1.SplitterDistance = 509;
-            this.splitContainer1.TabIndex = 10;
-            // 
-            // tabControlFile
-            // 
-            this.tabControlFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlFile.Location = new System.Drawing.Point(0, 0);
-            this.tabControlFile.Name = "tabControlFile";
-            this.tabControlFile.SelectedIndex = 0;
-            this.tabControlFile.Size = new System.Drawing.Size(509, 550);
-            this.tabControlFile.TabIndex = 3;
-            // 
-            // propertyGrid1
-            // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(365, 550);
-            this.propertyGrid1.TabIndex = 0;
-            // 
             // btnAddTemplate
             // 
             this.btnAddTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnAddTemplate.Image")));
@@ -299,6 +199,40 @@
             this.btnRemoveTemplate.Text = "Remove Template";
             this.btnRemoveTemplate.Click += new System.EventHandler(this.btnRemoveTemplate_Click);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 75);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.tabControlFile);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.propertyGrid1);
+            this.splitContainer1.Size = new System.Drawing.Size(878, 575);
+            this.splitContainer1.SplitterDistance = 509;
+            this.splitContainer1.TabIndex = 10;
+            // 
+            // tabControlFile
+            // 
+            this.tabControlFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlFile.Location = new System.Drawing.Point(0, 0);
+            this.tabControlFile.Name = "tabControlFile";
+            this.tabControlFile.SelectedIndex = 0;
+            this.tabControlFile.Size = new System.Drawing.Size(509, 575);
+            this.tabControlFile.TabIndex = 3;
+            // 
+            // propertyGrid1
+            // 
+            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.Size = new System.Drawing.Size(365, 575);
+            this.propertyGrid1.TabIndex = 0;
+            // 
             // QikCodeDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -308,7 +242,6 @@
             this.Controls.Add(this.toolstripTitle);
             this.Controls.Add(this.toolstripKeywords);
             this.Controls.Add(this.toolstripCommands);
-            this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "QikCodeDocument";
             this.Text = "QikCodeDocument";
@@ -318,8 +251,6 @@
             this.toolstripKeywords.PerformLayout();
             this.toolstripCommands.ResumeLayout(false);
             this.toolstripCommands.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -336,8 +267,6 @@
         private System.Windows.Forms.ToolStrip toolstripTitle;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private ToolStripSpringTextBox txtTitle;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel5;
-        private System.Windows.Forms.ToolStripComboBox cboSyntax;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStrip toolstripKeywords;
@@ -347,10 +276,6 @@
         private System.Windows.Forms.ToolStripButton btnDiscardChange;
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStrip toolstripCommands;
-        private ToolStripSpringTextBox txtIdentifier;
-        private System.Windows.Forms.ToolStripLabel lblEditStatus;
-        private System.Windows.Forms.ToolStripComboBox cboFontSize;
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabControl tabControlFile;
         private System.Windows.Forms.PropertyGrid propertyGrid1;

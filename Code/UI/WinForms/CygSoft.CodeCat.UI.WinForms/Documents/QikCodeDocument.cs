@@ -43,11 +43,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.Tag = qikFile.Id;
 
             BuildTabs();
-
-            SetDefaultFont();
             
             InitializeImages();
-            InitializeSyntaxList();
 
             EnableControls();
             ResetFields();
@@ -103,12 +100,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 if (this.isModified != value)
                 {
-                    if (this.isNew)
-                        lblEditStatus.Text = value ? "Edited" : "No Changes";
-                    else
-                        lblEditStatus.Text = value ? "Edited" : "Saved";
-
-                    lblEditStatus.ForeColor = value ? Color.DarkRed : Color.Black;
                     btnSave.Enabled = value;
                     btnDiscardChange.Enabled = value;
                     this.isModified = value;
@@ -206,20 +197,14 @@ namespace CygSoft.CodeCat.UI.WinForms
             chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
             btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
 
-            this.Icon = IconRepository.GetIcon(this.qikFile.Syntax);
-            lblEditStatus.Image = this.IconImage;
+            //this.Icon = IconRepository.GetIcon(this.qikFile.Syntax);
+            this.Icon = null;
         }
 
         private void RegisterEvents()
         {
 
             this.chkEdit.Click += (s, e) => { this.ShowIndexEditControls = chkEdit.Checked; };
-
-            cboFontSize.SelectedIndexChanged += (s, e) =>
-            {
-                //this.syntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
-                //this.snapshotListCtrl1.EditorFontSize = this.syntaxBox.FontSize;
-            };
 
             //this.qikFile.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
             //this.qikFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
@@ -228,13 +213,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             txtKeywords.TextChanged += SetModified;
             //syntaxBox.TextChanged += SetModified;
             btnDelete.Click += btnDelete_Click;
-            cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
-        }
-
-        private void InitializeSyntaxList()
-        {
-            cboSyntax.Items.Clear();
-            cboSyntax.Items.AddRange(application.GetSyntaxes());
         }
 
         private void EnableControls()
@@ -247,19 +225,16 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void ResetFields()
         {
             this.Text = qikFile.Title;
-            this.txtIdentifier.Text = qikFile.Id;
             this.txtKeywords.Text = qikFile.CommaDelimitedKeywords;
             this.txtTitle.Text = qikFile.Title;
             //this.syntaxBox.Document.Text = qikFile.Text;
-
-            SelectSyntax(qikFile.Syntax);
         }
 
         private void SaveValues()
         {
             this.qikFile.Title = this.txtTitle.Text.Trim();
             this.qikFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
-            this.qikFile.Syntax = this.cboSyntax.Text.Trim();
+            this.qikFile.Syntax = string.Empty;
             //this.qikFile.Text = syntaxBox.Document.Text;
             this.qikFile.Save();
             this.Text = qikFile.Title;
@@ -282,43 +257,8 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.txtKeywords.Focus();
                 return false;
             }
-            else if (string.IsNullOrWhiteSpace(this.cboSyntax.Text))
-            {
-                Dialogs.MandatoryFieldRequired(this, "Syntax");
-                this.ShowIndexEditControls = true;
-                this.cboSyntax.Focus();
-                return false;
-            }
             else
                 return true;
-        }
-
-        private void SetDefaultFont()
-        {
-            int index = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
-            if (index >= 0)
-                cboFontSize.SelectedIndex = index;
-            else
-                cboFontSize.SelectedIndex = 4;
-        }
-
-        private void SelectSyntax(string syntax)
-        {
-            // ensures that all controls are up to date with the new syntax.
-            string syn = syntax.ToUpper();
-
-            foreach (object item in cboSyntax.Items)
-            {
-                if (item.ToString() == syn)
-                    cboSyntax.SelectedItem = item;
-            }
-
-            string syntaxFile = application.GetSyntaxFile(syntax);
-            //this.syntaxBox.Document.SyntaxFile = syntaxFile;
-            //this.snapshotListCtrl1.SyntaxFile = syntaxFile;
-
-            this.Icon = IconRepository.GetIcon(syntax);
-            this.lblEditStatus.Image = IconRepository.GetIcon(syntax).ToBitmap();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -383,12 +323,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ResetFields();
                 this.IsModified = false;
             }
-        }
-
-        private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.IsModified = true;
-            SelectSyntax(cboSyntax.SelectedItem.ToString());
         }
 
         private void btnAddTemplate_Click(object sender, EventArgs e)
