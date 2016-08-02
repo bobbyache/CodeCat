@@ -236,6 +236,14 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.qikFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
             this.qikFile.Syntax = string.Empty;
             //this.qikFile.Text = syntaxBox.Document.Text;
+
+            foreach (TabPage tabPage in tabControlFile.TabPages)
+            {
+                QikTemplateCodeCtrl templateControl = tabPage.Controls[0] as QikTemplateCodeCtrl;
+                this.qikFile.SetTemplateTitle(tabPage.Name, templateControl.Title);
+                this.qikFile.SetTemplateText(tabPage.Name, templateControl.TemplateText);
+            }
+
             this.qikFile.Save();
             this.Text = qikFile.Title;
             this.txtKeywords.Text = this.qikFile.CommaDelimitedKeywords;
@@ -329,8 +337,9 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             string fileId = this.qikFile.AddTemplate();
             string title = this.qikFile.GetTemplateTitle(fileId);
+            string code = this.qikFile.GetTemplateText(fileId);
 
-            TabPage tabPage = NewTab(fileId, title);
+            TabPage tabPage = NewTab(fileId, title, code);
             tabControlFile.TabPages.Add(tabPage);
             //tabControlFile.SelectedIndex = tabControlFile.tab
             //tabPage.Select();
@@ -351,18 +360,21 @@ namespace CygSoft.CodeCat.UI.WinForms
             foreach (string fileId in this.qikFile.Templates)
             {
                 string title = this.qikFile.GetTemplateTitle(fileId);
-                TabPage tabPage = NewTab(fileId, title);
+                string code = this.qikFile.GetTemplateText(fileId);
+                TabPage tabPage = NewTab(fileId, title, code);
                 tabControlFile.TabPages.Add(tabPage);
             }
         }
 
-        private TabPage NewTab(string id, string title)
+        private TabPage NewTab(string id, string title, string code)
         {
             TabPage tabPage = new TabPage(title);
             tabPage.Name = id;
             QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl();
             tabPage.Controls.Add(codeCtrl);
             codeCtrl.Dock = DockStyle.Fill;
+            codeCtrl.Title = title;
+            codeCtrl.TemplateText = code;
 
             return tabPage;
         }

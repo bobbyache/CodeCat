@@ -124,11 +124,36 @@ namespace CygSoft.CodeCat.Domain.Qik
             fileManager.RemoveTemplate(fileName);
         }
 
+
+        public void SetTemplateSyntax(string fileName, string syntax)
+        {
+            this.fileManager.SetTemplateSyntax(fileName, syntax);
+        }
+
+        public string GetTemplateSyntax(string fileName)
+        {
+            return this.fileManager.GetTemplateSyntax(fileName);
+        }
+
+        public void SetTemplateText(string fileName, string text)
+        {
+            this.fileManager.SetTemplateText(fileName, text);
+        }
+
+        public string GetTemplateText(string fileName)
+        {
+            return this.fileManager.GetTemplateText(fileName);
+        }
+
+        public void SetTemplateTitle(string fileName, string title)
+        {
+            this.fileManager.SetTemplateTitle(fileName, title);
+        }
+
         public string GetTemplateTitle(string fileName)
         {
             return fileManager.GetTemplateTitle(fileName);
         }
-
 
         private void IncrementHitCount()
         {

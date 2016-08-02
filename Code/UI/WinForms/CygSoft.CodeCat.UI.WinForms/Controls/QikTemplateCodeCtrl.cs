@@ -16,5 +16,23 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             InitializeComponent();
         }
+
+        public string Title
+        {
+            get { return this.txtTitle.Text; }
+            set { this.txtTitle.Text = value; }
+        }
+
+        public string TemplateText
+        {
+            get { return this.syntaxBoxControl1.Document.Text; }
+            set { this.syntaxBoxControl1.Document.Text = value; }
+        }
+
+        //public string Syntax
+        //{
+        //    get { return this.cboSyntax.Text; }
+        //    set { this.txtTitle.Text = value; }
+        //}
     }
 }
