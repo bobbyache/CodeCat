@@ -20,11 +20,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private CodeFile codeFile;
         private AppFacade application;
 
-        public Image IconImage
-        {
-            get { return this.Icon.ToBitmap(); }
-        }
-
         public SnippetDocument(CodeFile codeFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
@@ -53,6 +48,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             // event registration after all properties are set...
             base.Deleting += SnippetDocument_Deleting;
             base.Saving += SnippetDocument_Saving;
+            base.HeaderFieldsVisibilityChanged += SnippetDocument_HeaderFieldsVisibilityChanged;
             base.ModifyStatusChanged += SnippetDocument_ModifyStatusChanged;
             base.NewStatusChanged += SnippetDocument_NewStatusChanged;
 
@@ -129,16 +125,18 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return null;
             }
         }
-        
+
         public bool ShowIndexEditControls
         {
-            get { return this.chkEdit.Checked; }
-            set
-            {
-                this.chkEdit.Checked = value;
-                this.toolstripKeywords.Visible = value;
-                this.toolstripTitle.Visible = value;
-            }
+            get { return base.HeaderFieldsVisible; }
+            set { base.HeaderFieldsVisible = value; }
+        }
+
+        private void SnippetDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
+        {
+            this.chkEdit.Checked = base.HeaderFieldsVisible;
+            this.toolstripKeywords.Visible = base.HeaderFieldsVisible;
+            this.toolstripTitle.Visible = base.HeaderFieldsVisible;
         }
 
         public void FlagSilentClose()

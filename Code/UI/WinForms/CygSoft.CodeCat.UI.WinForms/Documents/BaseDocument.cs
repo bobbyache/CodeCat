@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,12 +18,18 @@ namespace CygSoft.CodeCat.UI.WinForms
         public event EventHandler DocumentDeleted;
         public event EventHandler<DocumentSavedFileEventArgs> DocumentSaved;
 
+        protected event EventHandler HeaderFieldsVisibilityChanged;
         protected event EventHandler ModifyStatusChanged;
         protected event EventHandler NewStatusChanged;
         protected event EventHandler Saving;
         protected event EventHandler Deleting;
 
         private bool flagForDelete = false;
+
+        public Image IconImage
+        {
+            get { return this.Icon.ToBitmap(); }
+        }
 
         protected bool isNew;
         public virtual bool IsNew
@@ -54,12 +61,29 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        private bool headerFieldsVisible;
+        public bool HeaderFieldsVisible
+        {
+            get { return headerFieldsVisible; }
+            set
+            {
+                this.headerFieldsVisible = value;
+                if (HeaderFieldsVisibilityChanged != null)
+                    HeaderFieldsVisibilityChanged(this, new EventArgs());
+            }
+        }
+
         public bool CloseWithoutPrompts { get; set; }
 
         public BaseDocument()
         {
             InitializeComponent();
         }
+
+        //public IKeywordIndexItem GetKeywordIndex()
+        //{
+
+        //}
 
         protected void Delete()
         {

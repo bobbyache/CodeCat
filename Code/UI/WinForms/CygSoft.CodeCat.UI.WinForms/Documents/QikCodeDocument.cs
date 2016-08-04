@@ -20,11 +20,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private QikFile qikFile;
         private AppFacade application;
 
-        public Image IconImage
-        {
-            get { return this.Icon.ToBitmap(); }
-        }
-
         public QikCodeDocument(QikFile qikFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
@@ -47,6 +42,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             // event registration after all properties are set...
             base.Deleting += QikCodeDocument_Deleting;
             base.Saving += QikCodeDocument_Saving;
+            base.HeaderFieldsVisibilityChanged += QikCodeDocument_HeaderFieldsVisibilityChanged;
             base.ModifyStatusChanged += QikCodeDocument_ModifyStatusChanged;
             base.NewStatusChanged += QikCodeDocument_NewStatusChanged;
             RegisterEvents();
@@ -54,6 +50,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             // finally set the state of the document
             this.IsNew = isNew;
             this.IsModified = false;
+        }
+
+        private void QikCodeDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
+        {
+            this.chkEdit.Checked = base.HeaderFieldsVisible;
+            this.toolstripKeywords.Visible = base.HeaderFieldsVisible;
+            this.toolstripTitle.Visible = base.HeaderFieldsVisible;
         }
 
         private void QikCodeDocument_NewStatusChanged(object sender, EventArgs e)
@@ -126,13 +129,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public bool ShowIndexEditControls
         {
-            get { return this.chkEdit.Checked; }
-            set
-            {
-                this.chkEdit.Checked = value;
-                this.toolstripKeywords.Visible = value;
-                this.toolstripTitle.Visible = value;
-            }
+            get { return base.HeaderFieldsVisible; }
+            set { base.HeaderFieldsVisible = value; }
         }
 
         public void FlagSilentClose()
