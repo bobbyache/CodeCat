@@ -136,11 +136,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.toolstripTitle.Visible = base.HeaderFieldsVisible;
         }
 
-        public void FlagSilentClose()
-        {
-            base.CloseWithoutPrompts = true;
-        }
-
         public void AddKeywords(string keywords, bool flagModified = true)
         {
             // in fact, it seems that "codeFile" has already been updated because we have a reference to it in memory, but

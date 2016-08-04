@@ -128,11 +128,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.Delete();
         }
 
-        public void FlagSilentClose()
-        {
-            base.CloseWithoutPrompts = true;
-        }
-
         public void AddKeywords(string keywords, bool flagModified = true)
         {
             // in fact, it seems that "qikFile" has already been updated because we have a reference to it in memory, but

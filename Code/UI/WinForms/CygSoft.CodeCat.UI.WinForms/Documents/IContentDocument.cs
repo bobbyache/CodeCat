@@ -19,6 +19,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         string Text { get; set; }
         Image IconImage { get; }
+        bool CloseWithoutPrompts { get; set; }
         bool HeaderFieldsVisible { get; set; }
 
         bool IsNew { get; }
@@ -28,8 +29,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         void Activate();
 
         bool SaveChanges();
-
-        void FlagSilentClose();
         void Close();
 
         void AddKeywords(string keywords, bool flagModified = true);

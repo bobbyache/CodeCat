@@ -429,7 +429,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 snippetDocs.Remove(snippetDoc);
                 // important, otherwise snippet for will throw a messagebox.
                 // we should have already been through the IsModified check process.
-                snippetDoc.FlagSilentClose();
+                snippetDoc.CloseWithoutPrompts = true;
                 snippetDoc.Close();
             }
         }
