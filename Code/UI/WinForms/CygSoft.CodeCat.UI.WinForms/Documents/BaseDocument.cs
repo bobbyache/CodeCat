@@ -29,6 +29,16 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected IPersistableTarget persistableTarget;
 
+        public string Id
+        {
+            get
+            {
+                if (this.persistableTarget != null)
+                    return this.persistableTarget.Id;
+                return null;
+            }
+        }
+
         public Image IconImage
         {
             get { return this.Icon.ToBitmap(); }

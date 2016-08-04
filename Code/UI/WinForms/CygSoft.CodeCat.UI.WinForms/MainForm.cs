@@ -106,7 +106,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             foreach (IKeywordIndexItem item in e.Items)
             {
                 IContentDocument document = dockPanel.Documents
-                    .Where(doc => (doc as IContentDocument).SnippetId == item.Id)
+                    .Where(doc => (doc as IContentDocument).Id == item.Id)
                     .OfType<IContentDocument>().SingleOrDefault();
 
                 if (document != null)
@@ -119,7 +119,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             foreach (IKeywordIndexItem item in e.Items)
             {
                 IContentDocument document = dockPanel.Documents
-                    .Where(doc => (doc as IContentDocument).SnippetId == item.Id)
+                    .Where(doc => (doc as IContentDocument).Id == item.Id)
                     .OfType<IContentDocument>().SingleOrDefault();
 
                 if (document != null)
@@ -366,7 +366,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private IContentDocument GetOpenDocument(string snippetId)
         {
             IContentDocument document = dockPanel.Documents
-                .Where(doc => (doc as IContentDocument).SnippetId == snippetId)
+                .Where(doc => (doc as IContentDocument).Id == snippetId)
                 .OfType<IContentDocument>().SingleOrDefault();
 
             return document;
@@ -381,7 +381,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private bool SnippetIsOpen(IKeywordIndexItem snippetIndex)
         {
-            return dockPanel.Documents.Any(doc => (doc as IContentDocument).SnippetId == snippetIndex.Id);
+            return dockPanel.Documents.Any(doc => (doc as IContentDocument).Id == snippetIndex.Id);
         }
 
         private string ItemCountCaption(int foundItems)
@@ -640,7 +640,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (e.Content is IContentDocument)
             {
                 IContentDocument snippetForm = e.Content as IContentDocument;
-                ToolStripMenuItem menuItem = mnuDocuments.DropDownItems[snippetForm.SnippetId] as ToolStripMenuItem;
+                ToolStripMenuItem menuItem = mnuDocuments.DropDownItems[snippetForm.Id] as ToolStripMenuItem;
                 if (menuItem != null)
                 {
                     menuItem.Click -= mnuDocumentWindow_Click;
@@ -662,7 +662,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 IContentDocument snippetForm = e.Content as IContentDocument;
                 ToolStripMenuItem menuItem = new ToolStripMenuItem(snippetForm.Text, null, mnuDocumentWindow_Click);
                 menuItem.Image = snippetForm.IconImage;
-                menuItem.Name = snippetForm.SnippetId;
+                menuItem.Name = snippetForm.Id;
                 menuItem.Tag = snippetForm;
                 mnuDocuments.DropDownItems.Add(menuItem);
             }

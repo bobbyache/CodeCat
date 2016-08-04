@@ -91,16 +91,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsModified = true;
         }
 
-        public string SnippetId
-        {
-            get
-            {
-                if (base.persistableTarget != null)
-                    return base.persistableTarget.Id;
-                return null;
-            }
-        }
-
         public IKeywordIndexItem KeywordIndex
         {
             get
@@ -194,7 +184,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.Text = base.persistableTarget.Title;
             this.txtKeywords.Text = base.persistableTarget.CommaDelimitedKeywords;
             this.txtTitle.Text = base.persistableTarget.Title;
-            //this.syntaxBox.Document.Text = qikFile.Text;
         }
 
         protected override bool ValidateChanges()
@@ -243,8 +232,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.persistableTarget.Close();
             base.OnFormClosed(e);
         }
-
-
 
         private void btnSave_Click(object sender, EventArgs e)
         {

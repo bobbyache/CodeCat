@@ -99,16 +99,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsModified = true;
         }
 
-        public string SnippetId
-        {
-            get
-            {
-                if (base.persistableTarget != null)
-                    return base.persistableTarget.Id;
-                return null;
-            }
-        }
-
         public IKeywordIndexItem KeywordIndex
         {
             get

@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         event EventHandler DocumentDeleted;
         event EventHandler<DocumentSavedFileEventArgs> DocumentSaved;
 
-        string SnippetId { get; }
+        string Id { get; }
         IKeywordIndexItem KeywordIndex { get; }
 
         string Text { get; set; }
