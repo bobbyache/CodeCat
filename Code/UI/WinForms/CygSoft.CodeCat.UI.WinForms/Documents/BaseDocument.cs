@@ -78,6 +78,10 @@ namespace CygSoft.CodeCat.UI.WinForms
         public BaseDocument()
         {
             InitializeComponent();
+
+            this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
+            this.CloseButtonVisible = true;
+            this.CloseButton = true;
         }
 
         //public IKeywordIndexItem GetKeywordIndex()

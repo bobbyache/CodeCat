@@ -23,10 +23,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         public QikCodeDocument(QikFile qikFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
-            
-            this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
-            this.CloseButtonVisible = true;
-            this.CloseButton = true;
 
             this.application = application;
             this.qikFile = qikFile;
@@ -48,8 +44,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             RegisterEvents();
 
             // finally set the state of the document
-            this.IsNew = isNew;
-            this.IsModified = false;
+            base.IsNew = isNew;
+            base.IsModified = false;
         }
 
         private void QikCodeDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)

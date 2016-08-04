@@ -25,11 +25,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeComponent();
             this.syntaxBox.AllowBreakPoints = false;
             
-            this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
             tabControl.Alignment = TabAlignment.Left;
             this.snapshotsTab = this.tabPageSnapshots;
-            this.CloseButtonVisible = true;
-            this.CloseButton = true;
 
             this.application = application;
             this.codeFile = codeFile;
