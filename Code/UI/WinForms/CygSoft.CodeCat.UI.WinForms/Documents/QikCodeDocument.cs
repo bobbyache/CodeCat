@@ -185,7 +185,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             TabPage tabPage = new TabPage(title);
             tabPage.Name = id;
 
-            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(qikFile, id);
+            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(application, qikFile, id);
             codeCtrl.Modified += codeCtrl_Modified;
             tabPage.Controls.Add(codeCtrl);
             codeCtrl.Dock = DockStyle.Fill;

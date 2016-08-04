@@ -8,25 +8,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain.Qik;
+using CygSoft.CodeCat.Domain;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class QikTemplateCodeCtrl : UserControl
     {
         public event EventHandler Modified;
-        //public event EventHandler CloseRequest;
 
         private QikFile qikFile;
+        private AppFacade application;
 
-        public QikTemplateCodeCtrl(QikFile qikFile, string templateId)
+        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, string templateId)
         {
             InitializeComponent();
+            
 
+            this.application = application;
             this.qikFile = qikFile;
             this.Id = templateId;
 
+            SetDefaultFont();
+            InitializeSyntaxList();
+
             txtTitle.Text = qikFile.GetTemplateTitle(templateId);
             templateSyntaxDocument.Text = qikFile.GetTemplateText(templateId);
+            SelectSyntax(qikFile.GetTemplateSyntax(this.Id));
 
             this.IsModified = false;
 
@@ -55,8 +62,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             qikFile.ContentSaved += qikFile_ContentSaved;
             qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
 
+            cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
+            cboFontSize.SelectedIndexChanged += cboFontSize_SelectedIndexChanged;
             txtTitle.TextChanged += SetModified;
             templateSyntaxBox.TextChanged += SetModified;
+        }
+
+        private void cboFontSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.templateSyntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
+            this.outputSyntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
         }
 
         private void qikFile_BeforeContentSaved(object sender, EventArgs e)
@@ -65,13 +80,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 qikFile.SetTemplateTitle(this.Id, txtTitle.Text);
                 qikFile.SetTemplateText(this.Id, templateSyntaxDocument.Text);
+                qikFile.SetTemplateSyntax(this.Id, cboSyntax.SelectedItem.ToString());
             }
-            //else
-            //{
-            //    // this template has been removed.
-            //    if (this.CloseRequest != null)
-            //        CloseRequest(this, new EventArgs());
-            //}
         }
 
         private void qikFile_ContentSaved(object sender, EventArgs e)
@@ -91,11 +101,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
                 txtTitle.Text = qikFile.GetTemplateTitle(this.Id);
                 templateSyntaxDocument.Text = qikFile.GetTemplateText(this.Id);
+                SelectSyntax(qikFile.GetTemplateSyntax(this.Id));
                 this.IsModified = false;
 
                 txtTitle.TextChanged += SetModified;
                 templateSyntaxBox.TextChanged += SetModified;
             }
+        }
+
+        private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectSyntax(cboSyntax.SelectedItem.ToString());
+
+            this.IsModified = true;
+
+            if (this.Modified != null)
+                this.Modified(this, new EventArgs()); 
         }
 
         private void SetModified(object sender, EventArgs e)
@@ -105,5 +126,50 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             if (this.Modified != null)
                 this.Modified(this, new EventArgs());
         }
+
+        private void InitializeSyntaxList()
+        {
+            cboSyntax.Items.Clear();
+            cboSyntax.Items.AddRange(application.GetSyntaxes());
+        }
+
+        private void SelectSyntax(string syntax)
+        {
+            string syn;
+            if (string.IsNullOrEmpty(syntax))
+                syn = ConfigSettings.DefaultSyntax.ToUpper();
+            else
+                syn = syntax.ToUpper();
+
+            foreach (object item in cboSyntax.Items)
+            {
+                if (item.ToString() == syn)
+                    cboSyntax.SelectedItem = item;
+            }
+
+            string syntaxFile = application.GetSyntaxFile(syn);
+            this.outputSyntaxBox.Document.SyntaxFile = syntaxFile;
+
+            //this.Icon = IconRepository.GetIcon(syntax);
+            this.lblEditStatus.Image = IconRepository.GetIcon(syn).ToBitmap();
+        }
+
+        private void SetDefaultFont()
+        {
+            int index = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
+            if (index >= 0)
+                cboFontSize.SelectedIndex = index;
+            else
+                cboFontSize.SelectedIndex = 4;
+        }
+
+        private void templateFileTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (templateFileTabControl.SelectedTab.Name == "outputTabPage")
+            {
+                outputSyntaxDocument.Text = templateSyntaxDocument.Text;
+            }
+        }
+
     }
 }
