@@ -37,6 +37,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             // event registration after all properties are set...
             base.Deleting += QikCodeDocument_Deleting;
             base.Saving += QikCodeDocument_Saving;
+            base.Reverting += QikCodeDocument_Reverting;
             base.HeaderFieldsVisibilityChanged += QikCodeDocument_HeaderFieldsVisibilityChanged;
             base.ModifyStatusChanged += QikCodeDocument_ModifyStatusChanged;
             base.NewStatusChanged += QikCodeDocument_NewStatusChanged;
@@ -45,6 +46,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             // finally set the state of the document
             base.IsNew = isNew;
             base.IsModified = false;
+        }
+
+        private void QikCodeDocument_Reverting(object sender, EventArgs e)
+        {
+            ResetFields();
         }
 
         private void QikCodeDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
@@ -252,12 +258,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnDiscardChange_Click(object sender, EventArgs e)
         {
-            DialogResult result = Dialogs.DiscardSnippetChangesDialogPrompt(this);
-            if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                ResetFields();
-                this.IsModified = false;
-            }
+            base.RevertChanges();
         }
 
         private void btnAddTemplate_Click(object sender, EventArgs e)

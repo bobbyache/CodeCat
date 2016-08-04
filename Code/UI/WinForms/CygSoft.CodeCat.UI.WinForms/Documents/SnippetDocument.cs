@@ -45,6 +45,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             // event registration after all properties are set...
             base.Deleting += SnippetDocument_Deleting;
             base.Saving += SnippetDocument_Saving;
+            base.Reverting += SnippetDocument_Reverting;
             base.HeaderFieldsVisibilityChanged += SnippetDocument_HeaderFieldsVisibilityChanged;
             base.ModifyStatusChanged += SnippetDocument_ModifyStatusChanged;
             base.NewStatusChanged += SnippetDocument_NewStatusChanged;
@@ -54,6 +55,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             // finally set the state of the document
             this.IsNew = isNew;
             this.IsModified = false;
+        }
+
+        private void SnippetDocument_Reverting(object sender, EventArgs e)
+        {
+            ResetFields();
         }
 
         private void SnippetDocument_NewStatusChanged(object sender, EventArgs e)
@@ -366,12 +372,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnDiscardChange_Click(object sender, EventArgs e)
         {
-            DialogResult result = Dialogs.DiscardSnippetChangesDialogPrompt(this);
-            if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                ResetFields();
-                this.IsModified = false;
-            }
+            base.RevertChanges();
         }
 
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)

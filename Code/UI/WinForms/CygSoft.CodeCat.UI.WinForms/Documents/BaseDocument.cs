@@ -23,6 +23,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         protected event EventHandler NewStatusChanged;
         protected event EventHandler Saving;
         protected event EventHandler Deleting;
+        protected event EventHandler Reverting;
 
         private bool flagForDelete = false;
 
@@ -114,6 +115,18 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected virtual bool ValidateChanges() { return false; }
         protected virtual void SaveFields() { }
+
+        protected void RevertChanges()
+        {
+            DialogResult result = Dialogs.RevertDocumentChangesDialogPrompt(this);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                if (Reverting != null)
+                    Reverting(this, new EventArgs());
+
+                this.IsModified = false;
+            }
+        }
 
         protected bool Save(IPersistableTarget target, IContentDocument contentDocument)
         {

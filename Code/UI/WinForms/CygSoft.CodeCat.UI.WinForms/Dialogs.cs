@@ -33,9 +33,9 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
-        public static DialogResult DiscardSnippetChangesDialogPrompt(IWin32Window owner)
+        public static DialogResult RevertDocumentChangesDialogPrompt(IWin32Window owner)
         {
-            return MessageBox.Show(owner, "Sure you want to discard changes made to this snippet?",
+            return MessageBox.Show(owner, "Sure you want to discard changes made to this document?",
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
