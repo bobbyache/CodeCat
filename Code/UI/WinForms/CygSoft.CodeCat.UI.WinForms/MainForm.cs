@@ -243,7 +243,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 {
                     IKeywordIndexItem[] keywordIndexItems = this.dockPanel.Contents.OfType<IContentDocument>()
                         .Where(doc => doc.IsNew == false)
-                        .Select(doc => doc.KeywordIndex).ToArray();
+                        .Select(doc => doc.GetKeywordIndex()).ToArray();
 
                     application.SetLastOpenedIds(keywordIndexItems);
                 }

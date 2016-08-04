@@ -91,16 +91,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsModified = true;
         }
 
-        public IKeywordIndexItem KeywordIndex
-        {
-            get
-            {
-                if (base.persistableTarget != null)
-                    return (base.persistableTarget as QikFile).IndexItem;
-                return null;
-            }
-        }
-
         public string Keywords
         {
             get

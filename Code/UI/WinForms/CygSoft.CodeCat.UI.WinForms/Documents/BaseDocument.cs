@@ -97,13 +97,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.CloseButton = true;
         }
 
-        //// can't currently do this because IndexItem is not a part of IPersistableTarget.
-        //public IKeywordIndexItem GetKeywordIndex()
-        //{
-        //    if (this.persistableTarget != null)
-        //        return this.persistableTarget.IndexItem;
-        //    return null;
-        //}
+        public IKeywordIndexItem GetKeywordIndex()
+        {
+            if (this.persistableTarget != null)
+                return this.persistableTarget.IndexItem;
+            return null;
+        }
 
         protected void Delete()
         {
