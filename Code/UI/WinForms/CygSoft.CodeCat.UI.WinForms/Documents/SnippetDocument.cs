@@ -17,7 +17,6 @@ namespace CygSoft.CodeCat.UI.WinForms
     public partial class SnippetDocument : BaseDocument, IContentDocument
     {
         private TabPage snapshotsTab;
-        private CodeFile codeFile;
         private AppFacade application;
 
         public SnippetDocument(CodeFile codeFile, AppFacade application, bool isNew = false)
@@ -29,7 +28,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.snapshotsTab = this.tabPageSnapshots;
 
             this.application = application;
-            this.codeFile = codeFile;
+            base.persistableTarget = codeFile;
+
             this.Tag = codeFile.Id;
 
             SetDefaultFont();
@@ -80,12 +80,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void SnippetDocument_Deleting(object sender, EventArgs e)
         {
-            this.codeFile.Delete();
+            base.persistableTarget.Delete();
         }
 
         public bool SaveChanges()
         {
-            return base.Save(this.codeFile, this);
+            return base.Save(base.persistableTarget, this);
         }
 
         private void SetModified(object sender, EventArgs e)
@@ -97,8 +97,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             get
             {
-                if (this.codeFile != null)
-                    return this.codeFile.Id;
+                if (base.persistableTarget != null)
+                    return base.persistableTarget.Id;
                 return null;
             }
         }
@@ -107,8 +107,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             get
             {
-                if (this.codeFile != null)
-                    return this.codeFile.IndexItem;
+                if (base.persistableTarget != null)
+                    return (base.persistableTarget as CodeFile).IndexItem;
                 return null;
             }
         }
@@ -117,8 +117,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             get
             {
-                if (this.codeFile != null)
-                    return this.codeFile.CommaDelimitedKeywords;
+                if (base.persistableTarget != null)
+                    return base.persistableTarget.CommaDelimitedKeywords;
                 return null;
             }
         }
@@ -140,11 +140,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             // in fact, it seems that "codeFile" has already been updated because we have a reference to it in memory, but
             // this is just a "defensive programming" approach.
             if (flagModified)
-                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(this.codeFile.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
             else
             {
                 txtKeywords.TextChanged -= SetModified;
-                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(this.codeFile.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
                 txtKeywords.TextChanged += SetModified;
             }
         }
@@ -154,12 +154,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             // in fact, it seems that "codeFile" has already been updated because we have a reference to it in memory, but
             // this is just a "defensive programming" approach.
             if (flagModified)
-                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(this.codeFile.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
 
             else
             {
                 txtKeywords.TextChanged -= SetModified;
-                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(this.codeFile.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
                 txtKeywords.TextChanged += SetModified;
             }
         }
@@ -173,7 +173,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
             btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
 
-            this.Icon = IconRepository.GetIcon(this.codeFile.Syntax);
+            this.Icon = IconRepository.GetIcon((base.persistableTarget as CodeFile).Syntax);
             lblEditStatus.Image = this.IconImage;
         }
 
@@ -197,8 +197,10 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.snapshotListCtrl1.EditorFontSize = this.syntaxBox.FontSize;
             };
 
-            this.codeFile.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
-            this.codeFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
+            CodeFile codeFile = base.persistableTarget as CodeFile;
+
+            codeFile.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
+            codeFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
 
             txtTitle.TextChanged += SetModified;
             txtKeywords.TextChanged += SetModified;
@@ -224,6 +226,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void ResetFields()
         {
+            CodeFile codeFile = base.persistableTarget as CodeFile;
+
             this.Text = codeFile.Title;
             this.txtIdentifier.Text = codeFile.Id;
             this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
@@ -235,14 +239,16 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected override void SaveFields()
         {
-            this.codeFile.Title = this.txtTitle.Text.Trim();
-            this.codeFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
-            this.codeFile.Syntax = this.cboSyntax.Text.Trim();
-            this.codeFile.Text = syntaxBox.Document.Text;
-            this.codeFile.Save();
-            this.btnTakeSnapshot.Enabled = true;
-            this.Text = codeFile.Title;
-            this.txtKeywords.Text = this.codeFile.CommaDelimitedKeywords;
+            CodeFile codeFile = base.persistableTarget as CodeFile;
+
+            codeFile.Title = this.txtTitle.Text.Trim();
+            codeFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
+            codeFile.Syntax = this.cboSyntax.Text.Trim();
+            codeFile.Text = syntaxBox.Document.Text;
+            codeFile.Save();
+            btnTakeSnapshot.Enabled = true;
+            Text = codeFile.Title;
+            this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
         }
 
         protected override bool ValidateChanges()
@@ -302,12 +308,14 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void UpdateSnapshotsTab()
         {
+            CodeFile codeFile = base.persistableTarget as CodeFile;
+
             if (!snapshotListCtrl1.Attached)
-                snapshotListCtrl1.Attach(this.codeFile);
+                snapshotListCtrl1.Attach(codeFile);
 
-            snapshotsTab.Text = string.Format("Snapshots ({0})", this.codeFile.Snapshots.Length);
+            snapshotsTab.Text = string.Format("Snapshots ({0})", codeFile.Snapshots.Length);
 
-            if (!this.codeFile.HasSnapshots)
+            if (!codeFile.HasSnapshots)
             {
                 if (tabControl.TabPages.Contains(snapshotsTab))
                     tabControl.TabPages.Remove(snapshotsTab);
@@ -317,12 +325,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 if (!tabControl.TabPages.Contains(snapshotsTab))
                     tabControl.TabPages.Add(snapshotsTab);
             }
-        }
-
-        protected override void OnFormClosed(FormClosedEventArgs e)
-        {
-            this.codeFile.Close();
-            base.OnFormClosed(e);
         }
 
         private void btnTakeSnapshot_Click(object sender, EventArgs e)
@@ -343,7 +345,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             if (result == DialogResult.OK)
             {
-                this.codeFile.TakeSnapshot(frm.Description);
+                (base.persistableTarget as CodeFile).TakeSnapshot(frm.Description);
             }
         }
 

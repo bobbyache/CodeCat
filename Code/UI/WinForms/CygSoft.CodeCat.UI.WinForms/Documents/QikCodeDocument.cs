@@ -17,7 +17,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class QikCodeDocument : BaseDocument, IContentDocument
     {
-        private QikFile qikFile;
         private AppFacade application;
 
         public QikCodeDocument(QikFile qikFile, AppFacade application, bool isNew = false)
@@ -25,7 +24,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeComponent();
 
             this.application = application;
-            this.qikFile = qikFile;
+            base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
 
             BuildTabs();
@@ -73,12 +72,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public bool SaveChanges()
         {
-            return base.Save(this.qikFile, this);
+            return base.Save(base.persistableTarget, this);
         }
 
         private void QikCodeDocument_Deleting(object sender, EventArgs e)
         {
-            this.qikFile.Delete();
+            base.persistableTarget.Delete();
         }
 
         private void SetModified(object sender, EventArgs e)
@@ -90,8 +89,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             get
             {
-                if (this.qikFile != null)
-                    return this.qikFile.Id;
+                if (base.persistableTarget != null)
+                    return base.persistableTarget.Id;
                 return null;
             }
         }
@@ -100,8 +99,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             get
             {
-                if (this.qikFile != null)
-                    return this.qikFile.IndexItem;
+                if (base.persistableTarget != null)
+                    return (base.persistableTarget as QikFile).IndexItem;
                 return null;
             }
         }
@@ -110,8 +109,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             get
             {
-                if (this.qikFile != null)
-                    return this.qikFile.CommaDelimitedKeywords;
+                if (base.persistableTarget != null)
+                    return base.persistableTarget.CommaDelimitedKeywords;
                 return null;
             }
         }
@@ -133,11 +132,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             // in fact, it seems that "qikFile" has already been updated because we have a reference to it in memory, but
             // this is just a "defensive programming" approach.
             if (flagModified)
-                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(this.qikFile.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
             else
             {
                 txtKeywords.TextChanged -= SetModified;
-                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(this.qikFile.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
                 txtKeywords.TextChanged += SetModified;
             }
         }
@@ -147,12 +146,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             // in fact, it seems that "qikFile" has already been updated because we have a reference to it in memory, but
             // this is just a "defensive programming" approach.
             if (flagModified)
-                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(this.qikFile.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
 
             else
             {
                 txtKeywords.TextChanged -= SetModified;
-                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(this.qikFile.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
                 txtKeywords.TextChanged += SetModified;
             }
         }
@@ -164,7 +163,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
             btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
 
-            //this.Icon = IconRepository.GetIcon(this.qikFile.Syntax);
+            //this.Icon = IconRepository.GetIcon(base.persistableTarget.Syntax);
             this.Icon = null;
         }
 
@@ -173,8 +172,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             this.chkEdit.Click += (s, e) => { base.HeaderFieldsVisible = chkEdit.Checked; };
 
-            //this.qikFile.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
-            //this.qikFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
+            //base.persistableTarget.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
+            //base.persistableTarget.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
 
             txtTitle.TextChanged += SetModified;
             txtKeywords.TextChanged += SetModified;
@@ -191,9 +190,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void ResetFields()
         {
-            this.Text = qikFile.Title;
-            this.txtKeywords.Text = qikFile.CommaDelimitedKeywords;
-            this.txtTitle.Text = qikFile.Title;
+            this.Text = base.persistableTarget.Title;
+            this.txtKeywords.Text = base.persistableTarget.CommaDelimitedKeywords;
+            this.txtTitle.Text = base.persistableTarget.Title;
             //this.syntaxBox.Document.Text = qikFile.Text;
         }
 
@@ -219,26 +218,28 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected override void SaveFields()
         {
-            this.qikFile.Title = this.txtTitle.Text.Trim();
-            this.qikFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
-            this.qikFile.Syntax = string.Empty;
-            //this.qikFile.Text = syntaxBox.Document.Text;
+            QikFile qikFile = base.persistableTarget as QikFile;
+
+            qikFile.Title = this.txtTitle.Text.Trim();
+            qikFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
+            qikFile.Syntax = string.Empty;
+            //qikFile.Text = syntaxBox.Document.Text;
 
             foreach (TabPage tabPage in tabControlFile.TabPages)
             {
                 QikTemplateCodeCtrl templateControl = tabPage.Controls[0] as QikTemplateCodeCtrl;
-                this.qikFile.SetTemplateTitle(tabPage.Name, templateControl.Title);
-                this.qikFile.SetTemplateText(tabPage.Name, templateControl.TemplateText);
+                qikFile.SetTemplateTitle(tabPage.Name, templateControl.Title);
+                qikFile.SetTemplateText(tabPage.Name, templateControl.TemplateText);
             }
 
-            this.qikFile.Save();
+            qikFile.Save();
             this.Text = qikFile.Title;
-            this.txtKeywords.Text = this.qikFile.CommaDelimitedKeywords;
+            this.txtKeywords.Text = qikFile.CommaDelimitedKeywords;
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            this.qikFile.Close();
+            base.persistableTarget.Close();
             base.OnFormClosed(e);
         }
 
@@ -261,9 +262,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddTemplate_Click(object sender, EventArgs e)
         {
-            string fileId = this.qikFile.AddTemplate();
-            string title = this.qikFile.GetTemplateTitle(fileId);
-            string code = this.qikFile.GetTemplateText(fileId);
+            QikFile qikFile = base.persistableTarget as QikFile;
+
+            string fileId = qikFile.AddTemplate();
+            string title = qikFile.GetTemplateTitle(fileId);
+            string code = qikFile.GetTemplateText(fileId);
 
             TabPage tabPage = NewTab(fileId, title, code);
             tabControlFile.TabPages.Add(tabPage);
@@ -274,19 +277,22 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnRemoveTemplate_Click(object sender, EventArgs e)
         {
+            QikFile qikFile = base.persistableTarget as QikFile;
+
             string fileTitle = tabControlFile.SelectedTab.Name;
-            this.qikFile.RemoveTemplate(fileTitle);
+            qikFile.RemoveTemplate(fileTitle);
             tabControlFile.TabPages.Remove(tabControlFile.SelectedTab);
         }
 
         private void BuildTabs()
         {
+            QikFile qikFile = base.persistableTarget as QikFile;
             tabControlFile.TabPages.Clear();
 
-            foreach (string fileId in this.qikFile.Templates)
+            foreach (string fileId in qikFile.Templates)
             {
-                string title = this.qikFile.GetTemplateTitle(fileId);
-                string code = this.qikFile.GetTemplateText(fileId);
+                string title = qikFile.GetTemplateTitle(fileId);
+                string code = qikFile.GetTemplateText(fileId);
                 TabPage tabPage = NewTab(fileId, title, code);
                 tabControlFile.TabPages.Add(tabPage);
             }

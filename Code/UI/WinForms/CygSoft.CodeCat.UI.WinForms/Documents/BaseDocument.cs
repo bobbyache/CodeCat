@@ -26,6 +26,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private bool flagForDelete = false;
 
+        protected IPersistableTarget persistableTarget;
+
         public Image IconImage
         {
             get { return this.Icon.ToBitmap(); }
@@ -161,6 +163,12 @@ namespace CygSoft.CodeCat.UI.WinForms
                 }
             }
             base.OnFormClosing(e);
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            this.persistableTarget.Close();
+            base.OnFormClosed(e);
         }
     }
 }
