@@ -18,18 +18,19 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         private TabPage snapshotsTab;
 
+        #region Constructors
+
         public SnippetDocument(CodeFile codeFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
-            this.syntaxBox.AllowBreakPoints = false;
-            
-            tabControl.Alignment = TabAlignment.Left;
-            this.snapshotsTab = this.tabPageSnapshots;
 
             base.application = application;
             base.persistableTarget = codeFile;
-
             this.Tag = codeFile.Id;
+
+            this.syntaxBox.AllowBreakPoints = false;
+            tabControl.Alignment = TabAlignment.Left;
+            this.snapshotsTab = this.tabPageSnapshots;
 
             SetDefaultFont();
             
@@ -48,53 +49,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.IsModified = false;
         }
 
-        private void SnippetDocument_Reverting(object sender, EventArgs e)
-        {
-            ResetFields();
-        }
+        #endregion
 
-        private void SnippetDocument_NewStatusChanged(object sender, EventArgs e)
-        {
-            this.btnDelete.Enabled = !base.IsNew;
-        }
-
-        private void SnippetDocument_ModifyStatusChanged(object sender, EventArgs e)
-        {
-            if (base.IsNew)
-                lblEditStatus.Text = base.IsModified ? "Edited" : "No Changes";
-            else
-                lblEditStatus.Text = base.IsModified ? "Edited" : "Saved";
-
-            lblEditStatus.ForeColor = base.IsModified ? Color.DarkRed : Color.Black;
-            btnSave.Enabled = base.IsModified;
-            btnDiscardChange.Enabled = base.IsModified;
-        }
-
-        private void SnippetDocument_Saving(object sender, EventArgs e)
-        {
-            this.SaveChanges();
-        }
-
-        private void SnippetDocument_Deleting(object sender, EventArgs e)
-        {
-            base.persistableTarget.Delete();
-        }
+        #region Public Methods
 
         public bool SaveChanges()
         {
             return base.Save(base.persistableTarget, this);
-        }
-
-        private void SetModified(object sender, EventArgs e)
-        {
-            this.IsModified = true;
-        }
-
-        private void SnippetDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
-        {
-            this.chkEdit.Checked = base.HeaderFieldsVisible;
-            this.toolstripKeywords.Visible = base.HeaderFieldsVisible;
-            this.toolstripTitle.Visible = base.HeaderFieldsVisible;
         }
 
         public void AddKeywords(string keywords, bool flagModified = true)
@@ -120,6 +81,60 @@ namespace CygSoft.CodeCat.UI.WinForms
                 txtKeywords.Text = base.RemoveKeywords(keywords);
                 txtKeywords.TextChanged += SetModified;
             }
+        }
+
+        #endregion
+
+        #region Overrides
+
+        protected override bool ValidateChanges()
+        {
+            if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
+            {
+                Dialogs.MandatoryFieldRequired(this, "Title");
+                base.HeaderFieldsVisible = true;
+                this.txtTitle.Focus();
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
+            {
+                Dialogs.MandatoryFieldRequired(this, "Keywords");
+                base.HeaderFieldsVisible = true;
+                this.txtKeywords.Focus();
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(this.cboSyntax.Text))
+            {
+                Dialogs.MandatoryFieldRequired(this, "Syntax");
+                base.HeaderFieldsVisible = true;
+                this.cboSyntax.Focus();
+                return false;
+            }
+            else
+                return true;
+        }
+
+        protected override void SaveFields()
+        {
+            CodeFile codeFile = base.persistableTarget as CodeFile;
+
+            codeFile.Title = this.txtTitle.Text.Trim();
+            codeFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
+            codeFile.Syntax = this.cboSyntax.Text.Trim();
+            codeFile.Text = syntaxBox.Document.Text;
+            codeFile.Save();
+            btnTakeSnapshot.Enabled = true;
+            Text = codeFile.Title;
+            this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void SetModified(object sender, EventArgs e)
+        {
+            this.IsModified = true;
         }
 
         private void InitializeImages()
@@ -174,12 +189,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
         }
 
-        private void InitializeSyntaxList()
-        {
-            cboSyntax.Items.Clear();
-            cboSyntax.Items.AddRange(application.GetSyntaxes());
-        }
-
         private void InitializeControls()
         {
             btnTakeSnapshot.Enabled = !IsNew;
@@ -202,45 +211,10 @@ namespace CygSoft.CodeCat.UI.WinForms
             SelectSyntax(codeFile.Syntax);
         }
 
-        protected override void SaveFields()
+        private void InitializeSyntaxList()
         {
-            CodeFile codeFile = base.persistableTarget as CodeFile;
-
-            codeFile.Title = this.txtTitle.Text.Trim();
-            codeFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
-            codeFile.Syntax = this.cboSyntax.Text.Trim();
-            codeFile.Text = syntaxBox.Document.Text;
-            codeFile.Save();
-            btnTakeSnapshot.Enabled = true;
-            Text = codeFile.Title;
-            this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
-        }
-
-        protected override bool ValidateChanges()
-        {
-            if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
-            {
-                Dialogs.MandatoryFieldRequired(this, "Title");
-                base.HeaderFieldsVisible = true;
-                this.txtTitle.Focus();
-                return false;
-            }
-            else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
-            {
-                Dialogs.MandatoryFieldRequired(this, "Keywords");
-                base.HeaderFieldsVisible = true;
-                this.txtKeywords.Focus();
-                return false;
-            }
-            else if (string.IsNullOrWhiteSpace(this.cboSyntax.Text))
-            {
-                Dialogs.MandatoryFieldRequired(this, "Syntax");
-                base.HeaderFieldsVisible = true;
-                this.cboSyntax.Focus();
-                return false;
-            }
-            else
-                return true;
+            cboSyntax.Items.Clear();
+            cboSyntax.Items.AddRange(application.GetSyntaxes());
         }
 
         private void SetDefaultFont()
@@ -292,6 +266,25 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        #endregion
+
+        #region Document Control Events
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            this.SaveChanges();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            base.Delete();
+        }
+
+        private void btnDiscardChange_Click(object sender, EventArgs e)
+        {
+            base.RevertChanges();
+        }
+
         private void btnTakeSnapshot_Click(object sender, EventArgs e)
         {
             // Important: that changes are saved. because the snapshot will immediately save the file
@@ -314,24 +307,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            base.Delete();
-        }
-
         private void btnDeleteSnapshot_Click(object sender, EventArgs e)
         {
             this.snapshotListCtrl1.DeleteSnapshot();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            this.SaveChanges();
-        }
-
-        private void btnDiscardChange_Click(object sender, EventArgs e)
-        {
-            base.RevertChanges();
         }
 
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
@@ -339,5 +317,50 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsModified = true;
             SelectSyntax(cboSyntax.SelectedItem.ToString());
         }
+
+        #endregion
+
+        #region Document Events
+
+        private void SnippetDocument_Reverting(object sender, EventArgs e)
+        {
+            ResetFields();
+        }
+
+        private void SnippetDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
+        {
+            this.chkEdit.Checked = base.HeaderFieldsVisible;
+            this.toolstripKeywords.Visible = base.HeaderFieldsVisible;
+            this.toolstripTitle.Visible = base.HeaderFieldsVisible;
+        }
+
+        private void SnippetDocument_NewStatusChanged(object sender, EventArgs e)
+        {
+            this.btnDelete.Enabled = !base.IsNew;
+        }
+
+        private void SnippetDocument_ModifyStatusChanged(object sender, EventArgs e)
+        {
+            if (base.IsNew)
+                lblEditStatus.Text = base.IsModified ? "Edited" : "No Changes";
+            else
+                lblEditStatus.Text = base.IsModified ? "Edited" : "Saved";
+
+            lblEditStatus.ForeColor = base.IsModified ? Color.DarkRed : Color.Black;
+            btnSave.Enabled = base.IsModified;
+            btnDiscardChange.Enabled = base.IsModified;
+        }
+
+        private void SnippetDocument_Saving(object sender, EventArgs e)
+        {
+            this.SaveChanges();
+        }
+
+        private void SnippetDocument_Deleting(object sender, EventArgs e)
+        {
+            base.persistableTarget.Delete();
+        }
+
+        #endregion
     }
 }

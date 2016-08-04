@@ -17,6 +17,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class QikCodeDocument : BaseDocument, IContentDocument
     {
+        #region Constructors
+
         public QikCodeDocument(QikFile qikFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
@@ -26,9 +28,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.Tag = qikFile.Id;
 
             BuildTabs();
-            
             InitializeImages();
-
             InitializeControls();
             ResetFields();
 
@@ -40,52 +40,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.IsModified = false;
         }
 
-        private void QikCodeDocument_Reverting(object sender, EventArgs e)
-        {
-            ResetFields();
-        }
+        #endregion
 
-        private void QikCodeDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
-        {
-            this.chkEdit.Checked = base.HeaderFieldsVisible;
-            this.toolstripKeywords.Visible = base.HeaderFieldsVisible;
-            this.toolstripTitle.Visible = base.HeaderFieldsVisible;
-        }
-
-        private void QikCodeDocument_NewStatusChanged(object sender, EventArgs e)
-        {
-            this.btnDelete.Enabled = !base.IsNew;
-        }
-
-        private void QikCodeDocument_ModifyStatusChanged(object sender, EventArgs e)
-        {
-            btnSave.Enabled = base.IsModified;
-            btnDiscardChange.Enabled = base.IsModified;
-        }
-
-        private void QikCodeDocument_Saving(object sender, EventArgs e)
-        {
-            this.SaveChanges();
-        }
+        #region Public Methods
 
         public bool SaveChanges()
         {
             return base.Save(base.persistableTarget, this);
-        }
-
-        private void QikCodeDocument_Deleting(object sender, EventArgs e)
-        {
-            base.persistableTarget.Delete();
-        }
-
-        private void SetModified(object sender, EventArgs e)
-        {
-            this.IsModified = true;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            this.Delete();
         }
 
         public void AddKeywords(string keywords, bool flagModified = true)
@@ -117,47 +78,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void InitializeImages()
-        {
-            btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
-            chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
-            //this.Icon = IconRepository.GetIcon(base.persistableTarget.Syntax);
-            this.Icon = null;
-        }
+        #endregion
 
-        private void RegisterEvents()
-        {
-
-            base.Deleting += QikCodeDocument_Deleting;
-            base.Saving += QikCodeDocument_Saving;
-            base.Reverting += QikCodeDocument_Reverting;
-            base.HeaderFieldsVisibilityChanged += QikCodeDocument_HeaderFieldsVisibilityChanged;
-            base.ModifyStatusChanged += QikCodeDocument_ModifyStatusChanged;
-
-            base.NewStatusChanged += QikCodeDocument_NewStatusChanged;
-            this.chkEdit.Click += (s, e) => { base.HeaderFieldsVisible = chkEdit.Checked; };
-
-            txtTitle.TextChanged += SetModified;
-            txtKeywords.TextChanged += SetModified;
-            //syntaxBox.TextChanged += SetModified;
-            btnDelete.Click += btnDelete_Click;
-        }
-
-        private void InitializeControls()
-        {
-            //btnSave.Enabled = false;
-            btnDiscardChange.Enabled = false;
-            btnDelete.Enabled = !this.IsNew;
-        }
-
-        private void ResetFields()
-        {
-            this.Text = base.persistableTarget.Title;
-            this.txtKeywords.Text = base.persistableTarget.CommaDelimitedKeywords;
-            this.txtTitle.Text = base.persistableTarget.Title;
-        }
+        #region Overrides
 
         protected override bool ValidateChanges()
         {
@@ -200,15 +123,96 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.txtKeywords.Text = qikFile.CommaDelimitedKeywords;
         }
 
-        protected override void OnFormClosed(FormClosedEventArgs e)
+        #endregion
+
+        #region Private Methods
+
+        private void SetModified(object sender, EventArgs e)
         {
-            base.persistableTarget.Close();
-            base.OnFormClosed(e);
+            this.IsModified = true;
+
         }
+        private void InitializeImages()
+        {
+            btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
+            chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
+            //this.Icon = IconRepository.GetIcon(base.persistableTarget.Syntax);
+            this.Icon = null;
+        }
+
+        private void RegisterEvents()
+        {
+
+            base.Deleting += QikCodeDocument_Deleting;
+            base.Saving += QikCodeDocument_Saving;
+            base.Reverting += QikCodeDocument_Reverting;
+            base.HeaderFieldsVisibilityChanged += QikCodeDocument_HeaderFieldsVisibilityChanged;
+            base.ModifyStatusChanged += QikCodeDocument_ModifyStatusChanged;
+
+            base.NewStatusChanged += QikCodeDocument_NewStatusChanged;
+            this.chkEdit.Click += (s, e) => { base.HeaderFieldsVisible = chkEdit.Checked; };
+
+            txtTitle.TextChanged += SetModified;
+            txtKeywords.TextChanged += SetModified;
+            //syntaxBox.TextChanged += SetModified;
+            btnDelete.Click += btnDelete_Click;
+        }
+
+        private void InitializeControls()
+        {
+            //btnSave.Enabled = false;
+            btnDiscardChange.Enabled = false;
+            btnDelete.Enabled = !this.IsNew;
+        }
+
+        private void ResetFields()
+        {
+            this.Text = base.persistableTarget.Title;
+            this.txtKeywords.Text = base.persistableTarget.CommaDelimitedKeywords;
+            this.txtTitle.Text = base.persistableTarget.Title;
+        }
+
+        private void BuildTabs()
+        {
+            QikFile qikFile = base.persistableTarget as QikFile;
+            tabControlFile.TabPages.Clear();
+
+            foreach (string fileId in qikFile.Templates)
+            {
+                string title = qikFile.GetTemplateTitle(fileId);
+                string code = qikFile.GetTemplateText(fileId);
+                TabPage tabPage = NewTab(fileId, title, code);
+                tabControlFile.TabPages.Add(tabPage);
+            }
+        }
+
+        private TabPage NewTab(string id, string title, string code)
+        {
+            TabPage tabPage = new TabPage(title);
+            tabPage.Name = id;
+            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl();
+            tabPage.Controls.Add(codeCtrl);
+            codeCtrl.Dock = DockStyle.Fill;
+            codeCtrl.Title = title;
+            codeCtrl.TemplateText = code;
+
+            return tabPage;
+        }
+
+        #endregion
+
+        #region Document Control Events
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             this.SaveChanges();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            this.Delete();
         }
 
         private void btnDiscardChange_Click(object sender, EventArgs e)
@@ -240,31 +244,43 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabControlFile.TabPages.Remove(tabControlFile.SelectedTab);
         }
 
-        private void BuildTabs()
-        {
-            QikFile qikFile = base.persistableTarget as QikFile;
-            tabControlFile.TabPages.Clear();
+        #endregion
 
-            foreach (string fileId in qikFile.Templates)
-            {
-                string title = qikFile.GetTemplateTitle(fileId);
-                string code = qikFile.GetTemplateText(fileId);
-                TabPage tabPage = NewTab(fileId, title, code);
-                tabControlFile.TabPages.Add(tabPage);
-            }
+        #region Document Events
+
+        private void QikCodeDocument_Reverting(object sender, EventArgs e)
+        {
+            ResetFields();
         }
 
-        private TabPage NewTab(string id, string title, string code)
+        private void QikCodeDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
         {
-            TabPage tabPage = new TabPage(title);
-            tabPage.Name = id;
-            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl();
-            tabPage.Controls.Add(codeCtrl);
-            codeCtrl.Dock = DockStyle.Fill;
-            codeCtrl.Title = title;
-            codeCtrl.TemplateText = code;
-
-            return tabPage;
+            this.chkEdit.Checked = base.HeaderFieldsVisible;
+            this.toolstripKeywords.Visible = base.HeaderFieldsVisible;
+            this.toolstripTitle.Visible = base.HeaderFieldsVisible;
         }
+
+        private void QikCodeDocument_NewStatusChanged(object sender, EventArgs e)
+        {
+            this.btnDelete.Enabled = !base.IsNew;
+        }
+
+        private void QikCodeDocument_ModifyStatusChanged(object sender, EventArgs e)
+        {
+            btnSave.Enabled = base.IsModified;
+            btnDiscardChange.Enabled = base.IsModified;
+        }
+
+        private void QikCodeDocument_Saving(object sender, EventArgs e)
+        {
+            this.SaveChanges();
+        }
+
+        private void QikCodeDocument_Deleting(object sender, EventArgs e)
+        {
+            base.persistableTarget.Delete();
+        }
+
+        #endregion
     }
 }
