@@ -15,20 +15,15 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class QikCodeDocument : DockContent, IContentDocument
+    public partial class QikCodeDocument : BaseDocument, IContentDocument
     {
         private QikFile qikFile;
-        private bool flagSilentClose = false;
-        private bool flagForDelete = false;
         private AppFacade application;
 
         public Image IconImage
         {
             get { return this.Icon.ToBitmap(); }
         }
-
-        public event EventHandler DocumentDeleted;
-        public event EventHandler<DocumentSavedFileEventArgs> DocumentSaved;
 
         public QikCodeDocument(QikFile qikFile, AppFacade application, bool isNew = false)
         {
@@ -50,11 +45,41 @@ namespace CygSoft.CodeCat.UI.WinForms
             ResetFields();
 
             // event registration after all properties are set...
+            base.Deleting += QikCodeDocument_Deleting;
+            base.Saving += QikCodeDocument_Saving;
+            base.ModifyStatusChanged += QikCodeDocument_ModifyStatusChanged;
+            base.NewStatusChanged += QikCodeDocument_NewStatusChanged;
             RegisterEvents();
 
             // finally set the state of the document
             this.IsNew = isNew;
             this.IsModified = false;
+        }
+
+        private void QikCodeDocument_NewStatusChanged(object sender, EventArgs e)
+        {
+            this.btnDelete.Enabled = !base.IsNew;
+        }
+
+        private void QikCodeDocument_ModifyStatusChanged(object sender, EventArgs e)
+        {
+            btnSave.Enabled = base.IsModified;
+            btnDiscardChange.Enabled = base.IsModified;
+        }
+
+        private void QikCodeDocument_Saving(object sender, EventArgs e)
+        {
+            this.SaveChanges();
+        }
+
+        public bool SaveChanges()
+        {
+            return base.Save(this.qikFile, this);
+        }
+
+        private void QikCodeDocument_Deleting(object sender, EventArgs e)
+        {
+            this.qikFile.Delete();
         }
 
         private void SetModified(object sender, EventArgs e)
@@ -92,35 +117,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private bool isModified;
-        public bool IsModified 
+
+
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-            get { return this.isModified; }
-            private set
-            {
-                if (this.isModified != value)
-                {
-                    btnSave.Enabled = value;
-                    btnDiscardChange.Enabled = value;
-                    this.isModified = value;
-                }
-            }
+            this.Delete();
         }
 
-        private bool isNew;
-        public bool IsNew 
-        {
-            get { return this.isNew; }
-            private set
-            {
-                if (this.isNew != value)
-                {
-                    this.btnDelete.Enabled = !value;
-                    this.isNew = value;
-                }
-            }
-        }
-        
         public bool ShowIndexEditControls
         {
             get { return this.chkEdit.Checked; }
@@ -132,33 +135,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        public bool SaveChanges()
-        {
-            if (ValidateChanges())
-            {
-                try
-                {
-                    SaveValues();
-
-                    this.IsModified = false;
-                    this.IsNew = false;
-
-                    if (DocumentSaved != null)
-                        DocumentSaved(this, new DocumentSavedFileEventArgs(this.qikFile, this));
-
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    Dialogs.SnippetSaveErrorNotification(this, ex);
-                }
-            }
-            return false;
-        }
-
         public void FlagSilentClose()
         {
-            flagSilentClose = true;
+            base.CloseWithoutPrompts = true;
         }
 
         public void AddKeywords(string keywords, bool flagModified = true)
@@ -230,26 +209,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             //this.syntaxBox.Document.Text = qikFile.Text;
         }
 
-        private void SaveValues()
-        {
-            this.qikFile.Title = this.txtTitle.Text.Trim();
-            this.qikFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
-            this.qikFile.Syntax = string.Empty;
-            //this.qikFile.Text = syntaxBox.Document.Text;
-
-            foreach (TabPage tabPage in tabControlFile.TabPages)
-            {
-                QikTemplateCodeCtrl templateControl = tabPage.Controls[0] as QikTemplateCodeCtrl;
-                this.qikFile.SetTemplateTitle(tabPage.Name, templateControl.Title);
-                this.qikFile.SetTemplateText(tabPage.Name, templateControl.TemplateText);
-            }
-
-            this.qikFile.Save();
-            this.Text = qikFile.Title;
-            this.txtKeywords.Text = this.qikFile.CommaDelimitedKeywords;
-        }
-
-        private bool ValidateChanges()
+        protected override bool ValidateChanges()
         {
             if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
             {
@@ -269,27 +229,23 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return true;
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
+        protected override void SaveFields()
         {
-            // if this form cancels close, seems to stop the application from closing!
-            // if forcing close (flagging for delete or closing from the main form)
-            // want any dialog boxes popping up. 
-            if (!flagSilentClose && !flagForDelete)
-            {
-                if (this.IsModified)
-                {
-                    if (e.CloseReason != CloseReason.MdiFormClosing && !flagSilentClose)
-                    {
-                        DialogResult result = Dialogs.SaveSnippetChangesDialogPrompt(this);
+            this.qikFile.Title = this.txtTitle.Text.Trim();
+            this.qikFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
+            this.qikFile.Syntax = string.Empty;
+            //this.qikFile.Text = syntaxBox.Document.Text;
 
-                        if (result == System.Windows.Forms.DialogResult.Yes)
-                            this.SaveChanges();
-                        else if (result == System.Windows.Forms.DialogResult.Cancel)
-                            e.Cancel = true;
-                    }
-                }
+            foreach (TabPage tabPage in tabControlFile.TabPages)
+            {
+                QikTemplateCodeCtrl templateControl = tabPage.Controls[0] as QikTemplateCodeCtrl;
+                this.qikFile.SetTemplateTitle(tabPage.Name, templateControl.Title);
+                this.qikFile.SetTemplateText(tabPage.Name, templateControl.TemplateText);
             }
-            base.OnFormClosing(e);
+
+            this.qikFile.Save();
+            this.Text = qikFile.Title;
+            this.txtKeywords.Text = this.qikFile.CommaDelimitedKeywords;
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
@@ -298,25 +254,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.OnFormClosed(e);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (this.IsNew)
-                return;
 
-            DialogResult result = Dialogs.DeleteSnippetDialogPrompt(this);
-
-            if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                string snippetId = this.SnippetId;
-                this.flagForDelete = true;
-                this.qikFile.Delete();
-
-                if (DocumentDeleted != null)
-                    DocumentDeleted(this, new EventArgs());
-
-                this.Close();
-            }
-        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {

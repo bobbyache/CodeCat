@@ -39,9 +39,9 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
-        public static DialogResult DeleteSnippetDialogPrompt(IWin32Window owner)
+        public static DialogResult DeleteDocumentDialogPrompt(IWin32Window owner)
         {
-            return MessageBox.Show(owner, "Sure you want to delete this snippet?",
+            return MessageBox.Show(owner, "Sure you want to delete this document?",
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
@@ -51,7 +51,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
-        public static DialogResult SaveSnippetChangesDialogPrompt(IWin32Window owner)
+        public static DialogResult SaveDocumentChangesDialogPrompt(IWin32Window owner)
         {
             return MessageBox.Show(owner, string.Format("{0}\n You have not saved this snippet. Would you like to save it first?", (owner as IContentDocument).Text),
                 string.Format("{0}: {1}", ConfigSettings.ApplicationTitle, (owner as IContentDocument).Text),

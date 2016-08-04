@@ -14,7 +14,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class SnippetDocument : DockContent, IContentDocument
+    public partial class SnippetDocument : BaseDocument, IContentDocument
     {
         private TabPage snapshotsTab;
         private CodeFile codeFile;
@@ -367,7 +367,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 {
                     if (e.CloseReason != CloseReason.MdiFormClosing && !flagSilentClose)
                     {
-                        DialogResult result = Dialogs.SaveSnippetChangesDialogPrompt(this);
+                        DialogResult result = Dialogs.SaveDocumentChangesDialogPrompt(this);
 
                         if (result == System.Windows.Forms.DialogResult.Yes)
                             this.SaveChanges();
@@ -412,7 +412,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (this.IsNew)
                 return;
 
-            DialogResult result = Dialogs.DeleteSnippetDialogPrompt(this);
+            DialogResult result = Dialogs.DeleteDocumentDialogPrompt(this);
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
