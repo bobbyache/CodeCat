@@ -19,7 +19,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         string Text { get; set; }
         Image IconImage { get; }
-        bool ShowIndexEditControls { get; set; }
+        bool HeaderFieldsVisible { get; set; }
 
         bool IsNew { get; }
         bool IsModified { get; }

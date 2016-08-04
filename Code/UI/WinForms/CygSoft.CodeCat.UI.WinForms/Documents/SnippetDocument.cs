@@ -126,12 +126,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        public bool ShowIndexEditControls
-        {
-            get { return base.HeaderFieldsVisible; }
-            set { base.HeaderFieldsVisible = value; }
-        }
-
         private void SnippetDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
         {
             this.chkEdit.Checked = base.HeaderFieldsVisible;
@@ -198,7 +192,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab && !this.isNew);
             };
 
-            this.chkEdit.Click += (s, e) => { this.ShowIndexEditControls = chkEdit.Checked; };
+            this.chkEdit.Click += (s, e) => { base.HeaderFieldsVisible = chkEdit.Checked; };
 
             cboFontSize.SelectedIndexChanged += (s, e) =>
             {
@@ -259,21 +253,21 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
             {
                 Dialogs.MandatoryFieldRequired(this, "Title");
-                this.ShowIndexEditControls = true;
+                base.HeaderFieldsVisible = true;
                 this.txtTitle.Focus();
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
             {
                 Dialogs.MandatoryFieldRequired(this, "Keywords");
-                this.ShowIndexEditControls = true;
+                base.HeaderFieldsVisible = true;
                 this.txtKeywords.Focus();
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.cboSyntax.Text))
             {
                 Dialogs.MandatoryFieldRequired(this, "Syntax");
-                this.ShowIndexEditControls = true;
+                base.HeaderFieldsVisible = true;
                 this.cboSyntax.Focus();
                 return false;
             }

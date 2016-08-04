@@ -314,7 +314,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 {
                     CodeFile codeFile = application.OpenCodeFileTarget(snippetIndex);
                     IContentDocument snippetForm = new SnippetDocument(codeFile, application);
-                    snippetForm.ShowIndexEditControls = false;
+                    snippetForm.HeaderFieldsVisible = false;
                     snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
                     snippetForm.DocumentSaved += snippetForm_DocumentSaved;
                     snippetForm.Show(dockPanel, DockState.Document);
@@ -323,7 +323,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 {
                     QikFile qikFile = application.OpenQikSnippet(snippetIndex);
                     IContentDocument snippetForm = new QikCodeDocument(qikFile, application);
-                    snippetForm.ShowIndexEditControls = false;
+                    snippetForm.HeaderFieldsVisible = false;
                     snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
                     snippetForm.DocumentSaved += snippetForm_DocumentSaved;
                     snippetForm.Show(dockPanel, DockState.Document);
@@ -348,7 +348,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
             snippetForm.DocumentSaved += snippetForm_DocumentSaved;
-            snippetForm.ShowIndexEditControls = true;
+            snippetForm.HeaderFieldsVisible = true;
             snippetForm.Show(dockPanel, DockState.Document);
         }
 
@@ -359,7 +359,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
             snippetForm.DocumentSaved += snippetForm_DocumentSaved;
-            snippetForm.ShowIndexEditControls = true;
+            snippetForm.HeaderFieldsVisible = true;
             snippetForm.Show(dockPanel, DockState.Document);
         }
 

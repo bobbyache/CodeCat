@@ -127,12 +127,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.Delete();
         }
 
-        public bool ShowIndexEditControls
-        {
-            get { return base.HeaderFieldsVisible; }
-            set { base.HeaderFieldsVisible = value; }
-        }
-
         public void FlagSilentClose()
         {
             base.CloseWithoutPrompts = true;
@@ -181,7 +175,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void RegisterEvents()
         {
 
-            this.chkEdit.Click += (s, e) => { this.ShowIndexEditControls = chkEdit.Checked; };
+            this.chkEdit.Click += (s, e) => { base.HeaderFieldsVisible = chkEdit.Checked; };
 
             //this.qikFile.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
             //this.qikFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
@@ -212,14 +206,14 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
             {
                 Dialogs.MandatoryFieldRequired(this, "Title");
-                this.ShowIndexEditControls = true;
+                base.HeaderFieldsVisible = true;
                 this.txtTitle.Focus();
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
             {
                 Dialogs.MandatoryFieldRequired(this, "Keywords");
-                this.ShowIndexEditControls = true;
+                base.HeaderFieldsVisible = true;
                 this.txtKeywords.Focus();
                 return false;
             }
