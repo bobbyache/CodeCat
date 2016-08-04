@@ -36,25 +36,17 @@ namespace CygSoft.CodeCat.UI.WinForms
             
             InitializeImages();
             InitializeSyntaxList();
+            InitializeControls();
 
-            EnableControls();
             ResetFields();
             UpdateSnapshotsTab();
 
             // event registration after all properties are set...
-            // event registration after all properties are set...
-            base.Deleting += SnippetDocument_Deleting;
-            base.Saving += SnippetDocument_Saving;
-            base.Reverting += SnippetDocument_Reverting;
-            base.HeaderFieldsVisibilityChanged += SnippetDocument_HeaderFieldsVisibilityChanged;
-            base.ModifyStatusChanged += SnippetDocument_ModifyStatusChanged;
-            base.NewStatusChanged += SnippetDocument_NewStatusChanged;
-
             RegisterEvents();
 
             // finally set the state of the document
-            this.IsNew = isNew;
-            this.IsModified = false;
+            base.IsNew = isNew;
+            base.IsModified = false;
         }
 
         private void SnippetDocument_Reverting(object sender, EventArgs e)
@@ -97,16 +89,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void SetModified(object sender, EventArgs e)
         {
             this.IsModified = true;
-        }
-
-        public string Keywords
-        {
-            get
-            {
-                if (base.persistableTarget != null)
-                    return base.persistableTarget.CommaDelimitedKeywords;
-                return null;
-            }
         }
 
         private void SnippetDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
@@ -160,6 +142,13 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void RegisterEvents()
         {
+            base.Deleting += SnippetDocument_Deleting;
+            base.Saving += SnippetDocument_Saving;
+            base.Reverting += SnippetDocument_Reverting;
+            base.HeaderFieldsVisibilityChanged += SnippetDocument_HeaderFieldsVisibilityChanged;
+            base.ModifyStatusChanged += SnippetDocument_ModifyStatusChanged;
+            base.NewStatusChanged += SnippetDocument_NewStatusChanged;
+
             this.snapshotListCtrl1.SnapshotSelectionChanged += (s, e) =>
             {
                 this.btnDeleteSnapshot.Enabled = (snapshotListCtrl1.SelectedSnapshot != null && tabControl.SelectedTab == snapshotsTab && !this.isNew);
@@ -196,7 +185,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             cboSyntax.Items.AddRange(application.GetSyntaxes());
         }
 
-        private void EnableControls()
+        private void InitializeControls()
         {
             btnTakeSnapshot.Enabled = !IsNew;
             btnDeleteSnapshot.Enabled = false;

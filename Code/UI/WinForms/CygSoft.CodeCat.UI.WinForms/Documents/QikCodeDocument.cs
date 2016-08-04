@@ -31,16 +31,10 @@ namespace CygSoft.CodeCat.UI.WinForms
             
             InitializeImages();
 
-            EnableControls();
+            InitializeControls();
             ResetFields();
 
             // event registration after all properties are set...
-            base.Deleting += QikCodeDocument_Deleting;
-            base.Saving += QikCodeDocument_Saving;
-            base.Reverting += QikCodeDocument_Reverting;
-            base.HeaderFieldsVisibilityChanged += QikCodeDocument_HeaderFieldsVisibilityChanged;
-            base.ModifyStatusChanged += QikCodeDocument_ModifyStatusChanged;
-            base.NewStatusChanged += QikCodeDocument_NewStatusChanged;
             RegisterEvents();
 
             // finally set the state of the document
@@ -91,18 +85,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsModified = true;
         }
 
-        public string Keywords
-        {
-            get
-            {
-                if (base.persistableTarget != null)
-                    return base.persistableTarget.CommaDelimitedKeywords;
-                return null;
-            }
-        }
-
-
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             this.Delete();
@@ -143,7 +125,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
             chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
             btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
-
             //this.Icon = IconRepository.GetIcon(base.persistableTarget.Syntax);
             this.Icon = null;
         }
@@ -151,10 +132,14 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void RegisterEvents()
         {
 
-            this.chkEdit.Click += (s, e) => { base.HeaderFieldsVisible = chkEdit.Checked; };
+            base.Deleting += QikCodeDocument_Deleting;
+            base.Saving += QikCodeDocument_Saving;
+            base.Reverting += QikCodeDocument_Reverting;
+            base.HeaderFieldsVisibilityChanged += QikCodeDocument_HeaderFieldsVisibilityChanged;
+            base.ModifyStatusChanged += QikCodeDocument_ModifyStatusChanged;
 
-            //base.persistableTarget.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
-            //base.persistableTarget.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
+            base.NewStatusChanged += QikCodeDocument_NewStatusChanged;
+            this.chkEdit.Click += (s, e) => { base.HeaderFieldsVisible = chkEdit.Checked; };
 
             txtTitle.TextChanged += SetModified;
             txtKeywords.TextChanged += SetModified;
@@ -162,7 +147,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnDelete.Click += btnDelete_Click;
         }
 
-        private void EnableControls()
+        private void InitializeControls()
         {
             //btnSave.Enabled = false;
             btnDiscardChange.Enabled = false;

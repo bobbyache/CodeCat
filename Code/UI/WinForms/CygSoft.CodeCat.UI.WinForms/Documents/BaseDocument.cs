@@ -39,6 +39,16 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        public string Keywords
+        {
+            get
+            {
+                if (this.persistableTarget != null)
+                    return this.persistableTarget.CommaDelimitedKeywords;
+                return null;
+            }
+        }
+
         public Image IconImage
         {
             get { return this.Icon.ToBitmap(); }
