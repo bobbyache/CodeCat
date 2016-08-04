@@ -70,9 +70,9 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public static void SnippetSaveErrorNotification(IWin32Window owner, Exception exception)
+        public static void DocumentSaveErrorNotification(IWin32Window owner, Exception exception)
         {
-            MessageBox.Show(owner, string.Format("An error occurred while trying to save the snippet:\n{0}", exception.Message), 
+            MessageBox.Show(owner, string.Format("An error occurred while trying to save the document:\n{0}", exception.Message), 
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 

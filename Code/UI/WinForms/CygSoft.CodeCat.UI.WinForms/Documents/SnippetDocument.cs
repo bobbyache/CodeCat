@@ -18,17 +18,12 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         private TabPage snapshotsTab;
         private CodeFile codeFile;
-        private bool flagSilentClose = false;
-        private bool flagForDelete = false;
         private AppFacade application;
 
         public Image IconImage
         {
             get { return this.Icon.ToBitmap(); }
         }
-
-        public event EventHandler DocumentDeleted;
-        public event EventHandler<DocumentSavedFileEventArgs> DocumentSaved;
 
         public SnippetDocument(CodeFile codeFile, AppFacade application, bool isNew = false)
         {
@@ -55,11 +50,49 @@ namespace CygSoft.CodeCat.UI.WinForms
             UpdateSnapshotsTab();
 
             // event registration after all properties are set...
+            // event registration after all properties are set...
+            base.Deleting += SnippetDocument_Deleting;
+            base.Saving += SnippetDocument_Saving;
+            base.ModifyStatusChanged += SnippetDocument_ModifyStatusChanged;
+            base.NewStatusChanged += SnippetDocument_NewStatusChanged;
+
             RegisterEvents();
 
             // finally set the state of the document
             this.IsNew = isNew;
             this.IsModified = false;
+        }
+
+        private void SnippetDocument_NewStatusChanged(object sender, EventArgs e)
+        {
+            this.btnDelete.Enabled = !base.IsNew;
+        }
+
+        private void SnippetDocument_ModifyStatusChanged(object sender, EventArgs e)
+        {
+            if (base.IsNew)
+                lblEditStatus.Text = base.IsModified ? "Edited" : "No Changes";
+            else
+                lblEditStatus.Text = base.IsModified ? "Edited" : "Saved";
+
+            lblEditStatus.ForeColor = base.IsModified ? Color.DarkRed : Color.Black;
+            btnSave.Enabled = base.IsModified;
+            btnDiscardChange.Enabled = base.IsModified;
+        }
+
+        private void SnippetDocument_Saving(object sender, EventArgs e)
+        {
+            this.SaveChanges();
+        }
+
+        private void SnippetDocument_Deleting(object sender, EventArgs e)
+        {
+            this.codeFile.Delete();
+        }
+
+        public bool SaveChanges()
+        {
+            return base.Save(this.codeFile, this);
         }
 
         private void SetModified(object sender, EventArgs e)
@@ -96,41 +129,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return null;
             }
         }
-
-        private bool isModified;
-        public bool IsModified 
-        {
-            get { return this.isModified; }
-            private set
-            {
-                if (this.isModified != value)
-                {
-                    if (this.isNew)
-                        lblEditStatus.Text = value ? "Edited" : "No Changes";
-                    else
-                        lblEditStatus.Text = value ? "Edited" : "Saved";
-
-                    lblEditStatus.ForeColor = value ? Color.DarkRed : Color.Black;
-                    btnSave.Enabled = value;
-                    btnDiscardChange.Enabled = value;
-                    this.isModified = value;
-                }
-            }
-        }
-
-        private bool isNew;
-        public bool IsNew 
-        {
-            get { return this.isNew; }
-            private set
-            {
-                if (this.isNew != value)
-                {
-                    this.btnDelete.Enabled = !value;
-                    this.isNew = value;
-                }
-            }
-        }
         
         public bool ShowIndexEditControls
         {
@@ -143,33 +141,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        public bool SaveChanges()
-        {
-            if (ValidateChanges())
-            {
-                try
-                {
-                    SaveValues();
-
-                    this.IsModified = false;
-                    this.IsNew = false;
-
-                    if (DocumentSaved != null)
-                        DocumentSaved(this, new DocumentSavedFileEventArgs(this.codeFile, this));
-
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    Dialogs.SnippetSaveErrorNotification(this, ex);
-                }
-            }
-            return false;
-        }
-
         public void FlagSilentClose()
         {
-            flagSilentClose = true;
+            base.CloseWithoutPrompts = true;
         }
 
         public void AddKeywords(string keywords, bool flagModified = true)
@@ -270,7 +244,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             SelectSyntax(codeFile.Syntax);
         }
 
-        private void SaveValues()
+        protected override void SaveFields()
         {
             this.codeFile.Title = this.txtTitle.Text.Trim();
             this.codeFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
@@ -282,7 +256,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.txtKeywords.Text = this.codeFile.CommaDelimitedKeywords;
         }
 
-        private bool ValidateChanges()
+        protected override bool ValidateChanges()
         {
             if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
             {
@@ -356,29 +330,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            // if this form cancels close, seems to stop the application from closing!
-            // if forcing close (flagging for delete or closing from the main form)
-            // want any dialog boxes popping up. 
-            if (!flagSilentClose && !flagForDelete)
-            {
-                if (this.IsModified)
-                {
-                    if (e.CloseReason != CloseReason.MdiFormClosing && !flagSilentClose)
-                    {
-                        DialogResult result = Dialogs.SaveDocumentChangesDialogPrompt(this);
-
-                        if (result == System.Windows.Forms.DialogResult.Yes)
-                            this.SaveChanges();
-                        else if (result == System.Windows.Forms.DialogResult.Cancel)
-                            e.Cancel = true;
-                    }
-                }
-            }
-            base.OnFormClosing(e);
-        }
-
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             this.codeFile.Close();
@@ -409,22 +360,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (this.IsNew)
-                return;
-
-            DialogResult result = Dialogs.DeleteDocumentDialogPrompt(this);
-
-            if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                string snippetId = this.SnippetId;
-                this.flagForDelete = true;
-                this.codeFile.Delete();
-
-                if (DocumentDeleted != null)
-                    DocumentDeleted(this, new EventArgs());
-
-                this.Close();
-            }
+            base.Delete();
         }
 
         private void btnDeleteSnapshot_Click(object sender, EventArgs e)

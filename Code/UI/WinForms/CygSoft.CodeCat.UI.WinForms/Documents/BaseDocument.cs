@@ -103,7 +103,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 }
                 catch (Exception ex)
                 {
-                    Dialogs.SnippetSaveErrorNotification(this, ex);
+                    Dialogs.DocumentSaveErrorNotification(this, ex);
                 }
             }
             return false;
