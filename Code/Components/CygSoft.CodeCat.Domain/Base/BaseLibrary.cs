@@ -260,7 +260,7 @@ namespace CygSoft.CodeCat.Domain.Base
 
         private void target_ContentSaved(object sender, EventArgs e)
         {
-            IKeywordTarget targetFile = sender as IKeywordTarget;
+            IPersistableTarget targetFile = sender as IPersistableTarget;
             this.index.Update(targetFile.IndexItem);
         }
 

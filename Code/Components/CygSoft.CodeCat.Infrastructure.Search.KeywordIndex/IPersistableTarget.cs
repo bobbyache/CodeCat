@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure.Search.KeywordIndex
 {
     public interface IPersistableTarget
     {
@@ -18,11 +18,13 @@ namespace CygSoft.CodeCat.Infrastructure
         int HitCount { get; }
         string CommaDelimitedKeywords { get; set; }
 
+        IKeywordIndexItem IndexItem { get; }
+
         bool Open();
         void Close();
         void Save();
         void Delete();  
-
+        
         event EventHandler ContentSaved;
         event EventHandler ContentClosed;
         event EventHandler ContentDeleted;

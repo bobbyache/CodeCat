@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    public class QikFile : IPersistableTarget, IKeywordTarget
+    public class QikFile : IPersistableTarget
     {
         public event EventHandler ContentSaved;
         public event EventHandler ContentClosed;
