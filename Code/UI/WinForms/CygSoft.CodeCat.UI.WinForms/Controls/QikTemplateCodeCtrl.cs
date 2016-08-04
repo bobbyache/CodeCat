@@ -7,60 +7,95 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CygSoft.CodeCat.Domain.Qik;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class QikTemplateCodeCtrl : UserControl
     {
         public event EventHandler Modified;
+        //public event EventHandler CloseRequest;
 
-        public QikTemplateCodeCtrl(string title, string templateCode)
+        private QikFile qikFile;
+
+        public QikTemplateCodeCtrl(QikFile qikFile, string templateId)
         {
             InitializeComponent();
 
-            txtTitle.Text = title;
-            templateSyntaxDocument.Text = templateCode;
+            this.qikFile = qikFile;
+            this.Id = templateId;
+
+            txtTitle.Text = qikFile.GetTemplateTitle(templateId);
+            templateSyntaxDocument.Text = qikFile.GetTemplateText(templateId);
+
             this.IsModified = false;
 
             RegisterEvents();
         }
 
+        public string Id { get; private set; }
+
         public string Title
         {
             get { return this.txtTitle.Text; }
-            set { this.txtTitle.Text = value; }
         }
 
         public string TemplateText
         {
             get { return this.templateSyntaxDocument.Text; }
-            set { this.templateSyntaxDocument.Text = value; }
         }
 
         public bool IsModified { get; private set; }
 
-        public void Save()
-        {
-            this.IsModified = false;
-        }
-
-        public void Revert(string title, string templateCode)
-        {
-            txtTitle.TextChanged -= SetModified;
-            templateSyntaxBox.TextChanged -= SetModified;
-
-            txtTitle.Text = title;
-            templateSyntaxDocument.Text = templateCode;
-            this.IsModified = false;
-
-            txtTitle.TextChanged += SetModified;
-            templateSyntaxBox.TextChanged += SetModified;
-        }
+        public bool TemplateExists { get { return qikFile.TemplateExists(this.Id); } }
 
         private void RegisterEvents()
         {
+            qikFile.ContentReverted += qikFile_ContentReverted;
+            qikFile.ContentSaved += qikFile_ContentSaved;
+            qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
+
             txtTitle.TextChanged += SetModified;
             templateSyntaxBox.TextChanged += SetModified;
+        }
+
+        private void qikFile_BeforeContentSaved(object sender, EventArgs e)
+        {
+            if (qikFile.TemplateExists(this.Id))
+            {
+                qikFile.SetTemplateTitle(this.Id, txtTitle.Text);
+                qikFile.SetTemplateText(this.Id, templateSyntaxDocument.Text);
+            }
+            //else
+            //{
+            //    // this template has been removed.
+            //    if (this.CloseRequest != null)
+            //        CloseRequest(this, new EventArgs());
+            //}
+        }
+
+        private void qikFile_ContentSaved(object sender, EventArgs e)
+        {
+            this.IsModified = false;
+        }
+
+        private void qikFile_ContentReverted(object sender, EventArgs e)
+        {
+            if (qikFile.TemplateExists(this.Id))
+            {
+                TabPage tabPage = this.Parent as TabPage;
+                tabPage.Show();
+
+                txtTitle.TextChanged -= SetModified;
+                templateSyntaxBox.TextChanged -= SetModified;
+
+                txtTitle.Text = qikFile.GetTemplateTitle(this.Id);
+                templateSyntaxDocument.Text = qikFile.GetTemplateText(this.Id);
+                this.IsModified = false;
+
+                txtTitle.TextChanged += SetModified;
+                templateSyntaxBox.TextChanged += SetModified;
+            }
         }
 
         private void SetModified(object sender, EventArgs e)

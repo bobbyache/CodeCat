@@ -23,10 +23,13 @@ namespace CygSoft.CodeCat.Infrastructure.Search.KeywordIndex
         bool Open();
         void Close();
         void Save();
-        void Delete();  
+        void Delete();
+        void Revert();
         
         event EventHandler ContentSaved;
         event EventHandler ContentClosed;
         event EventHandler ContentDeleted;
+        event EventHandler ContentReverted;
+        event EventHandler BeforeContentSaved;
     }
 }

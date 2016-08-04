@@ -17,6 +17,8 @@ namespace CygSoft.CodeCat.Domain.Qik
         public event EventHandler ContentSaved;
         public event EventHandler ContentClosed;
         public event EventHandler ContentDeleted;
+        public event EventHandler ContentReverted;
+        public event EventHandler BeforeContentSaved;
 
         private IKeywordIndexItem indexItem;
         private QikFileManager fileManager = null;
@@ -80,6 +82,20 @@ namespace CygSoft.CodeCat.Domain.Qik
             private set;
         }
 
+        public bool TemplateExists(string fileName)
+        {
+            return Templates.Any(t => t == fileName);
+        }
+
+        public void Revert()
+        {
+            if (Open())
+            {
+                if (ContentReverted != null)
+                    ContentReverted(this, new EventArgs());
+            }
+        }
+
         public bool Open()
         {
             if (this.FileExists)
@@ -99,7 +115,12 @@ namespace CygSoft.CodeCat.Domain.Qik
         public void Save()
         {
             if (this.FileExists)
+            {
+                if (BeforeContentSaved != null)
+                    BeforeContentSaved(this, new EventArgs());
+
                 fileManager.Save();
+            }
             else
                 fileManager.Create(this.FolderPath, this.Id);
             

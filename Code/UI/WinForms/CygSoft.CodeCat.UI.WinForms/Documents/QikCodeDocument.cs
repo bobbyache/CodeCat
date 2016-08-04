@@ -17,6 +17,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class QikCodeDocument : BaseDocument, IContentDocument
     {
+        private List<TabPage> removedTabpages = new List<TabPage>();
+
         #region Constructors
 
         public QikCodeDocument(QikFile qikFile, AppFacade application, bool isNew = false)
@@ -105,20 +107,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         protected override void SaveFields()
         {
             QikFile qikFile = base.persistableTarget as QikFile;
-
-            qikFile.Title = this.txtTitle.Text.Trim();
-            qikFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
-            qikFile.Syntax = string.Empty;
-            //qikFile.Text = syntaxBox.Document.Text;
-
-            foreach (TabPage tabPage in tabControlFile.TabPages)
-            {
-                QikTemplateCodeCtrl templateControl = tabPage.Controls[0] as QikTemplateCodeCtrl;
-                templateControl.Save();
-                qikFile.SetTemplateTitle(tabPage.Name, templateControl.Title);
-                qikFile.SetTemplateText(tabPage.Name, templateControl.TemplateText);
-            }
-
             qikFile.Save();
         }
 
@@ -143,6 +131,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void RegisterEvents()
         {
+            QikFile qikFile = base.persistableTarget as QikFile;
+            qikFile.ContentReverted += qikFile_ContentReverted;
+            qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
+            qikFile.ContentSaved += qikFile_ContentSaved;
 
             base.Deleting += QikCodeDocument_Deleting;
             base.Saving += QikCodeDocument_Saving;
@@ -183,21 +175,56 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 string title = qikFile.GetTemplateTitle(fileId);
                 string code = qikFile.GetTemplateText(fileId);
-                TabPage tabPage = NewTab(fileId, title, code);
-                tabControlFile.TabPages.Add(tabPage);
+                NewTab(fileId, title, code);
             }
         }
 
         private TabPage NewTab(string id, string title, string code)
         {
+            QikFile qikFile = base.persistableTarget as QikFile;
             TabPage tabPage = new TabPage(title);
             tabPage.Name = id;
-            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(title, code);
+
+            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(qikFile, id);
             codeCtrl.Modified += codeCtrl_Modified;
             tabPage.Controls.Add(codeCtrl);
             codeCtrl.Dock = DockStyle.Fill;
 
+            tabControlFile.TabPages.Add(tabPage);
+
             return tabPage;
+        }
+
+        #endregion
+
+        #region QikFile Events
+
+        private void qikFile_ContentReverted(object sender, EventArgs e)
+        {
+            ResetFields();
+
+            foreach (TabPage tabPage in removedTabpages)
+            {
+                QikTemplateCodeCtrl codeCtrl = tabPage.Controls[0] as QikTemplateCodeCtrl;
+                codeCtrl.Modified += codeCtrl_Modified;
+                tabControlFile.TabPages.Add(tabPage);
+            }
+            removedTabpages.Clear();
+        }
+
+        private void qikFile_ContentSaved(object sender, EventArgs e)
+        {
+            this.removedTabpages.Clear();
+            this.IsModified = false;
+        }
+
+        private void qikFile_BeforeContentSaved(object sender, EventArgs e)
+        {
+            QikFile qikFile = base.persistableTarget as QikFile;
+
+            qikFile.Title = this.txtTitle.Text.Trim();
+            qikFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
+            qikFile.Syntax = string.Empty;
         }
 
         #endregion
@@ -228,9 +255,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             string code = qikFile.GetTemplateText(fileId);
 
             TabPage tabPage = NewTab(fileId, title, code);
-            tabControlFile.TabPages.Add(tabPage);
-            //tabControlFile.SelectedIndex = tabControlFile.tab
-            //tabPage.Select();
             tabControlFile.SelectedTab = tabPage;
             this.IsModified = true;
         }
@@ -241,7 +265,14 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             string fileTitle = tabControlFile.SelectedTab.Name;
             qikFile.RemoveTemplate(fileTitle);
-            tabControlFile.TabPages.Remove(tabControlFile.SelectedTab);
+
+            // hide the template, don't remove it, might need to revert back to it...
+            TabPage tabPage = tabControlFile.SelectedTab;
+            QikTemplateCodeCtrl codeCtrl = tabPage.Controls[0] as QikTemplateCodeCtrl;
+
+            codeCtrl.Modified -= codeCtrl_Modified;
+            removedTabpages.Add(tabPage);
+            tabControlFile.TabPages.Remove(tabPage);
             this.IsModified = true;
         }
 
@@ -257,10 +288,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void QikCodeDocument_Reverting(object sender, EventArgs e)
         {
             QikFile qikFile = base.persistableTarget as QikFile;
-            qikFile.Open();
-
-            ResetFields();
-            BuildTabs();
+            qikFile.Revert();
         }
 
         private void QikCodeDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)

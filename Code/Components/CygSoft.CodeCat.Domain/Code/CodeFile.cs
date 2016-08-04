@@ -30,6 +30,8 @@ namespace CygSoft.CodeCat.Domain.Code
         public event EventHandler ContentSaved;
         public event EventHandler ContentClosed;
         public event EventHandler ContentDeleted;
+        public event EventHandler ContentReverted;
+        public event EventHandler BeforeContentSaved;
 
         public event EventHandler SnapshotTaken;
         public event EventHandler SnapshotDeleted;
@@ -107,6 +109,14 @@ namespace CygSoft.CodeCat.Domain.Code
             private set;
         }
 
+        public void Revert()
+        {
+            bool opened = this.ReadData();
+
+            if (this.ContentReverted != null)
+                this.ContentReverted(this, new EventArgs());
+        }
+
         public bool Open()
         {
             bool opened = this.ReadData();
@@ -162,7 +172,11 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Save()
         {
+            if (this.BeforeContentSaved != null)
+                BeforeContentSaved(this, new EventArgs());
+
             this.WriteData();
+
             if (this.ContentSaved != null)
                 ContentSaved(this, new EventArgs());
         }
