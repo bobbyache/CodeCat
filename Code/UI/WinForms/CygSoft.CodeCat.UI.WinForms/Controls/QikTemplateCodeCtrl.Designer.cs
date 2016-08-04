@@ -29,27 +29,31 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QikTemplateCodeCtrl));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.cboSyntax = new System.Windows.Forms.ToolStripComboBox();
-            this.syntaxDocument1 = new Alsing.SourceCode.SyntaxDocument(this.components);
-            this.syntaxDocument2 = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
-            this.syntaxBoxControl1 = new Alsing.Windows.Forms.SyntaxBoxControl();
+            this.templateFileTabControl = new System.Windows.Forms.TabControl();
+            this.templateTabPage = new System.Windows.Forms.TabPage();
+            this.templateSyntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
+            this.templateSyntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
+            this.outputTabPage = new System.Windows.Forms.TabPage();
+            this.outputSyntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
+            this.outputSyntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
+            this.templateFileTabControl.SuspendLayout();
+            this.templateTabPage.SuspendLayout();
+            this.outputTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
             this.toolStripLabel1,
             this.txtTitle,
             this.toolStripLabel5,
@@ -59,15 +63,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(656, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.CheckOnClick = true;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(99, 22);
-            this.toolStripButton1.Text = "Output Mode";
             // 
             // toolStripLabel1
             // 
@@ -80,7 +75,7 @@
             // txtTitle
             // 
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(285, 25);
+            this.txtTitle.Size = new System.Drawing.Size(384, 25);
             // 
             // toolStripLabel5
             // 
@@ -93,22 +88,6 @@
             this.cboSyntax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSyntax.Name = "cboSyntax";
             this.cboSyntax.Size = new System.Drawing.Size(121, 25);
-            // 
-            // syntaxDocument1
-            // 
-            this.syntaxDocument1.Lines = new string[] {
-        ""};
-            this.syntaxDocument1.MaxUndoBufferSize = 1000;
-            this.syntaxDocument1.Modified = false;
-            this.syntaxDocument1.UndoStep = 0;
-            // 
-            // syntaxDocument2
-            // 
-            this.syntaxDocument2.Lines = new string[] {
-        ""};
-            this.syntaxDocument2.MaxUndoBufferSize = 1000;
-            this.syntaxDocument2.Modified = false;
-            this.syntaxDocument2.UndoStep = 0;
             // 
             // toolStrip2
             // 
@@ -147,41 +126,120 @@
             this.lblEditStatus.Text = "No Changes";
             this.lblEditStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // syntaxBoxControl1
+            // templateFileTabControl
             // 
-            this.syntaxBoxControl1.ActiveView = Alsing.Windows.Forms.ActiveView.BottomRight;
-            this.syntaxBoxControl1.AutoListPosition = null;
-            this.syntaxBoxControl1.AutoListSelectedText = "a123";
-            this.syntaxBoxControl1.AutoListVisible = false;
-            this.syntaxBoxControl1.BackColor = System.Drawing.Color.White;
-            this.syntaxBoxControl1.BorderStyle = Alsing.Windows.Forms.BorderStyle.None;
-            this.syntaxBoxControl1.CopyAsRTF = false;
-            this.syntaxBoxControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.syntaxBoxControl1.Document = this.syntaxDocument2;
-            this.syntaxBoxControl1.FontName = "Courier new";
-            this.syntaxBoxControl1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.syntaxBoxControl1.InfoTipCount = 1;
-            this.syntaxBoxControl1.InfoTipPosition = null;
-            this.syntaxBoxControl1.InfoTipSelectedIndex = 1;
-            this.syntaxBoxControl1.InfoTipVisible = false;
-            this.syntaxBoxControl1.Location = new System.Drawing.Point(0, 25);
-            this.syntaxBoxControl1.LockCursorUpdate = false;
-            this.syntaxBoxControl1.Name = "syntaxBoxControl1";
-            this.syntaxBoxControl1.ShowScopeIndicator = false;
-            this.syntaxBoxControl1.Size = new System.Drawing.Size(656, 467);
-            this.syntaxBoxControl1.SmoothScroll = false;
-            this.syntaxBoxControl1.SplitviewH = -4;
-            this.syntaxBoxControl1.SplitviewV = -4;
-            this.syntaxBoxControl1.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.syntaxBoxControl1.TabIndex = 6;
-            this.syntaxBoxControl1.Text = "syntaxBoxControl1";
-            this.syntaxBoxControl1.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
+            this.templateFileTabControl.Controls.Add(this.templateTabPage);
+            this.templateFileTabControl.Controls.Add(this.outputTabPage);
+            this.templateFileTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.templateFileTabControl.Location = new System.Drawing.Point(0, 25);
+            this.templateFileTabControl.Name = "templateFileTabControl";
+            this.templateFileTabControl.SelectedIndex = 0;
+            this.templateFileTabControl.Size = new System.Drawing.Size(656, 467);
+            this.templateFileTabControl.TabIndex = 6;
+            // 
+            // templateTabPage
+            // 
+            this.templateTabPage.Controls.Add(this.templateSyntaxBox);
+            this.templateTabPage.Location = new System.Drawing.Point(4, 22);
+            this.templateTabPage.Name = "templateTabPage";
+            this.templateTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.templateTabPage.Size = new System.Drawing.Size(648, 441);
+            this.templateTabPage.TabIndex = 0;
+            this.templateTabPage.Text = "Template";
+            this.templateTabPage.UseVisualStyleBackColor = true;
+            // 
+            // templateSyntaxBox
+            // 
+            this.templateSyntaxBox.ActiveView = Alsing.Windows.Forms.ActiveView.BottomRight;
+            this.templateSyntaxBox.AutoListPosition = null;
+            this.templateSyntaxBox.AutoListSelectedText = "a123";
+            this.templateSyntaxBox.AutoListVisible = false;
+            this.templateSyntaxBox.BackColor = System.Drawing.Color.White;
+            this.templateSyntaxBox.BorderStyle = Alsing.Windows.Forms.BorderStyle.None;
+            this.templateSyntaxBox.CopyAsRTF = false;
+            this.templateSyntaxBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.templateSyntaxBox.Document = this.templateSyntaxDocument;
+            this.templateSyntaxBox.FontName = "Courier new";
+            this.templateSyntaxBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.templateSyntaxBox.InfoTipCount = 1;
+            this.templateSyntaxBox.InfoTipPosition = null;
+            this.templateSyntaxBox.InfoTipSelectedIndex = 1;
+            this.templateSyntaxBox.InfoTipVisible = false;
+            this.templateSyntaxBox.Location = new System.Drawing.Point(3, 3);
+            this.templateSyntaxBox.LockCursorUpdate = false;
+            this.templateSyntaxBox.Name = "templateSyntaxBox";
+            this.templateSyntaxBox.ShowScopeIndicator = false;
+            this.templateSyntaxBox.Size = new System.Drawing.Size(642, 435);
+            this.templateSyntaxBox.SmoothScroll = false;
+            this.templateSyntaxBox.SplitviewH = -4;
+            this.templateSyntaxBox.SplitviewV = -4;
+            this.templateSyntaxBox.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
+            this.templateSyntaxBox.TabIndex = 0;
+            this.templateSyntaxBox.Text = "syntaxBoxControl1";
+            this.templateSyntaxBox.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
+            // 
+            // templateSyntaxDocument
+            // 
+            this.templateSyntaxDocument.Lines = new string[] {
+        ""};
+            this.templateSyntaxDocument.MaxUndoBufferSize = 1000;
+            this.templateSyntaxDocument.Modified = false;
+            this.templateSyntaxDocument.UndoStep = 0;
+            // 
+            // outputTabPage
+            // 
+            this.outputTabPage.Controls.Add(this.outputSyntaxBox);
+            this.outputTabPage.Location = new System.Drawing.Point(4, 22);
+            this.outputTabPage.Name = "outputTabPage";
+            this.outputTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.outputTabPage.Size = new System.Drawing.Size(648, 441);
+            this.outputTabPage.TabIndex = 1;
+            this.outputTabPage.Text = "Output";
+            this.outputTabPage.UseVisualStyleBackColor = true;
+            // 
+            // outputSyntaxBox
+            // 
+            this.outputSyntaxBox.ActiveView = Alsing.Windows.Forms.ActiveView.BottomRight;
+            this.outputSyntaxBox.AutoListPosition = null;
+            this.outputSyntaxBox.AutoListSelectedText = "a123";
+            this.outputSyntaxBox.AutoListVisible = false;
+            this.outputSyntaxBox.BackColor = System.Drawing.Color.White;
+            this.outputSyntaxBox.BorderStyle = Alsing.Windows.Forms.BorderStyle.None;
+            this.outputSyntaxBox.CopyAsRTF = false;
+            this.outputSyntaxBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outputSyntaxBox.Document = this.outputSyntaxDocument;
+            this.outputSyntaxBox.FontName = "Courier new";
+            this.outputSyntaxBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.outputSyntaxBox.InfoTipCount = 1;
+            this.outputSyntaxBox.InfoTipPosition = null;
+            this.outputSyntaxBox.InfoTipSelectedIndex = 1;
+            this.outputSyntaxBox.InfoTipVisible = false;
+            this.outputSyntaxBox.Location = new System.Drawing.Point(3, 3);
+            this.outputSyntaxBox.LockCursorUpdate = false;
+            this.outputSyntaxBox.Name = "outputSyntaxBox";
+            this.outputSyntaxBox.ShowScopeIndicator = false;
+            this.outputSyntaxBox.Size = new System.Drawing.Size(642, 435);
+            this.outputSyntaxBox.SmoothScroll = false;
+            this.outputSyntaxBox.SplitviewH = -4;
+            this.outputSyntaxBox.SplitviewV = -4;
+            this.outputSyntaxBox.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
+            this.outputSyntaxBox.TabIndex = 0;
+            this.outputSyntaxBox.Text = "syntaxBoxControl1";
+            this.outputSyntaxBox.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
+            // 
+            // outputSyntaxDocument
+            // 
+            this.outputSyntaxDocument.Lines = new string[] {
+        ""};
+            this.outputSyntaxDocument.MaxUndoBufferSize = 1000;
+            this.outputSyntaxDocument.Modified = false;
+            this.outputSyntaxDocument.UndoStep = 0;
             // 
             // QikTemplateCodeCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.syntaxBoxControl1);
+            this.Controls.Add(this.templateFileTabControl);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.toolStrip1);
             this.Name = "QikTemplateCodeCtrl";
@@ -190,6 +248,9 @@
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.templateFileTabControl.ResumeLayout(false);
+            this.templateTabPage.ResumeLayout(false);
+            this.outputTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,9 +259,6 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private Alsing.SourceCode.SyntaxDocument syntaxDocument1;
-        private Alsing.SourceCode.SyntaxDocument syntaxDocument2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private ToolStripSpringTextBox txtTitle;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
@@ -208,6 +266,12 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripComboBox cboFontSize;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
-        private Alsing.Windows.Forms.SyntaxBoxControl syntaxBoxControl1;
+        private System.Windows.Forms.TabControl templateFileTabControl;
+        private System.Windows.Forms.TabPage templateTabPage;
+        private System.Windows.Forms.TabPage outputTabPage;
+        private Alsing.Windows.Forms.SyntaxBoxControl templateSyntaxBox;
+        private Alsing.SourceCode.SyntaxDocument templateSyntaxDocument;
+        private Alsing.Windows.Forms.SyntaxBoxControl outputSyntaxBox;
+        private Alsing.SourceCode.SyntaxDocument outputSyntaxDocument;
     }
 }

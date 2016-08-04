@@ -114,13 +114,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             foreach (TabPage tabPage in tabControlFile.TabPages)
             {
                 QikTemplateCodeCtrl templateControl = tabPage.Controls[0] as QikTemplateCodeCtrl;
+                templateControl.Save();
                 qikFile.SetTemplateTitle(tabPage.Name, templateControl.Title);
                 qikFile.SetTemplateText(tabPage.Name, templateControl.TemplateText);
             }
 
             qikFile.Save();
-            this.Text = qikFile.Title;
-            this.txtKeywords.Text = qikFile.CommaDelimitedKeywords;
         }
 
         #endregion
@@ -158,11 +157,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             txtKeywords.TextChanged += SetModified;
             //syntaxBox.TextChanged += SetModified;
             btnDelete.Click += btnDelete_Click;
+            btnDiscardChange.Click += btnDiscardChange_Click;
         }
 
         private void InitializeControls()
         {
-            //btnSave.Enabled = false;
+            btnSave.Enabled = false;
             btnDiscardChange.Enabled = false;
             btnDelete.Enabled = !this.IsNew;
         }
@@ -192,11 +192,10 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             TabPage tabPage = new TabPage(title);
             tabPage.Name = id;
-            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl();
+            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(title, code);
+            codeCtrl.Modified += codeCtrl_Modified;
             tabPage.Controls.Add(codeCtrl);
             codeCtrl.Dock = DockStyle.Fill;
-            codeCtrl.Title = title;
-            codeCtrl.TemplateText = code;
 
             return tabPage;
         }
@@ -233,6 +232,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             //tabControlFile.SelectedIndex = tabControlFile.tab
             //tabPage.Select();
             tabControlFile.SelectedTab = tabPage;
+            this.IsModified = true;
         }
 
         private void btnRemoveTemplate_Click(object sender, EventArgs e)
@@ -242,6 +242,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             string fileTitle = tabControlFile.SelectedTab.Name;
             qikFile.RemoveTemplate(fileTitle);
             tabControlFile.TabPages.Remove(tabControlFile.SelectedTab);
+            this.IsModified = true;
+        }
+
+        private void codeCtrl_Modified(object sender, EventArgs e)
+        {
+            this.IsModified = true;
         }
 
         #endregion
@@ -250,7 +256,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void QikCodeDocument_Reverting(object sender, EventArgs e)
         {
+            QikFile qikFile = base.persistableTarget as QikFile;
+            qikFile.Open();
+
             ResetFields();
+            BuildTabs();
         }
 
         private void QikCodeDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)

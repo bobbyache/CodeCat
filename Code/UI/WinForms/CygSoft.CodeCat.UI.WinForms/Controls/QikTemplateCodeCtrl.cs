@@ -12,9 +12,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class QikTemplateCodeCtrl : UserControl
     {
-        public QikTemplateCodeCtrl()
+        public event EventHandler Modified;
+
+        public QikTemplateCodeCtrl(string title, string templateCode)
         {
             InitializeComponent();
+
+            txtTitle.Text = title;
+            templateSyntaxDocument.Text = templateCode;
+            this.IsModified = false;
+
+            RegisterEvents();
         }
 
         public string Title
@@ -25,14 +33,42 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public string TemplateText
         {
-            get { return this.syntaxBoxControl1.Document.Text; }
-            set { this.syntaxBoxControl1.Document.Text = value; }
+            get { return this.templateSyntaxDocument.Text; }
+            set { this.templateSyntaxDocument.Text = value; }
         }
 
-        //public string Syntax
-        //{
-        //    get { return this.cboSyntax.Text; }
-        //    set { this.txtTitle.Text = value; }
-        //}
+        public bool IsModified { get; private set; }
+
+        public void Save()
+        {
+            this.IsModified = false;
+        }
+
+        public void Revert(string title, string templateCode)
+        {
+            txtTitle.TextChanged -= SetModified;
+            templateSyntaxBox.TextChanged -= SetModified;
+
+            txtTitle.Text = title;
+            templateSyntaxDocument.Text = templateCode;
+            this.IsModified = false;
+
+            txtTitle.TextChanged += SetModified;
+            templateSyntaxBox.TextChanged += SetModified;
+        }
+
+        private void RegisterEvents()
+        {
+            txtTitle.TextChanged += SetModified;
+            templateSyntaxBox.TextChanged += SetModified;
+        }
+
+        private void SetModified(object sender, EventArgs e)
+        {
+            this.IsModified = true;
+
+            if (this.Modified != null)
+                this.Modified(this, new EventArgs());
+        }
     }
 }
