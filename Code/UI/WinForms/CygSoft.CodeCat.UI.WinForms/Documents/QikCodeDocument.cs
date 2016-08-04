@@ -17,13 +17,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class QikCodeDocument : BaseDocument, IContentDocument
     {
-        private AppFacade application;
-
         public QikCodeDocument(QikFile qikFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
-            this.application = application;
+            base.application = application;
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
 
@@ -95,11 +93,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             // in fact, it seems that "qikFile" has already been updated because we have a reference to it in memory, but
             // this is just a "defensive programming" approach.
             if (flagModified)
-                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = base.AddKeywords(keywords);
             else
             {
                 txtKeywords.TextChanged -= SetModified;
-                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = base.AddKeywords(keywords);
                 txtKeywords.TextChanged += SetModified;
             }
         }
@@ -109,12 +107,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             // in fact, it seems that "qikFile" has already been updated because we have a reference to it in memory, but
             // this is just a "defensive programming" approach.
             if (flagModified)
-                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = base.RemoveKeywords(keywords);
 
             else
             {
                 txtKeywords.TextChanged -= SetModified;
-                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = base.RemoveKeywords(keywords);
                 txtKeywords.TextChanged += SetModified;
             }
         }

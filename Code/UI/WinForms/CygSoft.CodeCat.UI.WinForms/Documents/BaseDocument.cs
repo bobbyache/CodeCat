@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.Infrastructure;
+﻿using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private bool flagForDelete = false;
 
+        protected AppFacade application;
         protected IPersistableTarget persistableTarget;
 
         public string Id
@@ -137,6 +139,16 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected virtual bool ValidateChanges() { return false; }
         protected virtual void SaveFields() { }
+
+        protected string AddKeywords(string keywords)
+        {
+            return this.application.AddKeywordsToDelimitedText(this.persistableTarget.CommaDelimitedKeywords, keywords);
+        }
+
+        protected string RemoveKeywords(string keywords)
+        {
+            return this.application.RemoveKeywordsFromDelimitedText(this.persistableTarget.CommaDelimitedKeywords, keywords);
+        }
 
         protected void RevertChanges()
         {

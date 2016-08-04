@@ -17,7 +17,6 @@ namespace CygSoft.CodeCat.UI.WinForms
     public partial class SnippetDocument : BaseDocument, IContentDocument
     {
         private TabPage snapshotsTab;
-        private AppFacade application;
 
         public SnippetDocument(CodeFile codeFile, AppFacade application, bool isNew = false)
         {
@@ -27,7 +26,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabControl.Alignment = TabAlignment.Left;
             this.snapshotsTab = this.tabPageSnapshots;
 
-            this.application = application;
+            base.application = application;
             base.persistableTarget = codeFile;
 
             this.Tag = codeFile.Id;
@@ -100,29 +99,25 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public void AddKeywords(string keywords, bool flagModified = true)
         {
-            // in fact, it seems that "codeFile" has already been updated because we have a reference to it in memory, but
-            // this is just a "defensive programming" approach.
             if (flagModified)
-                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = base.AddKeywords(keywords);
             else
             {
                 txtKeywords.TextChanged -= SetModified;
-                txtKeywords.Text = this.application.AddKeywordsToDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = base.AddKeywords(keywords);
                 txtKeywords.TextChanged += SetModified;
             }
         }
 
         public void RemoveKeywords(string keywords, bool flagModified = true)
         {
-            // in fact, it seems that "codeFile" has already been updated because we have a reference to it in memory, but
-            // this is just a "defensive programming" approach.
             if (flagModified)
-                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = base.RemoveKeywords(keywords);
 
             else
             {
                 txtKeywords.TextChanged -= SetModified;
-                txtKeywords.Text = this.application.RemoveKeywordsFromDelimitedText(base.persistableTarget.CommaDelimitedKeywords, keywords);
+                txtKeywords.Text = base.RemoveKeywords(keywords);
                 txtKeywords.TextChanged += SetModified;
             }
         }
