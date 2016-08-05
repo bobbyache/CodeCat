@@ -146,6 +146,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
             btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
 
+            this.tabControl.ImageList = IconRepository.ImageList;
+            this.tabPageCode.ImageKey = (base.persistableTarget as CodeFile).Syntax;
             this.Icon = IconRepository.GetIcon((base.persistableTarget as CodeFile).Syntax);
             lblEditStatus.Image = this.IconImage;
         }

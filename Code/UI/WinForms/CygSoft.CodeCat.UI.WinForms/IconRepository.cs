@@ -12,7 +12,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public static class IconRepository
     {
+        private static ImageList imageList = new ImageList();
         private static Dictionary<string, Icon> iconDictonary = new Dictionary<string, Icon>();
+
+        public static ImageList ImageList { get { return imageList; } }
 
         public static void Load(SyntaxFile[] syntaxFiles)
         {
@@ -22,6 +25,11 @@ namespace CygSoft.CodeCat.UI.WinForms
                     Etier.IconHelper.IconReader.IconSize.Small, 
                     false);
                 iconDictonary.Add(syntaxFile.Syntax.ToUpper(), icon);
+
+                if (!imageList.Images.ContainsKey(syntaxFile.Syntax))
+                {
+                    imageList.Images.Add(syntaxFile.Syntax, icon);
+                }
                 
             }
         }
@@ -29,6 +37,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         public static Icon GetIcon(string syntax)
         {
             return iconDictonary[syntax.ToUpper()];
+        }
+
+        public static int ImageKeyFor(string syntax)
+        {
+            return imageList.Images.IndexOfKey(syntax);
         }
     }
 }

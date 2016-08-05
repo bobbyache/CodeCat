@@ -24,6 +24,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
+            this.tabControlFile.ImageList = IconRepository.ImageList;
+            
             base.application = application;
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
@@ -184,6 +186,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             QikFile qikFile = base.persistableTarget as QikFile;
             TabPage tabPage = new TabPage(templateFile.Title);
             tabPage.Name = templateFile.FileName;
+            tabPage.ImageIndex = IconRepository.ImageKeyFor(templateFile.Syntax);
 
             QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(application, qikFile, templateFile, tabPage);
             codeCtrl.Modified += codeCtrl_Modified;

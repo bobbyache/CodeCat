@@ -20,7 +20,6 @@ namespace CygSoft.CodeCat.UI.WinForms
     public partial class SearchForm : DockContent
     {
         private AppFacade application;
-        private ImageList imageList = new ImageList();
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
@@ -116,9 +115,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.HideOnClose = true;
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight;
 
-            PopulateSystemIconsImageList();
-
-            listView.SmallImageList = imageList;
+            listView.SmallImageList = IconRepository.ImageList;
             listView.ColumnClick += listView_ColumnClick;
             listView.SelectedIndexChanged += listView_SelectedIndexChanged;
             listView.MouseClick += listView_MouseClick;
@@ -184,19 +181,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 listItem.Selected = true;
                 listItem.Focused = true;
                 listItem.EnsureVisible();
-            }
-        }
-
-        private void PopulateSystemIconsImageList()
-        {
-            foreach (SyntaxFile syntaxFile in application.GetSyntaxFileInfo())
-            {
-                Icon icon = IconRepository.GetIcon(syntaxFile.Syntax);
-
-                if (!imageList.Images.ContainsKey(syntaxFile.Syntax))
-                {
-                    imageList.Images.Add(syntaxFile.Syntax, icon);
-                }
             }
         }
 
