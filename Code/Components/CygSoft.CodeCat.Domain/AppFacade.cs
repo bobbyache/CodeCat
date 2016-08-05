@@ -77,15 +77,15 @@ namespace CygSoft.CodeCat.Domain
         {
             List<IKeywordIndexItem> lastOpenedItems = new List<IKeywordIndexItem>();
             lastOpenedItems.AddRange(this.codeLibrary.GetLastOpenedIds());
-            //lastOpenedItems.AddRange(this.qikLibrary.GetLastOpenedIds());
+            lastOpenedItems.AddRange(this.qikLibrary.GetLastOpenedIds());
             return lastOpenedItems.ToArray();
         }
 
         public void SetLastOpenedIds(IKeywordIndexItem[] keywordIndexItems)
         {
             // filter by type rather than just send in a bunch of ids.
-            this.codeLibrary.SetLastOpenedIds(keywordIndexItems);
-            //this.qikLibrary.SetLastOpenedIds(ids);
+            this.codeLibrary.SetLastOpenedIds(keywordIndexItems.OfType<CodeKeywordIndexItem>().ToArray());
+            this.qikLibrary.SetLastOpenedIds(keywordIndexItems.OfType<QikKeywordIndexItem>().ToArray());
         }
 
         public string[] GetSyntaxes()
