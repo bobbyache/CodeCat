@@ -24,6 +24,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
+            btnShowProperties.Checked = false;
+            
             this.tabControlFile.ImageList = IconRepository.ImageList;
             
             base.application = application;
@@ -340,5 +342,10 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         #endregion
+
+        private void btnShowProperties_CheckedChanged(object sender, EventArgs e)
+        {
+            splitContainer1.Panel2Collapsed = !btnShowProperties.Checked;
+        }
     }
 }

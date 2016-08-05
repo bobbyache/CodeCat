@@ -49,6 +49,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
+            this.btnShowProperties = new System.Windows.Forms.ToolStripButton();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -174,7 +175,8 @@
             this.toolStripSeparator2,
             this.chkEdit,
             this.btnAddTemplate,
-            this.btnRemoveTemplate});
+            this.btnRemoveTemplate,
+            this.btnShowProperties});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
             this.toolstripCommands.Size = new System.Drawing.Size(878, 25);
@@ -233,6 +235,18 @@
             this.propertyGrid1.Size = new System.Drawing.Size(365, 575);
             this.propertyGrid1.TabIndex = 0;
             // 
+            // btnShowProperties
+            // 
+            this.btnShowProperties.Checked = true;
+            this.btnShowProperties.CheckOnClick = true;
+            this.btnShowProperties.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnShowProperties.Image = ((System.Drawing.Image)(resources.GetObject("btnShowProperties.Image")));
+            this.btnShowProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowProperties.Name = "btnShowProperties";
+            this.btnShowProperties.Size = new System.Drawing.Size(112, 22);
+            this.btnShowProperties.Text = "Show Properties";
+            this.btnShowProperties.CheckedChanged += new System.EventHandler(this.btnShowProperties_CheckedChanged);
+            // 
             // QikCodeDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -281,5 +295,6 @@
         private System.Windows.Forms.PropertyGrid propertyGrid1;
         private System.Windows.Forms.ToolStripButton btnAddTemplate;
         private System.Windows.Forms.ToolStripButton btnRemoveTemplate;
+        private System.Windows.Forms.ToolStripButton btnShowProperties;
     }
 }
