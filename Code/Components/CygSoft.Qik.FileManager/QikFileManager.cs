@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CygSoft.CodeCat.Infrastructure.Qik;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace CygSoft.Qik.FileManager
         public string IndexFileTitle { get { return "index.xml"; } }
         public string ScriptFilePath { get { return Path.Combine(this.Folder, this.ScriptFileName); } }
 
-        public string[] Templates { get { return this.templateFiles.Values.Select(f => f.FileName).ToArray(); } }
+        public ITemplateFile[] Templates { get { return this.templateFiles.Values.Select(f => f).ToArray(); } }
 
         public bool IndexFileExists { get { return File.Exists(this.IndexFilePath); } }
 
@@ -39,7 +40,20 @@ namespace CygSoft.Qik.FileManager
         }
 
         private ScriptFile scriptFile = null;
-        private Dictionary<string, TemplateFile> templateFiles = new Dictionary<string, TemplateFile>();
+        private Dictionary<string, ITemplateFile> templateFiles = new Dictionary<string, ITemplateFile>();
+
+
+        public bool TemplateExists(string fileName)
+        {
+            return templateFiles.ContainsKey(fileName);
+        }
+
+        public ITemplateFile GetTemplate(string fileName)
+        {
+            if (TemplateExists(fileName))
+                return templateFiles[fileName];
+            return null;
+        }
 
         public void Create(string parentFolder, string id)
         {
@@ -63,7 +77,7 @@ namespace CygSoft.Qik.FileManager
             this.ParentFolder = parentFolder;
             this.Id = id;
 
-            templateFiles = new Dictionary<string, TemplateFile>();
+            templateFiles = new Dictionary<string, ITemplateFile>();
 
             XDocument indexDocument = XDocument.Load(this.IndexFilePath);
             foreach (XElement fileElement in indexDocument.Element("QikFile").Element("Templates").Elements())
@@ -74,13 +88,13 @@ namespace CygSoft.Qik.FileManager
                 string syntax = (string)fileElement.Attribute("Syntax");
 
                 TemplateFile templateFile = new TemplateFile(Path.Combine(this.Folder, file), title, syntax);
-                templateFile.Load();
+                templateFile.Open();
                 templateFiles.Add(file, templateFile);
             }
 
             // load the script file
             this.scriptFile = new ScriptFile(this.ScriptFilePath);
-            this.scriptFile.Load();
+            this.scriptFile.Open();
         }
 
         public string ScriptText
@@ -103,11 +117,12 @@ namespace CygSoft.Qik.FileManager
             Directory.Delete(this.Folder, true);
         }
 
-        public string AddTemplate(string title, string syntax)
+        public ITemplateFile AddTemplate(string title, string syntax)
         {
             string fileName = Guid.NewGuid().ToString() + ".tpl";
-            this.templateFiles.Add(fileName, new TemplateFile(Path.Combine(this.Folder, fileName), title, syntax));
-            return fileName;
+            ITemplateFile templateFile = new TemplateFile(Path.Combine(this.Folder, fileName), title, syntax);
+            this.templateFiles.Add(fileName, templateFile);
+            return templateFile;
         }
 
         public void RemoveTemplate(string fileName)
@@ -115,38 +130,12 @@ namespace CygSoft.Qik.FileManager
             this.templateFiles.Remove(fileName);
         }
 
-        public void SetTemplateSyntax(string fileName, string syntax)
-        {
-            this.templateFiles[fileName].Syntax = syntax;
-        }
-
-        public string GetTemplateSyntax(string fileName)
-        {
-            return this.templateFiles[fileName].Syntax;
-        }
-
-        public void SetTemplateText(string fileName, string text)
-        {
-            this.templateFiles[fileName].Text = text;
-        }
-
-        public string GetTemplateText(string fileName)
-        {
-            return this.templateFiles[fileName].Text;
-        }
-
-        public void SetTemplateTitle(string fileName, string title)
-        {
-            this.templateFiles[fileName].Title = title;
-        }
-
-        public string GetTemplateTitle(string fileName)
-        {
-            return this.templateFiles[fileName].Title;
-        }
-
         private void DeleteTemplateFiles()
         {
+            //ITemplateFile[] files = templateFiles.Values.ToArray();
+            //foreach (TemplateFile file in files)
+            //    file.Delete();
+
             string[] templates = Directory.EnumerateFiles(this.Folder, "*.tpl").ToArray();
             foreach (string template in templates)
                 File.Delete(template);
@@ -154,20 +143,20 @@ namespace CygSoft.Qik.FileManager
 
         private void SaveTemplateFiles()
         {
-            TemplateFile[] files = templateFiles.Values.ToArray();
+            ITemplateFile[] files = templateFiles.Values.ToArray();
             foreach (TemplateFile file in files)
                 file.Save();
         }
 
         private void RefreshIndex()
         {
-            TemplateFile[] files = templateFiles.Values.ToArray();
+            ITemplateFile[] files = templateFiles.Values.ToArray();
 
             XDocument indexDocument = XDocument.Load(this.IndexFilePath);
             XElement filesElement = indexDocument.Element("QikFile").Element("Templates");
             filesElement.RemoveNodes();
 
-            foreach (TemplateFile file in files)
+            foreach (ITemplateFile file in files)
             {
                 filesElement.Add(new XElement("Template",
                     new XAttribute("File", file.FileName),

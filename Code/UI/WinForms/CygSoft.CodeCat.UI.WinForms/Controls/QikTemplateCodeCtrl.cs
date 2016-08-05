@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Infrastructure.Qik;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -16,28 +17,28 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
-        private QikFile qikFile;
+        private ITemplateFile templateFile;
         private AppFacade application;
+        private QikFile qikFile;
+        private TabPage tabPage;
 
-        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, string templateId)
+        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, ITemplateFile templateFile, TabPage tabPage)
         {
             InitializeComponent();
             
 
             this.application = application;
             this.qikFile = qikFile;
-            this.Id = templateId;
+            this.tabPage = tabPage;
+            this.templateFile = templateFile;
+            this.Id = templateFile.FileName;
 
             SetDefaultFont();
             InitializeSyntaxList();
 
-            txtTitle.Text = qikFile.GetTemplateTitle(templateId);
-            templateSyntaxDocument.Text = qikFile.GetTemplateText(templateId);
-            SelectSyntax(qikFile.GetTemplateSyntax(this.Id));
-
-            this.IsModified = false;
-
-            RegisterEvents();
+            ResetFieldValues();
+            RegisterDataFieldEvents();
+            RegisterFileEvents();
         }
 
         public string Id { get; private set; }
@@ -54,59 +55,80 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public bool IsModified { get; private set; }
 
-        public bool TemplateExists { get { return qikFile.TemplateExists(this.Id); } }
+        public bool TemplateExists { get { return templateFile.Exists; } }
 
-        private void RegisterEvents()
+        public void Revert()
         {
-            qikFile.ContentReverted += qikFile_ContentReverted;
-            qikFile.ContentSaved += qikFile_ContentSaved;
-            qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
+            UnregisterDataFieldEvents();
+            ResetFieldValues();
+            RegisterDataFieldEvents();
+        }
 
+        private void ResetFieldValues()
+        {
+            txtTitle.Text = templateFile.Title;
+            templateSyntaxBox.Document.Text = templateFile.Text;
+            outputSyntaxBox.Document.Text = string.Empty;
+            SelectSyntax(templateFile.Syntax);
+
+            this.IsModified = false;
+            SetChangeStatus();
+        }
+
+        private void RegisterFileEvents()
+        {
+            qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
+            qikFile.ContentSaved += qikFile_ContentSaved;
+        }
+
+        private void qikFile_ContentSaved(object sender, EventArgs e)
+        {
+            this.IsModified = false;
+            SetChangeStatus();
+        }
+
+        private void qikFile_BeforeContentSaved(object sender, EventArgs e)
+        {
+            this.templateFile.Title = txtTitle.Text;
+            this.templateFile.Text = templateSyntaxDocument.Text;
+            this.templateFile.Syntax = cboSyntax.SelectedItem.ToString();
+        }
+
+        private void RegisterDataFieldEvents()
+        {
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
             cboFontSize.SelectedIndexChanged += cboFontSize_SelectedIndexChanged;
             txtTitle.TextChanged += SetModified;
+            txtTitle.Validated += txtTitle_Validated;
             templateSyntaxBox.TextChanged += SetModified;
+            this.Modified += QikTemplateCodeCtrl_Modified;
+        }
+
+        private void QikTemplateCodeCtrl_Modified(object sender, EventArgs e)
+        {
+            SetChangeStatus();
+        }
+
+        private void SetChangeStatus()
+        {
+            lblEditStatus.Text = this.IsModified ? "Edited" : "Saved";
+            lblEditStatus.ForeColor = this.IsModified ? Color.DarkRed : Color.Black;
+        }
+
+        private void UnregisterDataFieldEvents()
+        {
+            cboSyntax.SelectedIndexChanged -= cboSyntax_SelectedIndexChanged;
+            cboFontSize.SelectedIndexChanged -= cboFontSize_SelectedIndexChanged;
+            txtTitle.TextChanged -= SetModified;
+            txtTitle.Validated += txtTitle_Validated;
+            templateSyntaxBox.TextChanged -= SetModified;
+            this.Modified -= QikTemplateCodeCtrl_Modified;
         }
 
         private void cboFontSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.templateSyntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
             this.outputSyntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
-        }
-
-        private void qikFile_BeforeContentSaved(object sender, EventArgs e)
-        {
-            if (qikFile.TemplateExists(this.Id))
-            {
-                qikFile.SetTemplateTitle(this.Id, txtTitle.Text);
-                qikFile.SetTemplateText(this.Id, templateSyntaxDocument.Text);
-                qikFile.SetTemplateSyntax(this.Id, cboSyntax.SelectedItem.ToString());
-            }
-        }
-
-        private void qikFile_ContentSaved(object sender, EventArgs e)
-        {
-            this.IsModified = false;
-        }
-
-        private void qikFile_ContentReverted(object sender, EventArgs e)
-        {
-            if (qikFile.TemplateExists(this.Id))
-            {
-                TabPage tabPage = this.Parent as TabPage;
-                tabPage.Show();
-
-                txtTitle.TextChanged -= SetModified;
-                templateSyntaxBox.TextChanged -= SetModified;
-
-                txtTitle.Text = qikFile.GetTemplateTitle(this.Id);
-                templateSyntaxDocument.Text = qikFile.GetTemplateText(this.Id);
-                SelectSyntax(qikFile.GetTemplateSyntax(this.Id));
-                this.IsModified = false;
-
-                txtTitle.TextChanged += SetModified;
-                templateSyntaxBox.TextChanged += SetModified;
-            }
         }
 
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
@@ -150,7 +172,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             string syntaxFile = application.GetSyntaxFile(syn);
             this.outputSyntaxBox.Document.SyntaxFile = syntaxFile;
 
+            // requires an image list like the one you're using in the list view.
             //this.Icon = IconRepository.GetIcon(syntax);
+            
             this.lblEditStatus.Image = IconRepository.GetIcon(syn).ToBitmap();
         }
 
@@ -169,6 +193,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 outputSyntaxDocument.Text = templateSyntaxDocument.Text;
             }
+        }
+
+        private void txtTitle_Validated(object sender, EventArgs e)
+        {
+            tabPage.Text = txtTitle.Text;
         }
 
     }

@@ -25,7 +25,7 @@ namespace CygSoft.CodeCat.Infrastructure.Search.KeywordIndex
         void Save();
         void Delete();
         void Revert();
-        
+
         event EventHandler ContentSaved;
         event EventHandler ContentClosed;
         event EventHandler ContentDeleted;

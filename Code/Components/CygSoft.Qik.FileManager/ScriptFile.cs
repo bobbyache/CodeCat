@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.Qik.FileManager
 {
-    internal class ScriptFile : QikFile
+    internal class ScriptFile : BaseFile
     {
         public ScriptFile(string filePath)
             : base(filePath)

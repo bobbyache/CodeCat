@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Qik;
+using CygSoft.CodeCat.Infrastructure.Qik;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using System;
@@ -17,8 +18,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class QikCodeDocument : BaseDocument, IContentDocument
     {
-        private List<TabPage> removedTabpages = new List<TabPage>();
-
         #region Constructors
 
         public QikCodeDocument(QikFile qikFile, AppFacade application, bool isNew = false)
@@ -39,7 +38,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             // finally set the state of the document
             base.IsNew = isNew;
-            base.IsModified = false;
         }
 
         #endregion
@@ -164,6 +162,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.Text = base.persistableTarget.Title;
             this.txtKeywords.Text = base.persistableTarget.CommaDelimitedKeywords;
             this.txtTitle.Text = base.persistableTarget.Title;
+
+            base.IsModified = false;
         }
 
         private void BuildTabs()
@@ -171,21 +171,19 @@ namespace CygSoft.CodeCat.UI.WinForms
             QikFile qikFile = base.persistableTarget as QikFile;
             tabControlFile.TabPages.Clear();
 
-            foreach (string fileId in qikFile.Templates)
+            foreach (ITemplateFile templateFile in qikFile.Templates)
             {
-                string title = qikFile.GetTemplateTitle(fileId);
-                string code = qikFile.GetTemplateText(fileId);
-                NewTab(fileId, title, code);
+                NewTab(templateFile);
             }
         }
 
-        private TabPage NewTab(string id, string title, string code)
+        private TabPage NewTab(ITemplateFile templateFile)
         {
             QikFile qikFile = base.persistableTarget as QikFile;
-            TabPage tabPage = new TabPage(title);
-            tabPage.Name = id;
+            TabPage tabPage = new TabPage(templateFile.Title);
+            tabPage.Name = templateFile.FileName;
 
-            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(application, qikFile, id);
+            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(application, qikFile, templateFile, tabPage);
             codeCtrl.Modified += codeCtrl_Modified;
             tabPage.Controls.Add(codeCtrl);
             codeCtrl.Dock = DockStyle.Fill;
@@ -202,20 +200,13 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void qikFile_ContentReverted(object sender, EventArgs e)
         {
             ResetFields();
-
-            foreach (TabPage tabPage in removedTabpages)
-            {
-                QikTemplateCodeCtrl codeCtrl = tabPage.Controls[0] as QikTemplateCodeCtrl;
-                codeCtrl.Modified += codeCtrl_Modified;
-                tabControlFile.TabPages.Add(tabPage);
-            }
-            removedTabpages.Clear();
+            BuildTabs();
         }
+
 
         private void qikFile_ContentSaved(object sender, EventArgs e)
         {
-            this.removedTabpages.Clear();
-            this.IsModified = false;
+            ResetFields();
         }
 
         private void qikFile_BeforeContentSaved(object sender, EventArgs e)
@@ -250,17 +241,18 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             QikFile qikFile = base.persistableTarget as QikFile;
 
-            string fileId = qikFile.AddTemplate();
-            string title = qikFile.GetTemplateTitle(fileId);
-            string code = qikFile.GetTemplateText(fileId);
+            ITemplateFile templateFile = qikFile.AddTemplate();
 
-            TabPage tabPage = NewTab(fileId, title, code);
+            TabPage tabPage = NewTab(templateFile);
             tabControlFile.SelectedTab = tabPage;
             this.IsModified = true;
         }
 
         private void btnRemoveTemplate_Click(object sender, EventArgs e)
         {
+            if (tabControlFile.TabPages.Count == 0)
+                return;
+
             QikFile qikFile = base.persistableTarget as QikFile;
 
             string fileTitle = tabControlFile.SelectedTab.Name;
@@ -271,7 +263,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             QikTemplateCodeCtrl codeCtrl = tabPage.Controls[0] as QikTemplateCodeCtrl;
 
             codeCtrl.Modified -= codeCtrl_Modified;
-            removedTabpages.Add(tabPage);
             tabControlFile.TabPages.Remove(tabPage);
             this.IsModified = true;
         }

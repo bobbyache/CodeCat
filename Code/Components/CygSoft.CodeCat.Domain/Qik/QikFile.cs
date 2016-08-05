@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Qik;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.Qik.FileManager;
 using System;
@@ -23,20 +24,19 @@ namespace CygSoft.CodeCat.Domain.Qik
         private IKeywordIndexItem indexItem;
         private QikFileManager fileManager = null;
 
+        public QikFile(QikKeywordIndexItem indexItem, string folderPath)
+        {
+            this.indexItem = indexItem;
+            fileManager = new QikFileManager(folderPath, indexItem.Id);
+        }
+
         public IKeywordIndexItem IndexItem
         {
             get { return this.indexItem; }
         }
 
         public string Text { get; set; }
-
-        public string[] Templates { get { return this.fileManager.Templates; } }
-
-        public QikFile(QikKeywordIndexItem indexItem, string folderPath)
-        {
-            this.indexItem = indexItem;
-            fileManager = new QikFileManager(folderPath, indexItem.Id);
-        }
+        public ITemplateFile[] Templates { get { return this.fileManager.Templates; } }
 
         public string Id { get { return this.IndexItem.Id; } }
         public string FilePath { get { return fileManager.IndexFilePath; } }
@@ -84,7 +84,13 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public bool TemplateExists(string fileName)
         {
-            return Templates.Any(t => t == fileName);
+            return fileManager.TemplateExists(fileName);
+
+        }
+
+        public ITemplateFile GetTemplate(string fileName)
+        {
+            return fileManager.GetTemplate(fileName);
         }
 
         public void Revert()
@@ -114,11 +120,11 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public void Save()
         {
+            if (BeforeContentSaved != null)
+                BeforeContentSaved(this, new EventArgs());
+
             if (this.FileExists)
             {
-                if (BeforeContentSaved != null)
-                    BeforeContentSaved(this, new EventArgs());
-
                 fileManager.Save();
             }
             else
@@ -135,7 +141,7 @@ namespace CygSoft.CodeCat.Domain.Qik
                 ContentDeleted(this, new EventArgs());
         }
 
-        public string AddTemplate()
+        public ITemplateFile AddTemplate()
         {
             return fileManager.AddTemplate("New Template", "");
         }
@@ -145,36 +151,6 @@ namespace CygSoft.CodeCat.Domain.Qik
             fileManager.RemoveTemplate(fileName);
         }
 
-
-        public void SetTemplateSyntax(string fileName, string syntax)
-        {
-            this.fileManager.SetTemplateSyntax(fileName, syntax);
-        }
-
-        public string GetTemplateSyntax(string fileName)
-        {
-            return this.fileManager.GetTemplateSyntax(fileName);
-        }
-
-        public void SetTemplateText(string fileName, string text)
-        {
-            this.fileManager.SetTemplateText(fileName, text);
-        }
-
-        public string GetTemplateText(string fileName)
-        {
-            return this.fileManager.GetTemplateText(fileName);
-        }
-
-        public void SetTemplateTitle(string fileName, string title)
-        {
-            this.fileManager.SetTemplateTitle(fileName, title);
-        }
-
-        public string GetTemplateTitle(string fileName)
-        {
-            return fileManager.GetTemplateTitle(fileName);
-        }
 
         private void IncrementHitCount()
         {
