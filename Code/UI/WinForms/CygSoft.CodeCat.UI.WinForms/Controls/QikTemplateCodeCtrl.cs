@@ -175,7 +175,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             // requires an image list like the one you're using in the list view.
             //this.Icon = IconRepository.GetIcon(syntax);
-            
+
+            this.tabPage.ImageIndex = IconRepository.ImageKeyFor(syn);
             this.lblEditStatus.Image = IconRepository.GetIcon(syn).ToBitmap();
         }
 
