@@ -171,13 +171,15 @@ namespace CygSoft.CodeCat.UI.WinForms
             QikFile qikFile = base.persistableTarget as QikFile;
             tabControlFile.TabPages.Clear();
 
+            NewScriptTab();
+
             foreach (ITemplateFile templateFile in qikFile.Templates)
             {
-                NewTab(templateFile);
+                NewCodeTemplateTab(templateFile);
             }
         }
 
-        private TabPage NewTab(ITemplateFile templateFile)
+        private TabPage NewCodeTemplateTab(ITemplateFile templateFile)
         {
             QikFile qikFile = base.persistableTarget as QikFile;
             TabPage tabPage = new TabPage(templateFile.Title);
@@ -187,6 +189,22 @@ namespace CygSoft.CodeCat.UI.WinForms
             codeCtrl.Modified += codeCtrl_Modified;
             tabPage.Controls.Add(codeCtrl);
             codeCtrl.Dock = DockStyle.Fill;
+
+            tabControlFile.TabPages.Add(tabPage);
+
+            return tabPage;
+        }
+
+        private TabPage NewScriptTab()
+        {
+            
+            QikFile qikFile = base.persistableTarget as QikFile;
+            TabPage tabPage = new TabPage("Qik Script");
+            tabPage.Name = "script";
+            QikScriptCtrl scriptCtrl = new QikScriptCtrl(application, qikFile, tabPage);
+            scriptCtrl.Modified += scriptCtrl_Modified;
+            tabPage.Controls.Add(scriptCtrl);
+            scriptCtrl.Dock = DockStyle.Fill;
 
             tabControlFile.TabPages.Add(tabPage);
 
@@ -243,7 +261,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             ITemplateFile templateFile = qikFile.AddTemplate();
 
-            TabPage tabPage = NewTab(templateFile);
+            TabPage tabPage = NewCodeTemplateTab(templateFile);
             tabControlFile.SelectedTab = tabPage;
             this.IsModified = true;
         }
@@ -251,6 +269,9 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void btnRemoveTemplate_Click(object sender, EventArgs e)
         {
             if (tabControlFile.TabPages.Count == 0)
+                return;
+
+            if (tabControlFile.SelectedTab.Name == "script")
                 return;
 
             QikFile qikFile = base.persistableTarget as QikFile;
@@ -268,6 +289,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         private void codeCtrl_Modified(object sender, EventArgs e)
+        {
+            this.IsModified = true;
+        }
+
+        private void scriptCtrl_Modified(object sender, EventArgs e)
         {
             this.IsModified = true;
         }

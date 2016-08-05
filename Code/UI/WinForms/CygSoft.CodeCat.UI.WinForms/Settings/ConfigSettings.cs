@@ -118,6 +118,44 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        private static string qikScriptSyntaxFile;
+        public static string QikScriptSyntaxFile
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(qikScriptSyntaxFile))
+                    qikScriptSyntaxFile = ConfigurationManager.AppSettings["QikScriptSyntaxFile"];
+
+                return qikScriptSyntaxFile;
+            }
+            set
+            {
+                Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                configuration.AppSettings.Settings["QikScriptSyntaxFile"].Value = value;
+                configuration.Save();
+                ConfigurationManager.RefreshSection("appSettings");
+            }
+        }
+
+        private static string qikTemplateSyntaxFile;
+        public static string QikTemplateSyntaxFile
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(qikTemplateSyntaxFile))
+                    qikTemplateSyntaxFile = ConfigurationManager.AppSettings["QikTemplateSyntaxFile"];
+
+                return qikTemplateSyntaxFile;
+            }
+            set
+            {
+                Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                configuration.AppSettings.Settings["QikTemplateSyntaxFile"].Value = value;
+                configuration.Save();
+                ConfigurationManager.RefreshSection("appSettings");
+            }
+        }
+
         private static int? defaultFontSize;
         public static int DefaultFontSize
         {
@@ -144,6 +182,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             lastProject = ConfigurationManager.AppSettings["LastProject"];
             syntaxFilePath = ConfigurationManager.AppSettings["SyntaxFilePath"];
             defaultSyntax = ConfigurationManager.AppSettings["DefaultSyntax"];
+            qikScriptSyntaxFile = ConfigurationManager.AppSettings["QikScriptSyntaxFile"];
+            qikTemplateSyntaxFile = ConfigurationManager.AppSettings["QikTemplateSyntaxFile"];
             helpPageUrl = ConfigurationManager.AppSettings["HelpPageUrl"];
             defaultFontSize = Int32.Parse(ConfigurationManager.AppSettings["DefaultFontSize"]);
             codeLibraryIndexFileVersion = Int32.Parse(ConfigurationManager.AppSettings["CodeLibraryIndexFileVersion"]);

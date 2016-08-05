@@ -26,12 +26,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             InitializeComponent();
             
-
             this.application = application;
             this.qikFile = qikFile;
             this.tabPage = tabPage;
             this.templateFile = templateFile;
             this.Id = templateFile.FileName;
+
+            templateSyntaxDocument.SyntaxFile = ConfigSettings.QikTemplateSyntaxFile;
 
             SetDefaultFont();
             InitializeSyntaxList();

@@ -38,10 +38,11 @@ namespace CygSoft.Qik.FileManager
                 return string.Empty;
             } 
         }
-
-        private ScriptFile scriptFile = null;
+        
         private Dictionary<string, ITemplateFile> templateFiles = new Dictionary<string, ITemplateFile>();
 
+        private ScriptFile scriptFile = null;
+        public IQikScriptFile ScriptFile { get { return this.scriptFile; } }
 
         public bool TemplateExists(string fileName)
         {
@@ -95,12 +96,6 @@ namespace CygSoft.Qik.FileManager
             // load the script file
             this.scriptFile = new ScriptFile(this.ScriptFilePath);
             this.scriptFile.Open();
-        }
-
-        public string ScriptText
-        {
-            get { return this.scriptFile.Text; }
-            set { this.scriptFile.Text = value; }
         }
 
         public void Save()

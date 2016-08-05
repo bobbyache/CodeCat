@@ -93,6 +93,8 @@ namespace CygSoft.CodeCat.Domain.Qik
             return fileManager.GetTemplate(fileName);
         }
 
+        public IQikScriptFile ScriptFile { get { return fileManager.ScriptFile; } }
+
         public void Revert()
         {
             if (Open())
