@@ -15,7 +15,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         event EventHandler<DocumentSavedFileEventArgs> DocumentSaved;
 
         string Id { get; }
-        //IKeywordIndexItem KeywordIndex { get; }
 
         string Text { get; set; }
         Image IconImage { get; }

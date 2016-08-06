@@ -25,7 +25,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeComponent();
 
             btnShowProperties.Checked = false;
-            
             this.tabControlFile.ImageList = IconRepository.ImageList;
             
             base.application = application;
