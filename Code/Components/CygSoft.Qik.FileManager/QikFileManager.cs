@@ -42,7 +42,17 @@ namespace CygSoft.Qik.FileManager
         private Dictionary<string, ITemplateFile> templateFiles = new Dictionary<string, ITemplateFile>();
 
         private ScriptFile scriptFile = null;
-        public IQikScriptFile ScriptFile { get { return this.scriptFile; } }
+        public IQikScriptFile ScriptFile 
+        { 
+            get 
+            {
+                if (this.scriptFile == null)
+                {
+                    this.scriptFile = new ScriptFile(this.ScriptFilePath);
+                }
+                return this.scriptFile; 
+            } 
+        }
 
         public bool TemplateExists(string fileName)
         {
@@ -63,12 +73,13 @@ namespace CygSoft.Qik.FileManager
 
             Directory.CreateDirectory(this.Folder);
 
-            // do this to ensure that the file is closed afterwards before use...
-            using (FileStream fileStream = File.Create(this.ScriptFilePath)) { }
-
             XElement rootElement = new XElement("QikFile", new XElement("Templates"));
             XDocument document = new XDocument(rootElement);
             document.Save(this.IndexFilePath);
+
+            // do this to ensure that the file is closed afterwards before use...
+            using (FileStream fileStream = File.Create(this.ScriptFilePath)) { }
+            (this.ScriptFile as ScriptFile).Save();
 
             Load(parentFolder, id);
         }
@@ -94,8 +105,7 @@ namespace CygSoft.Qik.FileManager
             }
 
             // load the script file
-            this.scriptFile = new ScriptFile(this.ScriptFilePath);
-            this.scriptFile.Open();
+            (this.ScriptFile as ScriptFile).Open();
         }
 
         public void Save()

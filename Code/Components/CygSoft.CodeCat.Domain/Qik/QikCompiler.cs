@@ -11,6 +11,11 @@ namespace CygSoft.CodeCat.Domain.Qik
     {
         CygSoft.Qik.LanguageEngine.Qik qik;
 
+        public QikCompiler()
+        {
+            qik = new CygSoft.Qik.LanguageEngine.Qik();
+        }
+
         public IQikExpression[] Expressions { get { return qik.Expressions; } }
 
         public IQikControl[] Controls { get { return qik.Controls; } }
@@ -29,7 +34,6 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public void Compile(string script)
         {
-            qik = new CygSoft.Qik.LanguageEngine.Qik();
             qik.ExecuteScript(script);
         }
     }
