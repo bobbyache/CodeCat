@@ -18,6 +18,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class QikCodeDocument : BaseDocument, IContentDocument
     {
+        private QikCompiler compiler = new QikCompiler();
+
         #region Constructors
 
         public QikCodeDocument(QikFile qikFile, AppFacade application, bool isNew = false)
@@ -137,6 +139,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
             qikFile.ContentSaved += qikFile_ContentSaved;
 
+            inputPropertyGrid.InputChanged += inputPropertyGrid_InputChanged;
             base.Deleting += QikCodeDocument_Deleting;
             base.Saving += QikCodeDocument_Saving;
             base.Reverting += QikCodeDocument_Reverting;
@@ -151,6 +154,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             //syntaxBox.TextChanged += SetModified;
             btnDelete.Click += btnDelete_Click;
             btnDiscardChange.Click += btnDiscardChange_Click;
+        }
+
+        private void inputPropertyGrid_InputChanged(object sender, EventArgs e)
+        {
+            QikTemplateCodeCtrl codeCtrl = tabControlFile.SelectedTab.Controls[0] as QikTemplateCodeCtrl;
+            if (codeCtrl != null)
+                codeCtrl.Generate();
         }
 
         private void InitializeControls()
@@ -189,7 +199,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabPage.Name = templateFile.FileName;
             tabPage.ImageIndex = IconRepository.ImageKeyFor(templateFile.Syntax);
 
-            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(application, qikFile, templateFile, tabPage);
+            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(application, qikFile, compiler, templateFile, tabPage);
             codeCtrl.Modified += codeCtrl_Modified;
             tabPage.Controls.Add(codeCtrl);
             codeCtrl.Dock = DockStyle.Fill;
@@ -345,6 +355,18 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void btnShowProperties_CheckedChanged(object sender, EventArgs e)
         {
             splitContainer1.Panel2Collapsed = !btnShowProperties.Checked;
+        }
+
+        private void btnCompile_Click(object sender, EventArgs e)
+        {
+            QikScriptCtrl scriptCtrl = tabControlFile.TabPages["script"].Controls[0] as QikScriptCtrl;
+            compiler.Compile(scriptCtrl.ScriptText);
+
+
+            CygSoft.Qik.LanguageEngine.Infrastructure.IQikExpression[] expressions = compiler.Expressions;
+            CygSoft.Qik.LanguageEngine.Infrastructure.IQikControl[] controls = compiler.Controls;
+
+            inputPropertyGrid.Reset(controls, expressions);
         }
     }
 }

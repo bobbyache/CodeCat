@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Infrastructure.Qik;
+using Alsing.SourceCode;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -21,13 +22,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private AppFacade application;
         private QikFile qikFile;
         private TabPage tabPage;
+        private QikCompiler compiler;
 
-        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, ITemplateFile templateFile, TabPage tabPage)
+        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, QikCompiler compiler, ITemplateFile templateFile, TabPage tabPage)
         {
             InitializeComponent();
             
             this.application = application;
             this.qikFile = qikFile;
+            this.compiler = compiler;
             this.tabPage = tabPage;
             this.templateFile = templateFile;
             this.Id = templateFile.FileName;
@@ -63,6 +66,36 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             UnregisterDataFieldEvents();
             ResetFieldValues();
             RegisterDataFieldEvents();
+        }
+
+
+        public void Generate()
+        {
+            UpdateOutputDocument();
+            UpdateAutoList();
+        }
+
+        private void UpdateOutputDocument()
+        {
+            string input = templateSyntaxBox.Document.Text;
+            foreach (string placeholder in compiler.Placeholders)
+            {
+                string output = compiler.GetOutput(placeholder);
+                input = input.Replace(placeholder, output);
+            }
+
+            outputSyntaxBox.Document.Text = input;
+        }
+
+        private void UpdateAutoList()
+        {
+            templateSyntaxBox.AutoListClear();
+
+            foreach (string placeholder in compiler.Placeholders)
+            {
+                string title = compiler.GetTitle(placeholder);
+                templateSyntaxBox.AutoListAdd(string.Format("{0} ({1})", title, placeholder), placeholder, 0);
+            }
         }
 
         private void ResetFieldValues()
@@ -102,6 +135,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             txtTitle.TextChanged += SetModified;
             txtTitle.Validated += txtTitle_Validated;
             templateSyntaxBox.TextChanged += SetModified;
+            templateSyntaxBox.KeyDown += templateSyntaxBox_KeyDown;
             this.Modified += QikTemplateCodeCtrl_Modified;
         }
 
@@ -193,7 +227,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (templateFileTabControl.SelectedTab.Name == "outputTabPage")
             {
-                outputSyntaxDocument.Text = templateSyntaxDocument.Text;
+                //outputSyntaxDocument.Text = templateSyntaxDocument.Text;
+                UpdateOutputDocument();
             }
         }
 
@@ -202,5 +237,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             tabPage.Text = txtTitle.Text;
         }
 
+        private void templateSyntaxBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!this.templateSyntaxBox.ReadOnly)
+            {
+                if (e.KeyData == (Keys.Shift | Keys.F8) || e.KeyData == Keys.F8)
+                {
+                    this.templateSyntaxBox.AutoListPosition = new TextPoint(templateSyntaxBox.Caret.Position.X, templateSyntaxBox.Caret.Position.Y);
+                    this.templateSyntaxBox.AutoListVisible = true;
+                }
+            }
+        }
     }
 }

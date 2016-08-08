@@ -40,8 +40,14 @@
       <HintPath>..\..\..\packages\Alsing.SyntaxBox.1.4.10.1\lib\net45\Alsing.SyntaxBox.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CygSoft.Qik.LanguageEngine.Infrastructure">
+      <HintPath>..\..\..\External\CygSoft.Qik.LanguageEngine.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="CygX1.UI.WinForms.RecentFileMenu">
       <HintPath>..\..\..\External\CygX1.UI.WinForms.RecentFileMenu.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicTypeDescriptor">
+      <HintPath>..\..\..\External\DynamicTypeDescriptor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -62,6 +68,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\InputPropertyGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\InputPropertyGrid.designer.cs">
+      <DependentUpon>InputPropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PropertyControlAttribute.cs" />
     <Compile Include="Controls\QikScriptCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -74,6 +87,7 @@
     <Compile Include="Controls\QikTemplateCodeCtrl.Designer.cs">
       <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserInputProperties.cs" />
     <Compile Include="Dialogs\AboutBoxDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +179,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UiResource.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\InputPropertyGrid.resx">
+      <DependentUpon>InputPropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\QikScriptCtrl.resx">
       <DependentUpon>QikScriptCtrl.cs</DependentUpon>
     </EmbeddedResource>

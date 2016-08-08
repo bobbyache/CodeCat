@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CygSoft.Qik.LanguageEngine">
+      <HintPath>..\..\External\CygSoft.Qik.LanguageEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="CygSoft.Qik.LanguageEngine.Infrastructure">
+      <HintPath>..\..\External\CygSoft.Qik.LanguageEngine.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,6 +57,7 @@
     </Compile>
     <Compile Include="Code\ICodeKeywordIndexItem.cs" />
     <Compile Include="Qik\IQikKeywordIndexItem.cs" />
+    <Compile Include="Qik\QikCompiler.cs" />
     <Compile Include="Qik\QikFile.cs" />
     <Compile Include="Qik\QikKeywordIndexItem.cs" />
     <Compile Include="Qik\QikKeywordSearchIndexRepository.cs" />

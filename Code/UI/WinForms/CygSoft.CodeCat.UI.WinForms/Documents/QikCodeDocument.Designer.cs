@@ -46,10 +46,11 @@
             this.toolstripCommands = new System.Windows.Forms.ToolStrip();
             this.btnAddTemplate = new System.Windows.Forms.ToolStripButton();
             this.btnRemoveTemplate = new System.Windows.Forms.ToolStripButton();
+            this.btnShowProperties = new System.Windows.Forms.ToolStripButton();
+            this.btnCompile = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.btnShowProperties = new System.Windows.Forms.ToolStripButton();
+            this.inputPropertyGrid = new CygSoft.CodeCat.UI.WinForms.Controls.InputPropertyGrid();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -176,7 +177,8 @@
             this.chkEdit,
             this.btnAddTemplate,
             this.btnRemoveTemplate,
-            this.btnShowProperties});
+            this.btnShowProperties,
+            this.btnCompile});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
             this.toolstripCommands.Size = new System.Drawing.Size(878, 25);
@@ -201,6 +203,27 @@
             this.btnRemoveTemplate.Text = "Remove Template";
             this.btnRemoveTemplate.Click += new System.EventHandler(this.btnRemoveTemplate_Click);
             // 
+            // btnShowProperties
+            // 
+            this.btnShowProperties.Checked = true;
+            this.btnShowProperties.CheckOnClick = true;
+            this.btnShowProperties.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnShowProperties.Image = ((System.Drawing.Image)(resources.GetObject("btnShowProperties.Image")));
+            this.btnShowProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowProperties.Name = "btnShowProperties";
+            this.btnShowProperties.Size = new System.Drawing.Size(112, 22);
+            this.btnShowProperties.Text = "Show Properties";
+            this.btnShowProperties.CheckedChanged += new System.EventHandler(this.btnShowProperties_CheckedChanged);
+            // 
+            // btnCompile
+            // 
+            this.btnCompile.Image = ((System.Drawing.Image)(resources.GetObject("btnCompile.Image")));
+            this.btnCompile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCompile.Name = "btnCompile";
+            this.btnCompile.Size = new System.Drawing.Size(72, 22);
+            this.btnCompile.Text = "Compile";
+            this.btnCompile.Click += new System.EventHandler(this.btnCompile_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -213,7 +236,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.propertyGrid1);
+            this.splitContainer1.Panel2.Controls.Add(this.inputPropertyGrid);
             this.splitContainer1.Size = new System.Drawing.Size(878, 575);
             this.splitContainer1.SplitterDistance = 509;
             this.splitContainer1.TabIndex = 10;
@@ -227,25 +250,13 @@
             this.tabControlFile.Size = new System.Drawing.Size(509, 575);
             this.tabControlFile.TabIndex = 3;
             // 
-            // propertyGrid1
+            // inputPropertyGrid
             // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(365, 575);
-            this.propertyGrid1.TabIndex = 0;
-            // 
-            // btnShowProperties
-            // 
-            this.btnShowProperties.Checked = true;
-            this.btnShowProperties.CheckOnClick = true;
-            this.btnShowProperties.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.btnShowProperties.Image = ((System.Drawing.Image)(resources.GetObject("btnShowProperties.Image")));
-            this.btnShowProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnShowProperties.Name = "btnShowProperties";
-            this.btnShowProperties.Size = new System.Drawing.Size(112, 22);
-            this.btnShowProperties.Text = "Show Properties";
-            this.btnShowProperties.CheckedChanged += new System.EventHandler(this.btnShowProperties_CheckedChanged);
+            this.inputPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputPropertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.inputPropertyGrid.Name = "inputPropertyGrid";
+            this.inputPropertyGrid.Size = new System.Drawing.Size(365, 575);
+            this.inputPropertyGrid.TabIndex = 0;
             // 
             // QikCodeDocument
             // 
@@ -292,9 +303,10 @@
         private System.Windows.Forms.ToolStrip toolstripCommands;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabControl tabControlFile;
-        private System.Windows.Forms.PropertyGrid propertyGrid1;
         private System.Windows.Forms.ToolStripButton btnAddTemplate;
         private System.Windows.Forms.ToolStripButton btnRemoveTemplate;
         private System.Windows.Forms.ToolStripButton btnShowProperties;
+        private System.Windows.Forms.ToolStripButton btnCompile;
+        private Controls.InputPropertyGrid inputPropertyGrid;
     }
 }
