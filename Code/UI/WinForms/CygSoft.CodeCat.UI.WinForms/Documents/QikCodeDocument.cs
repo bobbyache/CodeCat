@@ -212,6 +212,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             QikFile qikFile = base.persistableTarget as QikFile;
             TabPage tabPage = new TabPage("Qik Script");
             tabPage.Name = "script";
+            tabPage.ImageIndex = IconRepository.ImageKeyFor(IconRepository.QikKey);
+
             QikScriptCtrl scriptCtrl = new QikScriptCtrl(application, qikFile, tabPage);
             scriptCtrl.Modified += scriptCtrl_Modified;
             tabPage.Controls.Add(scriptCtrl);

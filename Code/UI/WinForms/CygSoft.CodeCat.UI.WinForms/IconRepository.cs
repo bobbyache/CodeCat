@@ -12,6 +12,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public static class IconRepository
     {
+        public const string QikKey = "qik";
+
         private static ImageList imageList = new ImageList();
         private static Dictionary<string, Icon> iconDictonary = new Dictionary<string, Icon>();
 
@@ -30,7 +32,10 @@ namespace CygSoft.CodeCat.UI.WinForms
                 {
                     imageList.Images.Add(syntaxFile.Syntax, icon);
                 }
-                
+            }
+            if (!imageList.Images.ContainsKey(QikKey))
+            {
+                imageList.Images.Add(QikKey, Resources.GetImage(Constants.ImageKeys.QikFile));
             }
         }
 

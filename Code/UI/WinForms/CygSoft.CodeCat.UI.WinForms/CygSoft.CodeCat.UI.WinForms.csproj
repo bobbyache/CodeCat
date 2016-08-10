@@ -297,6 +297,7 @@
     <None Include="Resources\tag_blue_delete.png" />
     <None Include="Resources\page_save.png" />
     <None Include="Resources\control_rewind.png" />
+    <None Include="Resources\rfid.png" />
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

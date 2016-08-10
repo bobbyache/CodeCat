@@ -41,8 +41,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
             this.application = new AppFacade(ConfigSettings.SyntaxFilePath);
 
-            InitializeFileIcons();
             InitializeIconImages();
+            InitializeFileIcons();
 
             dockPanel.ContentAdded += dockPanel_ContentAdded;
             dockPanel.ContentRemoved += dockPanel_ContentRemoved;

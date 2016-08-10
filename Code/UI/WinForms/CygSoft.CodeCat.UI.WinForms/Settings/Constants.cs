@@ -20,6 +20,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string NewProject = "NewProject";
             public const string AddSnapshot = "AddSnapshot";
             public const string DeleteSnapshot = "DeleteSnapshot";
+            public const string QikFile = "QikFile";
             
             //public const string SaveProject = "SaveProject";
         }

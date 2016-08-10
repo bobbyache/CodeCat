@@ -169,7 +169,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 IQikKeywordIndexItem codeItem = item as IQikKeywordIndexItem;
                 listItem.Name = item.Id;
                 listItem.Tag = item;
-                listItem.ImageKey = codeItem.Syntax;
+                listItem.ImageKey = IconRepository.QikKey;
                 listItem.Text = item.Title;
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
