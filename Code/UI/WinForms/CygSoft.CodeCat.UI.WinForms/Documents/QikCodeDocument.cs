@@ -29,11 +29,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             btnShowProperties.Checked = false;
             this.tabControlFile.ImageList = IconRepository.ImageList;
-            
             base.application = application;
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
             this.compiler = qikFile.Compiler;
+            
 
             BuildTabs();
             InitializeImages();
@@ -129,10 +129,15 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
         private void InitializeImages()
         {
+            this.Icon = IconRepository.QikIcon;
             btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
             btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
             chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
             btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
+            btnAddTemplate.Image = Resources.GetImage(Constants.ImageKeys.AddTemplate);
+            btnRemoveTemplate.Image = Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
+            btnShowProperties.Image = Resources.GetImage(Constants.ImageKeys.ShowProperties);
+            btnCompile.Image = Resources.GetImage(Constants.ImageKeys.Compile);
             //this.Icon = IconRepository.GetIcon(base.persistableTarget.Syntax);
             this.Icon = null;
         }
@@ -287,18 +292,23 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (tabControlFile.SelectedTab.Name == "script")
                 return;
 
-            QikFile qikFile = base.persistableTarget as QikFile;
+            DialogResult dialogResult = Dialogs.RemoveQikTemplateDialogPrompt(this);
 
-            string fileTitle = tabControlFile.SelectedTab.Name;
-            qikFile.RemoveTemplate(fileTitle);
+            if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+            {
+                QikFile qikFile = base.persistableTarget as QikFile;
 
-            // hide the template, don't remove it, might need to revert back to it...
-            TabPage tabPage = tabControlFile.SelectedTab;
-            QikTemplateCodeCtrl codeCtrl = tabPage.Controls[0] as QikTemplateCodeCtrl;
+                string fileTitle = tabControlFile.SelectedTab.Name;
+                qikFile.RemoveTemplate(fileTitle);
 
-            codeCtrl.Modified -= codeCtrl_Modified;
-            tabControlFile.TabPages.Remove(tabPage);
-            this.IsModified = true;
+                // hide the template, don't remove it, might need to revert back to it...
+                TabPage tabPage = tabControlFile.SelectedTab;
+                QikTemplateCodeCtrl codeCtrl = tabPage.Controls[0] as QikTemplateCodeCtrl;
+
+                codeCtrl.Modified -= codeCtrl_Modified;
+                tabControlFile.TabPages.Remove(tabPage);
+                this.IsModified = true;
+            }
         }
 
         private void codeCtrl_Modified(object sender, EventArgs e)

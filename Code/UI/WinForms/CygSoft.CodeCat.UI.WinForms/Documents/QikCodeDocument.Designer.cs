@@ -51,6 +51,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
             this.inputPropertyGrid = new CygSoft.CodeCat.UI.WinForms.Controls.InputPropertyGrid();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -177,6 +178,7 @@
             this.chkEdit,
             this.btnAddTemplate,
             this.btnRemoveTemplate,
+            this.toolStripSeparator3,
             this.btnShowProperties,
             this.btnCompile});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
@@ -258,6 +260,11 @@
             this.inputPropertyGrid.Size = new System.Drawing.Size(365, 575);
             this.inputPropertyGrid.TabIndex = 0;
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // QikCodeDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -308,5 +315,6 @@
         private System.Windows.Forms.ToolStripButton btnShowProperties;
         private System.Windows.Forms.ToolStripButton btnCompile;
         private Controls.InputPropertyGrid inputPropertyGrid;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }

@@ -51,6 +51,12 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
+        public static DialogResult RemoveQikTemplateDialogPrompt(IWin32Window owner)
+        {
+            return MessageBox.Show(owner, "Sure you want to delete this template?",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+        }
+
         public static DialogResult SaveDocumentChangesDialogPrompt(IWin32Window owner)
         {
             return MessageBox.Show(owner, string.Format("{0}\n You have not saved this snippet. Would you like to save it first?", (owner as IContentDocument).Text),

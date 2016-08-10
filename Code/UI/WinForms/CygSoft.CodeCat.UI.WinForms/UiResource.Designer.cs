@@ -93,6 +93,16 @@ namespace CygSoft.CodeCat.UI.WinForms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Compile {
+            get {
+                object obj = ResourceManager.GetObject("Compile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete {
             get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);
@@ -186,6 +196,16 @@ namespace CygSoft.CodeCat.UI.WinForms {
         internal static System.Drawing.Bitmap SaveSnippet {
             get {
                 object obj = ResourceManager.GetObject("SaveSnippet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShowProperties {
+            get {
+                object obj = ResourceManager.GetObject("ShowProperties", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

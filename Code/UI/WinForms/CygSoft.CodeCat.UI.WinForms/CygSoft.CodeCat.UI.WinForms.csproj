@@ -298,6 +298,8 @@
     <None Include="Resources\page_save.png" />
     <None Include="Resources\control_rewind.png" />
     <None Include="Resources\rfid.png" />
+    <None Include="Resources\table.png" />
+    <None Include="Resources\hourglass.png" />
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

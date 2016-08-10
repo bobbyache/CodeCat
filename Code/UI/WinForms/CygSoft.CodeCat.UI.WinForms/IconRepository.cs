@@ -19,6 +19,21 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public static ImageList ImageList { get { return imageList; } }
 
+        private static Icon qikIcon;
+        public static Icon QikIcon
+        {
+            get
+            {
+                if (qikIcon == null)
+                {
+                    Bitmap qikBitMap = new Bitmap(Resources.GetImage(Constants.ImageKeys.QikFile));
+                    IntPtr iconPtr = qikBitMap.GetHicon();
+                    qikIcon = Icon.FromHandle(iconPtr);
+                }
+                return qikIcon;
+            }
+        }
+
         public static void Load(SyntaxFile[] syntaxFiles)
         {
             foreach (SyntaxFile syntaxFile in syntaxFiles)
