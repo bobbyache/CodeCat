@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure.Qik;
+using CygSoft.Qik.LanguageEngine.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -21,6 +22,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private QikFile qikFile;
         private TabPage tabPage;
         private IQikScriptFile scriptFile;
+        private ICompiler compiler;
 
         public QikScriptCtrl(AppFacade application, QikFile qikFile, TabPage tabPage)
         {
@@ -30,6 +32,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.qikFile = qikFile;
             this.tabPage = tabPage;
             this.scriptFile = qikFile.ScriptFile;
+            this.compiler = qikFile.Compiler;
 
             syntaxDocument.Text = this.scriptFile.Text;
             syntaxDocument.SyntaxFile = ConfigSettings.QikScriptSyntaxFile;
@@ -66,6 +69,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
             qikFile.ContentSaved += qikFile_ContentSaved;
+            compiler.AfterCompile += compiler_AfterCompile;
+            compiler.AfterInput += compiler_AfterInput;
         }
 
         private void qikFile_ContentSaved(object sender, EventArgs e)
@@ -107,6 +112,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void cboFontSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.syntaxBoxControl.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
+        }
+
+        private void compiler_AfterInput(object sender, EventArgs e)
+        {
+        }
+
+        private void compiler_AfterCompile(object sender, EventArgs e)
+        {
         }
 
         private void SetModified(object sender, EventArgs e)

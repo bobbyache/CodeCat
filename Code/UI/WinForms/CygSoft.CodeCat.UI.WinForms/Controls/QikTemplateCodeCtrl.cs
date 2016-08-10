@@ -44,6 +44,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             ResetFieldValues();
             RegisterDataFieldEvents();
             RegisterFileEvents();
+
+            UpdateAutoList();
         }
 
         public string Id { get; private set; }
@@ -246,6 +248,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                     this.templateSyntaxBox.AutoListVisible = true;
                 }
             }
+        }
+
+        private void templateFileTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateOutputDocument();
         }
     }
 }

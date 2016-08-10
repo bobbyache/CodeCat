@@ -46,10 +46,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             // finally set the state of the document
             base.IsNew = isNew;
 
-            QikScriptCtrl scriptCtrl = tabControlFile.TabPages["script"].Controls[0] as QikScriptCtrl;
             inputPropertyGrid.Reset(this.compiler);
-
-            this.compiler.Compile(scriptCtrl.ScriptText);
+            Compile();
         }
 
         #endregion
@@ -271,11 +269,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void btnAddTemplate_Click(object sender, EventArgs e)
         {
             QikFile qikFile = base.persistableTarget as QikFile;
-
             ITemplateFile templateFile = qikFile.AddTemplate();
 
             TabPage tabPage = NewCodeTemplateTab(templateFile);
             tabControlFile.SelectedTab = tabPage;
+
             this.IsModified = true;
         }
 
@@ -358,10 +356,23 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnCompile_Click(object sender, EventArgs e)
         {
-            QikFile qikFile = base.persistableTarget as QikFile;
-            QikScriptCtrl scriptCtrl = tabControlFile.TabPages["script"].Controls[0] as QikScriptCtrl;
+            Compile();
+        }
 
-            this.compiler.Compile(scriptCtrl.ScriptText);
+        private void Compile()
+        {
+            try
+            {
+                QikFile qikFile = base.persistableTarget as QikFile;
+                QikScriptCtrl scriptCtrl = tabControlFile.TabPages["script"].Controls[0] as QikScriptCtrl;
+
+                if (!(string.IsNullOrEmpty(scriptCtrl.ScriptText)))
+                    this.compiler.Compile(scriptCtrl.ScriptText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("A compilation error has occurred\n: {0}", ex.Message));
+            }
         }
     }
 }

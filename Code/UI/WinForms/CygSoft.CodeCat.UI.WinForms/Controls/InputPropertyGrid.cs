@@ -110,7 +110,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             foreach (IOption option in options)
             {
-                Dyn.StandardValue sv = new Dyn.StandardValue(option.Index, option.Value);
+                Dyn.StandardValue sv = new Dyn.StandardValue(option.Index, option.Title);
                 sv.Description = "Description of " + sv.DisplayName + ".";
                 pd.StandardValues.Add(sv);
             }
