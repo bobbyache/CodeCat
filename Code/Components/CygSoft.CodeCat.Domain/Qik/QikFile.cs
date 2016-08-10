@@ -3,6 +3,8 @@ using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Qik;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.Qik.FileManager;
+using CygSoft.Qik.LanguageEngine;
+using CygSoft.Qik.LanguageEngine.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +29,7 @@ namespace CygSoft.CodeCat.Domain.Qik
         public QikFile(QikKeywordIndexItem indexItem, string folderPath)
         {
             this.indexItem = indexItem;
+            this.Compiler = new Compiler();
             fileManager = new QikFileManager(folderPath, indexItem.Id);
         }
 
@@ -34,6 +37,8 @@ namespace CygSoft.CodeCat.Domain.Qik
         {
             get { return this.indexItem; }
         }
+
+        public ICompiler Compiler { get; private set; }
 
         public string Text { get; set; }
         public ITemplateFile[] Templates { get { return this.fileManager.Templates; } }

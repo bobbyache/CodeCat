@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure.Qik;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.CodeCat.UI.WinForms.Controls;
+using CygSoft.Qik.LanguageEngine.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class QikCodeDocument : BaseDocument, IContentDocument
     {
-        private QikCompiler compiler = new QikCompiler();
+        ICompiler compiler = null;
 
         #region Constructors
 
@@ -32,6 +33,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.application = application;
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
+            this.compiler = qikFile.Compiler;
 
             BuildTabs();
             InitializeImages();
@@ -43,6 +45,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             // finally set the state of the document
             base.IsNew = isNew;
+
+            QikScriptCtrl scriptCtrl = tabControlFile.TabPages["script"].Controls[0] as QikScriptCtrl;
+            inputPropertyGrid.Reset(this.compiler);
+
+            this.compiler.Compile(scriptCtrl.ScriptText);
         }
 
         #endregion
@@ -139,7 +146,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
             qikFile.ContentSaved += qikFile_ContentSaved;
 
-            inputPropertyGrid.InputChanged += inputPropertyGrid_InputChanged;
             base.Deleting += QikCodeDocument_Deleting;
             base.Saving += QikCodeDocument_Saving;
             base.Reverting += QikCodeDocument_Reverting;
@@ -154,13 +160,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             //syntaxBox.TextChanged += SetModified;
             btnDelete.Click += btnDelete_Click;
             btnDiscardChange.Click += btnDiscardChange_Click;
-        }
-
-        private void inputPropertyGrid_InputChanged(object sender, EventArgs e)
-        {
-            QikTemplateCodeCtrl codeCtrl = tabControlFile.SelectedTab.Controls[0] as QikTemplateCodeCtrl;
-            if (codeCtrl != null)
-                codeCtrl.Generate();
         }
 
         private void InitializeControls()
@@ -199,7 +198,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabPage.Name = templateFile.FileName;
             tabPage.ImageIndex = IconRepository.ImageKeyFor(templateFile.Syntax);
 
-            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(application, qikFile, compiler, templateFile, tabPage);
+            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(application, qikFile, templateFile, tabPage);
             codeCtrl.Modified += codeCtrl_Modified;
             tabPage.Controls.Add(codeCtrl);
             codeCtrl.Dock = DockStyle.Fill;
@@ -359,14 +358,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnCompile_Click(object sender, EventArgs e)
         {
+            QikFile qikFile = base.persistableTarget as QikFile;
             QikScriptCtrl scriptCtrl = tabControlFile.TabPages["script"].Controls[0] as QikScriptCtrl;
-            compiler.Compile(scriptCtrl.ScriptText);
 
-
-            CygSoft.Qik.LanguageEngine.Infrastructure.IQikExpression[] expressions = compiler.Expressions;
-            CygSoft.Qik.LanguageEngine.Infrastructure.IQikControl[] controls = compiler.Controls;
-
-            inputPropertyGrid.Reset(controls, expressions);
+            this.compiler.Compile(scriptCtrl.ScriptText);
         }
     }
 }

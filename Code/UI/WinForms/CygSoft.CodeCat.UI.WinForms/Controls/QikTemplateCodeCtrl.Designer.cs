@@ -136,7 +136,6 @@
             this.templateFileTabControl.SelectedIndex = 0;
             this.templateFileTabControl.Size = new System.Drawing.Size(656, 467);
             this.templateFileTabControl.TabIndex = 6;
-            this.templateFileTabControl.SelectedIndexChanged += new System.EventHandler(this.templateFileTabControl_SelectedIndexChanged);
             // 
             // templateTabPage
             // 

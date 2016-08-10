@@ -57,7 +57,6 @@
     </Compile>
     <Compile Include="Code\ICodeKeywordIndexItem.cs" />
     <Compile Include="Qik\IQikKeywordIndexItem.cs" />
-    <Compile Include="Qik\QikCompiler.cs" />
     <Compile Include="Qik\QikFile.cs" />
     <Compile Include="Qik\QikKeywordIndexItem.cs" />
     <Compile Include="Qik\QikKeywordSearchIndexRepository.cs" />

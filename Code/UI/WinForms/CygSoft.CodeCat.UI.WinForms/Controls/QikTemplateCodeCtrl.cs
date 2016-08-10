@@ -11,6 +11,7 @@ using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Infrastructure.Qik;
 using Alsing.SourceCode;
+using CygSoft.Qik.LanguageEngine.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -22,15 +23,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private AppFacade application;
         private QikFile qikFile;
         private TabPage tabPage;
-        private QikCompiler compiler;
+        private ICompiler compiler;
 
-        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, QikCompiler compiler, ITemplateFile templateFile, TabPage tabPage)
+        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, ITemplateFile templateFile, TabPage tabPage)
         {
             InitializeComponent();
             
             this.application = application;
             this.qikFile = qikFile;
-            this.compiler = compiler;
+            this.compiler = qikFile.Compiler;
             this.tabPage = tabPage;
             this.templateFile = templateFile;
             this.Id = templateFile.FileName;
@@ -68,19 +69,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             RegisterDataFieldEvents();
         }
 
-
-        public void Generate()
-        {
-            UpdateOutputDocument();
-            UpdateAutoList();
-        }
-
         private void UpdateOutputDocument()
         {
             string input = templateSyntaxBox.Document.Text;
             foreach (string placeholder in compiler.Placeholders)
             {
-                string output = compiler.GetOutput(placeholder);
+                string output = compiler.GetValueOfPlaceholder(placeholder);
                 input = input.Replace(placeholder, output);
             }
 
@@ -93,7 +87,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             foreach (string placeholder in compiler.Placeholders)
             {
-                string title = compiler.GetTitle(placeholder);
+                string title = compiler.GetTitleOfPlaceholder(placeholder);
                 templateSyntaxBox.AutoListAdd(string.Format("{0} ({1})", title, placeholder), placeholder, 0);
             }
         }
@@ -113,6 +107,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
             qikFile.ContentSaved += qikFile_ContentSaved;
+            compiler.AfterCompile += compiler_AfterCompile;
+            compiler.AfterInput += compiler_AfterInput;
+        }
+
+        private void compiler_AfterInput(object sender, EventArgs e)
+        {
+            UpdateOutputDocument();
+            UpdateAutoList();
+        }
+
+        private void compiler_AfterCompile(object sender, EventArgs e)
+        {
+            UpdateOutputDocument();
+            UpdateAutoList();
         }
 
         private void qikFile_ContentSaved(object sender, EventArgs e)
@@ -221,15 +229,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 cboFontSize.SelectedIndex = index;
             else
                 cboFontSize.SelectedIndex = 4;
-        }
-
-        private void templateFileTabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (templateFileTabControl.SelectedTab.Name == "outputTabPage")
-            {
-                //outputSyntaxDocument.Text = templateSyntaxDocument.Text;
-                UpdateOutputDocument();
-            }
         }
 
         private void txtTitle_Validated(object sender, EventArgs e)

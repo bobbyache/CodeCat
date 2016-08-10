@@ -87,7 +87,6 @@
     <Compile Include="Controls\QikTemplateCodeCtrl.Designer.cs">
       <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UserInputProperties.cs" />
     <Compile Include="Dialogs\AboutBoxDialog.cs">
       <SubType>Form</SubType>
     </Compile>
