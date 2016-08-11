@@ -41,6 +41,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             SetDefaultFont();
             InitializeSyntaxList();
 
+            RegisterSyntaxEditorEvents();
             ResetFieldValues();
             RegisterDataFieldEvents();
             RegisterFileEvents();
@@ -138,6 +139,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.templateFile.Syntax = cboSyntax.SelectedItem.ToString();
         }
 
+        private void RegisterSyntaxEditorEvents()
+        {
+            templateSyntaxBox.KeyDown += templateSyntaxBox_KeyDown;
+            templateSyntaxBox.Leave += templateSyntaxBox_Leave;
+            templateSyntaxBox.RowClick += templateSyntaxBox_RowClick;
+        }
+
         private void RegisterDataFieldEvents()
         {
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
@@ -145,8 +153,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             txtTitle.TextChanged += SetModified;
             txtTitle.Validated += txtTitle_Validated;
             templateSyntaxBox.TextChanged += SetModified;
-            templateSyntaxBox.KeyDown += templateSyntaxBox_KeyDown;
             this.Modified += QikTemplateCodeCtrl_Modified;
+        }
+
+        private void templateSyntaxBox_RowClick(object sender, Alsing.Windows.Forms.SyntaxBox.RowMouseEventArgs e)
+        {
+            templateSyntaxBox.AutoListVisible = false;
+        }
+
+        private void templateSyntaxBox_Leave(object sender, EventArgs e)
+        {
+            templateSyntaxBox.AutoListVisible = false;
         }
 
         private void QikTemplateCodeCtrl_Modified(object sender, EventArgs e)
@@ -243,9 +260,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             if (!this.templateSyntaxBox.ReadOnly)
             {
                 if (e.KeyData == (Keys.Shift | Keys.F8) || e.KeyData == Keys.F8)
+                //if (e.KeyData == (Keys.ControlKey | Keys.F8) || e.KeyData == (Keys.Control | Keys.J))
                 {
-                    this.templateSyntaxBox.AutoListPosition = new TextPoint(templateSyntaxBox.Caret.Position.X, templateSyntaxBox.Caret.Position.Y);
-                    this.templateSyntaxBox.AutoListVisible = true;
+                    if (this.compiler.Placeholders.Count() > 0)
+                    {
+                        this.templateSyntaxBox.AutoListPosition = new TextPoint(templateSyntaxBox.Caret.Position.X, templateSyntaxBox.Caret.Position.Y);
+                        this.templateSyntaxBox.AutoListVisible = true;
+                    }
                 }
             }
         }
