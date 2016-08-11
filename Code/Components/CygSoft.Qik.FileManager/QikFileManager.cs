@@ -71,17 +71,21 @@ namespace CygSoft.Qik.FileManager
             this.ParentFolder = parentFolder;
             this.Id = id;
 
-            Directory.CreateDirectory(this.Folder);
-
-            XElement rootElement = new XElement("QikFile", new XElement("Templates"));
-            XDocument document = new XDocument(rootElement);
-            document.Save(this.IndexFilePath);
-
-            // do this to ensure that the file is closed afterwards before use...
-            using (FileStream fileStream = File.Create(this.ScriptFilePath)) { }
-            (this.ScriptFile as ScriptFile).Save();
-
+            CreateIndex();
+            Save();
             Load(parentFolder, id);
+        }
+
+        private void CreateIndex()
+        {
+            if (!Directory.Exists(this.Folder))
+            {
+                Directory.CreateDirectory(this.Folder);
+
+                XElement rootElement = new XElement("QikFile", new XElement("Templates"));
+                XDocument document = new XDocument(rootElement);
+                document.Save(this.IndexFilePath);
+            }
         }
 
         public void Load(string parentFolder, string id)
@@ -137,10 +141,7 @@ namespace CygSoft.Qik.FileManager
 
         private void DeleteTemplateFiles()
         {
-            //ITemplateFile[] files = templateFiles.Values.ToArray();
-            //foreach (TemplateFile file in files)
-            //    file.Delete();
-
+            // easier just to enumerate and delete rather then track through the template files...
             string[] templates = Directory.EnumerateFiles(this.Folder, "*.tpl").ToArray();
             foreach (string template in templates)
                 File.Delete(template);
