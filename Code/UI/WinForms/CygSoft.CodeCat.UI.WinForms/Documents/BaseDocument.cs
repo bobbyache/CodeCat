@@ -201,8 +201,13 @@ namespace CygSoft.CodeCat.UI.WinForms
 
                         if (result == System.Windows.Forms.DialogResult.Yes)
                         {
-                            if (this.Saving != null)
-                                Saving(this, new EventArgs());
+                            if (this.ValidateChanges())
+                            {
+                                if (this.Saving != null)
+                                    Saving(this, new EventArgs());
+                            }
+                            else
+                                e.Cancel = true;
                         }
                         else if (result == System.Windows.Forms.DialogResult.Cancel)
                             e.Cancel = true;
