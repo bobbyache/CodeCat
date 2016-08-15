@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
+using CygSoft.CodeCat.UI.WinForms.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace CygSoft.CodeCat.UI.WinForms
     public partial class SearchForm : DockContent
     {
         private AppFacade application;
+        private ListViewSorter listViewSorter;
+
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
@@ -27,35 +30,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         public event EventHandler<SearchDelimitedKeywordEventArgs> SearchExecuted;
         public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
         public event EventHandler<SelectSnippetEventArgs> SelectSnippet;
-
-        private class ListViewItemComparer : IComparer
-        {
-            private int col;
-            private SortOrder order;
-            public ListViewItemComparer()
-            {
-                col = 0;
-                order = SortOrder.Ascending;
-            }
-            public ListViewItemComparer(int column, SortOrder order)
-            {
-                col = column;
-                this.order = order;
-            }
-            public int Compare(object x, object y)
-            {
-                int returnVal = -1;
-                returnVal = String.Compare(((ListViewItem)x).SubItems[col].Text,
-                                        ((ListViewItem)y).SubItems[col].Text);
-                // Determine whether the sort order is descending.
-                if (order == SortOrder.Descending)
-                    // Invert the value returned by String.Compare.
-                    returnVal = -(returnVal);
-                return returnVal;
-            }
-        }
-
-        public int SortingColumn { get; set; }
 
         private bool searchEnabled;
         public bool SearchEnabled
@@ -111,6 +85,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             btnFind.Image = Resources.GetImage(Constants.ImageKeys.FindSnippets);
 
+            this.listViewSorter = new ListViewSorter(this.listView);
+            
+            listView.Sorting = SortOrder.Ascending;
+
             this.application = application;
             this.HideOnClose = true;
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight;
@@ -143,10 +121,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void ReloadListview(IKeywordIndexItem[] indexItems)
         {
-
             listView.Items.Clear();
             foreach (IKeywordIndexItem item in indexItems)
                 CreateListviewItem(listView, item);
+
+            listViewSorter.Sort(0);
         }
 
         private void CreateListviewItem(ListView listView, IKeywordIndexItem item, bool select = false)
@@ -195,33 +174,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             menuContextRemoveKeywords.Enabled = true;
         }
 
-        private void SortColumn(int columnIndex)
-        {
-            if (columnIndex != SortingColumn)
-            {
-                // Set the sort column to the new column.
-                this.SortingColumn = columnIndex;
-                // Set the sort order to ascending by default.
-                listView.Sorting = SortOrder.Ascending;
-            }
-            else
-            {
-                // Determine what the last sort order was and change it.
-                if (listView.Sorting == SortOrder.Ascending)
-                    listView.Sorting = SortOrder.Descending;
-                else
-                    listView.Sorting = SortOrder.Ascending;
-            }
-
-            // Call the sort method to manually sort.
-            //this.listView1.ListViewItemSorter = new ListViewItemComparer(e.Column,
-            //                                     listView1.Sorting);
-            listView.ListViewItemSorter = new ListViewItemComparer(columnIndex, listView.Sorting);
-            listView.Sort();
-            // Set the ListViewItemSorter property to a new ListViewItemComparer
-            // object.
-        }
-
         private void OpenSelectedSnippet()
         {
             if (this.searchEnabled)
@@ -254,7 +206,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (this.searchEnabled)
             {
-                this.SortColumn(e.Column);
+                listViewSorter.Sort(e.Column);
             }
         }
 
