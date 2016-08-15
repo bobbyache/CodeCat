@@ -129,7 +129,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
         private void InitializeImages()
         {
-            this.Icon = IconRepository.QikIcon;
             btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
             btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
             chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
@@ -138,8 +137,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnRemoveTemplate.Image = Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
             btnShowProperties.Image = Resources.GetImage(Constants.ImageKeys.ShowProperties);
             btnCompile.Image = Resources.GetImage(Constants.ImageKeys.Compile);
-            //this.Icon = IconRepository.GetIcon(base.persistableTarget.Syntax);
-            this.Icon = null;
+            this.Icon = IconRepository.QikIcon;
         }
 
         private void RegisterEvents()
