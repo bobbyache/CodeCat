@@ -19,7 +19,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class QikCodeDocument : BaseDocument, IContentDocument
     {
-        ICompiler compiler = null;
+        private ICompiler compiler = null;
+        private QikFile qikFile = null;
 
         #region Constructors
 
@@ -30,10 +31,10 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnShowProperties.Checked = false;
             this.tabControlFile.ImageList = IconRepository.ImageList;
             base.application = application;
+            this.qikFile = qikFile;
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
-            this.compiler = qikFile.Compiler;
-            
+            this.compiler = qikFile.Compiler;            
 
             BuildTabs();
             InitializeImages();
@@ -114,7 +115,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected override void SaveFields()
         {
-            QikFile qikFile = base.persistableTarget as QikFile;
             qikFile.Save();
         }
 
@@ -142,7 +142,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void RegisterEvents()
         {
-            QikFile qikFile = base.persistableTarget as QikFile;
             qikFile.ContentReverted += qikFile_ContentReverted;
             qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
             qikFile.ContentSaved += qikFile_ContentSaved;
@@ -181,7 +180,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void BuildTabs()
         {
-            QikFile qikFile = base.persistableTarget as QikFile;
             tabControlFile.TabPages.Clear();
 
             NewScriptTab();
@@ -194,7 +192,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private TabPage NewCodeTemplateTab(ITemplateFile templateFile)
         {
-            QikFile qikFile = base.persistableTarget as QikFile;
             TabPage tabPage = new TabPage(templateFile.Title);
             tabPage.Name = templateFile.FileName;
             tabPage.ImageIndex = IconRepository.ImageKeyFor(templateFile.Syntax);
@@ -212,7 +209,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private TabPage NewScriptTab()
         {
             
-            QikFile qikFile = base.persistableTarget as QikFile;
             TabPage tabPage = new TabPage("Qik Script");
             tabPage.Name = "script";
             tabPage.ImageIndex = IconRepository.ImageKeyFor(IconRepository.QikKey);
@@ -225,6 +221,21 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabControlFile.TabPages.Add(tabPage);
 
             return tabPage;
+        }
+
+        private void Compile()
+        {
+            try
+            {
+                QikScriptCtrl scriptCtrl = tabControlFile.TabPages["script"].Controls[0] as QikScriptCtrl;
+
+                if (!(string.IsNullOrEmpty(scriptCtrl.ScriptText)))
+                    this.compiler.Compile(scriptCtrl.ScriptText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("A compilation error has occurred\n: {0}", ex.Message));
+            }
         }
 
         #endregion
@@ -245,8 +256,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void qikFile_BeforeContentSaved(object sender, EventArgs e)
         {
-            QikFile qikFile = base.persistableTarget as QikFile;
-
             qikFile.Title = this.txtTitle.Text.Trim();
             qikFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
             qikFile.Syntax = string.Empty;
@@ -273,7 +282,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddTemplate_Click(object sender, EventArgs e)
         {
-            QikFile qikFile = base.persistableTarget as QikFile;
             ITemplateFile templateFile = qikFile.AddTemplate();
 
             TabPage tabPage = NewCodeTemplateTab(templateFile);
@@ -294,8 +302,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {
-                QikFile qikFile = base.persistableTarget as QikFile;
-
                 string fileTitle = tabControlFile.SelectedTab.Name;
                 qikFile.RemoveTemplate(fileTitle);
 
@@ -319,13 +325,22 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsModified = true;
         }
 
+        private void btnShowProperties_CheckedChanged(object sender, EventArgs e)
+        {
+            splitContainer1.Panel2Collapsed = !btnShowProperties.Checked;
+        }
+
+        private void btnCompile_Click(object sender, EventArgs e)
+        {
+            Compile();
+        }
+
         #endregion
 
         #region Document Events
 
         private void QikCodeDocument_Reverting(object sender, EventArgs e)
         {
-            QikFile qikFile = base.persistableTarget as QikFile;
             qikFile.Revert();
         }
 
@@ -358,31 +373,5 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         #endregion
-
-        private void btnShowProperties_CheckedChanged(object sender, EventArgs e)
-        {
-            splitContainer1.Panel2Collapsed = !btnShowProperties.Checked;
-        }
-
-        private void btnCompile_Click(object sender, EventArgs e)
-        {
-            Compile();
-        }
-
-        private void Compile()
-        {
-            try
-            {
-                QikFile qikFile = base.persistableTarget as QikFile;
-                QikScriptCtrl scriptCtrl = tabControlFile.TabPages["script"].Controls[0] as QikScriptCtrl;
-
-                if (!(string.IsNullOrEmpty(scriptCtrl.ScriptText)))
-                    this.compiler.Compile(scriptCtrl.ScriptText);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(string.Format("A compilation error has occurred\n: {0}", ex.Message));
-            }
-        }
     }
 }
