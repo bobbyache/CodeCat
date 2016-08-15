@@ -218,6 +218,7 @@
             this.outputSyntaxBox.Location = new System.Drawing.Point(3, 3);
             this.outputSyntaxBox.LockCursorUpdate = false;
             this.outputSyntaxBox.Name = "outputSyntaxBox";
+            this.outputSyntaxBox.ReadOnly = true;
             this.outputSyntaxBox.ShowScopeIndicator = false;
             this.outputSyntaxBox.Size = new System.Drawing.Size(642, 435);
             this.outputSyntaxBox.SmoothScroll = false;
