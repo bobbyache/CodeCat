@@ -45,12 +45,12 @@ namespace CygSoft.CodeCat.Domain
 
         public bool Loaded
         {
-            get { return this.codeLibrary.Loaded; }
+            get { return this.codeLibrary.Loaded && this.qikLibrary.Loaded; }
         }
 
         public int GetIndexCount()
         {
-            return this.codeLibrary.IndexCount;
+            return this.codeLibrary.IndexCount + this.qikLibrary.IndexCount;
         }
 
         public void OpenContextFolder()
@@ -126,12 +126,37 @@ namespace CygSoft.CodeCat.Domain
 
         public void AddKeywords(IKeywordIndexItem[] indeces, string delimitedKeywordList)
         {
-            this.codeLibrary.AddKeywords(indeces, delimitedKeywordList);
+            CodeKeywordIndexItem[] codeIndeces = indeces.OfType<CodeKeywordIndexItem>().ToArray();
+            QikKeywordIndexItem[] qikIndeces = indeces.OfType<QikKeywordIndexItem>().ToArray();
+
+            this.codeLibrary.AddKeywords(codeIndeces, delimitedKeywordList);
+            this.qikLibrary.AddKeywords(qikIndeces, delimitedKeywordList);
         }
 
         public bool RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidIndeces)
         {
-            return this.codeLibrary.RemoveKeywords(indeces, keywords, out invalidIndeces);
+            CodeKeywordIndexItem[] codeIndeces = indeces.OfType<CodeKeywordIndexItem>().ToArray();
+            QikKeywordIndexItem[] qikIndeces = indeces.OfType<QikKeywordIndexItem>().ToArray();
+            IKeywordIndexItem[] invalidCodeIndeces;
+            IKeywordIndexItem[] invalidQikIndeces;
+
+            bool canRemoveCodeKeywords = codeLibrary.CanRemoveKeywords(codeIndeces, keywords, out invalidCodeIndeces);
+            bool canRemoveQikKeywords = this.qikLibrary.CanRemoveKeywords(qikIndeces, keywords, out invalidQikIndeces);
+            List<IKeywordIndexItem> allInvalidIndeces = new List<IKeywordIndexItem>();
+            allInvalidIndeces.AddRange(invalidCodeIndeces);
+            allInvalidIndeces.AddRange(invalidQikIndeces);
+            invalidIndeces = allInvalidIndeces.ToArray();
+
+            if (canRemoveCodeKeywords && canRemoveQikKeywords)
+            {
+                this.codeLibrary.RemoveKeywords(codeIndeces, keywords);
+                this.qikLibrary.RemoveKeywords(qikIndeces, keywords);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public string KeywordArrayToDelimitedText(string[] keywords)

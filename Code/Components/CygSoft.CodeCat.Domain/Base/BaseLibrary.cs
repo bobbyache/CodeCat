@@ -138,14 +138,21 @@ namespace CygSoft.CodeCat.Domain.Base
             this.index.AddKeywords(indeces, delimitedKeywordList);
         }
 
-        public bool RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidIndeces)
+        public bool CanRemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidIndeces)
         {
             if (this.index.ValidateRemoveKeywords(indeces, keywords, out invalidIndeces))
-            {
-                this.index.RemoveKeywords(indeces, keywords);
                 return true;
-            }
             return false;
+        }
+
+        public void RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords)
+        {
+            IKeywordIndexItem[] invalidIndeces;
+            if (!this.index.ValidateRemoveKeywords(indeces, keywords, out invalidIndeces))
+            {
+                throw new ApplicationException("Removing these keywords would result in unsearchable item(s).");
+            }
+            this.index.RemoveKeywords(indeces, keywords);
         }
 
         public string LastOpenedFilePath
