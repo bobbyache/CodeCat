@@ -48,7 +48,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                                                         typeof(string), textBox.DefaultValue,
                                                         new Scm.BrowsableAttribute(true),
                                                         new Scm.DisplayNameAttribute(textBox.Title),
-                                                        new Scm.DescriptionAttribute("Insert Text"),
+                                                        new Scm.DescriptionAttribute(CreatePropertyDescription(textBox)),
                                                         new Scm.DefaultValueAttribute(textBox.DefaultValue)
                                                         );
             propertyDescriptor.Attributes.Add(new Scm.CategoryAttribute(CATEGORY_USER_INPUT), true);
@@ -65,7 +65,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                                                         typeof(int), optionBox.SelectedIndex,
                                                         new Scm.BrowsableAttribute(true),
                                                         new Scm.DisplayNameAttribute(optionBox.Title),
-                                                        new Scm.DescriptionAttribute("Select an option."),
+                                                        new Scm.DescriptionAttribute(CreatePropertyDescription(optionBox)),
                                                         new Scm.DefaultValueAttribute(optionBox.SelectedIndex)
                                                         );
             propertyDescriptor.Attributes.Add(new Scm.CategoryAttribute(CATEGORY_USER_INPUT), true);
@@ -89,7 +89,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 //typeof(string), null,
                                                         new Scm.BrowsableAttribute(true),
                                                         new Scm.DisplayNameAttribute(expression.Title),
-                                                        new Scm.DescriptionAttribute("Derived expression."),
+                                                        new Scm.DescriptionAttribute(CreatePropertyDescription(expression)),
                                                         new Scm.DefaultValueAttribute(null),
                                                         new Scm.ReadOnlyAttribute(true)
                                                         );
@@ -104,6 +104,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             typeDescriptor.GetProperties().Add(propertyDescriptor);
         }
 
+        private string CreatePropertyDescription(ISymbol expression)
+        {
+            if (string.IsNullOrEmpty(expression.Description))
+                return string.Format("PLACEHOLDER: {0}\nSYMBOL: {1}", expression.Placeholder, expression.Symbol);
+            else
+                return string.Format("{0}\n\nPLACEHOLDER: {1}\nSYMBOL: {2}", expression.Description, expression.Placeholder, expression.Symbol);
+        }
+
         private void BuildOptions(Dyn.PropertyDescriptor pd, IOption[] options)
         {
             pd.StandardValues.Clear();
@@ -111,7 +119,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             foreach (IOption option in options)
             {
                 Dyn.StandardValue sv = new Dyn.StandardValue(option.Index, option.Title);
-                sv.Description = "Description of " + sv.DisplayName + ".";
+                sv.Description = option.Description;
                 pd.StandardValues.Add(sv);
             }
         }
@@ -149,7 +157,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             foreach (IExpression expression in compiler.Expressions)
             {
-                CreateExpression(expression);
+                if (expression.IsVisibleToEditor)
+                    CreateExpression(expression);
             }
 
             propertyGrid.Refresh();
