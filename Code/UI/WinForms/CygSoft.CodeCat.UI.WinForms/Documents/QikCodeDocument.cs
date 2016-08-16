@@ -21,6 +21,23 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         private ICompiler compiler = null;
         private QikFile qikFile = null;
+        private TabPage qikScriptTab = null;
+
+        #region Public Properties
+
+        public bool ShowScript
+        {
+            get { return btnShowScript.Checked; }
+            set { btnShowScript.Checked = value; }
+        }
+
+        public bool ShowProperties
+        {
+            get { return btnShowProperties.Checked; }
+            set { btnShowProperties.Checked = value; }
+        }
+
+        #endregion
 
         #region Constructors
 
@@ -28,15 +45,14 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
-            btnShowProperties.Checked = false;
             this.tabControlFile.ImageList = IconRepository.ImageList;
             base.application = application;
             this.qikFile = qikFile;
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
-            this.compiler = qikFile.Compiler;            
+            this.compiler = qikFile.Compiler;
 
-            BuildTabs();
+            RebuildTabs();
             InitializeImages();
             InitializeControls();
             ResetFields();
@@ -47,7 +63,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             // finally set the state of the document
             base.IsNew = isNew;
 
+            btnShowProperties.Checked = true;
+            btnShowScript.Checked = base.IsNew;
+
             inputPropertyGrid.Reset(this.compiler);
+
             Compile();
         }
 
@@ -137,6 +157,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnRemoveTemplate.Image = Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
             btnShowProperties.Image = Resources.GetImage(Constants.ImageKeys.ShowProperties);
             btnCompile.Image = Resources.GetImage(Constants.ImageKeys.Compile);
+            btnShowScript.Image = Resources.GetImage(Constants.ImageKeys.TemplateScript);
             this.Icon = IconRepository.QikIcon;
         }
 
@@ -178,16 +199,36 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.IsModified = false;
         }
 
-        private void BuildTabs()
+        private void RebuildTabs()
         {
-            tabControlFile.TabPages.Clear();
+            // Completely removes all tabs
+            ClearAllTabs();
 
-            NewScriptTab();
-
+            // Re-creates from source...
             foreach (ITemplateFile templateFile in qikFile.Templates)
             {
                 NewCodeTemplateTab(templateFile);
             }
+
+            DisplayScriptTab(btnShowScript.Checked);
+        }
+
+        private void ClearAllTabs()
+        {
+            foreach (TabPage tabPage in tabControlFile.TabPages)
+            {
+                if (tabPage == this.qikScriptTab)
+                {
+                    QikScriptCtrl scriptCtrl = qikScriptTab.Controls[0] as QikScriptCtrl;
+                    scriptCtrl.Modified -= scriptCtrl_Modified;
+                }
+                else
+                {
+                    QikTemplateCodeCtrl codeCtrl = tabPage.Controls[0] as QikTemplateCodeCtrl;
+                    codeCtrl.Modified -= codeCtrl_Modified;
+                }
+            }
+            tabControlFile.TabPages.Clear();
         }
 
         private TabPage NewCodeTemplateTab(ITemplateFile templateFile)
@@ -206,28 +247,38 @@ namespace CygSoft.CodeCat.UI.WinForms
             return tabPage;
         }
 
-        private TabPage NewScriptTab()
+        private void DisplayScriptTab(bool visible)
         {
-            
-            TabPage tabPage = new TabPage("Qik Script");
-            tabPage.Name = "script";
-            tabPage.ImageIndex = IconRepository.ImageKeyFor(IconRepository.QikKey);
+            if (qikScriptTab == null)
+            {
+                TabPage tabPage = new TabPage("Qik Script");
+                tabPage.Name = "script";
+                tabPage.ImageIndex = IconRepository.ImageKeyFor(IconRepository.QikKey);
+                this.qikScriptTab = tabPage;
 
-            QikScriptCtrl scriptCtrl = new QikScriptCtrl(application, qikFile, tabPage);
-            scriptCtrl.Modified += scriptCtrl_Modified;
-            tabPage.Controls.Add(scriptCtrl);
-            scriptCtrl.Dock = DockStyle.Fill;
+                QikScriptCtrl scriptCtrl = new QikScriptCtrl(application, qikFile, tabPage);
+                scriptCtrl.Modified += scriptCtrl_Modified;
+                tabPage.Controls.Add(scriptCtrl);
+                scriptCtrl.Dock = DockStyle.Fill;
+            }
 
-            tabControlFile.TabPages.Add(tabPage);
-
-            return tabPage;
+            if (visible)
+            {
+                tabControlFile.TabPages.Add(this.qikScriptTab);
+                tabControlFile.SelectedTab = this.qikScriptTab;
+            }
+            else
+            {
+                if (tabControlFile.TabPages.Contains(this.qikScriptTab))
+                    tabControlFile.TabPages.Remove(this.qikScriptTab);
+            }
         }
 
         private void Compile()
         {
             try
             {
-                QikScriptCtrl scriptCtrl = tabControlFile.TabPages["script"].Controls[0] as QikScriptCtrl;
+                QikScriptCtrl scriptCtrl = qikScriptTab.Controls[0] as QikScriptCtrl;
 
                 if (!(string.IsNullOrEmpty(scriptCtrl.ScriptText)))
                     this.compiler.Compile(scriptCtrl.ScriptText);
@@ -245,7 +296,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void qikFile_ContentReverted(object sender, EventArgs e)
         {
             ResetFields();
-            BuildTabs();
+            RebuildTabs();
         }
 
 
@@ -285,6 +336,10 @@ namespace CygSoft.CodeCat.UI.WinForms
             ITemplateFile templateFile = qikFile.AddTemplate();
 
             TabPage tabPage = NewCodeTemplateTab(templateFile);
+
+            // ensures that the script tab always remains at the end.
+            DisplayScriptTab(false);
+            DisplayScriptTab(true);
             tabControlFile.SelectedTab = tabPage;
 
             this.IsModified = true;
@@ -328,6 +383,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void btnShowProperties_CheckedChanged(object sender, EventArgs e)
         {
             splitContainer1.Panel2Collapsed = !btnShowProperties.Checked;
+        }
+
+        private void btnShowScript_CheckedChanged(object sender, EventArgs e)
+        {
+            DisplayScriptTab(btnShowScript.Checked);
         }
 
         private void btnCompile_Click(object sender, EventArgs e)

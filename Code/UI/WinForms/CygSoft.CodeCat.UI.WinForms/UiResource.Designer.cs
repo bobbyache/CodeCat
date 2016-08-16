@@ -209,5 +209,15 @@ namespace CygSoft.CodeCat.UI.WinForms {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TemplateScript {
+            get {
+                object obj = ResourceManager.GetObject("TemplateScript", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

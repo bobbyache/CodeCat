@@ -25,6 +25,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string RemoveTemplate = "delete";
             public const string ShowProperties = "ShowProperties";
             public const string Compile = "Compile";
+            public const string TemplateScript = "TemplateScript";
             
             //public const string SaveProject = "SaveProject";
         }

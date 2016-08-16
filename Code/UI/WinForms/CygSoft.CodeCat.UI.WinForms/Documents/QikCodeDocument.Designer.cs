@@ -46,12 +46,14 @@
             this.toolstripCommands = new System.Windows.Forms.ToolStrip();
             this.btnAddTemplate = new System.Windows.Forms.ToolStripButton();
             this.btnRemoveTemplate = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnShowProperties = new System.Windows.Forms.ToolStripButton();
+            this.btnShowScript = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCompile = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
             this.inputPropertyGrid = new CygSoft.CodeCat.UI.WinForms.Controls.InputPropertyGrid();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -180,6 +182,8 @@
             this.btnRemoveTemplate,
             this.toolStripSeparator3,
             this.btnShowProperties,
+            this.btnShowScript,
+            this.toolStripSeparator4,
             this.btnCompile});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
@@ -189,33 +193,57 @@
             // 
             // btnAddTemplate
             // 
+            this.btnAddTemplate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnAddTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnAddTemplate.Image")));
             this.btnAddTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddTemplate.Name = "btnAddTemplate";
-            this.btnAddTemplate.Size = new System.Drawing.Size(102, 22);
+            this.btnAddTemplate.Size = new System.Drawing.Size(23, 22);
             this.btnAddTemplate.Text = "Add Template";
             this.btnAddTemplate.Click += new System.EventHandler(this.btnAddTemplate_Click);
             // 
             // btnRemoveTemplate
             // 
+            this.btnRemoveTemplate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnRemoveTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveTemplate.Image")));
             this.btnRemoveTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRemoveTemplate.Name = "btnRemoveTemplate";
-            this.btnRemoveTemplate.Size = new System.Drawing.Size(123, 22);
+            this.btnRemoveTemplate.Size = new System.Drawing.Size(23, 22);
             this.btnRemoveTemplate.Text = "Remove Template";
             this.btnRemoveTemplate.Click += new System.EventHandler(this.btnRemoveTemplate_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // btnShowProperties
             // 
             this.btnShowProperties.Checked = true;
             this.btnShowProperties.CheckOnClick = true;
             this.btnShowProperties.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnShowProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnShowProperties.Image = ((System.Drawing.Image)(resources.GetObject("btnShowProperties.Image")));
             this.btnShowProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnShowProperties.Name = "btnShowProperties";
-            this.btnShowProperties.Size = new System.Drawing.Size(112, 22);
+            this.btnShowProperties.Size = new System.Drawing.Size(23, 22);
             this.btnShowProperties.Text = "Show Properties";
             this.btnShowProperties.CheckedChanged += new System.EventHandler(this.btnShowProperties_CheckedChanged);
+            // 
+            // btnShowScript
+            // 
+            this.btnShowScript.CheckOnClick = true;
+            this.btnShowScript.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnShowScript.Image = ((System.Drawing.Image)(resources.GetObject("btnShowScript.Image")));
+            this.btnShowScript.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowScript.Name = "btnShowScript";
+            this.btnShowScript.Size = new System.Drawing.Size(23, 22);
+            this.btnShowScript.Text = "Hide Qik Script";
+            this.btnShowScript.CheckedChanged += new System.EventHandler(this.btnShowScript_CheckedChanged);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // btnCompile
             // 
@@ -259,11 +287,6 @@
             this.inputPropertyGrid.Name = "inputPropertyGrid";
             this.inputPropertyGrid.Size = new System.Drawing.Size(365, 575);
             this.inputPropertyGrid.TabIndex = 0;
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // QikCodeDocument
             // 
@@ -316,5 +339,7 @@
         private System.Windows.Forms.ToolStripButton btnCompile;
         private Controls.InputPropertyGrid inputPropertyGrid;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton btnShowScript;
     }
 }

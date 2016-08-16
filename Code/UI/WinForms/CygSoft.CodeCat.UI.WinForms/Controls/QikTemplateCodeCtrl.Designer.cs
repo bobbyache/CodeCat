@@ -128,8 +128,8 @@
             // 
             // templateFileTabControl
             // 
-            this.templateFileTabControl.Controls.Add(this.templateTabPage);
             this.templateFileTabControl.Controls.Add(this.outputTabPage);
+            this.templateFileTabControl.Controls.Add(this.templateTabPage);
             this.templateFileTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.templateFileTabControl.Location = new System.Drawing.Point(0, 25);
             this.templateFileTabControl.Name = "templateFileTabControl";
