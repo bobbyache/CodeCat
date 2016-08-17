@@ -40,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IDocManager.cs" />
+    <Compile Include="IDocumentFile.cs" />
+    <Compile Include="IPositionableDocManager.cs" />
+    <Compile Include="IPositionedItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

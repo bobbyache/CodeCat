@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.Qik.FileManager
 {
-    public class QikFileManager
+    public class QikFileManager : CygSoft.Qik.FileManager.IQikFileManager
     {
         public QikFileManager(string parentFolder, string id)
         {
