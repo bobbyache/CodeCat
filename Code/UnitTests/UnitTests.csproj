@@ -56,44 +56,38 @@
     <Compile Include="Tests\Converters\Version1ToVersion2_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Files\ProjectFiles\CodeFile V1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Files\ProjectFiles\CodeFile V2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Files\ProjectFiles\CodeFile V3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Files\ProjectFiles\CodeFile V1.xml" />
+    <Content Include="Files\ProjectFiles\CodeFile V2.xml" />
+    <Content Include="Files\ProjectFiles\CodeFile V3.xml" />
     <Content Include="Files\ProjectFiles\CodeIndex V1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Files\ProjectFiles\CodeIndex V2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Files\ProjectFiles\CodeIndex V3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Files\ProjectFiles\IndexItem V1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Files\ProjectFiles\IndexItem V2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Files\ProjectFiles\ProjectFile V2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Files\ProjectFiles\ProjectFile V3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Files\ProjectFiles\CodeIndex V3.xml" />
+    <Content Include="Files\ProjectFiles\IndexItem V1.xml" />
+    <Content Include="Files\ProjectFiles\IndexItem V2.xml" />
+    <Content Include="Files\ProjectFiles\ProjectFile V2.xml" />
+    <Content Include="Files\ProjectFiles\ProjectFile V3.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Components\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
+      <Project>{70ba46ba-7055-4e29-96a1-725a30b00b61}</Project>
+      <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Components\CygSoft.CodeCat.DocumentManager\CygSoft.CodeCat.DocumentManager.csproj">
+      <Project>{d3c89aa0-fd50-4d0e-9492-15efd952958a}</Project>
+      <Name>CygSoft.CodeCat.DocumentManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Components\CygSoft.CodeCat.ProjectConverter\CygSoft.CodeCat.ProjectConverter.csproj">
       <Project>{c908f626-1812-4119-b551-e14840100203}</Project>
       <Name>CygSoft.CodeCat.ProjectConverter</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Files\DocumentManagement\" />
+    <Folder Include="Tests\DocumentManagement\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
