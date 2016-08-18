@@ -5,12 +5,7 @@ using System.Text;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IDocumentFile  : IPositionedItem
+    public interface IDocumentFile  : IVersionableFile, IPositionedItem
     {
-        string Id { get; }
-        string FilePath { get; }
-        string Text { get; set; }
-        string FileName { get; }
-        string Folder { get; }
     }
 }

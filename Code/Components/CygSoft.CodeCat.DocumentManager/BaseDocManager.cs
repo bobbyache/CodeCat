@@ -129,11 +129,11 @@ namespace CygSoft.CodeCat.DocumentManager
             }
         }
 
-        public IDocumentFile GetDocumentFile(string fileName)
+        public IDocumentFile GetDocumentFile(string id)
         {
             try
             {
-                return this.documentFiles.ItemsList.Where(f => f.Id == fileName).SingleOrDefault();
+                return this.documentFiles.ItemsList.Where(f => f.Id == id).SingleOrDefault();
             }
             catch (Exception exception)
             {
@@ -141,11 +141,11 @@ namespace CygSoft.CodeCat.DocumentManager
             }
         }
 
-        public void DeleteDocumentFile(string fileName)
+        public void DeleteDocumentFile(string id)
         {
             try
             {
-                IDocumentFile documentFile = this.documentFiles.ItemsList.Where(f => f.Id == fileName).SingleOrDefault();
+                IDocumentFile documentFile = this.documentFiles.ItemsList.Where(f => f.Id == id).SingleOrDefault();
                 this.RemoveDocumentFile(documentFile);
             }
             catch (Exception exception)

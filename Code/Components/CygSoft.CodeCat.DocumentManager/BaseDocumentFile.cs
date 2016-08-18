@@ -8,22 +8,12 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager
 {
-    public class BaseDocumentFile : IDocumentFile
+    public abstract class BaseDocumentFile : BaseVersionableFile, IDocumentFile
     {
-        public string Id { get { return this.FileName; } }
-        public string FilePath { get; private set; }
-        public string Text { get; set; }
-        public string FileName { get { return Path.GetFileName(this.FilePath); } }
-        public string Folder
-        {
-            get { return Path.GetDirectoryName(this.FilePath); }
-        }
-
         public int Ordinal { get; set; }
 
-        public BaseDocumentFile(string filePath)
+        public BaseDocumentFile(string filePath) : base(filePath)
         {
-            this.FilePath = filePath;
         }
     }
 }
