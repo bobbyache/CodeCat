@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager
 {
-    public class BaseSnapshotFile : BaseFile, IFileSnapshot
+    public class BaseVersionFile : BaseFile, IFileVersion
     {
-        private SnapshotFileNamer snapshotFileNamer = null;
+        private VersionFileNamer versionFileNamer = null;
 
         public DateTime TimeTaken { get; private set; }
         public string Description { get; private set; }
@@ -24,14 +24,14 @@ namespace CygSoft.CodeCat.DocumentManager
             }
         }
 
-        public override string Id { get { return snapshotFileNamer.Id; } }
-        public override string FileName { get { return snapshotFileNamer.FileName; } }
-        public override string FilePath { get { return snapshotFileNamer.FilePath; } }
+        public override string Id { get { return versionFileNamer.Id; } }
+        public override string FileName { get { return versionFileNamer.FileName; } }
+        public override string FilePath { get { return versionFileNamer.FilePath; } }
 
-        public BaseSnapshotFile(string filePath, DateTime timeStamp, string description, string text)
+        public BaseVersionFile(string filePath, DateTime timeStamp, string description, string text)
             : base(filePath)
         {
-            this.snapshotFileNamer = new SnapshotFileNamer(filePath, timeStamp);
+            this.versionFileNamer = new VersionFileNamer(filePath, timeStamp);
             this.TimeTaken = timeStamp;
             this.Description = description;
             this.Text = text;

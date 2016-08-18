@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace UnitTests.Stubs.DocumentManager
 {
-    public class StubSnapshotFile : BaseSnapshotFile
+    public class StubVersionFile : BaseVersionFile
     {
-        public StubSnapshotFile(string filePath, DateTime timeStamp, string description, string text)
+        public StubVersionFile(string filePath, DateTime timeStamp, string description, string text)
             : base(filePath, timeStamp, description, text) 
         {
 

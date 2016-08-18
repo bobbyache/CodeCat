@@ -15,9 +15,9 @@ namespace UnitTests.Stubs.DocumentManager
 
         }
 
-        protected override IFileSnapshot NewSnapshot(DateTime timeStamp, string description, string text)
+        protected override IFileVersion NewSnapshot(DateTime timeStamp, string description, string text)
         {
-            return new StubSnapshotFile(this.FilePath, timeStamp, description, text);
+            return new StubVersionFile(this.FilePath, timeStamp, description, text);
         }
     }
 }

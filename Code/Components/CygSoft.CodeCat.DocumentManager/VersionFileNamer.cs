@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager
 {
-    internal class SnapshotFileNamer
+    internal class VersionFileNamer
     {
         public string SourceFilePath { get; private set; }
         public DateTime TimeStamp { get; private set; }
@@ -27,7 +27,7 @@ namespace CygSoft.CodeCat.DocumentManager
             get { return CreateFilePath(); }
         }
 
-        public SnapshotFileNamer(string sourceFilePath, DateTime timeStamp)
+        public VersionFileNamer(string sourceFilePath, DateTime timeStamp)
         {
             this.SourceFilePath = sourceFilePath;
             this.TimeStamp = timeStamp;

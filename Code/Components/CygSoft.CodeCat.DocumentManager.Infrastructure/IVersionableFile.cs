@@ -8,10 +8,10 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
     public interface IVersionableFile : IFile
     {
-        IFileSnapshot[] Snapshots { get; }
-        bool HasSnapshots { get; }
+        IFileVersion[] Versions { get; }
+        bool HasVersions { get; }
 
-        void TakeSnapshot(string description = "");
-        void DeleteSnapshot(string snapshotId);
+        void CreateVersion(string description = "");
+        void DeleteVersion(string versionId);
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IFileSnapshot : IFile
+    public interface IFileVersion : IFile
     {
         DateTime TimeTaken { get; }
         string Description { get; }

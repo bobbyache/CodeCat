@@ -7,23 +7,23 @@ using System.Threading.Tasks;
 
 namespace UnitTests.Stubs.DocumentManager
 {
-    public static class SnapshotFileHelper
+    public static class VersionFileHelper
     {
         public static string CreateId(string filePath, DateTime timeStamp)
         {
-            SnapshotFileNamer fileNamer = new SnapshotFileNamer(filePath, timeStamp);
+            VersionFileNamer fileNamer = new VersionFileNamer(filePath, timeStamp);
             return fileNamer.Id;
         }
 
         public static string CreateFileName(string filePath, DateTime timeStamp)
         {
-            SnapshotFileNamer fileNamer = new SnapshotFileNamer(filePath, timeStamp);
+            VersionFileNamer fileNamer = new VersionFileNamer(filePath, timeStamp);
             return fileNamer.FileName;
         }
 
         public static string CreateFilePath(string filePath, DateTime timeStamp)
         {
-            SnapshotFileNamer fileNamer = new SnapshotFileNamer(filePath, timeStamp);
+            VersionFileNamer fileNamer = new VersionFileNamer(filePath, timeStamp);
             return fileNamer.FilePath;
         }
     }

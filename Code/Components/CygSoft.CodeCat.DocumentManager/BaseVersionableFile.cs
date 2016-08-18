@@ -9,33 +9,33 @@ namespace CygSoft.CodeCat.DocumentManager
 {
     public abstract class BaseVersionableFile : BaseFile, IVersionableFile
     {
-        private List<IFileSnapshot> snapshots = new List<IFileSnapshot>();
+        private List<IFileVersion> fileVersions = new List<IFileVersion>();
 
         public BaseVersionableFile(string filePath)
             : base(filePath)
         {
         }
 
-        protected abstract IFileSnapshot NewSnapshot(DateTime timeStamp, string description, string text);
+        protected abstract IFileVersion NewSnapshot(DateTime timeStamp, string description, string text);
 
-        public IFileSnapshot[] Snapshots
+        public IFileVersion[] Versions
         {
-            get { return this.snapshots.ToArray(); }
+            get { return this.fileVersions.ToArray(); }
         }
 
-        public bool HasSnapshots
+        public bool HasVersions
         {
-            get { return this.snapshots.Count > 0; }
+            get { return this.fileVersions.Count > 0; }
         }
 
-        public void TakeSnapshot(string description = "")
+        public void CreateVersion(string description = "")
         {
-            DateTime snapshotTime = DateTime.Now;
-            IFileSnapshot snapshot = this.NewSnapshot(snapshotTime, description, this.Text);
-            this.snapshots.Add(snapshot);
+            DateTime versionTime = DateTime.Now;
+            IFileVersion fileVersion = this.NewSnapshot(versionTime, description, this.Text);
+            this.fileVersions.Add(fileVersion);
         }
 
-        public void DeleteSnapshot(string snapshotId)
+        public void DeleteVersion(string versionId)
         {
             throw new NotImplementedException();
         }

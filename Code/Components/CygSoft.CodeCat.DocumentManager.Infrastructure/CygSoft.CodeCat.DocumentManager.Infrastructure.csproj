@@ -42,14 +42,14 @@
     <Compile Include="IDocManager.cs" />
     <Compile Include="IDocumentFile.cs" />
     <Compile Include="IFile.cs" />
-    <Compile Include="IFileSnapshot.cs" />
+    <Compile Include="IFileVersion.cs" />
     <Compile Include="IPositionableDocManager.cs" />
     <Compile Include="IPositionedItem.cs" />
     <Compile Include="IVersionableFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="DocManagerInfrastructure.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

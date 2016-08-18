@@ -97,36 +97,36 @@ namespace UnitTestFile
         {
             IDocumentFile documentFile = new StubDocumentFile(@"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\11334214-ca43-406b-9cae-f986c3c63332.txt");
             documentFile.Text = "Code Sample V1";
-            Assert.AreEqual(0, documentFile.Snapshots.Count());
+            Assert.AreEqual(0, documentFile.Versions.Count());
 
-            documentFile.TakeSnapshot("Snapshot 1");
-            Assert.AreEqual(1, documentFile.Snapshots.Count());
+            documentFile.CreateVersion("Snapshot 1");
+            Assert.AreEqual(1, documentFile.Versions.Count());
 
-            IFileSnapshot snapshot_1 = documentFile.Snapshots[0];
-            Assert.AreEqual("Code Sample V1", snapshot_1.Text);
+            IFileVersion fileVersion_1 = documentFile.Versions[0];
+            Assert.AreEqual("Code Sample V1", fileVersion_1.Text);
             
-            string snapshot_1_ExpectedId = SnapshotFileHelper.CreateId(documentFile.FilePath, snapshot_1.TimeTaken);
-            string snapshot_1_ExpectedFileName = SnapshotFileHelper.CreateFileName(documentFile.FilePath, snapshot_1.TimeTaken);
-            string snapshot_1_ExpectedFilePath = SnapshotFileHelper.CreateFilePath(documentFile.FilePath, snapshot_1.TimeTaken);
+            string fileVersion_1_ExpectedId = VersionFileHelper.CreateId(documentFile.FilePath, fileVersion_1.TimeTaken);
+            string fileVersion_1_ExpectedFileName = VersionFileHelper.CreateFileName(documentFile.FilePath, fileVersion_1.TimeTaken);
+            string fileVersion_1_ExpectedFilePath = VersionFileHelper.CreateFilePath(documentFile.FilePath, fileVersion_1.TimeTaken);
 
-            Assert.AreEqual(snapshot_1_ExpectedId, snapshot_1.Id);
-            Assert.AreEqual(snapshot_1_ExpectedFileName, snapshot_1.FileName);
-            Assert.AreEqual(snapshot_1_ExpectedFilePath, snapshot_1.FilePath);
+            Assert.AreEqual(fileVersion_1_ExpectedId, fileVersion_1.Id);
+            Assert.AreEqual(fileVersion_1_ExpectedFileName, fileVersion_1.FileName);
+            Assert.AreEqual(fileVersion_1_ExpectedFilePath, fileVersion_1.FilePath);
 
             documentFile.Text = "Code Sample V2";
-            documentFile.TakeSnapshot("Snapshot 2");
-            Assert.AreEqual(2, documentFile.Snapshots.Count());
+            documentFile.CreateVersion("Snapshot 2");
+            Assert.AreEqual(2, documentFile.Versions.Count());
 
-            IFileSnapshot snapshot_2 = documentFile.Snapshots[1];
-            Assert.AreEqual("Code Sample V2", snapshot_2.Text);
+            IFileVersion fileVersion_2 = documentFile.Versions[1];
+            Assert.AreEqual("Code Sample V2", fileVersion_2.Text);
 
-            string snapshot_2_ExpectedId = SnapshotFileHelper.CreateId(documentFile.FilePath, snapshot_2.TimeTaken);
-            string snapshot_2_ExpectedFileName = SnapshotFileHelper.CreateFileName(documentFile.FilePath, snapshot_2.TimeTaken);
-            string snapshot_2_ExpectedFilePath = SnapshotFileHelper.CreateFilePath(documentFile.FilePath, snapshot_2.TimeTaken);
+            string fileVersion_2_ExpectedId = VersionFileHelper.CreateId(documentFile.FilePath, fileVersion_2.TimeTaken);
+            string fileVersion_2_ExpectedFileName = VersionFileHelper.CreateFileName(documentFile.FilePath, fileVersion_2.TimeTaken);
+            string fileVersion_2_ExpectedFilePath = VersionFileHelper.CreateFilePath(documentFile.FilePath, fileVersion_2.TimeTaken);
 
-            Assert.AreEqual(snapshot_2_ExpectedId, snapshot_2.Id);
-            Assert.AreEqual(snapshot_2_ExpectedFileName, snapshot_2.FileName);
-            Assert.AreEqual(snapshot_2_ExpectedFilePath, snapshot_2.FilePath);
+            Assert.AreEqual(fileVersion_2_ExpectedId, fileVersion_2.Id);
+            Assert.AreEqual(fileVersion_2_ExpectedFileName, fileVersion_2.FileName);
+            Assert.AreEqual(fileVersion_2_ExpectedFilePath, fileVersion_2.FilePath);
 
         }
     }

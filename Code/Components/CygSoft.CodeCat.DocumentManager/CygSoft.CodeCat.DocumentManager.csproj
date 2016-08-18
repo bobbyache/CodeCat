@@ -42,12 +42,12 @@
     <Compile Include="BaseDocManager.cs" />
     <Compile Include="BaseDocumentFile.cs" />
     <Compile Include="BaseFile.cs" />
-    <Compile Include="BaseSnapshotFile.cs" />
+    <Compile Include="BaseVersionFile.cs" />
     <Compile Include="BaseVersionableFile.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="PositionableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SnapshotFileNamer.cs" />
+    <Compile Include="VersionFileNamer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
@@ -56,7 +56,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="BaseDocManager.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
