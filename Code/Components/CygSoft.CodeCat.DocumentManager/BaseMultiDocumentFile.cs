@@ -17,12 +17,29 @@ namespace CygSoft.CodeCat.DocumentManager
             get { return documentFiles.ItemsList.ToArray(); }
         }
 
-        protected abstract void LoadDocumentFiles();
+        protected abstract List<IDocumentFile> LoadDocumentFiles();
         protected abstract void RemoveDocumentFile(IDocumentFile documentFile);
 
         public BaseMultiDocumentFile(string id, string fileExtension) : base(fileExtension)
         {
             this.Id = id;
+        }
+
+        protected override void OpenFile()
+        {
+            try
+            {
+                List<IDocumentFile> docFiles = LoadDocumentFiles();
+
+                foreach (IDocumentFile documentFile in docFiles)
+                    documentFile.Open(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
+
+                this.documentFiles.InitializeList(docFiles);
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         public void SaveDocumentFiles()

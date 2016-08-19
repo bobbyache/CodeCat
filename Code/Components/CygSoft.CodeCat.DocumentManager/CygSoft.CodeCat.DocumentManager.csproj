@@ -46,6 +46,7 @@
     <Compile Include="BaseVersionFile.cs" />
     <Compile Include="BaseVersionableFile.cs" />
     <Compile Include="Documents\TemplateDocument.cs" />
+    <Compile Include="Documents\TemplateDocumentsFile.cs" />
     <Compile Include="Documents\TemplateDocumentVersion.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="PositionableList.cs" />

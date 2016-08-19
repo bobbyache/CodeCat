@@ -16,68 +16,156 @@ namespace UnitTestFile
     [TestClass]
     public class TestBench
     {
+        private string multiDocId = "d33b59bd-54af-4f0b-967f-64084847b678";
+        private string multDocFileName = "document_index.xml";
+        private string multiDocFilePath = @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\document_index.xml";
+        
+        private string multiDocFolder = @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678";
+
+        private string documentFile_1_FilePath = @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\f562810b-a1f7-4cf8-b370-dbaf87ff8759.txt";
+        private string documentFile_1_FileName = "f562810b-a1f7-4cf8-b370-dbaf87ff8759.txt";
+        private string documentFile_1_Id = "f562810b-a1f7-4cf8-b370-dbaf87ff8759";
+
+        private string documentFile_2_FilePath = @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\11334214-ca43-406b-9cae-f986c3c63332.txt";
+        private string documentFile_2_FileName = "11334214-ca43-406b-9cae-f986c3c63332.txt";
+        private string documentFile_2_Id = "11334214-ca43-406b-9cae-f986c3c63332";
+
+        private string documentFile_3_FilePath = @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\37c1dba5-9da3-4222-af34-43f98c674d82.txt";
+        private string documentFile_3_FileName = "37c1dba5-9da3-4222-af34-43f98c674d82.txt";
+        private string documentFile_3_Id = "37c1dba5-9da3-4222-af34-43f98c674d82";
+
+        private string documentFile_4_FilePath = @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\0f964889-a3ab-43d6-94a2-76e60cb9aae8.txt";
+        private string documentFile_4_FileName = "0f964889-a3ab-43d6-94a2-76e60cb9aae8.txt";
+        private string documentFile_4_Id = "0f964889-a3ab-43d6-94a2-76e60cb9aae8";
+
+
         [TestMethod]
         public void MultiDocumentFile_CreateDocument()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile("d33b59bd-54af-4f0b-967f-64084847b678");
-            multiDocFile.Create(Path.Combine(@"H:\ParentFolder\", "d33b59bd-54af-4f0b-967f-64084847b678", "document_index.xml"));
+            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
+            multiDocFile.Create(multiDocFilePath);
 
-            Assert.AreEqual("document_index.xml", multiDocFile.FileName);
-            Assert.AreEqual(@"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\document_index.xml", multiDocFile.FilePath);
-            Assert.AreEqual(@"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678", multiDocFile.Folder);
+            Assert.AreEqual(multDocFileName, multiDocFile.FileName);
+            Assert.AreEqual(multiDocFilePath, multiDocFile.FilePath);
+            Assert.AreEqual(multiDocFolder, multiDocFile.Folder);
             Assert.AreEqual(0, multiDocFile.DocumentFiles.Length);
-            Assert.AreEqual("d33b59bd-54af-4f0b-967f-64084847b678", multiDocFile.Id);
+            Assert.AreEqual(multiDocId, multiDocFile.Id);
         }
 
         [TestMethod]
         public void MultiDocumentFile_OpenDocument()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile("d33b59bd-54af-4f0b-967f-64084847b678");
-            multiDocFile.Open(Path.Combine(@"H:\ParentFolder\", "d33b59bd-54af-4f0b-967f-64084847b678", "document_index.xml"));
+            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
+            multiDocFile.Open(multiDocFilePath);
 
-            Assert.AreEqual("document_index.xml", multiDocFile.FileName);
-            Assert.AreEqual(@"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\document_index.xml", multiDocFile.FilePath);
-            Assert.AreEqual(@"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678", multiDocFile.Folder);
-            Assert.AreEqual(0, multiDocFile.DocumentFiles.Length);
-            Assert.AreEqual("d33b59bd-54af-4f0b-967f-64084847b678", multiDocFile.Id);
+            Assert.AreEqual(multDocFileName, multiDocFile.FileName);
+            Assert.AreEqual(multiDocFilePath, multiDocFile.FilePath);
+            Assert.AreEqual(multiDocFolder, multiDocFile.Folder);
+            Assert.AreEqual(3, multiDocFile.DocumentFiles.Length);
+            Assert.AreEqual(multiDocId, multiDocFile.Id);
         }
 
+
         [TestMethod]
-        public void MultiDocumentFile_Positioning()
+        public void MultiDocumentFile_LoadWithDocuments()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile("d33b59bd-54af-4f0b-967f-64084847b678");
-            
+            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
 
             bool loadedOnInstantiate = multiDocFile.Loaded;
-            multiDocFile.Open(Path.Combine(@"H:\ParentFolder\", "d33b59bd-54af-4f0b-967f-64084847b678", "document_index.xml"));
+            multiDocFile.Open(multiDocFilePath);
             bool loadedOnOpen = multiDocFile.Loaded;
 
-            Assert.IsFalse(loadedOnInstantiate);
-            Assert.IsTrue(loadedOnOpen);
+            Assert.IsTrue(multiDocFile.DocumentFiles.Count() == 3);
 
-            // because multi-document files could have more than one type of document file, these document
-            // files will have to be created elsewhere (think document factory).
-            IDocumentFile documentFile_1 = new StubDocumentFile("11334214-ca43-406b-9cae-f986c3c63332");
-            IDocumentFile documentFile_2 = new StubDocumentFile("f562810b-a1f7-4cf8-b370-dbaf87ff8759");
-            IDocumentFile documentFile_3 = new StubDocumentFile("37334412-5735-4c34-b88c-0be7dcb742a9");
+            IDocumentFile documentFile_1 = multiDocFile.DocumentFiles[0];
+            Assert.AreEqual(documentFile_1_Id, documentFile_1.Id);
 
-            multiDocFile.AddDocumentFile(documentFile_1);
-            multiDocFile.AddDocumentFile(documentFile_2);
-            multiDocFile.AddDocumentFile(documentFile_3);
-
-            Assert.AreEqual("11334214-ca43-406b-9cae-f986c3c63332", multiDocFile.DocumentFiles[0].Id);
-            Assert.AreEqual("f562810b-a1f7-4cf8-b370-dbaf87ff8759", multiDocFile.DocumentFiles[1].Id);
-            Assert.AreEqual("37334412-5735-4c34-b88c-0be7dcb742a9", multiDocFile.DocumentFiles[2].Id);
-
-            Assert.AreEqual(@"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\11334214-ca43-406b-9cae-f986c3c63332.txt", documentFile_1.FilePath);
-            Assert.AreEqual("11334214-ca43-406b-9cae-f986c3c63332.txt", documentFile_1.FileName);
-            Assert.AreEqual(@"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678", documentFile_1.Folder);
+            Assert.AreEqual(documentFile_1_FilePath, documentFile_1.FilePath);
+            Assert.AreEqual(documentFile_1_FileName, documentFile_1.FileName);
+            Assert.AreEqual(multiDocFolder, documentFile_1.Folder);
             Assert.AreEqual(null, documentFile_1.Content);
             Assert.IsFalse(documentFile_1.HasVersions);
             Assert.AreEqual(0, documentFile_1.Versions.Length);
             Assert.IsTrue(documentFile_1.Loaded);
 
-            IDocumentFile documentFile = multiDocFile.GetDocumentFile("11334214-ca43-406b-9cae-f986c3c63332");
+            Assert.IsFalse(loadedOnInstantiate);
+            Assert.IsTrue(loadedOnOpen);
+        }
+
+        [TestMethod]
+        public void MultiDocumentFile_LoadWithDocuments_Reposition()
+        {
+            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
+            multiDocFile.Open(multiDocFilePath);
+
+            Assert.IsTrue(multiDocFile.DocumentFiles.Count() == 3);
+
+            IDocumentFile documentFile_1 = multiDocFile.DocumentFiles[0];
+            Assert.AreEqual(documentFile_1_Id, documentFile_1.Id);
+
+            multiDocFile.MoveDown(documentFile_1);
+
+            documentFile_1 = multiDocFile.DocumentFiles[1];
+            Assert.AreEqual(documentFile_1_Id, documentFile_1.Id);
+        }
+
+        [TestMethod]
+        public void MultiDocumentFile_LoadWithDocuments_AddDocuments()
+        {
+            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
+            multiDocFile.Open(multiDocFilePath);
+
+            IDocumentFile documentFile_4 = new StubDocumentFile(documentFile_4_Id);
+            multiDocFile.AddDocumentFile(documentFile_4);
+
+            Assert.AreEqual(documentFile_4_Id, multiDocFile.DocumentFiles[multiDocFile.DocumentFiles.Length - 1].Id);
+            multiDocFile.MoveUp(documentFile_4);
+            Assert.AreEqual(documentFile_4_Id, multiDocFile.DocumentFiles[multiDocFile.DocumentFiles.Length - 2].Id);
+        }
+
+
+        [TestMethod]
+        public void MultiDocumentFile_Create_And_AddDocuments()
+        {
+            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
+            multiDocFile.Create(multiDocFilePath);
+
+            Assert.AreEqual(0, multiDocFile.DocumentFiles.Length);
+
+            IDocumentFile documentFile_4 = new StubDocumentFile(documentFile_4_Id);
+            multiDocFile.AddDocumentFile(documentFile_4);
+
+            Assert.AreEqual(documentFile_4_Id, multiDocFile.DocumentFiles[multiDocFile.DocumentFiles.Length - 1].Id);
+            multiDocFile.MoveUp(documentFile_4);
+            Assert.AreEqual(documentFile_4_Id, multiDocFile.DocumentFiles[multiDocFile.DocumentFiles.Length - 1].Id);
+            Assert.AreEqual(1, multiDocFile.DocumentFiles.Length);
+        }
+
+        [TestMethod]
+        public void MultiDocumentFile_Positioning()
+        {
+            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
+            multiDocFile.Open(multiDocFilePath);
+
+            // because multi-document files could have more than one type of document file, these document
+            // files will have to be created elsewhere (think document factory).
+            IDocumentFile documentFile_1 = multiDocFile.DocumentFiles[0];
+            IDocumentFile documentFile_2 = multiDocFile.DocumentFiles[1];
+            IDocumentFile documentFile_3 = multiDocFile.DocumentFiles[2];
+
+            Assert.AreEqual(documentFile_1_Id, documentFile_1.Id);
+            Assert.AreEqual(documentFile_2_Id, documentFile_2.Id);
+            Assert.AreEqual(documentFile_3_Id, documentFile_3.Id);
+
+            Assert.AreEqual(documentFile_1_FilePath, documentFile_1.FilePath);
+            Assert.AreEqual(documentFile_2_FileName, documentFile_2.FileName);
+            Assert.AreEqual(multiDocFolder, documentFile_1.Folder);
+            Assert.AreEqual(null, documentFile_1.Content);
+            Assert.IsFalse(documentFile_1.HasVersions);
+            Assert.AreEqual(0, documentFile_1.Versions.Length);
+            Assert.IsTrue(documentFile_1.Loaded);
+
+            IDocumentFile documentFile = multiDocFile.GetDocumentFile(documentFile_1_Id);
 
             Assert.AreEqual(1, documentFile.Ordinal);
             Assert.IsFalse(multiDocFile.CanMoveUp(documentFile));
@@ -89,26 +177,26 @@ namespace UnitTestFile
             Assert.IsTrue(multiDocFile.CanMoveUp(documentFile));
             Assert.IsTrue(multiDocFile.CanMoveDown(documentFile));
 
-            Assert.AreEqual("11334214-ca43-406b-9cae-f986c3c63332", multiDocFile.DocumentFiles[1].Id);
+            Assert.AreEqual(documentFile_1_Id, multiDocFile.DocumentFiles[1].Id);
         }
 
         [TestMethod]
         public void DocumentFile_Create()
         {
-            IDocumentFile documentFile = new StubDocumentFile("11334214-ca43-406b-9cae-f986c3c63332");
-            documentFile.Create(@"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\11334214-ca43-406b-9cae-f986c3c63332.txt");
+            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id);
+            documentFile.Create(documentFile_1_FilePath);
 
-            Assert.AreEqual(@"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678", documentFile.Folder);
-            Assert.AreEqual(@"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\11334214-ca43-406b-9cae-f986c3c63332.txt", documentFile.FilePath);
-            Assert.AreEqual("11334214-ca43-406b-9cae-f986c3c63332.txt", documentFile.FileName);
-            Assert.AreEqual("11334214-ca43-406b-9cae-f986c3c63332", documentFile.Id);
+            Assert.AreEqual(multiDocFolder, documentFile.Folder);
+            Assert.AreEqual(documentFile_1_FilePath, documentFile.FilePath);
+            Assert.AreEqual(documentFile_1_FileName, documentFile.FileName);
+            Assert.AreEqual(documentFile_1_Id, documentFile.Id);
         }
 
         [TestMethod]
         public void DocumentFile_Snapshots()
         {
             IDocumentFile documentFile = new StubDocumentFile(@"11334214-ca43-406b-9cae-f986c3c63332");
-            documentFile.Open(@"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\11334214-ca43-406b-9cae-f986c3c63332.txt");
+            documentFile.Open(documentFile_1_FilePath);
             documentFile.Content = "Code Sample V1";
             Assert.AreEqual(0, documentFile.Versions.Count());
 

@@ -15,6 +15,14 @@ namespace CygSoft.CodeCat.DocumentManager
         public BaseDocumentFile(string id, string fileExtension) : base(fileExtension)
         {
             base.Id = id;
+            this.Ordinal = -1;
+        }
+
+        public BaseDocumentFile(string id, string fileExtension, int ordinal)
+            : base(fileExtension)
+        {
+            base.Id = id;
+            this.Ordinal = ordinal;
         }
     }
 }

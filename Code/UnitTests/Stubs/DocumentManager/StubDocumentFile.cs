@@ -14,6 +14,11 @@ namespace UnitTests.Stubs.DocumentManager
         {
         }
 
+        public StubDocumentFile(string id, int ordinal)
+            : base(id, "txt", ordinal)
+        {
+        }
+
         protected override IFileVersion NewVersion(DateTime timeStamp, string description, string text)
         {
             return new StubVersionFile(this.FilePath, timeStamp, description, text);
