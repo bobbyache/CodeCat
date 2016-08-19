@@ -18,7 +18,6 @@ namespace CygSoft.CodeCat.DocumentManager
         }
 
         protected abstract List<IDocumentFile> LoadDocumentFiles();
-        protected abstract void RemoveDocumentFile(IDocumentFile documentFile);
 
         public BaseMultiDocumentFile(string id, string fileExtension) : base(fileExtension)
         {
@@ -76,7 +75,7 @@ namespace CygSoft.CodeCat.DocumentManager
             {
                 IDocumentFile documentFile = this.documentFiles.ItemsList.Where(f => f.Id == id).SingleOrDefault();
                 documentFile.Delete();
-                this.RemoveDocumentFile(documentFile);
+                documentFiles.Remove(documentFile);
             }
             catch (Exception exception)
             {

@@ -30,11 +30,6 @@ namespace UnitTests.Stubs.DocumentManager
             return documentFiles;
         }
 
-        protected override void RemoveDocumentFile(IDocumentFile documentFile)
-        {
-            //throw new NotImplementedException();
-        }
-
         protected override void SaveFile()
         {
             //throw new NotImplementedException();

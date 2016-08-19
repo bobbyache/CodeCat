@@ -20,11 +20,6 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             throw new NotImplementedException();
         }
 
-        protected override void RemoveDocumentFile(Infrastructure.IDocumentFile documentFile)
-        {
-            throw new NotImplementedException();
-        }
-
         protected override void CreateFile()
         {
             throw new NotImplementedException();
