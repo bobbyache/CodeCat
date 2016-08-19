@@ -8,15 +8,10 @@ using System.Threading.Tasks;
 
 namespace UnitTests.Stubs.DocumentManager
 {
-    internal class StubDocumentFile : BaseDocumentFile
+    public class StubMultiDocumentFile : BaseMultiDocumentFile
     {
-        public StubDocumentFile(string id) : base(id, "txt")
+        public StubMultiDocumentFile(string id) : base(id, "xml")
         {
-        }
-
-        protected override IFileVersion NewVersion(DateTime timeStamp, string description, string text)
-        {
-            return new StubVersionFile(this.FilePath, timeStamp, description, text);
         }
 
         protected override void CreateFile()
@@ -24,12 +19,22 @@ namespace UnitTests.Stubs.DocumentManager
             //throw new NotImplementedException();
         }
 
-        protected override void OpenFile()
+        protected override void LoadDocumentFiles()
+        {
+            //throw new NotImplementedException();
+        }
+
+        protected override void RemoveDocumentFile(IDocumentFile documentFile)
         {
             //throw new NotImplementedException();
         }
 
         protected override void SaveFile()
+        {
+            //throw new NotImplementedException();
+        }
+
+        protected override void OpenFile()
         {
             //throw new NotImplementedException();
         }

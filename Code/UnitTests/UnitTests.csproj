@@ -50,6 +50,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Stubs\DocumentManager\StubMultiDocumentFile.cs" />
     <Compile Include="Stubs\DocumentManager\VersionFileHelper.cs" />
     <Compile Include="Stubs\DocumentManager\StubDocManager.cs" />
     <Compile Include="Stubs\DocumentManager\StubDocumentFile.cs" />

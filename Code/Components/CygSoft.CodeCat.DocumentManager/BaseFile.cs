@@ -8,20 +8,112 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager
 {
-    public class BaseFile : IFile
+    public abstract class BaseFile : IFile
     {
-        public virtual string Id { get { return Path.GetFileNameWithoutExtension(this.FileName); } }
-        public virtual string FilePath { get; private set; }
-        public string Text { get; set; }
+        public event EventHandler BeforeDelete;
+        public event EventHandler AfterDelete;
+        public event EventHandler BeforeOpen;
+        public event EventHandler AfterOpen;
+        public event EventHandler BeforeCreate;
+        public event EventHandler AfterCreate;
+        public event EventHandler BeforeSave;
+        public event EventHandler AfterSave;
+
+        public virtual string Id { get; protected set; }
+        public virtual string FilePath { get; protected set; }
+        public string Content { get; set; }
+
         public virtual string FileName { get { return Path.GetFileName(this.FilePath); } }
+        public string FileExtension { get; private set; }
+
         public virtual string Folder
         {
             get { return Path.GetDirectoryName(this.FilePath); }
         }
 
-        public BaseFile(string filePath)
+        public bool Exists { get { return File.Exists(this.FilePath); } }
+        public bool Loaded { get; private set; }
+
+        protected abstract void CreateFile();
+        protected abstract void OpenFile();
+        protected abstract void SaveFile();
+
+        public BaseFile(string fileExtension)
+        {
+            this.Loaded = false;
+            this.FileExtension = fileExtension;
+        }
+
+        public void Create(string filePath)
         {
             this.FilePath = filePath;
+            try
+            {
+                if (BeforeCreate != null)
+                    BeforeCreate(this, new EventArgs());
+
+                CreateFile();
+                this.Loaded = true;
+
+                if (AfterCreate != null)
+                    AfterCreate(this, new EventArgs());
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public void Open(string filePath)
+        {
+            this.FilePath = filePath;
+            try
+            {
+                if (BeforeOpen != null)
+                    BeforeOpen(this, new EventArgs());
+
+                OpenFile();
+                this.Loaded = true;
+
+                if (AfterOpen != null)
+                    AfterOpen(this, new EventArgs());
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public void Delete()
+        {
+            if (BeforeDelete != null)
+                BeforeDelete(this, new EventArgs());
+
+            if (File.Exists(this.FilePath))
+                File.Delete(this.FilePath);
+            this.Loaded = false;
+
+            if (AfterDelete != null)
+                AfterDelete(this, new EventArgs());
+        }
+
+        public void Save()
+        {
+            try
+            {
+                if (BeforeSave != null)
+                    BeforeSave(this, new EventArgs());
+
+                OpenFile();
+                this.Loaded = true;
+
+                if (AfterSave != null)
+                    AfterSave(this, new EventArgs());
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
     }
 }

@@ -12,8 +12,9 @@ namespace CygSoft.CodeCat.DocumentManager
     {
         public int Ordinal { get; set; }
 
-        public BaseDocumentFile(string filePath) : base(filePath)
+        public BaseDocumentFile(string id, string fileExtension) : base(fileExtension)
         {
+            base.Id = id;
         }
     }
 }
