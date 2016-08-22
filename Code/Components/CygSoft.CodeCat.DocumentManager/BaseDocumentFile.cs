@@ -24,5 +24,11 @@ namespace CygSoft.CodeCat.DocumentManager
             base.Id = id;
             this.Ordinal = ordinal;
         }
+
+        protected override void DeleteFile()
+        {
+            base.DeleteFile();
+            this.Ordinal = -1;
+        }
     }
 }

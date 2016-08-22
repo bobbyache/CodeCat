@@ -91,11 +91,17 @@ namespace CygSoft.CodeCat.DocumentManager
 
             if (File.Exists(this.FilePath))
                 File.Delete(this.FilePath);
+
+            DeleteFile();
+
             this.Loaded = false;
 
             if (AfterDelete != null)
                 AfterDelete(this, new EventArgs());
         }
+
+        // can be used to do more cleanup during delete ... ie. version files.
+        protected virtual void DeleteFile() { }
 
         public void Save()
         {

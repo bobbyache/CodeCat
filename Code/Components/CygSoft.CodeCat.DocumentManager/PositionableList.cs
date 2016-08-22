@@ -105,6 +105,11 @@ namespace CygSoft.CodeCat.DocumentManager
             }
         }
 
+        public void Clear()
+        {
+            positionedItemList.Clear();
+        }
+
         public void MoveUp(T item)
         {
             if (!OrdinalMatchesReference(item))

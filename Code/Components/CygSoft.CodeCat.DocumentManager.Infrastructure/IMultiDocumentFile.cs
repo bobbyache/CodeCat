@@ -12,10 +12,10 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         IDocumentFile[] DocumentFiles { get; }
 
         void SaveDocumentFiles();
-        void AddDocumentFile(IDocumentFile documentFile); // necessary, because document files could be of different types...
+        IDocumentFile AddDocumentFile(IDocumentFile documentFile); // necessary, because document files could be of different types...
                                                           // need to be created elsewhere like a document factory.
-        void DeleteDocumentFile(string fileName);
-        IDocumentFile GetDocumentFile(string fileName);
+        void DeleteDocumentFile(string id);
+        IDocumentFile GetDocumentFile(string id);
 
         bool CanMoveDown(IDocumentFile documentFile);
         bool CanMoveTo(IDocumentFile documentFile, int ordinal);

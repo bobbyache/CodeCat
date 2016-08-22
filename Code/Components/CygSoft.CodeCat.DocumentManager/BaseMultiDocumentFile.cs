@@ -56,12 +56,13 @@ namespace CygSoft.CodeCat.DocumentManager
 
         // IDocumentFile could be of a different type, so it needs to be created
         // elsewhere such as a IDocumentFile factory.
-        public void AddDocumentFile(IDocumentFile documentFile)
+        public IDocumentFile AddDocumentFile(IDocumentFile documentFile)
         {
             try
             {
                 documentFile.Create(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
                 this.documentFiles.Insert(documentFile);
+                return documentFile;
             }
             catch (Exception exception)
             {
@@ -81,6 +82,16 @@ namespace CygSoft.CodeCat.DocumentManager
             {
                 throw exception;
             }
+        }
+
+        protected override void DeleteFile()
+        {
+            List<IDocumentFile> docs = documentFiles.ItemsList;
+            foreach (IDocumentFile doc in docs)
+            {
+                doc.Delete();
+            }
+            documentFiles.Clear();
         }
 
         public IDocumentFile GetDocumentFile(string id)

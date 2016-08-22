@@ -43,6 +43,14 @@ namespace CygSoft.CodeCat.DocumentManager
             get { return this.fileVersions.Count > 0; }
         }
 
+        protected override void DeleteFile()
+        {
+            foreach (IFileVersion fileVersion in fileVersions)
+            {
+                fileVersion.Delete();
+            }
+        }
+
         public IFileVersion CreateVersion(string description = "")
         {
             DateTime versionTime = DateTime.Now;

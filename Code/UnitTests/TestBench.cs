@@ -20,7 +20,6 @@ namespace UnitTestFile
      * 
      * You've been testing the BaseMultiDocument file.
      * 
-     * You still have to implement and test deletion of documents within this file.
      * You need to test and implement versioning of the BaseVersionable file (this is where you'll add your functionality).
      * You need to test that all the events work. Use the event unit tests in your code cat file "unit  testing with events".
      * 
@@ -86,6 +85,45 @@ namespace UnitTestFile
             Assert.AreEqual(multiDocId, multiDocFile.Id);
         }
 
+
+        [TestMethod]
+        public void MultiDocumentFile_DeleteDocument()
+        {
+            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
+            multiDocFile.Create(multiDocFilePath);
+
+            IDocumentFile file_1 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_1_Id));
+            IDocumentFile file_2 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_2_Id));
+            IDocumentFile file_3 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_3_Id));
+
+            Assert.AreEqual(3, multiDocFile.DocumentFiles.Length);
+
+            multiDocFile.DeleteDocumentFile(file_1.Id);
+
+            Assert.IsFalse(file_1.Loaded);
+            Assert.AreEqual(-1, file_1.Ordinal);
+            Assert.IsFalse(file_1.HasVersions);
+
+        }
+
+
+        [TestMethod]
+        public void MultiDocumentFile_Delete()
+        {
+            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
+            multiDocFile.Create(multiDocFilePath);
+
+            multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_1_Id));
+            multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_2_Id));
+            multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_3_Id));
+
+            Assert.AreEqual(3, multiDocFile.DocumentFiles.Length);
+
+            multiDocFile.Delete();
+
+            Assert.IsFalse(multiDocFile.Loaded);
+            Assert.AreEqual(0, multiDocFile.DocumentFiles.Length);
+        }
 
         [TestMethod]
         public void MultiDocumentFile_LoadWithDocuments()
