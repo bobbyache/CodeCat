@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.DocumentManager
+namespace CygSoft.CodeCat.DocumentManager.Services
 {
     internal class VersionFileNamer
     {

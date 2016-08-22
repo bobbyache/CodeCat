@@ -6,18 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.DocumentManager
+namespace CygSoft.CodeCat.DocumentManager.Base
 {
     public abstract class BaseFile : IFile
     {
-        public event EventHandler BeforeDelete;
-        public event EventHandler AfterDelete;
-        public event EventHandler BeforeOpen;
-        public event EventHandler AfterOpen;
-        public event EventHandler BeforeCreate;
-        public event EventHandler AfterCreate;
-        public event EventHandler BeforeSave;
-        public event EventHandler AfterSave;
+        public event EventHandler<FileEventArgs> BeforeDelete;
+        public event EventHandler<FileEventArgs> AfterDelete;
+        public event EventHandler<FileEventArgs> BeforeOpen;
+        public event EventHandler<FileEventArgs> AfterOpen;
+        public event EventHandler<FileEventArgs> BeforeCreate;
+        public event EventHandler<FileEventArgs> AfterCreate;
+        public event EventHandler<FileEventArgs> BeforeSave;
+        public event EventHandler<FileEventArgs> AfterSave;
 
         public virtual string Id { get; protected set; }
         public virtual string FilePath { get; protected set; }
@@ -50,13 +50,13 @@ namespace CygSoft.CodeCat.DocumentManager
             try
             {
                 if (BeforeCreate != null)
-                    BeforeCreate(this, new EventArgs());
+                    BeforeCreate(this, new FileEventArgs(this));
 
                 CreateFile();
                 this.Loaded = true;
 
                 if (AfterCreate != null)
-                    AfterCreate(this, new EventArgs());
+                    AfterCreate(this, new FileEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -70,13 +70,13 @@ namespace CygSoft.CodeCat.DocumentManager
             try
             {
                 if (BeforeOpen != null)
-                    BeforeOpen(this, new EventArgs());
+                    BeforeOpen(this, new FileEventArgs(this));
 
                 OpenFile();
                 this.Loaded = true;
 
                 if (AfterOpen != null)
-                    AfterOpen(this, new EventArgs());
+                    AfterOpen(this, new FileEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -87,7 +87,7 @@ namespace CygSoft.CodeCat.DocumentManager
         public void Delete()
         {
             if (BeforeDelete != null)
-                BeforeDelete(this, new EventArgs());
+                BeforeDelete(this, new FileEventArgs(this));
 
             if (File.Exists(this.FilePath))
                 File.Delete(this.FilePath);
@@ -97,7 +97,7 @@ namespace CygSoft.CodeCat.DocumentManager
             this.Loaded = false;
 
             if (AfterDelete != null)
-                AfterDelete(this, new EventArgs());
+                AfterDelete(this, new FileEventArgs(this));
         }
 
         // can be used to do more cleanup during delete ... ie. version files.
@@ -108,13 +108,13 @@ namespace CygSoft.CodeCat.DocumentManager
             try
             {
                 if (BeforeSave != null)
-                    BeforeSave(this, new EventArgs());
+                    BeforeSave(this, new FileEventArgs(this));
 
                 OpenFile();
                 this.Loaded = true;
 
                 if (AfterSave != null)
-                    AfterSave(this, new EventArgs());
+                    AfterSave(this, new FileEventArgs(this));
             }
             catch (Exception exception)
             {

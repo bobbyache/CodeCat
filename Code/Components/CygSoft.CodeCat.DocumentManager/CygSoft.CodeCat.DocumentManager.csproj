@@ -40,18 +40,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDocManager.cs" />
-    <Compile Include="BaseDocumentFile.cs" />
-    <Compile Include="BaseFile.cs" />
-    <Compile Include="BaseMultiDocumentFile.cs" />
-    <Compile Include="BaseVersionFile.cs" />
-    <Compile Include="BaseVersionableFile.cs" />
+    <Compile Include="Base\BaseDocumentFile.cs" />
+    <Compile Include="Base\BaseFile.cs" />
+    <Compile Include="Base\BaseMultiDocumentFile.cs" />
+    <Compile Include="Base\BaseVersionFile.cs" />
+    <Compile Include="Base\BaseVersionableFile.cs" />
     <Compile Include="Documents\TemplateDocument.cs" />
     <Compile Include="Documents\TemplateDocumentsFile.cs" />
     <Compile Include="Documents\TemplateDocumentVersion.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
-    <Compile Include="PositionableList.cs" />
+    <Compile Include="Services\PositionableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VersionFileNamer.cs" />
+    <Compile Include="Services\VersionFileNamer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">

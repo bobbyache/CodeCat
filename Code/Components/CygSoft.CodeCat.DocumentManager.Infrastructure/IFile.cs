@@ -8,14 +8,14 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
     public interface IFile
     {
-        event EventHandler BeforeDelete;
-        event EventHandler AfterDelete;
-        event EventHandler BeforeOpen;
-        event EventHandler AfterOpen;
-        event EventHandler BeforeCreate;
-        event EventHandler AfterCreate;
-        event EventHandler BeforeSave;
-        event EventHandler AfterSave;
+        event EventHandler<FileEventArgs> BeforeDelete;
+        event EventHandler<FileEventArgs> AfterDelete;
+        event EventHandler<FileEventArgs> BeforeOpen;
+        event EventHandler<FileEventArgs> AfterOpen;
+        event EventHandler<FileEventArgs> BeforeCreate;
+        event EventHandler<FileEventArgs> AfterCreate;
+        event EventHandler<FileEventArgs> BeforeSave;
+        event EventHandler<FileEventArgs> AfterSave;
 
         string Id { get; }
         string FilePath { get; }

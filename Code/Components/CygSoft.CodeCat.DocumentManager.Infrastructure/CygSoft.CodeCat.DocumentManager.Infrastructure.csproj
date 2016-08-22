@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileEventArgs.cs" />
     <Compile Include="IDocManager.cs" />
     <Compile Include="IDocumentFile.cs" />
     <Compile Include="IFile.cs" />

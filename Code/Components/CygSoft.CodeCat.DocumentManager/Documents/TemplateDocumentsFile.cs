@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
+﻿using CygSoft.CodeCat.DocumentManager.Base;
+using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,6 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         protected override List<IDocumentFile> LoadDocumentFiles()
         {
-            
             throw new NotImplementedException();
         }
 

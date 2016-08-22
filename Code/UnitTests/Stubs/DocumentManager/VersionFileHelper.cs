@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager;
+using CygSoft.CodeCat.DocumentManager.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
