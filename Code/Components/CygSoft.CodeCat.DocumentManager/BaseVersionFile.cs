@@ -29,13 +29,12 @@ namespace CygSoft.CodeCat.DocumentManager
         public override string FileName { get { return versionFileNamer.FileName; } }
         public override string FilePath { get { return versionFileNamer.FilePath; } }
 
-        public BaseVersionFile(string filePath, DateTime timeStamp, string description, string text) : base(Path.GetExtension(filePath))
+        public BaseVersionFile(string filePath, DateTime timeStamp, string description) : base(Path.GetExtension(filePath))
         {
             base.FilePath = filePath;
             this.versionFileNamer = new VersionFileNamer(filePath, timeStamp);
             this.TimeTaken = timeStamp;
             this.Description = description;
-            this.Content = text;
         }
     }
 }

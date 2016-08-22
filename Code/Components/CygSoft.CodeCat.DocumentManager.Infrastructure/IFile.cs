@@ -19,7 +19,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 
         string Id { get; }
         string FilePath { get; }
-        string Content { get; set; }
+        //string Content { get; set; } Do not set any file content. This is the job of specialized file classes.
         string FileName { get; }
         string FileExtension { get; }
         string Folder { get; }

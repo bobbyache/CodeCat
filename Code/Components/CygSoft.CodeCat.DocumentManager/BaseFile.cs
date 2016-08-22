@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.DocumentManager
 
         public virtual string Id { get; protected set; }
         public virtual string FilePath { get; protected set; }
-        public string Content { get; set; }
+        //public string Content { get; set; }
 
         public virtual string FileName { get { return Path.GetFileName(this.FilePath); } }
         public string FileExtension { get; private set; }

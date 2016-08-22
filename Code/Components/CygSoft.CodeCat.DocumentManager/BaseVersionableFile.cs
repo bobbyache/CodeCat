@@ -11,7 +11,7 @@ namespace CygSoft.CodeCat.DocumentManager
     {
         private List<IFileVersion> fileVersions = new List<IFileVersion>();
 
-        protected abstract IFileVersion NewVersion(DateTime timeStamp, string description, string text);
+        protected abstract IFileVersion NewVersion(DateTime timeStamp, string description);
 
         public BaseVersionableFile(string fileExtension) : base(fileExtension)
         {
@@ -30,7 +30,7 @@ namespace CygSoft.CodeCat.DocumentManager
         public void CreateVersion(string description = "")
         {
             DateTime versionTime = DateTime.Now;
-            IFileVersion fileVersion = this.NewVersion(versionTime, description, this.Content);
+            IFileVersion fileVersion = this.NewVersion(versionTime, description);
             this.fileVersions.Add(fileVersion);
         }
 

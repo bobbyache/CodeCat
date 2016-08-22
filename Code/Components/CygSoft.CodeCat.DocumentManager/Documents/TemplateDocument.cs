@@ -14,9 +14,9 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         {
         }
 
-        protected override IFileVersion NewVersion(DateTime timeStamp, string description, string text)
+        protected override IFileVersion NewVersion(DateTime timeStamp, string description)
         {
-            return new TemplateDocumentVersion(this.FilePath, timeStamp, description, text);
+            return new TemplateDocumentVersion(this.FilePath, timeStamp, description);
         }
 
         protected override void CreateFile()

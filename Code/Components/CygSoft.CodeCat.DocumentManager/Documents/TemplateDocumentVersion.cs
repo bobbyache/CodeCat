@@ -9,8 +9,8 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 {
     public class TemplateDocumentVersion : BaseVersionFile
     {
-        public TemplateDocumentVersion(string filePath, DateTime timeStamp, string description, string text)
-            : base(filePath, timeStamp, description, text) 
+        public TemplateDocumentVersion(string filePath, DateTime timeStamp, string description)
+            : base(filePath, timeStamp, description) 
         {
 
         }

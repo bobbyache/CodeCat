@@ -13,6 +13,26 @@ using UnitTests.Stubs.DocumentManager;
 
 namespace UnitTestFile
 {
+    /* ===============================================================================================================================================
+     * NEXT STEPS
+     * ===============================================================================================================================================
+     * 
+     * You've been testing the BaseMultiDocument file.
+     * 
+     * You still have to implement and test deletion of documents within this file.
+     * You need to test and implement versioning of the BaseVersionable file (this is where you'll add your functionality).
+     * You need to test that all the events work. Use the event unit tests in your code cat file "unit  testing with events".
+     * 
+     * You need to look at extensions. How are you going to keep the files in the index of these mult-document files. Store file name instead of
+     * id? If so, you might need to look at how you instantiate the document classes ie. with an ID or a file name. But you're inheriting from a base
+     * file with a single constructor?
+     * 
+     * You've already set up a "Documents" folder in the DocumentManager with the Template Doc stuff for Qik! You can start implementing here once
+     * you're happy enough with your unit tests....
+     * 
+     * You should NOT have a content property since different file types will display text, images, etc. So that will be specialized.
+     * */
+
     [TestClass]
     public class TestBench
     {
@@ -83,7 +103,7 @@ namespace UnitTestFile
             Assert.AreEqual(documentFile_1_FilePath, documentFile_1.FilePath);
             Assert.AreEqual(documentFile_1_FileName, documentFile_1.FileName);
             Assert.AreEqual(multiDocFolder, documentFile_1.Folder);
-            Assert.AreEqual(null, documentFile_1.Content);
+            //Assert.AreEqual(null, documentFile_1.Content);
             Assert.IsFalse(documentFile_1.HasVersions);
             Assert.AreEqual(0, documentFile_1.Versions.Length);
             Assert.IsTrue(documentFile_1.Loaded);
@@ -160,7 +180,7 @@ namespace UnitTestFile
             Assert.AreEqual(documentFile_1_FilePath, documentFile_1.FilePath);
             Assert.AreEqual(documentFile_2_FileName, documentFile_2.FileName);
             Assert.AreEqual(multiDocFolder, documentFile_1.Folder);
-            Assert.AreEqual(null, documentFile_1.Content);
+            //Assert.AreEqual(null, documentFile_1.Content);
             Assert.IsFalse(documentFile_1.HasVersions);
             Assert.AreEqual(0, documentFile_1.Versions.Length);
             Assert.IsTrue(documentFile_1.Loaded);
@@ -197,14 +217,14 @@ namespace UnitTestFile
         {
             IDocumentFile documentFile = new StubDocumentFile(@"11334214-ca43-406b-9cae-f986c3c63332");
             documentFile.Open(documentFile_1_FilePath);
-            documentFile.Content = "Code Sample V1";
+            //documentFile.Content = "Code Sample V1";
             Assert.AreEqual(0, documentFile.Versions.Count());
 
             documentFile.CreateVersion("Snapshot 1");
             Assert.AreEqual(1, documentFile.Versions.Count());
 
             IFileVersion fileVersion_1 = documentFile.Versions[0];
-            Assert.AreEqual("Code Sample V1", fileVersion_1.Content);
+            //Assert.AreEqual("Code Sample V1", fileVersion_1.Content);
             
             string fileVersion_1_ExpectedId = VersionFileHelper.CreateId(documentFile.FilePath, fileVersion_1.TimeTaken);
             string fileVersion_1_ExpectedFileName = VersionFileHelper.CreateFileName(documentFile.FilePath, fileVersion_1.TimeTaken);
@@ -214,12 +234,12 @@ namespace UnitTestFile
             Assert.AreEqual(fileVersion_1_ExpectedFileName, fileVersion_1.FileName);
             Assert.AreEqual(fileVersion_1_ExpectedFilePath, fileVersion_1.FilePath);
 
-            documentFile.Content = "Code Sample V2";
+            //documentFile.Content = "Code Sample V2";
             documentFile.CreateVersion("Snapshot 2");
             Assert.AreEqual(2, documentFile.Versions.Count());
 
             IFileVersion fileVersion_2 = documentFile.Versions[1];
-            Assert.AreEqual("Code Sample V2", fileVersion_2.Content);
+            //Assert.AreEqual("Code Sample V2", fileVersion_2.Content);
 
             string fileVersion_2_ExpectedId = VersionFileHelper.CreateId(documentFile.FilePath, fileVersion_2.TimeTaken);
             string fileVersion_2_ExpectedFileName = VersionFileHelper.CreateFileName(documentFile.FilePath, fileVersion_2.TimeTaken);

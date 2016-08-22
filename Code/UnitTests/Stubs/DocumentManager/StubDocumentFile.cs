@@ -19,9 +19,9 @@ namespace UnitTests.Stubs.DocumentManager
         {
         }
 
-        protected override IFileVersion NewVersion(DateTime timeStamp, string description, string text)
+        protected override IFileVersion NewVersion(DateTime timeStamp, string description)
         {
-            return new StubVersionFile(this.FilePath, timeStamp, description, text);
+            return new StubVersionFile(this.FilePath, timeStamp, description);
         }
 
         protected override void CreateFile()
