@@ -31,8 +31,17 @@ namespace CygSoft.CodeCat.DocumentManager
 
         public BaseVersionFile(string filePath, DateTime timeStamp, string description) : base(Path.GetExtension(filePath))
         {
-            base.FilePath = filePath;
             this.versionFileNamer = new VersionFileNamer(filePath, timeStamp);
+            base.FilePath = this.versionFileNamer.FilePath;
+            base.Id = versionFileNamer.Id;
+            this.TimeTaken = timeStamp;
+            this.Description = description;
+        }
+
+        public BaseVersionFile(string id, string versionedFilePath, DateTime timeStamp, string description) : base(versionedFilePath)
+        {
+            this.versionFileNamer = new VersionFileNamer(versionedFilePath, timeStamp);
+            base.FilePath = this.versionFileNamer.FilePath;
             base.Id = versionFileNamer.Id;
             this.TimeTaken = timeStamp;
             this.Description = description;

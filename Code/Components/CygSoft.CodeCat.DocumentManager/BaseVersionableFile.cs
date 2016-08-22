@@ -21,12 +21,13 @@ namespace CygSoft.CodeCat.DocumentManager
             }
         }
 
-        private List<IFileVersion> fileVersions = new List<IFileVersion>();
+        private List<IFileVersion> fileVersions = null;
 
         protected abstract IFileVersion NewVersion(DateTime timeStamp, string description);
 
         public BaseVersionableFile(string fileExtension) : base(fileExtension)
         {
+            this.fileVersions = new List<IFileVersion>();
         }
 
         public IFileVersion[] Versions
