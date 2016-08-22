@@ -22,7 +22,7 @@ namespace UnitTests.Stubs.DocumentManager
 
         protected override void OpenFile()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         protected override void SaveFile()

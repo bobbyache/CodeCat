@@ -41,7 +41,7 @@ namespace CygSoft.CodeCat.DocumentManager
         public BaseFile(string fileExtension)
         {
             this.Loaded = false;
-            this.FileExtension = fileExtension;
+            this.FileExtension = CleanExtension(fileExtension);
         }
 
         public void Create(string filePath)
@@ -114,6 +114,17 @@ namespace CygSoft.CodeCat.DocumentManager
             {
                 throw exception;
             }
+        }
+
+        private string CleanExtension(string extension)
+        {
+            if (extension.Length > 0)
+            {
+                if (extension.StartsWith("."))
+                    return extension.Substring(1);
+            }
+
+            return extension;
         }
     }
 }

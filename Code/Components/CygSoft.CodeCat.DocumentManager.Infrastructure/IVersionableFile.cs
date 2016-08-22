@@ -11,7 +11,10 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         IFileVersion[] Versions { get; }
         bool HasVersions { get; }
 
-        void CreateVersion(string description = "");
+        bool HasVersion(string versionId);
+        IFileVersion GetVersion(string versionId);
+        IFileVersion LatestVersion();
+        IFileVersion CreateVersion(string description = "");
         void DeleteVersion(string versionId);
     }
 }

@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager;
 using UnitTests.Stubs.DocumentManager;
+using System.Threading;
 
 namespace UnitTestFile
 {
@@ -103,7 +104,7 @@ namespace UnitTestFile
             Assert.AreEqual(documentFile_1_FilePath, documentFile_1.FilePath);
             Assert.AreEqual(documentFile_1_FileName, documentFile_1.FileName);
             Assert.AreEqual(multiDocFolder, documentFile_1.Folder);
-            //Assert.AreEqual(null, documentFile_1.Content);
+
             Assert.IsFalse(documentFile_1.HasVersions);
             Assert.AreEqual(0, documentFile_1.Versions.Length);
             Assert.IsTrue(documentFile_1.Loaded);
@@ -180,7 +181,7 @@ namespace UnitTestFile
             Assert.AreEqual(documentFile_1_FilePath, documentFile_1.FilePath);
             Assert.AreEqual(documentFile_2_FileName, documentFile_2.FileName);
             Assert.AreEqual(multiDocFolder, documentFile_1.Folder);
-            //Assert.AreEqual(null, documentFile_1.Content);
+
             Assert.IsFalse(documentFile_1.HasVersions);
             Assert.AreEqual(0, documentFile_1.Versions.Length);
             Assert.IsTrue(documentFile_1.Loaded);
@@ -213,41 +214,94 @@ namespace UnitTestFile
         }
 
         [TestMethod]
-        public void DocumentFile_Snapshots()
+        public void DocumentFile_FileVersions_Create()
         {
-            IDocumentFile documentFile = new StubDocumentFile(@"11334214-ca43-406b-9cae-f986c3c63332");
+            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id);
             documentFile.Open(documentFile_1_FilePath);
-            //documentFile.Content = "Code Sample V1";
-            Assert.AreEqual(0, documentFile.Versions.Count());
+            IFileVersion fileVersion_1 = documentFile.CreateVersion("Snapshot 1");
+            Assert.AreEqual("Snapshot 1", fileVersion_1.Description);
+            Assert.IsNotNull(fileVersion_1.TimeTaken);
+            Assert.AreEqual(fileVersion_1.Id.Substring(0, 36), documentFile.Id);
+            Assert.AreEqual(documentFile.Folder, fileVersion_1.Folder);
+            Assert.AreEqual(documentFile.FileExtension, fileVersion_1.FileExtension);
+            Assert.AreEqual(Path.Combine(documentFile.Folder, fileVersion_1.FileName), fileVersion_1.FilePath);
+        }
+
+        [TestMethod]
+        public void DocumentFile_FileVersions_FileVersionName()
+        {
+            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id);
+            documentFile.Open(documentFile_1_FilePath);
+
+            int initialVersionCount = documentFile.Versions.Length;
 
             documentFile.CreateVersion("Snapshot 1");
-            Assert.AreEqual(1, documentFile.Versions.Count());
-
+            int versionCount_1 = documentFile.Versions.Length;
+            
             IFileVersion fileVersion_1 = documentFile.Versions[0];
-            //Assert.AreEqual("Code Sample V1", fileVersion_1.Content);
             
             string fileVersion_1_ExpectedId = VersionFileHelper.CreateId(documentFile.FilePath, fileVersion_1.TimeTaken);
             string fileVersion_1_ExpectedFileName = VersionFileHelper.CreateFileName(documentFile.FilePath, fileVersion_1.TimeTaken);
             string fileVersion_1_ExpectedFilePath = VersionFileHelper.CreateFilePath(documentFile.FilePath, fileVersion_1.TimeTaken);
 
-            Assert.AreEqual(fileVersion_1_ExpectedId, fileVersion_1.Id);
-            Assert.AreEqual(fileVersion_1_ExpectedFileName, fileVersion_1.FileName);
-            Assert.AreEqual(fileVersion_1_ExpectedFilePath, fileVersion_1.FilePath);
-
-            //documentFile.Content = "Code Sample V2";
+            Thread.Sleep(5);
             documentFile.CreateVersion("Snapshot 2");
-            Assert.AreEqual(2, documentFile.Versions.Count());
+            int versionCount_2 = documentFile.Versions.Length;
 
             IFileVersion fileVersion_2 = documentFile.Versions[1];
-            //Assert.AreEqual("Code Sample V2", fileVersion_2.Content);
 
             string fileVersion_2_ExpectedId = VersionFileHelper.CreateId(documentFile.FilePath, fileVersion_2.TimeTaken);
             string fileVersion_2_ExpectedFileName = VersionFileHelper.CreateFileName(documentFile.FilePath, fileVersion_2.TimeTaken);
             string fileVersion_2_ExpectedFilePath = VersionFileHelper.CreateFilePath(documentFile.FilePath, fileVersion_2.TimeTaken);
 
+            Assert.AreEqual(0, initialVersionCount);
+            Assert.AreEqual(1, versionCount_1);
+            Assert.AreEqual(2, versionCount_2);
+
+            Assert.AreEqual(fileVersion_1_ExpectedId, fileVersion_1.Id);
+            Assert.AreEqual(fileVersion_1_ExpectedFileName, fileVersion_1.FileName);
+            Assert.AreEqual(fileVersion_1_ExpectedFilePath, fileVersion_1.FilePath);
+
             Assert.AreEqual(fileVersion_2_ExpectedId, fileVersion_2.Id);
             Assert.AreEqual(fileVersion_2_ExpectedFileName, fileVersion_2.FileName);
             Assert.AreEqual(fileVersion_2_ExpectedFilePath, fileVersion_2.FilePath);
+
+            Assert.AreEqual(fileVersion_2.Id, documentFile.LatestVersion().Id);
+            Assert.IsTrue(documentFile.HasVersion(fileVersion_1.Id));
+            Assert.AreSame(fileVersion_1, documentFile.GetVersion(fileVersion_1.Id));
+        }
+
+        [TestMethod]
+        public void DocumentFile_FileVersions_Delete()
+        {
+            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id);
+            documentFile.Open(documentFile_1_FilePath);
+
+            // You'll never be creating versions as fast as this.
+            documentFile.CreateVersion("Snapshot 1");
+            Thread.Sleep(5);
+            documentFile.CreateVersion("Snapshot 2");
+            Thread.Sleep(5);
+            documentFile.CreateVersion("Snapshot 3");
+            Thread.Sleep(5);
+            documentFile.CreateVersion("Snapshot 4");
+            Thread.Sleep(5);
+
+            int initialVersionCount = documentFile.Versions.Length;
+
+            IFileVersion version1 = documentFile.Versions[0];
+            //IFileVersion version2 = documentFile.Versions[1];
+            //IFileVersion version3 = documentFile.Versions[2];
+            //IFileVersion version4 = documentFile.Versions[3];
+
+            documentFile.DeleteVersion(version1.Id);
+
+            int afterVersionCount = documentFile.Versions.Length;
+
+            Assert.AreEqual(4, initialVersionCount);
+            Assert.IsFalse(version1.Loaded);
+            Assert.AreEqual(3, afterVersionCount);
+            
         }
     }
 }

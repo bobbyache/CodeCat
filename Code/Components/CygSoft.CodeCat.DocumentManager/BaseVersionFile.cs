@@ -33,6 +33,7 @@ namespace CygSoft.CodeCat.DocumentManager
         {
             base.FilePath = filePath;
             this.versionFileNamer = new VersionFileNamer(filePath, timeStamp);
+            base.Id = versionFileNamer.Id;
             this.TimeTaken = timeStamp;
             this.Description = description;
         }
