@@ -11,7 +11,6 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         // files within the document group
         IDocumentFile[] DocumentFiles { get; }
 
-        void SaveDocumentFiles();
         IDocumentFile AddDocumentFile(IDocumentFile documentFile); // necessary, because document files could be of different types...
                                                           // need to be created elsewhere like a document factory.
         void DeleteDocumentFile(string id);

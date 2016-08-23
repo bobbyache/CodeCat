@@ -92,9 +92,9 @@ namespace UnitTestFile
             IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
             multiDocFile.Create(multiDocFilePath);
 
-            IDocumentFile file_1 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_1_Id));
-            IDocumentFile file_2 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_2_Id));
-            IDocumentFile file_3 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_3_Id));
+            IDocumentFile file_1 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_1_Id, "Title"));
+            IDocumentFile file_2 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_2_Id, "Title"));
+            IDocumentFile file_3 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_3_Id, "Title"));
 
             Assert.AreEqual(3, multiDocFile.DocumentFiles.Length);
 
@@ -113,9 +113,9 @@ namespace UnitTestFile
             IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
             multiDocFile.Create(multiDocFilePath);
 
-            multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_1_Id));
-            multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_2_Id));
-            multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_3_Id));
+            multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_1_Id, "Title"));
+            multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_2_Id, "Title"));
+            multiDocFile.AddDocumentFile(new StubDocumentFile(documentFile_3_Id, "Title"));
 
             Assert.AreEqual(3, multiDocFile.DocumentFiles.Length);
 
@@ -174,7 +174,7 @@ namespace UnitTestFile
             IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
             multiDocFile.Open(multiDocFilePath);
 
-            IDocumentFile documentFile_4 = new StubDocumentFile(documentFile_4_Id);
+            IDocumentFile documentFile_4 = new StubDocumentFile(documentFile_4_Id, "Title");
             multiDocFile.AddDocumentFile(documentFile_4);
 
             Assert.AreEqual(documentFile_4_Id, multiDocFile.DocumentFiles[multiDocFile.DocumentFiles.Length - 1].Id);
@@ -191,7 +191,7 @@ namespace UnitTestFile
 
             Assert.AreEqual(0, multiDocFile.DocumentFiles.Length);
 
-            IDocumentFile documentFile_4 = new StubDocumentFile(documentFile_4_Id);
+            IDocumentFile documentFile_4 = new StubDocumentFile(documentFile_4_Id, "Title");
             multiDocFile.AddDocumentFile(documentFile_4);
 
             Assert.AreEqual(documentFile_4_Id, multiDocFile.DocumentFiles[multiDocFile.DocumentFiles.Length - 1].Id);
@@ -240,9 +240,38 @@ namespace UnitTestFile
         }
 
         [TestMethod]
+        public void MultiDocument_TestEvents()
+        {
+            bool beforeOpenEventFired = false;
+            bool afterOpenEventFired = false;
+            ManualResetEvent beforeOpenResetEvent = new ManualResetEvent(false);
+            ManualResetEvent afterOpenResetEvent = new ManualResetEvent(false);
+
+            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(multiDocId);
+
+            multiDocFile.BeforeOpen += (s, e) =>
+                {
+                    beforeOpenEventFired = true;
+                    beforeOpenResetEvent.Set();
+                };
+            multiDocFile.AfterOpen += (s, e) =>
+                {
+                    afterOpenEventFired = true;
+                    beforeOpenResetEvent.Set();
+                };
+
+            beforeOpenResetEvent.WaitOne(50, false);
+            afterOpenResetEvent.WaitOne(50, false);
+            multiDocFile.Open(multiDocFilePath);
+
+            Assert.IsTrue(beforeOpenEventFired);
+            Assert.IsTrue(afterOpenEventFired);
+        }
+
+        [TestMethod]
         public void DocumentFile_Create()
         {
-            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id);
+            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id, "Title");
             documentFile.Create(documentFile_1_FilePath);
 
             Assert.AreEqual(multiDocFolder, documentFile.Folder);
@@ -254,7 +283,7 @@ namespace UnitTestFile
         [TestMethod]
         public void DocumentFile_FileVersions_Create()
         {
-            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id);
+            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id, "Title");
             documentFile.Open(documentFile_1_FilePath);
             IFileVersion fileVersion_1 = documentFile.CreateVersion("Snapshot 1");
             Assert.AreEqual("Snapshot 1", fileVersion_1.Description);
@@ -268,7 +297,7 @@ namespace UnitTestFile
         [TestMethod]
         public void DocumentFile_FileVersions_FileVersionName()
         {
-            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id);
+            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id, "Title");
             documentFile.Open(documentFile_1_FilePath);
 
             int initialVersionCount = documentFile.Versions.Length;
@@ -312,7 +341,7 @@ namespace UnitTestFile
         [TestMethod]
         public void DocumentFile_FileVersions_Delete()
         {
-            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id);
+            IDocumentFile documentFile = new StubDocumentFile(documentFile_1_Id, "Title");
             documentFile.Open(documentFile_1_FilePath);
 
             // You'll never be creating versions as fast as this.

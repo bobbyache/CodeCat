@@ -11,18 +11,24 @@ namespace CygSoft.CodeCat.DocumentManager.Base
     public abstract class BaseDocumentFile : BaseVersionableFile, IDocumentFile
     {
         public int Ordinal { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
 
-        public BaseDocumentFile(string id, string fileExtension) : base(fileExtension)
+        public BaseDocumentFile(string id, string fileExtension, string title, string description = null) : base(fileExtension)
         {
             base.Id = id;
             this.Ordinal = -1;
+            this.Title = title;
+            this.Description = description;
         }
 
-        public BaseDocumentFile(string id, string fileExtension, int ordinal)
+        public BaseDocumentFile(string id, string fileExtension, int ordinal, string title, string description = null)
             : base(fileExtension)
         {
             base.Id = id;
             this.Ordinal = ordinal;
+            this.Title = title;
+            this.Description = description;
         }
 
         protected override void DeleteFile()

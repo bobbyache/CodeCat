@@ -45,9 +45,14 @@
     <Compile Include="Base\BaseMultiDocumentFile.cs" />
     <Compile Include="Base\BaseVersionFile.cs" />
     <Compile Include="Base\BaseVersionableFile.cs" />
+    <Compile Include="Documents\CodeDocumentFile.cs" />
+    <Compile Include="Documents\ScriptDocument.cs" />
+    <Compile Include="Documents\ScriptDocumentVersion.cs" />
     <Compile Include="Documents\TemplateDocument.cs" />
     <Compile Include="Documents\TemplateDocumentsFile.cs" />
     <Compile Include="Documents\TemplateDocumentVersion.cs" />
+    <Compile Include="Documents\TextDocumentFile.cs" />
+    <Compile Include="Documents\TextDocumentVersion.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="Services\PositionableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -19,6 +19,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         }
 
         protected abstract List<IDocumentFile> LoadDocumentFiles();
+        protected virtual void LoadNonDocumentFiles() { }
 
         public BaseMultiDocumentFile(string id, string fileExtension) : base(fileExtension)
         {
@@ -29,12 +30,8 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                List<IDocumentFile> docFiles = LoadDocumentFiles();
-
-                foreach (IDocumentFile documentFile in docFiles)
-                    documentFile.Open(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
-
-                this.documentFiles.InitializeList(docFiles);
+                this.OpenDocumentFiles();
+                this.LoadNonDocumentFiles();
             }
             catch (Exception exception)
             {
@@ -42,17 +39,9 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
-        public void SaveDocumentFiles()
+        protected override void SaveFile()
         {
-            try
-            {
-                foreach (IDocumentFile documentFile in this.DocumentFiles)
-                    documentFile.Save();
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+            SaveDocumentFiles();
         }
 
         // IDocumentFile could be of a different type, so it needs to be created
@@ -87,12 +76,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         protected override void DeleteFile()
         {
-            List<IDocumentFile> docs = documentFiles.ItemsList;
-            foreach (IDocumentFile doc in docs)
-            {
-                doc.Delete();
-            }
-            documentFiles.Clear();
+            DeleteDocumentFiles();
         }
 
         public IDocumentFile GetDocumentFile(string id)
@@ -137,5 +121,55 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             documentFiles.MoveUp(documentFile);
         }
+
+
+        private void OpenDocumentFiles()
+        {
+            try
+            {
+                List<IDocumentFile> docFiles = LoadDocumentFiles();
+
+                foreach (IDocumentFile documentFile in docFiles)
+                    documentFile.Open(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
+
+                this.documentFiles.InitializeList(docFiles);
+
+                this.LoadNonDocumentFiles();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        private void SaveDocumentFiles()
+        {
+            try
+            {
+                foreach (IDocumentFile documentFile in this.DocumentFiles)
+                    documentFile.Save();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        private void DeleteDocumentFiles()
+        {
+            try
+            {
+                foreach (IDocumentFile documentFile in this.documentFiles.ItemsList)
+                {
+                    documentFile.Delete();
+                }
+                documentFiles.Clear();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
     }
 }

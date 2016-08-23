@@ -11,12 +11,13 @@ namespace UnitTests.Stubs.DocumentManager
 {
     internal class StubDocumentFile : BaseDocumentFile
     {
-        public StubDocumentFile(string id) : base(id, "txt")
+        public StubDocumentFile(string id, string title, string description = null)
+            : base(id, "txt", title, description)
         {
         }
 
-        public StubDocumentFile(string id, int ordinal)
-            : base(id, "txt", ordinal)
+        public StubDocumentFile(string id, int ordinal, string title, string description = null)
+            : base(id, "txt", ordinal, title, description)
         {
         }
 

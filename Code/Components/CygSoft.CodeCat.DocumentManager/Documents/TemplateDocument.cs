@@ -1,38 +1,50 @@
-﻿using CygSoft.CodeCat.DocumentManager.Base;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using CygSoft.CodeCat.DocumentManager.Base;
+//using CygSoft.CodeCat.DocumentManager.Infrastructure;
+//using System;
+//using System.Collections.Generic;
+//using System.IO;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.DocumentManager.Documents
-{
-    public class TemplateDocument : BaseDocumentFile
-    {
-        // Only create these documents internally.
-        internal TemplateDocument(string id) : base(id, "txt")
-        {
-        }
+//namespace CygSoft.CodeCat.DocumentManager.Documents
+//{
+//    public class TemplateDocument : BaseDocumentFile
+//    {
+//        public string Text { get; set; }
+//        public string Syntax { get; set; }
 
-        protected override IFileVersion NewVersion(DateTime timeStamp, string description)
-        {
-            return new TemplateDocumentVersion(this.FilePath, timeStamp, description);
-        }
+//        // Only create these documents internally.
+//        internal TemplateDocument(string id, string title, string syntax, string description = null)
+//            : base(id, "tpl", title, description)
+//        {
+//            this.Syntax = syntax;
+//        }
 
-        protected override void CreateFile()
-        {
-            System.Diagnostics.Debug.WriteLine(string.Format("Test Document File Created: {0}", this.FileName));
-        }
+//        internal TemplateDocument(string id, string title, string syntax, int ordinal, string description = null)
+//            : base(id, "tpl", ordinal, title, description)
+//        {
+//            this.Syntax = syntax; 
+//        }
 
-        protected override void OpenFile()
-        {
-            System.Diagnostics.Debug.WriteLine(string.Format("Test Document File Opened: {0}", this.FileName));
-        }
+//        protected override IFileVersion NewVersion(DateTime timeStamp, string description)
+//        {
+//            return new TemplateDocumentVersion(this.FilePath, timeStamp, description);
+//        }
 
-        protected override void SaveFile()
-        {
-            System.Diagnostics.Debug.WriteLine(string.Format("Test Document File Saved: {0}", this.FileName));
-        }
-    }
-}
+//        protected override void CreateFile()
+//        {
+//            File.WriteAllText(this.FileName, this.Text);
+//        }
+
+//        protected override void OpenFile()
+//        {
+//            this.Text = File.ReadAllText(this.FilePath);
+//        }
+
+//        protected override void SaveFile()
+//        {
+//            File.WriteAllText(this.FilePath, this.Text);
+//        }
+//    }
+//}

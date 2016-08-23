@@ -110,7 +110,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 if (BeforeSave != null)
                     BeforeSave(this, new FileEventArgs(this));
 
-                OpenFile();
+                SaveFile();
                 this.Loaded = true;
 
                 if (AfterSave != null)
