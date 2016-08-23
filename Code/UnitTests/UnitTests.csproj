@@ -50,6 +50,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\DocumentManager\DocFileSimulator.cs" />
     <Compile Include="Stubs\DocumentManager\StubMultiDocumentFile.cs" />
     <Compile Include="Stubs\DocumentManager\VersionFileHelper.cs" />
     <Compile Include="Stubs\DocumentManager\StubDocManager.cs" />
@@ -59,6 +60,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Converters\Version2ToVersion3_Tests.cs" />
     <Compile Include="Tests\Converters\Version1ToVersion2_Tests.cs" />
+    <Compile Include="Tests\DocumentManagement\DocumentIndex_Tests.cs" />
+    <Compile Include="Tests\DocumentManagement\Document_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Files\ProjectFiles\CodeFile V1.xml" />
@@ -92,7 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\DocumentManagement\" />
-    <Folder Include="Tests\DocumentManagement\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
