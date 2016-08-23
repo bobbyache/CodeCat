@@ -9,30 +9,30 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public class TextDocumentFile : BaseDocumentFile
+    public class TextDocument : BaseDocument
     {
         public string Text { get; set; }
 
         // Only create these documents internally.
-        internal TextDocumentFile(string id, string title, string description = null, string extension = "txt")
+        internal TextDocument(string id, string title, string description = null, string extension = "txt")
             : base(id, extension, title, description)
         {
             this.Text = null;
         }
 
-        internal TextDocumentFile(string id, string title, int ordinal, string description = null, string extension = "txt")
+        internal TextDocument(string id, string title, int ordinal, string description = null, string extension = "txt")
             : base(id, extension, ordinal, title, description)
         {
             this.Text = null;
         }
 
-        internal TextDocumentFile(string id, string title, string description = null, string text = null, string extension = "txt")
+        internal TextDocument(string id, string title, string description = null, string text = null, string extension = "txt")
             : base(id, extension, title, description)
         {
             this.Text = text;
         }
 
-        internal TextDocumentFile(string id, string title, int ordinal, string description = null, string text = null, string extension = "txt")
+        internal TextDocument(string id, string title, int ordinal, string description = null, string text = null, string extension = "txt")
             : base(id, extension, ordinal, title, description)
         {
             this.Text = text;

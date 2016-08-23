@@ -29,7 +29,7 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentIndex_CreateDocument()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
+            IDocumentIndex multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
             multiDocFile.Create(documentSimulator.DocumentIndex.FilePath);
 
             Assert.AreEqual(documentSimulator.DocumentIndex.FileName, multiDocFile.FileName);
@@ -42,7 +42,7 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentIndex_OpenDocument()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
+            IDocumentIndex multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
             multiDocFile.Open(documentSimulator.DocumentIndex.FilePath);
 
             Assert.AreEqual(documentSimulator.DocumentIndex.FileName, multiDocFile.FileName);
@@ -56,12 +56,12 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentIndex_DeleteDocument()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
+            IDocumentIndex multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
             multiDocFile.Create(documentSimulator.DocumentIndex.FilePath);
 
-            IDocumentFile file_1 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentSimulator.DocumentFile1.Id, "Title"));
-            IDocumentFile file_2 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentSimulator.DocumentFile2.Id, "Title"));
-            IDocumentFile file_3 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentSimulator.DocumentFile3.Id, "Title"));
+            IDocument file_1 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentSimulator.DocumentFile1.Id, "Title"));
+            IDocument file_2 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentSimulator.DocumentFile2.Id, "Title"));
+            IDocument file_3 = multiDocFile.AddDocumentFile(new StubDocumentFile(documentSimulator.DocumentFile3.Id, "Title"));
 
             Assert.AreEqual(3, multiDocFile.DocumentFiles.Length);
 
@@ -77,7 +77,7 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentIndex_Delete()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
+            IDocumentIndex multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
             multiDocFile.Create(documentSimulator.DocumentIndex.FilePath);
 
             multiDocFile.AddDocumentFile(new StubDocumentFile(documentSimulator.DocumentFile1.Id, "Title"));
@@ -95,7 +95,7 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentIndex_LoadWithDocuments()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
+            IDocumentIndex multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
 
             bool loadedOnInstantiate = multiDocFile.Loaded;
             multiDocFile.Open(documentSimulator.DocumentIndex.FilePath);
@@ -103,7 +103,7 @@ namespace UnitTests.Tests.DocumentManagement
 
             Assert.IsTrue(multiDocFile.DocumentFiles.Count() == 3);
 
-            IDocumentFile documentFile_1 = multiDocFile.DocumentFiles[0];
+            IDocument documentFile_1 = multiDocFile.DocumentFiles[0];
             Assert.AreEqual(documentSimulator.DocumentFile1.Id, documentFile_1.Id);
 
             Assert.AreEqual(documentSimulator.DocumentFile1.FilePath, documentFile_1.FilePath);
@@ -121,12 +121,12 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentIndex_LoadWithDocuments_Reposition()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
+            IDocumentIndex multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
             multiDocFile.Open(documentSimulator.DocumentIndex.FilePath);
 
             Assert.IsTrue(multiDocFile.DocumentFiles.Count() == 3);
 
-            IDocumentFile documentFile_1 = multiDocFile.DocumentFiles[0];
+            IDocument documentFile_1 = multiDocFile.DocumentFiles[0];
             Assert.AreEqual(documentSimulator.DocumentFile1.Id, documentFile_1.Id);
 
             multiDocFile.MoveDown(documentFile_1);
@@ -138,10 +138,10 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentIndex_LoadWithDocuments_AddDocuments()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
+            IDocumentIndex multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
             multiDocFile.Open(documentSimulator.DocumentIndex.FilePath);
 
-            IDocumentFile documentFile_4 = new StubDocumentFile(documentSimulator.DocumentFile4.Id, "Title");
+            IDocument documentFile_4 = new StubDocumentFile(documentSimulator.DocumentFile4.Id, "Title");
             multiDocFile.AddDocumentFile(documentFile_4);
 
             Assert.AreEqual(documentSimulator.DocumentFile4.Id, multiDocFile.DocumentFiles[multiDocFile.DocumentFiles.Length - 1].Id);
@@ -153,12 +153,12 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentIndex_Create_And_AddDocuments()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
+            IDocumentIndex multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
             multiDocFile.Create(documentSimulator.DocumentIndex.FilePath);
 
             Assert.AreEqual(0, multiDocFile.DocumentFiles.Length);
 
-            IDocumentFile documentFile_4 = new StubDocumentFile(documentSimulator.DocumentFile4.Id, "Title");
+            IDocument documentFile_4 = new StubDocumentFile(documentSimulator.DocumentFile4.Id, "Title");
             multiDocFile.AddDocumentFile(documentFile_4);
 
             Assert.AreEqual(documentSimulator.DocumentFile4.Id, multiDocFile.DocumentFiles[multiDocFile.DocumentFiles.Length - 1].Id);
@@ -170,14 +170,14 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentIndex_Positioning()
         {
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
+            IDocumentIndex multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
             multiDocFile.Open(documentSimulator.DocumentIndex.FilePath);
 
             // because multi-document files could have more than one type of document file, these document
             // files will have to be created elsewhere (think document factory).
-            IDocumentFile documentFile_1 = multiDocFile.DocumentFiles[0];
-            IDocumentFile documentFile_2 = multiDocFile.DocumentFiles[1];
-            IDocumentFile documentFile_3 = multiDocFile.DocumentFiles[2];
+            IDocument documentFile_1 = multiDocFile.DocumentFiles[0];
+            IDocument documentFile_2 = multiDocFile.DocumentFiles[1];
+            IDocument documentFile_3 = multiDocFile.DocumentFiles[2];
 
             Assert.AreEqual(documentSimulator.DocumentFile1.Id, documentFile_1.Id);
             Assert.AreEqual(documentSimulator.DocumentFile2.Id, documentFile_2.Id);
@@ -191,7 +191,7 @@ namespace UnitTests.Tests.DocumentManagement
             Assert.AreEqual(0, documentFile_1.Versions.Length);
             Assert.IsTrue(documentFile_1.Loaded);
 
-            IDocumentFile documentFile = multiDocFile.GetDocumentFile(documentSimulator.DocumentFile1.Id);
+            IDocument documentFile = multiDocFile.GetDocumentFile(documentSimulator.DocumentFile1.Id);
 
             Assert.AreEqual(1, documentFile.Ordinal);
             Assert.IsFalse(multiDocFile.CanMoveUp(documentFile));
@@ -214,7 +214,7 @@ namespace UnitTests.Tests.DocumentManagement
             ManualResetEvent beforeOpenResetEvent = new ManualResetEvent(false);
             ManualResetEvent afterOpenResetEvent = new ManualResetEvent(false);
 
-            IMultiDocumentFile multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
+            IDocumentIndex multiDocFile = new StubMultiDocumentFile(documentSimulator.DocumentIndex.Id);
 
             multiDocFile.BeforeOpen += (s, e) =>
             {

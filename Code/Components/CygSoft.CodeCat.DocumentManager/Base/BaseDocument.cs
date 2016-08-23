@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {
-    public abstract class BaseDocumentFile : BaseVersionableFile, IDocumentFile
+    public abstract class BaseDocument : BaseVersionableFile, IDocument
     {
         public int Ordinal { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public BaseDocumentFile(string id, string fileExtension, string title, string description = null) : base(fileExtension)
+        public BaseDocument(string id, string fileExtension, string title, string description = null) : base(fileExtension)
         {
             base.Id = id;
             this.Ordinal = -1;
@@ -22,7 +22,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             this.Description = description;
         }
 
-        public BaseDocumentFile(string id, string fileExtension, int ordinal, string title, string description = null)
+        public BaseDocument(string id, string fileExtension, int ordinal, string title, string description = null)
             : base(fileExtension)
         {
             base.Id = id;

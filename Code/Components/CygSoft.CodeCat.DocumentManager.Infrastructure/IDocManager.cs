@@ -14,6 +14,6 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
     public interface IDocManager
     {
         IVersionableFile CreateSingleDocument(DocumentTypeEnum documentType);
-        IMultiDocumentFile CreateMultiDocument(DocumentTypeEnum documentType);        
+        IDocumentIndex CreateMultiDocument(DocumentTypeEnum documentType);        
     }
 }

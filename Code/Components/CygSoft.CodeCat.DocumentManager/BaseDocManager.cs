@@ -32,7 +32,7 @@ namespace CygSoft.CodeCat.DocumentManager
             throw new NotImplementedException();
         }
 
-        public IMultiDocumentFile CreateMultiDocument(DocumentTypeEnum documentType)
+        public IDocumentIndex CreateMultiDocument(DocumentTypeEnum documentType)
         {
             throw new NotImplementedException();
         }

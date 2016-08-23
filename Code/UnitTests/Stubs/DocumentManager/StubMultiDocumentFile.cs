@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace UnitTests.Stubs.DocumentManager
 {
-    public class StubMultiDocumentFile : BaseMultiDocumentFile
+    public class StubMultiDocumentFile : BaseDocumentIndex
     {
         public StubMultiDocumentFile(string id) : base(id, "xml")
         {
@@ -20,9 +20,9 @@ namespace UnitTests.Stubs.DocumentManager
             //throw new NotImplementedException();
         }
 
-        protected override List<IDocumentFile> LoadDocumentFiles()
+        protected override List<IDocument> LoadDocumentFiles()
         {
-            List<IDocumentFile> documentFiles = new List<IDocumentFile>
+            List<IDocument> documentFiles = new List<IDocument>
             {
                 new StubDocumentFile("37c1dba5-9da3-4222-af34-43f98c674d82", 3, "Title"),
                 new StubDocumentFile("f562810b-a1f7-4cf8-b370-dbaf87ff8759", 1, "Title"),

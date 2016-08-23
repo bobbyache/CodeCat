@@ -47,6 +47,5 @@ namespace UnitTestFile
         {
             documentSimulator = new DocFileSimulator();
         }
-
     }
 }

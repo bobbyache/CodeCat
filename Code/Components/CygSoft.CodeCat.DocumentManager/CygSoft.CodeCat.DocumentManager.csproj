@@ -40,18 +40,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDocManager.cs" />
-    <Compile Include="Base\BaseDocumentFile.cs" />
+    <Compile Include="Base\BaseDocument.cs" />
     <Compile Include="Base\BaseFile.cs" />
-    <Compile Include="Base\BaseMultiDocumentFile.cs" />
+    <Compile Include="Base\BaseDocumentIndex.cs" />
     <Compile Include="Base\BaseVersionFile.cs" />
     <Compile Include="Base\BaseVersionableFile.cs" />
-    <Compile Include="Documents\CodeDocumentFile.cs" />
+    <Compile Include="Documents\CodeDocument.cs" />
     <Compile Include="Documents\ScriptDocument.cs" />
     <Compile Include="Documents\ScriptDocumentVersion.cs" />
     <Compile Include="Documents\TemplateDocument.cs" />
     <Compile Include="Documents\TemplateDocumentsFile.cs" />
     <Compile Include="Documents\TemplateDocumentVersion.cs" />
-    <Compile Include="Documents\TextDocumentFile.cs" />
+    <Compile Include="Documents\TextDocument.cs" />
     <Compile Include="Documents\TextDocumentVersion.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="Services\PositionableList.cs" />

@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {
-    public abstract class BaseMultiDocumentFile : BaseFile, IMultiDocumentFile
+    public abstract class BaseDocumentIndex : BaseFile, IDocumentIndex
     {
-        private PositionableList<IDocumentFile> documentFiles = new PositionableList<IDocumentFile>();
+        private PositionableList<IDocument> documentFiles = new PositionableList<IDocument>();
 
-        public IDocumentFile[] DocumentFiles
+        public IDocument[] DocumentFiles
         {
             get { return documentFiles.ItemsList.ToArray(); }
         }
 
-        protected abstract List<IDocumentFile> LoadDocumentFiles();
+        protected abstract List<IDocument> LoadDocumentFiles();
         protected virtual void LoadNonDocumentFiles() { }
 
-        public BaseMultiDocumentFile(string id, string fileExtension) : base(fileExtension)
+        public BaseDocumentIndex(string id, string fileExtension) : base(fileExtension)
         {
             this.Id = id;
         }
@@ -46,7 +46,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         // IDocumentFile could be of a different type, so it needs to be created
         // elsewhere such as a IDocumentFile factory.
-        public IDocumentFile AddDocumentFile(IDocumentFile documentFile)
+        public IDocument AddDocumentFile(IDocument documentFile)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                IDocumentFile documentFile = this.documentFiles.ItemsList.Where(f => f.Id == id).SingleOrDefault();
+                IDocument documentFile = this.documentFiles.ItemsList.Where(f => f.Id == id).SingleOrDefault();
                 documentFile.Delete();
                 documentFiles.Remove(documentFile);
             }
@@ -79,7 +79,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             DeleteDocumentFiles();
         }
 
-        public IDocumentFile GetDocumentFile(string id)
+        public IDocument GetDocumentFile(string id)
         {
             try
             {
@@ -92,32 +92,32 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         }
 
 
-        public bool CanMoveDown(IDocumentFile documentFile)
+        public bool CanMoveDown(IDocument documentFile)
         {
             return documentFiles.CanMoveDown(documentFile);
         }
 
-        public bool CanMoveTo(IDocumentFile documentFile, int ordinal)
+        public bool CanMoveTo(IDocument documentFile, int ordinal)
         {
             return documentFiles.CanMoveTo(documentFile, ordinal);
         }
 
-        public bool CanMoveUp(IDocumentFile documentFile)
+        public bool CanMoveUp(IDocument documentFile)
         {
             return documentFiles.CanMoveUp(documentFile);
         }
 
-        public void MoveDown(IDocumentFile documentFile)
+        public void MoveDown(IDocument documentFile)
         {
             documentFiles.MoveDown(documentFile);
         }
 
-        public void MoveTo(IDocumentFile documentFile, int ordinal)
+        public void MoveTo(IDocument documentFile, int ordinal)
         {
             documentFiles.MoveTo(documentFile, ordinal);
         }
 
-        public void MoveUp(IDocumentFile documentFile)
+        public void MoveUp(IDocument documentFile)
         {
             documentFiles.MoveUp(documentFile);
         }
@@ -127,9 +127,9 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                List<IDocumentFile> docFiles = LoadDocumentFiles();
+                List<IDocument> docFiles = LoadDocumentFiles();
 
-                foreach (IDocumentFile documentFile in docFiles)
+                foreach (IDocument documentFile in docFiles)
                     documentFile.Open(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
 
                 this.documentFiles.InitializeList(docFiles);
@@ -146,7 +146,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                foreach (IDocumentFile documentFile in this.DocumentFiles)
+                foreach (IDocument documentFile in this.DocumentFiles)
                     documentFile.Save();
             }
             catch (Exception exception)
@@ -159,7 +159,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                foreach (IDocumentFile documentFile in this.documentFiles.ItemsList)
+                foreach (IDocument documentFile in this.documentFiles.ItemsList)
                 {
                     documentFile.Delete();
                 }

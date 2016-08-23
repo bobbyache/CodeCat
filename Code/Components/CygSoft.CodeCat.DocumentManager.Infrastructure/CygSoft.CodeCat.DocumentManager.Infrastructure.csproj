@@ -41,10 +41,10 @@
   <ItemGroup>
     <Compile Include="FileEventArgs.cs" />
     <Compile Include="IDocManager.cs" />
-    <Compile Include="IDocumentFile.cs" />
+    <Compile Include="IDocument.cs" />
     <Compile Include="IFile.cs" />
     <Compile Include="IFileVersion.cs" />
-    <Compile Include="IMultiDocumentFile.cs" />
+    <Compile Include="IDocumentIndex.cs" />
     <Compile Include="IPositionedItem.cs" />
     <Compile Include="IVersionableFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IDocumentFile  : IVersionableFile, IPositionedItem
+    public interface IDocument  : IVersionableFile, IPositionedItem
     {
     }
 }

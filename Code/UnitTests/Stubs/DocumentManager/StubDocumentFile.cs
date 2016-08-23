@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace UnitTests.Stubs.DocumentManager
 {
-    internal class StubDocumentFile : BaseDocumentFile
+    internal class StubDocumentFile : BaseDocument
     {
         public StubDocumentFile(string id, string title, string description = null)
             : base(id, "txt", title, description)

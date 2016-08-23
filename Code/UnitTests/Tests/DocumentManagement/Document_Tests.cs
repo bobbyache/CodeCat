@@ -29,7 +29,7 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentFile_Create()
         {
-            IDocumentFile documentFile = new StubDocumentFile(documentSimulator.DocumentFile1.Id, "Title");
+            IDocument documentFile = new StubDocumentFile(documentSimulator.DocumentFile1.Id, "Title");
             documentFile.Create(documentSimulator.DocumentFile1.FilePath);
 
             Assert.AreEqual(documentSimulator.DocumentIndex.Folder, documentFile.Folder);
@@ -41,7 +41,7 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentFile_FileVersions_Create()
         {
-            IDocumentFile documentFile = new StubDocumentFile(documentSimulator.DocumentFile1.Id, "Title");
+            IDocument documentFile = new StubDocumentFile(documentSimulator.DocumentFile1.Id, "Title");
             documentFile.Open(documentSimulator.DocumentFile1.FilePath);
             IFileVersion fileVersion_1 = documentFile.CreateVersion("Snapshot 1");
             Assert.AreEqual("Snapshot 1", fileVersion_1.Description);
@@ -55,7 +55,7 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentFile_FileVersions_FileVersionName()
         {
-            IDocumentFile documentFile = new StubDocumentFile(documentSimulator.DocumentFile1.Id, "Title");
+            IDocument documentFile = new StubDocumentFile(documentSimulator.DocumentFile1.Id, "Title");
             documentFile.Open(documentSimulator.DocumentFile1.FilePath);
 
             int initialVersionCount = documentFile.Versions.Length;
@@ -99,7 +99,7 @@ namespace UnitTests.Tests.DocumentManagement
         [TestMethod]
         public void DocumentFile_FileVersions_Delete()
         {
-            IDocumentFile documentFile = new StubDocumentFile(documentSimulator.DocumentFile1.Id, "Title");
+            IDocument documentFile = new StubDocumentFile(documentSimulator.DocumentFile1.Id, "Title");
             documentFile.Open(documentSimulator.DocumentFile1.FilePath);
 
             // You'll never be creating versions as fast as this.
