@@ -40,12 +40,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileEventArgs.cs" />
-    <Compile Include="IDocManager.cs" />
+    <Compile Include="ICodeDocument.cs" />
     <Compile Include="IDocument.cs" />
     <Compile Include="IFile.cs" />
     <Compile Include="IFileVersion.cs" />
     <Compile Include="IDocumentIndex.cs" />
     <Compile Include="IPositionedItem.cs" />
+    <Compile Include="ITextDocument.cs" />
     <Compile Include="IVersionableFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

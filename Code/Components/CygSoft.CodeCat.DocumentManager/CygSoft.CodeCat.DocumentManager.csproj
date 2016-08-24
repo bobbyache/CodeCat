@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseDocManager.cs" />
+    <Compile Include="DocumentFactory.cs" />
     <Compile Include="Base\BaseDocument.cs" />
     <Compile Include="Base\BaseFile.cs" />
     <Compile Include="Base\BaseDocumentIndex.cs" />

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="A single file could be managed simply by creating a single folder for it and putting the file and its version files inside it. This is the job of a specialized file that inherits from BaseVersionablFile. It cannot inherit from BaseDocumentFile because of the &quot;Ordinal&quot;.&#xD;&#xA;&#xD;&#xA;A multi-document file needs to manage the file group that belongs to it within a single folder. This file needs to inherit from BaseMultiDocumentFile.&#xD;&#xA;&#xD;&#xA;All these files will be versionable.">
+    <Position X="5.656" Y="8.312" Height="2.281" Width="4.096" />
+  </Comment>
+  <Class Name="CygSoft.CodeCat.DocumentManager.Base.BaseDocument">
+    <Position X="10.5" Y="12.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAEAAABAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Base\BaseDocument.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CygSoft.CodeCat.DocumentManager.Base.BaseFile">
+    <Position X="8.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAIAAACEAIAAAAEQAAAAAAAEAAEAABAlAEAFBBDA=</HashCode>
+      <FileName>Base\BaseFile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CygSoft.CodeCat.DocumentManager.Base.BaseVersionFile">
+    <Position X="14.5" Y="8" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAgAEAAAAAAAAAAAAAAAAAAAABQAABAAAA=</HashCode>
+      <FileName>Base\BaseVersionFile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CygSoft.CodeCat.DocumentManager.Base.BaseVersionableFile">
+    <Position X="10.5" Y="8" Width="2.5" />
+    <NestedTypes>
+      <Class Name="CygSoft.CodeCat.DocumentManager.Base.BaseVersionableFile.VersionFileComparer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Base\BaseVersionableFile.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAABCAAAAAIAAAAAAAgAAAAAEAAAEEAABAAEA=</HashCode>
+      <FileName>Base\BaseVersionableFile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CygSoft.CodeCat.DocumentManager.Base.BaseDocumentIndex">
+    <Position X="2.25" Y="8" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AIEAAgABAAAECAACACAACAAAAAAIAEAAVAWACAAAAAg=</HashCode>
+      <FileName>Base\BaseDocumentIndex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CygSoft.CodeCat.DocumentManager.Documents.TextDocument">
+    <Position X="10.5" Y="15.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAQAAAAAAAAAAEAABAAACAAAAAA=</HashCode>
+      <FileName>Documents\TextDocument.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CygSoft.CodeCat.DocumentManager.Documents.TextDocumentVersion">
+    <Position X="14.5" Y="12.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAEAABAAACAAAAAA=</HashCode>
+      <FileName>Documents\TextDocumentVersion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CygSoft.CodeCat.DocumentManager.Documents.CodeDocument">
+    <Position X="10.5" Y="19" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Documents\CodeDocument.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

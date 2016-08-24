@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UnitTests.Stubs.DocumentManager
 {
-    internal class StubDocManager : BaseDocManager
+    internal class StubDocManager : DocumentFactory
     {
 
     }

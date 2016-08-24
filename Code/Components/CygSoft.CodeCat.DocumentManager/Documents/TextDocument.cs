@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public class TextDocument : BaseDocument
+    public class TextDocument : BaseDocument, ITextDocument
     {
         public string Text { get; set; }
 
