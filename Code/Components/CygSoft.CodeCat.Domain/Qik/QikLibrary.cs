@@ -23,13 +23,14 @@ namespace CygSoft.CodeCat.Domain.Qik
         {
             QikKeywordIndexItem qikIndexItem = indexItem as QikKeywordIndexItem;
             QikFile qikFile = new QikFile(qikIndexItem, this.FolderPath);
+            //qikFile.Create();
 
             if (this.openFiles == null)
                 this.openFiles = new Dictionary<string, IPersistableTarget>();
 
             this.openFiles.Add(qikFile.Id, qikFile);
 
-            qikFile.Open();
+            qikFile.Create();
 
             return qikFile as IPersistableTarget;
         }

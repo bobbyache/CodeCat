@@ -11,7 +11,8 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 {
     public abstract class BaseDocumentIndex : BaseFile, IDocumentIndex
     {
-        private PositionableList<IDocument> documentFiles = new PositionableList<IDocument>();
+        protected PositionableList<IDocument> documentFiles = new PositionableList<IDocument>();
+        private List<IDocument> removedDocumentFiles = new List<IDocument>();
 
         public IDocument[] DocumentFiles
         {
@@ -21,9 +22,14 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         protected abstract List<IDocument> LoadDocumentFiles();
         protected abstract void SaveDocumentIndex();
 
-        public BaseDocumentIndex(string id, string fileExtension) : base(fileExtension)
+        public BaseDocumentIndex(string folder, string id, string fileExtension): base(folder, id, fileExtension)
         {
-            this.Id = id;
+        }
+
+        public override void Delete()
+        {
+            base.Delete();
+            Directory.Delete(this.Folder);
         }
 
         protected override void OpenFile()
@@ -42,10 +48,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                // saves all the physical document files.
-                SaveDocumentFiles();
                 // save the document index (abstract, must be implemented).
                 SaveDocumentIndex();
+                // saves all the physical document files.
+                SaveDocumentFiles();
+                DeleteRemovedDocumentFiles();
             }
             catch (Exception exception)
             {
@@ -54,6 +61,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         }
 
+        public bool DocumentExists(string id)
+        {
+            return this.documentFiles.ItemsList.Exists(r => r.Id == id);
+
+        }
         // IDocumentFile could be of a different type, so it needs to be created
         // elsewhere such as a IDocumentFile factory.
         public IDocument AddDocumentFile(IDocument documentFile)
@@ -62,6 +74,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             {
                 documentFile.Create(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
                 this.documentFiles.Insert(documentFile);
+                AfterAddDocumentFile();
                 return documentFile;
             }
             catch (Exception exception)
@@ -70,14 +83,16 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
-        public void DeleteDocumentFile(string id)
+        protected virtual void AfterAddDocumentFile() { }
+
+        public void RemoveDocumentFile(string id)
         {
             try
             {
                 IDocument documentFile = this.documentFiles.ItemsList.Where(f => f.Id == id).SingleOrDefault();
-                documentFile.Delete();
+                removedDocumentFiles.Add(documentFile);
                 documentFiles.Remove(documentFile);
-
+                documentFile.Ordinal = -1;
             }
             catch (Exception exception)
             {
@@ -132,6 +147,16 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             documentFiles.MoveUp(documentFile);
         }
 
+        public void MoveLast(IDocument documentFile)
+        {
+            documentFiles.MoveLast(documentFile);
+        }
+
+        public void MoveFirst(IDocument documentFile)
+        {
+            documentFiles.MoveFirst(documentFile);
+        }
+
         private void OpenDocumentFiles()
         {
             try
@@ -164,6 +189,12 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                     documentFile.Delete();
                 }
                 documentFiles.Clear();
+
+                foreach (IDocument documentFile in this.removedDocumentFiles)
+                {
+                    documentFile.Delete();
+                }
+                removedDocumentFiles.Clear();
             }
             catch (Exception exception)
             {
@@ -171,5 +202,13 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
+        private void DeleteRemovedDocumentFiles()
+        {
+            foreach (IDocument document in removedDocumentFiles)
+            {
+                document.Delete();
+            }
+            removedDocumentFiles.Clear();
+        }
     }
 }

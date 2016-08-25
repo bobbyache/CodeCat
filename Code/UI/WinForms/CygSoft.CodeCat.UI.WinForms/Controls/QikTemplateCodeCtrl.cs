@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Infrastructure.Qik;
 using Alsing.SourceCode;
 using CygSoft.Qik.LanguageEngine.Infrastructure;
+using CygSoft.CodeCat.DocumentManager.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -19,13 +19,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
-        private ITemplateFile templateFile;
+        private ICodeDocument templateFile;
         private AppFacade application;
         private QikFile qikFile;
         private TabPage tabPage;
         private ICompiler compiler;
 
-        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, ITemplateFile templateFile, TabPage tabPage)
+        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, ICodeDocument templateFile, TabPage tabPage)
         {
             InitializeComponent();
             

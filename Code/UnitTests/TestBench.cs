@@ -51,8 +51,7 @@ namespace UnitTestFile
         [TestMethod]
         public void DocumentFactory_CreateTextDocument()
         {
-            ITextDocument document1 = DocumentFactory.CreateTextDocument(documentSimulator.DocumentFile1.Id, "Document 1", "txt1");
-            Assert.AreEqual(documentSimulator.DocumentFile1.Id, document1.Id);
+            ITextDocument document1 = DocumentFactory.CreateTextDocument("Document 1", "txt1");
             Assert.AreEqual("Document 1", document1.Title);
             Assert.AreEqual(-1, document1.Ordinal);
             Assert.AreEqual(null, document1.Description);
@@ -73,8 +72,7 @@ namespace UnitTestFile
         [TestMethod]
         public void DocumentFactory_CreateCodeDocument()
         {
-            ICodeDocument document1 = DocumentFactory.CreateCodeDocument(documentSimulator.DocumentFile1.Id, "Document 1", "txt1", "text");
-            Assert.AreEqual(documentSimulator.DocumentFile1.Id, document1.Id);
+            ICodeDocument document1 = DocumentFactory.CreateCodeDocument("Document 1", "txt1", "text");
             Assert.AreEqual("Document 1", document1.Title);
             Assert.AreEqual(-1, document1.Ordinal);
             Assert.AreEqual(null, document1.Description);

@@ -1,8 +1,9 @@
-﻿using CygSoft.CodeCat.Domain.Code;
+﻿using CygSoft.CodeCat.DocumentManager;
+using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.Qik.Document;
 using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Infrastructure.Qik;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
-using CygSoft.Qik.FileManager;
 using CygSoft.Qik.LanguageEngine;
 using CygSoft.Qik.LanguageEngine.Infrastructure;
 using System;
@@ -24,14 +25,13 @@ namespace CygSoft.CodeCat.Domain.Qik
         public event EventHandler BeforeContentSaved;
 
         private IKeywordIndexItem indexItem;
-        private QikFileManager fileManager = null;
-
+        private QikDocumentIndex documentIndex = null;
 
         public QikFile(QikKeywordIndexItem indexItem, string folderPath)
         {
             this.indexItem = indexItem;
             this.Compiler = new Compiler();
-            fileManager = new QikFileManager(folderPath, indexItem.Id);
+            this.documentIndex = new QikDocumentIndex(folderPath, indexItem.Id);
         }
 
         public IKeywordIndexItem IndexItem
@@ -42,14 +42,14 @@ namespace CygSoft.CodeCat.Domain.Qik
         public ICompiler Compiler { get; private set; }
 
         public string Text { get; set; }
-        public ITemplateFile[] Templates { get { return this.fileManager.Templates; } }
+        public ICodeDocument[] Documents { get { return this.documentIndex.DocumentFiles.OfType<ICodeDocument>().ToArray(); } }
 
         public string Id { get { return this.IndexItem.Id; } }
-        public string FilePath { get { return fileManager.IndexFilePath; } }
-        public string FileTitle { get { return this.fileManager.IndexFileTitle; } }
-        public string FolderPath { get { return this.fileManager.ParentFolder; } }
+        public string FilePath { get { return this.documentIndex.FilePath; } }
+        public string FileTitle { get { return this.documentIndex.FileName; } }
+        public string FolderPath { get { return this.documentIndex.Folder; } }
 
-        public bool FileExists { get { return this.fileManager.IndexFileExists; } }
+        public bool FileExists { get { return this.documentIndex.Exists; } }
 
         public string Title
         {
@@ -88,18 +88,17 @@ namespace CygSoft.CodeCat.Domain.Qik
             private set;
         }
 
-        public bool TemplateExists(string fileName)
+        public bool TemplateExists(string id)
         {
-            return fileManager.TemplateExists(fileName);
-
+            return this.documentIndex.DocumentExists(id);
         }
 
-        public ITemplateFile GetTemplate(string fileName)
+        public ICodeDocument GetTemplate(string id)
         {
-            return fileManager.GetTemplate(fileName);
+            return this.documentIndex.GetDocumentFile(id) as ICodeDocument;
         }
 
-        public IQikScriptFile ScriptFile { get { return fileManager.ScriptFile; } }
+        public ICodeDocument ScriptFile { get { return this.documentIndex.ScriptDocument; } }
 
         public void Revert()
         {
@@ -110,14 +109,15 @@ namespace CygSoft.CodeCat.Domain.Qik
             }
         }
 
+        public void Create()
+        {
+            this.documentIndex.Create();
+        }
+
         public bool Open()
         {
-            if (this.FileExists)
-            {
-                fileManager.Load(this.FolderPath, this.Id);
-                return true;
-            }
-            return false;
+            this.documentIndex.Open();
+            return true;
         }
 
         public void Close()
@@ -131,12 +131,7 @@ namespace CygSoft.CodeCat.Domain.Qik
             if (BeforeContentSaved != null)
                 BeforeContentSaved(this, new EventArgs());
 
-            if (this.FileExists)
-            {
-                fileManager.Save();
-            }
-            else
-                fileManager.Create(this.FolderPath, this.Id);
+            this.documentIndex.Save();
             
             if (this.ContentSaved != null)
                 ContentSaved(this, new EventArgs());
@@ -144,19 +139,19 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public void Delete()
         {
-            fileManager.Delete();
+            this.documentIndex.Delete();
             if (ContentDeleted != null)
                 ContentDeleted(this, new EventArgs());
         }
 
-        public ITemplateFile AddTemplate()
+        public ICodeDocument AddTemplate(string syntax)
         {
-            return fileManager.AddTemplate("New Template", "");
+            return this.documentIndex.AddDocumentFile(DocumentFactory.CreateCodeDocument("New Template", "tpl", syntax)) as ICodeDocument;
         }
 
-        public void RemoveTemplate(string fileName)
+        public void RemoveTemplate(string id)
         {
-            fileManager.RemoveTemplate(fileName);
+            this.documentIndex.RemoveDocumentFile(id);
         }
 
 

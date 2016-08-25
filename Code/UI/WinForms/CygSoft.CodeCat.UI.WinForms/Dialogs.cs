@@ -33,6 +33,12 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
+        public static DialogResult CannotRemoveTemplateScriptNotification(IWin32Window owner)
+        {
+            return MessageBox.Show(owner, "A template script cannot be removed.",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         public static DialogResult RevertDocumentChangesDialogPrompt(IWin32Window owner)
         {
             return MessageBox.Show(owner, "Sure you want to discard changes made to this document?",

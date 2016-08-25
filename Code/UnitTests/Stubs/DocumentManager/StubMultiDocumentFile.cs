@@ -11,7 +11,7 @@ namespace UnitTests.Stubs.DocumentManager
 {
     public class StubMultiDocumentFile : BaseDocumentIndex
     {
-        public StubMultiDocumentFile(string id) : base(id, "xml")
+        public StubMultiDocumentFile(string folder, string id) : base(folder, id, "xml")
         {
         }
 

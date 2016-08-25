@@ -40,4 +40,5 @@
   <SyntaxMapping Language="VRML97" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\VRML97.syn" FileExtension="txt" />
   <SyntaxMapping Language="XML" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\XML.syn" FileExtension="xml" />
   <SyntaxMapping Language="XAML" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\XML.syn" FileExtension="xaml" />
+  <SyntaxMapping Language="QIK" FilePath="D:\Sandbox\My Code\NatTreasury\trunk\Binaries\SyntaxBox\SyntaxFiles\QIK.syn" FileExtension="qik" />
 </Syntax>

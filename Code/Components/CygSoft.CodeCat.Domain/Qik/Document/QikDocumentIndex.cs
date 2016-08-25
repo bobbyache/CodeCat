@@ -14,29 +14,24 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
 {
     public class QikDocumentIndex : BaseDocumentIndex
     {
-        private ICodeDocument scriptDocument;
-        public ICodeDocument ScriptDocument { get { return this.scriptDocument; } }
-
-        public ICodeDocument[] TemplateDocuments
-        {
-            get { return this.DocumentFiles.OfType<CodeDocument>().ToArray(); }
+        public IQikScriptDocument ScriptDocument 
+        { 
+            get 
+            {
+                return base.DocumentFiles.OfType<QikScriptDocument>().SingleOrDefault();
+            } 
         }
 
-        public QikDocumentIndex(string id) : base(id, "xml")
+        public QikDocumentIndex(string folder, string id) : base(Path.Combine(folder, id), id, "xml")
         {
-
         }
 
         protected override void CreateFile()
         {
-            if (!Directory.Exists(this.Folder))
-            {
-                Directory.CreateDirectory(this.Folder);
-
-                XElement rootElement = new XElement("QikFile", new XElement("Templates"));
-                XDocument document = new XDocument(rootElement);
-                document.Save(this.FilePath);
-            }
+            ICodeDocument scriptDoc = DocumentFactory.CreateQikScriptDocument("Qik Script", "qik", "qik");
+            scriptDoc.Create(Path.Combine(this.Folder, scriptDoc.Id + "." + scriptDoc.FileExtension));
+            scriptDoc.Ordinal = 1;  // should always be the last item, but is the first over here.
+            this.AddDocumentFile(scriptDoc);
         }
 
         protected override List<DocumentManager.Infrastructure.IDocument> LoadDocumentFiles()
@@ -44,7 +39,7 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
             List<ICodeDocument> documents = new List<ICodeDocument>();
 
             XDocument indexDocument = XDocument.Load(this.FilePath);
-            foreach (XElement documentElement in indexDocument.Element("QikFile").Element("Templates").Elements())
+            foreach (XElement documentElement in indexDocument.Element("QikFile").Element("Documents").Elements())
             {
                 string documentId = (string)documentElement.Attribute("Id");
                 string documentTitle = (string)documentElement.Attribute("Title");
@@ -67,26 +62,44 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
                 }
             }
 
-            ICodeDocument scriptDoc = documents.OfType<QikScriptDocument>().SingleOrDefault();
-            this.scriptDocument = scriptDoc;
-
             return documents.OfType<IDocument>().ToList();
         }
 
         protected override void SaveDocumentIndex()
         {
+            if (!Directory.Exists(this.Folder))
+                WriteStartFile();
+            WriteExistingFile();
+        }
+
+        protected override void AfterAddDocumentFile()
+        {
+            base.documentFiles.MoveLast(this.ScriptDocument as IDocument);
+        }
+
+        private void WriteStartFile()
+        {
+            Directory.CreateDirectory(this.Folder);
+
+            XElement rootElement = new XElement("QikFile", new XElement("Documents"));
+            XDocument document = new XDocument(rootElement);
+            document.Save(this.FilePath);
+        }
+
+        private void WriteExistingFile()
+        {
             ICodeDocument[] docFiles = base.DocumentFiles.OfType<ICodeDocument>().ToArray();
 
             XDocument indexDocument = XDocument.Load(this.FilePath);
-            XElement filesElement = indexDocument.Element("QikFile").Element("Templates");
+            XElement filesElement = indexDocument.Element("QikFile").Element("Documents");
             filesElement.RemoveNodes();
 
             foreach (ICodeDocument docFile in docFiles)
             {
-                filesElement.Add(new XElement("Template",
-                    new XAttribute("File", docFile.FileName),
+                filesElement.Add(new XElement("Document",
+                    new XAttribute("Id", docFile.Id),
                     new XAttribute("Title", docFile.Title),
-                    new XAttribute("Description", docFile.Description),
+                    new XAttribute("Description", docFile.Description == null ? "" : docFile.Description),
                     new XAttribute("Ext", docFile.FileExtension),
                     new XAttribute("Syntax", docFile.Syntax),
                     new XAttribute("Ordinal", docFile.Ordinal.ToString())

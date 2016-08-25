@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.Domain.Qik.Document
+namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    class QikTemplateDocumentVersion
+    public interface IQikScriptDocument : ICodeDocument
     {
     }
 }

@@ -12,7 +12,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public static class IconRepository
     {
-        public const string QikKey = "qik";
+        public const string QikKey = "QIK";
 
         private static ImageList imageList = new ImageList();
         private static Dictionary<string, Icon> iconDictonary = new Dictionary<string, Icon>();
@@ -38,30 +38,42 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             foreach (SyntaxFile syntaxFile in syntaxFiles)
             {
-                Icon icon = Etier.IconHelper.IconReader.GetFileIcon("." + syntaxFile.Extension, 
-                    Etier.IconHelper.IconReader.IconSize.Small, 
-                    false);
-                iconDictonary.Add(syntaxFile.Syntax.ToUpper(), icon);
+                string syntax = syntaxFile.Syntax.ToUpper();
 
-                if (!imageList.Images.ContainsKey(syntaxFile.Syntax))
+                if (syntax == QikKey)
                 {
-                    imageList.Images.Add(syntaxFile.Syntax, icon);
+                    iconDictonary.Add(syntax, QikIcon);
+
+                    if (!imageList.Images.ContainsKey(syntax))
+                        imageList.Images.Add(syntax, QikIcon);
                 }
-            }
-            if (!imageList.Images.ContainsKey(QikKey))
-            {
-                imageList.Images.Add(QikKey, Resources.GetImage(Constants.ImageKeys.QikFile));
+                else
+                {
+                    Icon icon = Etier.IconHelper.IconReader.GetFileIcon("." + syntaxFile.Extension,
+                        Etier.IconHelper.IconReader.IconSize.Small,
+                        false);
+                    iconDictonary.Add(syntax, icon);
+
+                    if (!imageList.Images.ContainsKey(syntax))
+                        imageList.Images.Add(syntax, icon);
+                }
             }
         }
 
         public static Icon GetIcon(string syntax)
         {
-            return iconDictonary[syntax.ToUpper()];
+            string uSyntax = syntax.ToUpper();
+
+            if (uSyntax == QikKey)
+                return QikIcon;
+            else
+                return iconDictonary[uSyntax];
         }
 
         public static int ImageKeyFor(string syntax)
         {
-            return imageList.Images.IndexOfKey(syntax);
+            string uSyntax = syntax.ToUpper();
+            return imageList.Images.IndexOfKey(uSyntax);
         }
     }
 }

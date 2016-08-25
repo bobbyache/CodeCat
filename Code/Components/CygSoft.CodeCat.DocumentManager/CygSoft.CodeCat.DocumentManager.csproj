@@ -49,9 +49,6 @@
     <Compile Include="Documents\QikScriptDocument.cs" />
     <Compile Include="Documents\ScriptDocument.cs" />
     <Compile Include="Documents\ScriptDocumentVersion.cs" />
-    <Compile Include="Documents\TemplateDocument.cs" />
-    <Compile Include="Documents\TemplateDocumentsFile.cs" />
-    <Compile Include="Documents\TemplateDocumentVersion.cs" />
     <Compile Include="Documents\TextDocument.cs" />
     <Compile Include="Documents\TextDocumentVersion.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />

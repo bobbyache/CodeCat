@@ -26,6 +26,8 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         bool Exists { get; }
         bool Loaded { get; }
 
+        void Create();
+        void Open();
         void Create(string filePath);
         void Open(string filePath);
         void Delete();

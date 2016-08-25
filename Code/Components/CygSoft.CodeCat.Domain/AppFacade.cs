@@ -69,6 +69,7 @@ namespace CygSoft.CodeCat.Domain
         {
             project.Create(filePath, currentVersion);
             this.codeLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
+            this.qikLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
         }
 
 

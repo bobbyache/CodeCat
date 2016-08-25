@@ -44,6 +44,31 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             this.FileExtension = CleanExtension(fileExtension);
         }
 
+        public BaseFile(string folder, string id, string extension)
+        {
+            this.Id = id;
+            this.FilePath = Path.Combine(folder, id + "." + extension);
+        }
+
+        public void Create()
+        {
+            try
+            {
+                if (BeforeCreate != null)
+                    BeforeCreate(this, new FileEventArgs(this));
+
+                CreateFile();
+                this.Loaded = true;
+
+                if (AfterCreate != null)
+                    AfterCreate(this, new FileEventArgs(this));
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
         public void Create(string filePath)
         {
             this.FilePath = filePath;
@@ -84,7 +109,26 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
-        public void Delete()
+        public void Open()
+        {
+            try
+            {
+                if (BeforeOpen != null)
+                    BeforeOpen(this, new FileEventArgs(this));
+
+                OpenFile();
+                this.Loaded = true;
+
+                if (AfterOpen != null)
+                    AfterOpen(this, new FileEventArgs(this));
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public virtual void Delete()
         {
             if (BeforeDelete != null)
                 BeforeDelete(this, new FileEventArgs(this));

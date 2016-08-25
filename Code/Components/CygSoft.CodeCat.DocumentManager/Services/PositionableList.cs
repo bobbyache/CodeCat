@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Services
 {
-    internal class PositionableList<T> where T : class, IPositionedItem
+    public class PositionableList<T> where T : class, IPositionedItem
     {
         private const string ItemDoesNotExistMessage = "Position item does not exist within the position list.";
         private List<T> positionedItemList = new List<T>();
@@ -140,6 +140,16 @@ namespace CygSoft.CodeCat.DocumentManager.Services
                 item.Ordinal += 1;
                 displacedItem.Ordinal -= 1;
             }
+        }
+
+        public void MoveLast(T item)
+        {
+            MoveTo(item, LastItem.Ordinal);
+        }
+
+        public void MoveFirst(T item)
+        {
+            MoveTo(item, 1);
         }
 
         public void MoveTo(T item, int ordinal)
