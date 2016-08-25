@@ -26,6 +26,7 @@ namespace CygSoft.CodeCat.Domain.Qik
         private IKeywordIndexItem indexItem;
         private QikFileManager fileManager = null;
 
+
         public QikFile(QikKeywordIndexItem indexItem, string folderPath)
         {
             this.indexItem = indexItem;

@@ -46,6 +46,7 @@
     <Compile Include="Base\BaseVersionFile.cs" />
     <Compile Include="Base\BaseVersionableFile.cs" />
     <Compile Include="Documents\CodeDocument.cs" />
+    <Compile Include="Documents\QikScriptDocument.cs" />
     <Compile Include="Documents\ScriptDocument.cs" />
     <Compile Include="Documents\ScriptDocumentVersion.cs" />
     <Compile Include="Documents\TemplateDocument.cs" />

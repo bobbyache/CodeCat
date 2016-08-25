@@ -14,28 +14,14 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         public string Text { get; set; }
 
         // Only create these documents internally.
-        internal TextDocument(string id, string title, string description = null, string extension = "txt")
-            : base(id, extension, title, description)
+        internal TextDocument(string id, string title, string extension) : base(id, extension, title, null)
         {
             this.Text = null;
         }
 
-        internal TextDocument(string id, string title, int ordinal, string description = null, string extension = "txt")
-            : base(id, extension, ordinal, title, description)
+        internal TextDocument(string id, string title, string extension, int ordinal, string description) : base(id, extension, ordinal, title, description)
         {
             this.Text = null;
-        }
-
-        internal TextDocument(string id, string title, string description = null, string text = null, string extension = "txt")
-            : base(id, extension, title, description)
-        {
-            this.Text = text;
-        }
-
-        internal TextDocument(string id, string title, int ordinal, string description = null, string text = null, string extension = "txt")
-            : base(id, extension, ordinal, title, description)
-        {
-            this.Text = text;
         }
 
         protected override IFileVersion NewVersion(DateTime timeStamp, string description)

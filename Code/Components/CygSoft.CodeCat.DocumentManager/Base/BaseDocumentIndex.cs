@@ -19,7 +19,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         }
 
         protected abstract List<IDocument> LoadDocumentFiles();
-        protected virtual void LoadNonDocumentFiles() { }
+        protected abstract void SaveDocumentIndex();
 
         public BaseDocumentIndex(string id, string fileExtension) : base(fileExtension)
         {
@@ -31,7 +31,6 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             try
             {
                 this.OpenDocumentFiles();
-                this.LoadNonDocumentFiles();
             }
             catch (Exception exception)
             {
@@ -41,7 +40,18 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         protected override void SaveFile()
         {
-            SaveDocumentFiles();
+            try
+            {
+                // saves all the physical document files.
+                SaveDocumentFiles();
+                // save the document index (abstract, must be implemented).
+                SaveDocumentIndex();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+
         }
 
         // IDocumentFile could be of a different type, so it needs to be created
@@ -67,6 +77,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 IDocument documentFile = this.documentFiles.ItemsList.Where(f => f.Id == id).SingleOrDefault();
                 documentFile.Delete();
                 documentFiles.Remove(documentFile);
+
             }
             catch (Exception exception)
             {
@@ -90,7 +101,6 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 throw exception;
             }
         }
-
 
         public bool CanMoveDown(IDocument documentFile)
         {
@@ -122,7 +132,6 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             documentFiles.MoveUp(documentFile);
         }
 
-
         private void OpenDocumentFiles()
         {
             try
@@ -133,8 +142,6 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                     documentFile.Open(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
 
                 this.documentFiles.InitializeList(docFiles);
-
-                this.LoadNonDocumentFiles();
             }
             catch (Exception exception)
             {
@@ -144,15 +151,8 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         private void SaveDocumentFiles()
         {
-            try
-            {
-                foreach (IDocument documentFile in this.DocumentFiles)
-                    documentFile.Save();
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+            foreach (IDocument documentFile in this.DocumentFiles)
+                documentFile.Save();
         }
 
         private void DeleteDocumentFiles()

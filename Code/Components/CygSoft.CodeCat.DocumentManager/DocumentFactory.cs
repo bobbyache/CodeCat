@@ -11,45 +11,34 @@ namespace CygSoft.CodeCat.DocumentManager
 {
     public class DocumentFactory
     {
-
-        public static ITextDocument CreateTextDocument(string id, string title, string description = null, string extension = null)
+        public static ITextDocument CreateTextDocument(string id, string title, string extension)
         {
-            return new TextDocument(id, title, description, extension);
+            return new TextDocument(id, title, extension);
         }
 
-        public static ITextDocument CreateTextDocument(string id, string title, string description = null, string text = null, string extension = null)
+        public static ITextDocument CreateTextDocument(string id, string title, string extension, int ordinal, string description)
         {
-            return new TextDocument(id, title, description, text, extension);
+            return new TextDocument(id, title, extension, ordinal, description);
         }
 
-        public static ITextDocument CreateTextDocument(string id, string title, int ordinal, string description = null, string extension = null)
+        public static ICodeDocument CreateCodeDocument(string id, string title, string extension, string syntax)
         {
-            return new TextDocument(id, title, ordinal, description, extension);
+            return new CodeDocument(id, title, extension, syntax);
         }
 
-        public static ITextDocument CreateTextDocument(string id, string title, int ordinal, string description = null, string text = null, string extension = null)
+        public static ICodeDocument CreateCodeDocument(string id, string title, string extension, string syntax, int ordinal, string description)
         {
-            return new TextDocument(id, title, ordinal, description, text, extension);
+            return new CodeDocument(id, title, extension, ordinal, description, syntax);
         }
 
-        public static ICodeDocument CreateCodeDocument(string id, string title, string description = null, string extension = null)
+        public static ICodeDocument CreateQikScriptDocument(string id, string title, string extension, string syntax)
         {
-            return new CodeDocument(id, title, description, extension);
+            return new QikScriptDocument(id, title, extension, syntax);
         }
 
-        public static ICodeDocument CreateCodeDocument(string id, string title, string description = null, string text = null, string extension = null)
+        public static ICodeDocument CreateQikScriptDocument(string id, string title, string extension, string syntax, int ordinal, string description)
         {
-            return new CodeDocument(id, title, description, text, extension);
-        }
-
-        public static ICodeDocument CreateCodeDocument(string id, string title, int ordinal, string description = null, string extension = null, string syntax = null)
-        {
-            return new CodeDocument(id, title, ordinal, description, extension, syntax);
-        }
-
-        public static ICodeDocument CreateCodeDocument(string id, string title, int ordinal, string description = null, string text = null, string extension = null, string syntax = null)
-        {
-            return new CodeDocument(id, title, ordinal, description, text, extension, syntax);
+            return new QikScriptDocument(id, title, extension, ordinal, description, syntax);
         }
     }
 }

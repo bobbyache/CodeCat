@@ -31,9 +31,11 @@ namespace UnitTests.Stubs.DocumentManager
             return documentFiles;
         }
 
-        protected override void SaveFile()
+
+        protected override void SaveDocumentIndex()
         {
-            //throw new NotImplementedException();
         }
+
+
     }
 }
