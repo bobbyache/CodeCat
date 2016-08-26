@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\IDocumentItemControl.cs" />
     <Compile Include="Controls\InputPropertyGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -101,6 +102,8 @@
     <Compile Include="Documents\BaseDocument.Designer.cs">
       <DependentUpon>BaseDocument.cs</DependentUpon>
     </Compile>
+    <Compile Include="Documents\DocumentTabEventArgs.cs" />
+    <Compile Include="Documents\DocumentTabManager.cs" />
     <Compile Include="Documents\IContentDocument.cs" />
     <Compile Include="Documents\QikCodeDocument.cs">
       <SubType>Form</SubType>

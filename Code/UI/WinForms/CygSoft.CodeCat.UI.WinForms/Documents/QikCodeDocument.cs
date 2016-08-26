@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.CodeCat.UI.WinForms.Controls;
+using CygSoft.CodeCat.UI.WinForms.Documents;
 using CygSoft.Qik.LanguageEngine.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,8 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         private ICompiler compiler = null;
         private QikFile qikFile = null;
-        private TabPage qikScriptTab = null;
+        private DocumentTabManager tabManager = null;
+        private QikScriptCtrl scriptControl;
 
         #region Public Properties
 
@@ -46,11 +48,18 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeComponent();
 
             this.tabControlFile.ImageList = IconRepository.ImageList;
+            
             base.application = application;
             this.qikFile = qikFile;
+            this.scriptControl = new QikScriptCtrl(application, qikFile);
+            this.scriptControl.Modified += scriptCtrl_Modified;
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
             this.compiler = qikFile.Compiler;
+
+            this.tabManager = new DocumentTabManager(this.tabControlFile);
+            this.tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
+            this.tabManager.AfterAddTab += tabManager_AfterAddTab;
 
             RebuildTabs();
             InitializeImages();
@@ -202,76 +211,42 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void RebuildTabs()
         {
             // Completely removes all tabs
-            ClearAllTabs();
+            tabManager.Clear();
 
             // Re-creates from source...
             foreach (ICodeDocument document in qikFile.Documents)
             {
                 if (document is IQikScriptDocument)
-                    DisplayScriptTab(document as IQikScriptDocument, btnShowScript.Checked);
+                    tabManager.AddTab(document, scriptControl, btnShowScript.Checked, false);
                 else
-                    NewCodeTemplateTab(document);
+                    tabManager.AddTab(document, NewTemplateControl(document), true, false);
             }
+            tabControlFile.Refresh();
         }
 
-        private void ClearAllTabs()
+        private QikTemplateCodeCtrl NewTemplateControl(ICodeDocument document)
         {
-            foreach (TabPage tabPage in tabControlFile.TabPages)
-            {
-                if (tabPage == this.qikScriptTab)
-                {
-                    QikScriptCtrl scriptCtrl = qikScriptTab.Controls[0] as QikScriptCtrl;
-                    scriptCtrl.Modified -= scriptCtrl_Modified;
-                }
-                else
-                {
-                    QikTemplateCodeCtrl codeCtrl = tabPage.Controls[0] as QikTemplateCodeCtrl;
-                    codeCtrl.Modified -= codeCtrl_Modified;
-                }
-            }
-            tabControlFile.TabPages.Clear();
+            QikTemplateCodeCtrl templateControl = new QikTemplateCodeCtrl(this.application, this.qikFile, document);
+            templateControl.Modified += codeCtrl_Modified;
+            return templateControl;
         }
 
-        private TabPage NewCodeTemplateTab(ICodeDocument templateFile)
+        private void tabManager_AfterAddTab(object sender, DocumentTabEventArgs e)
         {
-            TabPage tabPage = new TabPage(templateFile.Title);
-            tabPage.Name = templateFile.Id;
-            tabPage.ImageIndex = IconRepository.ImageKeyFor(templateFile.Syntax);
-
-            QikTemplateCodeCtrl codeCtrl = new QikTemplateCodeCtrl(application, qikFile, templateFile, tabPage);
-            codeCtrl.Modified += codeCtrl_Modified;
-            tabPage.Controls.Add(codeCtrl);
-            codeCtrl.Dock = DockStyle.Fill;
-
-            tabControlFile.TabPages.Add(tabPage);
-
-            return tabPage;
+            //throw new NotImplementedException();
         }
 
-        private void DisplayScriptTab(IQikScriptDocument scriptDocument, bool visible)
+        private void tabManager_BeforeDeleteTab(object sender, DocumentTabEventArgs e)
         {
-            if (qikScriptTab == null)
+            if (e.TabUserControl is QikScriptCtrl)
             {
-                TabPage tabPage = new TabPage(scriptDocument.Title);
-                tabPage.Name = scriptDocument.Id;
-                tabPage.ImageIndex = IconRepository.ImageKeyFor(IconRepository.QikKey);
-                this.qikScriptTab = tabPage;
-
-                QikScriptCtrl scriptCtrl = new QikScriptCtrl(application, qikFile, tabPage);
-                scriptCtrl.Modified += scriptCtrl_Modified;
-                tabPage.Controls.Add(scriptCtrl);
-                scriptCtrl.Dock = DockStyle.Fill;
+                QikScriptCtrl scriptCtrl = e.TabUserControl as QikScriptCtrl;
+                scriptCtrl.Modified -= scriptCtrl_Modified;
             }
-
-            if (visible)
+            else if (e.TabUserControl is QikTemplateCodeCtrl)
             {
-                tabControlFile.TabPages.Add(this.qikScriptTab);
-                tabControlFile.SelectedTab = this.qikScriptTab;
-            }
-            else
-            {
-                if (tabControlFile.TabPages.Contains(this.qikScriptTab))
-                    tabControlFile.TabPages.Remove(this.qikScriptTab);
+                QikTemplateCodeCtrl codeCtrl = e.TabUserControl as QikTemplateCodeCtrl;
+                codeCtrl.Modified -= codeCtrl_Modified;
             }
         }
 
@@ -279,10 +254,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             try
             {
-                QikScriptCtrl scriptCtrl = qikScriptTab.Controls[0] as QikScriptCtrl;
-
-                if (!(string.IsNullOrEmpty(scriptCtrl.ScriptText)))
-                    this.compiler.Compile(scriptCtrl.ScriptText);
+                if (!(string.IsNullOrEmpty(scriptControl.ScriptText)))
+                    this.compiler.Compile(scriptControl.ScriptText);
             }
             catch (Exception ex)
             {
@@ -336,22 +309,19 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             ICodeDocument templateFile = qikFile.AddTemplate(ConfigSettings.DefaultSyntax);
 
-            TabPage tabPage = NewCodeTemplateTab(templateFile);
-
+            tabManager.AddTab(templateFile, NewTemplateControl(templateFile), true, true);
             // ensures that the script tab always remains at the end.
-            DisplayScriptTab(qikFile.ScriptFile as IQikScriptDocument, false);
-            DisplayScriptTab(qikFile.ScriptFile as IQikScriptDocument, true);
-            tabControlFile.SelectedTab = tabPage;
+            tabManager.SendToBack(scriptControl.Id, btnShowScript.Checked);
 
             this.IsModified = true;
         }
 
         private void btnRemoveTemplate_Click(object sender, EventArgs e)
         {
-            if (tabControlFile.TabPages.Count == 0)
+            if (!tabManager.HasTabs)
                 return;
 
-            if (tabControlFile.SelectedTab.Name == qikFile.ScriptFile.Id)
+            if (tabManager.SelectedTabId == qikFile.ScriptFile.Id)
             {
                 Dialogs.CannotRemoveTemplateScriptNotification(this);
                 return;
@@ -361,15 +331,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {
-                string id = tabControlFile.SelectedTab.Name;
+                string id = tabManager.SelectedTabId;
+                tabManager.Remove(id);
                 qikFile.RemoveTemplate(id);
-
-                // hide the template, don't remove it, might need to revert back to it...
-                TabPage tabPage = tabControlFile.SelectedTab;
-                QikTemplateCodeCtrl codeCtrl = tabPage.Controls[0] as QikTemplateCodeCtrl;
-
-                codeCtrl.Modified -= codeCtrl_Modified;
-                tabControlFile.TabPages.Remove(tabPage);
                 this.IsModified = true;
             }
         }
@@ -391,7 +355,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnShowScript_CheckedChanged(object sender, EventArgs e)
         {
-            DisplayScriptTab(this.qikFile.ScriptFile as IQikScriptDocument, btnShowScript.Checked);
+            //tabManager.SendToBack(scriptControl.Id);
+            tabManager.Display(scriptControl.Id, btnShowScript.Checked);
         }
 
         private void btnCompile_Click(object sender, EventArgs e)

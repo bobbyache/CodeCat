@@ -15,24 +15,22 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    public partial class QikTemplateCodeCtrl : UserControl
+    public partial class QikTemplateCodeCtrl : UserControl, IDocumentItemControl
     {
         public event EventHandler Modified;
 
         private ICodeDocument templateFile;
         private AppFacade application;
         private QikFile qikFile;
-        private TabPage tabPage;
         private ICompiler compiler;
 
-        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, ICodeDocument templateFile, TabPage tabPage)
+        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, ICodeDocument templateFile)
         {
             InitializeComponent();
             
             this.application = application;
             this.qikFile = qikFile;
             this.compiler = qikFile.Compiler;
-            this.tabPage = tabPage;
             this.templateFile = templateFile;
             this.Id = templateFile.FileName;
 
@@ -49,6 +47,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             UpdateAutoList();
         }
 
+        public int ImageKey { get { return IconRepository.ImageKeyFor(templateFile.Syntax); } }
+        public TabPage ParentTab { get; set; }
+
+
+
         public string Id { get; private set; }
 
         public string Title
@@ -63,7 +66,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public bool IsModified { get; private set; }
 
-        public bool TemplateExists { get { return templateFile.Exists; } }
+        public bool FileExists { get { return templateFile.Exists; } }
 
         public void Revert()
         {
@@ -237,9 +240,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             // requires an image list like the one you're using in the list view.
             //this.Icon = IconRepository.GetIcon(syntax);
 
-            this.tabPage.ImageIndex = IconRepository.ImageKeyFor(syn);
+            //this.ParentTab.ImageIndex = IconRepository.ImageKeyFor(syn);
             this.lblEditStatus.Image = IconRepository.GetIcon(syn).ToBitmap();
         }
+
+        
 
         private void SetDefaultFont()
         {
@@ -252,7 +257,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void txtTitle_Validated(object sender, EventArgs e)
         {
-            tabPage.Text = txtTitle.Text;
+            this.ParentTab.Text = txtTitle.Text;
         }
 
         private void templateSyntaxBox_KeyDown(object sender, KeyEventArgs e)

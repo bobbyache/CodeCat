@@ -14,23 +14,21 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    public partial class QikScriptCtrl : UserControl
+    public partial class QikScriptCtrl : UserControl, IDocumentItemControl
     {
         public event EventHandler Modified;
 
         private AppFacade application;
         private QikFile qikFile;
-        private TabPage tabPage;
         private ICodeDocument scriptFile;
         private ICompiler compiler;
 
-        public QikScriptCtrl(AppFacade application, QikFile qikFile, TabPage tabPage)
+        public QikScriptCtrl(AppFacade application, QikFile qikFile)
         {
             InitializeComponent();
 
             this.application = application;
             this.qikFile = qikFile;
-            this.tabPage = tabPage;
             this.scriptFile = qikFile.ScriptFile;
             this.compiler = qikFile.Compiler;
 
@@ -42,6 +40,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             RegisterFileEvents();
         }
 
+        public int ImageKey { get { return IconRepository.ImageKeyFor(IconRepository.QikKey); } }
+        public TabPage ParentTab { get; set; }
+
+        public string Id { get { return this.scriptFile.Id; } }
+
+        public string Title { get { return this.scriptFile.Title; } }
+
         public string ScriptText
         {
             get { return this.syntaxDocument.Text; }
@@ -49,7 +54,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public bool IsModified { get; private set; }
 
-        public bool ScriptExists { get { return qikFile.ScriptFile.Exists; } }
+        public bool FileExists { get { return qikFile.ScriptFile.Exists; } }
 
         public void Revert()
         {
