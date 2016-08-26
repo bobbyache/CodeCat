@@ -73,8 +73,6 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                //documentFile.Create(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
-                documentFile.Create();
                 this.documentFiles.Insert(documentFile);
                 AfterAddDocumentFile();
                 return documentFile;
@@ -166,7 +164,8 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 List<IDocument> docFiles = LoadDocumentFiles();
 
                 foreach (IDocument documentFile in docFiles)
-                    documentFile.Open(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
+                    documentFile.Open();
+                    //documentFile.Open(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
 
                 this.documentFiles.InitializeList(docFiles);
             }

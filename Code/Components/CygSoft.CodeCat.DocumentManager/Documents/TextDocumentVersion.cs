@@ -19,11 +19,6 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             this.Text = null;
         }
 
-        protected override void CreateFile()
-        {
-            File.WriteAllText(this.FileName, this.Text);
-        }
-
         protected override void OpenFile()
         {
             this.Text = File.ReadAllText(this.FilePath);

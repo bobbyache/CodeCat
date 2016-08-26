@@ -31,11 +31,6 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             return new TextDocumentVersion(new VersionPathGenerator(this.FilePath, timeStamp), description, this.Text);
         }
 
-        protected override void CreateFile()
-        {
-            File.WriteAllText(this.FileName, this.Text);
-        }
-
         protected override void OpenFile()
         {
             this.Text = File.ReadAllText(this.FilePath);

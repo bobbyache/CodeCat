@@ -26,20 +26,15 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
         public QikDocumentIndex(string folder, string id) : 
             base(new DocumentIndexPathGenerator(folder, "xml", id))
         {
+            // creating this document for the very first time... so we need to ensure that we create a script document!
+            ICodeDocument scriptDoc = DocumentFactory.CreateQikScriptDocument(this.Folder, "Qik Script", "qik", "Qik");
+            scriptDoc.Ordinal = 1;  // should always be the last item, but is the first over here.
+            this.AddDocumentFile(scriptDoc);
         }
 
         public QikDocumentIndex(string folder)
             : base(new DocumentIndexPathGenerator(folder, "xml"))
         {
-        }
-
-        protected override void CreateFile()
-        {
-            ICodeDocument scriptDoc = DocumentFactory.CreateQikScriptDocument(this.Folder, "Qik Script", "qik", "Qik");
-            scriptDoc.Create(Path.Combine(this.Folder, scriptDoc.Id + "." + scriptDoc.FileExtension));
-            scriptDoc.Create();
-            scriptDoc.Ordinal = 1;  // should always be the last item, but is the first over here.
-            this.AddDocumentFile(scriptDoc);
         }
 
         protected override List<DocumentManager.Infrastructure.IDocument> LoadDocumentFiles()

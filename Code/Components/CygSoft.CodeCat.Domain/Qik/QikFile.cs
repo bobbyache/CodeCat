@@ -109,11 +109,6 @@ namespace CygSoft.CodeCat.Domain.Qik
             }
         }
 
-        public void Create()
-        {
-            this.documentIndex.Create();
-        }
-
         public bool Open()
         {
             this.documentIndex.Open();

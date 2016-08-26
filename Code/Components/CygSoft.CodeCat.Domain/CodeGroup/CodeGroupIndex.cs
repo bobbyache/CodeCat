@@ -23,11 +23,6 @@
 //            base.LoadNonDocumentFiles();
 //        }
 
-//        protected override void CreateFile()
-//        {
-//            throw new NotImplementedException();
-//        }
-
 //        protected override void SaveFile()
 //        {
 //            base.SaveFile();

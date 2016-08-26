@@ -16,11 +16,6 @@ namespace UnitTests.Stubs.DocumentManager
         {
         }
 
-        protected override void CreateFile()
-        {
-            //throw new NotImplementedException();
-        }
-
         protected override List<IDocument> LoadDocumentFiles()
         {
             List<IDocument> documentFiles = new List<IDocument>

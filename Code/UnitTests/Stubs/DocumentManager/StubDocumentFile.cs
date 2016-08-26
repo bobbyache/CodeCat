@@ -22,11 +22,6 @@ namespace UnitTests.Stubs.DocumentManager
             return new StubVersionFile(this.FilePath, timeStamp, description);
         }
 
-        protected override void CreateFile()
-        {
-            //throw new NotImplementedException();
-        }
-
         protected override void OpenFile()
         {
             //throw new NotImplementedException();

@@ -12,8 +12,8 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         event EventHandler<FileEventArgs> AfterDelete;
         event EventHandler<FileEventArgs> BeforeOpen;
         event EventHandler<FileEventArgs> AfterOpen;
-        event EventHandler<FileEventArgs> BeforeCreate;
-        event EventHandler<FileEventArgs> AfterCreate;
+        //event EventHandler<FileEventArgs> BeforeCreate;
+        //event EventHandler<FileEventArgs> AfterCreate;
         event EventHandler<FileEventArgs> BeforeSave;
         event EventHandler<FileEventArgs> AfterSave;
 
@@ -26,10 +26,10 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         bool Exists { get; }
         bool Loaded { get; }
 
-        void Create();
+        //void Create();
         void Open();
-        void Create(string filePath);
-        void Open(string filePath);
+        //void Create(string filePath);
+        //void Open(string filePath);
         void Delete();
         void Save();
     }

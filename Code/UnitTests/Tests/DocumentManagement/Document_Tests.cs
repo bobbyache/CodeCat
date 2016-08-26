@@ -30,11 +30,9 @@ namespace UnitTests.Tests.DocumentManagement
         public void DocumentFile_Create()
         {
             IDocument documentFile = new StubDocumentFile(documentSimulator.DocumentIndex.Folder, documentSimulator.DocumentFile1.Id, "Title");
-            documentFile.Create(documentSimulator.DocumentFile1.FilePath);
 
             Assert.AreEqual(documentSimulator.DocumentIndex.Folder, documentFile.Folder);
             Assert.AreEqual(documentSimulator.DocumentFile1.FilePath, documentFile.FilePath);
-            Assert.AreEqual(documentSimulator.DocumentFile1.FileName, documentFile.FileName);
             Assert.AreEqual(documentSimulator.DocumentFile1.Id, documentFile.Id);
         }
 
@@ -42,7 +40,8 @@ namespace UnitTests.Tests.DocumentManagement
         public void DocumentFile_FileVersions_Create()
         {
             IDocument documentFile = new StubDocumentFile(documentSimulator.DocumentIndex.Folder, documentSimulator.DocumentFile1.Id, "Title");
-            documentFile.Open(documentSimulator.DocumentFile1.FilePath);
+            //documentFile.Open(documentSimulator.DocumentFile1.FilePath);
+            documentFile.Open();
             IFileVersion fileVersion_1 = documentFile.CreateVersion("Snapshot 1");
             Assert.AreEqual("Snapshot 1", fileVersion_1.Description);
             Assert.IsNotNull(fileVersion_1.TimeTaken);
@@ -56,7 +55,8 @@ namespace UnitTests.Tests.DocumentManagement
         public void DocumentFile_FileVersions_FileVersionName()
         {
             IDocument documentFile = new StubDocumentFile(documentSimulator.DocumentIndex.Folder, documentSimulator.DocumentFile1.Id, "Title");
-            documentFile.Open(documentSimulator.DocumentFile1.FilePath);
+            //documentFile.Open(documentSimulator.DocumentFile1.FilePath);
+            documentFile.Open();
 
             int initialVersionCount = documentFile.Versions.Length;
 
@@ -100,7 +100,8 @@ namespace UnitTests.Tests.DocumentManagement
         public void DocumentFile_FileVersions_Delete()
         {
             IDocument documentFile = new StubDocumentFile(documentSimulator.DocumentIndex.Folder, documentSimulator.DocumentFile1.Id, "Title");
-            documentFile.Open(documentSimulator.DocumentFile1.FilePath);
+            //documentFile.Open(documentSimulator.DocumentFile1.FilePath);
+            documentFile.Open();
 
             // You'll never be creating versions as fast as this.
             documentFile.CreateVersion("Snapshot 1");
