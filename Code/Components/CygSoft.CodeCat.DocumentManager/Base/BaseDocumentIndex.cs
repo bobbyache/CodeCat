@@ -22,14 +22,15 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         protected abstract List<IDocument> LoadDocumentFiles();
         protected abstract void SaveDocumentIndex();
 
-        public BaseDocumentIndex(string folder, string id, string fileExtension): base(folder, id, fileExtension)
+        public BaseDocumentIndex(BaseFilePathGenerator filePathGenerator): base(filePathGenerator)
         {
         }
 
         public override void Delete()
         {
             base.Delete();
-            Directory.Delete(this.Folder);
+            if (Directory.Exists(this.Folder))
+                Directory.Delete(this.Folder);
         }
 
         protected override void OpenFile()
@@ -72,7 +73,8 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                documentFile.Create(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
+                //documentFile.Create(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
+                documentFile.Create();
                 this.documentFiles.Insert(documentFile);
                 AfterAddDocumentFile();
                 return documentFile;

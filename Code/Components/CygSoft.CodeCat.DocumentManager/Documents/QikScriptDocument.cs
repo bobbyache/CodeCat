@@ -9,12 +9,12 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 {
     public class QikScriptDocument : CodeDocument, IQikScriptDocument
     {
-        internal QikScriptDocument(string id, string title, string extension, string syntax) : base(id, title, extension, syntax)
+        internal QikScriptDocument(string folder, string title, string extension, string syntax) : base(folder, title, extension, syntax)
         {
         }
 
-        internal QikScriptDocument(string id, string title, string extension, int ordinal, string description, string syntax)
-            : base(id, title, extension, ordinal, description, syntax)
+        internal QikScriptDocument(string folder, string id, string title, string extension, int ordinal, string description, string syntax)
+            : base(folder, id, title, extension, ordinal, description, syntax)
         {
         }
     }

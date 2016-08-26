@@ -19,11 +19,15 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public event EventHandler<FileEventArgs> BeforeSave;
         public event EventHandler<FileEventArgs> AfterSave;
 
-        public virtual string Id { get; protected set; }
-        public virtual string FilePath { get; protected set; }
-        //public string Content { get; set; }
+        //public string Id { get; protected set; }
+        //public string FilePath { get; protected set; }
 
-        public virtual string FileName { get { return Path.GetFileName(this.FilePath); } }
+        //public string FileName { get { return Path.GetFileName(this.FilePath); } }
+        //public string FileExtension { get; private set; }
+
+        public string Id { get; private set; }
+        public string FilePath { get; private set; }
+        public string FileName { get; private set; }
         public string FileExtension { get; private set; }
 
         public virtual string Folder
@@ -38,18 +42,34 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         protected abstract void OpenFile();
         protected abstract void SaveFile();
 
-        public BaseFile(string fileExtension)
+        //public BaseFile(string fileExtension)
+        //{
+        //    this.Loaded = false;
+        //    this.FileExtension = CleanExtension(fileExtension);
+        //}
+
+        //public BaseFile(string folder, string id, string extension)
+        //{
+        //    this.Id = id;
+        //    this.FileExtension = CleanExtension(extension);
+        //    this.FilePath = Path.Combine(folder, id + "." + CleanExtension(extension));
+        //    this.Loaded = false;
+        //}
+
+        public BaseFile(BaseFilePathGenerator filePathGenerator)
         {
-            this.Loaded = false;
-            this.FileExtension = CleanExtension(fileExtension);
+            this.Id = filePathGenerator.Id;
+            this.FileExtension = filePathGenerator.FileExtension;
+            this.FilePath = filePathGenerator.FilePath;
+            this.FileName = filePathGenerator.FileName;
         }
 
-        public BaseFile(string folder, string id, string extension)
-        {
-            this.Id = id;
-            this.FilePath = Path.Combine(folder, id + "." + extension);
-        }
-
+        /// <summary>
+        /// Create a file (in memory). The file is not yet saved to disk. Call the "Save" method to persist the file.
+        /// Use the template method "CreateFile" to initialize the file invariants so that it is ready to be persisted.
+        /// This overload takes no arguments, therefore it is expected that a valid file path for this file already
+        /// exists.
+        /// </summary>
         public void Create()
         {
             try
@@ -69,6 +89,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
+        /// <summary>
+        /// Create a file (in memory). The file is not yet saved to disk. Call the "Save" method to persist the file.
+        /// Use the template method "CreateFile" to initialize the file invariants so that it is ready to be persisted.
+        /// This overload takes a file path argument, and the invariants (ie. file location
+        /// </summary>
         public void Create(string filePath)
         {
             this.FilePath = filePath;

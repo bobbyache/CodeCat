@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager;
 using CygSoft.CodeCat.DocumentManager.Base;
+using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace UnitTests.Stubs.DocumentManager
     public class StubVersionFile : BaseVersionFile
     {
         public StubVersionFile(string filePath, DateTime timeStamp, string description)
-            : base(filePath, timeStamp, description) 
+            : base(new VersionPathGenerator(filePath, timeStamp), description) 
         {
 
         }

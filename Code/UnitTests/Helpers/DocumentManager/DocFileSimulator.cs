@@ -48,9 +48,9 @@ namespace UnitTests.Helpers.DocumentManager
         {
             this.DocumentIndex = new DocIndex("d33b59bd-54af-4f0b-967f-64084847b678", "document_index.xml", @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\document_index.xml", @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678");
             this.DocumentFile1 = new DocumentFile("f562810b-a1f7-4cf8-b370-dbaf87ff8759", "f562810b-a1f7-4cf8-b370-dbaf87ff8759.txt", @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\f562810b-a1f7-4cf8-b370-dbaf87ff8759.txt");
-            this.DocumentFile2 = new DocumentFile("11334214-ca43-406b-9cae-f986c3c63332", "11334214-ca43-406b-9cae-f986c3c63332.txt", @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\11334214-ca43-406b-9cae-f986c3c63332.txt");
-            this.DocumentFile3 = new DocumentFile("37c1dba5-9da3-4222-af34-43f98c674d82", "37c1dba5-9da3-4222-af34-43f98c674d82.txt", @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\37c1dba5-9da3-4222-af34-43f98c674d82.txt");
-            this.DocumentFile4 = new DocumentFile("0f964889-a3ab-43d6-94a2-76e60cb9aae8", "0f964889-a3ab-43d6-94a2-76e60cb9aae8.txt", @"H:\ParentFolder\d33b59bd-54af-4f0b-967f-64084847b678\0f964889-a3ab-43d6-94a2-76e60cb9aae8.txt");
+            this.DocumentFile2 = new DocumentFile("11334214-ca43-406b-9cae-f986c3c63332", "11334214-ca43-406b-9cae-f986c3c63332.txt", @"H:\ParentFolder\11334214-ca43-406b-9cae-f986c3c63332\11334214-ca43-406b-9cae-f986c3c63332.txt");
+            this.DocumentFile3 = new DocumentFile("37c1dba5-9da3-4222-af34-43f98c674d82", "37c1dba5-9da3-4222-af34-43f98c674d82.txt", @"H:\ParentFolder\37c1dba5-9da3-4222-af34-43f98c674d82\37c1dba5-9da3-4222-af34-43f98c674d82.txt");
+            this.DocumentFile4 = new DocumentFile("0f964889-a3ab-43d6-94a2-76e60cb9aae8", "0f964889-a3ab-43d6-94a2-76e60cb9aae8.txt", @"H:\ParentFolder\0f964889-a3ab-43d6-94a2-76e60cb9aae8\0f964889-a3ab-43d6-94a2-76e60cb9aae8.txt");
         }
     }
 }

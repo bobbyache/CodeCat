@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.DocumentManager.Base;
 using CygSoft.CodeCat.DocumentManager.Documents;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,14 +23,21 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
             } 
         }
 
-        public QikDocumentIndex(string folder, string id) : base(Path.Combine(folder, id), id, "xml")
+        public QikDocumentIndex(string folder, string id) : 
+            base(new DocumentIndexPathGenerator(folder, "xml", id))
+        {
+        }
+
+        public QikDocumentIndex(string folder)
+            : base(new DocumentIndexPathGenerator(folder, "xml"))
         {
         }
 
         protected override void CreateFile()
         {
-            ICodeDocument scriptDoc = DocumentFactory.CreateQikScriptDocument("Qik Script", "qik", "qik");
+            ICodeDocument scriptDoc = DocumentFactory.CreateQikScriptDocument(this.Folder, "Qik Script", "qik", "Qik");
             scriptDoc.Create(Path.Combine(this.Folder, scriptDoc.Id + "." + scriptDoc.FileExtension));
+            scriptDoc.Create();
             scriptDoc.Ordinal = 1;  // should always be the last item, but is the first over here.
             this.AddDocumentFile(scriptDoc);
         }
@@ -50,13 +58,13 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
 
                 if (documentExt == "qik")
                 {
-                    ICodeDocument scriptDocument = DocumentFactory.CreateQikScriptDocument(documentId, documentTitle, documentExt,
+                    ICodeDocument scriptDocument = DocumentFactory.CreateQikScriptDocument(this.Folder, documentId, documentTitle, documentExt,
                         documentSyntax, documentOrdinal, documentDesc);
                     documents.Add(scriptDocument);
                 }
                 else
                 {
-                    ICodeDocument templateDocument = DocumentFactory.CreateCodeDocument(documentId, documentTitle, documentExt,
+                    ICodeDocument templateDocument = DocumentFactory.CreateCodeDocument(this.Folder, documentId, documentTitle, documentExt,
                         documentSyntax, documentOrdinal, documentDesc);
                     documents.Add(templateDocument);
                 }

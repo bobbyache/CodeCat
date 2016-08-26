@@ -14,22 +14,38 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public BaseDocument(string id, string fileExtension, string title, string description = null) : base(fileExtension)
+        public BaseDocument(BaseFilePathGenerator filePathGenerator, string title, string description = null)
+            : base(filePathGenerator)
         {
-            base.Id = id;
             this.Ordinal = -1;
             this.Title = title;
             this.Description = description;
         }
 
-        public BaseDocument(string id, string fileExtension, int ordinal, string title, string description = null)
-            : base(fileExtension)
+        public BaseDocument(BaseFilePathGenerator filePathGenerator, string title, string description = null, int ordinal = -1)
+            : base(filePathGenerator)
         {
-            base.Id = id;
-            this.Ordinal = ordinal;
+            this.Ordinal = -1;
             this.Title = title;
             this.Description = description;
         }
+
+        //public BaseDocument(string id, string fileExtension, string title, string description = null) : base(fileExtension)
+        //{
+        //    base.Id = id;
+        //    this.Ordinal = -1;
+        //    this.Title = title;
+        //    this.Description = description;
+        //}
+
+        //public BaseDocument(string id, string fileExtension, int ordinal, string title, string description = null)
+        //    : base(fileExtension)
+        //{
+        //    base.Id = id;
+        //    this.Ordinal = ordinal;
+        //    this.Title = title;
+        //    this.Description = description;
+        //}
 
         protected override void DeleteFile()
         {

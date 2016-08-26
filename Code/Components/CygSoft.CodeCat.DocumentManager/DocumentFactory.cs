@@ -11,37 +11,34 @@ namespace CygSoft.CodeCat.DocumentManager
 {
     public class DocumentFactory
     {
-        public static ITextDocument CreateTextDocument(string title, string extension)
+        public static ITextDocument CreateTextDocument(string folder, string title, string extension)
         {
-            string id = Guid.NewGuid().ToString();
-            return new TextDocument(id, title, extension);
+            return new TextDocument(folder, title, extension);
         }
 
-        public static ITextDocument CreateTextDocument(string id, string title, string extension, int ordinal, string description)
+        public static ITextDocument CreateTextDocument(string folder, string id, string title, string extension, int ordinal, string description)
         {
-            return new TextDocument(id, title, extension, ordinal, description);
+            return new TextDocument(folder, id, title, extension, ordinal, description);
         }
 
-        public static ICodeDocument CreateCodeDocument(string title, string extension, string syntax)
+        public static ICodeDocument CreateCodeDocument(string folder, string title, string extension, string syntax)
         {
-            string id = Guid.NewGuid().ToString();
-            return new CodeDocument(id, title, extension, syntax);
+            return new CodeDocument(folder, title, extension, syntax);
         }
 
-        public static ICodeDocument CreateCodeDocument(string id, string title, string extension, string syntax, int ordinal, string description)
+        public static ICodeDocument CreateCodeDocument(string folder, string id, string title, string extension, string syntax, int ordinal, string description)
         {
-            return new CodeDocument(id, title, extension, ordinal, description, syntax);
+            return new CodeDocument(folder, id, title, extension, ordinal, description, syntax);
         }
 
-        public static ICodeDocument CreateQikScriptDocument(string title, string extension, string syntax)
+        public static ICodeDocument CreateQikScriptDocument(string folder, string title, string extension, string syntax)
         {
-            string id = Guid.NewGuid().ToString();
-            return new QikScriptDocument(id, title, extension, syntax);
+            return new QikScriptDocument(folder, title, extension, syntax);
         }
 
-        public static ICodeDocument CreateQikScriptDocument(string id, string title, string extension, string syntax, int ordinal, string description)
+        public static ICodeDocument CreateQikScriptDocument(string folder, string id, string title, string extension, string syntax, int ordinal, string description)
         {
-            return new QikScriptDocument(id, title, extension, ordinal, description, syntax);
+            return new QikScriptDocument(folder, id, title, extension, ordinal, description, syntax);
         }
     }
 }

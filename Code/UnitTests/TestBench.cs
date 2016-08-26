@@ -51,7 +51,7 @@ namespace UnitTestFile
         [TestMethod]
         public void DocumentFactory_CreateTextDocument()
         {
-            ITextDocument document1 = DocumentFactory.CreateTextDocument("Document 1", "txt1");
+            ITextDocument document1 = DocumentFactory.CreateTextDocument(@"C:\Files", "Document 1", "txt1");
             Assert.AreEqual("Document 1", document1.Title);
             Assert.AreEqual(-1, document1.Ordinal);
             Assert.AreEqual(null, document1.Description);
@@ -59,7 +59,7 @@ namespace UnitTestFile
             Assert.AreEqual("txt1", document1.FileExtension);
             Assert.AreEqual(false, document1.Loaded);
 
-            ITextDocument document2 = DocumentFactory.CreateTextDocument(documentSimulator.DocumentFile1.Id, "Document 2", "txt2", -1, "Document 2 Description");
+            ITextDocument document2 = DocumentFactory.CreateTextDocument(@"C:\Files", documentSimulator.DocumentFile1.Id, "Document 2", "txt2", -1, "Document 2 Description");
             Assert.AreEqual(documentSimulator.DocumentFile1.Id, document2.Id);
             Assert.AreEqual("Document 2", document2.Title);
             Assert.AreEqual(-1, document2.Ordinal);
@@ -72,7 +72,7 @@ namespace UnitTestFile
         [TestMethod]
         public void DocumentFactory_CreateCodeDocument()
         {
-            ICodeDocument document1 = DocumentFactory.CreateCodeDocument("Document 1", "txt1", "text");
+            ICodeDocument document1 = DocumentFactory.CreateCodeDocument(@"C:\Files", "Document 1", "txt1", "text");
             Assert.AreEqual("Document 1", document1.Title);
             Assert.AreEqual(-1, document1.Ordinal);
             Assert.AreEqual(null, document1.Description);
@@ -81,7 +81,7 @@ namespace UnitTestFile
             Assert.AreEqual("txt1", document1.FileExtension);
             Assert.AreEqual(false, document1.Loaded);
 
-            ICodeDocument document2 = DocumentFactory.CreateCodeDocument(documentSimulator.DocumentFile1.Id, "Document 2", "txt2", "text", -1, "Document 2 Description");
+            ICodeDocument document2 = DocumentFactory.CreateCodeDocument(@"C:\Files", documentSimulator.DocumentFile1.Id, "Document 2", "txt2", "text", -1, "Document 2 Description");
             Assert.AreEqual(documentSimulator.DocumentFile1.Id, document2.Id);
             Assert.AreEqual("Document 2", document2.Title);
             Assert.AreEqual(-1, document2.Ordinal);

@@ -1,41 +1,47 @@
-﻿using System;
+﻿using CygSoft.CodeCat.DocumentManager.Base;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.DocumentManager.Services
+namespace CygSoft.CodeCat.DocumentManager.PathGenerators
 {
-    internal class VersionFileNamer
+    public class VersionPathGenerator : BaseFilePathGenerator
     {
-        public string SourceFilePath { get; private set; }
+        private string sourceFilePath;
         public DateTime TimeStamp { get; private set; }
 
-        public string Id
+        public VersionPathGenerator(string sourceFilePath, DateTime timeStamp)
         {
-            get { return CreateId(this.SourceFilePath, this.TimeStamp); }
+            this.sourceFilePath = sourceFilePath;
+            this.TimeStamp = timeStamp;
         }
 
-        public string FileName
+        public override string FileExtension
         {
-            get { return CreateFileName(this.SourceFilePath, this.TimeStamp); }
+            get { return CleanExtension(Path.GetExtension(this.sourceFilePath)); }
         }
 
-        public string FilePath
+        public override string FileName
+        {
+            get { return CreateFileName(sourceFilePath, this.TimeStamp); }
+        }
+
+        public override string FilePath
         {
             get { return CreateFilePath(); }
         }
 
-        public VersionFileNamer(string sourceFilePath, DateTime timeStamp)
+        public override string Id
         {
-            this.SourceFilePath = sourceFilePath;
-            this.TimeStamp = timeStamp;
+            get { return CreateId(sourceFilePath, this.TimeStamp); }
         }
 
         private string CreateFilePath()
         {
-            return Path.Combine(Path.GetDirectoryName(this.SourceFilePath), CreateFileName(this.SourceFilePath, this.TimeStamp));
+            return Path.Combine(Path.GetDirectoryName(sourceFilePath), CreateFileName(sourceFilePath, this.TimeStamp));
         }
 
         private string CreateId(string sourceFileName, DateTime timeStamp)
@@ -73,6 +79,17 @@ namespace CygSoft.CodeCat.DocumentManager.Services
                 return "0" + dayOrMonth.ToString();
             else
                 return dayOrMonth.ToString();
+        }
+
+        private string CleanExtension(string extension)
+        {
+            if (extension.Length > 0)
+            {
+                if (extension.StartsWith("."))
+                    return extension.Substring(1);
+            }
+
+            return extension;
         }
     }
 }

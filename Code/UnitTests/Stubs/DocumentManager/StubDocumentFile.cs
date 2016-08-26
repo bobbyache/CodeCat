@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager;
 using CygSoft.CodeCat.DocumentManager.Base;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,8 @@ namespace UnitTests.Stubs.DocumentManager
 {
     internal class StubDocumentFile : BaseDocument
     {
-        public StubDocumentFile(string id, string title, string description = null)
-            : base(id, "txt", title, description)
-        {
-        }
-
-        public StubDocumentFile(string id, int ordinal, string title, string description = null)
-            : base(id, "txt", ordinal, title, description)
+        public StubDocumentFile(string folder, string id, string title, string description = null, int ordinal = -1)
+            : base(new DocumentPathGenerator(folder, "txt", id), title, description, ordinal)
         {
         }
 

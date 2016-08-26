@@ -25,7 +25,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         protected abstract IFileVersion NewVersion(DateTime timeStamp, string description);
 
-        public BaseVersionableFile(string fileExtension) : base(fileExtension)
+        public BaseVersionableFile(BaseFilePathGenerator filePathGenerator) : base(filePathGenerator)
         {
             this.fileVersions = new List<IFileVersion>();
         }

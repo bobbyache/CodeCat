@@ -11,13 +11,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
     {
         public string Syntax { get; set; }
 
-        internal CodeDocument(string id, string title, string extension, string syntax) : base(id, title, extension)
+        internal CodeDocument(string folder, string title, string extension, string syntax) : base(folder, title, extension)
         {
             this.Syntax = syntax;
         }
 
-        internal CodeDocument(string id, string title, string extension, int ordinal, string description, string syntax)
-            : base(id, title, extension, ordinal, description)
+        internal CodeDocument(string folder, string id, string title, string extension, int ordinal, string description, string syntax)
+            : base(folder, id, title, extension, ordinal, description)
         {
             this.Syntax = syntax;
         }

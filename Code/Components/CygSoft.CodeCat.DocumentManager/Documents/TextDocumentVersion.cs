@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Base;
+using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,16 +13,10 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
     {
         public string Text { get; set; }
 
-        public TextDocumentVersion(string filePath, DateTime timeStamp, string description)
-            : base(filePath, timeStamp, description) 
+        public TextDocumentVersion(VersionPathGenerator versionPathGenerator, string description, string text)
+            : base(versionPathGenerator, description) 
         {
             this.Text = null;
-        }
-
-        public TextDocumentVersion(string filePath, DateTime timeStamp, string description, string text)
-            : base(filePath, timeStamp, description)
-        {
-            this.Text = text;
         }
 
         protected override void CreateFile()
