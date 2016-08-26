@@ -52,8 +52,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.qikFile = qikFile;
             this.qikFile.DocumentAdded += qikFile_DocumentAdded;
             this.qikFile.DocumentRemoved += qikFile_DocumentRemoved;
-            this.qikFile.DocumentMovedUp += qikFile_DocumentMovedUp;
-            this.qikFile.DocumentMovedDown += qikFile_DocumentMovedDown;
+            this.qikFile.DocumentMovedLeft += qikFile_DocumentMovedLeft;
+            this.qikFile.DocumentMovedRight += qikFile_DocumentMovedRight;
             this.scriptControl = new QikScriptCtrl(application, qikFile);
             this.scriptControl.Modified += scriptCtrl_Modified;
             base.persistableTarget = qikFile;
@@ -218,7 +218,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 else
                     tabManager.AddTab(document, NewTemplateControl(document), true, false);
             }
-            tabControlFile.Refresh();
         }
 
         private QikTemplateCodeCtrl NewTemplateControl(IDocument document)
@@ -283,7 +282,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             qikFile.Syntax = string.Empty;
         }
 
-        private void qikFile_DocumentMovedDown(object sender, DocumentEventArgs e)
+        private void qikFile_DocumentMovedRight(object sender, DocumentEventArgs e)
         {
             this.IsModified = true;
             ControlGraphics.SuspendDrawing(this);
@@ -293,7 +292,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             ControlGraphics.ResumeDrawing(this);
         }
 
-        private void qikFile_DocumentMovedUp(object sender, DocumentEventArgs e)
+        private void qikFile_DocumentMovedLeft(object sender, DocumentEventArgs e)
         {
             this.IsModified = true;
             ControlGraphics.SuspendDrawing(this);
@@ -321,6 +320,39 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
             ControlGraphics.ResumeDrawing(this);
         }
+
+        //private void RebuildTabMenu()
+        //{
+        //    foreach (ToolStripMenuItem item in btnMenu.DropDownItems)
+        //        item.Click -= item_Click;
+
+        //    btnMenu.DropDownItems.Clear();
+            
+        //    foreach (ICodeDocument document in qikFile.Documents)
+        //    {
+        //        ToolStripMenuItem item = new ToolStripMenuItem();
+        //        item.Tag = document.Id;
+        //        item.Name = document.Id;
+        //        item.Text = document.Title;
+        //        item.Image = IconRepository.GetIcon(document.Syntax).ToBitmap();
+        //        item.Click +=item_Click;
+        //        btnMenu.DropDownItems.Add(item);
+        //    }
+        //}
+
+        //private void item_Click(object sender, EventArgs e)
+        //{
+        //    ToolStripMenuItem item = sender as ToolStripMenuItem;
+        //    tabManager.DisplayTab(item.Name, true);
+        //}
+
+        //private void btnMenu_Click(object sender, EventArgs e)
+        //{
+        //    ControlGraphics.SuspendDrawing(this);
+        //    RebuildTabMenu();
+        //    ControlGraphics.ResumeDrawing(this);
+        //}
+
         #endregion
 
         #region Document Control Events

@@ -26,8 +26,8 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public event EventHandler<DocumentEventArgs> DocumentAdded;
         public event EventHandler<DocumentEventArgs> DocumentRemoved;
-        public event EventHandler<DocumentEventArgs> DocumentMovedUp;
-        public event EventHandler<DocumentEventArgs> DocumentMovedDown;
+        public event EventHandler<DocumentEventArgs> DocumentMovedLeft;
+        public event EventHandler<DocumentEventArgs> DocumentMovedRight;
 
         private IKeywordIndexItem indexItem;
         private QikDocumentIndex documentIndex = null;
@@ -39,20 +39,20 @@ namespace CygSoft.CodeCat.Domain.Qik
             this.documentIndex = new QikDocumentIndex(folderPath, indexItem.Id);
             this.documentIndex.DocumentAdded += documentIndex_DocumentAdded;
             this.documentIndex.DocumentRemoved += documentIndex_DocumentRemoved;
-            this.documentIndex.DocumentMovedUp += documentIndex_DocumentMovedUp;
-            this.documentIndex.DocumentMovedDown += documentIndex_DocumentMovedDown;
+            this.documentIndex.DocumentMovedUp += documentIndex_DocumentMovedLeft;
+            this.documentIndex.DocumentMovedDown += documentIndex_DocumentMovedRight;
         }
 
-        private void documentIndex_DocumentMovedDown(object sender, DocumentEventArgs e)
+        private void documentIndex_DocumentMovedRight(object sender, DocumentEventArgs e)
         {
-            if (DocumentMovedDown != null)
-                DocumentMovedDown(this, e);
+            if (DocumentMovedRight != null)
+                DocumentMovedRight(this, e);
         }
 
-        private void documentIndex_DocumentMovedUp(object sender, DocumentEventArgs e)
+        private void documentIndex_DocumentMovedLeft(object sender, DocumentEventArgs e)
         {
-            if (DocumentMovedUp != null)
-                DocumentMovedUp(this, e);
+            if (DocumentMovedLeft != null)
+                DocumentMovedLeft(this, e);
         }
 
         private void documentIndex_DocumentRemoved(object sender, DocumentEventArgs e)

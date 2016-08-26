@@ -49,14 +49,14 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnShowProperties = new System.Windows.Forms.ToolStripButton();
             this.btnShowScript = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnCompile = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnCompile = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
             this.inputPropertyGrid = new CygSoft.CodeCat.UI.WinForms.Controls.InputPropertyGrid();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -246,19 +246,10 @@
             this.btnShowScript.Text = "Hide Qik Script";
             this.btnShowScript.CheckedChanged += new System.EventHandler(this.btnShowScript_CheckedChanged);
             // 
-            // toolStripSeparator4
+            // toolStripSeparator5
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnCompile
-            // 
-            this.btnCompile.Image = ((System.Drawing.Image)(resources.GetObject("btnCompile.Image")));
-            this.btnCompile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCompile.Name = "btnCompile";
-            this.btnCompile.Size = new System.Drawing.Size(72, 22);
-            this.btnCompile.Text = "Compile";
-            this.btnCompile.Click += new System.EventHandler(this.btnCompile_Click);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // btnMoveLeft
             // 
@@ -279,6 +270,20 @@
             this.btnMoveRight.Size = new System.Drawing.Size(23, 22);
             this.btnMoveRight.Text = "Move Right";
             this.btnMoveRight.Click += new System.EventHandler(this.btnMoveRight_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnCompile
+            // 
+            this.btnCompile.Image = ((System.Drawing.Image)(resources.GetObject("btnCompile.Image")));
+            this.btnCompile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCompile.Name = "btnCompile";
+            this.btnCompile.Size = new System.Drawing.Size(72, 22);
+            this.btnCompile.Text = "Compile";
+            this.btnCompile.Click += new System.EventHandler(this.btnCompile_Click);
             // 
             // splitContainer1
             // 
@@ -313,11 +318,6 @@
             this.inputPropertyGrid.Name = "inputPropertyGrid";
             this.inputPropertyGrid.Size = new System.Drawing.Size(365, 575);
             this.inputPropertyGrid.TabIndex = 0;
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // QikCodeDocument
             // 
