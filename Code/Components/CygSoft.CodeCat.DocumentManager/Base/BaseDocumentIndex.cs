@@ -11,6 +11,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 {
     public abstract class BaseDocumentIndex : BaseFile, IDocumentIndex
     {
+        public event EventHandler<DocumentEventArgs> DocumentAdded;
+        public event EventHandler<DocumentEventArgs> DocumentRemoved;
+        public event EventHandler<DocumentEventArgs> DocumentMovedUp;
+        public event EventHandler<DocumentEventArgs> DocumentMovedDown;
+
         protected PositionableList<IDocument> documentFiles = new PositionableList<IDocument>();
         private List<IDocument> removedDocumentFiles = new List<IDocument>();
 
@@ -75,6 +80,9 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             {
                 this.documentFiles.Insert(documentFile);
                 AfterAddDocumentFile();
+                if (DocumentAdded != null)
+                    DocumentAdded(this, new DocumentEventArgs(documentFile));
+
                 return documentFile;
             }
             catch (Exception exception)
@@ -93,6 +101,9 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 removedDocumentFiles.Add(documentFile);
                 documentFiles.Remove(documentFile);
                 documentFile.Ordinal = -1;
+
+                if (DocumentRemoved != null)
+                    DocumentRemoved(this, new DocumentEventArgs(documentFile));
             }
             catch (Exception exception)
             {
@@ -132,9 +143,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             return documentFiles.CanMoveUp(documentFile);
         }
 
-        public void MoveDown(IDocument documentFile)
+        public virtual void MoveDown(IDocument documentFile)
         {
             documentFiles.MoveDown(documentFile);
+            if (DocumentMovedDown != null)
+                DocumentMovedDown(this, new DocumentEventArgs(documentFile));
         }
 
         public void MoveTo(IDocument documentFile, int ordinal)
@@ -142,9 +155,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             documentFiles.MoveTo(documentFile, ordinal);
         }
 
-        public void MoveUp(IDocument documentFile)
+        public virtual void MoveUp(IDocument documentFile)
         {
             documentFiles.MoveUp(documentFile);
+            if (DocumentMovedUp != null)
+                DocumentMovedUp(this, new DocumentEventArgs(documentFile));
         }
 
         public void MoveLast(IDocument documentFile)

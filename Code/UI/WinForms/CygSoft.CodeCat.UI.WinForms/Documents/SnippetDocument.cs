@@ -331,9 +331,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void SnippetDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
         {
+            ControlGraphics.SuspendDrawing(this);
             this.chkEdit.Checked = base.HeaderFieldsVisible;
             this.toolstripKeywords.Visible = base.HeaderFieldsVisible;
             this.toolstripTitle.Visible = base.HeaderFieldsVisible;
+            ControlGraphics.ResumeDrawing(this);
         }
 
         private void SnippetDocument_NewStatusChanged(object sender, EventArgs e)

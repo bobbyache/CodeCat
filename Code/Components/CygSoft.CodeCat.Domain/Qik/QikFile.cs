@@ -24,6 +24,11 @@ namespace CygSoft.CodeCat.Domain.Qik
         public event EventHandler ContentReverted;
         public event EventHandler BeforeContentSaved;
 
+        public event EventHandler<DocumentEventArgs> DocumentAdded;
+        public event EventHandler<DocumentEventArgs> DocumentRemoved;
+        public event EventHandler<DocumentEventArgs> DocumentMovedUp;
+        public event EventHandler<DocumentEventArgs> DocumentMovedDown;
+
         private IKeywordIndexItem indexItem;
         private QikDocumentIndex documentIndex = null;
 
@@ -32,6 +37,34 @@ namespace CygSoft.CodeCat.Domain.Qik
             this.indexItem = indexItem;
             this.Compiler = new Compiler();
             this.documentIndex = new QikDocumentIndex(folderPath, indexItem.Id);
+            this.documentIndex.DocumentAdded += documentIndex_DocumentAdded;
+            this.documentIndex.DocumentRemoved += documentIndex_DocumentRemoved;
+            this.documentIndex.DocumentMovedUp += documentIndex_DocumentMovedUp;
+            this.documentIndex.DocumentMovedDown += documentIndex_DocumentMovedDown;
+        }
+
+        private void documentIndex_DocumentMovedDown(object sender, DocumentEventArgs e)
+        {
+            if (DocumentMovedDown != null)
+                DocumentMovedDown(this, e);
+        }
+
+        private void documentIndex_DocumentMovedUp(object sender, DocumentEventArgs e)
+        {
+            if (DocumentMovedUp != null)
+                DocumentMovedUp(this, e);
+        }
+
+        private void documentIndex_DocumentRemoved(object sender, DocumentEventArgs e)
+        {
+            if (DocumentRemoved != null)
+                DocumentRemoved(this, e);
+        }
+
+        private void documentIndex_DocumentAdded(object sender, DocumentEventArgs e)
+        {
+            if (DocumentAdded != null)
+                DocumentAdded(this, e);
         }
 
         public IKeywordIndexItem IndexItem
@@ -139,6 +172,22 @@ namespace CygSoft.CodeCat.Domain.Qik
                 ContentDeleted(this, new EventArgs());
         }
 
+        public void MoveDocumentRight(string id)
+        {
+            IDocument document = this.documentIndex.GetDocumentFile(id);
+            
+            // can't move the script file and we can't move behind the script file.
+            if (document.Id != this.ScriptFile.Id && !IsSecondLast(document.Id))
+                this.documentIndex.MoveDown(document);
+        }
+
+        public void MoveDocumentLeft(string id)
+        {
+            IDocument document = this.documentIndex.GetDocumentFile(id);
+            if (document.Id != this.ScriptFile.Id)
+                this.documentIndex.MoveUp(document);
+        }
+
         public ICodeDocument AddTemplate(string syntax)
         {
             return this.documentIndex.AddDocumentFile(DocumentFactory.CreateCodeDocument(documentIndex.Folder, "New Template", "tpl", syntax)) as ICodeDocument;
@@ -149,10 +198,22 @@ namespace CygSoft.CodeCat.Domain.Qik
             this.documentIndex.RemoveDocumentFile(id);
         }
 
-
         private void IncrementHitCount()
         {
             this.HitCount++;
+        }
+
+        private bool IsSecondLast(string id)
+        {
+            int count = documentIndex.DocumentFiles.Count();
+
+            if (count == 2)
+                return true;
+            else if (documentIndex.DocumentFiles.ElementAt(count - 2).Id == id)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

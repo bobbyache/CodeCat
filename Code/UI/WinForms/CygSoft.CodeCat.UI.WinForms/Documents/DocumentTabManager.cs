@@ -12,14 +12,37 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
     public class DocumentTabManager
     {
         public event EventHandler<DocumentTabEventArgs> BeforeDeleteTab;
-        public event EventHandler<DocumentTabEventArgs> AfterAddTab;
         
         private TabControl tabControl;
         private Dictionary<string, TabPage> tabPageDictionary = new Dictionary<string, TabPage>();
 
+        public string SelectedTabId { get { return tabControl.SelectedTab.Name; } }
+        public TabPage SelectedTab { get { return tabControl.SelectedTab; } }
+        public bool HasTabs { get { return this.tabControl.TabPages.Count > 0; } }
+
         public DocumentTabManager(TabControl tabControl)
         {
             this.tabControl = tabControl;
+        }
+
+        public bool TabExists(string id)
+        {
+            return tabPageDictionary.ContainsKey(id);
+        }
+
+        public IDocumentItemControl FindDocumentControl(string Id)
+        {
+            return tabPageDictionary[Id].Controls[0] as IDocumentItemControl;
+        }
+
+        public void OrderTabs(IDocument[] documents)
+        {
+            tabControl.TabPages.Clear();
+            foreach (IDocument document in documents)
+            {
+                TabPage tabPage = tabPageDictionary[document.Id];
+                tabControl.TabPages.Add(tabPage);
+            }
         }
 
         public TabPage AddTab(IDocument document, IDocumentItemControl tabUserControl, bool visible = true, bool select = false)
@@ -45,12 +68,18 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             return tabPage;
         }
 
-        public IDocumentItemControl FindDocumentControl(string Id)
+        public void RemoveTab(string id)
         {
-            return tabPageDictionary[Id].Controls[0] as IDocumentItemControl;
+            TabPage tabPage = tabPageDictionary[id];
+
+            if (BeforeDeleteTab != null)
+                BeforeDeleteTab(this, new DocumentTabEventArgs(tabPage, tabPage.Controls[0] as UserControl));
+
+            tabPageDictionary.Remove(id);
+            tabControl.TabPages.Remove(tabPage);
         }
 
-        public void Display(string id, bool visible)
+        public void DisplayTab(string id, bool visible)
         {
             TabPage tabPage = tabPageDictionary[id];
 
@@ -68,32 +97,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             }
         }
 
-        public void SendToBack(string id, bool visible)
-        {
-            TabPage tabPage = tabPageDictionary[id];
-
-            if (tabControl.Contains(tabPage))
-                tabControl.TabPages.Remove(tabPage);
-
-            if (visible)
-            {
-                tabControl.TabPages.Add(tabPage);
-            }
-            //tabControl.SelectedTab = tabPage;
-        }
-
-        public string SelectedTabId
-        {
-            get
-            {
-                return tabControl.SelectedTab.Name;
-            }
-        }
-
-        public TabPage SelectedTab { get { return tabControl.SelectedTab; } }
-
-        public bool HasTabs { get { return this.tabControl.TabPages.Count > 0; } }
-
         public void Clear()
         {
             foreach (TabPage tabPage in tabControl.TabPages)
@@ -104,17 +107,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
             tabPageDictionary.Clear();
             tabControl.TabPages.Clear();
-        }
-
-        public void Remove(string id)
-        {
-            TabPage tabPage = tabPageDictionary[id];
-
-            if (BeforeDeleteTab != null)
-                BeforeDeleteTab(this, new DocumentTabEventArgs(tabPage, tabPage.Controls[0] as UserControl));
-
-            tabPageDictionary.Remove(id);
-            tabControl.TabPages.Remove(tabPage);
         }
     }
 }

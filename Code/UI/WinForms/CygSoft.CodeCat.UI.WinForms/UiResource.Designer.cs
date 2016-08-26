@@ -163,6 +163,26 @@ namespace CygSoft.CodeCat.UI.WinForms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MoveLeft {
+            get {
+                object obj = ResourceManager.GetObject("MoveLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MoveRight {
+            get {
+                object obj = ResourceManager.GetObject("MoveRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NewProject {
             get {
                 object obj = ResourceManager.GetObject("NewProject", resourceCulture);

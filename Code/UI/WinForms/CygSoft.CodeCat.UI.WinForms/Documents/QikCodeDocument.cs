@@ -48,24 +48,24 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeComponent();
 
             this.tabControlFile.ImageList = IconRepository.ImageList;
-            
             base.application = application;
             this.qikFile = qikFile;
+            this.qikFile.DocumentAdded += qikFile_DocumentAdded;
+            this.qikFile.DocumentRemoved += qikFile_DocumentRemoved;
+            this.qikFile.DocumentMovedUp += qikFile_DocumentMovedUp;
+            this.qikFile.DocumentMovedDown += qikFile_DocumentMovedDown;
             this.scriptControl = new QikScriptCtrl(application, qikFile);
             this.scriptControl.Modified += scriptCtrl_Modified;
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
             this.compiler = qikFile.Compiler;
-
             this.tabManager = new DocumentTabManager(this.tabControlFile);
             this.tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
-            this.tabManager.AfterAddTab += tabManager_AfterAddTab;
-
+  
             RebuildTabs();
             InitializeImages();
             InitializeControls();
             ResetFields();
-
             // event registration after all properties are set...
             RegisterEvents();
 
@@ -76,7 +76,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnShowScript.Checked = base.IsNew;
 
             inputPropertyGrid.Reset(this.compiler);
-
             Compile();
         }
 
@@ -167,6 +166,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnShowProperties.Image = Resources.GetImage(Constants.ImageKeys.ShowProperties);
             btnCompile.Image = Resources.GetImage(Constants.ImageKeys.Compile);
             btnShowScript.Image = Resources.GetImage(Constants.ImageKeys.TemplateScript);
+            btnMoveLeft.Image = Resources.GetImage(Constants.ImageKeys.MoveLeft);
+            btnMoveRight.Image = Resources.GetImage(Constants.ImageKeys.MoveRight);
             this.Icon = IconRepository.QikIcon;
         }
 
@@ -187,7 +188,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             txtTitle.TextChanged += SetModified;
             txtKeywords.TextChanged += SetModified;
-            //syntaxBox.TextChanged += SetModified;
             btnDelete.Click += btnDelete_Click;
             btnDiscardChange.Click += btnDiscardChange_Click;
         }
@@ -210,10 +210,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void RebuildTabs()
         {
-            // Completely removes all tabs
             tabManager.Clear();
-
-            // Re-creates from source...
             foreach (ICodeDocument document in qikFile.Documents)
             {
                 if (document is IQikScriptDocument)
@@ -224,30 +221,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabControlFile.Refresh();
         }
 
-        private QikTemplateCodeCtrl NewTemplateControl(ICodeDocument document)
+        private QikTemplateCodeCtrl NewTemplateControl(IDocument document)
         {
-            QikTemplateCodeCtrl templateControl = new QikTemplateCodeCtrl(this.application, this.qikFile, document);
+            QikTemplateCodeCtrl templateControl = new QikTemplateCodeCtrl(this.application, this.qikFile, document as ICodeDocument);
             templateControl.Modified += codeCtrl_Modified;
             return templateControl;
-        }
-
-        private void tabManager_AfterAddTab(object sender, DocumentTabEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        private void tabManager_BeforeDeleteTab(object sender, DocumentTabEventArgs e)
-        {
-            if (e.TabUserControl is QikScriptCtrl)
-            {
-                QikScriptCtrl scriptCtrl = e.TabUserControl as QikScriptCtrl;
-                scriptCtrl.Modified -= scriptCtrl_Modified;
-            }
-            else if (e.TabUserControl is QikTemplateCodeCtrl)
-            {
-                QikTemplateCodeCtrl codeCtrl = e.TabUserControl as QikTemplateCodeCtrl;
-                codeCtrl.Modified -= codeCtrl_Modified;
-            }
         }
 
         private void Compile()
@@ -265,14 +243,33 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #endregion
 
+        #region Tab Manager Events
+
+        private void tabManager_BeforeDeleteTab(object sender, DocumentTabEventArgs e)
+        {
+            if (e.TabUserControl is QikScriptCtrl)
+            {
+                QikScriptCtrl scriptCtrl = e.TabUserControl as QikScriptCtrl;
+                scriptCtrl.Modified -= scriptCtrl_Modified;
+            }
+            else if (e.TabUserControl is QikTemplateCodeCtrl)
+            {
+                QikTemplateCodeCtrl codeCtrl = e.TabUserControl as QikTemplateCodeCtrl;
+                codeCtrl.Modified -= codeCtrl_Modified;
+            }
+        }
+
+        #endregion
+
         #region QikFile Events
 
         private void qikFile_ContentReverted(object sender, EventArgs e)
         {
+            ControlGraphics.SuspendDrawing(this);
             ResetFields();
             RebuildTabs();
+            ControlGraphics.ResumeDrawing(this);
         }
-
 
         private void qikFile_ContentSaved(object sender, EventArgs e)
         {
@@ -286,6 +283,44 @@ namespace CygSoft.CodeCat.UI.WinForms
             qikFile.Syntax = string.Empty;
         }
 
+        private void qikFile_DocumentMovedDown(object sender, DocumentEventArgs e)
+        {
+            this.IsModified = true;
+            ControlGraphics.SuspendDrawing(this);
+            tabManager.OrderTabs(qikFile.Documents);
+            tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
+            tabManager.DisplayTab(e.Document.Id, true);
+            ControlGraphics.ResumeDrawing(this);
+        }
+
+        private void qikFile_DocumentMovedUp(object sender, DocumentEventArgs e)
+        {
+            this.IsModified = true;
+            ControlGraphics.SuspendDrawing(this);
+            tabManager.OrderTabs(qikFile.Documents);
+            tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
+            tabManager.DisplayTab(e.Document.Id, true);
+            ControlGraphics.ResumeDrawing(this);
+        }
+
+        private void qikFile_DocumentRemoved(object sender, DocumentEventArgs e)
+        {
+            ControlGraphics.SuspendDrawing(this);
+            tabManager.RemoveTab(e.Document.Id);
+            tabManager.OrderTabs(qikFile.Documents);
+            tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
+            ControlGraphics.ResumeDrawing(this);
+        }
+
+        private void qikFile_DocumentAdded(object sender, DocumentEventArgs e)
+        {
+            ControlGraphics.SuspendDrawing(this);
+            tabManager.AddTab(e.Document, NewTemplateControl(e.Document), true, true);
+            tabManager.OrderTabs(qikFile.Documents);
+            tabManager.DisplayTab(e.Document.Id, true);
+            tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
+            ControlGraphics.ResumeDrawing(this);
+        }
         #endregion
 
         #region Document Control Events
@@ -308,11 +343,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void btnAddTemplate_Click(object sender, EventArgs e)
         {
             ICodeDocument templateFile = qikFile.AddTemplate(ConfigSettings.DefaultSyntax);
-
-            tabManager.AddTab(templateFile, NewTemplateControl(templateFile), true, true);
-            // ensures that the script tab always remains at the end.
-            tabManager.SendToBack(scriptControl.Id, btnShowScript.Checked);
-
             this.IsModified = true;
         }
 
@@ -332,7 +362,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {
                 string id = tabManager.SelectedTabId;
-                tabManager.Remove(id);
                 qikFile.RemoveTemplate(id);
                 this.IsModified = true;
             }
@@ -355,13 +384,22 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnShowScript_CheckedChanged(object sender, EventArgs e)
         {
-            //tabManager.SendToBack(scriptControl.Id);
-            tabManager.Display(scriptControl.Id, btnShowScript.Checked);
+            tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
         }
 
         private void btnCompile_Click(object sender, EventArgs e)
         {
             Compile();
+        }
+
+        private void btnMoveLeft_Click(object sender, EventArgs e)
+        {
+            this.qikFile.MoveDocumentLeft(tabManager.SelectedTabId);
+        }
+
+        private void btnMoveRight_Click(object sender, EventArgs e)
+        {
+            this.qikFile.MoveDocumentRight(tabManager.SelectedTabId);
         }
 
         #endregion
@@ -375,9 +413,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void QikCodeDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
         {
+            ControlGraphics.SuspendDrawing(this);
             this.chkEdit.Checked = base.HeaderFieldsVisible;
             this.toolstripKeywords.Visible = base.HeaderFieldsVisible;
             this.toolstripTitle.Visible = base.HeaderFieldsVisible;
+            ControlGraphics.ResumeDrawing(this);
         }
 
         private void QikCodeDocument_NewStatusChanged(object sender, EventArgs e)

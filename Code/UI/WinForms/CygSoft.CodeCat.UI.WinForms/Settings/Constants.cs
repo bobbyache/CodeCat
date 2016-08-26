@@ -26,7 +26,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string ShowProperties = "ShowProperties";
             public const string Compile = "Compile";
             public const string TemplateScript = "TemplateScript";
-            
+            public const string MoveLeft = "MoveLeft";
+            public const string MoveRight = "MoveRight";
             //public const string SaveProject = "SaveProject";
         }
     }

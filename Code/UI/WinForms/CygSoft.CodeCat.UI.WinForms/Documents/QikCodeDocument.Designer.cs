@@ -51,9 +51,12 @@
             this.btnShowScript = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCompile = new System.Windows.Forms.ToolStripButton();
+            this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
+            this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
             this.inputPropertyGrid = new CygSoft.CodeCat.UI.WinForms.Controls.InputPropertyGrid();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -183,6 +186,9 @@
             this.toolStripSeparator3,
             this.btnShowProperties,
             this.btnShowScript,
+            this.toolStripSeparator5,
+            this.btnMoveLeft,
+            this.btnMoveRight,
             this.toolStripSeparator4,
             this.btnCompile});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
@@ -254,6 +260,26 @@
             this.btnCompile.Text = "Compile";
             this.btnCompile.Click += new System.EventHandler(this.btnCompile_Click);
             // 
+            // btnMoveLeft
+            // 
+            this.btnMoveLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMoveLeft.Image = ((System.Drawing.Image)(resources.GetObject("btnMoveLeft.Image")));
+            this.btnMoveLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMoveLeft.Name = "btnMoveLeft";
+            this.btnMoveLeft.Size = new System.Drawing.Size(23, 22);
+            this.btnMoveLeft.Text = "Move Left";
+            this.btnMoveLeft.Click += new System.EventHandler(this.btnMoveLeft_Click);
+            // 
+            // btnMoveRight
+            // 
+            this.btnMoveRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMoveRight.Image = ((System.Drawing.Image)(resources.GetObject("btnMoveRight.Image")));
+            this.btnMoveRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMoveRight.Name = "btnMoveRight";
+            this.btnMoveRight.Size = new System.Drawing.Size(23, 22);
+            this.btnMoveRight.Text = "Move Right";
+            this.btnMoveRight.Click += new System.EventHandler(this.btnMoveRight_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -287,6 +313,11 @@
             this.inputPropertyGrid.Name = "inputPropertyGrid";
             this.inputPropertyGrid.Size = new System.Drawing.Size(365, 575);
             this.inputPropertyGrid.TabIndex = 0;
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // QikCodeDocument
             // 
@@ -341,5 +372,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton btnShowScript;
+        private System.Windows.Forms.ToolStripButton btnMoveLeft;
+        private System.Windows.Forms.ToolStripButton btnMoveRight;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }

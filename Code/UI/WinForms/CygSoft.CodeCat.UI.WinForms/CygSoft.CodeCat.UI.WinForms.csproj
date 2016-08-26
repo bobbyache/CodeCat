@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlGraphics.cs" />
     <Compile Include="Controls\IDocumentItemControl.cs" />
     <Compile Include="Controls\InputPropertyGrid.cs">
       <SubType>UserControl</SubType>
@@ -309,6 +310,8 @@
     <None Include="Resources\table.png" />
     <None Include="Resources\hourglass.png" />
     <None Include="Resources\money_dollar.png" />
+    <None Include="Resources\arrow_left.png" />
+    <None Include="Resources\arrow_right.png" />
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
