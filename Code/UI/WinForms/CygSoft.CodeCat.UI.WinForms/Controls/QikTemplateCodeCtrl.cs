@@ -93,8 +93,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             foreach (string placeholder in compiler.Placeholders)
             {
-                string title = compiler.GetTitleOfPlaceholder(placeholder);
-                templateSyntaxBox.AutoListAdd(string.Format("{0} ({1})", title, placeholder), placeholder, 0);
+                ISymbolInfo symbolInfo = compiler.GetPlaceholderInfo(placeholder);
+                string itemText = string.Format("{0} ({1})", symbolInfo.Title, symbolInfo.Placeholder);
+                string toolTip = ""; // string.Format("{0}\n{1}", itemText, WordWrapper.WordWrap(symbolInfo.Description, 150));
+
+                templateSyntaxBox.AutoListAdd(itemText, placeholder, toolTip, 0);
             }
         }
 
