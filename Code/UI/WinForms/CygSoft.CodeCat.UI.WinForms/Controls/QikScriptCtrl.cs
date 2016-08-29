@@ -11,6 +11,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using Alsing.SourceCode;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -22,6 +23,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private QikFile qikFile;
         private ICodeDocument scriptFile;
         private ICompiler compiler;
+        private Row selectedRow;
 
         public QikScriptCtrl(AppFacade application, QikFile qikFile)
         {
@@ -76,6 +78,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             qikFile.ContentSaved += qikFile_ContentSaved;
             compiler.AfterCompile += compiler_AfterCompile;
             compiler.AfterInput += compiler_AfterInput;
+            compiler.CompileError += compiler_CompileError;
+            compiler.BeforeCompile += compiler_BeforeCompile;
         }
 
         private void qikFile_ContentSaved(object sender, EventArgs e)
@@ -142,6 +146,81 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 cboFontSize.SelectedIndex = index;
             else
                 cboFontSize.SelectedIndex = 4;
+        }
+
+        private void syntaxBoxControl_RowClick(object sender, Alsing.Windows.Forms.SyntaxBox.RowMouseEventArgs e)
+        {
+            DeselectRow();
+        }
+
+        private void compiler_BeforeCompile(object sender, EventArgs e)
+        {
+            DeselectRow();
+            errorListView.Items.Clear();
+        }
+
+        private void compiler_CompileError(object sender, CompileErrorEventArgs e)
+        {
+            AddErrorLine(e.Line, e.Column, e.Message, e.Location, e.OffendingSymbol);
+        }
+
+        private void errorListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (selectedRow != null)
+                selectedRow.BackColor = Color.White;
+
+            if (errorListView.SelectedItems.Count > 0)
+            {
+                ListViewItem item = errorListView.SelectedItems[0];
+                int lineNumber = int.Parse(item.Text);
+                SelectRow(lineNumber);
+            }
+        }
+
+        private void errorListView_Leave(object sender, EventArgs e)
+        {
+            DeselectRow();
+        }
+
+        private void AddErrorLine(int line, int column, string message, string ruleStack, string symbol)
+        {
+            ListViewItem item = new ListViewItem();
+            item.Text = line.ToString();
+            item.SubItems.Add(new ListViewItem.ListViewSubItem(item, column.ToString()));
+            item.SubItems.Add(new ListViewItem.ListViewSubItem(item, message));
+            item.SubItems.Add(new ListViewItem.ListViewSubItem(item, ruleStack));
+            item.SubItems.Add(new ListViewItem.ListViewSubItem(item, symbol));
+
+            errorListView.Items.Add(item);
+        }
+
+        private Row RowFromLine(int line)
+        {
+            int index = line > 1 ? line - 1 : line;
+            Row row = syntaxBoxControl.Document[index];
+            return row;
+        }
+
+        private void SelectRow(int line)
+        {
+            Row row = RowFromLine(line);
+            if (row != null)
+            {
+                syntaxBoxControl.GotoLine(line);
+                row.BackColor = Color.Gray;
+                selectedRow = row;
+            }
+            else
+                selectedRow = null;
+        }
+
+        private void DeselectRow()
+        {
+            if (selectedRow != null)
+            {
+                selectedRow.BackColor = Color.White;
+                this.selectedRow = null;
+            }
         }
     }
 }

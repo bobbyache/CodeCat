@@ -35,9 +35,16 @@
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.syntaxBoxControl = new Alsing.Windows.Forms.SyntaxBoxControl();
+            this.errorListView = new System.Windows.Forms.ListView();
+            this.colLine = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colMsg = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colStackRule = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colSymbol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,6 +103,10 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.syntaxBoxControl);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.errorListView);
             this.splitContainer1.Size = new System.Drawing.Size(595, 439);
             this.splitContainer1.SplitterDistance = 340;
             this.splitContainer1.TabIndex = 7;
@@ -129,6 +140,49 @@
             this.syntaxBoxControl.TabIndex = 0;
             this.syntaxBoxControl.Text = "syntaxBoxControl1";
             this.syntaxBoxControl.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
+            this.syntaxBoxControl.RowClick += new Alsing.Windows.Forms.SyntaxBox.RowMouseHandler(this.syntaxBoxControl_RowClick);
+            // 
+            // errorListView
+            // 
+            this.errorListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colLine,
+            this.colCol,
+            this.colMsg,
+            this.colStackRule,
+            this.colSymbol});
+            this.errorListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.errorListView.FullRowSelect = true;
+            this.errorListView.Location = new System.Drawing.Point(0, 0);
+            this.errorListView.Name = "errorListView";
+            this.errorListView.Size = new System.Drawing.Size(595, 95);
+            this.errorListView.TabIndex = 3;
+            this.errorListView.UseCompatibleStateImageBehavior = false;
+            this.errorListView.View = System.Windows.Forms.View.Details;
+            this.errorListView.SelectedIndexChanged += new System.EventHandler(this.errorListView_SelectedIndexChanged);
+            this.errorListView.Leave += new System.EventHandler(this.errorListView_Leave);
+            // 
+            // colLine
+            // 
+            this.colLine.Text = "Line";
+            // 
+            // colCol
+            // 
+            this.colCol.Text = "Column";
+            // 
+            // colMsg
+            // 
+            this.colMsg.Text = "Error";
+            this.colMsg.Width = 251;
+            // 
+            // colStackRule
+            // 
+            this.colStackRule.Text = "Location";
+            this.colStackRule.Width = 134;
+            // 
+            // colSymbol
+            // 
+            this.colSymbol.Text = "Symbol";
+            this.colSymbol.Width = 75;
             // 
             // QikScriptCtrl
             // 
@@ -141,6 +195,7 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -155,5 +210,11 @@
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private Alsing.Windows.Forms.SyntaxBoxControl syntaxBoxControl;
+        private System.Windows.Forms.ListView errorListView;
+        private System.Windows.Forms.ColumnHeader colLine;
+        private System.Windows.Forms.ColumnHeader colCol;
+        private System.Windows.Forms.ColumnHeader colMsg;
+        private System.Windows.Forms.ColumnHeader colStackRule;
+        private System.Windows.Forms.ColumnHeader colSymbol;
     }
 }
