@@ -8,6 +8,11 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
     public interface IDocumentIndex : IFile
     {
+        event EventHandler<DocumentEventArgs> DocumentAdded;
+        event EventHandler<DocumentEventArgs> DocumentRemoved;
+        event EventHandler<DocumentEventArgs> DocumentMovedUp;
+        event EventHandler<DocumentEventArgs> DocumentMovedDown;
+
         // files within the document group
         IDocument[] DocumentFiles { get; }
 

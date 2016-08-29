@@ -128,7 +128,6 @@
     <Compile Include="Dialogs\InvalidRemoveDialog.Designer.cs">
       <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ItemFormController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

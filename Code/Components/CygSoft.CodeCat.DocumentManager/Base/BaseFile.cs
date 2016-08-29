@@ -33,6 +33,16 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         protected abstract void OpenFile();
         protected abstract void SaveFile();
 
+        // can be used to do more cleanup during delete ... ie. version files.
+        protected virtual void OnBeforeDelete() { }
+        protected virtual void OnAfterDelete() { }
+
+        protected virtual void OnBeforeOpen() { }
+        protected virtual void OnAfterOpen() { }
+
+        protected virtual void OnBeforeSave() { }
+        protected virtual void OnAfterSave() { }
+
         public BaseFile(BaseFilePathGenerator filePathGenerator)
         {
             this.Id = filePathGenerator.Id;
@@ -48,7 +58,10 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 if (BeforeOpen != null)
                     BeforeOpen(this, new FileEventArgs(this));
 
+                OnBeforeOpen();
                 OpenFile();
+                OnAfterOpen();
+
                 this.Loaded = true;
 
                 if (AfterOpen != null)
@@ -60,24 +73,23 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
-        public virtual void Delete()
+        public void Delete()
         {
             if (BeforeDelete != null)
                 BeforeDelete(this, new FileEventArgs(this));
 
+            OnBeforeDelete();
+
             if (File.Exists(this.FilePath))
                 File.Delete(this.FilePath);
 
-            DeleteFile();
+            OnAfterDelete();
 
             this.Loaded = false;
 
             if (AfterDelete != null)
                 AfterDelete(this, new FileEventArgs(this));
         }
-
-        // can be used to do more cleanup during delete ... ie. version files.
-        protected virtual void DeleteFile() { }
 
         public void Save()
         {
@@ -86,7 +98,10 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 if (BeforeSave != null)
                     BeforeSave(this, new FileEventArgs(this));
 
+                OnBeforeSave();
                 SaveFile();
+                OnAfterSave();
+
                 this.Loaded = true;
 
                 if (AfterSave != null)

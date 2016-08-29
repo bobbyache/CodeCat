@@ -14,7 +14,7 @@
   <Class Name="CygSoft.CodeCat.DocumentManager.Base.BaseFile">
     <Position X="8.5" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>ACACAIAAACEAIAAAAEQAAAAAAAEAAEAABAlAEAFBBDA=</HashCode>
+      <HashCode>ACACAIAAACEAIAAAAAAAAAAAAAEAAEAABAlAAAFBBDA=</HashCode>
       <FileName>Base\BaseFile.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -22,13 +22,16 @@
   <Class Name="CygSoft.CodeCat.DocumentManager.Base.BaseVersionFile">
     <Position X="14.5" Y="8" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAADAAAAAAAgAEAAAAAAAAAAAAAAAAAAAABQAABAAAA=</HashCode>
+      <HashCode>AAABAAAAAAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Base\BaseVersionFile.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CygSoft.CodeCat.DocumentManager.Base.BaseVersionableFile">
     <Position X="10.5" Y="8" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <NestedTypes>
       <Class Name="CygSoft.CodeCat.DocumentManager.Base.BaseVersionableFile.VersionFileComparer" Collapsed="true">
         <TypeIdentifier>
@@ -45,8 +48,11 @@
   </Class>
   <Class Name="CygSoft.CodeCat.DocumentManager.Base.BaseDocumentIndex">
     <Position X="2.25" Y="8" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AIEAAgABAAAECAACACAACAAAAAAIAEAAVAWACAAAAAg=</HashCode>
+      <HashCode>AIEAAgABAARGAAECCKAASAAgAAEIAUIAVAWACAAAAAg=</HashCode>
       <FileName>Base\BaseDocumentIndex.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -54,7 +60,7 @@
   <Class Name="CygSoft.CodeCat.DocumentManager.Documents.TextDocument">
     <Position X="10.5" Y="15.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAABAAAAAAAAQAAAAAAAAAAEAABAAACAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAEAABAAACAAAAAA=</HashCode>
       <FileName>Documents\TextDocument.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -62,7 +68,7 @@
   <Class Name="CygSoft.CodeCat.DocumentManager.Documents.TextDocumentVersion">
     <Position X="14.5" Y="12.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAEAABAAACAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAABAAACAAAAAA=</HashCode>
       <FileName>Documents\TextDocumentVersion.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -77,7 +83,7 @@
   <Class Name="CygSoft.CodeCat.DocumentManager.DocumentFactory">
     <Position X="2" Y="1.75" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAQAAAAAAAAAA=</HashCode>
       <FileName>DocumentFactory.cs</FileName>
     </TypeIdentifier>
   </Class>

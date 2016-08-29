@@ -44,12 +44,10 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             get { return this.fileVersions.Count > 0; }
         }
 
-        protected override void DeleteFile()
+        protected override void OnAfterDelete()
         {
             foreach (IFileVersion fileVersion in fileVersions)
-            {
                 fileVersion.Delete();
-            }
         }
 
         public IFileVersion CreateVersion(string description = "")

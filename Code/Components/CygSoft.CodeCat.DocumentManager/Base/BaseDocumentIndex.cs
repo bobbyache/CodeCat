@@ -31,13 +31,6 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
         }
 
-        public override void Delete()
-        {
-            base.Delete();
-            if (Directory.Exists(this.Folder))
-                Directory.Delete(this.Folder);
-        }
-
         protected override void OpenFile()
         {
             try
@@ -111,9 +104,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
-        protected override void DeleteFile()
+        protected override void OnAfterDelete()
         {
             DeleteDocumentFiles();
+            if (Directory.Exists(this.Folder))
+                Directory.Delete(this.Folder);
         }
 
         public IDocument GetDocumentFile(string id)

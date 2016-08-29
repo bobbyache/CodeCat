@@ -1,52 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.IFile">
-    <Position X="6.75" Y="0.75" Width="2" />
+    <Position X="6" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABACABABAA=</HashCode>
+      <HashCode>ACACAIAAACEAIAAAAAAAAAAAAAEAAAAAAAlAAAFBBCA=</HashCode>
       <FileName>IFile.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.IFileSnapshot">
-    <Position X="8.25" Y="3.5" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IFileSnapshot.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.IDocumentFile">
-    <Position X="4.5" Y="6.75" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IDocumentFile.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.IDocManager">
-    <Position X="0.5" Y="0.75" Width="2.75" />
-    <TypeIdentifier>
-      <HashCode>AAAiAABDAIEAIAAAAAAACAAABAEAAEAAAAQAAAAABAg=</HashCode>
-      <FileName>IDocManager.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.IPositionableDocManager">
-    <Position X="0.75" Y="5.75" Width="3" />
-    <TypeIdentifier>
-      <HashCode>AAEAAAAAAAAEAAAAAAAAAAAAAAAIAAAAUACAAAAAAAA=</HashCode>
-      <FileName>IPositionableDocManager.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.IPositionedItem">
-    <Position X="3.5" Y="3.5" Width="1.75" />
+    <Position X="4" Y="7.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IPositionedItem.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.IVersionableFile">
-    <Position X="5.5" Y="3.5" Width="2" />
+    <Position X="6.25" Y="6.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <HashCode>ACAAAAAAAACAAAAAIAAAAAAAgAAAAAEAAAAEAABAAAA=</HashCode>
       <FileName>IVersionableFile.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.ICodeDocument">
+    <Position X="6.5" Y="12.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICodeDocument.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.IDocument">
+    <Position X="8.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAEAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDocument.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.IDocumentIndex">
+    <Position X="10.75" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAABGAAECCIAAAAAgAAAIAQAAUASAAAAAAAg=</HashCode>
+      <FileName>IDocumentIndex.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.IQikScriptDocument">
+    <Position X="9.75" Y="12.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IQikScriptDocument.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CygSoft.CodeCat.DocumentManager.Infrastructure.ITextDocument">
+    <Position X="6.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>ITextDocument.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

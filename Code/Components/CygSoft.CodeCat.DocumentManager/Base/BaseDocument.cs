@@ -30,26 +30,9 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             this.Description = description;
         }
 
-        //public BaseDocument(string id, string fileExtension, string title, string description = null) : base(fileExtension)
-        //{
-        //    base.Id = id;
-        //    this.Ordinal = -1;
-        //    this.Title = title;
-        //    this.Description = description;
-        //}
-
-        //public BaseDocument(string id, string fileExtension, int ordinal, string title, string description = null)
-        //    : base(fileExtension)
-        //{
-        //    base.Id = id;
-        //    this.Ordinal = ordinal;
-        //    this.Title = title;
-        //    this.Description = description;
-        //}
-
-        protected override void DeleteFile()
+        protected override void OnAfterDelete()
         {
-            base.DeleteFile();
+            base.OnAfterDelete();
             this.Ordinal = -1;
         }
     }
