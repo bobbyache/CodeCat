@@ -95,7 +95,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 ISymbolInfo symbolInfo = compiler.GetPlaceholderInfo(placeholder);
                 string itemText = string.Format("{0} ({1})", symbolInfo.Title, symbolInfo.Placeholder);
-                string toolTip = ""; // string.Format("{0}\n{1}", itemText, WordWrapper.WordWrap(symbolInfo.Description, 150));
+                string toolTip = string.Format("{0}\n{1}", itemText, WordWrapper.WordWrap(symbolInfo.Description, 150));
 
                 templateSyntaxBox.AutoListAdd(itemText, placeholder, toolTip, 0);
             }

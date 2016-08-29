@@ -183,6 +183,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UiResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="WordWrapper.cs" />
     <EmbeddedResource Include="Controls\InputPropertyGrid.resx">
       <DependentUpon>InputPropertyGrid.cs</DependentUpon>
     </EmbeddedResource>
