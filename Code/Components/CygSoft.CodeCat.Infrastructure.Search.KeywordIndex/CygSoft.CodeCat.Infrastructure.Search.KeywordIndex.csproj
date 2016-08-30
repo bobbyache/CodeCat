@@ -42,7 +42,6 @@
     <Compile Include="IKeywordIndexItem.cs" />
     <Compile Include="IKeywordSearchIndex.cs" />
     <Compile Include="IKeywordSearchIndexRepository.cs" />
-    <Compile Include="IPersistableTarget.cs" />
     <Compile Include="PersistableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

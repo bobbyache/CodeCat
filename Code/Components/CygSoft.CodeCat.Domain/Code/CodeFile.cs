@@ -9,6 +9,7 @@ using System.IO;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
+using CygSoft.CodeCat.Domain.Base;
 
 namespace CygSoft.CodeCat.Domain.Code
 {

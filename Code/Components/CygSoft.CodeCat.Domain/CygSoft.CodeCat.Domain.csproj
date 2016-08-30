@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AppFacade.cs" />
     <Compile Include="Base\BaseLibrary.cs" />
+    <Compile Include="Base\IPersistableTarget.cs" />
     <Compile Include="CodeGroup\CodeGroupIndex.cs" />
     <Compile Include="Code\CodeKeywordIndexItem.cs" />
     <Compile Include="Code\CodeKeywordSearchIndexRepository.cs" />
