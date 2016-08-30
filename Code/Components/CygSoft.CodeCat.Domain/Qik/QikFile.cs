@@ -19,11 +19,16 @@ namespace CygSoft.CodeCat.Domain.Qik
 {
     public class QikFile : IPersistableTarget
     {
-        public event EventHandler ContentSaved;
-        public event EventHandler ContentClosed;
-        public event EventHandler ContentDeleted;
-        public event EventHandler ContentReverted;
-        public event EventHandler BeforeContentSaved;
+        public event EventHandler<FileEventArgs> BeforeDelete;
+        public event EventHandler<FileEventArgs> AfterDelete;
+        public event EventHandler<FileEventArgs> BeforeOpen;
+        public event EventHandler<FileEventArgs> AfterOpen;
+        public event EventHandler<FileEventArgs> BeforeSave;
+        public event EventHandler<FileEventArgs> AfterSave;
+        public event EventHandler<FileEventArgs> BeforeClose;
+        public event EventHandler<FileEventArgs> AfterClose;
+        public event EventHandler<FileEventArgs> BeforeRevert;
+        public event EventHandler<FileEventArgs> AfterRevert;
 
         public event EventHandler<DocumentEventArgs> DocumentAdded;
         public event EventHandler<DocumentEventArgs> DocumentRemoved;
@@ -37,35 +42,24 @@ namespace CygSoft.CodeCat.Domain.Qik
         {
             this.indexItem = indexItem;
             this.Compiler = new Compiler();
+
             this.documentIndex = new QikDocumentIndex(folderPath, indexItem.Id);
+
+            this.documentIndex.BeforeSave += documentIndex_BeforeSave;
+            this.documentIndex.AfterSave += documentIndex_AfterSave;
+            this.documentIndex.BeforeClose += documentIndex_BeforeClose;
+            this.documentIndex.AfterClose += documentIndex_AfterClose;
+            this.documentIndex.BeforeDelete += documentIndex_BeforeDelete;
+            this.documentIndex.AfterDelete += documentIndex_AfterDelete;
+            this.documentIndex.BeforeRevert += documentIndex_BeforeRevert;
+            this.documentIndex.AfterRevert += documentIndex_AfterRevert;
+            this.documentIndex.BeforeOpen += documentIndex_BeforeOpen;
+            this.documentIndex.AfterOpen += documentIndex_AfterOpen;
+            
             this.documentIndex.DocumentAdded += documentIndex_DocumentAdded;
             this.documentIndex.DocumentRemoved += documentIndex_DocumentRemoved;
             this.documentIndex.DocumentMovedUp += documentIndex_DocumentMovedLeft;
             this.documentIndex.DocumentMovedDown += documentIndex_DocumentMovedRight;
-        }
-
-        private void documentIndex_DocumentMovedRight(object sender, DocumentEventArgs e)
-        {
-            if (DocumentMovedRight != null)
-                DocumentMovedRight(this, e);
-        }
-
-        private void documentIndex_DocumentMovedLeft(object sender, DocumentEventArgs e)
-        {
-            if (DocumentMovedLeft != null)
-                DocumentMovedLeft(this, e);
-        }
-
-        private void documentIndex_DocumentRemoved(object sender, DocumentEventArgs e)
-        {
-            if (DocumentRemoved != null)
-                DocumentRemoved(this, e);
-        }
-
-        private void documentIndex_DocumentAdded(object sender, DocumentEventArgs e)
-        {
-            if (DocumentAdded != null)
-                DocumentAdded(this, e);
         }
 
         public IKeywordIndexItem IndexItem
@@ -136,41 +130,27 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public void Revert()
         {
-            if (Open())
-            {
-                if (ContentReverted != null)
-                    ContentReverted(this, new EventArgs());
-            }
+            this.documentIndex.Revert();
         }
 
-        public bool Open()
+        public void Open()
         {
             this.documentIndex.Open();
-            return true;
         }
 
         public void Close()
         {
-            if (ContentClosed != null)
-                ContentClosed(this, new EventArgs());
+            this.documentIndex.Close();
         }
 
         public void Save()
         {
-            if (BeforeContentSaved != null)
-                BeforeContentSaved(this, new EventArgs());
-
             this.documentIndex.Save();
-            
-            if (this.ContentSaved != null)
-                ContentSaved(this, new EventArgs());
         }
 
         public void Delete()
         {
             this.documentIndex.Delete();
-            if (ContentDeleted != null)
-                ContentDeleted(this, new EventArgs());
         }
 
         public void MoveDocumentRight(string id)
@@ -215,6 +195,116 @@ namespace CygSoft.CodeCat.Domain.Qik
                 return true;
             }
             return false;
+        }
+
+        private void documentIndex_AfterOpen(object sender, FileEventArgs e)
+        {
+            if (AfterOpen != null)
+                AfterOpen(this, e);
+        }
+
+        private void documentIndex_BeforeOpen(object sender, FileEventArgs e)
+        {
+            if (BeforeOpen != null)
+                BeforeOpen(this, e);
+        }
+
+        private void documentIndex_BeforeRevert(object sender, FileEventArgs e)
+        {
+            if (BeforeRevert != null)
+                BeforeRevert(this, e);
+        }
+
+        private void documentIndex_AfterRevert(object sender, FileEventArgs e)
+        {
+            if (AfterRevert != null)
+                AfterRevert(this, e);
+        }
+
+        private void documentIndex_AfterDelete(object sender, FileEventArgs e)
+        {
+            if (AfterDelete != null)
+                AfterDelete(this, e);
+        }
+
+        private void documentIndex_BeforeDelete(object sender, FileEventArgs e)
+        {
+            if (BeforeDelete != null)
+                BeforeDelete(this, e);
+        }
+
+        private void documentIndex_AfterClose(object sender, FileEventArgs e)
+        {
+            if (AfterClose != null)
+                AfterClose(this, e);
+        }
+
+        private void documentIndex_BeforeClose(object sender, FileEventArgs e)
+        {
+            if (BeforeClose != null)
+                BeforeClose(this, e);
+        }
+
+
+        private void documentIndex_AfterSave(object sender, FileEventArgs e)
+        {
+            if (AfterSave != null)
+                AfterSave(this, e);
+        }
+
+        private void documentIndex_BeforeSave(object sender, FileEventArgs e)
+        {
+            if (BeforeSave != null)
+                BeforeSave(this, e);
+        }
+
+        private void documentIndex_DocumentMovedRight(object sender, DocumentEventArgs e)
+        {
+            if (DocumentMovedRight != null)
+                DocumentMovedRight(this, e);
+        }
+
+        private void documentIndex_DocumentMovedLeft(object sender, DocumentEventArgs e)
+        {
+            if (DocumentMovedLeft != null)
+                DocumentMovedLeft(this, e);
+        }
+
+        private void documentIndex_DocumentRemoved(object sender, DocumentEventArgs e)
+        {
+            if (DocumentRemoved != null)
+                DocumentRemoved(this, e);
+        }
+
+        private void documentIndex_DocumentAdded(object sender, DocumentEventArgs e)
+        {
+            if (DocumentAdded != null)
+                DocumentAdded(this, e);
+        }
+
+        public string FileName
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string FileExtension
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string Folder
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool Exists
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool Loaded
+        {
+            get { throw new NotImplementedException(); }
         }
     }
 }

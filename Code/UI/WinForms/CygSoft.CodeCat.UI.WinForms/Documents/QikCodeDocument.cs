@@ -173,9 +173,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void RegisterEvents()
         {
-            qikFile.ContentReverted += qikFile_ContentReverted;
-            qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
-            qikFile.ContentSaved += qikFile_ContentSaved;
+            qikFile.AfterRevert += qikFile_ContentReverted;
+            qikFile.BeforeSave += qikFile_BeforeContentSaved;
+            qikFile.AfterSave += qikFile_ContentSaved;
 
             base.Deleting += QikCodeDocument_Deleting;
             base.Saving += QikCodeDocument_Saving;
@@ -262,7 +262,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region QikFile Events
 
-        private void qikFile_ContentReverted(object sender, EventArgs e)
+        private void qikFile_ContentReverted(object sender, FileEventArgs e)
         {
             ControlGraphics.SuspendDrawing(this);
             ResetFields();
@@ -270,12 +270,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             ControlGraphics.ResumeDrawing(this);
         }
 
-        private void qikFile_ContentSaved(object sender, EventArgs e)
+        private void qikFile_ContentSaved(object sender, FileEventArgs e)
         {
             ResetFields();
         }
 
-        private void qikFile_BeforeContentSaved(object sender, EventArgs e)
+        private void qikFile_BeforeContentSaved(object sender, FileEventArgs e)
         {
             qikFile.Title = this.txtTitle.Text.Trim();
             qikFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();

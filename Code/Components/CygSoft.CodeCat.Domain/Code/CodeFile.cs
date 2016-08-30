@@ -10,6 +10,7 @@ using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.CodeCat.Domain.Base;
+using CygSoft.CodeCat.DocumentManager.Infrastructure;
 
 namespace CygSoft.CodeCat.Domain.Code
 {
@@ -28,11 +29,16 @@ namespace CygSoft.CodeCat.Domain.Code
             }
         }
 
-        public event EventHandler ContentSaved;
-        public event EventHandler ContentClosed;
-        public event EventHandler ContentDeleted;
-        public event EventHandler ContentReverted;
-        public event EventHandler BeforeContentSaved;
+        public event EventHandler<FileEventArgs> BeforeDelete;
+        public event EventHandler<FileEventArgs> AfterDelete;
+        public event EventHandler<FileEventArgs> BeforeOpen;
+        public event EventHandler<FileEventArgs> AfterOpen;
+        public event EventHandler<FileEventArgs> BeforeSave;
+        public event EventHandler<FileEventArgs> AfterSave;
+        public event EventHandler<FileEventArgs> BeforeClose;
+        public event EventHandler<FileEventArgs> AfterClose;
+        public event EventHandler<FileEventArgs> BeforeRevert;
+        public event EventHandler<FileEventArgs> AfterRevert;
 
         public event EventHandler SnapshotTaken;
         public event EventHandler SnapshotDeleted;
@@ -40,6 +46,7 @@ namespace CygSoft.CodeCat.Domain.Code
         private IKeywordIndexItem indexItem;
 
         private List<CodeSnapshot> snapshots;
+        private bool loaded;
 
         public CodeSnapshot[] Snapshots 
         { 
@@ -63,21 +70,32 @@ namespace CygSoft.CodeCat.Domain.Code
         {
             this.snapshots = new List<CodeSnapshot>();
             this.indexItem = indexItem;
-            this.FolderPath = folderPath;
+            this.Folder = folderPath;
         }
 
         public string Id { get { return this.IndexItem.Id; } }
         public string FilePath { get { return GetFilePath(); } }
-        public string FileTitle { get { return this.IndexItem.FileTitle; } }
-        public string FolderPath { get; private set; }
+        public string FileName { get { return this.IndexItem.FileTitle; } }
+        public string Folder { get; private set; }
 
-        public bool FileExists { get { return File.Exists(GetFilePath()); } }
+        public bool Exists { get { return File.Exists(GetFilePath()); } }
 
         public string Title
         {
             get { return this.IndexItem.Title; }
             set { this.IndexItem.Title = value; }
         }
+
+        public string FileExtension
+        {
+            get { return Path.GetExtension(GetFilePath()); }
+        }
+
+        public bool Loaded
+        {
+            get { return this.loaded; }
+        }
+
 
         public string Syntax
         {
@@ -112,27 +130,41 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Revert()
         {
+            if (this.BeforeRevert != null)
+                this.BeforeRevert(this, new FileEventArgs(null));
+
             bool opened = this.ReadData();
 
-            if (this.ContentReverted != null)
-                this.ContentReverted(this, new EventArgs());
+            if (this.AfterRevert != null)
+                this.AfterRevert(this, new FileEventArgs(null));
         }
 
-        public bool Open()
+        public void Open()
         {
+            if (BeforeOpen != null)
+                BeforeOpen(this, new FileEventArgs(null));
+
             bool opened = this.ReadData();
             if (opened)
             {
                 this.IncrementHitCount();
                 this.WriteData();
+                this.loaded = true;
+
+                if (AfterOpen != null)
+                    AfterOpen(this, new FileEventArgs(null));
             }
-            return opened;
         }
 
         public void Close()
         {
-            if (ContentClosed != null)
-                ContentClosed(this, new EventArgs());
+            if (BeforeClose != null)
+                BeforeClose(this, new FileEventArgs(null));
+
+            this.loaded = false;
+
+            if (AfterClose != null)
+                AfterClose(this, new FileEventArgs(null));
         }
 
         private bool ReadData()
@@ -173,13 +205,13 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Save()
         {
-            if (this.BeforeContentSaved != null)
-                BeforeContentSaved(this, new EventArgs());
+            if (this.BeforeSave != null)
+                BeforeSave(this, new FileEventArgs(null));
 
             this.WriteData();
 
-            if (this.ContentSaved != null)
-                ContentSaved(this, new EventArgs());
+            if (this.AfterSave != null)
+                AfterSave(this, new FileEventArgs(null));
         }
 
         public void TakeSnapshot(string description = "")
@@ -208,9 +240,14 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Delete()
         {
+            if (BeforeDelete != null)
+                BeforeDelete(this, new FileEventArgs(null));
+
             File.Delete(this.FilePath);
-            if (ContentDeleted != null)
-                ContentDeleted(this, new EventArgs());
+            this.loaded = false;
+
+            if (AfterDelete != null)
+                AfterDelete(this, new FileEventArgs(null));
         }
 
         private void IncrementHitCount()
@@ -246,7 +283,7 @@ namespace CygSoft.CodeCat.Domain.Code
 
         private string GetFilePath()
         {
-            return Path.Combine(this.FolderPath, IndexItem.FileTitle);
+            return Path.Combine(this.Folder, IndexItem.FileTitle);
         }
     }
 }

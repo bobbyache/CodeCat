@@ -74,21 +74,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void RegisterFileEvents()
         {
-            qikFile.BeforeContentSaved += qikFile_BeforeContentSaved;
-            qikFile.ContentSaved += qikFile_ContentSaved;
+            qikFile.BeforeSave += qikFile_BeforeContentSaved;
+            qikFile.AfterSave += qikFile_ContentSaved;
             compiler.AfterCompile += compiler_AfterCompile;
             compiler.AfterInput += compiler_AfterInput;
             compiler.CompileError += compiler_CompileError;
             compiler.BeforeCompile += compiler_BeforeCompile;
         }
 
-        private void qikFile_ContentSaved(object sender, EventArgs e)
+        private void qikFile_ContentSaved(object sender, FileEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void qikFile_BeforeContentSaved(object sender, EventArgs e)
+        private void qikFile_BeforeContentSaved(object sender, FileEventArgs e)
         {
             scriptFile.Text = syntaxDocument.Text;
         }

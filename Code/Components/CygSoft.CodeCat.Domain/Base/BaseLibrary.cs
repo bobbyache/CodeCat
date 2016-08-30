@@ -60,20 +60,20 @@ namespace CygSoft.CodeCat.Domain.Base
         public IPersistableTarget OpenTarget(IKeywordIndexItem indexItem)
         {
             IPersistableTarget target = OpenSpecializedTarget(indexItem);
-            
-            target.ContentClosed += target_ContentClosed;
-            target.ContentSaved += target_ContentSaved;
-            target.ContentDeleted += target_ContentDeleted;
+
+            target.BeforeClose += target_BeforeClose;
+            target.AfterSave += target_AfterSave;
+            target.AfterDelete += target_AfterDelete;
             return target;
         }
 
         public IPersistableTarget CreateTarget(IKeywordIndexItem indexItem)
         {
             IPersistableTarget target = CreateSpecializedTarget(indexItem);
-            
-            target.ContentClosed += target_ContentClosed;
-            target.ContentSaved += target_ContentSaved;
-            target.ContentDeleted += target_ContentDeleted;
+
+            target.BeforeClose += target_BeforeClose;
+            target.AfterSave += target_AfterSave;
+            target.AfterDelete += target_AfterDelete; ;
             return target;
         }
 
@@ -253,31 +253,32 @@ namespace CygSoft.CodeCat.Domain.Base
             indexRepository.SaveIndex(this.index);
         }
 
-        private void target_ContentDeleted(object sender, EventArgs e)
+        private void target_AfterDelete(object sender, DocumentManager.Infrastructure.FileEventArgs e)
         {
             IPersistableTarget target = sender as IPersistableTarget;
 
-            target.ContentClosed -= target_ContentClosed;
-            target.ContentSaved -= target_ContentSaved;
-            target.ContentDeleted -= target_ContentDeleted;
+            target.BeforeClose += target_BeforeClose;
+
+            target.AfterSave -= target_AfterSave;
+            target.AfterDelete -= target_AfterDelete;
 
             this.RemoveLibraryFileReference(target.Id);
             this.index.Remove(target.Id);
         }
 
-        private void target_ContentSaved(object sender, EventArgs e)
+        private void target_AfterSave(object sender, DocumentManager.Infrastructure.FileEventArgs e)
         {
             IPersistableTarget targetFile = sender as IPersistableTarget;
             this.index.Update(targetFile.IndexItem);
         }
 
-        private void target_ContentClosed(object sender, EventArgs e)
+        private void target_BeforeClose(object sender, DocumentManager.Infrastructure.FileEventArgs e)
         {
             IPersistableTarget target = sender as IPersistableTarget;
 
-            target.ContentClosed -= target_ContentClosed;
-            target.ContentSaved -= target_ContentSaved;
-            target.ContentDeleted -= target_ContentDeleted;
+            target.BeforeClose -= target_BeforeClose;
+            target.AfterSave -= target_AfterSave;
+            target.AfterDelete -= target_AfterDelete;
 
             this.RemoveLibraryFileReference(target.Id);
         }
