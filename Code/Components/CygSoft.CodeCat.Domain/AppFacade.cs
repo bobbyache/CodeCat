@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Code.Base;
+using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
@@ -18,6 +19,7 @@ namespace CygSoft.CodeCat.Domain
         private SyntaxRepository syntaxRepository;
         private CodeLibrary codeLibrary;
         private QikLibrary qikLibrary;
+        private CodeGroupLibrary codeGroupLibrary;
 
         private Project project = new Project();
 
@@ -26,6 +28,7 @@ namespace CygSoft.CodeCat.Domain
             this.syntaxRepository = new SyntaxRepository(syntaxFilePath);
             this.codeLibrary = new CodeLibrary();
             this.qikLibrary = new QikLibrary();
+            this.codeGroupLibrary = new CodeGroupLibrary();
         }
 
         public string CodeSyntaxFolderPath 
@@ -45,12 +48,12 @@ namespace CygSoft.CodeCat.Domain
 
         public bool Loaded
         {
-            get { return this.codeLibrary.Loaded && this.qikLibrary.Loaded; }
+            get { return this.codeLibrary.Loaded && this.qikLibrary.Loaded && this.codeGroupLibrary.Loaded; }
         }
 
         public int GetIndexCount()
         {
-            return this.codeLibrary.IndexCount + this.qikLibrary.IndexCount;
+            return this.codeLibrary.IndexCount + this.qikLibrary.IndexCount + this.codeGroupLibrary.IndexCount;
         }
 
         public void OpenContextFolder()
@@ -63,6 +66,7 @@ namespace CygSoft.CodeCat.Domain
             project.Open(filePath, currentVersion);
             this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
             this.qikLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
+            this.codeGroupLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
         }
 
         public void Create(string filePath, int currentVersion)
@@ -70,15 +74,15 @@ namespace CygSoft.CodeCat.Domain
             project.Create(filePath, currentVersion);
             this.codeLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
             this.qikLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
+            this.codeGroupLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
         }
-
-
 
         public IKeywordIndexItem[] GetLastOpenedIds()
         {
             List<IKeywordIndexItem> lastOpenedItems = new List<IKeywordIndexItem>();
             lastOpenedItems.AddRange(this.codeLibrary.GetLastOpenedIds());
             lastOpenedItems.AddRange(this.qikLibrary.GetLastOpenedIds());
+            lastOpenedItems.AddRange(this.codeGroupLibrary.GetLastOpenedIds());
             return lastOpenedItems.ToArray();
         }
 
@@ -87,6 +91,7 @@ namespace CygSoft.CodeCat.Domain
             // filter by type rather than just send in a bunch of ids.
             this.codeLibrary.SetLastOpenedIds(keywordIndexItems.OfType<CodeKeywordIndexItem>().ToArray());
             this.qikLibrary.SetLastOpenedIds(keywordIndexItems.OfType<QikKeywordIndexItem>().ToArray());
+            this.codeGroupLibrary.SetLastOpenedIds(keywordIndexItems.OfType<CodeGroupKeywordIndexItem>().ToArray());
         }
 
         public string[] GetSyntaxes()
@@ -111,6 +116,7 @@ namespace CygSoft.CodeCat.Domain
 
             keywordIndexItems.AddRange(this.codeLibrary.FindIndeces(commaDelimitedKeywords));
             keywordIndexItems.AddRange(this.qikLibrary.FindIndeces(commaDelimitedKeywords));
+            keywordIndexItems.AddRange(this.codeGroupLibrary.FindIndeces(commaDelimitedKeywords));
 
             return keywordIndexItems.ToArray();
         }
@@ -129,29 +135,39 @@ namespace CygSoft.CodeCat.Domain
         {
             CodeKeywordIndexItem[] codeIndeces = indeces.OfType<CodeKeywordIndexItem>().ToArray();
             QikKeywordIndexItem[] qikIndeces = indeces.OfType<QikKeywordIndexItem>().ToArray();
+            CodeGroupKeywordIndexItem[] codeGroupIndeces = indeces.OfType<CodeGroupKeywordIndexItem>().ToArray();
 
             this.codeLibrary.AddKeywords(codeIndeces, delimitedKeywordList);
             this.qikLibrary.AddKeywords(qikIndeces, delimitedKeywordList);
+            this.codeGroupLibrary.AddKeywords(codeGroupIndeces, delimitedKeywordList);
         }
 
         public bool RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidIndeces)
         {
             CodeKeywordIndexItem[] codeIndeces = indeces.OfType<CodeKeywordIndexItem>().ToArray();
             QikKeywordIndexItem[] qikIndeces = indeces.OfType<QikKeywordIndexItem>().ToArray();
+            CodeGroupKeywordIndexItem[] codeGroupIndeces = indeces.OfType<CodeGroupKeywordIndexItem>().ToArray();
+
             IKeywordIndexItem[] invalidCodeIndeces;
             IKeywordIndexItem[] invalidQikIndeces;
+            IKeywordIndexItem[] invalidCodeGroupIndeces;
 
             bool canRemoveCodeKeywords = codeLibrary.CanRemoveKeywords(codeIndeces, keywords, out invalidCodeIndeces);
             bool canRemoveQikKeywords = this.qikLibrary.CanRemoveKeywords(qikIndeces, keywords, out invalidQikIndeces);
+            bool canRemoveCodeGroupKeywords = this.codeGroupLibrary.CanRemoveKeywords(codeGroupIndeces, keywords, out invalidCodeGroupIndeces);
+
             List<IKeywordIndexItem> allInvalidIndeces = new List<IKeywordIndexItem>();
             allInvalidIndeces.AddRange(invalidCodeIndeces);
             allInvalidIndeces.AddRange(invalidQikIndeces);
+            allInvalidIndeces.AddRange(invalidCodeGroupIndeces);
+
             invalidIndeces = allInvalidIndeces.ToArray();
 
-            if (canRemoveCodeKeywords && canRemoveQikKeywords)
+            if (canRemoveCodeKeywords && canRemoveQikKeywords && canRemoveCodeGroupKeywords)
             {
                 this.codeLibrary.RemoveKeywords(codeIndeces, keywords);
                 this.qikLibrary.RemoveKeywords(qikIndeces, keywords);
+                this.codeGroupLibrary.RemoveKeywords(codeGroupIndeces, keywords);
                 return true;
             }
             else
@@ -186,26 +202,40 @@ namespace CygSoft.CodeCat.Domain
             return keyPhrases.DelimitKeyPhraseList();
         }
 
-        public CodeFile CreateCodeSnippet(string syntax)
-        {
-            CodeFile codeFile = this.codeLibrary.CreateTarget(new CodeKeywordIndexItem("New Snippet", syntax, string.Empty)) as CodeFile;
-            return codeFile;
-        }
-
-        public IQikDocumentGroup CreateQikDocumentGroup(string syntax)
-        {
-            IQikDocumentGroup qikFile = this.qikLibrary.CreateTarget(new QikKeywordIndexItem("New Qik Template", syntax, string.Empty)) as QikDocumentGroup;
-            return qikFile;
-        }
-
         public CodeFile OpenCodeFileTarget(IKeywordIndexItem keywordIndexItem)
         {
             return this.codeLibrary.OpenTarget(keywordIndexItem) as CodeFile;
         }
 
+        public CodeFile CreateCodeSnippet(string syntax)
+        {
+            CodeFile codeFile = this.codeLibrary.CreateTarget(new CodeKeywordIndexItem("New Snippet", syntax, 
+                string.Empty)) as CodeFile;
+            return codeFile;
+        }
+
+        public IQikDocumentGroup CreateQikDocumentGroup(string syntax)
+        {
+            IQikDocumentGroup qikFile = this.qikLibrary.CreateTarget(new QikKeywordIndexItem("New Qik Template", 
+                syntax, string.Empty)) as QikDocumentGroup;
+            return qikFile;
+        }
+
         public IQikDocumentGroup OpenQikDocumentGroup(IKeywordIndexItem keywordIndexItem)
         {
             return this.qikLibrary.OpenTarget(keywordIndexItem) as IQikDocumentGroup;
+        }
+
+        public ICodeGroupDocumentGroup CreateCodeGroupDocumentGroup(string syntax)
+        {
+            ICodeGroupDocumentGroup codeGroup = this.codeGroupLibrary.CreateTarget(new QikKeywordIndexItem("New Group Snippet", 
+                syntax, string.Empty)) as ICodeGroupDocumentGroup;
+            return codeGroup;
+        }
+
+        public ICodeGroupDocumentGroup OpenCodeGroupDocumentGroup(IKeywordIndexItem keywordIndexItem)
+        {
+            return this.codeGroupLibrary.OpenTarget(keywordIndexItem) as ICodeGroupDocumentGroup;
         }
     }
 }
