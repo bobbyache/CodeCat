@@ -16,6 +16,10 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public event EventHandler<FileEventArgs> AfterOpen;
         public event EventHandler<FileEventArgs> BeforeSave;
         public event EventHandler<FileEventArgs> AfterSave;
+        public event EventHandler<FileEventArgs> BeforeClose;
+        public event EventHandler<FileEventArgs> AfterClose;
+        public event EventHandler<FileEventArgs> BeforeRevert;
+        public event EventHandler<FileEventArgs> AfterRevert;
 
         public string Id { get; private set; }
         public string FilePath { get; private set; }
@@ -33,15 +37,15 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         protected abstract void OpenFile();
         protected abstract void SaveFile();
 
-        // can be used to do more cleanup during delete ... ie. version files.
         protected virtual void OnBeforeDelete() { }
         protected virtual void OnAfterDelete() { }
-
         protected virtual void OnBeforeOpen() { }
         protected virtual void OnAfterOpen() { }
-
+        protected virtual void OnBeforeRevert() { }
+        protected virtual void OnAfterRevert() { }
         protected virtual void OnBeforeSave() { }
         protected virtual void OnAfterSave() { }
+        protected virtual void OnClose() { }
 
         public BaseFile(BaseFilePathGenerator filePathGenerator)
         {
@@ -66,6 +70,28 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
                 if (AfterOpen != null)
                     AfterOpen(this, new FileEventArgs(this));
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public void Revert()
+        {
+            try
+            {
+                if (BeforeRevert != null)
+                    BeforeRevert(this, new FileEventArgs(this));
+
+                OnBeforeRevert();
+                OpenFile();
+                OnAfterRevert();
+
+                this.Loaded = true;
+
+                if (AfterRevert != null)
+                    AfterRevert(this, new FileEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -112,6 +138,18 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 throw exception;
             }
         }
+        public void Close()
+        {
+            if (BeforeClose != null)
+                BeforeClose(this, new FileEventArgs(this));
+
+            this.OnClose();
+            this.Loaded = false;
+
+            if (AfterClose != null)
+                AfterClose(this, new FileEventArgs(this));
+        }
+
 
         private string CleanExtension(string extension)
         {
