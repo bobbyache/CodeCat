@@ -211,11 +211,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void RebuildTabs()
         {
             tabManager.Clear();
-            tabManager.AddTab(qikFile.ScriptFile, scriptControl, btnShowScript.Checked, false);
             foreach (ICodeDocument document in qikFile.TemplateFiles)
             {
                 tabManager.AddTab(document, NewTemplateControl(document), true, false);
             }
+            tabManager.AddTab(qikFile.ScriptFile, scriptControl, btnShowScript.Checked, false);
         }
 
         private QikTemplateCodeCtrl NewTemplateControl(IDocument document)

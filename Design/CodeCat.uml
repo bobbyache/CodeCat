@@ -3665,7 +3665,7 @@ management.
 <XPD:REF name="DiagramOwner">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:OBJ name="DiagramView" type="UMLClassDiagramView" guid="bvX0+Fp98EiGi8hp6x/XTAAA">
 <XPD:REF name="Diagram">nta/Gxyx30eLSpMzdFYdvAAA</XPD:REF>
-<XPD:ATTR name="#OwnedViews" type="integer">30</XPD:ATTR>
+<XPD:ATTR name="#OwnedViews" type="integer">31</XPD:ATTR>
 <XPD:OBJ name="OwnedViews[0]" type="UMLNoteView" guid="2RtTXAS3Akqd0ehw2xM8cgAA">
 <XPD:ATTR name="FillColor" type="string">$0080FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">360</XPD:ATTR>
@@ -3850,8 +3850,8 @@ CodeDocumentGroup for the code group
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[9]" type="UMLInterfaceView" guid="e7SsFEbeHEmxWayQ2FiG8gAA">
-<XPD:ATTR name="Left" type="integer">616</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">220</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">884</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">492</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">179</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">305</XPD:ATTR>
 <XPD:ATTR name="StereotypeDisplay" type="UMLStereotypeDisplayKind">sdkDecoration</XPD:ATTR>
@@ -3877,7 +3877,7 @@ CodeDocumentGroup for the code group
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[10]" type="UMLAssociationView" guid="xpX4fSp300+OF5H0m/gWPQAA">
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">330,344;616,344</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">330,384;776,384;776,540;884,540</XPD:ATTR>
 <XPD:REF name="Model">Ldmqu7q8iEy0e+0Y5UBeywAA</XPD:REF>
 <XPD:REF name="Head">e7SsFEbeHEmxWayQ2FiG8gAA</XPD:REF>
 <XPD:REF name="Tail">NSs0r+JWA0atQEe/4sFVVgAA</XPD:REF>
@@ -3974,7 +3974,7 @@ realize the IPersistableTarget interface.
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[13]" type="UMLNoteLinkView" guid="kPQLc98vXUueALUbGmsMDwAA">
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">592,448;616,448</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">592,448;997,448;997,492</XPD:ATTR>
 <XPD:REF name="Head">e7SsFEbeHEmxWayQ2FiG8gAA</XPD:REF>
 <XPD:REF name="Tail">0bn+lqOAi0mDRhUXgCnp+QAA</XPD:REF>
 </XPD:OBJ>
@@ -3987,7 +3987,7 @@ realize the IPersistableTarget interface.
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="ZV0eAiMWakSQNFz502JNqQAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="nSbuI9RghESyAR8zyrPJDwAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">QikFile</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">QikDocumentGroup</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="kCNVZzcJw0WK+1JI5Z3xUAAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -4007,31 +4007,7 @@ realize the IPersistableTarget interface.
 <XPD:REF name="Model">BRiNQ+HF8EGZju3/jpZuZgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[15]" type="UMLRealizationView" guid="tlrM0PoNUESCzM+3dX/w3gAA">
-<XPD:ATTR name="Points" type="Points">702,178;703,220</XPD:ATTR>
-<XPD:REF name="Model">LjRiW9PcYkS8kF8svJR+LQAA</XPD:REF>
-<XPD:REF name="Head">e7SsFEbeHEmxWayQ2FiG8gAA</XPD:REF>
-<XPD:REF name="Tail">0KSFZjP5gUqrBnpG3q3bpAAA</XPD:REF>
-<XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="vueJrhWErkmbeTgSwG2mcQAA">
-<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
-<XPD:ATTR name="Alpha" type="real">1.5707963267949</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">15</XPD:ATTR>
-<XPD:REF name="Model">LjRiW9PcYkS8kF8svJR+LQAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="StereotypeLabel" type="EdgeLabelView" guid="SLbBRGq1RU6rMBeQ9uYNrwAA">
-<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
-<XPD:ATTR name="Alpha" type="real">1.5707963267949</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">30</XPD:ATTR>
-<XPD:REF name="Model">LjRiW9PcYkS8kF8svJR+LQAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="PropertyLabel" type="EdgeLabelView" guid="T8WRQXvesU2IcNc1ciohIgAA">
-<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
-<XPD:ATTR name="Alpha" type="real">-1.5707963267949</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">15</XPD:ATTR>
-<XPD:REF name="Model">LjRiW9PcYkS8kF8svJR+LQAA</XPD:REF>
-</XPD:OBJ>
-</XPD:OBJ>
-<XPD:OBJ name="OwnedViews[16]" type="UMLInterfaceView" guid="lZUUoHmV+EifrxcWL04xyAAA">
+<XPD:OBJ name="OwnedViews[15]" type="UMLInterfaceView" guid="lZUUoHmV+EifrxcWL04xyAAA">
 <XPD:ATTR name="Left" type="integer">68</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">676</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">174</XPD:ATTR>
@@ -4057,7 +4033,7 @@ realize the IPersistableTarget interface.
 <XPD:REF name="Model">BF5EaO40GUC9Z7crdYAj9AAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[17]" type="UMLClassView" guid="zrZYGjyOoEyxFB/PkQiEaAAA">
+<XPD:OBJ name="OwnedViews[16]" type="UMLClassView" guid="zrZYGjyOoEyxFB/PkQiEaAAA">
 <XPD:ATTR name="Left" type="integer">876</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">132</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">119</XPD:ATTR>
@@ -4086,7 +4062,7 @@ realize the IPersistableTarget interface.
 <XPD:REF name="Model">vQ2tas88ZkeTExaKUVpErgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[18]" type="UMLClassView" guid="P+gtrzLYyUGJ8ns4uDOrggAA">
+<XPD:OBJ name="OwnedViews[17]" type="UMLClassView" guid="P+gtrzLYyUGJ8ns4uDOrggAA">
 <XPD:ATTR name="Left" type="integer">1132</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">76</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">201</XPD:ATTR>
@@ -4115,7 +4091,7 @@ realize the IPersistableTarget interface.
 <XPD:REF name="Model">pbMEz9f9UEOSkSsxwmwWpwAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[19]" type="UMLGeneralizationView" guid="rYp2EId0rkC0LZkqon+9FgAA">
+<XPD:OBJ name="OwnedViews[18]" type="UMLGeneralizationView" guid="rYp2EId0rkC0LZkqon+9FgAA">
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
 <XPD:ATTR name="Points" type="Points">994,148;1132,148</XPD:ATTR>
 <XPD:REF name="Model">mZbIwIg2C0Om2+fO2/MfnAAA</XPD:REF>
@@ -4140,7 +4116,7 @@ realize the IPersistableTarget interface.
 <XPD:REF name="Model">mZbIwIg2C0Om2+fO2/MfnAAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[20]" type="UMLAssociationView" guid="hQef41ihdU2MEnzd0q45PAAA">
+<XPD:OBJ name="OwnedViews[19]" type="UMLAssociationView" guid="hQef41ihdU2MEnzd0q45PAAA">
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
 <XPD:ATTR name="Points" type="Points">876,152;792,152</XPD:ATTR>
 <XPD:REF name="Model">Jb4CnMmJvke9R26eDZZ1iAAA</XPD:REF>
@@ -4223,7 +4199,7 @@ realize the IPersistableTarget interface.
 <XPD:REF name="Model">8ywiFYDpL0SqxoLaX4oYqAAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[21]" type="UMLNoteView" guid="cUYePcqZYk+2sXweI1emhAAA">
+<XPD:OBJ name="OwnedViews[20]" type="UMLNoteView" guid="cUYePcqZYk+2sXweI1emhAAA">
 <XPD:ATTR name="Left" type="integer">824</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">184</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">229</XPD:ATTR>
@@ -4245,7 +4221,7 @@ extra layer of abstraction which you MIGHT
 be able to do away with.
 </XPD:ATTR>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[22]" type="UMLNoteView" guid="0UikTD10u0+wL1s0HP1O4wAA">
+<XPD:OBJ name="OwnedViews[21]" type="UMLNoteView" guid="0UikTD10u0+wL1s0HP1O4wAA">
 <XPD:ATTR name="Left" type="integer">480</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">4</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">576</XPD:ATTR>
@@ -4257,7 +4233,7 @@ IDocumentIndex and IDocument interfaces. Therefore, it could be argued that this
 when the old single CodeFile system is removed.
 </XPD:ATTR>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[23]" type="UMLClassView" guid="Z3P7qdcriEeSBnlhNwFiTgAA">
+<XPD:OBJ name="OwnedViews[22]" type="UMLClassView" guid="Z3P7qdcriEeSBnlhNwFiTgAA">
 <XPD:ATTR name="Left" type="integer">564</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">692</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">211</XPD:ATTR>
@@ -4286,7 +4262,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Model">dJKLUhTzzE60jXEVVwc62gAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[24]" type="UMLClassView" guid="FuOzd+P6YkyA6ETqXKFIygAA">
+<XPD:OBJ name="OwnedViews[23]" type="UMLClassView" guid="FuOzd+P6YkyA6ETqXKFIygAA">
 <XPD:ATTR name="Left" type="integer">328</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">700</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">138</XPD:ATTR>
@@ -4315,7 +4291,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Model">Z4fUhp4cRkKj/inTyp7K5wAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[25]" type="UMLDependencyView" guid="ib0CXAnl8UKi4QgSdaOqzQAA">
+<XPD:OBJ name="OwnedViews[24]" type="UMLDependencyView" guid="ib0CXAnl8UKi4QgSdaOqzQAA">
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
 <XPD:ATTR name="Points" type="Points">564,720;465,720</XPD:ATTR>
 <XPD:REF name="Model">h5u86ZeM3E+g+A54iLqvigAA</XPD:REF>
@@ -4340,7 +4316,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Model">h5u86ZeM3E+g+A54iLqvigAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[26]" type="UMLTextView" guid="cs1oZkmg/kuAMpCaTPbfVgAA">
+<XPD:OBJ name="OwnedViews[25]" type="UMLTextView" guid="cs1oZkmg/kuAMpCaTPbfVgAA">
 <XPD:ATTR name="Left" type="integer">1104</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">32</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">189</XPD:ATTR>
@@ -4348,7 +4324,7 @@ when the old single CodeFile system is removed.
 <XPD:ATTR name="Text" type="string">CygSoft.CodeCat.DocumentManager
 </XPD:ATTR>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[27]" type="UMLTextView" guid="uQ6hBPpQBkKbyY3gZV0dIAAA">
+<XPD:OBJ name="OwnedViews[26]" type="UMLTextView" guid="uQ6hBPpQBkKbyY3gZV0dIAAA">
 <XPD:ATTR name="Left" type="integer">608</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">656</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">206</XPD:ATTR>
@@ -4356,13 +4332,13 @@ when the old single CodeFile system is removed.
 <XPD:ATTR name="Text" type="string">CygSoft.CodeCat.Search.KeywordIndex
 </XPD:ATTR>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[28]" type="UMLNoteLinkView" guid="P4ZBfKwBwkKd6MOVHGmB4QAA">
+<XPD:OBJ name="OwnedViews[27]" type="UMLNoteLinkView" guid="P4ZBfKwBwkKd6MOVHGmB4QAA">
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
 <XPD:ATTR name="Points" type="Points">612,156;566,156;566,133</XPD:ATTR>
 <XPD:REF name="Head">2RtTXAS3Akqd0ehw2xM8cgAA</XPD:REF>
 <XPD:REF name="Tail">0KSFZjP5gUqrBnpG3q3bpAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedViews[29]" type="UMLRealizationView" guid="gVn5PjiMCUu+Hefk8MzpcAAA">
+<XPD:OBJ name="OwnedViews[28]" type="UMLRealizationView" guid="gVn5PjiMCUu+Hefk8MzpcAAA">
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
 <XPD:ATTR name="Points" type="Points">328,720;241,720</XPD:ATTR>
 <XPD:REF name="Model">9ByNGgrw40eh3/1VXD5TTgAA</XPD:REF>
@@ -4387,9 +4363,60 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Model">9ByNGgrw40eh3/1VXD5TTgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
+<XPD:OBJ name="OwnedViews[29]" type="UMLInterfaceView" guid="RDFnvrRhJkm7WL6a1x9P+AAA">
+<XPD:ATTR name="Left" type="integer">608</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">284</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">156</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">258</XPD:ATTR>
+<XPD:ATTR name="StereotypeDisplay" type="UMLStereotypeDisplayKind">sdkDecoration</XPD:ATTR>
+<XPD:REF name="Model">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+<XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="fnm5P11+DUeQIb3d4jNHoQAA">
+<XPD:OBJ name="NameLabel" type="LabelView" guid="psdROHn9eEieR3XQp+w6BQAA">
+<XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">IQikDocumentGroup</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="StereotypeLabel" type="LabelView" guid="YDQZnwFqR0eaaBunMSW+kwAA">
+<XPD:ATTR name="Text" type="string">&lt;&lt;interface&gt;&gt;</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="PropertyLabel" type="LabelView" guid="4BjbBH2VqU++eS81Jo5cVgAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#OwnedElements" type="integer">45</XPD:ATTR>
+<XPD:OBJ name="AttributeCompartment" type="UMLAttributeCompartmentView" guid="jVKIeevpCk21wzdMCH20zwAA">
+<XPD:REF name="Model">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OperationCompartment" type="UMLOperationCompartmentView" guid="FT4g37zF7kCvCtmoVecMvgAA">
+<XPD:REF name="Model">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[30]" type="UMLRealizationView" guid="GxYRbUh1u0aTMCas57fioAAA">
+<XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">701,178;701,284</XPD:ATTR>
+<XPD:REF name="Model">H4eboAPZ/ECCR9E/mRxebQAA</XPD:REF>
+<XPD:REF name="Head">RDFnvrRhJkm7WL6a1x9P+AAA</XPD:REF>
+<XPD:REF name="Tail">0KSFZjP5gUqrBnpG3q3bpAAA</XPD:REF>
+<XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="JyzVlQr14UGRebkBt6DTkwAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">1.5707963267949</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">15</XPD:ATTR>
+<XPD:REF name="Model">H4eboAPZ/ECCR9E/mRxebQAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="StereotypeLabel" type="EdgeLabelView" guid="vzNNcUEa/UaFR749OIt7cwAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">1.5707963267949</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">30</XPD:ATTR>
+<XPD:REF name="Model">H4eboAPZ/ECCR9E/mRxebQAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="PropertyLabel" type="EdgeLabelView" guid="ubc7oryQ50y8Qvt/IrcU4wAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">-1.5707963267949</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">15</XPD:ATTR>
+<XPD:REF name="Model">H4eboAPZ/ECCR9E/mRxebQAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:ATTR name="#OwnedElements" type="integer">46</XPD:ATTR>
 <XPD:OBJ name="OwnedElements[0]" type="UMLClass" guid="/wGdnneyGEaMuTHsLSo/GAAA">
 <XPD:ATTR name="Name" type="string">AppFacade</XPD:ATTR>
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
@@ -5384,8 +5411,6 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Views[0]">e7SsFEbeHEmxWayQ2FiG8gAA</XPD:REF>
 <XPD:REF name="Views[1]">qcdUsFENN0yyO3BGFnqOaAAA</XPD:REF>
 <XPD:REF name="Views[2]">z+dCpG8tcEq13FWHvYuqewAA</XPD:REF>
-<XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
-<XPD:REF name="SupplierDependencies[0]">LjRiW9PcYkS8kF8svJR+LQAA</XPD:REF>
 <XPD:ATTR name="#Operations" type="integer">5</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="bPlFTESdeki0hh8gsfDN3gAA">
 <XPD:ATTR name="Name" type="string">Open</XPD:ATTR>
@@ -5500,7 +5525,7 @@ when the old single CodeFile system is removed.
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[32]" type="UMLClass" guid="BRiNQ+HF8EGZju3/jpZuZgAA">
-<XPD:ATTR name="Name" type="string">QikFile</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">QikDocumentGroup</XPD:ATTR>
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">0KSFZjP5gUqrBnpG3q3bpAAA</XPD:REF>
@@ -5508,22 +5533,12 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Views[2]">69ca8ZoPlEKVYlWqqd6/9QAA</XPD:REF>
 <XPD:REF name="Views[3]">3B3KMmSBSkCmLiqMQUT54AAA</XPD:REF>
 <XPD:ATTR name="#ClientDependencies" type="integer">2</XPD:ATTR>
-<XPD:REF name="ClientDependencies[0]">LjRiW9PcYkS8kF8svJR+LQAA</XPD:REF>
-<XPD:REF name="ClientDependencies[1]">UtLMyw0cuUmwH/IKo7EEiAAA</XPD:REF>
+<XPD:REF name="ClientDependencies[0]">UtLMyw0cuUmwH/IKo7EEiAAA</XPD:REF>
+<XPD:REF name="ClientDependencies[1]">H4eboAPZ/ECCR9E/mRxebQAA</XPD:REF>
 <XPD:ATTR name="#Associations" type="integer">1</XPD:ATTR>
 <XPD:REF name="Associations[0]">1C/+4lUY70e8pNc2SEDYagAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[33]" type="UMLRealization" guid="LjRiW9PcYkS8kF8svJR+LQAA">
-<XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
-<XPD:REF name="Client">BRiNQ+HF8EGZju3/jpZuZgAA</XPD:REF>
-<XPD:REF name="Supplier">gGIEL3ZWa0Smyldv62e+5wAA</XPD:REF>
-<XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
-<XPD:REF name="Views[0]">tlrM0PoNUESCzM+3dX/w3gAA</XPD:REF>
-<XPD:REF name="Views[1]">vueJrhWErkmbeTgSwG2mcQAA</XPD:REF>
-<XPD:REF name="Views[2]">SLbBRGq1RU6rMBeQ9uYNrwAA</XPD:REF>
-<XPD:REF name="Views[3]">T8WRQXvesU2IcNc1ciohIgAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="OwnedElements[34]" type="UMLInterface" guid="BF5EaO40GUC9Z7crdYAj9AAA">
+<XPD:OBJ name="OwnedElements[33]" type="UMLInterface" guid="BF5EaO40GUC9Z7crdYAj9AAA">
 <XPD:ATTR name="Name" type="string">IQikKeywordIndexItem</XPD:ATTR>
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
@@ -5538,7 +5553,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Owner">BF5EaO40GUC9Z7crdYAj9AAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[35]" type="UMLClass" guid="vQ2tas88ZkeTExaKUVpErgAA">
+<XPD:OBJ name="OwnedElements[34]" type="UMLClass" guid="vQ2tas88ZkeTExaKUVpErgAA">
 <XPD:ATTR name="Name" type="string">QikDocumentIndex</XPD:ATTR>
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
@@ -5551,7 +5566,7 @@ when the old single CodeFile system is removed.
 <XPD:ATTR name="#Associations" type="integer">1</XPD:ATTR>
 <XPD:REF name="Associations[0]">8ywiFYDpL0SqxoLaX4oYqAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[36]" type="UMLGeneralization" guid="mZbIwIg2C0Om2+fO2/MfnAAA">
+<XPD:OBJ name="OwnedElements[35]" type="UMLGeneralization" guid="mZbIwIg2C0Om2+fO2/MfnAAA">
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:REF name="Child">vQ2tas88ZkeTExaKUVpErgAA</XPD:REF>
 <XPD:REF name="Parent">pbMEz9f9UEOSkSsxwmwWpwAA</XPD:REF>
@@ -5561,7 +5576,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Views[2]">Xd4N8F4VgUWUgbmpptrRQwAA</XPD:REF>
 <XPD:REF name="Views[3]">GQJ5BQnFi0WhXgLZVKfFZQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[37]" type="UMLAssociation" guid="Jb4CnMmJvke9R26eDZZ1iAAA">
+<XPD:OBJ name="OwnedElements[36]" type="UMLAssociation" guid="Jb4CnMmJvke9R26eDZZ1iAAA">
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">hQef41ihdU2MEnzd0q45PAAA</XPD:REF>
@@ -5589,7 +5604,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Views[3]">Dz3IqcoZPEaObPYkYTSSuQAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[38]" type="UMLClass" guid="dJKLUhTzzE60jXEVVwc62gAA">
+<XPD:OBJ name="OwnedElements[37]" type="UMLClass" guid="dJKLUhTzzE60jXEVVwc62gAA">
 <XPD:ATTR name="Name" type="string">QikKeywordSearchIndexRepository</XPD:ATTR>
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
@@ -5607,7 +5622,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Owner">dJKLUhTzzE60jXEVVwc62gAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[39]" type="UMLDependency" guid="iOXDTb2eBEa5oC8ZKiJqNAAA">
+<XPD:OBJ name="OwnedElements[38]" type="UMLDependency" guid="iOXDTb2eBEa5oC8ZKiJqNAAA">
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:REF name="Client">WsL/C3yZA0KCD17OCi3mQgAA</XPD:REF>
 <XPD:REF name="Supplier">dJKLUhTzzE60jXEVVwc62gAA</XPD:REF>
@@ -5617,7 +5632,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Views[2]">x4w8So5oB0CP7p9aQmefmwAA</XPD:REF>
 <XPD:REF name="Views[3]">LHyMQg3CRkehZqHf04zcbAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[40]" type="UMLClass" guid="Z4fUhp4cRkKj/inTyp7K5wAA">
+<XPD:OBJ name="OwnedElements[39]" type="UMLClass" guid="Z4fUhp4cRkKj/inTyp7K5wAA">
 <XPD:ATTR name="Name" type="string">QikKeywordIndexItem</XPD:ATTR>
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
@@ -5632,7 +5647,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="SupplierDependencies[1]">h5u86ZeM3E+g+A54iLqvigAA</XPD:REF>
 <XPD:REF name="SupplierDependencies[2]">yhIA2TJqJEiKAV4t89dvrwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[41]" type="UMLDependency" guid="UtLMyw0cuUmwH/IKo7EEiAAA">
+<XPD:OBJ name="OwnedElements[40]" type="UMLDependency" guid="UtLMyw0cuUmwH/IKo7EEiAAA">
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:REF name="Client">BRiNQ+HF8EGZju3/jpZuZgAA</XPD:REF>
 <XPD:REF name="Supplier">Z4fUhp4cRkKj/inTyp7K5wAA</XPD:REF>
@@ -5642,7 +5657,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Views[2]">N0Aag+nK1EeEM+OVu0j2XAAA</XPD:REF>
 <XPD:REF name="Views[3]">f9Oa0+EBEEql8+zPMSZBpAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[42]" type="UMLDependency" guid="h5u86ZeM3E+g+A54iLqvigAA">
+<XPD:OBJ name="OwnedElements[41]" type="UMLDependency" guid="h5u86ZeM3E+g+A54iLqvigAA">
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:REF name="Client">dJKLUhTzzE60jXEVVwc62gAA</XPD:REF>
 <XPD:REF name="Supplier">Z4fUhp4cRkKj/inTyp7K5wAA</XPD:REF>
@@ -5652,7 +5667,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Views[2]">pKpsn5s9DEev7TCvK/U4iAAA</XPD:REF>
 <XPD:REF name="Views[3]">ng97LR+LaEitbYYMPmjFCwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[43]" type="UMLDependency" guid="yhIA2TJqJEiKAV4t89dvrwAA">
+<XPD:OBJ name="OwnedElements[42]" type="UMLDependency" guid="yhIA2TJqJEiKAV4t89dvrwAA">
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:REF name="Client">WsL/C3yZA0KCD17OCi3mQgAA</XPD:REF>
 <XPD:REF name="Supplier">Z4fUhp4cRkKj/inTyp7K5wAA</XPD:REF>
@@ -5662,7 +5677,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Views[2]">fXeIJVbMqUuVddMF6AO3qgAA</XPD:REF>
 <XPD:REF name="Views[3]">NsIdrzIb30S8jKsJkcb14wAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[44]" type="UMLRealization" guid="9ByNGgrw40eh3/1VXD5TTgAA">
+<XPD:OBJ name="OwnedElements[43]" type="UMLRealization" guid="9ByNGgrw40eh3/1VXD5TTgAA">
 <XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
 <XPD:REF name="Client">Z4fUhp4cRkKj/inTyp7K5wAA</XPD:REF>
 <XPD:REF name="Supplier">BF5EaO40GUC9Z7crdYAj9AAA</XPD:REF>
@@ -5671,6 +5686,88 @@ when the old single CodeFile system is removed.
 <XPD:REF name="Views[1]">VKKTbBdOz02d5LRg5GLDIwAA</XPD:REF>
 <XPD:REF name="Views[2]">j9U5MGeIGEGl2Zik2/LySQAA</XPD:REF>
 <XPD:REF name="Views[3]">lqRi9t5RUUinVz99pe0BMQAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[44]" type="UMLInterface" guid="0CbutiWGekCh36uhMQGI6QAA">
+<XPD:ATTR name="Name" type="string">IQikDocumentGroup</XPD:ATTR>
+<XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
+<XPD:REF name="Views[0]">RDFnvrRhJkm7WL6a1x9P+AAA</XPD:REF>
+<XPD:REF name="Views[1]">jVKIeevpCk21wzdMCH20zwAA</XPD:REF>
+<XPD:REF name="Views[2]">FT4g37zF7kCvCtmoVecMvgAA</XPD:REF>
+<XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
+<XPD:REF name="SupplierDependencies[0]">H4eboAPZ/ECCR9E/mRxebQAA</XPD:REF>
+<XPD:ATTR name="#Operations" type="integer">5</XPD:ATTR>
+<XPD:OBJ name="Operations[0]" type="UMLOperation" guid="DwK3MrJyJk6lI1XidgWJYgAA">
+<XPD:ATTR name="Name" type="string">GetTemplate</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Operations[1]" type="UMLOperation" guid="Qd4XRbi5yku+dh8tGK7PLQAA">
+<XPD:ATTR name="Name" type="string">AddTemplate</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Operations[2]" type="UMLOperation" guid="xZHSAp1VAkyf+bmpdOnN1AAA">
+<XPD:ATTR name="Name" type="string">RemoveTemplate</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Operations[3]" type="UMLOperation" guid="xkIbEC99RUqQV/z7t5HH1QAA">
+<XPD:ATTR name="Name" type="string">MoveDocumentLeft</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Operations[4]" type="UMLOperation" guid="B0pmBdD9qECX3VyJWV4VYAAA">
+<XPD:ATTR name="Name" type="string">MoveDocumentRight</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:ATTR name="#Attributes" type="integer">10</XPD:ATTR>
+<XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="gQpWKKmQ3kaZP0V1sezRrgAA">
+<XPD:ATTR name="Name" type="string">Compiler</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[1]" type="UMLAttribute" guid="nu2tbidrbEW79tTKHxWF9wAA">
+<XPD:ATTR name="Name" type="string">Text</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[2]" type="UMLAttribute" guid="UVkwWxdNr0+RciwvOvdoGAAA">
+<XPD:ATTR name="Name" type="string">Syntax</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[3]" type="UMLAttribute" guid="Umtm9rSu2EGTNvUfrp/ukgAA">
+<XPD:ATTR name="Name" type="string">TemplateExists</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[4]" type="UMLAttribute" guid="A2XB7MIjvUCIYuh5mIqdKgAA">
+<XPD:ATTR name="Name" type="string">Documents</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[5]" type="UMLAttribute" guid="B++Y6uUtHEmjNWdc+EBeVwAA">
+<XPD:ATTR name="Name" type="string">TemplateFiles</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[6]" type="UMLAttribute" guid="rCW/rrwtO02xSvQooMz98gAA">
+<XPD:ATTR name="Name" type="string">DocumentAdded</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[7]" type="UMLAttribute" guid="GyIKkbzfRkuK6qOYlRgK/QAA">
+<XPD:ATTR name="Name" type="string">DocumentRemoved</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[8]" type="UMLAttribute" guid="+iAZxxHbGU2XAMTkXC6mCgAA">
+<XPD:ATTR name="Name" type="string">DocumentMovedLeft</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[9]" type="UMLAttribute" guid="FAtqUNCqrUC0c1sK8kgW4AAA">
+<XPD:ATTR name="Name" type="string">DocumentMovedRight</XPD:ATTR>
+<XPD:REF name="Owner">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[45]" type="UMLRealization" guid="H4eboAPZ/ECCR9E/mRxebQAA">
+<XPD:REF name="Namespace">uLr7BgRr4kqSB/74moMqpQAA</XPD:REF>
+<XPD:REF name="Client">BRiNQ+HF8EGZju3/jpZuZgAA</XPD:REF>
+<XPD:REF name="Supplier">0CbutiWGekCh36uhMQGI6QAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
+<XPD:REF name="Views[0]">GxYRbUh1u0aTMCas57fioAAA</XPD:REF>
+<XPD:REF name="Views[1]">JyzVlQr14UGRebkBt6DTkwAA</XPD:REF>
+<XPD:REF name="Views[2]">vzNNcUEa/UaFR749OIt7cwAA</XPD:REF>
+<XPD:REF name="Views[3]">ubc7oryQ50y8Qvt/IrcU4wAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[3]" type="UMLModel" guid="ehJDtD9ohUK360F0ZP/0wAAA">
@@ -8427,8 +8524,8 @@ Already have Text... check what this does...
 <XPD:REF name="Participant">qZcd1FT4DUiRCPohzFIddAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">M9zyDFy57k2EF55SXndKfQAA</XPD:REF>
-<XPD:REF name="Views[1]">W2qJf1ihWUuhVq241KSdzwAA</XPD:REF>
-<XPD:REF name="Views[2]">CpRKXVALrkmfsfH0sdlPAwAA</XPD:REF>
+<XPD:REF name="Views[1]">CpRKXVALrkmfsfH0sdlPAwAA</XPD:REF>
+<XPD:REF name="Views[2]">W2qJf1ihWUuhVq241KSdzwAA</XPD:REF>
 <XPD:REF name="Views[3]">5CfwF9zd3EGlRVw3V05gwgAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Connections[1]" type="UMLAssociationEnd" guid="8kaLAREGCkqH0L5QAcurWgAA">
@@ -8437,8 +8534,8 @@ Already have Text... check what this does...
 <XPD:REF name="Participant">idJ07Doo/Ui0wyMoBD6wKQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">EIrJI4RSXE+Hwk8qBhQMtAAA</XPD:REF>
-<XPD:REF name="Views[1]">DAqa2MB/c0qGCVZiMicTogAA</XPD:REF>
-<XPD:REF name="Views[2]">Z+7WSwsCeU2WC1gRn4XIwAAA</XPD:REF>
+<XPD:REF name="Views[1]">Z+7WSwsCeU2WC1gRn4XIwAAA</XPD:REF>
+<XPD:REF name="Views[2]">DAqa2MB/c0qGCVZiMicTogAA</XPD:REF>
 <XPD:REF name="Views[3]">NPw8CXVa0UWpVXbdc6PzFAAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
@@ -8455,8 +8552,8 @@ Already have Text... check what this does...
 <XPD:REF name="Participant">2Hmogf8C+E6iNKhImpUrvQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">UJKm/bl/SUixCl+6YX6jEAAA</XPD:REF>
-<XPD:REF name="Views[1]">uOkWOLVcyE641NjpCu2bagAA</XPD:REF>
-<XPD:REF name="Views[2]">eJOKAFVipk+YBZ+c6JR+ggAA</XPD:REF>
+<XPD:REF name="Views[1]">eJOKAFVipk+YBZ+c6JR+ggAA</XPD:REF>
+<XPD:REF name="Views[2]">uOkWOLVcyE641NjpCu2bagAA</XPD:REF>
 <XPD:REF name="Views[3]">AEGofIXQ7ESicTaKuXFGjAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Connections[1]" type="UMLAssociationEnd" guid="kdVKE/ML6k6kV4eCFX3DLAAA">
@@ -8465,8 +8562,8 @@ Already have Text... check what this does...
 <XPD:REF name="Participant">3wgg92NMHUWxe2d2Ep7UuAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">1oPjbcmtvEGm8+/D48wn+AAA</XPD:REF>
-<XPD:REF name="Views[1]">ucVbCiNN4ECZYlm6x4tMPAAA</XPD:REF>
-<XPD:REF name="Views[2]">O69KEoLZIEiwRJ9znHkxAgAA</XPD:REF>
+<XPD:REF name="Views[1]">O69KEoLZIEiwRJ9znHkxAgAA</XPD:REF>
+<XPD:REF name="Views[2]">ucVbCiNN4ECZYlm6x4tMPAAA</XPD:REF>
 <XPD:REF name="Views[3]">UQXo+q1z0EStvTZbJvFuDQAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
