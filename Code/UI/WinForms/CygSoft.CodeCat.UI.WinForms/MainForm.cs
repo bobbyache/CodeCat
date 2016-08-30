@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
@@ -328,6 +329,15 @@ namespace CygSoft.CodeCat.UI.WinForms
                     snippetForm.DocumentSaved += snippetForm_DocumentSaved;
                     snippetForm.Show(dockPanel, DockState.Document);
                 }
+                else if (snippetIndex is ICodeGroupKeywordIndexItem)
+                {
+                    ICodeGroupDocumentGroup codeGroupFile = application.OpenCodeGroupDocumentGroup(snippetIndex);
+                    IContentDocument snippetForm = new CodeGroupDocument(codeGroupFile, application);
+                    snippetForm.HeaderFieldsVisible = false;
+                    snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
+                    snippetForm.DocumentSaved += snippetForm_DocumentSaved;
+                    snippetForm.Show(dockPanel, DockState.Document);
+                }
             }
             else
             {
@@ -356,6 +366,17 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             IQikDocumentGroup qikFile = application.CreateQikDocumentGroup(ConfigSettings.DefaultSyntax);
             IContentDocument snippetForm = new QikCodeDocument(qikFile, application, true);
+
+            snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
+            snippetForm.DocumentSaved += snippetForm_DocumentSaved;
+            snippetForm.HeaderFieldsVisible = true;
+            snippetForm.Show(dockPanel, DockState.Document);
+        }
+
+        private void CreateCodeGroupDocument()
+        {
+            ICodeGroupDocumentGroup codeGroupFile = application.CreateCodeGroupDocumentGroup(ConfigSettings.DefaultSyntax);
+            IContentDocument snippetForm = new CodeGroupDocument(codeGroupFile, application, true);
 
             snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
             snippetForm.DocumentSaved += snippetForm_DocumentSaved;
@@ -545,6 +566,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             CreateQikTemplateDocument();
         }
 
+        private void mnuAddCodeGroup_Click(object sender, EventArgs e)
+        {
+            CreateCodeGroupDocument();
+        }
+
         private void mnuSnippetsViewModify_Click(object sender, EventArgs e)
         {
             if (searchForm.SingleSnippetSelected && searchForm.SelectedSnippet != null)
@@ -683,7 +709,5 @@ namespace CygSoft.CodeCat.UI.WinForms
             // This does not include your docked windows, just your "document" windows. This is excellent because
             // you can use this existing collection property to maintain your code snippets.
         }
-
-
     }
 }

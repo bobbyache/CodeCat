@@ -69,6 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlGraphics.cs" />
+    <Compile Include="Controls\CodeItemCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CodeItemCtrl.Designer.cs">
+      <DependentUpon>CodeItemCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\IDocumentItemControl.cs" />
     <Compile Include="Controls\InputPropertyGrid.cs">
       <SubType>UserControl</SubType>
@@ -102,6 +108,12 @@
     </Compile>
     <Compile Include="Documents\BaseDocument.Designer.cs">
       <DependentUpon>BaseDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Documents\CodeGroupDocument.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Documents\CodeGroupDocument.Designer.cs">
+      <DependentUpon>CodeGroupDocument.cs</DependentUpon>
     </Compile>
     <Compile Include="Documents\DocumentTabEventArgs.cs" />
     <Compile Include="Documents\DocumentTabManager.cs" />
@@ -183,6 +195,9 @@
       <DependentUpon>UiResource.resx</DependentUpon>
     </Compile>
     <Compile Include="WordWrapper.cs" />
+    <EmbeddedResource Include="Controls\CodeItemCtrl.resx">
+      <DependentUpon>CodeItemCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\InputPropertyGrid.resx">
       <DependentUpon>InputPropertyGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -200,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InvalidRemoveDialog.resx">
       <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Documents\CodeGroupDocument.resx">
+      <DependentUpon>CodeGroupDocument.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Documents\QikCodeDocument.resx">
       <DependentUpon>QikCodeDocument.cs</DependentUpon>

@@ -50,7 +50,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             TabPage tabPage = new TabPage(document.Title);
             tabPage.Name = document.Id;
             tabPage.ImageIndex = tabUserControl.ImageKey;
-            tabPage.ImageIndex = tabUserControl.ImageKey;
 
             tabUserControl.ParentTab = tabPage;
             ((UserControl)tabUserControl).Dock = DockStyle.Fill;

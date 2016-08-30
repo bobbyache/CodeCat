@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
@@ -146,6 +147,17 @@ namespace CygSoft.CodeCat.UI.WinForms
             else if (item is IQikKeywordIndexItem)
             {
                 IQikKeywordIndexItem codeItem = item as IQikKeywordIndexItem;
+                listItem.Name = item.Id;
+                listItem.Tag = item;
+                listItem.ImageKey = IconRepository.QikKey;
+                listItem.Text = item.Title;
+                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
+                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
+                listView.Items.Add(listItem);
+            }
+            else if (item is ICodeGroupKeywordIndexItem)
+            {
+                ICodeGroupKeywordIndexItem codeItem = item as ICodeGroupKeywordIndexItem;
                 listItem.Name = item.Id;
                 listItem.Tag = item;
                 listItem.ImageKey = IconRepository.QikKey;

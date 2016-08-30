@@ -56,6 +56,7 @@
             this.mnuSnippets = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSnippetsAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSnippetsViewModify = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAddQikTemplate = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindowKeywordSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
@@ -66,7 +67,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.indexCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.mnuAddQikTemplate = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAddCodeGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -149,7 +150,8 @@
             this.mnuSnippets.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSnippetsAdd,
             this.mnuSnippetsViewModify,
-            this.mnuAddQikTemplate});
+            this.mnuAddQikTemplate,
+            this.mnuAddCodeGroup});
             this.mnuSnippets.Name = "mnuSnippets";
             this.mnuSnippets.Size = new System.Drawing.Size(64, 20);
             this.mnuSnippets.Text = "Snippets";
@@ -167,6 +169,13 @@
             this.mnuSnippetsViewModify.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
             this.mnuSnippetsViewModify.Size = new System.Drawing.Size(192, 22);
             this.mnuSnippetsViewModify.Text = "View/Modify...";
+            // 
+            // mnuAddQikTemplate
+            // 
+            this.mnuAddQikTemplate.Name = "mnuAddQikTemplate";
+            this.mnuAddQikTemplate.Size = new System.Drawing.Size(192, 22);
+            this.mnuAddQikTemplate.Text = "Add Qik Template";
+            this.mnuAddQikTemplate.Click += new System.EventHandler(this.mnuAddQikTemplate_Click);
             // 
             // mnuWindow
             // 
@@ -289,12 +298,12 @@
             this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 7;
             // 
-            // mnuAddQikTemplate
+            // mnuAddCodeGroup
             // 
-            this.mnuAddQikTemplate.Name = "mnuAddQikTemplate";
-            this.mnuAddQikTemplate.Size = new System.Drawing.Size(192, 22);
-            this.mnuAddQikTemplate.Text = "Add Qik Template";
-            this.mnuAddQikTemplate.Click += new System.EventHandler(this.mnuAddQikTemplate_Click);
+            this.mnuAddCodeGroup.Name = "mnuAddCodeGroup";
+            this.mnuAddCodeGroup.Size = new System.Drawing.Size(192, 22);
+            this.mnuAddCodeGroup.Text = "Add Code Group";
+            this.mnuAddCodeGroup.Click += new System.EventHandler(this.mnuAddCodeGroup_Click);
             // 
             // MainForm
             // 
@@ -343,6 +352,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem mnuDocuments;
         private System.Windows.Forms.ToolStripMenuItem mnuAddQikTemplate;
+        private System.Windows.Forms.ToolStripMenuItem mnuAddCodeGroup;
 
     }
 }

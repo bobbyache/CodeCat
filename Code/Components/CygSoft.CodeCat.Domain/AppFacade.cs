@@ -228,7 +228,7 @@ namespace CygSoft.CodeCat.Domain
 
         public ICodeGroupDocumentGroup CreateCodeGroupDocumentGroup(string syntax)
         {
-            ICodeGroupDocumentGroup codeGroup = this.codeGroupLibrary.CreateTarget(new QikKeywordIndexItem("New Group Snippet", 
+            ICodeGroupDocumentGroup codeGroup = this.codeGroupLibrary.CreateTarget(new CodeGroupKeywordIndexItem("New Group Snippet", 
                 syntax, string.Empty)) as ICodeGroupDocumentGroup;
             return codeGroup;
         }
