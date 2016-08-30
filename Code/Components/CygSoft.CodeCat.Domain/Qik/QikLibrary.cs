@@ -22,7 +22,7 @@ namespace CygSoft.CodeCat.Domain.Qik
         protected override IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem)
         {
             QikKeywordIndexItem qikIndexItem = indexItem as QikKeywordIndexItem;
-            QikFile qikFile = new QikFile(qikIndexItem, this.FolderPath);
+            QikDocumentGroup qikFile = new QikDocumentGroup(qikIndexItem, this.FolderPath);
 
             if (this.openFiles == null)
                 this.openFiles = new Dictionary<string, IPersistableTarget>();
@@ -49,7 +49,7 @@ namespace CygSoft.CodeCat.Domain.Qik
             else
             {
                 // retrieve the file and add it to the opened code files.
-                persistableFile = new QikFile(qikIndexItem, this.FolderPath);
+                persistableFile = new QikDocumentGroup(qikIndexItem, this.FolderPath);
 
                 if (this.openFiles == null)
                     this.openFiles = new Dictionary<string, IPersistableTarget>();

@@ -321,7 +321,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 }
                 else if (snippetIndex is IQikKeywordIndexItem)
                 {
-                    QikFile qikFile = application.OpenQikSnippet(snippetIndex);
+                    QikDocumentGroup qikFile = application.OpenQikSnippet(snippetIndex);
                     IContentDocument snippetForm = new QikCodeDocument(qikFile, application);
                     snippetForm.HeaderFieldsVisible = false;
                     snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
@@ -354,7 +354,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateQikTemplateDocument()
         {
-            QikFile qikFile = application.CreateQikTemplate(ConfigSettings.DefaultSyntax);
+            QikDocumentGroup qikFile = application.CreateQikTemplate(ConfigSettings.DefaultSyntax);
             IContentDocument snippetForm = new QikCodeDocument(qikFile, application, true);
 
             snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;

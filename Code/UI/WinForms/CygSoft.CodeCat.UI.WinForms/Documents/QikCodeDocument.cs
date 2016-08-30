@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.UI.WinForms
     public partial class QikCodeDocument : BaseDocument, IContentDocument
     {
         private ICompiler compiler = null;
-        private QikFile qikFile = null;
+        private QikDocumentGroup qikFile = null;
         private DocumentTabManager tabManager = null;
         private QikScriptCtrl scriptControl;
 
@@ -43,7 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public QikCodeDocument(QikFile qikFile, AppFacade application, bool isNew = false)
+        public QikCodeDocument(QikDocumentGroup qikFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 

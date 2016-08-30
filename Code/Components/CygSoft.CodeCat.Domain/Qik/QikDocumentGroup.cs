@@ -17,7 +17,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    public class QikFile : IPersistableTarget
+    public class QikDocumentGroup : IPersistableTarget
     {
         public event EventHandler<FileEventArgs> BeforeDelete;
         public event EventHandler<FileEventArgs> AfterDelete;
@@ -38,7 +38,7 @@ namespace CygSoft.CodeCat.Domain.Qik
         private IKeywordIndexItem indexItem;
         private QikDocumentIndex documentIndex = null;
 
-        public QikFile(QikKeywordIndexItem indexItem, string folderPath)
+        public QikDocumentGroup(QikKeywordIndexItem indexItem, string folderPath)
         {
             this.indexItem = indexItem;
             this.Compiler = new Compiler();

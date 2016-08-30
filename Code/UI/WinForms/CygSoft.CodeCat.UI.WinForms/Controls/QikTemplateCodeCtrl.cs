@@ -21,10 +21,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private ICodeDocument templateFile;
         private AppFacade application;
-        private QikFile qikFile;
+        private QikDocumentGroup qikFile;
         private ICompiler compiler;
 
-        public QikTemplateCodeCtrl(AppFacade application, QikFile qikFile, ICodeDocument templateFile)
+        public QikTemplateCodeCtrl(AppFacade application, QikDocumentGroup qikFile, ICodeDocument templateFile)
         {
             InitializeComponent();
             

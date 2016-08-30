@@ -20,12 +20,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler Modified;
 
         private AppFacade application;
-        private QikFile qikFile;
+        private QikDocumentGroup qikFile;
         private ICodeDocument scriptFile;
         private ICompiler compiler;
         private Row selectedRow;
 
-        public QikScriptCtrl(AppFacade application, QikFile qikFile)
+        public QikScriptCtrl(AppFacade application, QikDocumentGroup qikFile)
         {
             InitializeComponent();
 
