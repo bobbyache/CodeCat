@@ -17,7 +17,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    public class QikDocumentGroup : IPersistableTarget
+    internal class QikDocumentGroup : IPersistableTarget, IQikDocumentGroup
     {
         public event EventHandler<FileEventArgs> BeforeDelete;
         public event EventHandler<FileEventArgs> AfterDelete;
@@ -70,14 +70,44 @@ namespace CygSoft.CodeCat.Domain.Qik
         public ICompiler Compiler { get; private set; }
 
         public string Text { get; set; }
+
+        // would like to remove this at some point see... TemplateFiles property below...
         public ICodeDocument[] Documents { get { return this.documentIndex.DocumentFiles.OfType<ICodeDocument>().ToArray(); } }
+
+        public ICodeDocument[] TemplateFiles
+        {
+            get
+            {
+                List<ICodeDocument> codeDocuments = this.documentIndex.DocumentFiles.OfType<ICodeDocument>().ToList();
+                IQikScriptDocument scriptDoc = codeDocuments.OfType<IQikScriptDocument>().SingleOrDefault();
+                codeDocuments.Remove(scriptDoc);
+                return codeDocuments.ToArray();
+            }
+        }
 
         public string Id { get { return this.IndexItem.Id; } }
         public string FilePath { get { return this.documentIndex.FilePath; } }
-        public string FileTitle { get { return this.documentIndex.FileName; } }
-        public string FolderPath { get { return this.documentIndex.Folder; } }
+        public bool Exists { get { return this.documentIndex.Exists; } }
 
-        public bool FileExists { get { return this.documentIndex.Exists; } }
+        public string FileName
+        {
+            get { return this.documentIndex.FileName; }
+        }
+
+        public string FileExtension
+        {
+            get { return this.documentIndex.FileExtension; }
+        }
+
+        public string Folder
+        {
+            get { return this.documentIndex.Folder; }
+        }
+
+        public bool Loaded
+        {
+            get { return this.documentIndex.Loaded; }
+        }
 
         public string Title
         {
@@ -171,7 +201,8 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public ICodeDocument AddTemplate(string syntax)
         {
-            return this.documentIndex.AddDocumentFile(DocumentFactory.CreateCodeDocument(documentIndex.Folder, "New Template", "tpl", syntax)) as ICodeDocument;
+            return this.documentIndex.AddDocumentFile(DocumentFactory.CreateCodeDocument(documentIndex.Folder, 
+                "New Template", "tpl", syntax)) as ICodeDocument;
         }
 
         public void RemoveTemplate(string id)
@@ -280,31 +311,6 @@ namespace CygSoft.CodeCat.Domain.Qik
         {
             if (DocumentAdded != null)
                 DocumentAdded(this, e);
-        }
-
-        public string FileName
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string FileExtension
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string Folder
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public bool Exists
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public bool Loaded
-        {
-            get { throw new NotImplementedException(); }
         }
     }
 }

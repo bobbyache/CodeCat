@@ -192,9 +192,9 @@ namespace CygSoft.CodeCat.Domain
             return codeFile;
         }
 
-        public QikDocumentGroup CreateQikTemplate(string syntax)
+        public IQikDocumentGroup CreateQikDocumentGroup(string syntax)
         {
-            QikDocumentGroup qikFile = this.qikLibrary.CreateTarget(new QikKeywordIndexItem("New Qik Template", syntax, string.Empty)) as QikDocumentGroup;
+            IQikDocumentGroup qikFile = this.qikLibrary.CreateTarget(new QikKeywordIndexItem("New Qik Template", syntax, string.Empty)) as QikDocumentGroup;
             return qikFile;
         }
 
@@ -203,9 +203,9 @@ namespace CygSoft.CodeCat.Domain
             return this.codeLibrary.OpenTarget(keywordIndexItem) as CodeFile;
         }
 
-        public QikDocumentGroup OpenQikSnippet(IKeywordIndexItem keywordIndexItem)
+        public IQikDocumentGroup OpenQikDocumentGroup(IKeywordIndexItem keywordIndexItem)
         {
-            return this.qikLibrary.OpenTarget(keywordIndexItem) as QikDocumentGroup;
+            return this.qikLibrary.OpenTarget(keywordIndexItem) as IQikDocumentGroup;
         }
     }
 }

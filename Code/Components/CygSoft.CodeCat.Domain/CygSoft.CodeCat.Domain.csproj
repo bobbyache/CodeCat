@@ -58,6 +58,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Code\ICodeKeywordIndexItem.cs" />
+    <Compile Include="Qik\IQikDocumentGroup.cs" />
     <Compile Include="Qik\IQikKeywordIndexItem.cs" />
     <Compile Include="Qik\Document\QikDocumentIndex.cs" />
     <Compile Include="Qik\QikDocumentGroup.cs" />

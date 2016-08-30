@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.UI.WinForms
     public partial class QikCodeDocument : BaseDocument, IContentDocument
     {
         private ICompiler compiler = null;
-        private QikDocumentGroup qikFile = null;
+        private IQikDocumentGroup qikFile = null;
         private DocumentTabManager tabManager = null;
         private QikScriptCtrl scriptControl;
 
@@ -43,7 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public QikCodeDocument(QikDocumentGroup qikFile, AppFacade application, bool isNew = false)
+        public QikCodeDocument(IQikDocumentGroup qikFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
@@ -211,12 +211,10 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void RebuildTabs()
         {
             tabManager.Clear();
-            foreach (ICodeDocument document in qikFile.Documents)
+            tabManager.AddTab(qikFile.ScriptFile, scriptControl, btnShowScript.Checked, false);
+            foreach (ICodeDocument document in qikFile.TemplateFiles)
             {
-                if (document is IQikScriptDocument)
-                    tabManager.AddTab(document, scriptControl, btnShowScript.Checked, false);
-                else
-                    tabManager.AddTab(document, NewTemplateControl(document), true, false);
+                tabManager.AddTab(document, NewTemplateControl(document), true, false);
             }
         }
 
