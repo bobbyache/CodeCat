@@ -32,7 +32,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.qikFile = qikFile;
             this.compiler = qikFile.Compiler;
             this.templateFile = templateFile;
-            this.Id = templateFile.FileName;
+            this.Id = templateFile.Id;
 
             templateSyntaxDocument.SyntaxFile = ConfigSettings.QikTemplateSyntaxFile;
 
@@ -47,10 +47,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             UpdateAutoList();
         }
 
-        public int ImageKey { get { return IconRepository.ImageKeyFor(templateFile.Syntax); } }
-        public TabPage ParentTab { get; set; }
-
-
+        public int ImageKey { get { return IconRepository.ImageKeyFor(cboSyntax.SelectedItem.ToString()); } }
+        public Icon ImageIcon { get { return IconRepository.GetIcon(cboSyntax.SelectedItem.ToString()); } }
+        public Image IconImage { get { return IconRepository.GetImage(cboSyntax.SelectedItem.ToString()); } }
 
         public string Id { get; private set; }
 
@@ -157,7 +156,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
             cboFontSize.SelectedIndexChanged += cboFontSize_SelectedIndexChanged;
             txtTitle.TextChanged += SetModified;
-            txtTitle.Validated += txtTitle_Validated;
             templateSyntaxBox.TextChanged += SetModified;
             this.Modified += QikTemplateCodeCtrl_Modified;
         }
@@ -188,7 +186,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             cboSyntax.SelectedIndexChanged -= cboSyntax_SelectedIndexChanged;
             cboFontSize.SelectedIndexChanged -= cboFontSize_SelectedIndexChanged;
             txtTitle.TextChanged -= SetModified;
-            txtTitle.Validated += txtTitle_Validated;
             templateSyntaxBox.TextChanged -= SetModified;
             this.Modified -= QikTemplateCodeCtrl_Modified;
         }
@@ -201,12 +198,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // don't want the syntax box to fire any events here...
+            templateSyntaxBox.TextChanged -= SetModified;
             SelectSyntax(cboSyntax.SelectedItem.ToString());
-
-            this.IsModified = true;
-
-            if (this.Modified != null)
-                this.Modified(this, new EventArgs()); 
+            templateSyntaxBox.TextChanged += SetModified;
+            SetModified(this, e);
         }
 
         private void SetModified(object sender, EventArgs e)
@@ -240,13 +236,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             string syntaxFile = application.GetSyntaxFile(syn);
             this.outputSyntaxBox.Document.SyntaxFile = syntaxFile;
 
-            if (this.ParentTab != null)
-                this.ParentTab.ImageIndex = IconRepository.ImageKeyFor(syn);
-
             this.lblEditStatus.Image = IconRepository.GetIcon(syn).ToBitmap();
         }
-
-        
 
         private void SetDefaultFont()
         {
@@ -255,11 +246,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 cboFontSize.SelectedIndex = index;
             else
                 cboFontSize.SelectedIndex = 4;
-        }
-
-        private void txtTitle_Validated(object sender, EventArgs e)
-        {
-            this.ParentTab.Text = txtTitle.Text;
         }
 
         private void templateSyntaxBox_KeyDown(object sender, KeyEventArgs e)

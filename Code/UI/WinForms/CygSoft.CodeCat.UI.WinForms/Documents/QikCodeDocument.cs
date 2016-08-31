@@ -59,7 +59,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
             this.compiler = qikFile.Compiler;
-            this.tabManager = new DocumentTabManager(this.tabControlFile);
+            this.tabManager = new DocumentTabManager(this.tabControlFile, this.btnMenu);
             this.tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   
             RebuildTabs();

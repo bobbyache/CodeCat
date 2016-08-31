@@ -14,15 +14,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
         public event EventHandler<DocumentTabEventArgs> BeforeDeleteTab;
         
         private TabControl tabControl;
+        private ToolStripDropDownButton tabMenuButton;
         private Dictionary<string, TabPage> tabPageDictionary = new Dictionary<string, TabPage>();
 
         public string SelectedTabId { get { return tabControl.SelectedTab.Name; } }
         public TabPage SelectedTab { get { return tabControl.SelectedTab; } }
         public bool HasTabs { get { return this.tabControl.TabPages.Count > 0; } }
 
-        public DocumentTabManager(TabControl tabControl)
+        public DocumentTabManager(TabControl tabControl, ToolStripDropDownButton tabMenuButton)
         {
             this.tabControl = tabControl;
+            this.tabMenuButton = tabMenuButton;
         }
 
         public bool TabExists(string id)
@@ -51,15 +53,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             tabPage.Name = document.Id;
             tabPage.ImageIndex = tabUserControl.ImageKey;
 
-            tabUserControl.ParentTab = tabPage;
             ((UserControl)tabUserControl).Dock = DockStyle.Fill;
             tabPage.Controls.Add(tabUserControl as UserControl);
+            tabUserControl.Modified += tabUserControl_Modified;
 
             tabPageDictionary.Add(document.Id, tabPage);
 
             if (visible)
             {
                 tabControl.TabPages.Add(tabPage);
+                AddTabMenuItem(document as ICodeDocument);
                 if (select)
                     tabControl.SelectedTab = tabPage;
             }
@@ -70,10 +73,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
         public void RemoveTab(string id)
         {
             TabPage tabPage = tabPageDictionary[id];
+            IDocumentItemControl itemControl = FindDocumentControl(id);
+            itemControl.Modified -= tabUserControl_Modified;
 
             if (BeforeDeleteTab != null)
                 BeforeDeleteTab(this, new DocumentTabEventArgs(tabPage, tabPage.Controls[0] as UserControl));
 
+            RemoveTabMenuItem(id);
             tabPageDictionary.Remove(id);
             tabControl.TabPages.Remove(tabPage);
         }
@@ -85,6 +91,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             if (visible && !tabControl.Contains(tabPage))
             {
                 tabControl.TabPages.Add(tabPage);
+                AddTabMenuItem(id);
                 tabControl.SelectedTab = tabPage;
             }
             else if (visible && tabControl.Contains(tabPage))
@@ -92,7 +99,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             else
             {
                 if (tabControl.Contains(tabPage))
+                {
                     tabControl.TabPages.Remove(tabPage);
+                    RemoveTabMenuItem(id);
+                }
             }
         }
 
@@ -100,12 +110,65 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
         {
             foreach (TabPage tabPage in tabControl.TabPages)
             {
+                ToolStripMenuItem item = tabMenuButton.DropDownItems[tabPage.Name] as ToolStripMenuItem;
+                item.Click -= item_Click;
+
+                IDocumentItemControl itemControl = FindDocumentControl(tabPage.Name);
+                itemControl.Modified -= tabUserControl_Modified;
+
                 if (BeforeDeleteTab != null)
                     BeforeDeleteTab(this, new DocumentTabEventArgs(tabPage, tabPage.Controls[0] as UserControl));
             }
 
             tabPageDictionary.Clear();
             tabControl.TabPages.Clear();
+            tabMenuButton.DropDownItems.Clear();
+        }
+
+        private void AddTabMenuItem(string id)
+        {
+            IDocumentItemControl docControl = FindDocumentControl(id);
+            ToolStripMenuItem item = new ToolStripMenuItem();
+            item.Name = docControl.Id;
+            item.Text = docControl.Title;
+            item.Image = docControl.IconImage;
+            item.Click += item_Click;
+            this.tabMenuButton.DropDownItems.Add(item);
+        }
+
+        private void AddTabMenuItem(ICodeDocument document)
+        {
+            ToolStripMenuItem item = new ToolStripMenuItem();
+            item.Name = document.Id;
+            item.Text = document.Title;
+            item.Image = IconRepository.GetImage(document.Syntax);
+            item.Click += item_Click;
+            this.tabMenuButton.DropDownItems.Add(item);
+        }
+
+        private void RemoveTabMenuItem(string id)
+        {
+            ToolStripMenuItem item = this.tabMenuButton.DropDownItems[id] as ToolStripMenuItem;
+            item.Click -= item_Click;
+            this.tabMenuButton.DropDownItems.Remove(item);
+        }
+
+        private void tabUserControl_Modified(object sender, EventArgs e)
+        {
+            IDocumentItemControl control = sender as IDocumentItemControl;
+            TabPage tabPage = tabPageDictionary[control.Id];
+            ToolStripMenuItem item = this.tabMenuButton.DropDownItems[control.Id] as ToolStripMenuItem;
+
+            tabPage.ImageIndex = control.ImageKey;
+            tabPage.Text = control.Title;
+            item.Text = control.Title;
+            item.Image = control.IconImage;
+        }
+
+        private void item_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            this.DisplayTab(item.Name, true);
         }
     }
 }

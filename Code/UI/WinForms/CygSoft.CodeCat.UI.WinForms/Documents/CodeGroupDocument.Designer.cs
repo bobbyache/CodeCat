@@ -47,11 +47,11 @@
             this.btnAddCodeItem = new System.Windows.Forms.ToolStripButton();
             this.btnRemoveCodeItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControlFile = new System.Windows.Forms.TabControl();
+            this.btnMenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -166,6 +166,8 @@
             // toolstripCommands
             // 
             this.toolstripCommands.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnMenu,
+            this.toolStripSeparator6,
             this.btnSave,
             this.btnDiscardChange,
             this.toolStripSeparator1,
@@ -175,10 +177,8 @@
             this.btnAddCodeItem,
             this.btnRemoveCodeItem,
             this.toolStripSeparator3,
-            this.toolStripSeparator5,
             this.btnMoveLeft,
-            this.btnMoveRight,
-            this.toolStripSeparator4});
+            this.btnMoveRight});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
             this.toolstripCommands.Size = new System.Drawing.Size(878, 25);
@@ -210,11 +210,6 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
-            // 
             // btnMoveLeft
             // 
             this.btnMoveLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -235,11 +230,6 @@
             this.btnMoveRight.Text = "Move Right";
             this.btnMoveRight.Click += new System.EventHandler(this.btnMoveRight_Click);
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
             // tabControlFile
             // 
             this.tabControlFile.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -248,6 +238,19 @@
             this.tabControlFile.SelectedIndex = 0;
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
+            // 
+            // btnMenu
+            // 
+            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
+            this.btnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(61, 22);
+            this.btnMenu.Text = "Tabs";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // CodeGroupDocument
             // 
@@ -291,10 +294,10 @@
         private System.Windows.Forms.ToolStripButton btnAddCodeItem;
         private System.Windows.Forms.ToolStripButton btnRemoveCodeItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton btnMoveLeft;
         private System.Windows.Forms.ToolStripButton btnMoveRight;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.TabControl tabControlFile;
+        private System.Windows.Forms.ToolStripDropDownButton btnMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }

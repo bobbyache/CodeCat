@@ -57,6 +57,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
             this.inputPropertyGrid = new CygSoft.CodeCat.UI.WinForms.Controls.InputPropertyGrid();
+            this.btnMenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -175,6 +177,8 @@
             // toolstripCommands
             // 
             this.toolstripCommands.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnMenu,
+            this.toolStripSeparator6,
             this.btnSave,
             this.btnDiscardChange,
             this.toolStripSeparator1,
@@ -319,6 +323,19 @@
             this.inputPropertyGrid.Size = new System.Drawing.Size(365, 575);
             this.inputPropertyGrid.TabIndex = 0;
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
+            this.btnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(61, 22);
+            this.btnMenu.Text = "Tabs";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
             // QikCodeDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,5 +392,7 @@
         private System.Windows.Forms.ToolStripButton btnMoveLeft;
         private System.Windows.Forms.ToolStripButton btnMoveRight;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripDropDownButton btnMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }

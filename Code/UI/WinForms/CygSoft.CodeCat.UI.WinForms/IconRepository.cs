@@ -52,12 +52,26 @@ namespace CygSoft.CodeCat.UI.WinForms
                     Icon icon = Etier.IconHelper.IconReader.GetFileIcon("." + syntaxFile.Extension,
                         Etier.IconHelper.IconReader.IconSize.Small,
                         false);
+                    
                     iconDictonary.Add(syntax, icon);
 
                     if (!imageList.Images.ContainsKey(syntax))
                         imageList.Images.Add(syntax, icon);
                 }
             }
+        }
+
+        public static Image GetImage(string syntax)
+        {
+            Icon icon = null;
+            string uSyntax = syntax.ToUpper();
+
+            if (uSyntax == QikKey)
+                icon = QikIcon;
+            else
+                icon = iconDictonary[uSyntax];
+
+            return icon.ToBitmap();
         }
 
         public static Icon GetIcon(string syntax)

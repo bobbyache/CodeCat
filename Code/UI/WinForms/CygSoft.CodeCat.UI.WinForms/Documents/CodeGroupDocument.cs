@@ -39,7 +39,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.codeItemFile.DocumentMovedRight += codeItemFile_DocumentMovedRight;
             base.persistableTarget = codeItemFile;
             this.Tag = codeItemFile.Id;
-            this.tabManager = new DocumentTabManager(this.tabControlFile);
+            this.tabManager = new DocumentTabManager(this.tabControlFile, this.btnMenu);
             this.tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   
             RebuildTabs();
@@ -271,38 +271,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabManager.DisplayTab(e.Document.Id, true);
             ControlGraphics.ResumeDrawing(this);
         }
-
-        //private void RebuildTabMenu()
-        //{
-        //    foreach (ToolStripMenuItem item in btnMenu.DropDownItems)
-        //        item.Click -= item_Click;
-
-        //    btnMenu.DropDownItems.Clear();
-            
-        //    foreach (ICodeDocument document in codeItemFile.Documents)
-        //    {
-        //        ToolStripMenuItem item = new ToolStripMenuItem();
-        //        item.Tag = document.Id;
-        //        item.Name = document.Id;
-        //        item.Text = document.Title;
-        //        item.Image = IconRepository.GetIcon(document.Syntax).ToBitmap();
-        //        item.Click +=item_Click;
-        //        btnMenu.DropDownItems.Add(item);
-        //    }
-        //}
-
-        //private void item_Click(object sender, EventArgs e)
-        //{
-        //    ToolStripMenuItem item = sender as ToolStripMenuItem;
-        //    tabManager.DisplayTab(item.Name, true);
-        //}
-
-        //private void btnMenu_Click(object sender, EventArgs e)
-        //{
-        //    ControlGraphics.SuspendDrawing(this);
-        //    RebuildTabMenu();
-        //    ControlGraphics.ResumeDrawing(this);
-        //}
 
         #endregion
 

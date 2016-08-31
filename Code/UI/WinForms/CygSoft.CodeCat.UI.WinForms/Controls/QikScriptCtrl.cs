@@ -43,7 +43,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         }
 
         public int ImageKey { get { return IconRepository.ImageKeyFor(IconRepository.QikKey); } }
-        public TabPage ParentTab { get; set; }
+        public Icon ImageIcon { get { return IconRepository.GetIcon(IconRepository.QikKey); } }
+        public Image IconImage { get { return IconRepository.GetImage(IconRepository.QikKey); } }
 
         public string Id { get { return this.scriptFile.Id; } }
 
