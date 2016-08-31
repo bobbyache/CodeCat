@@ -111,6 +111,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 Directory.Delete(this.Folder);
         }
 
+        protected override void OnAfterRevert()
+        {
+            this.removedDocumentFiles.Clear();
+        }
+
         public IDocument GetDocumentFile(string id)
         {
             try
