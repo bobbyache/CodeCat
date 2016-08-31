@@ -154,9 +154,6 @@
   <data name="DiscardSnippetChanges" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\control_rewind.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="QikFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\rfid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Compile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\hourglass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -171,5 +168,14 @@
   </data>
   <data name="MoveRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\arrow_right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CodeGroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\codegroup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QikGroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\qik.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GroupMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\book_open1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

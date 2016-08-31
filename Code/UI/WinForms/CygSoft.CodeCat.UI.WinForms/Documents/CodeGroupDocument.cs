@@ -139,7 +139,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnRemoveCodeItem.Image = Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
             btnMoveLeft.Image = Resources.GetImage(Constants.ImageKeys.MoveLeft);
             btnMoveRight.Image = Resources.GetImage(Constants.ImageKeys.MoveRight);
-            this.Icon = IconRepository.QikIcon;
+            btnMenu.Image = Resources.GetImage(Constants.ImageKeys.GroupMenu);
+            this.Icon = IconRepository.CodeGroupIcon;
         }
 
         private void RegisterEvents()

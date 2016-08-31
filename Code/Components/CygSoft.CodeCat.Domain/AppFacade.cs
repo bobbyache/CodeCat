@@ -58,6 +58,7 @@ namespace CygSoft.CodeCat.Domain
 
         public void OpenContextFolder()
         {
+            // rather make open project folder.
             this.codeLibrary.OpenProjectFolder();
         }
 
@@ -109,7 +110,6 @@ namespace CygSoft.CodeCat.Domain
             return this.syntaxRepository[syntax].FilePath;
         }
 
-
         public IKeywordIndexItem[] FindIndeces(string commaDelimitedKeywords)
         {
             List<IKeywordIndexItem> keywordIndexItems = new List<IKeywordIndexItem>();
@@ -123,12 +123,22 @@ namespace CygSoft.CodeCat.Domain
 
         public string[] AllKeywords(IKeywordIndexItem[] indeces)
         {
-            return this.codeLibrary.AllKeywords(indeces);
+            KeyPhrases keyPhrases = new KeyPhrases();
+            foreach (IKeywordIndexItem index in indeces)
+            {
+                keyPhrases.AddKeyPhrases(index.CommaDelimitedKeywords);
+            }
+            return keyPhrases.Phrases;
         }
 
         public string CopyAllKeywords(IKeywordIndexItem[] indeces)
         {
-            return this.codeLibrary.CopyAllKeywords(indeces);
+            KeyPhrases keyPhrases = new KeyPhrases();
+            foreach (IKeywordIndexItem index in indeces)
+            {
+                keyPhrases.AddKeyPhrases(index.CommaDelimitedKeywords);
+            }
+            return keyPhrases.DelimitKeyPhraseList();
         }
 
         public void AddKeywords(IKeywordIndexItem[] indeces, string delimitedKeywordList)

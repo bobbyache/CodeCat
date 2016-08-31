@@ -168,6 +168,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnShowScript.Image = Resources.GetImage(Constants.ImageKeys.TemplateScript);
             btnMoveLeft.Image = Resources.GetImage(Constants.ImageKeys.MoveLeft);
             btnMoveRight.Image = Resources.GetImage(Constants.ImageKeys.MoveRight);
+            btnMenu.Image = Resources.GetImage(Constants.ImageKeys.GroupMenu);
             this.Icon = IconRepository.QikIcon;
         }
 
@@ -318,38 +319,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabManager.DisplayTab(e.Document.Id, true);
             ControlGraphics.ResumeDrawing(this);
         }
-
-        //private void RebuildTabMenu()
-        //{
-        //    foreach (ToolStripMenuItem item in btnMenu.DropDownItems)
-        //        item.Click -= item_Click;
-
-        //    btnMenu.DropDownItems.Clear();
-            
-        //    foreach (ICodeDocument document in qikFile.Documents)
-        //    {
-        //        ToolStripMenuItem item = new ToolStripMenuItem();
-        //        item.Tag = document.Id;
-        //        item.Name = document.Id;
-        //        item.Text = document.Title;
-        //        item.Image = IconRepository.GetIcon(document.Syntax).ToBitmap();
-        //        item.Click +=item_Click;
-        //        btnMenu.DropDownItems.Add(item);
-        //    }
-        //}
-
-        //private void item_Click(object sender, EventArgs e)
-        //{
-        //    ToolStripMenuItem item = sender as ToolStripMenuItem;
-        //    tabManager.DisplayTab(item.Name, true);
-        //}
-
-        //private void btnMenu_Click(object sender, EventArgs e)
-        //{
-        //    ControlGraphics.SuspendDrawing(this);
-        //    RebuildTabMenu();
-        //    ControlGraphics.ResumeDrawing(this);
-        //}
 
         #endregion
 

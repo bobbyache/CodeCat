@@ -330,6 +330,9 @@
     <None Include="Resources\money_dollar.png" />
     <None Include="Resources\arrow_left.png" />
     <None Include="Resources\arrow_right.png" />
+    <None Include="Resources\qik.png" />
+    <None Include="Resources\codegroup.png" />
+    <None Include="Resources\book_open1.png" />
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

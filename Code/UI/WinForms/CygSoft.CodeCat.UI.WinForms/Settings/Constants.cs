@@ -20,7 +20,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string NewProject = "NewProject";
             public const string AddSnapshot = "AddSnapshot";
             public const string DeleteSnapshot = "DeleteSnapshot";
-            public const string QikFile = "QikFile";
+            public const string QikGroup = "QikGroup";
+            public const string CodeGroup = "CodeGroup";
             public const string AddTemplate = "add";
             public const string RemoveTemplate = "delete";
             public const string ShowProperties = "ShowProperties";
@@ -28,6 +29,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string TemplateScript = "TemplateScript";
             public const string MoveLeft = "MoveLeft";
             public const string MoveRight = "MoveRight";
+            public const string GroupMenu = "GroupMenu";
             //public const string SaveProject = "SaveProject";
         }
     }

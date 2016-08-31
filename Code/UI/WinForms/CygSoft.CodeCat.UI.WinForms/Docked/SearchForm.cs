@@ -160,7 +160,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ICodeGroupKeywordIndexItem codeItem = item as ICodeGroupKeywordIndexItem;
                 listItem.Name = item.Id;
                 listItem.Tag = item;
-                listItem.ImageKey = IconRepository.QikKey;
+                listItem.ImageKey = IconRepository.CodeGroupKey;
                 listItem.Text = item.Title;
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));

@@ -93,6 +93,16 @@ namespace CygSoft.CodeCat.UI.WinForms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CodeGroup {
+            get {
+                object obj = ResourceManager.GetObject("CodeGroup", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Compile {
             get {
                 object obj = ResourceManager.GetObject("Compile", resourceCulture);
@@ -163,6 +173,16 @@ namespace CygSoft.CodeCat.UI.WinForms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GroupMenu {
+            get {
+                object obj = ResourceManager.GetObject("GroupMenu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap MoveLeft {
             get {
                 object obj = ResourceManager.GetObject("MoveLeft", resourceCulture);
@@ -203,9 +223,9 @@ namespace CygSoft.CodeCat.UI.WinForms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap QikFile {
+        internal static System.Drawing.Bitmap QikGroup {
             get {
-                object obj = ResourceManager.GetObject("QikFile", resourceCulture);
+                object obj = ResourceManager.GetObject("QikGroup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

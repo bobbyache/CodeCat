@@ -13,6 +13,7 @@ namespace CygSoft.CodeCat.UI.WinForms
     public static class IconRepository
     {
         public const string QikKey = "QIK";
+        public const string CodeGroupKey = "CodeGroup";
 
         private static ImageList imageList = new ImageList();
         private static Dictionary<string, Icon> iconDictonary = new Dictionary<string, Icon>();
@@ -26,7 +27,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 if (qikIcon == null)
                 {
-                    Bitmap qikBitMap = new Bitmap(Resources.GetImage(Constants.ImageKeys.QikFile));
+                    Bitmap qikBitMap = new Bitmap(Resources.GetImage(Constants.ImageKeys.QikGroup));
                     IntPtr iconPtr = qikBitMap.GetHicon();
                     qikIcon = Icon.FromHandle(iconPtr);
                 }
@@ -34,8 +35,28 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        private static Icon codeGroupIcon;
+        public static Icon CodeGroupIcon
+        {
+            get
+            {
+                if (codeGroupIcon == null)
+                {
+                    Bitmap codeGroupBitmap = new Bitmap(Resources.GetImage(Constants.ImageKeys.CodeGroup));
+                    IntPtr iconPtr = codeGroupBitmap.GetHicon();
+                    codeGroupIcon = Icon.FromHandle(iconPtr);
+                }
+                return codeGroupIcon;
+            }
+        }
+
         public static void Load(SyntaxFile[] syntaxFiles)
         {
+            iconDictonary.Add(CodeGroupKey, CodeGroupIcon);
+
+            if (!imageList.Images.ContainsKey(CodeGroupKey))
+                imageList.Images.Add(CodeGroupKey, CodeGroupIcon);
+
             foreach (SyntaxFile syntaxFile in syntaxFiles)
             {
                 string syntax = syntaxFile.Syntax.ToUpper();
@@ -47,6 +68,13 @@ namespace CygSoft.CodeCat.UI.WinForms
                     if (!imageList.Images.ContainsKey(syntax))
                         imageList.Images.Add(syntax, QikIcon);
                 }
+                //else if (syntax == CodeGroupKey)
+                //{
+                //    iconDictonary.Add(syntax, CodeGroupIcon);
+
+                //    if (!imageList.Images.ContainsKey(syntax))
+                //        imageList.Images.Add(syntax, CodeGroupIcon);
+                //}
                 else
                 {
                     Icon icon = Etier.IconHelper.IconReader.GetFileIcon("." + syntaxFile.Extension,
@@ -68,6 +96,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             if (uSyntax == QikKey)
                 icon = QikIcon;
+            else if (uSyntax == CodeGroupKey)
+                icon = CodeGroupIcon;
             else
                 icon = iconDictonary[uSyntax];
 
@@ -80,6 +110,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             if (uSyntax == QikKey)
                 return QikIcon;
+            else if (uSyntax == CodeGroupKey)
+                return CodeGroupIcon;
             else
                 return iconDictonary[uSyntax];
         }
