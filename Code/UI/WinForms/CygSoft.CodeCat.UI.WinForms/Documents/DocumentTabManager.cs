@@ -149,8 +149,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
         private void RemoveTabMenuItem(string id)
         {
             ToolStripMenuItem item = this.tabMenuButton.DropDownItems[id] as ToolStripMenuItem;
-            item.Click -= item_Click;
-            this.tabMenuButton.DropDownItems.Remove(item);
+            if (item != null)
+            {
+                item.Click -= item_Click;
+                this.tabMenuButton.DropDownItems.Remove(item);
+            }
         }
 
         private void tabUserControl_Modified(object sender, EventArgs e)

@@ -314,8 +314,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             ControlGraphics.SuspendDrawing(this);
             tabManager.AddTab(e.Document, NewTemplateControl(e.Document), true, true);
             tabManager.OrderTabs(qikFile.Documents);
-            tabManager.DisplayTab(e.Document.Id, true);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
+            tabManager.DisplayTab(e.Document.Id, true);
             ControlGraphics.ResumeDrawing(this);
         }
 
