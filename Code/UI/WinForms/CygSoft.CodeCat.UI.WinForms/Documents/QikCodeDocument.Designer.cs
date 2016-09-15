@@ -44,6 +44,8 @@
             this.btnDiscardChange = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolstripCommands = new System.Windows.Forms.ToolStrip();
+            this.btnMenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAddTemplate = new System.Windows.Forms.ToolStripButton();
             this.btnRemoveTemplate = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -57,8 +59,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
             this.inputPropertyGrid = new CygSoft.CodeCat.UI.WinForms.Controls.InputPropertyGrid();
-            this.btnMenu = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -201,6 +201,19 @@
             this.toolstripCommands.TabIndex = 5;
             this.toolstripCommands.Text = "toolStrip4";
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
+            this.btnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(61, 22);
+            this.btnMenu.Text = "Tabs";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
             // btnAddTemplate
             // 
             this.btnAddTemplate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -247,7 +260,7 @@
             this.btnShowScript.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnShowScript.Name = "btnShowScript";
             this.btnShowScript.Size = new System.Drawing.Size(23, 22);
-            this.btnShowScript.Text = "Hide Qik Script";
+            this.btnShowScript.Text = "Show Qik Script";
             this.btnShowScript.CheckedChanged += new System.EventHandler(this.btnShowScript_CheckedChanged);
             // 
             // toolStripSeparator5
@@ -322,19 +335,6 @@
             this.inputPropertyGrid.Name = "inputPropertyGrid";
             this.inputPropertyGrid.Size = new System.Drawing.Size(365, 575);
             this.inputPropertyGrid.TabIndex = 0;
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
-            this.btnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(61, 22);
-            this.btnMenu.Text = "Tabs";
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // QikCodeDocument
             // 

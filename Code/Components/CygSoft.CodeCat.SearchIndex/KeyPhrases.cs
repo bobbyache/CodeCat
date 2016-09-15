@@ -22,7 +22,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
         public KeyPhrases(List<string> keyPhrases)
         {
-            this.keyPhrases = keyPhrases;
+            this.keyPhrases = keyPhrases.Select(s => s.Trim().ToUpper()).Where(s => !string.IsNullOrEmpty(s)).ToList(); ;
         }
 
         public bool PhraseExists(string phrase)
@@ -74,7 +74,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             foreach (string keyphrase in keyPhraseList)
             {
                 string trimmed = keyphrase.Trim();
-                if (!keyPhrases.Contains(trimmed.ToUpper()))
+                if (!string.IsNullOrEmpty(trimmed) && !keyPhrases.Contains(trimmed.ToUpper()))
                     keyPhrases.Add(trimmed.ToUpper());
             }
         }
@@ -103,7 +103,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         private List<string> SplitKeyPhrases(string keyPhrases)
         {
             string[] phrases = keyPhrases.Split(new char[] { ',' });
-            var ph = phrases.Select(p => p.ToUpper().Trim()).Distinct();
+            var ph = phrases.Select(p => p.ToUpper().Trim()).Where(p => !string.IsNullOrEmpty(p)).Distinct();
 
             return ph.OrderBy(k => k).ToList();
         }
