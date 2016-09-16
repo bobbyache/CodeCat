@@ -5779,7 +5779,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="DiagramOwner">ehJDtD9ohUK360F0ZP/0wAAA</XPD:REF>
 <XPD:OBJ name="DiagramView" type="UMLClassDiagramView" guid="bHiE9g/cUk+uGdlpWwy3JwAA">
 <XPD:REF name="Diagram">Y9XIRKFUUEGUqeB3BGCjXQAA</XPD:REF>
-<XPD:ATTR name="#OwnedViews" type="integer">24</XPD:ATTR>
+<XPD:ATTR name="#OwnedViews" type="integer">26</XPD:ATTR>
 <XPD:OBJ name="OwnedViews[0]" type="UMLClassView" guid="HzhE0OyZH0qsNxaqCtEKkQAA">
 <XPD:ATTR name="Left" type="integer">724</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">80</XPD:ATTR>
@@ -6156,8 +6156,8 @@ when the old single CodeFile system is removed.
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[14]" type="UMLClassView" guid="0lL4YtYdVkSS2bmb0GvkiQAA">
-<XPD:ATTR name="Left" type="integer">304</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">204</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">268</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">284</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">297</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">82</XPD:ATTR>
 <XPD:REF name="Model">9K14dPLaBEaIek6pJkdIjQAA</XPD:REF>
@@ -6309,6 +6309,23 @@ index and its other operations
 <XPD:ATTR name="Points" type="Points">369,821;369,852</XPD:ATTR>
 <XPD:REF name="Head">sHaBVrK2MEe1f21dHAd5HwAA</XPD:REF>
 <XPD:REF name="Tail">yO6XEO9S7kSkjBnFQx8K/QAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[24]" type="UMLNoteView" guid="X4AofsEBqUO1L/WbD0u82gAA">
+<XPD:ATTR name="Left" type="integer">228</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">388</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">390</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">68</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Used to create concrete instances of the document types that are supported
+by CodeCat. All these documents should implement the IDocument interface
+and yet are returned as ITextDocument, ICodeDocument etc. which in turn
+implement IDocument
+</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[25]" type="UMLNoteLinkView" guid="XThm7mCJOECvrUJut1d1aAAA">
+<XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">416,365;416,388</XPD:ATTR>
+<XPD:REF name="Head">X4AofsEBqUO1L/WbD0u82gAA</XPD:REF>
+<XPD:REF name="Tail">0lL4YtYdVkSS2bmb0GvkiQAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
