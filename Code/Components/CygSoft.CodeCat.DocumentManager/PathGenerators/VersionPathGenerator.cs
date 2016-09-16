@@ -8,16 +8,27 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.PathGenerators
 {
+    /// <summary>
+    /// An immutable class designed to be taken in by a consumer constructor.
+    /// Generates its own file path and provides other properties/information about the file.
+    /// </summary>
     public class VersionPathGenerator : BaseFilePathGenerator
     {
-        private string sourceFilePath;
-        public DateTime TimeStamp { get; private set; }
+        private readonly string sourceFilePath;
+        private readonly DateTime timeStamp;
+
+        public DateTime TimeStamp { get { return this.timeStamp; } }
 
         public VersionPathGenerator(string sourceFilePath, DateTime timeStamp)
         {
             this.sourceFilePath = sourceFilePath;
-            this.TimeStamp = timeStamp;
+            this.timeStamp = timeStamp;
         }
+
+        // don't think this is necessary... its the 
+        //public string SourceFileName { get { return Path.GetFileName(sourceFilePath); } }
+        //public string SourceId { get { return Path.GetFileNameWithoutExtension(sourceFilePath); } }
+        //public string SourceFilePath { get { return this.sourceFilePath; } }
 
         public override string FileExtension
         {

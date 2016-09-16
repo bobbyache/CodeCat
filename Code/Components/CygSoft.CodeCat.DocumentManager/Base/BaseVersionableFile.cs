@@ -9,6 +9,8 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 {
     public abstract class BaseVersionableFile : BaseFile, IVersionableFile
     {
+
+        # region Custom Comparer
         private class VersionFileComparer : IComparer<IFileVersion>
         {
             public int Compare(IFileVersion x, IFileVersion y)
@@ -20,10 +22,9 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 return 0;
             }
         }
+        #endregion
 
         private List<IFileVersion> fileVersions = null;
-
-        protected abstract IFileVersion NewVersion(DateTime timeStamp, string description);
 
         public BaseVersionableFile(BaseFilePathGenerator filePathGenerator) : base(filePathGenerator)
         {
@@ -44,6 +45,8 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             get { return this.fileVersions.Count > 0; }
         }
 
+        protected abstract IFileVersion NewVersion(DateTime timeStamp, string description);
+
         protected override void OnAfterDelete()
         {
             foreach (IFileVersion fileVersion in fileVersions)
@@ -53,7 +56,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public IFileVersion CreateVersion(string description = "")
         {
             DateTime versionTime = DateTime.Now;
+
+            // -- note: template method "NewVersion" is called here, to be handled by the downstream sub-type.
             IFileVersion fileVersion = this.NewVersion(versionTime, description);
+            // -----------------
+
             fileVersion.Save();
             this.fileVersions.Add(fileVersion);
 
