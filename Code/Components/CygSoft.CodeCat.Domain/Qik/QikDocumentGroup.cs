@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik.Document;
@@ -43,7 +44,10 @@ namespace CygSoft.CodeCat.Domain.Qik
             this.indexItem = indexItem;
             this.Compiler = new Compiler();
 
-            this.documentIndex = new QikDocumentIndex(folderPath, indexItem.Id);
+            DocumentIndexPathGenerator indexPathGenerator = new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id);
+            IDocumentIndexRepository repository = new QikDocumentIndexXmlRepository(indexPathGenerator);
+
+            this.documentIndex = new QikDocumentIndex(repository, indexPathGenerator);
 
             this.documentIndex.BeforeSave += documentIndex_BeforeSave;
             this.documentIndex.AfterSave += documentIndex_AfterSave;

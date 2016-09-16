@@ -43,6 +43,7 @@
     <Compile Include="FileEventArgs.cs" />
     <Compile Include="ICodeDocument.cs" />
     <Compile Include="IDocument.cs" />
+    <Compile Include="IDocumentIndexRepository.cs" />
     <Compile Include="IFile.cs" />
     <Compile Include="IFileVersion.cs" />
     <Compile Include="IDocumentIndex.cs" />

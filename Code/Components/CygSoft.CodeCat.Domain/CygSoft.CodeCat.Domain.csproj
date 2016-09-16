@@ -51,6 +51,7 @@
     <Compile Include="Base\IPersistableTarget.cs" />
     <Compile Include="CodeGroup\CodeGroupDocumentGroup.cs" />
     <Compile Include="CodeGroup\CodeGroupIndex.cs" />
+    <Compile Include="CodeGroup\CodeGroupIndexXmlRepository.cs" />
     <Compile Include="CodeGroup\CodeGroupKeywordIndexItem.cs" />
     <Compile Include="CodeGroup\CodeGroupKeywordSearchIndexRepository.cs" />
     <Compile Include="CodeGroup\CodeGroupLibrary.cs" />
@@ -64,6 +65,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Code\ICodeKeywordIndexItem.cs" />
+    <Compile Include="Qik\Document\QikDocumentIndexXmlRepository.cs" />
     <Compile Include="Qik\IQikDocumentGroup.cs" />
     <Compile Include="Qik\IQikKeywordIndexItem.cs" />
     <Compile Include="Qik\Document\QikDocumentIndex.cs" />

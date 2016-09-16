@@ -18,6 +18,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         protected PositionableList<IDocument> documentFiles = new PositionableList<IDocument>();
         private List<IDocument> removedDocumentFiles = new List<IDocument>();
+        protected IDocumentIndexRepository indexRepository;
 
         public IDocument[] DocumentFiles
         {
@@ -27,8 +28,9 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         protected abstract List<IDocument> LoadDocumentFiles();
         protected abstract void SaveDocumentIndex();
 
-        public BaseDocumentIndex(BaseFilePathGenerator filePathGenerator): base(filePathGenerator)
+        public BaseDocumentIndex(IDocumentIndexRepository indexRepository, BaseFilePathGenerator filePathGenerator): base(filePathGenerator)
         {
+            this.indexRepository = indexRepository;
         }
 
         protected override void OpenFile()

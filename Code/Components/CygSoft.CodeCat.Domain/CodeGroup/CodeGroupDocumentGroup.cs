@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using System;
@@ -35,7 +36,10 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         {
             this.indexItem = indexItem;
 
-            this.documentIndex = new CodeGroupIndex(folderPath, indexItem.Id);
+            DocumentIndexPathGenerator indexPathGenerator = new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id);
+            IDocumentIndexRepository repository = new CodeGroupIndexXmlRepository(indexPathGenerator);
+
+            this.documentIndex = new CodeGroupIndex(repository, indexPathGenerator);
 
             this.documentIndex.BeforeSave += documentIndex_BeforeSave;
             this.documentIndex.AfterSave += documentIndex_AfterSave;
