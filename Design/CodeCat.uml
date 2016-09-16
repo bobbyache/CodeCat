@@ -5779,7 +5779,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="DiagramOwner">ehJDtD9ohUK360F0ZP/0wAAA</XPD:REF>
 <XPD:OBJ name="DiagramView" type="UMLClassDiagramView" guid="bHiE9g/cUk+uGdlpWwy3JwAA">
 <XPD:REF name="Diagram">Y9XIRKFUUEGUqeB3BGCjXQAA</XPD:REF>
-<XPD:ATTR name="#OwnedViews" type="integer">19</XPD:ATTR>
+<XPD:ATTR name="#OwnedViews" type="integer">24</XPD:ATTR>
 <XPD:OBJ name="OwnedViews[0]" type="UMLClassView" guid="HzhE0OyZH0qsNxaqCtEKkQAA">
 <XPD:ATTR name="Left" type="integer">724</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">80</XPD:ATTR>
@@ -6234,6 +6234,81 @@ informatoin expert
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
 <XPD:REF name="Model">wGcGj8waIUOVUgWRTIETYwAA</XPD:REF>
 </XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[19]" type="UMLInterfaceView" guid="X/TEUrH/I0KzZTacUxp9eQAA">
+<XPD:ATTR name="Left" type="integer">44</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">828</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">168</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">45</XPD:ATTR>
+<XPD:ATTR name="StereotypeDisplay" type="UMLStereotypeDisplayKind">sdkIcon</XPD:ATTR>
+<XPD:REF name="Model">typ269CK1EWwb2/TNZDndwAA</XPD:REF>
+<XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="WbhXakBfx0ugdM1/a6TaMQAA">
+<XPD:OBJ name="NameLabel" type="LabelView" guid="Ba24ukHOBk++Fx9b990owgAA">
+<XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">IDocumentIndexRepository</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="StereotypeLabel" type="LabelView" guid="KkvCJ+s+h02AZ0J5mqUrGQAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="PropertyLabel" type="LabelView" guid="i+F4YOA5/UmZewCTcqfMPAAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="AttributeCompartment" type="UMLAttributeCompartmentView" guid="j+FpgjPEJ0CWlp0Xze1GAQAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:REF name="Model">typ269CK1EWwb2/TNZDndwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OperationCompartment" type="UMLOperationCompartmentView" guid="unL6czrYCUSoyZ0HAjnDqAAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:REF name="Model">typ269CK1EWwb2/TNZDndwAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[20]" type="UMLDependencyView" guid="u9KYzp0uvEuAX6uncCGMbwAA">
+<XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">240,590;127,590;127,828</XPD:ATTR>
+<XPD:REF name="Model">A345OYN69EOFgU/1lSBwUAAA</XPD:REF>
+<XPD:REF name="Head">X/TEUrH/I0KzZTacUxp9eQAA</XPD:REF>
+<XPD:REF name="Tail">yO6XEO9S7kSkjBnFQx8K/QAA</XPD:REF>
+<XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="ly6GEDwwdk2HaT6YCNcA6QAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">1.5707963267949</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">15</XPD:ATTR>
+<XPD:REF name="Model">A345OYN69EOFgU/1lSBwUAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="StereotypeLabel" type="EdgeLabelView" guid="RkpmH9pMZkOP7GAJI7AZPwAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">1.5707963267949</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">30</XPD:ATTR>
+<XPD:REF name="Model">A345OYN69EOFgU/1lSBwUAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="PropertyLabel" type="EdgeLabelView" guid="GV/+bMg3aUuuc5Ugkg8IkwAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">-1.5707963267949</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">15</XPD:ATTR>
+<XPD:REF name="Model">A345OYN69EOFgU/1lSBwUAAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[21]" type="UMLNoteView" guid="sHaBVrK2MEe1f21dHAd5HwAA">
+<XPD:ATTR name="Left" type="integer">244</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">852</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">269</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">53</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Injected into the constructor to allow one to save
+the index in a way that is abstracted away from the
+index and its other operations
+</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[22]" type="UMLNoteLinkView" guid="VFceDDwMX0y6E6UuYi/HAgAA">
+<XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">244,863;211,863</XPD:ATTR>
+<XPD:REF name="Head">X/TEUrH/I0KzZTacUxp9eQAA</XPD:REF>
+<XPD:REF name="Tail">sHaBVrK2MEe1f21dHAd5HwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[23]" type="UMLNoteLinkView" guid="Ob0+oz3jlkCi8toV9CVjfAAA">
+<XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">369,821;369,852</XPD:ATTR>
+<XPD:REF name="Head">sHaBVrK2MEe1f21dHAd5HwAA</XPD:REF>
+<XPD:REF name="Tail">yO6XEO9S7kSkjBnFQx8K/QAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
@@ -6721,7 +6796,7 @@ Adds a text property for saving text files.
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#OwnedElements" type="integer">24</XPD:ATTR>
+<XPD:ATTR name="#OwnedElements" type="integer">25</XPD:ATTR>
 <XPD:OBJ name="OwnedElements[0]" type="UMLClass" guid="vvBMG5fw40iec20jHPCqrwAA">
 <XPD:ATTR name="Name" type="string">BaseFile</XPD:ATTR>
 <XPD:REF name="Namespace">ehJDtD9ohUK360F0ZP/0wAAA</XPD:REF>
@@ -6858,6 +6933,8 @@ Adds a text property for saving text files.
 <XPD:REF name="Views[5]">11PieDSp5Eev9h+7WCpXmgAA</XPD:REF>
 <XPD:REF name="Views[6]">iOtlEcsxBkWxFsTsln/0yAAA</XPD:REF>
 <XPD:REF name="Views[7]">q+ToScXLkka7OPXWX+q5LwAA</XPD:REF>
+<XPD:ATTR name="#ClientDependencies" type="integer">1</XPD:ATTR>
+<XPD:REF name="ClientDependencies[0]">A345OYN69EOFgU/1lSBwUAAA</XPD:REF>
 <XPD:ATTR name="#Generalizations" type="integer">1</XPD:ATTR>
 <XPD:REF name="Generalizations[0]">qxiXRFLp10uAtt5oPkqyRgAA</XPD:REF>
 <XPD:ATTR name="#Specializations" type="integer">1</XPD:ATTR>
@@ -7353,6 +7430,16 @@ Adds a text property for saving text files.
 <XPD:REF name="Views[2]">yPNycQVzj0uwDgzaKF+JUQAA</XPD:REF>
 <XPD:REF name="Views[3]">H5aFSi+TPESUXen2o/vLawAA</XPD:REF>
 </XPD:OBJ>
+<XPD:OBJ name="OwnedElements[24]" type="UMLDependency" guid="A345OYN69EOFgU/1lSBwUAAA">
+<XPD:REF name="Namespace">ehJDtD9ohUK360F0ZP/0wAAA</XPD:REF>
+<XPD:REF name="Client">pbMEz9f9UEOSkSsxwmwWpwAA</XPD:REF>
+<XPD:REF name="Supplier">typ269CK1EWwb2/TNZDndwAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
+<XPD:REF name="Views[0]">u9KYzp0uvEuAX6uncCGMbwAA</XPD:REF>
+<XPD:REF name="Views[1]">ly6GEDwwdk2HaT6YCNcA6QAA</XPD:REF>
+<XPD:REF name="Views[2]">RkpmH9pMZkOP7GAJI7AZPwAA</XPD:REF>
+<XPD:REF name="Views[3]">GV/+bMg3aUuuc5Ugkg8IkwAA</XPD:REF>
+</XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[4]" type="UMLModel" guid="I8E1WstclkSOvQVyISdZDQAA">
 <XPD:ATTR name="Name" type="string">CygSoft.CodeCat.DocumentManager.Infrastructure</XPD:ATTR>
@@ -7363,7 +7450,7 @@ Adds a text property for saving text files.
 <XPD:REF name="DiagramOwner">I8E1WstclkSOvQVyISdZDQAA</XPD:REF>
 <XPD:OBJ name="DiagramView" type="UMLClassDiagramView" guid="mv13EwtTp0+sEw7qXSnoPQAA">
 <XPD:REF name="Diagram">jSqHNu1kJESwWWsTnE4DmAAA</XPD:REF>
-<XPD:ATTR name="#OwnedViews" type="integer">15</XPD:ATTR>
+<XPD:ATTR name="#OwnedViews" type="integer">19</XPD:ATTR>
 <XPD:OBJ name="OwnedViews[0]" type="UMLInterfaceView" guid="Sl7iOgOxCUqHh4eBeF0aCAAA">
 <XPD:ATTR name="Left" type="integer">520</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">40</XPD:ATTR>
@@ -7747,9 +7834,59 @@ Adds a text property for saving text files.
 <XPD:REF name="Model">92S0XG3BZEKOxPkjtSne4gAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
+<XPD:OBJ name="OwnedViews[15]" type="UMLNoteView" guid="lo6X257pVkyyEM9/EFKjjAAA">
+<XPD:ATTR name="Left" type="integer">84</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">348</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">323</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">83</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Any class that realizes the IDocumentIndex interface, will need
+to inject a verson of the IDocumentIndexRepository in order
+to be able to load and save to an index file that points to
+source documents and their versions. This is applicable to
+document groups.
+</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[16]" type="UMLNoteLinkView" guid="vjeBEXAcckeJ84AhT0OO3gAA">
+<XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">277,430;277,495;328,495</XPD:ATTR>
+<XPD:REF name="Head">D8qIsO+vaUCISY/XUpIWmgAA</XPD:REF>
+<XPD:REF name="Tail">lo6X257pVkyyEM9/EFKjjAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[17]" type="UMLInterfaceView" guid="FcOp4TvxLUeRSJJvK2d6YQAA">
+<XPD:ATTR name="Left" type="integer">116</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">216</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">224</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">89</XPD:ATTR>
+<XPD:ATTR name="StereotypeDisplay" type="UMLStereotypeDisplayKind">sdkDecoration</XPD:ATTR>
+<XPD:REF name="Model">typ269CK1EWwb2/TNZDndwAA</XPD:REF>
+<XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="mGoukK0jUk+GUv9fW/FOFQAA">
+<XPD:OBJ name="NameLabel" type="LabelView" guid="Qg6ZwJ4IG0+tMLLOamv6KQAA">
+<XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">IDocumentIndexRepository</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="StereotypeLabel" type="LabelView" guid="PHVrmaCo9UqvG89/Jf09LAAA">
+<XPD:ATTR name="Text" type="string">&lt;&lt;interface&gt;&gt;</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="PropertyLabel" type="LabelView" guid="zQb7oI9GYE+45RBl8kKPsAAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#OwnedElements" type="integer">19</XPD:ATTR>
+<XPD:OBJ name="AttributeCompartment" type="UMLAttributeCompartmentView" guid="yudXAjSOLkacQMZu+qAD7QAA">
+<XPD:REF name="Model">typ269CK1EWwb2/TNZDndwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OperationCompartment" type="UMLOperationCompartmentView" guid="doV5c4JHjk++8EaaLCFg7wAA">
+<XPD:REF name="Model">typ269CK1EWwb2/TNZDndwAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[18]" type="UMLNoteLinkView" guid="Dc8/llImCE+xL1j9BJ21UAAA">
+<XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">233,304;233,348</XPD:ATTR>
+<XPD:REF name="Head">lo6X257pVkyyEM9/EFKjjAAA</XPD:REF>
+<XPD:REF name="Tail">FcOp4TvxLUeRSJJvK2d6YQAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:ATTR name="#OwnedElements" type="integer">20</XPD:ATTR>
 <XPD:OBJ name="OwnedElements[0]" type="UMLInterface" guid="tWlJbAgBsUyyFZSBvmWNsQAA">
 <XPD:ATTR name="Name" type="string">IFile</XPD:ATTR>
 <XPD:REF name="Namespace">I8E1WstclkSOvQVyISdZDQAA</XPD:REF>
@@ -8212,6 +8349,41 @@ Adds a text property for saving text files.
 <XPD:ATTR name="#SupplierDependencies" type="integer">2</XPD:ATTR>
 <XPD:REF name="SupplierDependencies[0]">JDRHBUDsN0eoJESmoFWABQAA</XPD:REF>
 <XPD:REF name="SupplierDependencies[1]">YPr1Jw4HIUORjB5eou5CSgAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[19]" type="UMLInterface" guid="typ269CK1EWwb2/TNZDndwAA">
+<XPD:ATTR name="Name" type="string">IDocumentIndexRepository</XPD:ATTR>
+<XPD:REF name="Namespace">I8E1WstclkSOvQVyISdZDQAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">6</XPD:ATTR>
+<XPD:REF name="Views[0]">FcOp4TvxLUeRSJJvK2d6YQAA</XPD:REF>
+<XPD:REF name="Views[1]">yudXAjSOLkacQMZu+qAD7QAA</XPD:REF>
+<XPD:REF name="Views[2]">doV5c4JHjk++8EaaLCFg7wAA</XPD:REF>
+<XPD:REF name="Views[3]">X/TEUrH/I0KzZTacUxp9eQAA</XPD:REF>
+<XPD:REF name="Views[4]">j+FpgjPEJ0CWlp0Xze1GAQAA</XPD:REF>
+<XPD:REF name="Views[5]">unL6czrYCUSoyZ0HAjnDqAAA</XPD:REF>
+<XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
+<XPD:REF name="SupplierDependencies[0]">A345OYN69EOFgU/1lSBwUAAA</XPD:REF>
+<XPD:ATTR name="#Operations" type="integer">2</XPD:ATTR>
+<XPD:OBJ name="Operations[0]" type="UMLOperation" guid="k6ynemsFtkWaWc/MrOO3NgAA">
+<XPD:ATTR name="Name" type="string">LoadDocuments</XPD:ATTR>
+<XPD:REF name="Owner">typ269CK1EWwb2/TNZDndwAA</XPD:REF>
+<XPD:ATTR name="#Parameters" type="integer">1</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="nrZp953ni0OmT6bLi1QmMQAA">
+<XPD:ATTR name="Name" type="string">documents</XPD:ATTR>
+<XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">IDocument[]</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">k6ynemsFtkWaWc/MrOO3NgAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="Operations[1]" type="UMLOperation" guid="+0rw0C1fW0CilSWWzxTitAAA">
+<XPD:ATTR name="Name" type="string">WriteDocuments</XPD:ATTR>
+<XPD:REF name="Owner">typ269CK1EWwb2/TNZDndwAA</XPD:REF>
+<XPD:ATTR name="#Parameters" type="integer">1</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="SWiwJfNB8E6pjRLK0GSLuQAA">
+<XPD:ATTR name="Name" type="string">documents</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">IDocument[]</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">+0rw0C1fW0CilSWWzxTitAAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[5]" type="UMLModel" guid="CZ+2cFuCu0qxgr1JzHPUhwAA">
