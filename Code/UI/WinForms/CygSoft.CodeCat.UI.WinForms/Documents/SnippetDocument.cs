@@ -353,7 +353,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             lblEditStatus.ForeColor = base.IsModified ? Color.DarkRed : Color.Black;
             btnSave.Enabled = base.IsModified;
-            btnDiscardChange.Enabled = base.IsModified;
+            btnDiscardChange.Enabled = base.IsModified && !base.IsNew;
         }
 
         private void SnippetDocument_Saving(object sender, EventArgs e)
