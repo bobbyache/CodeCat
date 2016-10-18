@@ -173,6 +173,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void ResetFields()
         {
+            this.txtToolStripTitle.Text = base.persistableTarget.Title;
             this.Text = base.persistableTarget.Title;
             this.txtKeywords.Text = base.persistableTarget.CommaDelimitedKeywords;
             this.txtTitle.Text = base.persistableTarget.Title;

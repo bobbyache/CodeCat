@@ -56,6 +56,7 @@
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCompile = new System.Windows.Forms.ToolStripButton();
+            this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
             this.inputPropertyGrid = new CygSoft.CodeCat.UI.WinForms.Controls.InputPropertyGrid();
@@ -194,7 +195,8 @@
             this.btnMoveLeft,
             this.btnMoveRight,
             this.toolStripSeparator4,
-            this.btnCompile});
+            this.btnCompile,
+            this.txtToolStripTitle});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
             this.toolstripCommands.Size = new System.Drawing.Size(878, 25);
@@ -302,6 +304,14 @@
             this.btnCompile.Text = "Compile";
             this.btnCompile.Click += new System.EventHandler(this.btnCompile_Click);
             // 
+            // txtToolStripTitle
+            // 
+            this.txtToolStripTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.txtToolStripTitle.Name = "txtToolStripTitle";
+            this.txtToolStripTitle.ReadOnly = true;
+            this.txtToolStripTitle.Size = new System.Drawing.Size(378, 25);
+            this.txtToolStripTitle.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -394,5 +404,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripDropDownButton btnMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private ToolStripSpringTextBox txtToolStripTitle;
     }
 }

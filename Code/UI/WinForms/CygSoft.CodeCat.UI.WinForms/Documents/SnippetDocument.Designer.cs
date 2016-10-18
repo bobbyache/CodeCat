@@ -57,6 +57,7 @@
             this.tabPageCode = new System.Windows.Forms.TabPage();
             this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.txtToolStripTitle = new ToolStripSpringTextBox();
             this.toolStrip1.SuspendLayout();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
@@ -193,7 +194,8 @@
             this.toolStripSeparator2,
             this.btnTakeSnapshot,
             this.btnDeleteSnapshot,
-            this.chkEdit});
+            this.chkEdit,
+            this.txtToolStripTitle});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
             this.toolstripCommands.Size = new System.Drawing.Size(821, 25);
@@ -340,6 +342,14 @@
             this.tabControl.Size = new System.Drawing.Size(821, 396);
             this.tabControl.TabIndex = 3;
             // 
+            // txtToolStripTitle
+            // 
+            this.txtToolStripTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.txtToolStripTitle.Name = "txtToolStripTitle";
+            this.txtToolStripTitle.ReadOnly = true;
+            this.txtToolStripTitle.Size = new System.Drawing.Size(100, 25);
+            this.txtToolStripTitle.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // SnippetDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -398,5 +408,6 @@
         private System.Windows.Forms.TabPage tabPageCode;
         private Alsing.Windows.Forms.SyntaxBoxControl syntaxBox;
         private System.Windows.Forms.TabControl tabControl;
+        private ToolStripSpringTextBox txtToolStripTitle;
     }
 }

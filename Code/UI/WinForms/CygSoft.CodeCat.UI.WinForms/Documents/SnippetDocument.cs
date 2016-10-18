@@ -204,6 +204,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             CodeFile codeFile = base.persistableTarget as CodeFile;
 
+            this.txtToolStripTitle.Text = codeFile.Title;
             this.Text = codeFile.Title;
             this.txtIdentifier.Text = codeFile.Id;
             this.txtKeywords.Text = codeFile.CommaDelimitedKeywords;
