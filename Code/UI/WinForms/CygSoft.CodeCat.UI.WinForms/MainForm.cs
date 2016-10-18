@@ -295,6 +295,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             mnuSnippetsViewModify.Enabled = projectLoaded && itemSelected;
             mnuSnippetsAdd.Enabled = projectLoaded;
+            mnuAddCodeGroup.Enabled = projectLoaded;
+            mnuAddQikTemplate.Enabled = projectLoaded;
             mnuFileOpenProjectFolder.Enabled = projectLoaded;
             mnuDocuments.Enabled = projectLoaded;
         }
