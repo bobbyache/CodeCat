@@ -428,7 +428,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void QikCodeDocument_ModifyStatusChanged(object sender, EventArgs e)
         {
             btnSave.Enabled = base.IsModified;
-            btnDiscardChange.Enabled = base.IsModified;
+            btnDiscardChange.Enabled = base.IsModified && !base.IsNew;
         }
 
         private void QikCodeDocument_Saving(object sender, EventArgs e)
