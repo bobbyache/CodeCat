@@ -44,14 +44,15 @@
             this.btnDiscardChange = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolstripCommands = new System.Windows.Forms.ToolStrip();
+            this.btnMenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAddCodeItem = new System.Windows.Forms.ToolStripButton();
             this.btnRemoveCodeItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
+            this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.tabControlFile = new System.Windows.Forms.TabControl();
-            this.btnMenu = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -178,12 +179,26 @@
             this.btnRemoveCodeItem,
             this.toolStripSeparator3,
             this.btnMoveLeft,
-            this.btnMoveRight});
+            this.btnMoveRight,
+            this.txtToolStripTitle});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
             this.toolstripCommands.Size = new System.Drawing.Size(878, 25);
             this.toolstripCommands.TabIndex = 5;
             this.toolstripCommands.Text = "toolStrip4";
+            // 
+            // btnMenu
+            // 
+            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
+            this.btnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(61, 22);
+            this.btnMenu.Text = "Tabs";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // btnAddCodeItem
             // 
@@ -230,6 +245,14 @@
             this.btnMoveRight.Text = "Move Right";
             this.btnMoveRight.Click += new System.EventHandler(this.btnMoveRight_Click);
             // 
+            // txtToolStripTitle
+            // 
+            this.txtToolStripTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.txtToolStripTitle.Name = "txtToolStripTitle";
+            this.txtToolStripTitle.ReadOnly = true;
+            this.txtToolStripTitle.Size = new System.Drawing.Size(508, 25);
+            this.txtToolStripTitle.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // tabControlFile
             // 
             this.tabControlFile.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -238,19 +261,6 @@
             this.tabControlFile.SelectedIndex = 0;
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
-            this.btnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(61, 22);
-            this.btnMenu.Text = "Tabs";
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // CodeGroupDocument
             // 
@@ -299,5 +309,6 @@
         private System.Windows.Forms.TabControl tabControlFile;
         private System.Windows.Forms.ToolStripDropDownButton btnMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private ToolStripSpringTextBox txtToolStripTitle;
     }
 }

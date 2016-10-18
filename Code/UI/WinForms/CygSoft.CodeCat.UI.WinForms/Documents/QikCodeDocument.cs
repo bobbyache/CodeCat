@@ -186,7 +186,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             base.NewStatusChanged += QikCodeDocument_NewStatusChanged;
             this.chkEdit.Click += (s, e) => { base.HeaderFieldsVisible = chkEdit.Checked; };
-
+            
             txtTitle.TextChanged += SetModified;
             txtKeywords.TextChanged += SetModified;
             btnDelete.Click += btnDelete_Click;
@@ -202,6 +202,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void ResetFields()
         {
+            this.txtToolStripTitle.Text = base.persistableTarget.Title;
             this.Text = base.persistableTarget.Title;
             this.txtKeywords.Text = base.persistableTarget.CommaDelimitedKeywords;
             this.txtTitle.Text = base.persistableTarget.Title;
