@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>GEARWEEL.ICO</ApplicationIcon>
+    <ApplicationIcon>codecat_08.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Alsing.SyntaxBox, Version=1.4.10.0, Culture=neutral, processorArchitecture=MSIL">
@@ -303,7 +303,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GEARWEEL.ICO" />
+    <Content Include="codecat_08.ico" />
+    <Content Include="codecat_09.ico" />
     <None Include="qikscript.syn">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
