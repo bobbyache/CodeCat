@@ -57,6 +57,7 @@
             this.mnuSnippetsAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSnippetsViewModify = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAddQikTemplate = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAddCodeGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindowKeywordSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
@@ -67,7 +68,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.indexCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.mnuAddCodeGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -176,6 +176,13 @@
             this.mnuAddQikTemplate.Size = new System.Drawing.Size(192, 22);
             this.mnuAddQikTemplate.Text = "Add Qik Template";
             this.mnuAddQikTemplate.Click += new System.EventHandler(this.mnuAddQikTemplate_Click);
+            // 
+            // mnuAddCodeGroup
+            // 
+            this.mnuAddCodeGroup.Name = "mnuAddCodeGroup";
+            this.mnuAddCodeGroup.Size = new System.Drawing.Size(192, 22);
+            this.mnuAddCodeGroup.Text = "Add Code Group";
+            this.mnuAddCodeGroup.Click += new System.EventHandler(this.mnuAddCodeGroup_Click);
             // 
             // mnuWindow
             // 
@@ -297,13 +304,6 @@
             dockPanelSkin1.DockPaneStripSkin = dockPaneStripSkin1;
             this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 7;
-            // 
-            // mnuAddCodeGroup
-            // 
-            this.mnuAddCodeGroup.Name = "mnuAddCodeGroup";
-            this.mnuAddCodeGroup.Size = new System.Drawing.Size(192, 22);
-            this.mnuAddCodeGroup.Text = "Add Code Group";
-            this.mnuAddCodeGroup.Click += new System.EventHandler(this.mnuAddCodeGroup_Click);
             // 
             // MainForm
             // 
