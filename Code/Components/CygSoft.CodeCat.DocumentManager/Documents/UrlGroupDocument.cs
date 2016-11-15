@@ -10,20 +10,21 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public abstract class TextDocument : BaseDocument, ITextDocument
+    public class UrlGroupDocument : BaseDocument, IUrlGroupDocument
     {
         public string Text { get; set; }
 
-        // Only create these documents internally.
-        internal TextDocument(string folder, string title, string extension) : base(new DocumentPathGenerator(folder, extension), title, null)
+        internal UrlGroupDocument(string folder, string title)
+            : base(new DocumentPathGenerator(folder, "urlgrp"), title, null)
         {
             this.Text = null;
+            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.UrlGroup);
         }
 
-        internal TextDocument(string folder, string id, string title, string extension, int ordinal, string description)
-            : base(new DocumentPathGenerator(folder, extension, id), title, description, ordinal)
+        internal UrlGroupDocument(string folder, string id, string title, int ordinal, string description) : base(new DocumentPathGenerator(folder, "urlgrp", id), title, description, ordinal)
         {
             this.Text = null;
+            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.UrlGroup);
         }
 
         protected override IFileVersion NewVersion(DateTime timeStamp, string description)

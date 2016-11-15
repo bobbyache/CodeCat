@@ -24,20 +24,23 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         public List<IDocument> LoadDocuments()
         {
-            List<ICodeDocument> documents = new List<ICodeDocument>();
+            List<IDocument> documents = new List<IDocument>();
 
             XDocument indexDocument = XDocument.Load(this.filePath);
             foreach (XElement documentElement in indexDocument.Element("CodeGroup").Element("Documents").Elements())
             {
+                IDocument templateDocument = null;
+
                 string documentId = (string)documentElement.Attribute("Id");
                 string documentTitle = (string)documentElement.Attribute("Title");
                 string documentDesc = (string)documentElement.Attribute("Description");
-                string documentExt = (string)documentElement.Attribute("Ext");
-                string documentSyntax = (string)documentElement.Attribute("Syntax");
                 int documentOrdinal = int.Parse((string)documentElement.Attribute("Ordinal"));
+                string documentType = documentElement.Attribute("DocType") != null ? (string)documentElement.Attribute("DocType") : "CODESNIPPET";
+                string documentExt = documentElement.Attribute("Ext") != null ? (string)documentElement.Attribute("Ext") : null;
+                string documentSyntax = documentElement.Attribute("Syntax") != null ? (string)documentElement.Attribute("Syntax") : null;
 
-                ICodeDocument templateDocument = DocumentFactory.CreateCodeDocument(this.folder, documentId, documentTitle, documentExt,
-                    documentSyntax, documentOrdinal, documentDesc);
+                templateDocument = DocumentFactory.Create(DocumentFactory.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
+
                 documents.Add(templateDocument);
             }
 
@@ -62,22 +65,39 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         private void WriteFile(List<IDocument> documents)
         {
-            ICodeDocument[] docFiles = documents.OfType<ICodeDocument>().ToArray();
-
             XDocument indexDocument = XDocument.Load(this.filePath);
             XElement filesElement = indexDocument.Element("CodeGroup").Element("Documents");
             filesElement.RemoveNodes();
 
-            foreach (ICodeDocument docFile in docFiles)
+            foreach (IDocument docFile in documents)
             {
-                filesElement.Add(new XElement("Document",
-                    new XAttribute("Id", docFile.Id),
-                    new XAttribute("Title", docFile.Title),
-                    new XAttribute("Description", docFile.Description == null ? "" : docFile.Description),
-                    new XAttribute("Ext", docFile.FileExtension),
-                    new XAttribute("Syntax", docFile.Syntax),
-                    new XAttribute("Ordinal", docFile.Ordinal.ToString())
-                    ));
+                if (docFile is ICodeDocument)
+                {
+                    ICodeDocument codeDoc = docFile as ICodeDocument;
+
+                    filesElement.Add(new XElement("Document",
+                        new XAttribute("Id", codeDoc.Id),
+                        new XAttribute("Title", codeDoc.Title),
+                        new XAttribute("DocType", codeDoc.DocumentType),
+                        new XAttribute("Description", codeDoc.Description == null ? "" : codeDoc.Description),
+                        new XAttribute("Ext", codeDoc.FileExtension),
+                        new XAttribute("Syntax", codeDoc.Syntax),
+                        new XAttribute("Ordinal", codeDoc.Ordinal.ToString())
+                        ));
+                }
+                else
+                {
+                    IUrlGroupDocument urlFile = docFile as IUrlGroupDocument;
+
+                    filesElement.Add(new XElement("Document",
+                        new XAttribute("Id", urlFile.Id),
+                        new XAttribute("Title", urlFile.Title),
+                        new XAttribute("DocType", urlFile.DocumentType),
+                        new XAttribute("Description", urlFile.Description == null ? "" : urlFile.Description),
+                        new XAttribute("Ext", urlFile.FileExtension),
+                        new XAttribute("Ordinal", urlFile.Ordinal.ToString())
+                        ));
+                }
             }
 
             indexDocument.Save(this.filePath);

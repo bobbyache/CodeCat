@@ -184,9 +184,12 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void RebuildTabs()
         {
             tabManager.Clear();
-            foreach (ICodeDocument document in codeItemFile.Documents)
+            foreach (IDocument document in codeItemFile.Documents)
             {
-                tabManager.AddTab(document, NewCodeControl(document), true, false);
+                if (document is ICodeDocument)
+                    tabManager.AddTab(document, NewCodeControl(document), true, false);
+                else
+                    tabManager.AddTab(document, NewUrlGroupControl(document), true, false);
             }
         }
 
@@ -195,6 +198,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             CodeItemCtrl templateControl = new CodeItemCtrl(this.application, this.codeItemFile, document as ICodeDocument);
             templateControl.Modified += codeItemCtrl_Modified;
             return templateControl;
+        }
+
+        private UrlGroupControl NewUrlGroupControl(IDocument document)
+        {
+            UrlGroupControl urlGroupControl = new UrlGroupControl(this.application, null, document as IUrlGroupDocument);
+            //urlGroupControl.Modified += codeItemCtrl_Modified;
+            return urlGroupControl;
         }
 
         #endregion
@@ -268,7 +278,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void codeItemFile_DocumentAdded(object sender, DocumentEventArgs e)
         {
             ControlGraphics.SuspendDrawing(this);
-            tabManager.AddTab(e.Document, NewCodeControl(e.Document), true, true);
+            if (e.Document is ICodeDocument)
+                tabManager.AddTab(e.Document, NewCodeControl(e.Document), true, true);
+            else
+                tabManager.AddTab(e.Document, NewUrlGroupControl(e.Document), true, true);
+
             tabManager.OrderTabs(codeItemFile.Documents);
             tabManager.DisplayTab(e.Document.Id, true);
             ControlGraphics.ResumeDrawing(this);
@@ -295,7 +309,19 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddCodeItem_Click(object sender, EventArgs e)
         {
-            ICodeDocument templateFile = codeItemFile.AddDocument(ConfigSettings.DefaultSyntax);
+            ICodeDocument templateFile = codeItemFile.AddDocument(DocumentTypeEnum.CodeSnippet, ConfigSettings.DefaultSyntax) as ICodeDocument;
+            this.IsModified = true;
+        }
+
+        private void btnAddCode_Click(object sender, EventArgs e)
+        {
+            ICodeDocument templateFile = codeItemFile.AddDocument(DocumentTypeEnum.CodeSnippet, ConfigSettings.DefaultSyntax) as ICodeDocument;
+            this.IsModified = true;
+        }
+
+        private void btnAddHyperlinks_Click(object sender, EventArgs e)
+        {
+            IUrlGroupDocument urlFile = codeItemFile.AddDocument(DocumentTypeEnum.UrlGroup) as IUrlGroupDocument;
             this.IsModified = true;
         }
 
@@ -374,5 +400,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         #endregion
+
+
     }
 }

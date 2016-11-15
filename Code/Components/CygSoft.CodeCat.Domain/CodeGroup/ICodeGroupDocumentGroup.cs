@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
+﻿using CygSoft.CodeCat.DocumentManager;
+using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.Base;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,10 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         // don't like this... should not be returning "all" documents.
         // should be treating a collection of Template and a collection of Script.
-        ICodeDocument[] Documents { get; }
-        ICodeDocument GetDocument(string id);
+        IDocument[] Documents { get; }
+        IDocument GetDocument(string id);
 
-        ICodeDocument AddDocument(string syntax);
+        IDocument AddDocument(DocumentTypeEnum documentType, string syntax = null);
         void RemoveDocument(string id);
 
         void MoveDocumentLeft(string id);

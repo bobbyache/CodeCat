@@ -24,7 +24,7 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
 
         public List<IDocument> LoadDocuments()
         {
-            List<ICodeDocument> documents = new List<ICodeDocument>();
+            List<IDocument> documents = new List<IDocument>();
 
             XDocument indexDocument = XDocument.Load(this.filePath);
             foreach (XElement documentElement in indexDocument.Element("QikFile").Element("Documents").Elements())
@@ -35,19 +35,10 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
                 string documentExt = (string)documentElement.Attribute("Ext");
                 string documentSyntax = (string)documentElement.Attribute("Syntax");
                 int documentOrdinal = int.Parse((string)documentElement.Attribute("Ordinal"));
+                string documentType = documentElement.Attribute("DocType") != null ? (string)documentElement.Attribute("DocType") : "QIKSCRIPT";
 
-                if (documentExt == "qik")
-                {
-                    ICodeDocument scriptDocument = DocumentFactory.CreateQikScriptDocument(this.folder, documentId, documentTitle, documentExt,
-                        documentSyntax, documentOrdinal, documentDesc);
-                    documents.Add(scriptDocument);
-                }
-                else
-                {
-                    ICodeDocument templateDocument = DocumentFactory.CreateCodeDocument(this.folder, documentId, documentTitle, documentExt,
-                        documentSyntax, documentOrdinal, documentDesc);
-                    documents.Add(templateDocument);
-                }
+                IDocument scriptDocument = DocumentFactory.Create(DocumentFactory.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
+                documents.Add(scriptDocument);
             }
 
             return documents.OfType<IDocument>().ToList();
@@ -82,6 +73,7 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
                 filesElement.Add(new XElement("Document",
                     new XAttribute("Id", docFile.Id),
                     new XAttribute("Title", docFile.Title),
+                    new XAttribute("DocType", docFile.DocumentType),
                     new XAttribute("Description", docFile.Description == null ? "" : docFile.Description),
                     new XAttribute("Ext", docFile.FileExtension),
                     new XAttribute("Syntax", docFile.Syntax),

@@ -66,7 +66,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         public string Text { get; set; }
 
         // would like to remove this at some point see... TemplateFiles property below...
-        public ICodeDocument[] Documents { get { return this.documentIndex.DocumentFiles.OfType<ICodeDocument>().ToArray(); } }
+        public IDocument[] Documents { get { return this.documentIndex.DocumentFiles.ToArray(); } }
 
         public string Id { get { return this.IndexItem.Id; } }
         public string FilePath { get { return this.documentIndex.FilePath; } }
@@ -134,7 +134,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             return this.documentIndex.DocumentExists(id);
         }
 
-        public ICodeDocument GetDocument(string id)
+        public IDocument GetDocument(string id)
         {
             return this.documentIndex.GetDocumentFile(id) as ICodeDocument;
         }
@@ -177,10 +177,10 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             this.documentIndex.MoveUp(document);
         }
 
-        public ICodeDocument AddDocument(string syntax)
+        public IDocument AddDocument(DocumentTypeEnum documentType, string syntax = null)
         {
-            return this.documentIndex.AddDocumentFile(DocumentFactory.CreateCodeDocument(documentIndex.Folder, 
-                "New Document", "txt", syntax)) as ICodeDocument;
+            return this.documentIndex.AddDocumentFile(DocumentFactory.Create(documentType, documentIndex.Folder,
+                "New Document", null, 0, null, "txt", syntax)) as ICodeDocument;
         }
 
         public void RemoveDocument(string id)

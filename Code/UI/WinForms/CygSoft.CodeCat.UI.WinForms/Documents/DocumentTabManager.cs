@@ -62,7 +62,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             if (visible)
             {
                 tabControl.TabPages.Add(tabPage);
-                AddTabMenuItem(document as ICodeDocument);
+                AddTabMenuItem(document);
                 if (select)
                     tabControl.SelectedTab = tabPage;
             }
@@ -136,12 +136,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             this.tabMenuButton.DropDownItems.Add(item);
         }
 
-        private void AddTabMenuItem(ICodeDocument document)
+        private void AddTabMenuItem(IDocument document)
         {
             ToolStripMenuItem item = new ToolStripMenuItem();
             item.Name = document.Id;
             item.Text = document.Title;
-            item.Image = IconRepository.GetImage(document.Syntax);
+
+            if (document is ICodeDocument)
+                item.Image = IconRepository.GetImage((document as ICodeDocument).Syntax);
+            else
+                item.Image = IconRepository.GetImage("TEXT");
+
             item.Click += item_Click;
             this.tabMenuButton.DropDownItems.Add(item);
         }

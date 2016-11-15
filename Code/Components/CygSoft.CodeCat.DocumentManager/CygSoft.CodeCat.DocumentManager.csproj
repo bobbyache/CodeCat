@@ -50,6 +50,7 @@
     <Compile Include="Documents\QikScriptDocument.cs" />
     <Compile Include="Documents\TextDocument.cs" />
     <Compile Include="Documents\TextDocumentVersion.cs" />
+    <Compile Include="Documents\UrlGroupDocument.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="PathGenerators\DocumentIndexPathGenerator.cs" />
     <Compile Include="PathGenerators\DocumentPathGenerator.cs" />

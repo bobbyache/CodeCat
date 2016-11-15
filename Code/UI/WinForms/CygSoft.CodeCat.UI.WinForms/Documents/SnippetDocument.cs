@@ -240,7 +240,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                     cboSyntax.SelectedItem = item;
             }
 
-            string syntaxFile = application.GetSyntaxFile(syntax);
+            string syntaxFile = application.GetSyntaxFile(syn);
             this.syntaxBox.Document.SyntaxFile = syntaxFile;
             this.snapshotListCtrl1.SyntaxFile = syntaxFile;
 

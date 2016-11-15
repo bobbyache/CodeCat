@@ -108,6 +108,7 @@ namespace CygSoft.CodeCat.Domain
         public string GetSyntaxFile(string syntax)
         {
             return this.syntaxRepository[syntax].FilePath;
+            //return this.syntaxRepository.
         }
 
         public IKeywordIndexItem[] FindIndeces(string commaDelimitedKeywords)

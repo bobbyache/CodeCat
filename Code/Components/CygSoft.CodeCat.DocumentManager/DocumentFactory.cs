@@ -11,34 +11,88 @@ namespace CygSoft.CodeCat.DocumentManager
 {
     public class DocumentFactory
     {
-        public static ITextDocument CreateTextDocument(string folder, string title, string extension)
+        private class DocArgs
         {
-            return new TextDocument(folder, title, extension);
+            public string DocumentType { get; set; }
+            public string Folder { get; set; }
+            public string Title { get; set; }
+            public string Id { get; set; }
+            public int Ordinal { get; set; }
+            public string Description { get; set; }
+            public string Extension {get; set;}
+            public string Syntax { get; set; }
         }
 
-        public static ITextDocument CreateTextDocument(string folder, string id, string title, string extension, int ordinal, string description)
+        public static IDocument Create(DocumentTypeEnum documentType, string folder, string title, string id = null, int ordinal = 0, string description = null, string extension = null, string syntax = null)
         {
-            return new TextDocument(folder, id, title, extension, ordinal, description);
+            DocArgs docArgs = new DocArgs { DocumentType = GetDocumentType(documentType), Folder = folder, Title = title, Id = id, Ordinal = ordinal, Description = description, Extension = extension, Syntax = syntax };
+
+            if (docArgs.DocumentType == "CODESNIPPET")
+                return CreateCodeSnippet(docArgs);
+
+            if (docArgs.DocumentType == "URLGROUP")
+                return CreateUrlGroup(docArgs);
+
+            if (docArgs.DocumentType == "QIKSCRIPT")
+                return CreateQikScript(docArgs);
+            return null;
         }
 
-        public static ICodeDocument CreateCodeDocument(string folder, string title, string extension, string syntax)
+        public static DocumentTypeEnum GetDocumentType(string documentType)
         {
-            return new CodeDocument(folder, title, extension, syntax);
+            switch (documentType)
+            {
+                case "CODESNIPPET":
+                    return DocumentTypeEnum.CodeSnippet;
+
+                case "QIKSCRIPT":
+                    return DocumentTypeEnum.QikScript;
+
+                case "URLGROUP":
+                    return DocumentTypeEnum.UrlGroup;
+
+                default:
+                    return DocumentTypeEnum.CodeSnippet;
+            }
         }
 
-        public static ICodeDocument CreateCodeDocument(string folder, string id, string title, string extension, string syntax, int ordinal, string description)
+        public static string GetDocumentType(DocumentTypeEnum documentType)
         {
-            return new CodeDocument(folder, id, title, extension, ordinal, description, syntax);
+            switch (documentType)
+            {
+                case DocumentTypeEnum.CodeSnippet:
+                    return "CODESNIPPET";
+                case DocumentTypeEnum.QikScript:
+                    return "QIKSCRIPT";
+                case DocumentTypeEnum.UrlGroup:
+                    return "URLGROUP";
+                default:
+                    return "CODESNIPPET";
+            }
         }
 
-        public static ICodeDocument CreateQikScriptDocument(string folder, string title, string extension, string syntax)
+        private static IDocument CreateUrlGroup(DocArgs docArgs)
         {
-            return new QikScriptDocument(folder, title, extension, syntax);
+            if (docArgs.Id == null)
+                return new UrlGroupDocument(docArgs.Folder, docArgs.Title);
+            else
+                return new UrlGroupDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
-        public static ICodeDocument CreateQikScriptDocument(string folder, string id, string title, string extension, string syntax, int ordinal, string description)
+        private static IDocument CreateCodeSnippet(DocArgs docArgs)
         {
-            return new QikScriptDocument(folder, id, title, extension, ordinal, description, syntax);
+            if (docArgs.Id == null)
+                return new CodeDocument(docArgs.Folder, docArgs.Title, docArgs.Extension, docArgs.Syntax);
+            else
+                return new CodeDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description, docArgs.Syntax);
+        }
+
+        private static IDocument CreateQikScript(DocArgs docArgs)
+        {
+            if (docArgs.Id == null)
+                return new QikScriptDocument(docArgs.Folder, docArgs.Title, docArgs.Extension, docArgs.Syntax);
+            else
+                return new QikScriptDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description, docArgs.Syntax);
         }
     }
 }

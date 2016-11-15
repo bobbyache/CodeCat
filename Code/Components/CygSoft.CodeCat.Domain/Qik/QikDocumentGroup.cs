@@ -205,8 +205,8 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public ICodeDocument AddTemplate(string syntax)
         {
-            return this.documentIndex.AddDocumentFile(DocumentFactory.CreateCodeDocument(documentIndex.Folder, 
-                "New Template", "tpl", syntax)) as ICodeDocument;
+            return this.documentIndex.AddDocumentFile(DocumentFactory.Create(DocumentTypeEnum.CodeSnippet, documentIndex.Folder, 
+                "New Template", null, 0, null, "tpl", syntax)) as ICodeDocument;
         }
 
         public void RemoveTemplate(string id)

@@ -53,6 +53,9 @@
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.tabControlFile = new System.Windows.Forms.TabControl();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.btnAddCode = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAddHyperlinks = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -175,6 +178,7 @@
             this.btnDelete,
             this.toolStripSeparator2,
             this.chkEdit,
+            this.toolStripDropDownButton1,
             this.btnAddCodeItem,
             this.btnRemoveCodeItem,
             this.toolStripSeparator3,
@@ -250,7 +254,7 @@
             this.txtToolStripTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtToolStripTitle.Name = "txtToolStripTitle";
             this.txtToolStripTitle.ReadOnly = true;
-            this.txtToolStripTitle.Size = new System.Drawing.Size(508, 25);
+            this.txtToolStripTitle.Size = new System.Drawing.Size(479, 25);
             this.txtToolStripTitle.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tabControlFile
@@ -261,6 +265,32 @@
             this.tabControlFile.SelectedIndex = 0;
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAddCode,
+            this.btnAddHyperlinks});
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
+            this.toolStripDropDownButton1.Text = "btnAddItem";
+            // 
+            // btnAddCode
+            // 
+            this.btnAddCode.Name = "btnAddCode";
+            this.btnAddCode.Size = new System.Drawing.Size(155, 22);
+            this.btnAddCode.Text = "Add Code";
+            this.btnAddCode.Click += new System.EventHandler(this.btnAddCode_Click);
+            // 
+            // btnAddHyperlinks
+            // 
+            this.btnAddHyperlinks.Name = "btnAddHyperlinks";
+            this.btnAddHyperlinks.Size = new System.Drawing.Size(155, 22);
+            this.btnAddHyperlinks.Text = "Add Hyperlinks";
+            this.btnAddHyperlinks.Click += new System.EventHandler(this.btnAddHyperlinks_Click);
             // 
             // CodeGroupDocument
             // 
@@ -310,5 +340,8 @@
         private System.Windows.Forms.ToolStripDropDownButton btnMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private ToolStripSpringTextBox txtToolStripTitle;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem btnAddCode;
+        private System.Windows.Forms.ToolStripMenuItem btnAddHyperlinks;
     }
 }

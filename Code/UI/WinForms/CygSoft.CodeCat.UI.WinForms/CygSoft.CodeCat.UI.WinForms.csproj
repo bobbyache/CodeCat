@@ -96,6 +96,12 @@
     <Compile Include="Controls\QikTemplateCodeCtrl.Designer.cs">
       <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UrlGroupControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UrlGroupControl.Designer.cs">
+      <DependentUpon>UrlGroupControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\AboutBoxDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\QikTemplateCodeCtrl.resx">
       <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UrlGroupControl.resx">
+      <DependentUpon>UrlGroupControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AboutBoxDialog.resx">
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>

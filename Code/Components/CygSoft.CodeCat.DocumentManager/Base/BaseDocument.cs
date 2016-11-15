@@ -13,6 +13,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public int Ordinal { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string DocumentType { get; set; }
 
         public BaseDocument(BaseFilePathGenerator filePathGenerator, string title, string description = null)
             : base(filePathGenerator)

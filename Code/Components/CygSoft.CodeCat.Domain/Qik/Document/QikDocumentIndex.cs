@@ -29,7 +29,7 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
             if (!base.Exists)
             {
                 // creating this document for the very first time... so we need to ensure that we create a script document!
-                ICodeDocument scriptDoc = DocumentFactory.CreateQikScriptDocument(this.Folder, "Qik Script", "qik", "Qik");
+                ICodeDocument scriptDoc = DocumentFactory.Create(DocumentTypeEnum.QikScript, this.Folder, "Qik Script", null, 0, null, "qik", "Qik") as ICodeDocument;
                 scriptDoc.Ordinal = 1;  // should always be the last item, but is the first over here.
                 this.AddDocumentFile(scriptDoc);
             }
