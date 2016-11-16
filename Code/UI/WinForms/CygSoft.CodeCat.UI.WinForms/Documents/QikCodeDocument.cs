@@ -54,8 +54,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.qikFile.DocumentRemoved += qikFile_DocumentRemoved;
             this.qikFile.DocumentMovedLeft += qikFile_DocumentMovedLeft;
             this.qikFile.DocumentMovedRight += qikFile_DocumentMovedRight;
-            this.scriptControl = new QikScriptCtrl(application, qikFile);
-            this.scriptControl.Modified += scriptCtrl_Modified;
+
+            this.scriptControl = DocumentControlFactory.Create(null, qikFile, application, scriptCtrl_Modified) as QikScriptCtrl;
+
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
             this.compiler = qikFile.Compiler;
@@ -215,16 +216,22 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabManager.Clear();
             foreach (ICodeDocument document in qikFile.TemplateFiles)
             {
-                tabManager.AddTab(document, NewTemplateControl(document), true, false);
+                AddDocument(document, false);
             }
             tabManager.AddTab(qikFile.ScriptFile, scriptControl, btnShowScript.Checked, false);
         }
 
-        private QikTemplateCodeCtrl NewTemplateControl(IDocument document)
+
+        private void AddDocument(IDocument document, bool selected)
         {
-            QikTemplateCodeCtrl templateControl = new QikTemplateCodeCtrl(this.application, this.qikFile, document as ICodeDocument);
-            templateControl.Modified += codeCtrl_Modified;
-            return templateControl;
+            if (document is ICodeDocument)
+                tabManager.AddTab(document,
+                    DocumentControlFactory.Create(document, this.qikFile, this.application, codeCtrl_Modified),
+                true, selected);
+            else
+                tabManager.AddTab(document,
+                    DocumentControlFactory.Create(document, this.qikFile, this.application, codeCtrl_Modified),
+                    true, selected);
         }
 
         private void Compile()
@@ -314,7 +321,9 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void qikFile_DocumentAdded(object sender, DocumentEventArgs e)
         {
             ControlGraphics.SuspendDrawing(this);
-            tabManager.AddTab(e.Document, NewTemplateControl(e.Document), true, true);
+            tabManager.AddTab(e.Document,
+                DocumentControlFactory.Create(e.Document, this.qikFile, this.application, codeCtrl_Modified),
+                true, true);
             tabManager.OrderTabs(qikFile.Documents);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
             tabManager.DisplayTab(e.Document.Id, true);

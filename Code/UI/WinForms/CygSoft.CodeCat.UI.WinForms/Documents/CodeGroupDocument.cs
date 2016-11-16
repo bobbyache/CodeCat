@@ -135,7 +135,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
             chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
             btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
-            btnAddCodeItem.Image = Resources.GetImage(Constants.ImageKeys.AddTemplate);
+            
+            btnAddItem.Image = Resources.GetImage(Constants.ImageKeys.AddTemplate);
             btnRemoveCodeItem.Image = Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
             btnMoveLeft.Image = Resources.GetImage(Constants.ImageKeys.MoveLeft);
             btnMoveRight.Image = Resources.GetImage(Constants.ImageKeys.MoveRight);
@@ -186,25 +187,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabManager.Clear();
             foreach (IDocument document in codeItemFile.Documents)
             {
-                if (document is ICodeDocument)
-                    tabManager.AddTab(document, NewCodeControl(document), true, false);
-                else
-                    tabManager.AddTab(document, NewUrlGroupControl(document), true, false);
+                AddDocument(document, false);
             }
-        }
-
-        private CodeItemCtrl NewCodeControl(IDocument document)
-        {
-            CodeItemCtrl templateControl = new CodeItemCtrl(this.application, this.codeItemFile, document as ICodeDocument);
-            templateControl.Modified += codeItemCtrl_Modified;
-            return templateControl;
-        }
-
-        private UrlGroupControl NewUrlGroupControl(IDocument document)
-        {
-            UrlGroupControl urlGroupControl = new UrlGroupControl(this.application, this.codeItemFile, document as IUrlGroupDocument);
-            //urlGroupControl.Modified += codeItemCtrl_Modified;
-            return urlGroupControl;
         }
 
         #endregion
@@ -278,10 +262,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void codeItemFile_DocumentAdded(object sender, DocumentEventArgs e)
         {
             ControlGraphics.SuspendDrawing(this);
-            if (e.Document is ICodeDocument)
-                tabManager.AddTab(e.Document, NewCodeControl(e.Document), true, true);
-            else
-                tabManager.AddTab(e.Document, NewUrlGroupControl(e.Document), true, true);
+
+            AddDocument(e.Document, true);
 
             tabManager.OrderTabs(codeItemFile.Documents);
             tabManager.DisplayTab(e.Document.Id, true);
@@ -289,6 +271,22 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         #endregion
+
+        private void AddDocument(IDocument document, bool selected)
+        {
+            if (document is ICodeDocument)
+                tabManager.AddTab(document,
+                    DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
+                true, selected);
+            else if (document is IPdfDocument)
+                tabManager.AddTab(document,
+                    DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
+                true, selected);
+            else
+                tabManager.AddTab(document,
+                    DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
+                    true, selected);
+        }
 
         #region Document Control Events
 
@@ -307,12 +305,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.RevertChanges();
         }
 
-        private void btnAddCodeItem_Click(object sender, EventArgs e)
-        {
-            ICodeDocument templateFile = codeItemFile.AddDocument(DocumentTypeEnum.CodeSnippet, ConfigSettings.DefaultSyntax) as ICodeDocument;
-            this.IsModified = true;
-        }
-
         private void btnAddCode_Click(object sender, EventArgs e)
         {
             ICodeDocument templateFile = codeItemFile.AddDocument(DocumentTypeEnum.CodeSnippet, ConfigSettings.DefaultSyntax) as ICodeDocument;
@@ -322,6 +314,12 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void btnAddHyperlinks_Click(object sender, EventArgs e)
         {
             IUrlGroupDocument urlFile = codeItemFile.AddDocument(DocumentTypeEnum.UrlGroup) as IUrlGroupDocument;
+            this.IsModified = true;
+        }
+
+        private void btnAddPdfDocument_Click(object sender, EventArgs e)
+        {
+            IPdfDocument pdfDocument = codeItemFile.AddDocument(DocumentTypeEnum.PdfDocument) as IPdfDocument;
             this.IsModified = true;
         }
 
@@ -400,6 +398,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         #endregion
+
+
 
 
     }

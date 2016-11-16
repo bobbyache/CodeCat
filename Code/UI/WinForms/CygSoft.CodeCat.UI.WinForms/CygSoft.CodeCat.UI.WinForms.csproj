@@ -83,6 +83,12 @@
       <DependentUpon>InputPropertyGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListViewSorter.cs" />
+    <Compile Include="Controls\PdfDocumentControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PdfDocumentControl.Designer.cs">
+      <DependentUpon>PdfDocumentControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PropertyControlAttribute.cs" />
     <Compile Include="Controls\QikScriptCtrl.cs">
       <SubType>UserControl</SubType>
@@ -121,6 +127,7 @@
     <Compile Include="Documents\CodeGroupDocument.Designer.cs">
       <DependentUpon>CodeGroupDocument.cs</DependentUpon>
     </Compile>
+    <Compile Include="Documents\DocumentControlFactory.cs" />
     <Compile Include="Documents\DocumentTabEventArgs.cs" />
     <Compile Include="Documents\DocumentTabManager.cs" />
     <Compile Include="Documents\IContentDocument.cs" />
@@ -206,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InputPropertyGrid.resx">
       <DependentUpon>InputPropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PdfDocumentControl.resx">
+      <DependentUpon>PdfDocumentControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\QikScriptCtrl.resx">
       <DependentUpon>QikScriptCtrl.cs</DependentUpon>
@@ -348,7 +358,25 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="AcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxAcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

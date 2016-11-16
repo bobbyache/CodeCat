@@ -22,7 +22,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public event EventHandler<FileEventArgs> AfterRevert;
 
         public string Id { get; private set; }
-        public string FilePath { get; private set; }
+        public string FilePath { get; protected set; }
         public string FileName { get; private set; }
         public string FileExtension { get; private set; }
 

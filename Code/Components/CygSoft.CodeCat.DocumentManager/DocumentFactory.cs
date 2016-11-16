@@ -35,6 +35,10 @@ namespace CygSoft.CodeCat.DocumentManager
 
             if (docArgs.DocumentType == "QIKSCRIPT")
                 return CreateQikScript(docArgs);
+
+            if (docArgs.DocumentType == "PDFDOCUMENT")
+                return CreatePdfDocument(docArgs);
+
             return null;
         }
 
@@ -51,6 +55,9 @@ namespace CygSoft.CodeCat.DocumentManager
                 case "URLGROUP":
                     return DocumentTypeEnum.UrlGroup;
 
+                case "PDFDOCUMENT":
+                    return DocumentTypeEnum.PdfDocument;
+
                 default:
                     return DocumentTypeEnum.CodeSnippet;
             }
@@ -66,9 +73,19 @@ namespace CygSoft.CodeCat.DocumentManager
                     return "QIKSCRIPT";
                 case DocumentTypeEnum.UrlGroup:
                     return "URLGROUP";
+                case DocumentTypeEnum.PdfDocument:
+                    return "PDFDOCUMENT";
                 default:
                     return "CODESNIPPET";
             }
+        }
+
+        private static IDocument CreatePdfDocument(DocArgs docArgs)
+        {
+            if (docArgs.Id == null)
+                return new PdfDocument(docArgs.Folder, docArgs.Title);
+            else
+                return new PdfDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
         private static IDocument CreateUrlGroup(DocArgs docArgs)

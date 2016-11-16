@@ -46,16 +46,16 @@
             this.toolstripCommands = new System.Windows.Forms.ToolStrip();
             this.btnMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnAddCodeItem = new System.Windows.Forms.ToolStripButton();
+            this.btnAddItem = new System.Windows.Forms.ToolStripDropDownButton();
+            this.btnAddCode = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAddHyperlinks = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAddPdfDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRemoveCodeItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.tabControlFile = new System.Windows.Forms.TabControl();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnAddCode = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAddHyperlinks = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -178,8 +178,7 @@
             this.btnDelete,
             this.toolStripSeparator2,
             this.chkEdit,
-            this.toolStripDropDownButton1,
-            this.btnAddCodeItem,
+            this.btnAddItem,
             this.btnRemoveCodeItem,
             this.toolStripSeparator3,
             this.btnMoveLeft,
@@ -204,15 +203,39 @@
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
-            // btnAddCodeItem
+            // btnAddItem
             // 
-            this.btnAddCodeItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnAddCodeItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddCodeItem.Image")));
-            this.btnAddCodeItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAddCodeItem.Name = "btnAddCodeItem";
-            this.btnAddCodeItem.Size = new System.Drawing.Size(23, 22);
-            this.btnAddCodeItem.Text = "Add Template";
-            this.btnAddCodeItem.Click += new System.EventHandler(this.btnAddCodeItem_Click);
+            this.btnAddItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAddItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAddCode,
+            this.btnAddHyperlinks,
+            this.btnAddPdfDocument});
+            this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
+            this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(29, 22);
+            this.btnAddItem.Text = "btnAddItem";
+            // 
+            // btnAddCode
+            // 
+            this.btnAddCode.Name = "btnAddCode";
+            this.btnAddCode.Size = new System.Drawing.Size(176, 22);
+            this.btnAddCode.Text = "Add Code";
+            this.btnAddCode.Click += new System.EventHandler(this.btnAddCode_Click);
+            // 
+            // btnAddHyperlinks
+            // 
+            this.btnAddHyperlinks.Name = "btnAddHyperlinks";
+            this.btnAddHyperlinks.Size = new System.Drawing.Size(176, 22);
+            this.btnAddHyperlinks.Text = "Add Hyperlinks";
+            this.btnAddHyperlinks.Click += new System.EventHandler(this.btnAddHyperlinks_Click);
+            // 
+            // btnAddPdfDocument
+            // 
+            this.btnAddPdfDocument.Name = "btnAddPdfDocument";
+            this.btnAddPdfDocument.Size = new System.Drawing.Size(176, 22);
+            this.btnAddPdfDocument.Text = "Add Pdf Document";
+            this.btnAddPdfDocument.Click += new System.EventHandler(this.btnAddPdfDocument_Click);
             // 
             // btnRemoveCodeItem
             // 
@@ -254,7 +277,7 @@
             this.txtToolStripTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtToolStripTitle.Name = "txtToolStripTitle";
             this.txtToolStripTitle.ReadOnly = true;
-            this.txtToolStripTitle.Size = new System.Drawing.Size(479, 25);
+            this.txtToolStripTitle.Size = new System.Drawing.Size(502, 25);
             this.txtToolStripTitle.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tabControlFile
@@ -265,32 +288,6 @@
             this.tabControlFile.SelectedIndex = 0;
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
-            // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAddCode,
-            this.btnAddHyperlinks});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
-            this.toolStripDropDownButton1.Text = "btnAddItem";
-            // 
-            // btnAddCode
-            // 
-            this.btnAddCode.Name = "btnAddCode";
-            this.btnAddCode.Size = new System.Drawing.Size(155, 22);
-            this.btnAddCode.Text = "Add Code";
-            this.btnAddCode.Click += new System.EventHandler(this.btnAddCode_Click);
-            // 
-            // btnAddHyperlinks
-            // 
-            this.btnAddHyperlinks.Name = "btnAddHyperlinks";
-            this.btnAddHyperlinks.Size = new System.Drawing.Size(155, 22);
-            this.btnAddHyperlinks.Text = "Add Hyperlinks";
-            this.btnAddHyperlinks.Click += new System.EventHandler(this.btnAddHyperlinks_Click);
             // 
             // CodeGroupDocument
             // 
@@ -331,7 +328,6 @@
         private System.Windows.Forms.ToolStripButton btnDiscardChange;
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStrip toolstripCommands;
-        private System.Windows.Forms.ToolStripButton btnAddCodeItem;
         private System.Windows.Forms.ToolStripButton btnRemoveCodeItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton btnMoveLeft;
@@ -340,8 +336,9 @@
         private System.Windows.Forms.ToolStripDropDownButton btnMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private ToolStripSpringTextBox txtToolStripTitle;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripDropDownButton btnAddItem;
         private System.Windows.Forms.ToolStripMenuItem btnAddCode;
         private System.Windows.Forms.ToolStripMenuItem btnAddHyperlinks;
+        private System.Windows.Forms.ToolStripMenuItem btnAddPdfDocument;
     }
 }
