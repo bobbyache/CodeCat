@@ -71,7 +71,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
             foreach (IDocument docFile in documents)
             {
-                if (docFile is ICodeDocument)
+                if (docFile. is ICodeDocument)
                 {
                     ICodeDocument codeDoc = docFile as ICodeDocument;
 

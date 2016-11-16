@@ -48,6 +48,7 @@
     <Compile Include="IFile.cs" />
     <Compile Include="IFileVersion.cs" />
     <Compile Include="IDocumentIndex.cs" />
+    <Compile Include="IPdfDocument.cs" />
     <Compile Include="IPositionedItem.cs" />
     <Compile Include="IQikScriptDocument.cs" />
     <Compile Include="ITextDocument.cs" />

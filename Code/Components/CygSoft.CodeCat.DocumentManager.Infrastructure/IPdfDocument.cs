@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public enum DocumentTypeEnum
+    public interface IPdfDocument
     {
-        CodeSnippet,
-        UrlGroup,
-        PdfDocument,
-        QikScript
     }
 }

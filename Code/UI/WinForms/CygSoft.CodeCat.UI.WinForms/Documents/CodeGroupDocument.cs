@@ -202,7 +202,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private UrlGroupControl NewUrlGroupControl(IDocument document)
         {
-            UrlGroupControl urlGroupControl = new UrlGroupControl(this.application, null, document as IUrlGroupDocument);
+            UrlGroupControl urlGroupControl = new UrlGroupControl(this.application, this.codeItemFile, document as IUrlGroupDocument);
             //urlGroupControl.Modified += codeItemCtrl_Modified;
             return urlGroupControl;
         }

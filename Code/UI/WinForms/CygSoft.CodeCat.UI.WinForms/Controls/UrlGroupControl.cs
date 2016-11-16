@@ -15,9 +15,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class UrlGroupControl : UserControl, IDocumentItemControl
     {
+        private IUrlGroupDocument urlDocument;
+        private ICodeGroupDocumentGroup codeGroupFile;
+
         public UrlGroupControl(AppFacade application, ICodeGroupDocumentGroup codeGroupFile, IUrlGroupDocument urlDocument)
         {
             InitializeComponent();
+
+            this.urlDocument = urlDocument;
+            this.codeGroupFile = codeGroupFile;
+
+            ResetFieldValues();
+            //RegisterDataFieldEvents();
+            RegisterFileEvents();
         }
 
         public event EventHandler Modified;
@@ -41,6 +51,36 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public void Revert()
         {
+        }
+
+
+        private void RegisterFileEvents()
+        {
+            codeGroupFile.BeforeSave += codeGroupFile_BeforeContentSaved;
+            codeGroupFile.AfterSave += codeGroupFile_ContentSaved;
+        }
+
+        private void ResetFieldValues()
+        {
+            txtTitle.Text = urlDocument.Title;
+            this.IsModified = false;
+        }
+
+        private void codeGroupFile_ContentSaved(object sender, FileEventArgs e)
+        {
+            this.IsModified = false;
+            SetChangeStatus();
+        }
+
+        private void codeGroupFile_BeforeContentSaved(object sender, FileEventArgs e)
+        {
+            this.urlDocument.Title = txtTitle.Text;
+        }
+
+        private void SetChangeStatus()
+        {
+            lblEditStatus.Text = this.IsModified ? "Edited" : "Saved";
+            lblEditStatus.ForeColor = this.IsModified ? Color.DarkRed : Color.Black;
         }
     }
 }
