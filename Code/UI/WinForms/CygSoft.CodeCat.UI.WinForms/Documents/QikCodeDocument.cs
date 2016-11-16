@@ -55,7 +55,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.qikFile.DocumentMovedLeft += qikFile_DocumentMovedLeft;
             this.qikFile.DocumentMovedRight += qikFile_DocumentMovedRight;
 
-            this.scriptControl = DocumentControlFactory.Create(null, qikFile, application, scriptCtrl_Modified) as QikScriptCtrl;
+            this.scriptControl = DocumentControlFactory.Create(qikFile.ScriptFile, qikFile, application, scriptCtrl_Modified) as QikScriptCtrl;
 
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;

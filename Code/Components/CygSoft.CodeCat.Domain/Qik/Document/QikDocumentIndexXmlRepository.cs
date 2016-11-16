@@ -35,7 +35,13 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
                 string documentExt = (string)documentElement.Attribute("Ext");
                 string documentSyntax = (string)documentElement.Attribute("Syntax");
                 int documentOrdinal = int.Parse((string)documentElement.Attribute("Ordinal"));
-                string documentType = documentElement.Attribute("DocType") != null ? (string)documentElement.Attribute("DocType") : "QIKSCRIPT";
+
+                string documentType = null;
+
+                if (documentExt == "qik")
+                    documentType = documentElement.Attribute("DocType") != null ? (string)documentElement.Attribute("DocType") : "QIKSCRIPT";
+                else
+                    documentType = documentElement.Attribute("DocType") != null ? (string)documentElement.Attribute("DocType") : "CODESNIPPET";
 
                 IDocument scriptDocument = DocumentFactory.Create(DocumentFactory.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
                 documents.Add(scriptDocument);

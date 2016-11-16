@@ -18,11 +18,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
         public static IDocumentItemControl Create(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
             if (document is ICodeDocument)
-                return NewCodeControl(document, groupOwner, application, modifiedEventHandler);
+            {
+                if (document is IQikScriptDocument)
+                    return NewQikScriptControl(document, groupOwner, application, modifiedEventHandler);
+                else if (document.FileExtension == "tpl")
+                    return NewQikTemplateControl(document, groupOwner, application, modifiedEventHandler);
+                else
+                    return NewCodeControl(document, groupOwner, application, modifiedEventHandler);
+            }
+                
             else if (document is IUrlGroupDocument)
                 return NewUrlGroupControl(document, groupOwner, application, modifiedEventHandler);
-            else if (document is IQikScriptDocument)
-                return NewQikTemplateControl(document, groupOwner, application, modifiedEventHandler);
             else if (document is IPdfDocument)
                 return NewPdfDocument(document, groupOwner, application, modifiedEventHandler);
             else
