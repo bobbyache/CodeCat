@@ -134,7 +134,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             if (result == DialogResult.OK)
             {
-                //this.pdfDocument.Import(filePath);
                 File.Copy(filePath, this.pdfDocument.FilePath, true);
                 LoadIfExists();
             }
@@ -142,16 +141,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void btnReload_Click(object sender, EventArgs e)
         {
-            this.Controls.Remove(this.pdfControl);
-            this.pdfControl.Dispose();
-
-            this.pdfControl = new AxAcroPDFLib.AxAcroPDF();
-            this.pdfControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pdfControl.Enabled = true;
-            this.pdfControl.Location = new System.Drawing.Point(0, 25);
-            this.pdfControl.Size = new System.Drawing.Size(626, 479);
-            this.pdfControl.TabIndex = 12;
-            this.Controls.Add(this.pdfControl);
+            // hack to reload the control when it loses itself when changing panes.
             LoadIfExists();
         }
     }
