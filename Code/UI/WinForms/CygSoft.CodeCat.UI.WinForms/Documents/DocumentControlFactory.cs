@@ -26,13 +26,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 else
                     return NewCodeControl(document, groupOwner, application, modifiedEventHandler);
             }
-                
+
             else if (document is IUrlGroupDocument)
                 return NewUrlGroupControl(document, groupOwner, application, modifiedEventHandler);
             else if (document is IPdfDocument)
                 return NewPdfDocument(document, groupOwner, application, modifiedEventHandler);
+            else if (document is IImageDocument)
+                return NewImageDocument(document, groupOwner, application, modifiedEventHandler);
             else
                 return null;
+        }
+
+        private static IDocumentItemControl NewImageDocument(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        {
+            ImageControl documentControl = new ImageControl(application, groupOwner as ICodeGroupDocumentGroup, document as IImageDocument);
+            documentControl.Modified += modifiedEventHandler;
+            return documentControl;
         }
 
         private static IDocumentItemControl NewPdfDocument(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)

@@ -15,20 +15,20 @@ using System.IO;
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     // TODO: Rename this to PdfDocumentCtrl. Also consider moving all items controls into their own directory?
-    public partial class PdfDocumentControl :  UserControl, IDocumentItemControl
+    public partial class ImageControl :  UserControl, IDocumentItemControl
     {
-        private IPdfDocument pdfDocument;
+        private IImageDocument imageDocument;
         private ICodeGroupDocumentGroup codeGroupFile;
 
-        public PdfDocumentControl(AppFacade application, ICodeGroupDocumentGroup codeGroupFile, IPdfDocument pdfDocument)
+        public ImageControl(AppFacade application, ICodeGroupDocumentGroup codeGroupFile, IImageDocument imageDocument)
         {
             InitializeComponent();
 
-            this.pdfDocument = pdfDocument;
+            this.imageDocument = imageDocument;
             this.codeGroupFile = codeGroupFile;
 
             this.btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
-            this.Id = pdfDocument.Id;
+            this.Id = imageDocument.Id;
 
             ResetFieldValues();
             RegisterDataFieldEvents();
@@ -38,8 +38,25 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadIfExists()
         {
-            if (this.pdfDocument.Exists)
-                pdfControl.LoadFile(this.pdfDocument.FilePath);
+            if (this.imageDocument.Exists)
+            {
+                pictureBox.Image = LoadBitmap(this.imageDocument.FilePath);
+                CenterPictureBox(pictureBox);
+            }
+        }
+
+        private Bitmap LoadBitmap(string path)
+        {
+            //Open file in read only mode
+            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            //Get a binary reader for the file stream
+            using (BinaryReader reader = new BinaryReader(stream))
+            {
+                //copy the content of the file into a memory stream
+                var memoryStream = new MemoryStream(reader.ReadBytes((int)stream.Length));
+                //make a new Bitmap object the owner of the MemoryStream
+                return new Bitmap(memoryStream);
+            }
         }
 
         public event EventHandler Modified;
@@ -71,7 +88,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void ResetFieldValues()
         {
-            txtTitle.Text = pdfDocument.Title;
+            txtTitle.Text = imageDocument.Title;
             this.IsModified = false;
         }
 
@@ -89,7 +106,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupFile_BeforeContentSaved(object sender, FileEventArgs e)
         {
-            this.pdfDocument.Title = txtTitle.Text;
+            this.imageDocument.Title = txtTitle.Text;
         }
 
         private void CodeItemCtrl_Modified(object sender, EventArgs e)
@@ -114,9 +131,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void btnImport_Click(object sender, EventArgs e)
         {
             OpenFileDialog openDialog = new OpenFileDialog();
-            openDialog.Filter = "PDF Files *.pdf (*.pdf)|*.pdf";
-            openDialog.DefaultExt = "*.pdf";
-            openDialog.Title = string.Format("Open PDF");
+            openDialog.Filter = "Image Files *.png (*.png)|*.png";
+            openDialog.DefaultExt = "*.png";
+            openDialog.Title = string.Format("Open Image");
             openDialog.AddExtension = true;
             openDialog.FilterIndex = 0;
             openDialog.CheckPathExists = true;
@@ -126,10 +143,57 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             if (result == DialogResult.OK)
             {
-                //this.pdfDocument.Import(filePath);
-                File.Copy(filePath, this.pdfDocument.FilePath, true);
+                pictureBox.Image.Dispose();
+                
+                File.Copy(filePath, this.imageDocument.FilePath, true);
                 LoadIfExists();
             }
+        }
+
+        private void CenterPictureBox(PictureBox picBox)
+        {
+            picBox.Location = new Point((picBox.Parent.ClientSize.Width / 2) - (pictureBox.Image.Width / 2),
+                                        (picBox.Parent.ClientSize.Height / 2) - (pictureBox.Image.Height / 2));
+        }
+
+        private bool mustScroll = false;
+
+        private void imagePanel_Resize(object sender, EventArgs e)
+        {
+            if (pictureBox.Width > imagePanel.Width || pictureBox.Height > imagePanel.Height)
+            {
+                if (!mustScroll)
+                {
+                    mustScroll = true;
+                    ScrollingPicture();
+                }
+            }
+            else
+            {
+                if (mustScroll)
+                {
+                    mustScroll = false;
+                    CenteredPicture();
+                }
+            }
+        }
+
+        private void ScrollingPicture()
+        {
+            pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            imagePanel.AutoScroll = true;
+            //pictureBox.Refresh();
+            //imagePanel.Refresh();
+        }
+
+        private void CenteredPicture()
+        {
+            pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox.Anchor = AnchorStyles.None;
+
+            CenterPictureBox(pictureBox);
+            //pictureBox.Refresh();
         }
     }
 }

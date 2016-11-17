@@ -274,18 +274,26 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void AddDocument(IDocument document, bool selected)
         {
-            if (document is ICodeDocument)
-                tabManager.AddTab(document,
-                    DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
+            tabManager.AddTab(document,
+                DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
                 true, selected);
-            else if (document is IPdfDocument)
-                tabManager.AddTab(document,
-                    DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
-                true, selected);
-            else
-                tabManager.AddTab(document,
-                    DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
-                    true, selected);
+
+            //if (document is ICodeDocument)
+            //    tabManager.AddTab(document,
+            //        DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
+            //    true, selected);
+            //else if (document is IPdfDocument)
+            //    tabManager.AddTab(document,
+            //        DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
+            //    true, selected);
+            //else if (document is IImageDocument)
+            //    tabManager.AddTab(document, 
+            //        DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
+            //        true, selected);
+            //else
+            //    tabManager.AddTab(document,
+            //        DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
+            //        true, selected);
         }
 
         #region Document Control Events
@@ -320,6 +328,13 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void btnAddPdfDocument_Click(object sender, EventArgs e)
         {
             IPdfDocument pdfDocument = codeItemFile.AddDocument(DocumentTypeEnum.PdfDocument) as IPdfDocument;
+            this.IsModified = true;
+        }
+
+
+        private void btnAddImage_Click(object sender, EventArgs e)
+        {
+            IImageDocument imageDocument = codeItemFile.AddDocument(DocumentTypeEnum.ImageDocument, null, "png") as IImageDocument;
             this.IsModified = true;
         }
 
@@ -398,6 +413,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         #endregion
+
+
 
 
 

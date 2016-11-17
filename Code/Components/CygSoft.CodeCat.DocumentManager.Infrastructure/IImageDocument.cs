@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public enum DocumentTypeEnum
+    public interface IImageDocument :  IVersionableFile, IPositionedItem
     {
-        CodeSnippet,
-        UrlGroup,
-        PdfDocument,
-        QikScript,
-        ImageDocument
+        string Title { get; set; }
+        string DocumentType { get; set; }
+        string Description { get; set; }
     }
 }

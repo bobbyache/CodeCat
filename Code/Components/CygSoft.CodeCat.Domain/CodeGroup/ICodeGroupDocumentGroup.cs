@@ -25,7 +25,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         IDocument[] Documents { get; }
         IDocument GetDocument(string id);
 
-        IDocument AddDocument(DocumentTypeEnum documentType, string syntax = null);
+        IDocument AddDocument(DocumentTypeEnum documentType, string syntax = null, string extension = null);
         void RemoveDocument(string id);
 
         void MoveDocumentLeft(string id);

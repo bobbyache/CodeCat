@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
+
+    // TODO:  IconRepository. This class requires streamlining. There are a number methods and properties that can be streamlined for the rest of the application. Consider moving into infrastructure or domain.
     public static class IconRepository
     {
         public const string QikKey = "QIK";
@@ -56,6 +58,22 @@ namespace CygSoft.CodeCat.UI.WinForms
                     false);
                 return icon.ToBitmap();
             }
+        }
+
+        public static Icon ImageTypeIconByExtension(string extension)
+        {
+            Icon icon = Etier.IconHelper.IconReader.GetFileIcon(extension,
+                Etier.IconHelper.IconReader.IconSize.Small,
+                false);
+            return icon;
+        }
+
+        public static Image ImageTypeImageByExtension(string extension)
+        {
+            Icon icon = Etier.IconHelper.IconReader.GetFileIcon(extension,
+                Etier.IconHelper.IconReader.IconSize.Small,
+                false);
+            return icon.ToBitmap();
         }
 
         private static Icon codeGroupIcon;

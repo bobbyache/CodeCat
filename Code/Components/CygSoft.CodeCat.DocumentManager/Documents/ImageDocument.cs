@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public class PdfDocument : BaseDocument, IPdfDocument
+    public class ImageDocument : BaseDocument, IImageDocument
     {
         // YOU MIGHT NOT NEED TO INHERIT FROM BASEDOCUMENT HERE BECAUSE YOU ACTUALLY DON'T WRITE THE 
         // THE DOCUMENT (However some events etc. might be used further upstream.
         // Something to look into when you have time.
         // Perhaps you need to look at IFile which implemented by BaseFile... this contains all the events etc. And core methods and properties.
 
-        internal PdfDocument(string folder, string title)
-            : base(new DocumentPathGenerator(folder, "pdf"), title, null)
+        internal ImageDocument(string folder, string title, string extension)
+            : base(new DocumentPathGenerator(folder, extension), title, null)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.PdfDocument);
+            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.ImageDocument);
         }
 
-        internal PdfDocument(string folder, string id, string title, int ordinal, string description)
-            : base(new DocumentPathGenerator(folder, "pdf", id), title, description, ordinal)
+        internal ImageDocument(string folder, string id, string title, string extension, int ordinal, string description)
+            : base(new DocumentPathGenerator(folder, extension, id), title, description, ordinal)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.PdfDocument);
+            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.ImageDocument);
         }
 
         protected override IFileVersion NewVersion(DateTime timeStamp, string description)

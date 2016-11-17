@@ -56,6 +56,7 @@
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.tabControlFile = new System.Windows.Forms.TabControl();
+            this.btnAddImage = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -209,7 +210,8 @@
             this.btnAddItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAddCode,
             this.btnAddHyperlinks,
-            this.btnAddPdfDocument});
+            this.btnAddPdfDocument,
+            this.btnAddImage});
             this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
             this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddItem.Name = "btnAddItem";
@@ -289,6 +291,13 @@
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
             // 
+            // btnAddImage
+            // 
+            this.btnAddImage.Name = "btnAddImage";
+            this.btnAddImage.Size = new System.Drawing.Size(176, 22);
+            this.btnAddImage.Text = "Add Image";
+            this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
+            // 
             // CodeGroupDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -340,5 +349,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnAddCode;
         private System.Windows.Forms.ToolStripMenuItem btnAddHyperlinks;
         private System.Windows.Forms.ToolStripMenuItem btnAddPdfDocument;
+        private System.Windows.Forms.ToolStripMenuItem btnAddImage;
     }
 }

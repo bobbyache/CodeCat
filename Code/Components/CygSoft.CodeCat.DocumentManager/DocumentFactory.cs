@@ -39,6 +39,9 @@ namespace CygSoft.CodeCat.DocumentManager
             if (docArgs.DocumentType == "PDFDOCUMENT")
                 return CreatePdfDocument(docArgs);
 
+            if (docArgs.DocumentType == "IMAGEDOCUMENT")
+                return CreateImageDocument(docArgs);
+
             return null;
         }
 
@@ -58,6 +61,9 @@ namespace CygSoft.CodeCat.DocumentManager
                 case "PDFDOCUMENT":
                     return DocumentTypeEnum.PdfDocument;
 
+                case "IMAGEDOCUMENT":
+                    return DocumentTypeEnum.ImageDocument;
+
                 default:
                     return DocumentTypeEnum.CodeSnippet;
             }
@@ -75,9 +81,19 @@ namespace CygSoft.CodeCat.DocumentManager
                     return "URLGROUP";
                 case DocumentTypeEnum.PdfDocument:
                     return "PDFDOCUMENT";
+                case DocumentTypeEnum.ImageDocument:
+                    return "IMAGEDOCUMENT";
                 default:
                     return "CODESNIPPET";
             }
+        }
+
+        private static IDocument CreateImageDocument(DocArgs docArgs)
+        {
+            if (docArgs.Id == null)
+                return new ImageDocument(docArgs.Folder, docArgs.Title, docArgs.Extension);
+            else
+                return new ImageDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description);
         }
 
         private static IDocument CreatePdfDocument(DocArgs docArgs)

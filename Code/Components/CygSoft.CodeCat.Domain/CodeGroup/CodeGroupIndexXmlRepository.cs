@@ -71,18 +71,6 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
             foreach (IDocument docFile in documents)
             {
-                //switch (DocumentFactory.GetDocumentType(docFile.DocumentType))
-                //{
-                //    case DocumentTypeEnum.CodeSnippet:
-                //        break;
-                //    case DocumentTypeEnum.UrlGroup:
-                //        break;
-                //    case DocumentTypeEnum.PdfDocument:
-                //        break;
-                //    default:
-                //        break;
-                //}
-
                 if (docFile is ICodeDocument)
                 {
                     ICodeDocument codeDoc = docFile as ICodeDocument;
@@ -113,6 +101,19 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                 else if (docFile is IPdfDocument)
                 {
                     IPdfDocument urlFile = docFile as IPdfDocument;
+
+                    filesElement.Add(new XElement("Document",
+                        new XAttribute("Id", urlFile.Id),
+                        new XAttribute("Title", urlFile.Title),
+                        new XAttribute("DocType", urlFile.DocumentType),
+                        new XAttribute("Description", urlFile.Description == null ? "" : urlFile.Description),
+                        new XAttribute("Ext", urlFile.FileExtension),
+                        new XAttribute("Ordinal", urlFile.Ordinal.ToString())
+                        ));
+                }
+                else if (docFile is IImageDocument)
+                {
+                    IImageDocument urlFile = docFile as IImageDocument;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", urlFile.Id),

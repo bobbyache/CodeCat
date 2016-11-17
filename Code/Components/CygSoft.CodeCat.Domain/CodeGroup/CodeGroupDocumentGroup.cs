@@ -177,10 +177,10 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             this.documentIndex.MoveUp(document);
         }
 
-        public IDocument AddDocument(DocumentTypeEnum documentType, string syntax = null)
+        public IDocument AddDocument(DocumentTypeEnum documentType, string syntax = null, string extension = "txt")
         {
             return this.documentIndex.AddDocumentFile(DocumentFactory.Create(documentType, documentIndex.Folder,
-                "New Document", null, 0, null, "txt", syntax)) as ICodeDocument;
+                "New Document", null, 0, null, extension, syntax));
         }
 
         public void RemoveDocument(string id)
