@@ -50,13 +50,13 @@
             this.btnAddCode = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAddHyperlinks = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAddPdfDocument = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAddImage = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRemoveCodeItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.tabControlFile = new System.Windows.Forms.TabControl();
-            this.btnAddImage = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -227,6 +227,7 @@
             // 
             // btnAddHyperlinks
             // 
+            this.btnAddHyperlinks.Enabled = false;
             this.btnAddHyperlinks.Name = "btnAddHyperlinks";
             this.btnAddHyperlinks.Size = new System.Drawing.Size(176, 22);
             this.btnAddHyperlinks.Text = "Add Hyperlinks";
@@ -238,6 +239,13 @@
             this.btnAddPdfDocument.Size = new System.Drawing.Size(176, 22);
             this.btnAddPdfDocument.Text = "Add Pdf Document";
             this.btnAddPdfDocument.Click += new System.EventHandler(this.btnAddPdfDocument_Click);
+            // 
+            // btnAddImage
+            // 
+            this.btnAddImage.Name = "btnAddImage";
+            this.btnAddImage.Size = new System.Drawing.Size(176, 22);
+            this.btnAddImage.Text = "Add Image";
+            this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
             // 
             // btnRemoveCodeItem
             // 
@@ -290,13 +298,6 @@
             this.tabControlFile.SelectedIndex = 0;
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
-            // 
-            // btnAddImage
-            // 
-            this.btnAddImage.Name = "btnAddImage";
-            this.btnAddImage.Size = new System.Drawing.Size(176, 22);
-            this.btnAddImage.Text = "Add Image";
-            this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
             // 
             // CodeGroupDocument
             // 

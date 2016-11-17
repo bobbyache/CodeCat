@@ -245,6 +245,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.snapshotListCtrl1.SyntaxFile = syntaxFile;
 
             this.Icon = IconRepository.GetIcon(syntax);
+            this.tabPageCode.ImageKey = syntax;
             this.lblEditStatus.Image = IconRepository.GetIcon(syntax).ToBitmap();
         }
 
