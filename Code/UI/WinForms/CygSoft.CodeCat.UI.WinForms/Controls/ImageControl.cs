@@ -14,7 +14,6 @@ using System.IO;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    // TODO: Rename this to PdfDocumentCtrl. Also consider moving all items controls into their own directory?
     public partial class ImageControl :  UserControl, IDocumentItemControl
     {
         private IImageDocument imageDocument;

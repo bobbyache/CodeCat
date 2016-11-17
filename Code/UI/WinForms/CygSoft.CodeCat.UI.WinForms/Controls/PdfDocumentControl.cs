@@ -15,6 +15,8 @@ using System.IO;
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     // TODO: Rename this to PdfDocumentCtrl. Also consider moving all items controls into their own directory?
+    // TODO: Try and understand this for when your PDF document just dies on you when changing panes.
+    // https://sourceforge.net/p/dockpanelsuite/discussion/402316/thread/f29acfe2/
     public partial class PdfDocumentControl :  UserControl, IDocumentItemControl
     {
         private IPdfDocument pdfDocument;
@@ -23,11 +25,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public PdfDocumentControl(AppFacade application, ICodeGroupDocumentGroup codeGroupFile, IPdfDocument pdfDocument)
         {
             InitializeComponent();
-
             this.pdfDocument = pdfDocument;
             this.codeGroupFile = codeGroupFile;
 
             this.btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
+            this.btnReload.Image = Resources.GetImage(Constants.ImageKeys.NewProject);
             this.Id = pdfDocument.Id;
 
             ResetFieldValues();
@@ -136,6 +138,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 File.Copy(filePath, this.pdfDocument.FilePath, true);
                 LoadIfExists();
             }
+        }
+
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            this.Controls.Remove(this.pdfControl);
+            this.pdfControl.Dispose();
+
+            this.pdfControl = new AxAcroPDFLib.AxAcroPDF();
+            this.pdfControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pdfControl.Enabled = true;
+            this.pdfControl.Location = new System.Drawing.Point(0, 25);
+            this.pdfControl.Size = new System.Drawing.Size(626, 479);
+            this.pdfControl.TabIndex = 12;
+            this.Controls.Add(this.pdfControl);
+            LoadIfExists();
         }
     }
 }
