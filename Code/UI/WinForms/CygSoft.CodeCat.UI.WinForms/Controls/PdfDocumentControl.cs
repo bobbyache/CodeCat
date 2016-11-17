@@ -113,6 +113,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void btnImport_Click(object sender, EventArgs e)
         {
+            if (!Directory.Exists(Path.GetDirectoryName(this.pdfDocument.FilePath)))
+            {
+                Dialogs.MustSaveGroupBeforeAction(this);
+                return;
+            }
+
             OpenFileDialog openDialog = new OpenFileDialog();
             openDialog.Filter = "PDF Files *.pdf (*.pdf)|*.pdf";
             openDialog.DefaultExt = "*.pdf";

@@ -39,10 +39,14 @@
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.imagePanel = new System.Windows.Forms.Panel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.imageContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctxFileImportMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxClipboardImportMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.imagePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.imageContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // syntaxDocument
@@ -130,6 +134,28 @@
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             // 
+            // imageContextMenu
+            // 
+            this.imageContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctxFileImportMenu,
+            this.ctxClipboardImportMenu});
+            this.imageContextMenu.Name = "imageContextMenu";
+            this.imageContextMenu.Size = new System.Drawing.Size(195, 70);
+            // 
+            // ctxFileImportMenu
+            // 
+            this.ctxFileImportMenu.Name = "ctxFileImportMenu";
+            this.ctxFileImportMenu.Size = new System.Drawing.Size(194, 22);
+            this.ctxFileImportMenu.Text = "Import from File...";
+            this.ctxFileImportMenu.Click += new System.EventHandler(this.ctxFileImportMenu_Click);
+            // 
+            // ctxClipboardImportMenu
+            // 
+            this.ctxClipboardImportMenu.Name = "ctxClipboardImportMenu";
+            this.ctxClipboardImportMenu.Size = new System.Drawing.Size(194, 22);
+            this.ctxClipboardImportMenu.Text = "Import from Clipboard";
+            this.ctxClipboardImportMenu.Click += new System.EventHandler(this.ctxClipboardImportMenu_Click);
+            // 
             // ImageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -146,6 +172,7 @@
             this.imagePanel.ResumeLayout(false);
             this.imagePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.imageContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,5 +189,8 @@
         private System.Windows.Forms.ToolStripButton btnImport;
         private System.Windows.Forms.Panel imagePanel;
         private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.ContextMenuStrip imageContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem ctxFileImportMenu;
+        private System.Windows.Forms.ToolStripMenuItem ctxClipboardImportMenu;
     }
 }

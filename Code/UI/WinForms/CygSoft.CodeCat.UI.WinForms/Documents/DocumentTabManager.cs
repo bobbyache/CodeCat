@@ -147,7 +147,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             else if (document is IPdfDocument)
                 item.Image = IconRepository.GetImage(IconRepository.PDF);
             else if (document is IImageDocument)
-                item.Image = IconRepository.ImageTypeImageByExtension(document.FileExtension);
+                item.Image = IconRepository.ImageByExtension(document.FileExtension);
             else
                 item.Image = IconRepository.GetImage("TEXT");
 

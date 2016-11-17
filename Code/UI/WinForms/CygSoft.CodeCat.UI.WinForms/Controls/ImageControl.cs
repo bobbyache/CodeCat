@@ -24,6 +24,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             InitializeComponent();
 
+            imagePanel.MouseUp += imagePanel_MouseUp;
+            pictureBox.MouseUp += pictureBox_MouseUp;
+
+            pictureBox.Visible = false;
+
             this.imageDocument = imageDocument;
             this.codeGroupFile = codeGroupFile;
 
@@ -36,12 +41,33 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             LoadIfExists();
         }
 
+        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                ShowContextMenu(pictureBox, e.Location);
+        }
+
+        private void imagePanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                ShowContextMenu(imagePanel, e.Location);
+        }
+
+        private void ShowContextMenu(Control ctrl, Point location)
+        {
+            ctxClipboardImportMenu.Enabled = Clipboard.ContainsImage();
+            imageContextMenu.Show(ctrl, location);
+        }
+
         private void LoadIfExists()
         {
+            pictureBox.Visible = false;
+
             if (this.imageDocument.Exists)
             {
                 pictureBox.Image = LoadBitmap(this.imageDocument.FilePath);
                 CenterPictureBox(pictureBox);
+                pictureBox.Visible = true;
             }
         }
 
@@ -68,9 +94,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             get { return txtTitle.Text; }
         }
 
-        public int ImageKey { get { return IconRepository.ImageKeyFor(IconRepository.PDF); } }
-        public Icon ImageIcon { get { return IconRepository.GetIcon(IconRepository.PDF); } }
-        public Image IconImage { get { return IconRepository.GetImage(IconRepository.PDF); } }
+        public int ImageKey { get { return IconRepository.ImageKeyFor(IconRepository.IMG); } }
+        public Icon ImageIcon { get { return IconRepository.GetIcon(IconRepository.IMG); } }
+        public Image IconImage { get { return IconRepository.GetImage(IconRepository.IMG); } }
 
         public bool IsModified { get; private set; }
 
@@ -130,6 +156,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void btnImport_Click(object sender, EventArgs e)
         {
+            Import();
+        }
+
+        private void Import()
+        {
+            if (!Directory.Exists(Path.GetDirectoryName(this.imageDocument.FilePath)))
+            {
+                Dialogs.MustSaveGroupBeforeAction(this);
+                return;
+            }
+
             OpenFileDialog openDialog = new OpenFileDialog();
             openDialog.Filter = "Image Files *.png (*.png)|*.png";
             openDialog.DefaultExt = "*.png";
@@ -143,8 +180,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             if (result == DialogResult.OK)
             {
-                pictureBox.Image.Dispose();
-                
+                if (pictureBox.Image != null)
+                    pictureBox.Image.Dispose();
+
                 File.Copy(filePath, this.imageDocument.FilePath, true);
                 LoadIfExists();
             }
@@ -152,13 +190,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void CenterPictureBox(PictureBox picBox)
         {
-            picBox.Location = new Point((picBox.Parent.ClientSize.Width / 2) - (pictureBox.Image.Width / 2),
-                                        (picBox.Parent.ClientSize.Height / 2) - (pictureBox.Image.Height / 2));
+            if (pictureBox.Image != null)
+            {
+                picBox.Location = new Point((picBox.Parent.ClientSize.Width / 2) - (pictureBox.Image.Width / 2),
+                                            (picBox.Parent.ClientSize.Height / 2) - (pictureBox.Image.Height / 2));
+            }
         }
 
         private bool mustScroll = false;
 
         private void imagePanel_Resize(object sender, EventArgs e)
+        {
+            FixImage();
+        }
+
+        private void FixImage()
         {
             if (pictureBox.Width > imagePanel.Width || pictureBox.Height > imagePanel.Height)
             {
@@ -194,6 +240,47 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             CenterPictureBox(pictureBox);
             //pictureBox.Refresh();
+        }
+
+        private void ctxFileImportMenu_Click(object sender, EventArgs e)
+        {
+            Import();
+        }
+
+        private void ctxClipboardImportMenu_Click(object sender, EventArgs e)
+        {
+            ClipboardImport();
+        }
+
+        private void ClipboardImport()
+        {
+            if (Clipboard.ContainsImage())
+            {
+                if (pictureBox.Image == null)
+                    ReplaceImage();
+                else
+                {
+                    DialogResult result = Dialogs.ReplaceCurrentItemPrompt(this);
+                    if (result == DialogResult.Yes)
+                    {
+                        ReplaceImage();
+                    }
+                }
+            }
+        }
+
+        private void ReplaceImage()
+        {
+            pictureBox.Visible = false;
+            Image image = Clipboard.GetImage();
+            image.Save((imageDocument.FilePath));
+            image.Dispose();
+
+            LoadIfExists();
+            mustScroll = false;
+            FixImage();
+
+            pictureBox.Visible = true;
         }
     }
 }

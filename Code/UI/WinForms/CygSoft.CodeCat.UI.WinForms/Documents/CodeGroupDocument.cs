@@ -315,7 +315,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddCode_Click(object sender, EventArgs e)
         {
-            ICodeDocument templateFile = codeItemFile.AddDocument(DocumentTypeEnum.CodeSnippet, ConfigSettings.DefaultSyntax) as ICodeDocument;
+            ICodeDocument templateFile = codeItemFile.AddDocument(DocumentTypeEnum.CodeSnippet, ConfigSettings.DefaultSyntax, "txt") as ICodeDocument;
             this.IsModified = true;
         }
 

@@ -39,9 +39,22 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        public static DialogResult MustSaveGroupBeforeAction(IWin32Window owner)
+        {
+            return MessageBox.Show(owner, "The group must be saved before you can request this action.",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         public static DialogResult RevertDocumentChangesDialogPrompt(IWin32Window owner)
         {
             return MessageBox.Show(owner, "Sure you want to discard changes made to this document?",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+        }
+
+
+        public static DialogResult ReplaceCurrentItemPrompt(IWin32Window owner)
+        {
+            return MessageBox.Show(owner, "Sure you want to permanently replace this item? Changes will be permanent.",
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
