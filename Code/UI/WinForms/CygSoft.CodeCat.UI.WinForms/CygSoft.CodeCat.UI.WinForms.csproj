@@ -121,6 +121,12 @@
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Args.cs" />
+    <Compile Include="Dialogs\UrlItemEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UrlItemEditDialog.Designer.cs">
+      <DependentUpon>UrlItemEditDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Documents\BaseDocument.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -243,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InvalidRemoveDialog.resx">
       <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UrlItemEditDialog.resx">
+      <DependentUpon>UrlItemEditDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Documents\CodeGroupDocument.resx">
       <DependentUpon>CodeGroupDocument.cs</DependentUpon>

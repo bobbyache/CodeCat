@@ -1,4 +1,6 @@
-﻿using CygSoft.CodeCat.Domain.Code;
+﻿using CygSoft.CodeCat.DocumentManager.Documents;
+using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Code.Base;
 using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Qik;
@@ -247,6 +249,12 @@ namespace CygSoft.CodeCat.Domain
         public ICodeGroupDocumentGroup OpenCodeGroupDocumentGroup(IKeywordIndexItem keywordIndexItem)
         {
             return this.codeGroupLibrary.OpenTarget(keywordIndexItem) as ICodeGroupDocumentGroup;
+        }
+
+        public IUrlItem NewUrl()
+        {
+            IUrlItem item = new UrlItem();
+            return item;
         }
     }
 }

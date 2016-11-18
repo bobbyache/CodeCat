@@ -227,7 +227,6 @@
             // 
             // btnAddHyperlinks
             // 
-            this.btnAddHyperlinks.Enabled = false;
             this.btnAddHyperlinks.Name = "btnAddHyperlinks";
             this.btnAddHyperlinks.Size = new System.Drawing.Size(176, 22);
             this.btnAddHyperlinks.Text = "Add Hyperlinks";

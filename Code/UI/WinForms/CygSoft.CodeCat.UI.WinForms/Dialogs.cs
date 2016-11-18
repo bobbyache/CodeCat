@@ -51,10 +51,15 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
-
         public static DialogResult ReplaceCurrentItemPrompt(IWin32Window owner)
         {
             return MessageBox.Show(owner, "Sure you want to permanently replace this item? Changes will be permanent.",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+        }
+
+        public static DialogResult DeleteUrlDialogPrompt(IWin32Window owner)
+        {
+            return MessageBox.Show(owner, "Sure you want to delete this URL reference?",
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
@@ -76,6 +81,14 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
+        public static DialogResult NoInputValueForMandatoryField(IWin32Window owner, string fieldName)
+        {
+            string msg = string.Format("A valid value for {0} must be entered in order to continue.", fieldName);
+
+            return MessageBox.Show(owner, msg,
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         public static DialogResult SaveDocumentChangesDialogPrompt(IWin32Window owner)
         {
             return MessageBox.Show(owner, string.Format("{0}\n You have not saved this snippet. Would you like to save it first?", (owner as IContentDocument).Text),
@@ -89,9 +102,9 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
-        public static void HelpPageErrorNotification(IWin32Window owner, Exception exception)
+        public static void WebPageErrorNotification(IWin32Window owner, Exception exception)
         {
-            MessageBox.Show(owner, string.Format("An error occurred while trying to load the help page. \n{0}", exception.Message),
+            MessageBox.Show(owner, string.Format("An error occurred while trying to load the web page. \n{0}", exception.Message),
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
