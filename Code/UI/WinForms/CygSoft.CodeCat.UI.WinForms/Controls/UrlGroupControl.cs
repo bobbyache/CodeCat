@@ -50,11 +50,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             get { return this.txtTitle.Text; }
         }
 
-        public int ImageKey { get { return 0; } }
+        public int ImageKey { get { return IconRepository.ImageKeyFor("HTML"); } }
 
-        public Icon ImageIcon { get { return IconRepository.GetIcon("TEXT"); } }
+        public Icon ImageIcon { get { return IconRepository.GetIcon("HTML"); } }
 
-        public Image IconImage { get { return IconRepository.GetImage("TEXT"); } }
+        public Image IconImage { get { return IconRepository.GetImage("HTML"); } }
 
         public bool IsModified { get; private set; }
 
@@ -100,6 +100,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             listItem.Name = item.Id;
             listItem.Tag = item;
             listItem.ForeColor = Color.DarkBlue;
+            listItem.ToolTipText = item.Url;
             //listItem.ImageKey = IconRepository.IMG;
             listItem.Text = item.Title;
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Description));
@@ -190,27 +191,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private IUrlItem SelectedItem(ListView listView)
-        {
-            if (listView.SelectedItems.Count == 1)
-            {
-                return listView.SelectedItems[0].Tag as IUrlItem;
-            }
-            return null;
-        }
-
-        private void urlListview_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                if (urlListview.FocusedItem.Bounds.Contains(e.Location) == true)
-                {
-                    contextMenu.Show(Cursor.Position);
-                }
-            } 
-        }
-
-        private void mnuNavigate_Click(object sender, EventArgs e)
+        private void NavigateToUrl()
         {
             try
             {
@@ -222,6 +203,39 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 Dialogs.WebPageErrorNotification(this, ex);
             }
+        }
+
+        private IUrlItem SelectedItem(ListView listView)
+        {
+            if (listView.SelectedItems.Count == 1)
+            {
+                return listView.SelectedItems[0].Tag as IUrlItem;
+            }
+            return null;
+        }
+
+        private void urlListview_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (urlListview.FocusedItem.Bounds.Contains(e.Location) == true)
+                {
+                    NavigateToUrl();
+                }
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                if (urlListview.FocusedItem.Bounds.Contains(e.Location) == true)
+                {
+                    contextMenu.Show(Cursor.Position);
+                }
+            }
+
+        }
+
+        private void mnuNavigate_Click(object sender, EventArgs e)
+        {
+            NavigateToUrl();
         }
 
         private void mnuEdit_Click(object sender, EventArgs e)
