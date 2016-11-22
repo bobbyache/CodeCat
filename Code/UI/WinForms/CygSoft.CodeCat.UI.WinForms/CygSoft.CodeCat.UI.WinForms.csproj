@@ -46,6 +46,10 @@
     <Reference Include="CygX1.UI.WinForms.RecentFileMenu">
       <HintPath>..\..\..\External\CygX1.UI.WinForms.RecentFileMenu.dll</HintPath>
     </Reference>
+    <Reference Include="Cyotek.Windows.Forms.ImageBox, Version=1.1.5.1, Culture=neutral, PublicKeyToken=58daa28b0b2de221, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\CyotekImageBox.1.1.5.1\lib\net20\Cyotek.Windows.Forms.ImageBox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DynamicTypeDescriptor">
       <HintPath>..\..\..\External\DynamicTypeDescriptor.dll</HintPath>
     </Reference>
