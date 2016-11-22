@@ -375,6 +375,11 @@
     <None Include="Resources\qik.png" />
     <None Include="Resources\codegroup.png" />
     <None Include="Resources\book_open1.png" />
+    <None Include="Resources\Object Position.ico" />
+    <None Include="Resources\Object Size.ico" />
+    <None Include="Resources\Object Size1.ico" />
+    <None Include="Resources\Object Position1.ico" />
+    <None Include="Resources\magnifier-zoom.png" />
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

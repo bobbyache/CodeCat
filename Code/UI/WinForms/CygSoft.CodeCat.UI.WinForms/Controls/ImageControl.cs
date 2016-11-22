@@ -23,15 +23,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             InitializeComponent();
 
-            imagePanel.MouseUp += imagePanel_MouseUp;
-            pictureBox.MouseUp += pictureBox_MouseUp;
-
-            pictureBox.Visible = false;
-
+            imageBox.GridScale = Cyotek.Windows.Forms.ImageBoxGridScale.None;
             this.imageDocument = imageDocument;
             this.codeGroupFile = codeGroupFile;
 
+            lblScrollPosition.Image = Resources.GetImage(Constants.ImageKeys.ObjectPosition);
+            lblSize.Image = Resources.GetImage(Constants.ImageKeys.ObjectSize);
+            lblZoomLevel.Image = Resources.GetImage(Constants.ImageKeys.ObjectZoom);
             this.btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
+
             this.Id = imageDocument.Id;
 
             ResetFieldValues();
@@ -40,16 +40,28 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             LoadIfExists();
         }
 
-        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        private void UpdateStatusBar()
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                ShowContextMenu(pictureBox, e.Location);
+            //zoomLevelsToolStripComboBox.Text = string.Format("{0}%", imageBox.Zoom);
+            lblScrollPosition.Text = this.FormatPoint(imageBox.AutoScrollPosition);
+            lblSize.Text = this.FormatRectangle(imageBox.GetImageViewPort());
+            lblZoomLevel.Text = string.Format("{0}%", imageBox.Zoom);
         }
 
-        private void imagePanel_MouseUp(object sender, MouseEventArgs e)
+        private string FormatRectangle(RectangleF rect)
+        {
+            return string.Format("X:{0}, Y:{1}, W:{2}, H:{3}", (int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
+        }
+
+        private string FormatPoint(Point point)
+        {
+            return string.Format("X:{0}, Y:{1}", point.X, point.Y);
+        }
+
+        private void imageBox_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                ShowContextMenu(imagePanel, e.Location);
+                ShowContextMenu(imageBox, e.Location);
         }
 
         private void ShowContextMenu(Control ctrl, Point location)
@@ -60,13 +72,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadIfExists()
         {
-            pictureBox.Visible = false;
-
             if (this.imageDocument.Exists)
             {
-                pictureBox.Image = LoadBitmap(this.imageDocument.FilePath);
-                CenterPictureBox(pictureBox);
-                pictureBox.Visible = true;
+                Image image = LoadBitmap(this.imageDocument.FilePath);
+                imageBox.Image = image;
+                imageBox.Zoom = 100;
+
+                UpdateStatusBar();
             }
         }
 
@@ -179,66 +191,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             if (result == DialogResult.OK)
             {
-                if (pictureBox.Image != null)
-                    pictureBox.Image.Dispose();
+                if (imageBox.Image != null)
+                    imageBox.Image.Dispose();
 
                 File.Copy(filePath, this.imageDocument.FilePath, true);
                 LoadIfExists();
             }
-        }
-
-        private void CenterPictureBox(PictureBox picBox)
-        {
-            if (pictureBox.Image != null)
-            {
-                picBox.Location = new Point((picBox.Parent.ClientSize.Width / 2) - (pictureBox.Image.Width / 2),
-                                            (picBox.Parent.ClientSize.Height / 2) - (pictureBox.Image.Height / 2));
-            }
-        }
-
-        private bool mustScroll = false;
-
-        private void imagePanel_Resize(object sender, EventArgs e)
-        {
-            FixImage();
-        }
-
-        private void FixImage()
-        {
-            if (pictureBox.Width > imagePanel.Width || pictureBox.Height > imagePanel.Height)
-            {
-                if (!mustScroll)
-                {
-                    mustScroll = true;
-                    ScrollingPicture();
-                }
-            }
-            else
-            {
-                if (mustScroll)
-                {
-                    mustScroll = false;
-                    CenteredPicture();
-                }
-            }
-        }
-
-        private void ScrollingPicture()
-        {
-            pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-            imagePanel.AutoScroll = true;
-            //pictureBox.Refresh();
-            //imagePanel.Refresh();
-        }
-
-        private void CenteredPicture()
-        {
-            pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox.Anchor = AnchorStyles.None;
-
-            CenterPictureBox(pictureBox);
-            //pictureBox.Refresh();
         }
 
         private void ctxFileImportMenu_Click(object sender, EventArgs e)
@@ -255,7 +213,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (Clipboard.ContainsImage())
             {
-                if (pictureBox.Image == null)
+                if (imageBox.Image == null)
                     ReplaceImage();
                 else
                 {
@@ -270,16 +228,26 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void ReplaceImage()
         {
-            pictureBox.Visible = false;
             Image image = Clipboard.GetImage();
             image.Save((imageDocument.FilePath));
             image.Dispose();
 
             LoadIfExists();
-            mustScroll = false;
-            FixImage();
+        }
 
-            pictureBox.Visible = true;
+        private void imageBox_Resize(object sender, EventArgs e)
+        {
+            UpdateStatusBar();
+        }
+
+        private void imageBox_Scroll(object sender, ScrollEventArgs e)
+        {
+            UpdateStatusBar();
+        }
+
+        private void imageBox_ZoomChanged(object sender, EventArgs e)
+        {
+            UpdateStatusBar();
         }
     }
 }

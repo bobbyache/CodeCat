@@ -37,15 +37,15 @@
             this.btnImport = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
-            this.imagePanel = new System.Windows.Forms.Panel();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.lblZoomLevel = new System.Windows.Forms.ToolStripLabel();
+            this.lblSize = new System.Windows.Forms.ToolStripLabel();
+            this.lblScrollPosition = new System.Windows.Forms.ToolStripLabel();
             this.imageContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxFileImportMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxClipboardImportMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageBox = new Cyotek.Windows.Forms.ImageBox();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
-            this.imagePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.imageContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,7 +97,10 @@
             this.toolStrip2.AutoSize = false;
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblEditStatus});
+            this.lblEditStatus,
+            this.lblZoomLevel,
+            this.lblSize,
+            this.lblScrollPosition});
             this.toolStrip2.Location = new System.Drawing.Point(0, 504);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(626, 25);
@@ -112,27 +115,32 @@
             this.lblEditStatus.Text = "No Changes";
             this.lblEditStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // imagePanel
+            // lblZoomLevel
             // 
-            this.imagePanel.AutoScroll = true;
-            this.imagePanel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.imagePanel.Controls.Add(this.pictureBox);
-            this.imagePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imagePanel.Location = new System.Drawing.Point(0, 25);
-            this.imagePanel.Name = "imagePanel";
-            this.imagePanel.Size = new System.Drawing.Size(626, 479);
-            this.imagePanel.TabIndex = 12;
-            this.imagePanel.Resize += new System.EventHandler(this.imagePanel_Resize);
+            this.lblZoomLevel.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblZoomLevel.Image = ((System.Drawing.Image)(resources.GetObject("lblZoomLevel.Image")));
+            this.lblZoomLevel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblZoomLevel.Name = "lblZoomLevel";
+            this.lblZoomLevel.Size = new System.Drawing.Size(29, 22);
+            this.lblZoomLevel.Text = "0";
             // 
-            // pictureBox
+            // lblSize
             // 
-            this.pictureBox.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(135, 90);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox.TabIndex = 0;
-            this.pictureBox.TabStop = false;
+            this.lblSize.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblSize.Image = ((System.Drawing.Image)(resources.GetObject("lblSize.Image")));
+            this.lblSize.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblSize.Name = "lblSize";
+            this.lblSize.Size = new System.Drawing.Size(29, 22);
+            this.lblSize.Text = "0";
+            // 
+            // lblScrollPosition
+            // 
+            this.lblScrollPosition.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblScrollPosition.Image = ((System.Drawing.Image)(resources.GetObject("lblScrollPosition.Image")));
+            this.lblScrollPosition.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblScrollPosition.Name = "lblScrollPosition";
+            this.lblScrollPosition.Size = new System.Drawing.Size(29, 22);
+            this.lblScrollPosition.Text = "0";
             // 
             // imageContextMenu
             // 
@@ -140,7 +148,7 @@
             this.ctxFileImportMenu,
             this.ctxClipboardImportMenu});
             this.imageContextMenu.Name = "imageContextMenu";
-            this.imageContextMenu.Size = new System.Drawing.Size(195, 70);
+            this.imageContextMenu.Size = new System.Drawing.Size(195, 48);
             // 
             // ctxFileImportMenu
             // 
@@ -156,11 +164,23 @@
             this.ctxClipboardImportMenu.Text = "Import from Clipboard";
             this.ctxClipboardImportMenu.Click += new System.EventHandler(this.ctxClipboardImportMenu_Click);
             // 
+            // imageBox
+            // 
+            this.imageBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageBox.Location = new System.Drawing.Point(0, 25);
+            this.imageBox.Name = "imageBox";
+            this.imageBox.Size = new System.Drawing.Size(626, 479);
+            this.imageBox.TabIndex = 12;
+            this.imageBox.ZoomChanged += new System.EventHandler(this.imageBox_ZoomChanged);
+            this.imageBox.Scroll += new System.Windows.Forms.ScrollEventHandler(this.imageBox_Scroll);
+            this.imageBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imageBox_MouseUp);
+            this.imageBox.Resize += new System.EventHandler(this.imageBox_Resize);
+            // 
             // ImageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.imagePanel);
+            this.Controls.Add(this.imageBox);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip2);
             this.Name = "ImageControl";
@@ -169,9 +189,6 @@
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
-            this.imagePanel.ResumeLayout(false);
-            this.imagePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.imageContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -187,10 +204,12 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
         private System.Windows.Forms.ToolStripButton btnImport;
-        private System.Windows.Forms.Panel imagePanel;
-        private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.ContextMenuStrip imageContextMenu;
         private System.Windows.Forms.ToolStripMenuItem ctxFileImportMenu;
         private System.Windows.Forms.ToolStripMenuItem ctxClipboardImportMenu;
+        private Cyotek.Windows.Forms.ImageBox imageBox;
+        private System.Windows.Forms.ToolStripLabel lblZoomLevel;
+        private System.Windows.Forms.ToolStripLabel lblSize;
+        private System.Windows.Forms.ToolStripLabel lblScrollPosition;
     }
 }
