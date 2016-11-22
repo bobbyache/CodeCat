@@ -209,9 +209,9 @@
             this.btnAddItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnAddItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAddCode,
-            this.btnAddHyperlinks,
             this.btnAddPdfDocument,
-            this.btnAddImage});
+            this.btnAddImage,
+            this.btnAddHyperlinks});
             this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
             this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddItem.Name = "btnAddItem";
@@ -221,29 +221,29 @@
             // btnAddCode
             // 
             this.btnAddCode.Name = "btnAddCode";
-            this.btnAddCode.Size = new System.Drawing.Size(176, 22);
-            this.btnAddCode.Text = "Add Code";
+            this.btnAddCode.Size = new System.Drawing.Size(189, 22);
+            this.btnAddCode.Text = "Single Code Snippet";
             this.btnAddCode.Click += new System.EventHandler(this.btnAddCode_Click);
             // 
             // btnAddHyperlinks
             // 
             this.btnAddHyperlinks.Name = "btnAddHyperlinks";
-            this.btnAddHyperlinks.Size = new System.Drawing.Size(176, 22);
-            this.btnAddHyperlinks.Text = "Add Hyperlinks";
+            this.btnAddHyperlinks.Size = new System.Drawing.Size(189, 22);
+            this.btnAddHyperlinks.Text = "Web References";
             this.btnAddHyperlinks.Click += new System.EventHandler(this.btnAddHyperlinks_Click);
             // 
             // btnAddPdfDocument
             // 
             this.btnAddPdfDocument.Name = "btnAddPdfDocument";
-            this.btnAddPdfDocument.Size = new System.Drawing.Size(176, 22);
-            this.btnAddPdfDocument.Text = "Add Pdf Document";
+            this.btnAddPdfDocument.Size = new System.Drawing.Size(189, 22);
+            this.btnAddPdfDocument.Text = "Single PDF Document";
             this.btnAddPdfDocument.Click += new System.EventHandler(this.btnAddPdfDocument_Click);
             // 
             // btnAddImage
             // 
             this.btnAddImage.Name = "btnAddImage";
-            this.btnAddImage.Size = new System.Drawing.Size(176, 22);
-            this.btnAddImage.Text = "Add Image";
+            this.btnAddImage.Size = new System.Drawing.Size(189, 22);
+            this.btnAddImage.Text = "Single Image View";
             this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
             // 
             // btnRemoveCodeItem
