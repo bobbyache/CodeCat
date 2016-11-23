@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImageSetControl));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
@@ -45,8 +46,12 @@
             this.btnForward = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.imageBox = new Cyotek.Windows.Forms.ImageBox();
+            this.imageContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctxFileImportMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxClipboardImportMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.imageContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip2
@@ -206,7 +211,30 @@
             this.imageBox.TextPadding = new System.Windows.Forms.Padding(5);
             this.imageBox.ZoomChanged += new System.EventHandler(this.imageBox_ZoomChanged);
             this.imageBox.Scroll += new System.Windows.Forms.ScrollEventHandler(this.imageBox_Scroll);
+            this.imageBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imageBox_MouseUp);
             this.imageBox.Resize += new System.EventHandler(this.imageBox_Resize);
+            // 
+            // imageContextMenu
+            // 
+            this.imageContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctxFileImportMenu,
+            this.ctxClipboardImportMenu});
+            this.imageContextMenu.Name = "imageContextMenu";
+            this.imageContextMenu.Size = new System.Drawing.Size(195, 48);
+            // 
+            // ctxFileImportMenu
+            // 
+            this.ctxFileImportMenu.Name = "ctxFileImportMenu";
+            this.ctxFileImportMenu.Size = new System.Drawing.Size(194, 22);
+            this.ctxFileImportMenu.Text = "Import from File...";
+            this.ctxFileImportMenu.Click += new System.EventHandler(this.ctxFileImportMenu_Click);
+            // 
+            // ctxClipboardImportMenu
+            // 
+            this.ctxClipboardImportMenu.Name = "ctxClipboardImportMenu";
+            this.ctxClipboardImportMenu.Size = new System.Drawing.Size(194, 22);
+            this.ctxClipboardImportMenu.Text = "Import from Clipboard";
+            this.ctxClipboardImportMenu.Click += new System.EventHandler(this.ctxClipboardImportMenu_Click);
             // 
             // ImageSetControl
             // 
@@ -223,6 +251,7 @@
             this.toolStrip2.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.imageContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,5 +275,8 @@
         private System.Windows.Forms.ToolStripButton btnMoveLeft;
         private System.Windows.Forms.ToolStripButton btnMoveRight;
         private System.Windows.Forms.ToolStripLabel lblImagePosition;
+        private System.Windows.Forms.ContextMenuStrip imageContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem ctxFileImportMenu;
+        private System.Windows.Forms.ToolStripMenuItem ctxClipboardImportMenu;
     }
 }

@@ -96,8 +96,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 Image image = LoadBitmap(imageItem.FilePath);
                 imageBox.Image = image;
                 imageBox.Text = imageItem.Description;
-                //imageBox.Zoom = 100;
-                imageBox.ZoomToFit();
+                imageBox.Zoom = 100;
+                //imageBox.ZoomToFit();
 
                 this.currentImage = imageItem;
                 UpdateStatusBar();
@@ -199,6 +199,83 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 IImageItem imageItem = this.imageDocument.NextImage(this.currentImage);
                 LoadIfExists(imageItem);
             }
+        }
+
+        private void ctxFileImportMenu_Click(object sender, EventArgs e)
+        {
+            Import();
+        }
+
+        private void ctxClipboardImportMenu_Click(object sender, EventArgs e)
+        {
+            ClipboardImport();
+        }
+
+        private void Import()
+        {
+            if (!Directory.Exists(Path.GetDirectoryName(this.imageDocument.FilePath)))
+            {
+                Dialogs.MustSaveGroupBeforeAction(this);
+                return;
+            }
+
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "Image Files *.png (*.png)|*.png";
+            openDialog.DefaultExt = "*.png";
+            openDialog.Title = string.Format("Open Image");
+            openDialog.AddExtension = true;
+            openDialog.FilterIndex = 0;
+            openDialog.CheckPathExists = true;
+
+            DialogResult result = openDialog.ShowDialog(this);
+            string filePath = openDialog.FileName;
+
+            if (result == DialogResult.OK)
+            {
+                if (imageBox.Image != null)
+                    imageBox.Image.Dispose();
+
+                File.Copy(filePath, this.currentImage.FilePath, true);
+                LoadIfExists(this.currentImage);
+            }
+        }
+
+        private void ClipboardImport()
+        {
+            if (Clipboard.ContainsImage())
+            {
+                if (imageBox.Image == null)
+                    ReplaceImage();
+                else
+                {
+                    DialogResult result = Dialogs.ReplaceCurrentItemPrompt(this);
+                    if (result == DialogResult.Yes)
+                    {
+                        ReplaceImage();
+                    }
+                }
+            }
+        }
+
+        private void ReplaceImage()
+        {
+            Image image = Clipboard.GetImage();
+            image.Save((this.currentImage.FilePath));
+            image.Dispose();
+
+            LoadIfExists(this.currentImage);
+        }
+
+        private void imageBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                ShowContextMenu(imageBox, e.Location);
+        }
+
+        private void ShowContextMenu(Control ctrl, Point location)
+        {
+            ctxClipboardImportMenu.Enabled = Clipboard.ContainsImage();
+            imageContextMenu.Show(ctrl, location);
         }
     }
 }
