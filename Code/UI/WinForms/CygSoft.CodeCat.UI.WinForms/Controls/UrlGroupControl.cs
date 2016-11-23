@@ -36,6 +36,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.application = application;
             this.Id = urlDocument.Id;
 
+            ReloadGroups();
             LoadListOfUrls();
             RegisterDataFieldEvents();
             RegisterFileEvents();
@@ -88,25 +89,70 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             listView.Items.Clear();
             foreach (IUrlItem item in indexItems)
-                CreateListviewItem(listView, item);
+            {
+                ListViewItem listItem = CreateListviewItem(listView, item);
+                GroupItem(listItem, item);
+                listView.Items.Add(listItem);
+            }
 
             listViewSorter.Sort(0);
         }
 
-        private void CreateListviewItem(ListView listView, IUrlItem item, bool select = false)
+        private ListViewItem CreateListviewItem(ListView listView, IUrlItem item, bool select = false)
         {
             ListViewItem listItem = new ListViewItem();
 
             listItem.Name = item.Id;
             listItem.Tag = item;
-            listItem.ForeColor = Color.DarkBlue;
+            //listItem.ForeColor = Color.DarkGray;
             listItem.ToolTipText = item.Url;
             //listItem.ImageKey = IconRepository.IMG;
             listItem.Text = item.Title;
-            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Description));
+            //listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Category));
+            
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
-            listView.Items.Add(listItem);
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Description));
+            
+            return listItem;
+        }
+
+        private void ReloadGroups()
+        {
+            this.urlListview.Groups.Clear();
+            string[] categories = this.urlDocument.Categories;
+            foreach (string category in categories)
+            {
+                ListViewGroup group = new ListViewGroup(category);
+                group.HeaderAlignment = HorizontalAlignment.Left;
+                this.urlListview.Groups.Add(group);
+            }
+            urlListview.ShowGroups = this.urlListview.Groups.Count > 1;
+        }
+
+        private void GroupItem(ListViewItem listItem, IUrlItem item)
+        {
+            bool groupExists = false;
+
+            foreach (ListViewGroup group in this.urlListview.Groups)
+            {
+                if (group.Header == item.Category)
+                {
+                    // Add item to the group.
+                    // Alternative is: group.Items.Add(item);
+                    listItem.Group = group;
+                    groupExists = true;
+                    break;
+                }
+            }
+
+            if (!groupExists)
+            {
+                ListViewGroup group = new ListViewGroup(item.Category);
+                group.HeaderAlignment = HorizontalAlignment.Left;
+                this.urlListview.Groups.Add(group);
+                listItem.Group = group;
+            }
         }
 
         private void codeGroupFile_ContentSaved(object sender, FileEventArgs e)
@@ -138,12 +184,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void btnAdd_Click(object sender, EventArgs e)
         {
             IUrlItem item = application.NewUrl();
-            UrlItemEditDialog dialog = new UrlItemEditDialog(item);
+            UrlItemEditDialog dialog = new UrlItemEditDialog(item, urlDocument.Categories);
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
                 urlDocument.Add(item);
+                ReloadGroups();
                 ReloadListview(urlListview, urlDocument.Items);
                 SetModified();
             }
@@ -164,11 +211,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             if (urlListview.SelectedItems.Count == 1)
             {
                 IUrlItem item = urlListview.SelectedItems[0].Tag as IUrlItem;
-                UrlItemEditDialog dialog = new UrlItemEditDialog(item);
+                UrlItemEditDialog dialog = new UrlItemEditDialog(item, urlDocument.Categories);
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
+                    ReloadGroups();
                     ReloadListview(urlListview, urlDocument.Items);
                     SetModified();
                 }
@@ -185,6 +233,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 {
                     IUrlItem item = urlListview.SelectedItems[0].Tag as IUrlItem;
                     urlDocument.Remove(item);
+                    ReloadGroups();
                     ReloadListview(urlListview, urlDocument.Items);
                     SetModified();
                 }

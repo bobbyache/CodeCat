@@ -43,9 +43,9 @@
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.urlListview = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colCreated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuNavigate = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -169,9 +169,9 @@
             this.urlListview.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.urlListview.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colTitle,
-            this.colDescription,
             this.colCreated,
-            this.colModified});
+            this.colModified,
+            this.colDescription});
             this.urlListview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.urlListview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.urlListview.HideSelection = false;
@@ -191,23 +191,20 @@
             this.colTitle.Text = "Title";
             this.colTitle.Width = 550;
             // 
-            // colDescription
-            // 
-            this.colDescription.DisplayIndex = 3;
-            this.colDescription.Text = "Description";
-            this.colDescription.Width = 600;
-            // 
             // colCreated
             // 
-            this.colCreated.DisplayIndex = 1;
             this.colCreated.Text = "Created";
             this.colCreated.Width = 120;
             // 
             // colModified
             // 
-            this.colModified.DisplayIndex = 2;
             this.colModified.Text = "Modified";
             this.colModified.Width = 120;
+            // 
+            // colDescription
+            // 
+            this.colDescription.Text = "Description";
+            this.colDescription.Width = 600;
             // 
             // contextMenu
             // 

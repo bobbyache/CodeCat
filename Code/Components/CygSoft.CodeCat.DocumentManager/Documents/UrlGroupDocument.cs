@@ -16,6 +16,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         public string Title { get; set; }
         public string Url { get; set; }
         public string Description { get; set; }
+        public string Category { get; set; }
 
         private Guid identifyingGuid;
 
@@ -26,11 +27,12 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             this.DateModified = this.DateCreated;
         }
 
-        public UrlItem(string id, string title, string description, string url, DateTime dateCreated, DateTime dateModified)
+        public UrlItem(string id, string title, string category, string description, string url, DateTime dateCreated, DateTime dateModified)
         {
             this.Title = title;
             this.Url = url;
             this.Description = description;
+            this.Category = category;
             this.DateCreated = dateCreated;
             this.DateModified = dateModified;
             this.identifyingGuid = new Guid(id);
@@ -69,6 +71,11 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             get { return urlItemList.ToArray(); }
         }
 
+        public string[] Categories
+        {
+            get { return this.Items.Select(r => r.Category).Distinct().ToArray(); }
+        }
+
         protected override IFileVersion NewVersion(DateTime timeStamp, string description)
         {
             //return new TextDocumentVersion(new VersionPathGenerator(this.FilePath, timeStamp), description, this.Text);
@@ -86,6 +93,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
                 IUrlItem item = new UrlItem(
                     (string)element.Attribute("Id"), 
                     (string)element.Attribute("Title"),
+                    element.Attribute("Category") != null ? (string)element.Attribute("Category") : "Unknown", 
                     (string)element.Attribute("Description"), 
                     (string)element.Attribute("Url"), 
                     DateTime.Parse((string)element.Attribute("Created")), 
@@ -123,6 +131,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
                 element.Add(new XElement("UrlItem",
                     new XAttribute("Id", item.Id),
                     new XAttribute("Title", item.Title),
+                    new XAttribute("Category", item.Category != null ? item.Category : "Unknown"),
                     new XAttribute("Description", item.Description),
                     new XAttribute("Url", item.Url),
                     new XAttribute("Created", item.DateCreated.ToString()),

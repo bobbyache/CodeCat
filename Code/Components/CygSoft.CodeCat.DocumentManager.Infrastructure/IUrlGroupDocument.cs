@@ -10,6 +10,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
     {
         string Id { get; set; }
         string Title { get; set; }
+        string Category { get; set; }
         string Url { get; set; }
         string Description { get; set; }
         DateTime DateModified { get; set; }
@@ -22,7 +23,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string DocumentType { get; set; }
         string Description { get; set; }
         IUrlItem[] Items { get; }
-
+        string[] Categories { get; }
         void Add(IUrlItem urlItem);
         void Remove(IUrlItem urlItem);
     }
