@@ -43,6 +43,7 @@
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.urlListview = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colHostName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colCreated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -169,6 +170,7 @@
             this.urlListview.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.urlListview.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colTitle,
+            this.colHostName,
             this.colCreated,
             this.colModified,
             this.colDescription});
@@ -191,18 +193,27 @@
             this.colTitle.Text = "Title";
             this.colTitle.Width = 550;
             // 
+            // colHostName
+            // 
+            this.colHostName.DisplayIndex = 4;
+            this.colHostName.Text = "Host";
+            this.colHostName.Width = 180;
+            // 
             // colCreated
             // 
+            this.colCreated.DisplayIndex = 1;
             this.colCreated.Text = "Created";
             this.colCreated.Width = 120;
             // 
             // colModified
             // 
+            this.colModified.DisplayIndex = 2;
             this.colModified.Text = "Modified";
             this.colModified.Width = 120;
             // 
             // colDescription
             // 
+            this.colDescription.DisplayIndex = 3;
             this.colDescription.Text = "Description";
             this.colDescription.Width = 600;
             // 
@@ -284,5 +295,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuEdit;
         private System.Windows.Forms.ToolStripMenuItem mnuDelete;
+        private System.Windows.Forms.ColumnHeader colHostName;
     }
 }

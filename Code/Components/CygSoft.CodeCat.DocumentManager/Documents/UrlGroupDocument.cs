@@ -18,6 +18,18 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         public string Description { get; set; }
         public string Category { get; set; }
 
+        public string HostName
+        {
+            get
+            {
+                if (Uri.IsWellFormedUriString(this.Url, UriKind.Absolute))
+                {
+                    return new Uri(this.Url).Host;
+                }
+                return string.Empty;
+            }
+        }
+
         private Guid identifyingGuid;
 
         public UrlItem()

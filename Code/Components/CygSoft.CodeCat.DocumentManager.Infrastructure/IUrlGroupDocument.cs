@@ -12,6 +12,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string Title { get; set; }
         string Category { get; set; }
         string Url { get; set; }
+        string HostName { get; }
         string Description { get; set; }
         DateTime DateModified { get; set; }
         DateTime DateCreated { get; set; }
