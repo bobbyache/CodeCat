@@ -13,8 +13,9 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string Description { get; set; }
         string Extension { get; }
         string FileName { get; }
+        string FilePath { get; }
+        string FolderPath { get; }
         string Id { get; set; }
         string UnsavedFileName { get; }
-        int Ordinal { get; set; }
     }
 }

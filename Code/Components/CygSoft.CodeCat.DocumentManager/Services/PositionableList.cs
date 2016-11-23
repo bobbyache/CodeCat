@@ -24,7 +24,20 @@ namespace CygSoft.CodeCat.DocumentManager.Services
 
         public T LastItem
         {
-            get { return positionedItemList[positionedItemList.Count - 1]; }
+            get 
+            {
+                AutoFixPositioning();
+                return positionedItemList[positionedItemList.Count - 1]; 
+            }
+        }
+
+        public T FirstItem
+        {
+            get 
+            {
+                AutoFixPositioning();
+                return positionedItemList[0]; 
+            }
         }
 
         public int Count { get { return positionedItemList.Count; } }
