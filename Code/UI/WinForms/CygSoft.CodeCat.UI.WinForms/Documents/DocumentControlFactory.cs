@@ -33,8 +33,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 return NewPdfDocument(document, groupOwner, application, modifiedEventHandler);
             else if (document is IImageDocument)
                 return NewImageDocument(document, groupOwner, application, modifiedEventHandler);
+            else if (document is IImageSetDocument)
+                return NewImageSetControl(document, groupOwner, application, modifiedEventHandler);
             else
                 return null;
+        }
+
+        private static IDocumentItemControl NewImageSetControl(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        {
+            ImageSetControl documentControl = new ImageSetControl(application, groupOwner as ICodeGroupDocumentGroup, document as IImageSetDocument);
+            documentControl.Modified += modifiedEventHandler;
+            return documentControl;
         }
 
         private static IDocumentItemControl NewImageDocument(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)

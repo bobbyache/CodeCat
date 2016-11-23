@@ -48,6 +48,7 @@
     <Compile Include="Base\BaseVersionableFile.cs" />
     <Compile Include="Documents\CodeDocument.cs" />
     <Compile Include="Documents\ImageDocument.cs" />
+    <Compile Include="Documents\ImageSetDocument.cs" />
     <Compile Include="Documents\PdfDocument.cs" />
     <Compile Include="Documents\QikScriptDocument.cs" />
     <Compile Include="Documents\TextDocument.cs" />

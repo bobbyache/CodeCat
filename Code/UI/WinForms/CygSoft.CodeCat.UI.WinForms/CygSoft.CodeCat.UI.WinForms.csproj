@@ -86,6 +86,12 @@
       <DependentUpon>ImageControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\IDocumentItemControl.cs" />
+    <Compile Include="Controls\ImageSetControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ImageSetControl.Designer.cs">
+      <DependentUpon>ImageSetControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\InputPropertyGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -229,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ImageControl.resx">
       <DependentUpon>ImageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ImageSetControl.resx">
+      <DependentUpon>ImageSetControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InputPropertyGrid.resx">
       <DependentUpon>InputPropertyGrid.cs</DependentUpon>

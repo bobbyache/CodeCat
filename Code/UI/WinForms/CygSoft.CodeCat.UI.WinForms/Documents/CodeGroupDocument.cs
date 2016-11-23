@@ -277,23 +277,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabManager.AddTab(document,
                 DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
                 true, selected);
-
-            //if (document is ICodeDocument)
-            //    tabManager.AddTab(document,
-            //        DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
-            //    true, selected);
-            //else if (document is IPdfDocument)
-            //    tabManager.AddTab(document,
-            //        DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
-            //    true, selected);
-            //else if (document is IImageDocument)
-            //    tabManager.AddTab(document, 
-            //        DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
-            //        true, selected);
-            //else
-            //    tabManager.AddTab(document,
-            //        DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
-            //        true, selected);
         }
 
         #region Document Control Events
@@ -331,6 +314,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsModified = true;
         }
 
+        private void btnImageSet_Click(object sender, EventArgs e)
+        {
+            IImageSetDocument imageSetDocument = codeItemFile.AddDocument(DocumentTypeEnum.ImageSet) as IImageSetDocument;
+            this.IsModified = true;
+        }
 
         private void btnAddImage_Click(object sender, EventArgs e)
         {
@@ -413,6 +401,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         #endregion
+
+
 
 
 

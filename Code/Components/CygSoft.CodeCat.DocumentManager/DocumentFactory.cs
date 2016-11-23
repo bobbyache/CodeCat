@@ -42,6 +42,9 @@ namespace CygSoft.CodeCat.DocumentManager
             if (docArgs.DocumentType == "IMAGEDOCUMENT")
                 return CreateImageDocument(docArgs);
 
+            if (docArgs.DocumentType == "IMAGESET")
+                return CreateImageSet(docArgs);
+
             return null;
         }
 
@@ -64,6 +67,9 @@ namespace CygSoft.CodeCat.DocumentManager
                 case "IMAGEDOCUMENT":
                     return DocumentTypeEnum.ImageDocument;
 
+                case "IMAGESET":
+                    return DocumentTypeEnum.ImageSet;
+
                 default:
                     return DocumentTypeEnum.CodeSnippet;
             }
@@ -83,9 +89,19 @@ namespace CygSoft.CodeCat.DocumentManager
                     return "PDFDOCUMENT";
                 case DocumentTypeEnum.ImageDocument:
                     return "IMAGEDOCUMENT";
+                case DocumentTypeEnum.ImageSet:
+                    return "IMAGESET";
                 default:
                     return "CODESNIPPET";
             }
+        }
+
+        private static IDocument CreateImageSet(DocArgs docArgs)
+        {
+            if (docArgs.Id == null)
+                return new ImageSetDocument(docArgs.Folder, docArgs.Title);
+            else
+                return new ImageSetDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
         private static IDocument CreateImageDocument(DocArgs docArgs)
