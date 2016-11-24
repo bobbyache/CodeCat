@@ -13,47 +13,6 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public class ImageItem : IImageItem
-    {
-        public string FileName { get { return this.Id + "." + this.Extension; } }
-        public string FilePath { get { return Path.Combine(this.FolderPath, this.FileName); } }
-        public string FolderPath { get; private set; }
-        public string UnsavedFileName { get { return "TEMP_" + this.Id + "." + this.Extension; } }
-        public string Extension { get; private set; }
-        public string Description { get; set; }
-        private Guid identifyingGuid;
-        public DateTime DateModified { get; set; }
-        public DateTime DateCreated { get; set; }
-        public int Ordinal { get; set; }
-
-        public string Id
-        {
-            get { return this.identifyingGuid.ToString(); }
-            set
-            {
-                this.identifyingGuid = new Guid(value);
-            }
-        }
-
-        public ImageItem(string folderPath)
-        {
-            this.identifyingGuid = Guid.NewGuid();
-            this.DateCreated = DateTime.Now;
-            this.DateModified = this.DateCreated;
-            this.FolderPath = folderPath;
-        }
-
-        public ImageItem(string folderPath, string id, string extension, int ordinal, string description, DateTime dateCreated, DateTime dateModified)
-        {
-            this.Description = description;
-            this.DateCreated = dateCreated;
-            this.DateModified = dateModified;
-            this.Extension = extension;
-            this.identifyingGuid = new Guid(id);
-            this.FolderPath = folderPath;
-        }
-    }
-
     public class ImageSetDocument : BaseDocument, IImageSetDocument
     {
         public event EventHandler ImageAdded;
@@ -146,11 +105,11 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             //    ImageAdded(this, new EventArgs());
         }
 
-        public void Remove(IImgDocument urlItem)
+        public void Remove(IImgDocument imageItem)
         {
-            //imageItemList.Remove(urlItem);
-            //if (ImageRemoved != null)
-            //    ImageRemoved(this, new EventArgs());
+            this.documentIndex.RemoveDocumentFile(imageItem.Id);
+            if (ImageRemoved != null)
+                ImageRemoved(this, new EventArgs());
         }
 
         public bool CanMovePrevious(IImgDocument documentFile)

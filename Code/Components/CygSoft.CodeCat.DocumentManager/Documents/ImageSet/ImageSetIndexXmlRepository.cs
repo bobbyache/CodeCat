@@ -46,7 +46,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
 
         public void WriteDocuments(List<IDocument> documents)
         {
-            if (!Directory.Exists(this.folder))
+            if (!File.Exists(this.filePath))
                 CreateFile();
             WriteFile(documents);
         }

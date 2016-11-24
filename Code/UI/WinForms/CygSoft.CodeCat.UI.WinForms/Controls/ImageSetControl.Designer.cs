@@ -44,6 +44,8 @@
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.btnDisplayText = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnDeleteImage = new System.Windows.Forms.ToolStripButton();
             this.btnForward = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.imageBox = new Cyotek.Windows.Forms.ImageBox();
@@ -122,7 +124,9 @@
             this.toolStripSeparator1,
             this.btnMoveLeft,
             this.btnMoveRight,
-            this.btnDisplayText});
+            this.btnDisplayText,
+            this.toolStripSeparator2,
+            this.btnDeleteImage});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(766, 25);
@@ -140,7 +144,7 @@
             // txtTitle
             // 
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(560, 25);
+            this.txtTitle.Size = new System.Drawing.Size(531, 25);
             // 
             // btnImport
             // 
@@ -189,6 +193,21 @@
             this.btnDisplayText.Text = "Display Text";
             this.btnDisplayText.Click += new System.EventHandler(this.btnDisplayText_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnDeleteImage
+            // 
+            this.btnDeleteImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDeleteImage.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteImage.Image")));
+            this.btnDeleteImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDeleteImage.Name = "btnDeleteImage";
+            this.btnDeleteImage.Size = new System.Drawing.Size(23, 22);
+            this.btnDeleteImage.Text = "Delete Image";
+            this.btnDeleteImage.Click += new System.EventHandler(this.btnDeleteImage_Click);
+            // 
             // btnForward
             // 
             this.btnForward.Dock = System.Windows.Forms.DockStyle.Right;
@@ -219,9 +238,6 @@
             this.imageBox.Name = "imageBox";
             this.imageBox.Size = new System.Drawing.Size(686, 507);
             this.imageBox.TabIndex = 20;
-            this.imageBox.Text = "what happens if we put all this stuff over here and this just goes over like this" +
-    " and then that and then that will this actually do something and then something " +
-    "else";
             this.imageBox.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.imageBox.TextBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.imageBox.TextPadding = new System.Windows.Forms.Padding(5);
@@ -295,5 +311,7 @@
         private System.Windows.Forms.ToolStripMenuItem ctxFileImportMenu;
         private System.Windows.Forms.ToolStripMenuItem ctxClipboardImportMenu;
         private System.Windows.Forms.ToolStripButton btnDisplayText;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton btnDeleteImage;
     }
 }

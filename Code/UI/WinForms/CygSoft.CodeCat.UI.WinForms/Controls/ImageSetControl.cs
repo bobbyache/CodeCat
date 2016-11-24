@@ -30,6 +30,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.imageDocument = imageDocument;
             this.codeGroupFile = codeGroupFile;
 
+            btnDeleteImage.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
             btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
             btnMoveLeft.Image = Resources.GetImage(Constants.ImageKeys.MoveLeft);
             btnMoveRight.Image = Resources.GetImage(Constants.ImageKeys.MoveRight);
@@ -40,7 +41,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             // set initial data
             txtTitle.Text = imageDocument.Title;
             this.IsModified = false;
-            LoadIfExists(imageDocument.FirstImage);
+
+            if (imageDocument.ImageCount > 0)
+            {
+                LoadIfExists(imageDocument.FirstImage);
+            }
+            else
+            {
+                UpdateStatusBar();
+            }
 
             // add these events after any initial control data has been modified.
             txtTitle.TextChanged += (s, e) => { SetModified(); };
@@ -48,6 +57,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.Modified += CodeItemCtrl_Modified;
             codeGroupFile.BeforeSave += codeGroupFile_BeforeContentSaved;
             codeGroupFile.AfterSave += codeGroupFile_ContentSaved;
+            imageDocument.ImageRemoved += imageDocument_ImageRemoved;
         }
 
         public event EventHandler Modified;
@@ -122,12 +132,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void UpdateStatusBar()
         {
-            if (this.imageDocument != null && this.currentImage != null)
+            if (ImageSetExists())
             {
                 lblScrollPosition.Text = this.FormatPoint(imageBox.AutoScrollPosition);
                 lblSize.Text = this.FormatRectangle(imageBox.GetImageViewPort());
                 lblZoomLevel.Text = string.Format("{0}%", imageBox.Zoom);
                 lblImagePosition.Text = string.Format("Position {0} of {1}", this.currentImage.Ordinal, this.imageDocument.ImageCount);
+            }
+            else
+            {
+                lblScrollPosition.Text = "";
+                lblSize.Text = this.FormatRectangle(new RectangleF(0, 0, 0, 0));
+                lblZoomLevel.Text = string.Format("{0}%", 0);
+                lblImagePosition.Text = string.Format("Position {0} of {1}", 0, 0);
             }
         }
 
@@ -169,39 +186,51 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void btnMoveLeft_Click(object sender, EventArgs e)
         {
-            if (this.imageDocument.CanMovePrevious(this.currentImage))
+            if (ImageSetExists())
             {
-                this.imageDocument.MovePrevious(this.currentImage);
-                SetModified();
-                UpdateStatusBar();
+                if (this.imageDocument.CanMovePrevious(this.currentImage))
+                {
+                    this.imageDocument.MovePrevious(this.currentImage);
+                    SetModified();
+                    UpdateStatusBar();
+                }
             }
         }
 
         private void btnMoveRight_Click(object sender, EventArgs e)
         {
-            if (this.imageDocument.CanMoveNext(this.currentImage))
+            if (ImageSetExists())
             {
-                this.imageDocument.MoveNext(this.currentImage);
-                SetModified();
-                UpdateStatusBar();
+                if (this.imageDocument.CanMoveNext(this.currentImage))
+                {
+                    this.imageDocument.MoveNext(this.currentImage);
+                    SetModified();
+                    UpdateStatusBar();
+                }
             }
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            if (!this.imageDocument.IsFirstImage(this.currentImage))
+            if (ImageSetExists())
             {
-                IImgDocument imageItem = this.imageDocument.PreviousImage(this.currentImage);
-                LoadIfExists(imageItem);
+                if (!this.imageDocument.IsFirstImage(this.currentImage))
+                {
+                    IImgDocument imageItem = this.imageDocument.PreviousImage(this.currentImage);
+                    LoadIfExists(imageItem);
+                }
             }
         }
 
         private void btnForward_Click(object sender, EventArgs e)
         {
-            if (!this.imageDocument.IsLastImage(this.currentImage))
+            if (ImageSetExists())
             {
-                IImgDocument imageItem = this.imageDocument.NextImage(this.currentImage);
-                LoadIfExists(imageItem);
+                if (!this.imageDocument.IsLastImage(this.currentImage))
+                {
+                    IImgDocument imageItem = this.imageDocument.NextImage(this.currentImage);
+                    LoadIfExists(imageItem);
+                }
             }
         }
 
@@ -217,30 +246,33 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void Import()
         {
-            if (!Directory.Exists(Path.GetDirectoryName(this.imageDocument.FilePath)))
+            if (ImageSetExists())
             {
-                Dialogs.MustSaveGroupBeforeAction(this);
-                return;
-            }
+                if (!Directory.Exists(Path.GetDirectoryName(this.imageDocument.FilePath)))
+                {
+                    Dialogs.MustSaveGroupBeforeAction(this);
+                    return;
+                }
 
-            OpenFileDialog openDialog = new OpenFileDialog();
-            openDialog.Filter = "Image Files *.png (*.png)|*.png";
-            openDialog.DefaultExt = "*.png";
-            openDialog.Title = string.Format("Open Image");
-            openDialog.AddExtension = true;
-            openDialog.FilterIndex = 0;
-            openDialog.CheckPathExists = true;
+                OpenFileDialog openDialog = new OpenFileDialog();
+                openDialog.Filter = "Image Files *.png (*.png)|*.png";
+                openDialog.DefaultExt = "*.png";
+                openDialog.Title = string.Format("Open Image");
+                openDialog.AddExtension = true;
+                openDialog.FilterIndex = 0;
+                openDialog.CheckPathExists = true;
 
-            DialogResult result = openDialog.ShowDialog(this);
-            string filePath = openDialog.FileName;
+                DialogResult result = openDialog.ShowDialog(this);
+                string filePath = openDialog.FileName;
 
-            if (result == DialogResult.OK)
-            {
-                if (imageBox.Image != null)
-                    imageBox.Image.Dispose();
+                if (result == DialogResult.OK)
+                {
+                    if (imageBox.Image != null)
+                        imageBox.Image.Dispose();
 
-                File.Copy(filePath, this.currentImage.ModifyFilePath, true);
-                LoadIfExists(this.currentImage);
+                    File.Copy(filePath, this.currentImage.ModifyFilePath, true);
+                    LoadIfExists(this.currentImage);
+                }
             }
         }
 
@@ -263,18 +295,24 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void ReplaceImage()
         {
-            Image image = Clipboard.GetImage();
-            image.Save((this.currentImage.ModifyFilePath));
-            image.Dispose();
+            if (ImageSetExists())
+            {
+                Image image = Clipboard.GetImage();
+                image.Save((this.currentImage.ModifyFilePath));
+                image.Dispose();
 
-            LoadIfExists(this.currentImage);
-            SetModified();
+                LoadIfExists(this.currentImage);
+                SetModified();
+            }
         }
 
         private void imageBox_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                ShowContextMenu(imageBox, e.Location);
+            if (ImageSetExists())
+            {
+                if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                    ShowContextMenu(imageBox, e.Location);
+            }
         }
 
         private void ShowContextMenu(Control ctrl, Point location)
@@ -289,6 +327,35 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 imageBox.TextDisplayMode = Cyotek.Windows.Forms.ImageBoxGridDisplayMode.Client;
             else
                 imageBox.TextDisplayMode = Cyotek.Windows.Forms.ImageBoxGridDisplayMode.None;
+        }
+
+        private void btnDeleteImage_Click(object sender, EventArgs e)
+        {
+            if (ImageSetExists())
+            {
+                DialogResult result = Dialogs.DeleteDocumentDialogPrompt(this);
+
+                if (result == DialogResult.Yes)
+                    this.imageDocument.Remove(currentImage);
+            }
+        }
+
+        private void imageDocument_ImageRemoved(object sender, EventArgs e)
+        {
+            if (imageDocument.ImageCount > 0)
+                LoadIfExists(imageDocument.FirstImage);
+            else
+            {
+                imageBox.Image = null;
+                imageBox.Text = string.Empty;
+            }
+            SetModified();
+            UpdateStatusBar();
+        }
+
+        private bool ImageSetExists()
+        {
+            return imageDocument.ImageCount > 0 && this.currentImage != null;
         }
     }
 }
