@@ -49,6 +49,10 @@
     <Compile Include="Documents\CodeDocument.cs" />
     <Compile Include="Documents\ImageDocument.cs" />
     <Compile Include="Documents\ImageSetDocument.cs" />
+    <Compile Include="Documents\ImageSet\ImageSetIndex.cs" />
+    <Compile Include="Documents\ImageSet\ImageSetIndexXmlRepository.cs" />
+    <Compile Include="Documents\ImageSet\ImgDocument.cs" />
+    <Compile Include="Documents\ImageSet\OrderedImageSetDocument.cs" />
     <Compile Include="Documents\PdfDocument.cs" />
     <Compile Include="Documents\QikScriptDocument.cs" />
     <Compile Include="Documents\TextDocument.cs" />

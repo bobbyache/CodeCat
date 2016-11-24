@@ -51,6 +51,7 @@
     <Compile Include="IImageDocument.cs" />
     <Compile Include="IImageItem.cs" />
     <Compile Include="IImageSetDocument.cs" />
+    <Compile Include="IImgDocument.cs" />
     <Compile Include="IPdfDocument.cs" />
     <Compile Include="IPositionedItem.cs" />
     <Compile Include="IQikScriptDocument.cs" />

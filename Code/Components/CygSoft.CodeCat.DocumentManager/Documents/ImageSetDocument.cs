@@ -55,6 +55,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
     public class ImageSetDocument : BaseDocument, IImageSetDocument
     {
+
         public event EventHandler ImageAdded;
         public event EventHandler ImageRemoved;
         public event EventHandler ImageMovedUp;

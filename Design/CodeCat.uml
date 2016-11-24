@@ -5779,7 +5779,7 @@ when the old single CodeFile system is removed.
 <XPD:REF name="DiagramOwner">ehJDtD9ohUK360F0ZP/0wAAA</XPD:REF>
 <XPD:OBJ name="DiagramView" type="UMLClassDiagramView" guid="bHiE9g/cUk+uGdlpWwy3JwAA">
 <XPD:REF name="Diagram">Y9XIRKFUUEGUqeB3BGCjXQAA</XPD:REF>
-<XPD:ATTR name="#OwnedViews" type="integer">26</XPD:ATTR>
+<XPD:ATTR name="#OwnedViews" type="integer">27</XPD:ATTR>
 <XPD:OBJ name="OwnedViews[0]" type="UMLClassView" guid="HzhE0OyZH0qsNxaqCtEKkQAA">
 <XPD:ATTR name="Left" type="integer">724</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">80</XPD:ATTR>
@@ -6326,6 +6326,19 @@ implement IDocument
 <XPD:ATTR name="Points" type="Points">416,365;416,388</XPD:ATTR>
 <XPD:REF name="Head">X4AofsEBqUO1L/WbD0u82gAA</XPD:REF>
 <XPD:REF name="Tail">0lL4YtYdVkSS2bmb0GvkiQAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[26]" type="UMLNoteView" guid="s23Lf0a6uUCBrwT/r6NVUwAA">
+<XPD:ATTR name="Left" type="integer">248</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">100</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">394</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">98</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Note: Your ImageSet/ImageItem has not conformed to this design.
+This is because you've created a non-committed, temporary waiting for save
+logic into your ItemSet.
+
+A future rewrite of this design would aim to add this &quot;non-committed&quot; unsaved
+state into this design.
+</XPD:ATTR>
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
@@ -8371,12 +8384,12 @@ document groups.
 <XPD:ATTR name="Name" type="string">IDocumentIndexRepository</XPD:ATTR>
 <XPD:REF name="Namespace">I8E1WstclkSOvQVyISdZDQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">6</XPD:ATTR>
-<XPD:REF name="Views[0]">FcOp4TvxLUeRSJJvK2d6YQAA</XPD:REF>
-<XPD:REF name="Views[1]">yudXAjSOLkacQMZu+qAD7QAA</XPD:REF>
-<XPD:REF name="Views[2]">doV5c4JHjk++8EaaLCFg7wAA</XPD:REF>
-<XPD:REF name="Views[3]">X/TEUrH/I0KzZTacUxp9eQAA</XPD:REF>
-<XPD:REF name="Views[4]">j+FpgjPEJ0CWlp0Xze1GAQAA</XPD:REF>
-<XPD:REF name="Views[5]">unL6czrYCUSoyZ0HAjnDqAAA</XPD:REF>
+<XPD:REF name="Views[0]">X/TEUrH/I0KzZTacUxp9eQAA</XPD:REF>
+<XPD:REF name="Views[1]">j+FpgjPEJ0CWlp0Xze1GAQAA</XPD:REF>
+<XPD:REF name="Views[2]">unL6czrYCUSoyZ0HAjnDqAAA</XPD:REF>
+<XPD:REF name="Views[3]">FcOp4TvxLUeRSJJvK2d6YQAA</XPD:REF>
+<XPD:REF name="Views[4]">yudXAjSOLkacQMZu+qAD7QAA</XPD:REF>
+<XPD:REF name="Views[5]">doV5c4JHjk++8EaaLCFg7wAA</XPD:REF>
 <XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
 <XPD:REF name="SupplierDependencies[0]">A345OYN69EOFgU/1lSBwUAAA</XPD:REF>
 <XPD:ATTR name="#Operations" type="integer">2</XPD:ATTR>
