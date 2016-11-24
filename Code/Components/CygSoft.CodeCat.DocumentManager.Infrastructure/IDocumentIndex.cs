@@ -23,6 +23,9 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         void RemoveDocumentFile(string id);
         IDocument GetDocumentFile(string id);
 
+        IDocument FirstDocument { get; }
+        IDocument LastDocument { get; }
+
         bool CanMoveDown(IDocument documentFile);
         bool CanMoveTo(IDocument documentFile, int ordinal);
         bool CanMoveUp(IDocument documentFile);

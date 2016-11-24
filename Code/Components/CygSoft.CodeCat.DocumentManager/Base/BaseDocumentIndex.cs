@@ -25,6 +25,16 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             get { return documentFiles.ItemsList.ToArray(); }
         }
 
+        public IDocument FirstDocument
+        {
+            get { return documentFiles.FirstItem; }
+        }
+
+        public IDocument LastDocument
+        {
+            get { return documentFiles.LastItem; }
+        }
+
         protected abstract List<IDocument> LoadDocumentFiles();
         protected abstract void SaveDocumentIndex();
 

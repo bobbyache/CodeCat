@@ -18,7 +18,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         private IImageSetDocument imageDocument;
         private ICodeGroupDocumentGroup codeGroupFile;
-        private IImageItem currentImage;
+        private IImgDocument currentImage;
 
         public ImageSetControl(AppFacade application, ICodeGroupDocumentGroup codeGroupFile, IImageSetDocument imageDocument)
         {
@@ -89,7 +89,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             lblEditStatus.ForeColor = this.IsModified ? Color.DarkRed : Color.Black;
         }
 
-        private void LoadIfExists(IImageItem imageItem)
+        private void LoadIfExists(IImgDocument imageItem)
         {
             if (this.imageDocument.Exists)
             {
@@ -125,7 +125,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 lblScrollPosition.Text = this.FormatPoint(imageBox.AutoScrollPosition);
                 lblSize.Text = this.FormatRectangle(imageBox.GetImageViewPort());
                 lblZoomLevel.Text = string.Format("{0}%", imageBox.Zoom);
-                lblImagePosition.Text = string.Format("Position {0} of {1}", this.currentImage.Ordinal, this.imageDocument.Images.Count());
+                lblImagePosition.Text = string.Format("Position {0} of {1}", this.currentImage.Ordinal, this.imageDocument.ImageCount);
             }
         }
 
@@ -187,7 +187,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (!this.imageDocument.IsFirstImage(this.currentImage))
             {
-                IImageItem imageItem = this.imageDocument.PreviousImage(this.currentImage);
+                IImgDocument imageItem = this.imageDocument.PreviousImage(this.currentImage);
                 LoadIfExists(imageItem);
             }
         }
@@ -196,7 +196,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (!this.imageDocument.IsLastImage(this.currentImage))
             {
-                IImageItem imageItem = this.imageDocument.NextImage(this.currentImage);
+                IImgDocument imageItem = this.imageDocument.NextImage(this.currentImage);
                 LoadIfExists(imageItem);
             }
         }

@@ -16,20 +16,20 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string Title { get; set; }
         string DocumentType { get; set; }
         string Description { get; set; }
-        IImageItem[] Images { get; }
+        //IImageItem[] Images { get; }
+        int ImageCount { get; }
+        IImgDocument FirstImage { get; }
 
-        IImageItem FirstImage { get; }
+        bool IsLastImage(IImgDocument imageItem);
+        IImgDocument NextImage(IImgDocument imageItem);
+        bool IsFirstImage(IImgDocument imageItem);
+        IImgDocument PreviousImage(IImgDocument imageItem);
 
-        bool IsLastImage(IImageItem imageItem);
-        IImageItem NextImage(IImageItem imageItem);
-        bool IsFirstImage(IImageItem imageItem);
-        IImageItem PreviousImage(IImageItem imageItem);
-
-        void Add(IImageItem imageItem);
-        void Remove(IImageItem urlItem);
-        bool CanMovePrevious(IImageItem documentFile);
-        bool CanMoveNext(IImageItem documentFile);
-        void MovePrevious(IImageItem documentFile);
-        void MoveNext(IImageItem documentFile);
+        void Add(IImgDocument imageItem);
+        void Remove(IImgDocument urlItem);
+        bool CanMovePrevious(IImgDocument documentFile);
+        bool CanMoveNext(IImgDocument documentFile);
+        void MovePrevious(IImgDocument documentFile);
+        void MoveNext(IImgDocument documentFile);
     }
 }

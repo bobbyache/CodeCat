@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Base;
+using CygSoft.CodeCat.DocumentManager.Documents.ImageSet;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.DocumentManager.Services;
@@ -61,63 +62,60 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         public event EventHandler ImageMovedUp;
         public event EventHandler ImageMovedDown;
 
-        private PositionableList<IImageItem> imageItemList = new PositionableList<IImageItem>();
+        private DocumentIndexPathGenerator indexPathGenerator;
+        private IDocumentIndexRepository repository;
+        private ImageSetIndex documentIndex;
 
-        public IImageItem[] Images
+        public int ImageCount { get { return this.documentIndex.DocumentFiles.Count(); } }
+
+        public IImgDocument FirstImage
         {
-            get { return imageItemList.ItemsList.ToArray(); }
+            get { return this.documentIndex.FirstDocument as IImgDocument; }
         }
 
-        public IImageItem FirstImage
-        {
-            get { return imageItemList.FirstItem; }
-        }
-
-
-        public bool IsLastImage(IImageItem imageItem)
-        {
-            return imageItemList.LastItem.Ordinal <= imageItem.Ordinal;
-        }
-
-        public IImageItem NextImage(IImageItem imageItem)
-        {
-            if (imageItemList.LastItem.Ordinal > imageItem.Ordinal)
-            {
-                return imageItemList.ItemsList.Where(img => img.Ordinal == imageItem.Ordinal + 1).SingleOrDefault();
-            }
-            else
-            {
-                return imageItem;
-            }
-        }
-
-        public bool IsFirstImage(IImageItem imageItem)
-        {
-            return imageItemList.FirstItem.Ordinal >= imageItem.Ordinal;
-        }
-
-        public IImageItem PreviousImage(IImageItem imageItem)
-        {
-            if (imageItemList.FirstItem.Ordinal <= imageItem.Ordinal)
-            {
-                return imageItemList.ItemsList.Where(img => img.Ordinal == imageItem.Ordinal - 1).SingleOrDefault();
-            }
-            else
-            {
-                return imageItem;
-            }
-        }
 
         internal ImageSetDocument(string folder, string title)
             : base(new DocumentPathGenerator(folder, "imgset"), title, null)
         {
+            indexPathGenerator = new DocumentIndexPathGenerator(folder, "xml", this.Id);
+            repository = new ImageSetIndexXmlRepository(indexPathGenerator);
             this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.ImageSet);
+            this.documentIndex = new ImageSetIndex(repository, indexPathGenerator);
         }
 
         internal ImageSetDocument(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "imgset", id), title, description, ordinal)
         {
+            indexPathGenerator = new DocumentIndexPathGenerator(folder, "xml", this.Id);
+            repository = new ImageSetIndexXmlRepository(indexPathGenerator);
             this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.ImageSet);
+            this.documentIndex = new ImageSetIndex(repository, indexPathGenerator);
+        }
+
+        public bool IsLastImage(IImgDocument imageItem)
+        {
+            return this.documentIndex.LastDocument.Ordinal <= imageItem.Ordinal;
+        }
+
+        public IImgDocument NextImage(IImgDocument imageItem)
+        {
+            if (this.documentIndex.LastDocument.Ordinal > imageItem.Ordinal)
+                return this.documentIndex.DocumentFiles.Where(img => img.Ordinal == imageItem.Ordinal + 1).OfType<IImgDocument>().SingleOrDefault();
+            else
+                return imageItem;
+        }
+
+        public bool IsFirstImage(IImgDocument imageItem)
+        {
+            return this.documentIndex.FirstDocument.Ordinal >= imageItem.Ordinal;
+        }
+
+        public IImgDocument PreviousImage(IImgDocument imageItem)
+        {
+            if (this.documentIndex.LastDocument.Ordinal <= imageItem.Ordinal)
+                return this.documentIndex.DocumentFiles.Where(img => img.Ordinal == imageItem.Ordinal - 1).OfType<IImgDocument>().SingleOrDefault();
+            else
+                return imageItem;
         }
 
         protected override IFileVersion NewVersion(DateTime timeStamp, string description)
@@ -127,97 +125,49 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         protected override void OpenFile()
         {
-            List<IImageItem> imageItems = new List<IImageItem>();
-
-            XDocument document = XDocument.Load(this.FilePath);
-
-            foreach (XElement element in document.Element("ImageSet").Elements("Images").Elements())
-            {
-                IImageItem item = new ImageItem(
-                    this.Folder,
-                    (string)element.Attribute("Id"),
-                    (string)element.Attribute("Extension"),
-                    (int)element.Attribute("Ordinal"),
-                    (string)element.Element("Description"),
-                    DateTime.Parse((string)element.Attribute("Created")),
-                    DateTime.Parse((string)element.Attribute("Modified"))
-                );
-
-                imageItems.Add(item);
-            }
-
-            this.imageItemList.InitializeList(imageItems.OfType<IImageItem>().ToList());
-        }
-
-        private void CreateFile()
-        {
-            XElement rootElement = new XElement("ImageSet", new XElement("Images"));
-            XDocument document = new XDocument(rootElement);
-            document.Save(this.FilePath);
+            this.documentIndex.Open();
         }
 
         protected override void SaveFile()
         {
-            if (!File.Exists(this.FilePath))
-                CreateFile();
-            WriteFile(this.Images);
+            this.documentIndex.Save();
         }
 
-        private void WriteFile(IImageItem[] items)
+
+        public void Add(IImgDocument imageItem)
         {
-            XDocument indexDocument = XDocument.Load(this.FilePath);
-            XElement element = indexDocument.Element("ImageSet").Element("Images");
-            element.RemoveNodes();
-
-            foreach (IImageItem item in items)
-            {
-                element.Add(new XElement("Image",
-                    new XAttribute("Id", item.Id),
-                    new XAttribute("Extension", item.Extension),
-                    new XAttribute("Ordinal", item.Ordinal),
-                    new XElement("Description", new XCData(item.Description)),
-                    new XAttribute("Created", item.DateCreated.ToString()),
-                    new XAttribute("Modified", item.DateModified.ToString())
-                ));
-            }
-
-            indexDocument.Save(this.FilePath);
+            //imageItemList.Insert(imageItem);
+            //if (ImageAdded != null)
+            //    ImageAdded(this, new EventArgs());
         }
 
-        public void Add(IImageItem imageItem)
+        public void Remove(IImgDocument urlItem)
         {
-            imageItemList.Insert(imageItem);
-            if (ImageAdded != null)
-                ImageAdded(this, new EventArgs());
+            //imageItemList.Remove(urlItem);
+            //if (ImageRemoved != null)
+            //    ImageRemoved(this, new EventArgs());
         }
 
-        public void Remove(IImageItem urlItem)
+        public bool CanMovePrevious(IImgDocument documentFile)
         {
-            imageItemList.Remove(urlItem);
-            if (ImageRemoved != null)
-                ImageRemoved(this, new EventArgs());
+            return this.documentIndex.CanMoveUp(documentFile);
         }
 
-        public bool CanMovePrevious(IImageItem documentFile)
+        public bool CanMoveNext(IImgDocument documentFile)
         {
-            return imageItemList.CanMoveUp(documentFile);
+            return this.documentIndex.CanMoveDown(documentFile);
         }
 
-        public bool CanMoveNext(IImageItem documentFile)
+        public virtual void MovePrevious(IImgDocument documentFile)
         {
-            return imageItemList.CanMoveDown(documentFile);
-        }
-
-        public virtual void MovePrevious(IImageItem documentFile)
-        {
-            imageItemList.MoveUp(documentFile);
+            this.documentIndex.MoveUp(documentFile);
             if (ImageMovedUp != null)
                 ImageMovedUp(this, new EventArgs());
         }
 
-        public virtual void MoveNext(IImageItem documentFile)
+        public virtual void MoveNext(IImgDocument documentFile)
         {
-            imageItemList.MoveDown(documentFile);
+            this.documentIndex.MoveDown(documentFile);
             if (ImageMovedDown != null)
                 ImageMovedDown(this, new EventArgs());
         }
