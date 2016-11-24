@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.PathGenerators
 {
-    public class ImageSetIndexPathGenerator : BaseFilePathGenerator
+    public class ImagePathGenerator : BaseFilePathGenerator
     {
         private string folder;
         private string extension;
         private string id;
 
-        public ImageSetIndexPathGenerator(string folder, string extension)
+        public ImagePathGenerator(string folder, string extension)
         {
             this.id = Guid.NewGuid().ToString();
             this.folder = folder;
             this.extension = extension;
         }
 
-        public ImageSetIndexPathGenerator(string folder, string extension, string id)
+        public ImagePathGenerator(string folder, string extension, string id)
         {
             this.id = id;
             this.folder = folder;
@@ -47,5 +47,8 @@ namespace CygSoft.CodeCat.DocumentManager.PathGenerators
         {
             get { return id; }
         }
+
+        public string ModifiedFileName { get { return "TEMP_" + this.Id + "." + this.FileExtension; } }
+        public string ModifiedFilePath { get { return Path.Combine(this.FolderPath, this.ModifiedFileName); } }
     }
 }

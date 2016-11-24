@@ -150,13 +150,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             codeItemFile.BeforeSave += codeItemFile_BeforeContentSaved;
             codeItemFile.AfterSave += codeItemFile_ContentSaved;
 
-            base.Deleting += QikCodeDocument_Deleting;
-            base.Saving += QikCodeDocument_Saving;
-            base.Reverting += QikCodeDocument_Reverting;
-            base.HeaderFieldsVisibilityChanged += QikCodeDocument_HeaderFieldsVisibilityChanged;
-            base.ModifyStatusChanged += QikCodeDocument_ModifyStatusChanged;
+            base.Deleting += CodeGroupDocumentDeleting;
+            base.Saving += CodeGroupDocumentSaving;
+            base.Reverting += CodeGroupDocumentReverting;
+            base.HeaderFieldsVisibilityChanged += CodeGroupDocumentHeaderFieldsVisibilityChanged;
+            base.ModifyStatusChanged += CodeGroupDocumentModifyStatusChanged;
 
-            base.NewStatusChanged += QikCodeDocument_NewStatusChanged;
+            base.NewStatusChanged += CodeGroupDocumentNewStatusChanged;
             this.chkEdit.Click += (s, e) => { base.HeaderFieldsVisible = chkEdit.Checked; };
 
             txtTitle.TextChanged += SetModified;
@@ -365,12 +365,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Document Events
 
-        private void QikCodeDocument_Reverting(object sender, EventArgs e)
+        private void CodeGroupDocumentReverting(object sender, EventArgs e)
         {
             codeItemFile.Revert();
         }
 
-        private void QikCodeDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
+        private void CodeGroupDocumentHeaderFieldsVisibilityChanged(object sender, EventArgs e)
         {
             ControlGraphics.SuspendDrawing(this);
             this.chkEdit.Checked = base.HeaderFieldsVisible;
@@ -379,23 +379,23 @@ namespace CygSoft.CodeCat.UI.WinForms
             ControlGraphics.ResumeDrawing(this);
         }
 
-        private void QikCodeDocument_NewStatusChanged(object sender, EventArgs e)
+        private void CodeGroupDocumentNewStatusChanged(object sender, EventArgs e)
         {
             this.btnDelete.Enabled = !base.IsNew;
         }
 
-        private void QikCodeDocument_ModifyStatusChanged(object sender, EventArgs e)
+        private void CodeGroupDocumentModifyStatusChanged(object sender, EventArgs e)
         {
             btnSave.Enabled = base.IsModified;
             btnDiscardChange.Enabled = base.IsModified && !base.IsNew;
         }
 
-        private void QikCodeDocument_Saving(object sender, EventArgs e)
+        private void CodeGroupDocumentSaving(object sender, EventArgs e)
         {
             this.SaveChanges();
         }
 
-        private void QikCodeDocument_Deleting(object sender, EventArgs e)
+        private void CodeGroupDocumentDeleting(object sender, EventArgs e)
         {
             base.persistableTarget.Delete();
         }

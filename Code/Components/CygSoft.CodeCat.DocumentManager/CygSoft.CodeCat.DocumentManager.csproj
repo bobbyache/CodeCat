@@ -61,6 +61,7 @@
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="PathGenerators\DocumentIndexPathGenerator.cs" />
     <Compile Include="PathGenerators\DocumentPathGenerator.cs" />
+    <Compile Include="PathGenerators\ImagePathGenerator.cs" />
     <Compile Include="PathGenerators\ImageSetIndexPathGenerator.cs" />
     <Compile Include="PathGenerators\VersionPathGenerator.cs" />
     <Compile Include="Services\PositionableList.cs" />

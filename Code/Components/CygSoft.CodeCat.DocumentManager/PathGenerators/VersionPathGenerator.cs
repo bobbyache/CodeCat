@@ -32,7 +32,7 @@ namespace CygSoft.CodeCat.DocumentManager.PathGenerators
 
         public override string FileExtension
         {
-            get { return CleanExtension(Path.GetExtension(this.sourceFilePath)); }
+            get { return base.CleanExtension(Path.GetExtension(this.sourceFilePath)); }
         }
 
         public override string FileName
@@ -90,17 +90,6 @@ namespace CygSoft.CodeCat.DocumentManager.PathGenerators
                 return "0" + dayOrMonth.ToString();
             else
                 return dayOrMonth.ToString();
-        }
-
-        private string CleanExtension(string extension)
-        {
-            if (extension.Length > 0)
-            {
-                if (extension.StartsWith("."))
-                    return extension.Substring(1);
-            }
-
-            return extension;
         }
     }
 }

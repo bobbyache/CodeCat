@@ -123,6 +123,13 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 Directory.Delete(this.Folder);
         }
 
+        protected override void OnBeforeRevert()
+        {
+            foreach (IDocument documentFile in this.DocumentFiles)
+                documentFile.Revert();
+            base.OnBeforeRevert();
+        }
+
         protected override void OnAfterRevert()
         {
             this.removedDocumentFiles.Clear();

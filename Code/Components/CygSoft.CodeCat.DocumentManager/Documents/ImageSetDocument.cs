@@ -91,6 +91,12 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             this.documentIndex = new ImageSetIndex(repository, indexPathGenerator);
         }
 
+        protected override void OnBeforeRevert()
+        {
+            this.documentIndex.Revert();
+            base.OnBeforeRevert();
+        }
+
         public bool IsLastImage(IImgDocument imageItem)
         {
             return this.documentIndex.LastDocument.Ordinal <= imageItem.Ordinal;

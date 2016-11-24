@@ -8,5 +8,8 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
     public interface IImgDocument : IDocument, IPositionedItem
     {
+        bool IsModified { get; }
+        string ModifyFilePath { get; }
+        string DisplayFilePath { get; }
     }
 }

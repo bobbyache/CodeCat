@@ -30,33 +30,22 @@ namespace CygSoft.CodeCat.DocumentManager.PathGenerators
 
         public override string FileExtension
         {
-            get { return CleanExtension(this.extension); }
+            get { return base.CleanExtension(this.extension); }
         }
 
         public override string FileName
         {
-            get { return id + "." + CleanExtension(extension); }
+            get { return id + "." + base.CleanExtension(extension); }
         }
 
         public override string FilePath
         {
-            get { return Path.Combine(folder, id + "." + CleanExtension(extension)); }
+            get { return Path.Combine(folder, id + "." + base.CleanExtension(extension)); }
         }
 
         public override string Id
         {
             get { return id; }
-        }
-
-        private string CleanExtension(string ext)
-        {
-            if (ext.Length > 0)
-            {
-                if (ext.StartsWith("."))
-                    return ext.Substring(1);
-            }
-
-            return ext;
         }
     }
 }

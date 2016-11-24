@@ -28,10 +28,12 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
 
             foreach (XElement element in document.Element("ImageSet").Elements("Images").Elements())
             {
+                string id = (string)element.Attribute("Id");
+                string extension = (string)element.Attribute("Extension");
+                ImagePathGenerator imagePathGenerator = new ImagePathGenerator(this.folder, extension, id);
+
                 IImgDocument item = new ImgDocument(
-                    this.folder,
-                    (string)element.Attribute("Id"),
-                    (string)element.Attribute("Extension"),
+                    imagePathGenerator,
                     (int)element.Attribute("Ordinal"),
                     (string)element.Element("Description")
                 );

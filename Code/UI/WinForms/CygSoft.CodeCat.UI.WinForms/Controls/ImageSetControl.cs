@@ -43,7 +43,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             LoadIfExists(imageDocument.FirstImage);
 
             // add these events after any initial control data has been modified.
-            txtTitle.TextChanged += SetModified;
+            txtTitle.TextChanged += (s, e) => { SetModified(); };
+
             this.Modified += CodeItemCtrl_Modified;
             codeGroupFile.BeforeSave += codeGroupFile_BeforeContentSaved;
             codeGroupFile.AfterSave += codeGroupFile_ContentSaved;
@@ -68,6 +69,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public void Revert()
         {
+            this.imageDocument.Revert();
         }
 
         private void CodeItemCtrl_Modified(object sender, EventArgs e)
@@ -75,7 +77,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             SetChangeStatus();
         }
 
-        private void SetModified(object sender, EventArgs e)
+        private void SetModified()
         {
             this.IsModified = true;
 
@@ -93,7 +95,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (this.imageDocument.Exists)
             {
-                Image image = LoadBitmap(imageItem.FilePath);
+                Image image = LoadBitmap(imageItem.DisplayFilePath);
                 imageBox.Image = image;
                 imageBox.Text = imageItem.Description;
                 imageBox.Zoom = 100;
@@ -170,6 +172,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             if (this.imageDocument.CanMovePrevious(this.currentImage))
             {
                 this.imageDocument.MovePrevious(this.currentImage);
+                SetModified();
                 UpdateStatusBar();
             }
         }
@@ -179,6 +182,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             if (this.imageDocument.CanMoveNext(this.currentImage))
             {
                 this.imageDocument.MoveNext(this.currentImage);
+                SetModified();
                 UpdateStatusBar();
             }
         }
@@ -235,7 +239,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 if (imageBox.Image != null)
                     imageBox.Image.Dispose();
 
-                File.Copy(filePath, this.currentImage.FilePath, true);
+                File.Copy(filePath, this.currentImage.ModifyFilePath, true);
                 LoadIfExists(this.currentImage);
             }
         }
@@ -260,10 +264,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ReplaceImage()
         {
             Image image = Clipboard.GetImage();
-            image.Save((this.currentImage.FilePath));
+            image.Save((this.currentImage.ModifyFilePath));
             image.Dispose();
 
             LoadIfExists(this.currentImage);
+            SetModified();
         }
 
         private void imageBox_MouseUp(object sender, MouseEventArgs e)
