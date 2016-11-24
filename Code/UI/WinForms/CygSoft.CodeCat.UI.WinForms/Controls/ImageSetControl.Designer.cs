@@ -46,12 +46,15 @@
             this.btnDisplayText = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDeleteImage = new System.Windows.Forms.ToolStripButton();
+            this.btnAddImage = new System.Windows.Forms.ToolStripButton();
+            this.btnEditImageText = new System.Windows.Forms.ToolStripButton();
             this.btnForward = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.imageBox = new Cyotek.Windows.Forms.ImageBox();
             this.imageContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxFileImportMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxClipboardImportMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.imageContextMenu.SuspendLayout();
@@ -124,9 +127,12 @@
             this.toolStripSeparator1,
             this.btnMoveLeft,
             this.btnMoveRight,
+            this.toolStripSeparator3,
             this.btnDisplayText,
+            this.btnEditImageText,
             this.toolStripSeparator2,
-            this.btnDeleteImage});
+            this.btnDeleteImage,
+            this.btnAddImage});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(766, 25);
@@ -144,7 +150,7 @@
             // txtTitle
             // 
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(531, 25);
+            this.txtTitle.Size = new System.Drawing.Size(479, 25);
             // 
             // btnImport
             // 
@@ -154,6 +160,7 @@
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(23, 22);
             this.btnImport.Text = "Import";
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // toolStripSeparator1
             // 
@@ -207,6 +214,26 @@
             this.btnDeleteImage.Size = new System.Drawing.Size(23, 22);
             this.btnDeleteImage.Text = "Delete Image";
             this.btnDeleteImage.Click += new System.EventHandler(this.btnDeleteImage_Click);
+            // 
+            // btnAddImage
+            // 
+            this.btnAddImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAddImage.Image = ((System.Drawing.Image)(resources.GetObject("btnAddImage.Image")));
+            this.btnAddImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddImage.Name = "btnAddImage";
+            this.btnAddImage.Size = new System.Drawing.Size(23, 22);
+            this.btnAddImage.Text = "Add Image";
+            this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
+            // 
+            // btnEditImageText
+            // 
+            this.btnEditImageText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEditImageText.Image = ((System.Drawing.Image)(resources.GetObject("btnEditImageText.Image")));
+            this.btnEditImageText.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditImageText.Name = "btnEditImageText";
+            this.btnEditImageText.Size = new System.Drawing.Size(23, 22);
+            this.btnEditImageText.Text = "Edit Image Description";
+            this.btnEditImageText.Click += new System.EventHandler(this.btnEditImageText_Click);
             // 
             // btnForward
             // 
@@ -268,6 +295,11 @@
             this.ctxClipboardImportMenu.Text = "Import from Clipboard";
             this.ctxClipboardImportMenu.Click += new System.EventHandler(this.ctxClipboardImportMenu_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // ImageSetControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -313,5 +345,8 @@
         private System.Windows.Forms.ToolStripButton btnDisplayText;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton btnDeleteImage;
+        private System.Windows.Forms.ToolStripButton btnAddImage;
+        private System.Windows.Forms.ToolStripButton btnEditImageText;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }

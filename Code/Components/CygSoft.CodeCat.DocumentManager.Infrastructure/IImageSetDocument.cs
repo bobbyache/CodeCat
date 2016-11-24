@@ -16,7 +16,6 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string Title { get; set; }
         string DocumentType { get; set; }
         string Description { get; set; }
-        //IImageItem[] Images { get; }
         int ImageCount { get; }
         IImgDocument FirstImage { get; }
 
@@ -25,7 +24,9 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         bool IsFirstImage(IImgDocument imageItem);
         IImgDocument PreviousImage(IImgDocument imageItem);
 
-        void Add(IImgDocument imageItem);
+
+        IImgDocument Add(); // Adds a blank image (default image/initial image)
+        IImgDocument Add(string description, string extension);
         void Remove(IImgDocument urlItem);
         bool CanMovePrevious(IImgDocument documentFile);
         bool CanMoveNext(IImgDocument documentFile);

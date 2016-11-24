@@ -131,6 +131,12 @@
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Args.cs" />
+    <Compile Include="Dialogs\ImageDescriptionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ImageDescriptionDialog.Designer.cs">
+      <DependentUpon>ImageDescriptionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\UrlItemEditDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -259,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EnterKeywordsForm.resx">
       <DependentUpon>EnterKeywordsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ImageDescriptionDialog.resx">
+      <DependentUpon>ImageDescriptionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InvalidRemoveDialog.resx">
       <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>

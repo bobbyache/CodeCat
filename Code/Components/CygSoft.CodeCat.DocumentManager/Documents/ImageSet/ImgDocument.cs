@@ -3,6 +3,7 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -93,6 +94,51 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
         {
             if (File.Exists(this.imagePathGenerator.ModifiedFilePath))
                 File.Delete(this.imagePathGenerator.ModifiedFilePath);
+        }
+
+
+        public Bitmap GetDisplayImage()
+        {
+            if (File.Exists(this.DisplayFilePath))
+            {
+                using (FileStream stream = new FileStream(this.DisplayFilePath, FileMode.Open, FileAccess.Read))
+                using (BinaryReader reader = new BinaryReader(stream))
+                {
+                    var memoryStream = new MemoryStream(reader.ReadBytes((int)stream.Length));
+                    return new Bitmap(memoryStream);
+                }
+            }
+            else
+            {
+                // this unfortunately creates a gradient rectangle:
+                // http://stackoverflow.com/questions/12502365/how-to-create-1024x1024-rgb-bitmap-image-of-white
+                //Bitmap bitmap = new Bitmap(1, 1);
+                //bitmap.SetPixel(0, 0, Color.DarkGray);
+                //Bitmap result = new Bitmap(bitmap, 800, 800);
+                //return result;
+                int width = 600, height = 400;
+
+                Bitmap bmp = new Bitmap(width, height);
+                using (Graphics graph = Graphics.FromImage(bmp))
+                {
+                    Rectangle ImageSize = new Rectangle(0, 0, width, height);
+                    graph.FillRectangle(Brushes.DarkGray, ImageSize);
+                }
+                return bmp;
+            }
+        }
+
+        public void SetImage(string fromFile)
+        {
+            File.Copy(fromFile, this.imagePathGenerator.ModifiedFilePath, true);
+        }
+
+
+        public void SetImage(Image image)
+        {
+            Image theImage = image.Clone() as Image;
+            image.Save((this.imagePathGenerator.ModifiedFilePath));
+            theImage.Dispose();
         }
     }
 }

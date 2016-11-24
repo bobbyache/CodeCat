@@ -30,6 +30,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.imageDocument = imageDocument;
             this.codeGroupFile = codeGroupFile;
 
+            btnAddImage.Image = Resources.GetImage(Constants.ImageKeys.AddSnippet);
             btnDeleteImage.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
             btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
             btnMoveLeft.Image = Resources.GetImage(Constants.ImageKeys.MoveLeft);
@@ -44,11 +45,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             if (imageDocument.ImageCount > 0)
             {
-                LoadIfExists(imageDocument.FirstImage);
+                LoadImage(imageDocument.FirstImage);
             }
             else
             {
-                UpdateStatusBar();
+                AddBlankImage();
             }
 
             // add these events after any initial control data has been modified.
@@ -101,33 +102,23 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             lblEditStatus.ForeColor = this.IsModified ? Color.DarkRed : Color.Black;
         }
 
-        private void LoadIfExists(IImgDocument imageItem)
+        private void LoadImage(IImgDocument imageItem)
         {
-            if (this.imageDocument.Exists)
+            if (imageItem != null)
             {
-                Image image = LoadBitmap(imageItem.DisplayFilePath);
+                Image image = imageItem.GetDisplayImage();
                 imageBox.Image = image;
                 imageBox.Text = imageItem.Description;
                 imageBox.Zoom = 100;
-                //imageBox.ZoomToFit();
-
                 this.currentImage = imageItem;
                 UpdateStatusBar();
             }
         }
 
-        private Bitmap LoadBitmap(string path)
+        private void AddBlankImage()
         {
-            //Open file in read only mode
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-            //Get a binary reader for the file stream
-            using (BinaryReader reader = new BinaryReader(stream))
-            {
-                //copy the content of the file into a memory stream
-                var memoryStream = new MemoryStream(reader.ReadBytes((int)stream.Length));
-                //make a new Bitmap object the owner of the MemoryStream
-                return new Bitmap(memoryStream);
-            }
+            this.currentImage = imageDocument.Add();
+            LoadImage(currentImage);
         }
 
         private void UpdateStatusBar()
@@ -217,7 +208,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 if (!this.imageDocument.IsFirstImage(this.currentImage))
                 {
                     IImgDocument imageItem = this.imageDocument.PreviousImage(this.currentImage);
-                    LoadIfExists(imageItem);
+                    LoadImage(imageItem);
                 }
             }
         }
@@ -229,7 +220,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 if (!this.imageDocument.IsLastImage(this.currentImage))
                 {
                     IImgDocument imageItem = this.imageDocument.NextImage(this.currentImage);
-                    LoadIfExists(imageItem);
+                    LoadImage(imageItem);
                 }
             }
         }
@@ -270,8 +261,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                     if (imageBox.Image != null)
                         imageBox.Image.Dispose();
 
-                    File.Copy(filePath, this.currentImage.ModifyFilePath, true);
-                    LoadIfExists(this.currentImage);
+                    this.currentImage.SetImage(filePath);
+                    LoadImage(this.currentImage);
+                    SetModified();
                 }
             }
         }
@@ -298,10 +290,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             if (ImageSetExists())
             {
                 Image image = Clipboard.GetImage();
-                image.Save((this.currentImage.ModifyFilePath));
-                image.Dispose();
+                this.currentImage.SetImage(image);
 
-                LoadIfExists(this.currentImage);
+                //image.clo
+                //image.Save((this.currentImage.ModifyFilePath));
+                //image.Dispose();
+
+                LoadImage(this.currentImage);
                 SetModified();
             }
         }
@@ -343,19 +338,51 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void imageDocument_ImageRemoved(object sender, EventArgs e)
         {
             if (imageDocument.ImageCount > 0)
-                LoadIfExists(imageDocument.FirstImage);
+                LoadImage(imageDocument.FirstImage);
             else
             {
-                imageBox.Image = null;
-                imageBox.Text = string.Empty;
+                AddBlankImage();
+                //IImgDocument img = imageDocument.Add();
+
+                //imageBox.Image = null;
+                //imageBox.Text = string.Empty;
             }
             SetModified();
-            UpdateStatusBar();
+            //UpdateStatusBar();
         }
 
         private bool ImageSetExists()
         {
             return imageDocument.ImageCount > 0 && this.currentImage != null;
+        }
+
+        private void btnAddImage_Click(object sender, EventArgs e)
+        {
+            AddBlankImage();
+            //this.imageDocument.Add("this is some text that should display for the description BOYO !!!", "png");
+        }
+
+        private void btnEditImageText_Click(object sender, EventArgs e)
+        {
+            if (this.currentImage != null)
+            {
+                ImageDescriptionDialog dialog = new ImageDescriptionDialog();
+                dialog.Description = this.currentImage.Description;
+
+                DialogResult result = dialog.ShowDialog(this);
+
+                if (result == DialogResult.OK)
+                {
+                    this.currentImage.Description = dialog.Description;
+                    imageBox.Text = this.currentImage.Description;
+                    SetModified();
+                }
+            }
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            Import();
         }
     }
 }

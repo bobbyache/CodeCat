@@ -97,13 +97,25 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             this.documentIndex.Save();
         }
 
-
-        public void Add(IImgDocument imageItem)
+        public IImgDocument Add()
         {
-            //imageItemList.Insert(imageItem);
-            //if (ImageAdded != null)
-            //    ImageAdded(this, new EventArgs());
+            IImgDocument img = this.Add("Blank Image", "png");
+            return img;
         }
+
+        public IImgDocument Add(string description, string extension)
+        {
+            ImagePathGenerator imagePathGenerator = new ImagePathGenerator(this.Folder, extension);
+            ImgDocument imgDocument = new ImgDocument(imagePathGenerator);
+            imgDocument.Description = description;
+            this.documentIndex.AddDocumentFile(imgDocument);
+
+            if (ImageAdded != null)
+                ImageAdded(this, new EventArgs());
+
+            return imgDocument;
+        }
+
 
         public void Remove(IImgDocument imageItem)
         {
