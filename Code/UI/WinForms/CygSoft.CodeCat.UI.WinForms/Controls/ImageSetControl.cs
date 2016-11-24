@@ -277,5 +277,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             ctxClipboardImportMenu.Enabled = Clipboard.ContainsImage();
             imageContextMenu.Show(ctrl, location);
         }
+
+        private void btnDisplayText_Click(object sender, EventArgs e)
+        {
+            if (btnDisplayText.Checked)
+                imageBox.TextDisplayMode = Cyotek.Windows.Forms.ImageBoxGridDisplayMode.Client;
+            else
+                imageBox.TextDisplayMode = Cyotek.Windows.Forms.ImageBoxGridDisplayMode.None;
+        }
     }
 }

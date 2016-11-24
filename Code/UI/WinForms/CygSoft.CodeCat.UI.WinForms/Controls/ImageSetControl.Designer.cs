@@ -43,6 +43,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
+            this.btnDisplayText = new System.Windows.Forms.ToolStripButton();
             this.btnForward = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.imageBox = new Cyotek.Windows.Forms.ImageBox();
@@ -120,7 +121,8 @@
             this.btnImport,
             this.toolStripSeparator1,
             this.btnMoveLeft,
-            this.btnMoveRight});
+            this.btnMoveRight,
+            this.btnDisplayText});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(766, 25);
@@ -138,7 +140,7 @@
             // txtTitle
             // 
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(583, 25);
+            this.txtTitle.Size = new System.Drawing.Size(560, 25);
             // 
             // btnImport
             // 
@@ -174,6 +176,19 @@
             this.btnMoveRight.Text = "Move Right";
             this.btnMoveRight.Click += new System.EventHandler(this.btnMoveRight_Click);
             // 
+            // btnDisplayText
+            // 
+            this.btnDisplayText.Checked = true;
+            this.btnDisplayText.CheckOnClick = true;
+            this.btnDisplayText.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnDisplayText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDisplayText.Image = ((System.Drawing.Image)(resources.GetObject("btnDisplayText.Image")));
+            this.btnDisplayText.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDisplayText.Name = "btnDisplayText";
+            this.btnDisplayText.Size = new System.Drawing.Size(23, 22);
+            this.btnDisplayText.Text = "Display Text";
+            this.btnDisplayText.Click += new System.EventHandler(this.btnDisplayText_Click);
+            // 
             // btnForward
             // 
             this.btnForward.Dock = System.Windows.Forms.DockStyle.Right;
@@ -199,6 +214,7 @@
             // imageBox
             // 
             this.imageBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.imageBox.Location = new System.Drawing.Point(40, 25);
             this.imageBox.Name = "imageBox";
             this.imageBox.Size = new System.Drawing.Size(686, 507);
@@ -278,5 +294,6 @@
         private System.Windows.Forms.ContextMenuStrip imageContextMenu;
         private System.Windows.Forms.ToolStripMenuItem ctxFileImportMenu;
         private System.Windows.Forms.ToolStripMenuItem ctxClipboardImportMenu;
+        private System.Windows.Forms.ToolStripButton btnDisplayText;
     }
 }
