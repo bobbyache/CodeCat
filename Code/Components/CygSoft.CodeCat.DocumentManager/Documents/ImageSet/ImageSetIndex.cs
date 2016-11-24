@@ -11,7 +11,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
 {
     internal class ImageSetIndex : BaseDocumentIndex
     {
-        public ImageSetIndex(IDocumentIndexRepository repository, DocumentIndexPathGenerator indexPathGenerator)
+        public ImageSetIndex(IDocumentIndexRepository repository, ImageSetIndexPathGenerator indexPathGenerator)
             : base(repository, indexPathGenerator)
         {
         }

@@ -56,13 +56,12 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
     public class ImageSetDocument : BaseDocument, IImageSetDocument
     {
-
         public event EventHandler ImageAdded;
         public event EventHandler ImageRemoved;
         public event EventHandler ImageMovedUp;
         public event EventHandler ImageMovedDown;
 
-        private DocumentIndexPathGenerator indexPathGenerator;
+        private ImageSetIndexPathGenerator indexPathGenerator;
         private IDocumentIndexRepository repository;
         private ImageSetIndex documentIndex;
 
@@ -77,7 +76,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         internal ImageSetDocument(string folder, string title)
             : base(new DocumentPathGenerator(folder, "imgset"), title, null)
         {
-            indexPathGenerator = new DocumentIndexPathGenerator(folder, "xml", this.Id);
+            indexPathGenerator = new ImageSetIndexPathGenerator(folder, "imgset", this.Id);
             repository = new ImageSetIndexXmlRepository(indexPathGenerator);
             this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.ImageSet);
             this.documentIndex = new ImageSetIndex(repository, indexPathGenerator);
@@ -86,7 +85,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         internal ImageSetDocument(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "imgset", id), title, description, ordinal)
         {
-            indexPathGenerator = new DocumentIndexPathGenerator(folder, "xml", this.Id);
+            indexPathGenerator = new ImageSetIndexPathGenerator(folder, "imgset", this.Id);
             repository = new ImageSetIndexXmlRepository(indexPathGenerator);
             this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.ImageSet);
             this.documentIndex = new ImageSetIndex(repository, indexPathGenerator);
@@ -112,7 +111,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         public IImgDocument PreviousImage(IImgDocument imageItem)
         {
-            if (this.documentIndex.LastDocument.Ordinal <= imageItem.Ordinal)
+            if (this.documentIndex.FirstDocument.Ordinal <= imageItem.Ordinal)
                 return this.documentIndex.DocumentFiles.Where(img => img.Ordinal == imageItem.Ordinal - 1).OfType<IImgDocument>().SingleOrDefault();
             else
                 return imageItem;

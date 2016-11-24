@@ -38,29 +38,5 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
         {
             //throw new NotImplementedException();
         }
-
-        public DateTime DateCreated
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public DateTime DateModified
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
     }
 }

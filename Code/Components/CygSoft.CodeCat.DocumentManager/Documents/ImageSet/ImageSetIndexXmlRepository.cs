@@ -15,7 +15,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
         private readonly string filePath;
         private readonly string folder;
 
-        public ImageSetIndexXmlRepository(DocumentIndexPathGenerator indexPathGenerator)
+        public ImageSetIndexXmlRepository(ImageSetIndexPathGenerator indexPathGenerator)
         {
             this.filePath = indexPathGenerator.FilePath;
             this.folder = Path.GetDirectoryName(indexPathGenerator.FilePath);
