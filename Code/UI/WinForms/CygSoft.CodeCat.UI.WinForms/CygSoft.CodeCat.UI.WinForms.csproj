@@ -398,6 +398,8 @@
     <None Include="Resources\Object Size1.ico" />
     <None Include="Resources\Object Position1.ico" />
     <None Include="Resources\magnifier-zoom.png" />
+    <None Include="Resources\report.png" />
+    <None Include="Resources\report_key.png" />
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

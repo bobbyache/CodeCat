@@ -33,6 +33,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string ObjectPosition = "Position";
             public const string ObjectSize = "Size";
             public const string ObjectZoom = "Zoom";
+            public const string ShowText = "Text";
+            public const string EditText = "EditText";
             //public const string SaveProject = "SaveProject";
         }
     }
