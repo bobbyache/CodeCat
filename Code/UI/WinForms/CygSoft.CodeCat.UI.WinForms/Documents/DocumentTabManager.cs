@@ -149,7 +149,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             else if (document is IImageDocument)
                 item.Image = IconRepository.ImageByExtension(document.FileExtension);
             else if (document is IImageSetDocument)
-                item.Image = IconRepository.ImageByExtension(document.FileExtension);
+                item.Image = IconRepository.ImageByExtension(IconRepository.IMG);
+            else if (document is IUrlGroupDocument)
+                item.Image = IconRepository.ImageByExtension(IconRepository.WEB);
+
             else
                 item.Image = IconRepository.GetImage("TEXT");
 

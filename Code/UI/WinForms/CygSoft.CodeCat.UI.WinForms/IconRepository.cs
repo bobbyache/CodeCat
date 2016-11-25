@@ -17,7 +17,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         public const string QikKey = "QIK";
         public const string CodeGroupKey = "CodeGroup";
         public const string PDF = "PDF";
-        public const string IMG = "IMG";
+        public const string IMG = "PNG";
+        public const string WEB = "HTML";
 
         private static ImageList imageList = new ImageList();
         private static Dictionary<string, Icon> iconDictonary = new Dictionary<string, Icon>();
