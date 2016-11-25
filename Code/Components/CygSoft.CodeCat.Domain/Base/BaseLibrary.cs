@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.CodeCat.Search.KeywordIndex;
@@ -56,6 +57,7 @@ namespace CygSoft.CodeCat.Domain.Base
 
         protected abstract IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem);
         protected abstract IPersistableTarget OpenSpecializedTarget(IKeywordIndexItem indexItem);
+        public abstract IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems);
 
         public IPersistableTarget OpenTarget(IKeywordIndexItem indexItem)
         {
@@ -172,6 +174,11 @@ namespace CygSoft.CodeCat.Domain.Base
             lastCodeFileRepo.Save(FindExistingIds(keywordIndexItems));
         }
 
+        public bool ImportIndecesExist(IndexExportImportData[] importDataList, out IKeywordIndexItem[] existingItems)
+        {
+            return this.index.IndexesExistFor(importDataList.Select(k => k.KeywordIndexItem).ToArray(), out existingItems);
+        }
+
         private string[] FindExistingIds(IKeywordIndexItem[] indeces)
         {
             IKeywordIndexItem[] foundItems = this.FindIndecesByIds(indeces.Select(r => r.Id).ToArray());
@@ -180,7 +187,7 @@ namespace CygSoft.CodeCat.Domain.Base
             return foundIds;
         }
 
-        private IKeywordIndexItem[] FindIndecesByIds(string[] ids)
+        protected IKeywordIndexItem[] FindIndecesByIds(string[] ids)
         {
             List<IKeywordIndexItem> indeces = new List<IKeywordIndexItem>();
             foreach (string id in ids)

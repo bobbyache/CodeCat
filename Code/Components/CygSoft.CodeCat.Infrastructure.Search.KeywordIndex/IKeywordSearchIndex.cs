@@ -26,6 +26,7 @@ namespace CygSoft.CodeCat.Infrastructure.Search.KeywordIndex
         string[] Keywords { get; }
         string LibraryFolderPath { get; }
         void Remove(string id);
+        bool IndexesExistFor(IKeywordIndexItem[] indeces, out IKeywordIndexItem[] existingIndeces);
         bool ValidateRemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidEmptyItems);
         void RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords);
         void Update();

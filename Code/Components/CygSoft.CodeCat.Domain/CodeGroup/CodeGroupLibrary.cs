@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain.Base;
+using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,19 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             : base(new CodeGroupKeywordSearchIndexRepository("CodeCat_CodeGroupIndex"), "codegroup")
         {
             base.FileExtension = "*.xml";
+        }
+
+        public override IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems)
+        {
+            List<IndexExportImportData> exportList = new List<IndexExportImportData>();
+            IKeywordIndexItem[] foundItems = base.FindIndecesByIds(indexItems.Select(r => r.Id).ToArray());
+
+            foreach (CodeGroupKeywordIndexItem indexItem in foundItems.OfType<CodeGroupKeywordIndexItem>())
+            {
+                CodeGroupDocumentGroup codeFile = new CodeGroupDocumentGroup(indexItem as CodeGroupKeywordIndexItem, this.FolderPath);
+                exportList.Add(new IndexExportImportData(indexItem.Id, codeFile.Folder, indexItem.Id, indexItem));
+            }
+            return exportList.ToArray();
         }
 
         protected override IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem)

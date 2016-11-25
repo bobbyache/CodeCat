@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -164,6 +165,16 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
                 index.RemoveKeywords(keywords);
             }
             this.Update();
+        }
+
+        public bool IndexesExistFor(IKeywordIndexItem[] indeces, out IKeywordIndexItem[] existingIndeces)
+        {
+            IEnumerable<IKeywordIndexItem> foundItems = indeces.Join(this.IndexItems, a => a.Id, b => b.Id, 
+                (a, b) => b);
+
+            existingIndeces = foundItems.ToArray();
+
+            return existingIndeces.Count() > 0;
         }
 
         public bool ValidateRemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidIndeces)

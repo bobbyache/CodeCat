@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.CodeCat.Search.KeywordIndex;
@@ -17,6 +18,19 @@ namespace CygSoft.CodeCat.Domain.Qik
             : base(new QikKeywordSearchIndexRepository("CodeCat_QikIndex"), "qik")
         {
             base.FileExtension = "*.xml";
+        }
+
+        public override IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems)
+        {
+            List<IndexExportImportData> exportList = new List<IndexExportImportData>();
+            IKeywordIndexItem[] foundItems = base.FindIndecesByIds(indexItems.Select(r => r.Id).ToArray());
+
+            foreach (QikKeywordIndexItem indexItem in foundItems.OfType<QikKeywordIndexItem>())
+            {
+                QikDocumentGroup codeFile = new QikDocumentGroup(indexItem as QikKeywordIndexItem, this.FolderPath);
+                exportList.Add(new IndexExportImportData(indexItem.Id, codeFile.Folder, indexItem.Id, indexItem));
+            }
+            return exportList.ToArray();
         }
 
         protected override IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem)
