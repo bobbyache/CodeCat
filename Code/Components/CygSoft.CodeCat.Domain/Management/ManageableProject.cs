@@ -83,7 +83,7 @@ namespace CygSoft.CodeCat.Domain.Management
             ImportToIndex(sourceIndexFilePath, exportData);
             ImportToDisk(exportData);
 
-
+            
         }
 
         /// <summary>
@@ -94,10 +94,15 @@ namespace CygSoft.CodeCat.Domain.Management
         /// First load the source index, capture its elements (they're all called IndexItem or ItemIndex)
         /// Copy all these elements and "append" them in mass to the destination index file.
         /// Copy all the files, folders they point to, to the correct destination.
+        /// 
+        /// REMEMBER TO CHECK THE VERSION !!!
+        /// 
+        /// ALSO CHECK WHETHER YOUR INDEX ITEMS HAVE A TYPE (OR BETTER YET A TYPE NAME FIELD) BECAUSE THEN YOU CAN ADD THIS TO
+        /// THE LISTVIEW !!!
         /// </summary>
         /// <param name="sourceIndexFilePath"></param>
         /// <param name="exportData"></param>
-
+        
         private void ImportToIndex(string sourceIndexFilePath, IndexExportImportData[] exportData)
         {
             //XDocument codeDocument = XDocument.Load(this.codeLibrary.FilePath);
