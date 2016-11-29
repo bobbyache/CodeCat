@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.btnBrowseDestinationPath = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -110,6 +111,7 @@
             this.txtDestinationProjectPath.Size = new System.Drawing.Size(635, 20);
             this.txtDestinationProjectPath.TabIndex = 0;
             this.txtDestinationProjectPath.Text = "D:\\Temporary\\Import Tests\\CygSoft\\CygSoft.codecat";
+            this.txtDestinationProjectPath.TextChanged += new System.EventHandler(this.txtDestinationProjectPath_TextChanged);
             // 
             // panel1
             // 
@@ -152,6 +154,7 @@
             this.txtSourceProjectPath.Size = new System.Drawing.Size(635, 20);
             this.txtSourceProjectPath.TabIndex = 0;
             this.txtSourceProjectPath.Text = "D:\\Temporary\\Import Tests\\MSDF\\MSDF.codecat";
+            this.txtSourceProjectPath.TextChanged += new System.EventHandler(this.txtSourceProjectPath_TextChanged);
             // 
             // btnFind
             // 
@@ -341,6 +344,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.listView);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "CodeCat Exporter";
             this.panel2.ResumeLayout(false);

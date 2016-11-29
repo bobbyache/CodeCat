@@ -35,9 +35,7 @@ namespace CygSoft.CodeCat.Domain
             destinationProject = new ManageableProject();
             destinationProjectFilePath = toProjectFile;
             this.version = version;
-
             sourceProject.Open(fromProjectFile, this.version);
-            //destinationProject.Open(toProjectFile, version);
         }
 
         public IKeywordIndexItem[] FindIndeces(string commaDelimitedKeywords, out bool hasPotentialDuplicates, out IKeywordIndexItem[] potentialDuplicates)

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
 
             this.listViewSorter = new ListViewSorter(this.listView);
             listView.Sorting = SortOrder.Ascending;
+            EnableExecution();
         }
 
         private string GetProjectPath()
@@ -64,6 +66,18 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                 CreateListviewItem(listView, item);
 
             //listViewSorter.Sort(sortedColumn);
+        }
+
+        private void EnableExecution()
+        {
+            bool sourceExists = !string.IsNullOrEmpty(txtSourceProjectPath.Text.Trim()) && File.Exists(txtSourceProjectPath.Text.Trim());
+            bool destExists = !string.IsNullOrEmpty(txtDestinationProjectPath.Text.Trim()) && File.Exists(txtDestinationProjectPath.Text.Trim());
+            bool loaded = projectManagement != null && projectManagement.Loaded && sourceExists && destExists;
+            bool okToExecute = loaded && listView.CheckedItems.Count > 0;
+
+            btnOpen.Enabled = sourceExists && destExists;
+            btnFind.Enabled = loaded;
+            btnExecute.Enabled = loaded;
         }
 
         private void CreateListviewItem(ListView listView, IKeywordIndexItem item, bool select = false)
@@ -120,19 +134,21 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
         private void btnBrowseSourcePath_Click(object sender, EventArgs e)
         {
             txtSourceProjectPath.Text = GetProjectPath();
+            EnableExecution();
         }
 
         private void btnBrowseDestinationPath_Click(object sender, EventArgs e)
         {
             txtDestinationProjectPath.Text = GetProjectPath();
+            EnableExecution();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
             projectManagement = new ProjManFacade();
             projectManagement.LoadProjects(txtSourceProjectPath.Text, txtDestinationProjectPath.Text, 5);
-
             Find();
+            EnableExecution();
         }
 
         private void Find()
@@ -149,8 +165,6 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
         {
             Find();
         }
-
-        
 
         private void DisplayDuplicates(IKeywordIndexItem[] potentialDuplicates)
         {
@@ -195,7 +209,7 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                             try
                             {
                                 projectManagement.ImportData(exportData, 5);
-                                MessageBox.Show(this, "Selection has been successfully exported.", "Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information );
+                                MessageBox.Show(this, "Selection has been successfully exported.", "Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             catch (Exception)
                             {
@@ -207,6 +221,8 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
 
                         Find();
                     }
+                    else
+                        MessageBox.Show(this, "There is nothing to export. Please ensure the items you wish to export are checked.", "Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -215,6 +231,20 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
         {
             sortedColumn = e.Column;
             listViewSorter.Sort(sortedColumn);
+        }
+
+        private void txtSourceProjectPath_TextChanged(object sender, EventArgs e)
+        {
+            EnableExecution();
+            if (listView.Items.Count > 0)
+                listView.Items.Clear();
+        }
+
+        private void txtDestinationProjectPath_TextChanged(object sender, EventArgs e)
+        {
+            EnableExecution();
+            if (listView.Items.Count > 0)
+                listView.Items.Clear();
         }
     }
 }

@@ -101,6 +101,10 @@ namespace CygSoft.CodeCat.Domain.Management
             IKeywordIndexItem[] qikItems;
             IKeywordIndexItem[] codeGroupItems;
 
+            // Use this to "move" items from one project to another:
+            //                          this.codeGroupLibrary.OpenTarget() <--- Now you can use the target to delete itself.
+            // ... will this delete the index? probably not...
+
             bool anyExist =
                 this.codeGroupLibrary.ImportIndecesExist(exportData, out codeGroupItems) &&
                 this.codeLibrary.ImportIndecesExist(exportData, out codeItems) &&
@@ -120,8 +124,6 @@ namespace CygSoft.CodeCat.Domain.Management
             QikLibrary qikLibrary = new QikLibrary();
             qikLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
             qikLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is IQikKeywordIndexItem).ToArray());
-
-            // ALSO CHECK WHETHER YOUR INDEX ITEMS HAVE A TYPE (OR BETTER YET A TYPE NAME FIELD) BECAUSE THEN YOU CAN ADD THIS TO THE LISTVIEW 
         }
     }
 }
