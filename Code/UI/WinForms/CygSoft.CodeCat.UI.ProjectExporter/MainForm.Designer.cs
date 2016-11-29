@@ -45,6 +45,7 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listView = new System.Windows.Forms.ListView();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -159,6 +160,7 @@
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(47, 23);
             this.btnFind.TabIndex = 4;
+            this.btnFind.Text = "Find";
             this.btnFind.UseVisualStyleBackColor = true;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
@@ -195,11 +197,13 @@
             // 
             // columnHeader5
             // 
+            this.columnHeader5.DisplayIndex = 2;
             this.columnHeader5.Text = "Date Modified";
             this.columnHeader5.Width = 141;
             // 
             // columnHeader4
             // 
+            this.columnHeader4.DisplayIndex = 1;
             this.columnHeader4.Text = "Date Created";
             this.columnHeader4.Width = 138;
             // 
@@ -217,6 +221,7 @@
             this.listView.CheckBoxes = true;
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
+            this.columnHeader2,
             this.columnHeader4,
             this.columnHeader5});
             this.listView.FullRowSelect = true;
@@ -227,6 +232,12 @@
             this.listView.TabIndex = 10;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
+            this.listView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView_ColumnClick);
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.DisplayIndex = 3;
+            this.columnHeader2.Text = "Type";
             // 
             // groupBox1
             // 
@@ -331,7 +342,7 @@
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.listView);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "CodeCat Exporter";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -374,6 +385,7 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button btnOpen;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
 

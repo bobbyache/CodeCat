@@ -16,6 +16,8 @@ namespace CygSoft.CodeCat.Domain
     {
         private ManageableProject sourceProject;
         private ManageableProject destinationProject;
+        private string destinationProjectFilePath;
+        private int version;
 
         public bool Loaded
         {
@@ -31,25 +33,35 @@ namespace CygSoft.CodeCat.Domain
         {
             sourceProject = new ManageableProject();
             destinationProject = new ManageableProject();
+            destinationProjectFilePath = toProjectFile;
+            this.version = version;
 
-            sourceProject.Open(fromProjectFile, version);
-            destinationProject.Open(toProjectFile, version);
+            sourceProject.Open(fromProjectFile, this.version);
+            //destinationProject.Open(toProjectFile, version);
         }
 
-        public IKeywordIndexItem[] FindIndeces(string commaDelimitedKeywords)
+        public IKeywordIndexItem[] FindIndeces(string commaDelimitedKeywords, out bool hasPotentialDuplicates, out IKeywordIndexItem[] potentialDuplicates)
         {
             IKeywordIndexItem[] keywordIndexItems = sourceProject.FindIndeces(commaDelimitedKeywords);
+            IndexExportImportData[] exportData = sourceProject.GetExportData(keywordIndexItems);
+            destinationProject.Open(destinationProjectFilePath, version);
+            hasPotentialDuplicates = destinationProject.FindPotentialDuplicates(exportData, out potentialDuplicates);
 
             return keywordIndexItems.ToArray();
         }
 
-        public IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems)
+        public IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems, out bool hasPotentialDuplicates, out IKeywordIndexItem[] potentialDuplicates)
         {
-            return sourceProject.GetExportData(indexItems);
+            IndexExportImportData[] exportData = sourceProject.GetExportData(indexItems);
+            destinationProject.Open(destinationProjectFilePath, version);
+            hasPotentialDuplicates = destinationProject.FindPotentialDuplicates(exportData, out potentialDuplicates);
+
+            return exportData;
         }
 
         public void ImportData(IndexExportImportData[] exportData, int currentVersion)
         {
+            destinationProject.Open(destinationProjectFilePath, version);
             this.destinationProject.ImportData(this.sourceProject.RootFilePath, this.destinationProject.RootFilePath, exportData, currentVersion);
         }
     }

@@ -20,6 +20,7 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
     {
         private ProjManFacade projectManagement = null;
         private ListViewSorter listViewSorter;
+        private int sortedColumn = 0;
 
         public MainForm()
         {
@@ -56,22 +57,13 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
             return result;
         }
 
-        private void ExecuteSearch()
-        {
-            IKeywordIndexItem[] indexItems = this.projectManagement.FindIndeces(txtKeywords.Text);
-            this.ReloadListview(indexItems);
-
-            //if (this.SearchExecuted != null)
-            //    SearchExecuted(this, new SearchDelimitedKeywordEventArgs(keywordsTextBox.Text, indexItems.Length));
-        }
-
         private void ReloadListview(IKeywordIndexItem[] indexItems)
         {
             listView.Items.Clear();
             foreach (IKeywordIndexItem item in indexItems)
                 CreateListviewItem(listView, item);
 
-            listViewSorter.Sort(0);
+            //listViewSorter.Sort(sortedColumn);
         }
 
         private void CreateListviewItem(ListView listView, IKeywordIndexItem item, bool select = false)
@@ -84,6 +76,7 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                 listItem.Name = item.Id;
                 listItem.Tag = item;
                 listItem.Text = item.Title;
+                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, "Snippet"));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
                 listView.Items.Add(listItem);
@@ -94,6 +87,7 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                 listItem.Name = item.Id;
                 listItem.Tag = item;
                 listItem.Text = item.Title;
+                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, "Qik Template"));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
                 listView.Items.Add(listItem);
@@ -104,6 +98,7 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                 listItem.Name = item.Id;
                 listItem.Tag = item;
                 listItem.Text = item.Title;
+                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, "Code Group"));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
                 listView.Items.Add(listItem);
@@ -136,12 +131,43 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
         {
             projectManagement = new ProjManFacade();
             projectManagement.LoadProjects(txtSourceProjectPath.Text, txtDestinationProjectPath.Text, 5);
-            ReloadListview(projectManagement.FindIndeces(txtKeywords.Text));
+
+            Find();
+        }
+
+        private void Find()
+        {
+            bool hasPotentialDuplicates;
+            IKeywordIndexItem[] potentialDuplicates;
+            IKeywordIndexItem[] searchItems = projectManagement.FindIndeces(txtKeywords.Text, out hasPotentialDuplicates, out potentialDuplicates);
+
+            ReloadListview(searchItems);
+            DisplayDuplicates(potentialDuplicates);
         }
 
         private void btnFind_Click(object sender, EventArgs e)
         {
-            ReloadListview(projectManagement.FindIndeces(txtKeywords.Text));
+            Find();
+        }
+
+        
+
+        private void DisplayDuplicates(IKeywordIndexItem[] potentialDuplicates)
+        {
+            Dictionary<string, IKeywordIndexItem> duplicateItemDictionary = new Dictionary<string, IKeywordIndexItem>();
+
+            foreach (IKeywordIndexItem potentialDuplicate in potentialDuplicates)
+            {
+                duplicateItemDictionary.Add(potentialDuplicate.Id, potentialDuplicate);
+            }
+
+            foreach (ListViewItem item in listView.Items)
+            {
+                if (duplicateItemDictionary.ContainsKey(item.Name))
+                    item.ForeColor = Color.Red;
+                else
+                    item.ForeColor = Color.Black;
+            }
         }
 
         private void btnExecute_Click(object sender, EventArgs e)
@@ -158,11 +184,37 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                         {
                             keywordIndexes.Add(item.Tag as IKeywordIndexItem);
                         }
-                        IndexExportImportData[] exportData = projectManagement.GetExportData(keywordIndexes.ToArray());
-                        projectManagement.ImportData(exportData, 5);
+
+                        bool hasPotentialDuplicates;
+                        IKeywordIndexItem[] potentialDuplicates;
+
+                        IndexExportImportData[] exportData = projectManagement.GetExportData(keywordIndexes.ToArray(), out hasPotentialDuplicates, out potentialDuplicates);
+
+                        if (!hasPotentialDuplicates)
+                        {
+                            try
+                            {
+                                projectManagement.ImportData(exportData, 5);
+                                MessageBox.Show(this, "Selection has been successfully exported.", "Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information );
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show(this, "Error occurred while trying to export", "Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                            MessageBox.Show("Selection contains possible duplicates. The importer cannot allow this operation.");
+
+                        Find();
                     }
                 }
             }
+        }
+
+        private void listView_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            sortedColumn = e.Column;
+            listViewSorter.Sort(sortedColumn);
         }
     }
 }

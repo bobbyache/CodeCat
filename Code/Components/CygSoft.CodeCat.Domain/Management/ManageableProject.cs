@@ -67,6 +67,34 @@ namespace CygSoft.CodeCat.Domain.Management
             return indexExportData.ToArray();
         }
 
+        public bool FindPotentialDuplicates(IndexExportImportData[] exportData, out IKeywordIndexItem[] potentialDuplicates)
+        {
+            List<IKeywordIndexItem> items = new List<IKeywordIndexItem>();
+
+            IKeywordIndexItem[] codeItems = new IKeywordIndexItem[0];
+            IKeywordIndexItem[] qikItems = new IKeywordIndexItem[0];
+            IKeywordIndexItem[] codeGroupItems = new IKeywordIndexItem[0];
+
+            bool existA = this.codeGroupLibrary.ImportIndecesExist(exportData, out codeGroupItems);
+            bool existB = this.codeLibrary.ImportIndecesExist(exportData, out codeItems);
+            bool existC = this.qikLibrary.ImportIndecesExist(exportData, out qikItems);
+
+            if (existA || existB || existC)
+            {
+                items.AddRange(codeGroupItems);
+                items.AddRange(codeItems);
+                items.AddRange(qikItems);
+                potentialDuplicates = items.ToArray();
+
+                return true;
+            }
+            else
+            {
+                potentialDuplicates = new IKeywordIndexItem[0];
+                return false;
+            }
+        }
+
         public void ImportData(string sourceIndexFilePath, string destinationIndexFilePath, IndexExportImportData[] exportData, int currentVersion)
         {
             IKeywordIndexItem[] codeItems;
@@ -84,7 +112,7 @@ namespace CygSoft.CodeCat.Domain.Management
             CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary();
             codeGroupLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
             codeGroupLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is ICodeGroupKeywordIndexItem).ToArray());
-
+            
             CodeLibrary codeLibrary = new CodeLibrary();
             codeLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
             codeLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is ICodeKeywordIndexItem).ToArray());
