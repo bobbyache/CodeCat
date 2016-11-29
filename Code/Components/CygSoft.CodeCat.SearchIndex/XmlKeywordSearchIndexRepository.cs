@@ -85,6 +85,39 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
         protected abstract List<IndexItem> LoadIndexItems(string filePath, int currentVersion);
 
+
+        public void ImportItems(string filePath, int currentVersion, IKeywordIndexItem[] importItems)
+        {
+            IndexItem[] imports = importItems.OfType<IndexItem>().ToArray();
+
+            XDocument xDocument = XDocument.Load(filePath);
+            CheckVersion(xDocument.Root, currentVersion);
+
+            // ensure ids do not already exist.
+            List<IndexItem> existingItems = LoadIndexItems(filePath, currentVersion);
+
+            bool exist = existingItems.Join(importItems, ex => ex.Id, im => im.Id,
+                (ex, im) => ex.Id).Count() > 0;
+
+            if (exist)
+                throw new ApplicationException("Matching index IDs already exist on the target index.");
+
+            //var duplicateItems = existingItems.Join(importItems, ex => ex.Id, im => im.Id,
+            //    (ex, im) => new { ex.Id, ex.Title,  SourceId = im.Id, SourceTitle = im.Title });
+
+            //foreach (var item in duplicateItems)
+            //{
+            //    Console.WriteLine(item.Id);
+            //}
+
+            foreach (var importItem in imports)
+            {
+                xDocument.Root.Add(importItem.Serialize());
+            }
+
+            xDocument.Save(filePath);
+        }
+
         protected void CheckVersion(XElement xElement, int currentVersion)
         {
             try

@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain.Code.Base;
 using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
+using CygSoft.CodeCat.Search.KeywordIndex;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -66,7 +67,7 @@ namespace CygSoft.CodeCat.Domain.Management
             return indexExportData.ToArray();
         }
 
-        public void ImportData(string sourceIndexFilePath, IndexExportImportData[] exportData)
+        public void ImportData(string sourceIndexFilePath, string destinationIndexFilePath, IndexExportImportData[] exportData, int currentVersion)
         {
             IKeywordIndexItem[] codeItems;
             IKeywordIndexItem[] qikItems;
@@ -80,57 +81,19 @@ namespace CygSoft.CodeCat.Domain.Management
             if (anyExist)
                 throw new ApplicationException("they exist!");
 
-            ImportToIndex(sourceIndexFilePath, exportData);
-            ImportToDisk(exportData);
+            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary();
+            codeGroupLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
+            codeGroupLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is ICodeGroupKeywordIndexItem).ToArray());
 
-            
-        }
+            CodeLibrary codeLibrary = new CodeLibrary();
+            codeLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
+            codeLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is ICodeKeywordIndexItem).ToArray());
 
-        /// <summary>
-        /// NB. You could write to one index library at a time. That way you can create a library writer object (base)
-        /// and have its sub classes change their functionality when they have to write to different index types and file types
-        /// Generally you will just copy over the folder or file pointed to by the index.
-        /// 
-        /// First load the source index, capture its elements (they're all called IndexItem or ItemIndex)
-        /// Copy all these elements and "append" them in mass to the destination index file.
-        /// Copy all the files, folders they point to, to the correct destination.
-        /// 
-        /// REMEMBER TO CHECK THE VERSION !!!
-        /// 
-        /// ALSO CHECK WHETHER YOUR INDEX ITEMS HAVE A TYPE (OR BETTER YET A TYPE NAME FIELD) BECAUSE THEN YOU CAN ADD THIS TO
-        /// THE LISTVIEW !!!
-        /// </summary>
-        /// <param name="sourceIndexFilePath"></param>
-        /// <param name="exportData"></param>
-        
-        private void ImportToIndex(string sourceIndexFilePath, IndexExportImportData[] exportData)
-        {
-            //XDocument codeDocument = XDocument.Load(this.codeLibrary.FilePath);
-            //XDocument codeGroupDocument = XDocument.Load(this.codeGroupLibrary.FilePath);
-            //XDocument qikDocument = XDocument.Load(this.qikLibrary.FilePath);
+            QikLibrary qikLibrary = new QikLibrary();
+            qikLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
+            qikLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is IQikKeywordIndexItem).ToArray());
 
-            //foreach (IndexExportImportData item in data)
-            //{
-            //    if (item.KeywordIndexItem is ICodeGroupKeywordIndexItem)
-            //    {
-
-            //    }
-            //    else if (item.KeywordIndexItem is ICodeKeywordIndexItem)
-            //    {
-
-            //    }
-            //    else if (item.KeywordIndexItem is IQikKeywordIndexItem)
-            //    {
-
-            //    }
-            //}
-        }
-
-
-
-        private void ImportToDisk(IndexExportImportData[] exportData)
-        {
-            throw new NotImplementedException();
+            // ALSO CHECK WHETHER YOUR INDEX ITEMS HAVE A TYPE (OR BETTER YET A TYPE NAME FIELD) BECAUSE THEN YOU CAN ADD THIS TO THE LISTVIEW 
         }
     }
 }

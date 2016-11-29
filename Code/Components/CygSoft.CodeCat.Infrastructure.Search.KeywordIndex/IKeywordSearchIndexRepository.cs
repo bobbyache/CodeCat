@@ -13,5 +13,7 @@ namespace CygSoft.CodeCat.Infrastructure.Search.KeywordIndex
         IKeywordSearchIndex SaveIndexAs(IKeywordSearchIndex Index, string filePath);
         IKeywordSearchIndex CloneIndex(IKeywordSearchIndex sourceIndex, string filePath);
         IKeywordSearchIndex CreateIndex(string filePath, int currentVersion);
+
+        void ImportItems(string filePath, int currentVersion, IKeywordIndexItem[] items);
     }
 }

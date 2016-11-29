@@ -48,9 +48,9 @@ namespace CygSoft.CodeCat.Domain
             return sourceProject.GetExportData(indexItems);
         }
 
-        public void ImportData(IndexExportImportData[] exportData)
+        public void ImportData(IndexExportImportData[] exportData, int currentVersion)
         {
-            this.destinationProject.ImportData(this.sourceProject.RootFilePath, exportData);
+            this.destinationProject.ImportData(this.sourceProject.RootFilePath, this.destinationProject.RootFilePath, exportData, currentVersion);
         }
     }
 }

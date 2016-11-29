@@ -159,7 +159,7 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                             keywordIndexes.Add(item.Tag as IKeywordIndexItem);
                         }
                         IndexExportImportData[] exportData = projectManagement.GetExportData(keywordIndexes.ToArray());
-                        projectManagement.ImportData(exportData);
+                        projectManagement.ImportData(exportData, 5);
                     }
                 }
             }

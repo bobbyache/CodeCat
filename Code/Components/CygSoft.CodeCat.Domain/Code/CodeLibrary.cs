@@ -29,7 +29,7 @@ namespace CygSoft.CodeCat.Domain.Code.Base
             foreach (CodeKeywordIndexItem indexItem in foundItems.OfType<CodeKeywordIndexItem>())
             {
                 CodeFile codeFile = new CodeFile(indexItem as CodeKeywordIndexItem, this.FolderPath);
-                exportList.Add(new IndexExportImportData(indexItem.Id, codeFile.Folder, indexItem.FileTitle, indexItem, true));
+                exportList.Add(new IndexExportImportData(indexItem.Id, codeFile.FilePath, indexItem.FileTitle, indexItem, true));
             }
 
             return exportList.ToArray();

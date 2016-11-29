@@ -59,6 +59,23 @@ namespace CygSoft.CodeCat.Domain.Base
         protected abstract IPersistableTarget OpenSpecializedTarget(IKeywordIndexItem indexItem);
         public abstract IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems);
 
+        public void Import(IndexExportImportData[] importData)
+        {
+            this.indexRepository.ImportItems(this.FilePath, this.CurrentFileVersion, importData.Select(idx => idx.KeywordIndexItem).ToArray());
+
+            foreach (IndexExportImportData import in importData)
+            {
+                if (import.IsFile)
+                {
+                    File.Copy(import.Path, Path.Combine(this.FolderPath, import.FileOrFolderName), false);
+                }
+                else
+                {
+                    FileSys.DirectoryCopy(import.Path, Path.Combine(this.FolderPath, import.FileOrFolderName), true);
+                }
+            }
+        }
+
         public IPersistableTarget OpenTarget(IKeywordIndexItem indexItem)
         {
             IPersistableTarget target = OpenSpecializedTarget(indexItem);

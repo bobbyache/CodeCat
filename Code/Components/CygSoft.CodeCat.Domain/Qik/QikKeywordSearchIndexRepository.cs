@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.Search.KeywordIndex;
+﻿using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
+using CygSoft.CodeCat.Search.KeywordIndex;
 using System;
 using System.Collections.Generic;
 using System.Linq;
