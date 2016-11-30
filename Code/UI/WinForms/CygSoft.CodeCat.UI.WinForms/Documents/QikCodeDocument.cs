@@ -55,8 +55,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.qikFile.DocumentMovedLeft += qikFile_DocumentMovedLeft;
             this.qikFile.DocumentMovedRight += qikFile_DocumentMovedRight;
 
-            this.scriptControl = DocumentControlFactory.Create(qikFile.ScriptFile, qikFile, application, scriptCtrl_Modified) as QikScriptCtrl;
-
             base.persistableTarget = qikFile;
             this.Tag = qikFile.Id;
             this.compiler = qikFile.Compiler;
@@ -216,22 +214,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabManager.Clear();
             foreach (ICodeDocument document in qikFile.TemplateFiles)
             {
-                AddDocument(document, false);
+                tabManager.AddTab(document,
+                    DocumentControlFactory.Create(document, this.qikFile, this.application, codeCtrl_Modified), true, false);
             }
-            tabManager.AddTab(qikFile.ScriptFile, scriptControl, btnShowScript.Checked, false);
-        }
 
-
-        private void AddDocument(IDocument document, bool selected)
-        {
-            if (document is ICodeDocument)
-                tabManager.AddTab(document,
-                    DocumentControlFactory.Create(document, this.qikFile, this.application, codeCtrl_Modified),
-                true, selected);
-            else
-                tabManager.AddTab(document,
-                    DocumentControlFactory.Create(document, this.qikFile, this.application, codeCtrl_Modified),
-                    true, selected);
+            IQikScriptDocument scriptDocument = qikFile.ScriptFile as IQikScriptDocument;
+            this.scriptControl = (QikScriptCtrl)DocumentControlFactory.Create(scriptDocument, this.qikFile, this.application, codeCtrl_Modified);
+            tabManager.AddTab(scriptDocument, this.scriptControl, btnShowScript.Checked, false);
         }
 
         private void Compile()
@@ -274,6 +263,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             ControlGraphics.SuspendDrawing(this);
             ResetFields();
             RebuildTabs();
+            Compile();
             ControlGraphics.ResumeDrawing(this);
         }
 

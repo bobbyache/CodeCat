@@ -53,14 +53,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             tabPage.Name = document.Id;
             tabPage.ImageIndex = tabUserControl.ImageKey;
 
+            // Add the specialized "control" (code, script, template, whatever...)
             ((UserControl)tabUserControl).Dock = DockStyle.Fill;
             tabPage.Controls.Add(tabUserControl as UserControl);
             tabUserControl.Modified += tabUserControl_Modified;
 
+            // add to the dictionary....
             tabPageDictionary.Add(document.Id, tabPage);
 
             if (visible)
             {
+                // only create a tab page if the item should be seen as a visible tab.
+                // in the case of a qik script tab, we may only want to view it when making changes
+                // to the script.
                 tabControl.TabPages.Add(tabPage);
                 AddTabMenuItem(document);
                 if (select)
