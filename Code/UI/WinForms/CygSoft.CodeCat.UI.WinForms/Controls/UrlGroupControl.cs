@@ -107,9 +107,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             listItem.ToolTipText = item.Url;
             listItem.Text = item.Title;
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.HostName));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Description));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
-            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Description));
             
             return listItem;
         }

@@ -253,6 +253,7 @@
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Batch Operation";
+            this.groupBox1.Visible = false;
             // 
             // radioButton2
             // 
@@ -298,6 +299,7 @@
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Backup Options";
+            this.groupBox2.Visible = false;
             // 
             // checkBox2
             // 

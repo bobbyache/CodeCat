@@ -171,9 +171,9 @@
             this.urlListview.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colTitle,
             this.colHostName,
+            this.colDescription,
             this.colCreated,
-            this.colModified,
-            this.colDescription});
+            this.colModified});
             this.urlListview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.urlListview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.urlListview.HideSelection = false;
@@ -195,25 +195,21 @@
             // 
             // colHostName
             // 
-            this.colHostName.DisplayIndex = 4;
             this.colHostName.Text = "Host";
             this.colHostName.Width = 180;
             // 
             // colCreated
             // 
-            this.colCreated.DisplayIndex = 1;
             this.colCreated.Text = "Created";
             this.colCreated.Width = 120;
             // 
             // colModified
             // 
-            this.colModified.DisplayIndex = 2;
             this.colModified.Text = "Modified";
             this.colModified.Width = 120;
             // 
             // colDescription
             // 
-            this.colDescription.DisplayIndex = 3;
             this.colDescription.Text = "Description";
             this.colDescription.Width = 600;
             // 
