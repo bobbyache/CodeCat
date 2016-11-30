@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class EnterKeywordsForm : Form
+    public partial class EnterKeywordsDialog : Form
     {
         public string Keywords
         {
             get { return this.textBox1.Text.Trim().ToUpper(); }
         }
-        public EnterKeywordsForm()
+        public EnterKeywordsDialog()
         {
             InitializeComponent();
         }
@@ -31,7 +31,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
-        private void EnterKeywordsForm_Activated(object sender, EventArgs e)
+        private void EnterKeywordsDialog_Activated(object sender, EventArgs e)
         {
             textBox1.Focus();
         }

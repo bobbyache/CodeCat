@@ -256,7 +256,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void menuContextViewKeywords_Click(object sender, EventArgs e)
         {
-            SelectKeywordsForm frm = new SelectKeywordsForm();
+            SelectKeywordsDialog frm = new SelectKeywordsDialog();
             frm.Text = "View Keywords";
             IKeywordIndexItem[] IndexItems = this.SelectedSnippets;
             frm.Keywords = application.AllKeywords(IndexItems);
@@ -265,7 +265,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void menuContextAddKeywords_Click(object sender, EventArgs e)
         {
-            EnterKeywordsForm frm = new EnterKeywordsForm();
+            EnterKeywordsDialog frm = new EnterKeywordsDialog();
             DialogResult result = frm.ShowDialog(this);
 
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -281,7 +281,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void menuContextRemoveKeywords_Click(object sender, EventArgs e)
         {
-            SelectKeywordsForm frm = new SelectKeywordsForm();
+            SelectKeywordsDialog frm = new SelectKeywordsDialog();
             frm.Text = "Remove Keywords";
             IKeywordIndexItem[] indexItems = this.SelectedSnippets;
             frm.Keywords = application.AllKeywords(indexItems);

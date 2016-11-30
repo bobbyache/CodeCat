@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class SelectKeywordsForm : Form
+    public partial class SelectKeywordsDialog : Form
     {
         public string[] Keywords
         {
@@ -34,7 +34,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        public SelectKeywordsForm()
+        public SelectKeywordsDialog()
         {
             InitializeComponent();
             checkedListBox.CheckOnClick = true;

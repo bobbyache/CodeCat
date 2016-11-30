@@ -583,7 +583,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void mnuResultsAddKeywords_Click(object sender, EventArgs e)
         {
-            EnterKeywordsForm frm = new EnterKeywordsForm();
+            EnterKeywordsDialog frm = new EnterKeywordsDialog();
             DialogResult result = frm.ShowDialog(this);
 
             if (result == System.Windows.Forms.DialogResult.OK)

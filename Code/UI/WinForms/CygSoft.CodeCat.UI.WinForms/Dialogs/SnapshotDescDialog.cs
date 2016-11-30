@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class SnapshotDescForm : Form
+    public partial class SnapshotDescDialog : Form
     {
         public string Description
         {
@@ -18,7 +18,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             set { this.textBox.Text = value; }
         }
 
-        public SnapshotDescForm()
+        public SnapshotDescDialog()
         {
             InitializeComponent();
         }

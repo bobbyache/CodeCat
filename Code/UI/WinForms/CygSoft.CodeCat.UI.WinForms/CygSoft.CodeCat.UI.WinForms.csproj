@@ -168,11 +168,11 @@
     <Compile Include="Settings\ConfigSettings.cs" />
     <Compile Include="Settings\Constants.cs" />
     <Compile Include="Dialogs.cs" />
-    <Compile Include="Dialogs\EnterKeywordsForm.cs">
+    <Compile Include="Dialogs\EnterKeywordsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\EnterKeywordsForm.Designer.cs">
-      <DependentUpon>EnterKeywordsForm.cs</DependentUpon>
+    <Compile Include="Dialogs\EnterKeywordsDialog.Designer.cs">
+      <DependentUpon>EnterKeywordsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="IconRepository.cs" />
     <Compile Include="Dialogs\InvalidRemoveDialog.cs">
@@ -202,18 +202,18 @@
     <Compile Include="Docked\SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\SelectKeywordsForm.cs">
+    <Compile Include="Dialogs\SelectKeywordsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\SelectKeywordsForm.Designer.cs">
-      <DependentUpon>SelectKeywordsForm.cs</DependentUpon>
+    <Compile Include="Dialogs\SelectKeywordsDialog.Designer.cs">
+      <DependentUpon>SelectKeywordsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Resources.cs" />
-    <Compile Include="Dialogs\SnapshotDescForm.cs">
+    <Compile Include="Dialogs\SnapshotDescDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\SnapshotDescForm.Designer.cs">
-      <DependentUpon>SnapshotDescForm.cs</DependentUpon>
+    <Compile Include="Dialogs\SnapshotDescDialog.Designer.cs">
+      <DependentUpon>SnapshotDescDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\SnapshotListCtrl.cs">
       <SubType>UserControl</SubType>
@@ -263,8 +263,8 @@
     <EmbeddedResource Include="Dialogs\AboutBoxDialog.resx">
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\EnterKeywordsForm.resx">
-      <DependentUpon>EnterKeywordsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\EnterKeywordsDialog.resx">
+      <DependentUpon>EnterKeywordsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ImageDescriptionDialog.resx">
       <DependentUpon>ImageDescriptionDialog.cs</DependentUpon>
@@ -300,11 +300,11 @@
     <EmbeddedResource Include="Docked\SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\SelectKeywordsForm.resx">
-      <DependentUpon>SelectKeywordsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\SelectKeywordsDialog.resx">
+      <DependentUpon>SelectKeywordsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\SnapshotDescForm.resx">
-      <DependentUpon>SnapshotDescForm.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\SnapshotDescDialog.resx">
+      <DependentUpon>SnapshotDescDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SnapshotListCtrl.resx">
       <DependentUpon>SnapshotListCtrl.cs</DependentUpon>

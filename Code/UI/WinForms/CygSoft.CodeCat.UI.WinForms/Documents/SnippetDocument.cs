@@ -302,7 +302,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
 
             // ok to continue...
-            SnapshotDescForm frm = new SnapshotDescForm();
+            SnapshotDescDialog frm = new SnapshotDescDialog();
             DialogResult result = frm.ShowDialog(this);
 
             if (result == DialogResult.OK)
