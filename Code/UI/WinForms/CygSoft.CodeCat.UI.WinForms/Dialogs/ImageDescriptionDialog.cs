@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,7 +21,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         public string Description
         {
             get { return this.txtDescription.Text; }
-            set { this.txtDescription.Text = value; }
+            set 
+            {
+                string txt = Regex.Replace(value, "(?<!\r)\n", "\r\n");
+                this.txtDescription.Text = txt; 
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
