@@ -1,68 +1,40 @@
-﻿using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.CodeGroup;
-using CygSoft.CodeCat.Domain.Qik;
-using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
-using CygSoft.CodeCat.UI.WinForms.Controls;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
+using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.Qik;
+using CygSoft.CodeCat.Domain.CodeGroup;
+using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
+using CygSoft.CodeCat.Domain;
 
-namespace CygSoft.CodeCat.UI.WinForms
+namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    public partial class SearchForm : DockContent
+    public partial class CodeSearchResultsControl : UserControl
     {
-        private AppFacade application;
         private ListViewSorter listViewSorter;
-
+        private AppFacade application;
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
 
-        public event EventHandler<SearchDelimitedKeywordEventArgs> SearchExecuted;
         public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
         public event EventHandler<SelectSnippetEventArgs> SelectSnippet;
 
-        private bool searchEnabled;
-        public bool SearchEnabled
-        {
-            get { return this.searchEnabled; }
-            set
-            {
-                this.searchEnabled = value;
-                this.btnFind.Enabled = value;
-            }
 
-        }
-
-        public string KeywordSearchText
+        public AppFacade Application
         {
-            get { return this.keywordsTextBox.Text; }
-            set { this.keywordsTextBox.Text = value; }
+            set { this.application = value; }
         }
 
         public bool SingleSnippetSelected { get { return this.listView.SelectedItems.Count == 1; } }
         public bool MultipleSnippetsSelected { get { return this.listView.SelectedItems.Count > 1; } }
-
-        public IKeywordIndexItem SelectedSnippet
-        {
-            get
-            {
-                if (SingleSnippetSelected)
-                    return SelectedItem(listView);
-                return null;
-            }
-        }
-
+        
         public IKeywordIndexItem[] SelectedSnippets
         {
             get
@@ -80,85 +52,27 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        public SearchForm(AppFacade application)
+        public IKeywordIndexItem SelectedSnippet
+        {
+            get
+            {
+                if (SingleSnippetSelected)
+                    return SelectedItem(listView);
+                return null;
+            }
+        }
+
+        public CodeSearchResultsControl()
         {
             InitializeComponent();
-
-            this.codeSearchResultsControl1.Application = application;
-
-            btnFind.Image = Resources.GetImage(Constants.ImageKeys.FindSnippets);
-
-            this.listViewSorter = new ListViewSorter(this.listView);
-            
-            listView.Sorting = SortOrder.Ascending;
-
-            this.application = application;
-            this.HideOnClose = true;
-            this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight;
-
             listView.SmallImageList = IconRepository.ImageList;
-            listView.ColumnClick += listView_ColumnClick;
-            listView.SelectedIndexChanged += listView_SelectedIndexChanged;
-            listView.MouseClick += listView_MouseClick;
-            listView.MouseDoubleClick += listView_MouseDoubleClick;
-            btnFind.Click += (s, e) => ExecuteSearch();
-            keywordsTextBox.TextChanged += (s, e) => ExecuteSearch();
-
-            this.SearchExecuted += SearchForm_SearchExecuted;
-
-            this.codeSearchResultsControl1.OpenSnippet += codeSearchResultsControl1_OpenSnippet;
-            this.codeSearchResultsControl1.SelectSnippet += codeSearchResultsControl1_SelectSnippet;
-            this.codeSearchResultsControl1.KeywordsAdded += codeSearchResultsControl1_KeywordsAdded;
-            this.codeSearchResultsControl1.KeywordsRemoved += codeSearchResultsControl1_KeywordsRemoved;
+            this.listViewSorter = new ListViewSorter(this.listView);
         }
 
-        private void codeSearchResultsControl1_KeywordsRemoved(object sender, SearchKeywordsModifiedEventArgs e)
+        public void ExecuteSearch(string keywords)
         {
-            if (this.KeywordsRemoved != null)
-                KeywordsRemoved(sender, e);
-        }
-
-        private void codeSearchResultsControl1_KeywordsAdded(object sender, SearchKeywordsModifiedEventArgs e)
-        {
-            if (this.KeywordsAdded != null)
-                KeywordsAdded(sender, e);
-        }
-
-        private void codeSearchResultsControl1_SelectSnippet(object sender, SelectSnippetEventArgs e)
-        {
-            if (this.SelectSnippet != null)
-                SelectSnippet(sender, e);
-        }
-
-        private void codeSearchResultsControl1_OpenSnippet(object sender, OpenSnippetEventArgs e)
-        {
-            if (this.OpenSnippet != null)
-                OpenSnippet(sender, e);
-        }
-
-        private void SearchForm_SearchExecuted(object sender, SearchDelimitedKeywordEventArgs e)
-        {
-            if (this.searchEnabled)
-            {
-                codeSearchResultsControl1.ExecuteSearch(keywordsTextBox.Text);
-            }
-        }
-
-        public void ExecuteSearch()
-        {
-            if (this.searchEnabled)
-            {
-                IKeywordIndexItem[] indexItems = this.application.FindIndeces(keywordsTextBox.Text);
-                this.ReloadListview(indexItems);
-
-                if (this.SearchExecuted != null)
-                    SearchExecuted(this, new SearchDelimitedKeywordEventArgs(keywordsTextBox.Text, indexItems.Length));
-            }
-        }
-
-        public void ExecuteSearch(string selectedId)
-        {
-            ExecuteSearch();
+            IKeywordIndexItem[] indexItems = this.application.FindIndeces(keywords);
+            this.ReloadListview(indexItems);
         }
 
         private void ReloadListview(IKeywordIndexItem[] indexItems)
@@ -216,28 +130,14 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void EnableContextMenuItems()
-        {
-            bool singleSelection = listView.SelectedItems.Count == 1;
-
-            menuContextCopyIdentifier.Enabled = singleSelection;
-            menuContextCopyKeywords.Enabled = true;
-            menuContextViewSnippet.Enabled = singleSelection;
-            menuContextAddKeywords.Enabled = true;
-            menuContextRemoveKeywords.Enabled = true;
-        }
-
         private void OpenSelectedSnippet()
         {
-            if (this.searchEnabled)
-            {
-                IKeywordIndexItem codeItem = SelectedItem(listView);
+            IKeywordIndexItem codeItem = SelectedItem(listView);
 
-                if (codeItem != null)
-                {
-                    if (OpenSnippet != null)
-                        OpenSnippet(this, new OpenSnippetEventArgs(codeItem));
-                }
+            if (codeItem != null)
+            {
+                if (OpenSnippet != null)
+                    OpenSnippet(this, new OpenSnippetEventArgs(codeItem));
             }
         }
 
@@ -250,49 +150,25 @@ namespace CygSoft.CodeCat.UI.WinForms
             return null;
         }
 
-        private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void EnableContextMenuItems()
         {
-            OpenSelectedSnippet();
+            bool singleSelection = listView.SelectedItems.Count == 1;
+
+            menuContextCopyIdentifier.Enabled = singleSelection;
+            menuContextCopyKeywords.Enabled = true;
+            menuContextViewSnippet.Enabled = singleSelection;
+            menuContextAddKeywords.Enabled = true;
+            menuContextRemoveKeywords.Enabled = true;
         }
 
         private void listView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            if (this.searchEnabled)
-            {
-                listViewSorter.Sort(e.Column);
-            }
-        }
-
-        private void listView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.searchEnabled)
-            {
-                IKeywordIndexItem codeItem = SelectedItem(listView);
-
-                if (SelectSnippet != null)
-                    SelectSnippet(this, new SelectSnippetEventArgs(codeItem));
-            }
-        }
-
-        private void listView_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (this.searchEnabled)
-            {
-                if (e.Button == MouseButtons.Right)
-                {
-                    EnableContextMenuItems();
-                    if (listView.FocusedItem.Bounds.Contains(e.Location) == true)
-                        contextMenu.Show(Cursor.Position);
-                }
-            }
+            listViewSorter.Sort(e.Column);
         }
 
         private void menuContextViewSnippet_Click(object sender, EventArgs e)
         {
-            if (this.searchEnabled)
-            {
-                OpenSelectedSnippet();
-            }
+            OpenSelectedSnippet();
         }
 
         private void menuContextViewKeywords_Click(object sender, EventArgs e)
@@ -326,7 +202,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             frm.Text = "Remove Keywords";
             IKeywordIndexItem[] indexItems = this.SelectedSnippets;
             frm.Keywords = application.AllKeywords(indexItems);
-            
+
             DialogResult result = frm.ShowDialog(this);
 
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -363,6 +239,24 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 Clipboard.Clear();
                 Clipboard.SetText(this.SelectedSnippet.Id);
+            }
+        }
+
+        private void listView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IKeywordIndexItem codeItem = SelectedItem(listView);
+
+            if (SelectSnippet != null)
+                SelectSnippet(this, new SelectSnippetEventArgs(codeItem));
+        }
+
+        private void listView_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                EnableContextMenuItems();
+                if (listView.FocusedItem.Bounds.Contains(e.Location) == true)
+                    contextMenu.Show(Cursor.Position);
             }
         }
     }

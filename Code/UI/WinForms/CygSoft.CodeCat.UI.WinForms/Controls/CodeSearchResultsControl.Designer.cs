@@ -1,13 +1,13 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms
+﻿namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    partial class SearchForm
+    partial class CodeSearchResultsControl
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,19 +20,15 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.searchPanel = new System.Windows.Forms.Panel();
-            this.btnFind = new System.Windows.Forms.Button();
-            this.keywordsLabel = new System.Windows.Forms.Label();
-            this.keywordsTextBox = new System.Windows.Forms.TextBox();
             this.listView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -46,68 +42,28 @@
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.menuContextCopyKeywords = new System.Windows.Forms.ToolStripMenuItem();
             this.menuContextCopyIdentifier = new System.Windows.Forms.ToolStripMenuItem();
-            this.codeSearchResultsControl1 = new CygSoft.CodeCat.UI.WinForms.Controls.CodeSearchResultsControl();
-            this.searchPanel.SuspendLayout();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // searchPanel
-            // 
-            this.searchPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchPanel.Controls.Add(this.btnFind);
-            this.searchPanel.Controls.Add(this.keywordsLabel);
-            this.searchPanel.Controls.Add(this.keywordsTextBox);
-            this.searchPanel.Location = new System.Drawing.Point(0, 0);
-            this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(961, 27);
-            this.searchPanel.TabIndex = 2;
-            // 
-            // btnFind
-            // 
-            this.btnFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFind.Location = new System.Drawing.Point(909, 2);
-            this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(47, 23);
-            this.btnFind.TabIndex = 4;
-            this.btnFind.UseVisualStyleBackColor = true;
-            // 
-            // keywordsLabel
-            // 
-            this.keywordsLabel.AutoSize = true;
-            this.keywordsLabel.Location = new System.Drawing.Point(12, 6);
-            this.keywordsLabel.Name = "keywordsLabel";
-            this.keywordsLabel.Size = new System.Drawing.Size(53, 13);
-            this.keywordsLabel.TabIndex = 1;
-            this.keywordsLabel.Text = "Keywords";
-            // 
-            // keywordsTextBox
-            // 
-            this.keywordsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.keywordsTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.keywordsTextBox.Location = new System.Drawing.Point(106, 3);
-            this.keywordsTextBox.Name = "keywordsTextBox";
-            this.keywordsTextBox.Size = new System.Drawing.Size(797, 20);
-            this.keywordsTextBox.TabIndex = 0;
             // 
             // listView
             // 
             this.listView.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader4,
             this.columnHeader5});
+            this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
-            this.listView.Location = new System.Drawing.Point(0, 29);
+            this.listView.Location = new System.Drawing.Point(0, 0);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(961, 194);
-            this.listView.TabIndex = 3;
+            this.listView.Size = new System.Drawing.Size(537, 548);
+            this.listView.TabIndex = 4;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
+            this.listView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView_ColumnClick);
+            this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
+            this.listView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseClick);
             // 
             // columnHeader1
             // 
@@ -190,29 +146,13 @@
             this.menuContextCopyIdentifier.Text = "Copy Identifier";
             this.menuContextCopyIdentifier.Click += new System.EventHandler(this.menuContextCopyIdentifier_Click);
             // 
-            // codeSearchResultsControl1
-            // 
-            this.codeSearchResultsControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.codeSearchResultsControl1.Location = new System.Drawing.Point(0, 229);
-            this.codeSearchResultsControl1.Name = "codeSearchResultsControl1";
-            this.codeSearchResultsControl1.Size = new System.Drawing.Size(961, 221);
-            this.codeSearchResultsControl1.TabIndex = 4;
-            // 
-            // SearchForm
+            // CodeSearchResultsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(961, 457);
-            this.Controls.Add(this.codeSearchResultsControl1);
             this.Controls.Add(this.listView);
-            this.Controls.Add(this.searchPanel);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "SearchForm";
-            this.Text = "Keywords";
-            this.searchPanel.ResumeLayout(false);
-            this.searchPanel.PerformLayout();
+            this.Name = "CodeSearchResultsControl";
+            this.Size = new System.Drawing.Size(537, 548);
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -220,10 +160,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel searchPanel;
-        private System.Windows.Forms.Button btnFind;
-        private System.Windows.Forms.Label keywordsLabel;
-        private System.Windows.Forms.TextBox keywordsTextBox;
         private System.Windows.Forms.ListView listView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader4;
@@ -237,6 +173,5 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem menuContextCopyKeywords;
         private System.Windows.Forms.ToolStripMenuItem menuContextCopyIdentifier;
-        private Controls.CodeSearchResultsControl codeSearchResultsControl1;
     }
 }
