@@ -17,15 +17,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     public partial class ImageControl :  UserControl, IDocumentItemControl
     {
         private IImageDocument imageDocument;
-        private ICodeGroupDocumentGroup codeGroupFile;
+        private ICodeGroupDocumentSet codeGroupDocumentSet;
 
-        public ImageControl(AppFacade application, ICodeGroupDocumentGroup codeGroupFile, IImageDocument imageDocument)
+        public ImageControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IImageDocument imageDocument)
         {
             InitializeComponent();
 
             imageBox.GridScale = Cyotek.Windows.Forms.ImageBoxGridScale.None;
             this.imageDocument = imageDocument;
-            this.codeGroupFile = codeGroupFile;
+            this.codeGroupDocumentSet = codeGroupDocumentSet;
 
             lblScrollPosition.Image = Resources.GetImage(Constants.ImageKeys.ObjectPosition);
             lblSize.Image = Resources.GetImage(Constants.ImageKeys.ObjectSize);
@@ -119,8 +119,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void RegisterFileEvents()
         {
-            codeGroupFile.BeforeSave += codeGroupFile_BeforeContentSaved;
-            codeGroupFile.AfterSave += codeGroupFile_ContentSaved;
+            codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
+            codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
         }
 
         private void ResetFieldValues()
@@ -135,13 +135,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.Modified += CodeItemCtrl_Modified;
         }
 
-        private void codeGroupFile_ContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_ContentSaved(object sender, FileEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void codeGroupFile_BeforeContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
         {
             this.imageDocument.Title = txtTitle.Text;
         }

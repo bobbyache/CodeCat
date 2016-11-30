@@ -16,11 +16,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     public partial class UrlGroupControl : UserControl, IDocumentItemControl
     {
         private IUrlGroupDocument urlDocument;
-        private ICodeGroupDocumentGroup codeGroupFile;
+        private ICodeGroupDocumentSet codeGroupDocumentSet;
         private AppFacade application;
         private ListViewSorter listViewSorter;
 
-        public UrlGroupControl(AppFacade application, ICodeGroupDocumentGroup codeGroupFile, IUrlGroupDocument urlDocument)
+        public UrlGroupControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IUrlGroupDocument urlDocument)
         {
             InitializeComponent();
 
@@ -32,7 +32,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             btnEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
 
             this.urlDocument = urlDocument;
-            this.codeGroupFile = codeGroupFile;
+            this.codeGroupDocumentSet = codeGroupDocumentSet;
             this.application = application;
             this.Id = urlDocument.Id;
 
@@ -72,8 +72,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void RegisterFileEvents()
         {
-            codeGroupFile.BeforeSave += codeGroupFile_BeforeContentSaved;
-            codeGroupFile.AfterSave += codeGroupFile_ContentSaved;
+            codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
+            codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
         }
 
         private void LoadListOfUrls()
@@ -152,13 +152,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void codeGroupFile_ContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_ContentSaved(object sender, FileEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void codeGroupFile_BeforeContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
         {
             this.urlDocument.Title = txtTitle.Text;
         }

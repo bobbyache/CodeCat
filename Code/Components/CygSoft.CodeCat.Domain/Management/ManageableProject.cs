@@ -17,7 +17,7 @@ namespace CygSoft.CodeCat.Domain.Management
     public class ManageableProject
     {
         private CodeLibrary codeLibrary;
-        private QikLibrary qikLibrary;
+        private QikTemplateLibrary qikLibrary;
         private CodeGroupLibrary codeGroupLibrary;
         private Project project = new Project();
 
@@ -34,7 +34,7 @@ namespace CygSoft.CodeCat.Domain.Management
         public ManageableProject()
         {
             this.codeLibrary = new CodeLibrary();
-            this.qikLibrary = new QikLibrary();
+            this.qikLibrary = new QikTemplateLibrary();
             this.codeGroupLibrary = new CodeGroupLibrary();
         }
 
@@ -121,9 +121,9 @@ namespace CygSoft.CodeCat.Domain.Management
             codeLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
             codeLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is ICodeKeywordIndexItem).ToArray());
 
-            QikLibrary qikLibrary = new QikLibrary();
+            QikTemplateLibrary qikLibrary = new QikTemplateLibrary();
             qikLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
-            qikLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is IQikKeywordIndexItem).ToArray());
+            qikLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is IQikTemplateKeywordIndexItem).ToArray());
         }
     }
 }

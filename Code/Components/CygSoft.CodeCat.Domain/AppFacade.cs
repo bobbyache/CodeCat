@@ -20,7 +20,7 @@ namespace CygSoft.CodeCat.Domain
     {
         private SyntaxRepository syntaxRepository;
         private CodeLibrary codeLibrary;
-        private QikLibrary qikLibrary;
+        private QikTemplateLibrary qikLibrary;
         private CodeGroupLibrary codeGroupLibrary;
 
         private Project project = new Project();
@@ -29,7 +29,7 @@ namespace CygSoft.CodeCat.Domain
         {
             this.syntaxRepository = new SyntaxRepository(syntaxFilePath);
             this.codeLibrary = new CodeLibrary();
-            this.qikLibrary = new QikLibrary();
+            this.qikLibrary = new QikTemplateLibrary();
             this.codeGroupLibrary = new CodeGroupLibrary();
         }
 
@@ -93,7 +93,7 @@ namespace CygSoft.CodeCat.Domain
         {
             // filter by type rather than just send in a bunch of ids.
             this.codeLibrary.SetLastOpenedIds(keywordIndexItems.OfType<CodeKeywordIndexItem>().ToArray());
-            this.qikLibrary.SetLastOpenedIds(keywordIndexItems.OfType<QikKeywordIndexItem>().ToArray());
+            this.qikLibrary.SetLastOpenedIds(keywordIndexItems.OfType<QikTemplateKeywordIndexItem>().ToArray());
             this.codeGroupLibrary.SetLastOpenedIds(keywordIndexItems.OfType<CodeGroupKeywordIndexItem>().ToArray());
         }
 
@@ -147,7 +147,7 @@ namespace CygSoft.CodeCat.Domain
         public void AddKeywords(IKeywordIndexItem[] indeces, string delimitedKeywordList)
         {
             CodeKeywordIndexItem[] codeIndeces = indeces.OfType<CodeKeywordIndexItem>().ToArray();
-            QikKeywordIndexItem[] qikIndeces = indeces.OfType<QikKeywordIndexItem>().ToArray();
+            QikTemplateKeywordIndexItem[] qikIndeces = indeces.OfType<QikTemplateKeywordIndexItem>().ToArray();
             CodeGroupKeywordIndexItem[] codeGroupIndeces = indeces.OfType<CodeGroupKeywordIndexItem>().ToArray();
 
             this.codeLibrary.AddKeywords(codeIndeces, delimitedKeywordList);
@@ -158,7 +158,7 @@ namespace CygSoft.CodeCat.Domain
         public bool RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidIndeces)
         {
             CodeKeywordIndexItem[] codeIndeces = indeces.OfType<CodeKeywordIndexItem>().ToArray();
-            QikKeywordIndexItem[] qikIndeces = indeces.OfType<QikKeywordIndexItem>().ToArray();
+            QikTemplateKeywordIndexItem[] qikIndeces = indeces.OfType<QikTemplateKeywordIndexItem>().ToArray();
             CodeGroupKeywordIndexItem[] codeGroupIndeces = indeces.OfType<CodeGroupKeywordIndexItem>().ToArray();
 
             IKeywordIndexItem[] invalidCodeIndeces;
@@ -227,28 +227,28 @@ namespace CygSoft.CodeCat.Domain
             return codeFile;
         }
 
-        public IQikDocumentGroup CreateQikDocumentGroup(string syntax)
+        public IQikTemplateDocumentSet CreateQikDocumentGroup(string syntax)
         {
-            IQikDocumentGroup qikFile = this.qikLibrary.CreateTarget(new QikKeywordIndexItem("New Qik Template", 
-                syntax, string.Empty)) as QikDocumentGroup;
+            IQikTemplateDocumentSet qikFile = this.qikLibrary.CreateTarget(new QikTemplateKeywordIndexItem("New Qik Template", 
+                syntax, string.Empty)) as QikTemplateDocumentSet;
             return qikFile;
         }
 
-        public IQikDocumentGroup OpenQikDocumentGroup(IKeywordIndexItem keywordIndexItem)
+        public IQikTemplateDocumentSet OpenQikDocumentGroup(IKeywordIndexItem keywordIndexItem)
         {
-            return this.qikLibrary.OpenTarget(keywordIndexItem) as IQikDocumentGroup;
+            return this.qikLibrary.OpenTarget(keywordIndexItem) as IQikTemplateDocumentSet;
         }
 
-        public ICodeGroupDocumentGroup CreateCodeGroupDocumentGroup(string syntax)
+        public ICodeGroupDocumentSet CreateCodeGroupDocumentGroup(string syntax)
         {
-            ICodeGroupDocumentGroup codeGroup = this.codeGroupLibrary.CreateTarget(new CodeGroupKeywordIndexItem("New Group Snippet", 
-                syntax, string.Empty)) as ICodeGroupDocumentGroup;
+            ICodeGroupDocumentSet codeGroup = this.codeGroupLibrary.CreateTarget(new CodeGroupKeywordIndexItem("New Group Snippet", 
+                syntax, string.Empty)) as ICodeGroupDocumentSet;
             return codeGroup;
         }
 
-        public ICodeGroupDocumentGroup OpenCodeGroupDocumentGroup(IKeywordIndexItem keywordIndexItem)
+        public ICodeGroupDocumentSet OpenCodeGroupDocumentGroup(IKeywordIndexItem keywordIndexItem)
         {
-            return this.codeGroupLibrary.OpenTarget(keywordIndexItem) as ICodeGroupDocumentGroup;
+            return this.codeGroupLibrary.OpenTarget(keywordIndexItem) as ICodeGroupDocumentSet;
         }
 
         public IUrlItem NewUrl()

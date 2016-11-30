@@ -1,33 +1,32 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
+﻿using CygSoft.CodeCat.DocumentManager;
+using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.Base;
-using CygSoft.Qik.LanguageEngine.Infrastructure;
 using System;
-namespace CygSoft.CodeCat.Domain.Qik
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CygSoft.CodeCat.Domain.CodeGroup
 {
-    public interface IQikDocumentGroup : IPersistableTarget
+    public interface ICodeGroupDocumentSet : IPersistableTarget
     {
         event EventHandler<DocumentEventArgs> DocumentAdded;
         event EventHandler<DocumentEventArgs> DocumentMovedLeft;
         event EventHandler<DocumentEventArgs> DocumentMovedRight;
         event EventHandler<DocumentEventArgs> DocumentRemoved;
 
-        ICompiler Compiler { get; }
-
         string Text { get; set; }
         string Syntax { get; set; }
-        bool TemplateExists(string id);
+        bool DocumentExists(string id);
 
         // don't like this... should not be returning "all" documents.
         // should be treating a collection of Template and a collection of Script.
-        ICodeDocument[] Documents { get; }
+        IDocument[] Documents { get; }
+        IDocument GetDocument(string id);
 
-        ICodeDocument[] TemplateFiles { get; }
-
-        ICodeDocument ScriptFile { get; }
-        ICodeDocument GetTemplate(string id);
-
-        ICodeDocument AddTemplate(string syntax);
-        void RemoveTemplate(string id);
+        IDocument AddDocument(DocumentTypeEnum documentType, string syntax = null, string extension = null);
+        void RemoveDocument(string id);
 
         void MoveDocumentLeft(string id);
         void MoveDocumentRight(string id);

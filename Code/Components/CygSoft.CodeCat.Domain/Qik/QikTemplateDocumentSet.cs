@@ -3,7 +3,7 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.Qik.Document;
+using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
 using CygSoft.Qik.LanguageEngine;
@@ -18,7 +18,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    internal class QikDocumentGroup : IPersistableTarget, IQikDocumentGroup
+    internal class QikTemplateDocumentSet : IPersistableTarget, IQikTemplateDocumentSet
     {
         public event EventHandler<FileEventArgs> BeforeDelete;
         public event EventHandler<FileEventArgs> AfterDelete;
@@ -37,17 +37,17 @@ namespace CygSoft.CodeCat.Domain.Qik
         public event EventHandler<DocumentEventArgs> DocumentMovedRight;
 
         private IKeywordIndexItem indexItem;
-        private QikDocumentIndex documentIndex = null;
+        private QikTemplateDocumentIndex documentIndex = null;
 
-        public QikDocumentGroup(QikKeywordIndexItem indexItem, string folderPath)
+        public QikTemplateDocumentSet(QikTemplateKeywordIndexItem indexItem, string folderPath)
         {
             this.indexItem = indexItem;
             this.Compiler = new Compiler();
 
             DocumentIndexPathGenerator indexPathGenerator = new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id);
-            IDocumentIndexRepository repository = new QikDocumentIndexXmlRepository(indexPathGenerator);
+            IDocumentIndexRepository repository = new QikTemplateDocumentIndexXmlRepository(indexPathGenerator);
 
-            this.documentIndex = new QikDocumentIndex(repository, indexPathGenerator);
+            this.documentIndex = new QikTemplateDocumentIndex(repository, indexPathGenerator);
 
             this.documentIndex.BeforeSave += documentIndex_BeforeSave;
             this.documentIndex.AfterSave += documentIndex_AfterSave;
@@ -124,12 +124,12 @@ namespace CygSoft.CodeCat.Domain.Qik
             get 
             {
                 if (this.indexItem != null)
-                    return (this.indexItem as QikKeywordIndexItem).Syntax;
+                    return (this.indexItem as QikTemplateKeywordIndexItem).Syntax;
                 return null;
             }
             set
             {
-                QikKeywordIndexItem indexItem = this.indexItem as QikKeywordIndexItem;
+                QikTemplateKeywordIndexItem indexItem = this.indexItem as QikTemplateKeywordIndexItem;
                 if (indexItem != null)
                     indexItem.Syntax = value;
             }

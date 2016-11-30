@@ -8,14 +8,14 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    public class QikKeywordIndexItem : XmlKeywordIndexItem, IQikKeywordIndexItem
+    public class QikTemplateKeywordIndexItem : XmlKeywordIndexItem, IQikTemplateKeywordIndexItem
     {
-        public QikKeywordIndexItem()
+        public QikTemplateKeywordIndexItem()
         {
             this.Syntax = string.Empty;
         }
         
-        public QikKeywordIndexItem(string title, string syntax, string commaDelimitedKeywords)
+        public QikTemplateKeywordIndexItem(string title, string syntax, string commaDelimitedKeywords)
                     : base(title, syntax, commaDelimitedKeywords)
         {
             this.Syntax = syntax;

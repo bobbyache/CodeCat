@@ -19,7 +19,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler Modified;
 
         private IImageSetDocument imageDocument;
-        private ICodeGroupDocumentGroup codeGroupFile;
+        private ICodeGroupDocumentSet codeGroupDocumentSet;
         private IImgDocument currentImage;
 
         #region Public Properties
@@ -43,7 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         #region Constructors
 
-        public ImageSetControl(AppFacade application, ICodeGroupDocumentGroup codeGroupFile, IImageSetDocument imageDocument)
+        public ImageSetControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IImageSetDocument imageDocument)
         {
             InitializeComponent();
 
@@ -51,7 +51,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             imageBox.GridScale = Cyotek.Windows.Forms.ImageBoxGridScale.None;
             this.imageDocument = imageDocument;
-            this.codeGroupFile = codeGroupFile;
+            this.codeGroupDocumentSet = codeGroupDocumentSet;
 
             CreateControlGraphics();
 
@@ -82,8 +82,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             txtTitle.TextChanged += (s, e) => { SetModified(); };
             this.Modified += CodeItemCtrl_Modified;
-            codeGroupFile.BeforeSave += codeGroupFile_BeforeContentSaved;
-            codeGroupFile.AfterSave += codeGroupFile_ContentSaved;
+            codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
+            codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
             imageDocument.ImageRemoved += imageDocument_ImageRemoved;
         }
 
@@ -338,13 +338,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             UpdateStatusBar();
         }
 
-        private void codeGroupFile_ContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_ContentSaved(object sender, FileEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void codeGroupFile_BeforeContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
         {
             this.imageDocument.Title = txtTitle.Text;
         }

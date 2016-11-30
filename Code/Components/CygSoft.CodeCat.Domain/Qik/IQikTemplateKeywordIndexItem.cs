@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    public interface IQikKeywordIndexItem : IKeywordIndexItem
+    public interface IQikTemplateKeywordIndexItem : IKeywordIndexItem
     {
         string Syntax { get; set; }
     }

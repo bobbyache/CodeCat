@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Domain.CodeGroup
 {
-    public class CodeGroupDocumentGroup : IPersistableTarget, ICodeGroupDocumentGroup
+    public class CodeGroupDocumentSet : IPersistableTarget, ICodeGroupDocumentSet
     {
         public event EventHandler<FileEventArgs> BeforeDelete;
         public event EventHandler<FileEventArgs> AfterDelete;
@@ -32,7 +32,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         private IKeywordIndexItem indexItem;
         private CodeGroupIndex documentIndex = null;
 
-        public CodeGroupDocumentGroup(CodeGroupKeywordIndexItem indexItem, string folderPath)
+        public CodeGroupDocumentSet(CodeGroupKeywordIndexItem indexItem, string folderPath)
         {
             this.indexItem = indexItem;
 

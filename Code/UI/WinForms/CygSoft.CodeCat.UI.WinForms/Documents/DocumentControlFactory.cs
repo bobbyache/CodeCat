@@ -41,49 +41,49 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         private static IDocumentItemControl NewImageSetControl(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            ImageSetControl documentControl = new ImageSetControl(application, groupOwner as ICodeGroupDocumentGroup, document as IImageSetDocument);
+            ImageSetControl documentControl = new ImageSetControl(application, groupOwner as ICodeGroupDocumentSet, document as IImageSetDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
         private static IDocumentItemControl NewImageDocument(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            ImageControl documentControl = new ImageControl(application, groupOwner as ICodeGroupDocumentGroup, document as IImageDocument);
+            ImageControl documentControl = new ImageControl(application, groupOwner as ICodeGroupDocumentSet, document as IImageDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
         private static IDocumentItemControl NewPdfDocument(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            PdfDocumentControl documentControl = new PdfDocumentControl(application, groupOwner as ICodeGroupDocumentGroup, document as IPdfDocument);
+            PdfDocumentControl documentControl = new PdfDocumentControl(application, groupOwner as ICodeGroupDocumentSet, document as IPdfDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
         private static IDocumentItemControl NewQikScriptControl(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            QikScriptCtrl documentControl = new QikScriptCtrl(application, groupOwner as IQikDocumentGroup);
+            QikScriptCtrl documentControl = new QikScriptCtrl(application, groupOwner as IQikTemplateDocumentSet);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
         private static IDocumentItemControl NewQikTemplateControl(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            QikTemplateCodeCtrl documentControl = new QikTemplateCodeCtrl(application, groupOwner as IQikDocumentGroup, document as ICodeDocument);
+            QikTemplateCodeCtrl documentControl = new QikTemplateCodeCtrl(application, groupOwner as IQikTemplateDocumentSet, document as ICodeDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
         private static IDocumentItemControl NewCodeControl(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            CodeItemCtrl documentControl = new CodeItemCtrl(application, groupOwner as ICodeGroupDocumentGroup, document as ICodeDocument);
+            CodeItemCtrl documentControl = new CodeItemCtrl(application, groupOwner as ICodeGroupDocumentSet, document as ICodeDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
         private static IDocumentItemControl NewUrlGroupControl(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            UrlGroupControl documentControl = new UrlGroupControl(application, groupOwner as ICodeGroupDocumentGroup, document as IUrlGroupDocument);
+            UrlGroupControl documentControl = new UrlGroupControl(application, groupOwner as ICodeGroupDocumentSet, document as IUrlGroupDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }

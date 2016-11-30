@@ -20,13 +20,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     public partial class PdfDocumentControl :  UserControl, IDocumentItemControl
     {
         private IPdfDocument pdfDocument;
-        private ICodeGroupDocumentGroup codeGroupFile;
+        private ICodeGroupDocumentSet codeGroupDocumentSet;
 
-        public PdfDocumentControl(AppFacade application, ICodeGroupDocumentGroup codeGroupFile, IPdfDocument pdfDocument)
+        public PdfDocumentControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IPdfDocument pdfDocument)
         {
             InitializeComponent();
             this.pdfDocument = pdfDocument;
-            this.codeGroupFile = codeGroupFile;
+            this.codeGroupDocumentSet = codeGroupDocumentSet;
 
             this.btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
             this.btnReload.Image = Resources.GetImage(Constants.ImageKeys.NewProject);
@@ -67,8 +67,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void RegisterFileEvents()
         {
-            codeGroupFile.BeforeSave += codeGroupFile_BeforeContentSaved;
-            codeGroupFile.AfterSave += codeGroupFile_ContentSaved;
+            codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
+            codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
         }
 
         private void ResetFieldValues()
@@ -83,13 +83,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.Modified += CodeItemCtrl_Modified;
         }
 
-        private void codeGroupFile_ContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_ContentSaved(object sender, FileEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void codeGroupFile_BeforeContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
         {
             this.pdfDocument.Title = txtTitle.Text;
         }

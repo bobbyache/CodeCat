@@ -22,9 +22,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private ICodeDocument codeFile;
         private AppFacade application;
-        private ICodeGroupDocumentGroup codeGroupFile;
+        private ICodeGroupDocumentSet codeGroupFile;
 
-        public CodeItemCtrl(AppFacade application, ICodeGroupDocumentGroup codeGroupFile, ICodeDocument codeFile)
+        public CodeItemCtrl(AppFacade application, ICodeGroupDocumentSet codeGroupFile, ICodeDocument codeFile)
         {
             InitializeComponent();
             

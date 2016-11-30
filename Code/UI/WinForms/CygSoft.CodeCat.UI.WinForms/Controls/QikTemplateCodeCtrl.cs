@@ -21,16 +21,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private ICodeDocument templateFile;
         private AppFacade application;
-        private IQikDocumentGroup qikFile;
+        private IQikTemplateDocumentSet qikTemplateDocumentSet;
         private ICompiler compiler;
 
-        public QikTemplateCodeCtrl(AppFacade application, IQikDocumentGroup qikFile, ICodeDocument templateFile)
+        public QikTemplateCodeCtrl(AppFacade application, IQikTemplateDocumentSet qikTemplateDocumentSet, ICodeDocument templateFile)
         {
             InitializeComponent();
             
             this.application = application;
-            this.qikFile = qikFile;
-            this.compiler = qikFile.Compiler;
+            this.qikTemplateDocumentSet = qikTemplateDocumentSet;
+            this.compiler = qikTemplateDocumentSet.Compiler;
             this.templateFile = templateFile;
             this.Id = templateFile.Id;
 
@@ -113,8 +113,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void RegisterFileEvents()
         {
-            qikFile.BeforeSave += qikFile_BeforeContentSaved;
-            qikFile.AfterSave += qikFile_ContentSaved;
+            qikTemplateDocumentSet.BeforeSave += qikTemplateDocumentSet_BeforeContentSaved;
+            qikTemplateDocumentSet.AfterSave += qikTemplateDocumentSet_ContentSaved;
             compiler.AfterCompile += compiler_AfterCompile;
             compiler.AfterInput += compiler_AfterInput;
         }
@@ -131,13 +131,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             UpdateAutoList();
         }
 
-        private void qikFile_ContentSaved(object sender, FileEventArgs e)
+        private void qikTemplateDocumentSet_ContentSaved(object sender, FileEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void qikFile_BeforeContentSaved(object sender, FileEventArgs e)
+        private void qikTemplateDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
         {
             this.templateFile.Title = txtTitle.Text;
             this.templateFile.Text = templateSyntaxDocument.Text;

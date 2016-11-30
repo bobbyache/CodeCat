@@ -11,9 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace CygSoft.CodeCat.Domain.Qik.Document
+namespace CygSoft.CodeCat.Domain.Qik
 {
-    public class QikDocumentIndex : BaseDocumentIndex
+    public class QikTemplateDocumentIndex : BaseDocumentIndex
     {
         public IQikScriptDocument ScriptDocument 
         { 
@@ -23,7 +23,7 @@ namespace CygSoft.CodeCat.Domain.Qik.Document
             } 
         }
 
-        public QikDocumentIndex(IDocumentIndexRepository repository, DocumentIndexPathGenerator indexPathGenerator)
+        public QikTemplateDocumentIndex(IDocumentIndexRepository repository, DocumentIndexPathGenerator indexPathGenerator)
             : base(repository, indexPathGenerator)
         {
             if (!base.Exists)

@@ -144,9 +144,9 @@ namespace CygSoft.CodeCat.UI.WinForms
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
                 listView.Items.Add(listItem);
             }
-            else if (item is IQikKeywordIndexItem)
+            else if (item is IQikTemplateKeywordIndexItem)
             {
-                IQikKeywordIndexItem codeItem = item as IQikKeywordIndexItem;
+                IQikTemplateKeywordIndexItem codeItem = item as IQikTemplateKeywordIndexItem;
                 listItem.Name = item.Id;
                 listItem.Tag = item;
                 listItem.ImageKey = IconRepository.QikKey;

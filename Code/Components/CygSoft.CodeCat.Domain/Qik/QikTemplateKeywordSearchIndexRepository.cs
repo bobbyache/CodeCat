@@ -9,27 +9,27 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    public class QikKeywordSearchIndexRepository : XmlKeywordSearchIndexRepository<QikKeywordIndexItem>
+    public class QikTemplateKeywordSearchIndexRepository : XmlKeywordSearchIndexRepository<QikTemplateKeywordIndexItem>
     {
-        public QikKeywordSearchIndexRepository(string rootElement)
+        public QikTemplateKeywordSearchIndexRepository(string rootElement)
             : base(rootElement)
         {
 
         }
 
-        protected override List<QikKeywordIndexItem> LoadIndexItems(string filePath, int currentVersion)
+        protected override List<QikTemplateKeywordIndexItem> LoadIndexItems(string filePath, int currentVersion)
         {
             XElement xElement = XElement.Load(filePath);
             CheckVersion(xElement, currentVersion);
 
-            List<QikKeywordIndexItem> indexItems = new List<QikKeywordIndexItem>();
+            List<QikTemplateKeywordIndexItem> indexItems = new List<QikTemplateKeywordIndexItem>();
 
             var items = from h in xElement.Elements("IndexItem")
                         select h;
 
             foreach (var item in items)
             {
-                QikKeywordIndexItem indexItem = new QikKeywordIndexItem();
+                QikTemplateKeywordIndexItem indexItem = new QikTemplateKeywordIndexItem();
                 indexItem.Deserialize(item);
                 indexItems.Add(indexItem);
             }

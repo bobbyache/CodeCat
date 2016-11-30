@@ -21,12 +21,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class CodeGroupDocument : BaseDocument, IContentDocument
     {
-        private ICodeGroupDocumentGroup codeItemFile = null;
+        private ICodeGroupDocumentSet codeItemFile = null;
         private DocumentTabManager tabManager = null;
 
         #region Constructors
 
-        public CodeGroupDocument(ICodeGroupDocumentGroup codeItemFile, AppFacade application, bool isNew = false)
+        public CodeGroupDocument(ICodeGroupDocumentSet codeItemFile, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 

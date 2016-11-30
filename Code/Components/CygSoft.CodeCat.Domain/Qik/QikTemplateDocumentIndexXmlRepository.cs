@@ -9,14 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace CygSoft.CodeCat.Domain.Qik.Document
+namespace CygSoft.CodeCat.Domain.Qik
 {
-    internal class QikDocumentIndexXmlRepository : IDocumentIndexRepository
+    internal class QikTemplateDocumentIndexXmlRepository : IDocumentIndexRepository
     {
         private readonly string filePath;
         private readonly string folder;
 
-        public QikDocumentIndexXmlRepository(DocumentIndexPathGenerator indexPathGenerator)
+        public QikTemplateDocumentIndexXmlRepository(DocumentIndexPathGenerator indexPathGenerator)
         {
             this.filePath = indexPathGenerator.FilePath;
             this.folder =  Path.GetDirectoryName(indexPathGenerator.FilePath);

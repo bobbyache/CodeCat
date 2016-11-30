@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    internal class QikLibrary : BaseLibrary
+    internal class QikTemplateLibrary : BaseLibrary
     {
-        public QikLibrary()
-            : base(new QikKeywordSearchIndexRepository("CodeCat_QikIndex"), "qik")
+        public QikTemplateLibrary()
+            : base(new QikTemplateKeywordSearchIndexRepository("CodeCat_QikIndex"), "qik")
         {
             base.FileExtension = "*.xml";
         }
@@ -25,9 +25,9 @@ namespace CygSoft.CodeCat.Domain.Qik
             List<IndexExportImportData> exportList = new List<IndexExportImportData>();
             IKeywordIndexItem[] foundItems = base.FindIndecesByIds(indexItems.Select(r => r.Id).ToArray());
 
-            foreach (QikKeywordIndexItem indexItem in foundItems.OfType<QikKeywordIndexItem>())
+            foreach (QikTemplateKeywordIndexItem indexItem in foundItems.OfType<QikTemplateKeywordIndexItem>())
             {
-                QikDocumentGroup codeFile = new QikDocumentGroup(indexItem as QikKeywordIndexItem, this.FolderPath);
+                QikTemplateDocumentSet codeFile = new QikTemplateDocumentSet(indexItem as QikTemplateKeywordIndexItem, this.FolderPath);
                 exportList.Add(new IndexExportImportData(indexItem.Id, codeFile.Folder, indexItem.Id, indexItem));
             }
             return exportList.ToArray();
@@ -35,8 +35,8 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         protected override IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem)
         {
-            QikKeywordIndexItem qikIndexItem = indexItem as QikKeywordIndexItem;
-            QikDocumentGroup qikFile = new QikDocumentGroup(qikIndexItem, this.FolderPath);
+            QikTemplateKeywordIndexItem qikIndexItem = indexItem as QikTemplateKeywordIndexItem;
+            QikTemplateDocumentSet qikFile = new QikTemplateDocumentSet(qikIndexItem, this.FolderPath);
 
             if (this.openFiles == null)
                 this.openFiles = new Dictionary<string, IPersistableTarget>();
@@ -48,7 +48,7 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         protected override IPersistableTarget OpenSpecializedTarget(IKeywordIndexItem indexItem)
         {
-            QikKeywordIndexItem qikIndexItem = indexItem as QikKeywordIndexItem;
+            QikTemplateKeywordIndexItem qikIndexItem = indexItem as QikTemplateKeywordIndexItem;
             IPersistableTarget persistableFile;
 
             if (this.openFiles == null)
@@ -63,7 +63,7 @@ namespace CygSoft.CodeCat.Domain.Qik
             else
             {
                 // retrieve the file and add it to the opened code files.
-                persistableFile = new QikDocumentGroup(qikIndexItem, this.FolderPath);
+                persistableFile = new QikTemplateDocumentSet(qikIndexItem, this.FolderPath);
 
                 if (this.openFiles == null)
                     this.openFiles = new Dictionary<string, IPersistableTarget>();

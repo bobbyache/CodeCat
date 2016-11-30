@@ -322,9 +322,9 @@ namespace CygSoft.CodeCat.UI.WinForms
                     snippetForm.DocumentSaved += snippetForm_DocumentSaved;
                     snippetForm.Show(dockPanel, DockState.Document);
                 }
-                else if (snippetIndex is IQikKeywordIndexItem)
+                else if (snippetIndex is IQikTemplateKeywordIndexItem)
                 {
-                    IQikDocumentGroup qikFile = application.OpenQikDocumentGroup(snippetIndex);
+                    IQikTemplateDocumentSet qikFile = application.OpenQikDocumentGroup(snippetIndex);
                     IContentDocument snippetForm = new QikCodeDocument(qikFile, application);
                     snippetForm.HeaderFieldsVisible = false;
                     snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
@@ -333,7 +333,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 }
                 else if (snippetIndex is ICodeGroupKeywordIndexItem)
                 {
-                    ICodeGroupDocumentGroup codeGroupFile = application.OpenCodeGroupDocumentGroup(snippetIndex);
+                    ICodeGroupDocumentSet codeGroupFile = application.OpenCodeGroupDocumentGroup(snippetIndex);
                     IContentDocument snippetForm = new CodeGroupDocument(codeGroupFile, application);
                     snippetForm.HeaderFieldsVisible = false;
                     snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
@@ -366,7 +366,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateQikTemplateDocument()
         {
-            IQikDocumentGroup qikFile = application.CreateQikDocumentGroup(ConfigSettings.DefaultSyntax);
+            IQikTemplateDocumentSet qikFile = application.CreateQikDocumentGroup(ConfigSettings.DefaultSyntax);
             IContentDocument snippetForm = new QikCodeDocument(qikFile, application, true);
 
             snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
@@ -377,7 +377,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateCodeGroupDocument()
         {
-            ICodeGroupDocumentGroup codeGroupFile = application.CreateCodeGroupDocumentGroup(ConfigSettings.DefaultSyntax);
+            ICodeGroupDocumentSet codeGroupFile = application.CreateCodeGroupDocumentGroup(ConfigSettings.DefaultSyntax);
             IContentDocument snippetForm = new CodeGroupDocument(codeGroupFile, application, true);
 
             snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;

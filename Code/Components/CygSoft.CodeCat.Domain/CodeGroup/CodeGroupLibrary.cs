@@ -24,7 +24,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
             foreach (CodeGroupKeywordIndexItem indexItem in foundItems.OfType<CodeGroupKeywordIndexItem>())
             {
-                CodeGroupDocumentGroup codeFile = new CodeGroupDocumentGroup(indexItem as CodeGroupKeywordIndexItem, this.FolderPath);
+                CodeGroupDocumentSet codeFile = new CodeGroupDocumentSet(indexItem as CodeGroupKeywordIndexItem, this.FolderPath);
                 exportList.Add(new IndexExportImportData(indexItem.Id, codeFile.Folder, indexItem.Id, indexItem));
             }
             return exportList.ToArray();
@@ -33,7 +33,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         protected override IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem)
         {
             CodeGroupKeywordIndexItem codeGroupIndexItem = indexItem as CodeGroupKeywordIndexItem;
-            CodeGroupDocumentGroup codeGroupFile = new CodeGroupDocumentGroup(codeGroupIndexItem, this.FolderPath);
+            CodeGroupDocumentSet codeGroupFile = new CodeGroupDocumentSet(codeGroupIndexItem, this.FolderPath);
 
             if (this.openFiles == null)
                 this.openFiles = new Dictionary<string, IPersistableTarget>();
@@ -60,7 +60,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             else
             {
                 // retrieve the file and add it to the opened code files.
-                persistableFile = new CodeGroupDocumentGroup(codeGroupIndexItem, this.FolderPath);
+                persistableFile = new CodeGroupDocumentSet(codeGroupIndexItem, this.FolderPath);
 
                 if (this.openFiles == null)
                     this.openFiles = new Dictionary<string, IPersistableTarget>();

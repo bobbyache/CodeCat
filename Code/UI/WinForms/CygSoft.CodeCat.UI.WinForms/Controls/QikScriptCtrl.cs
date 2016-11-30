@@ -20,19 +20,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler Modified;
 
         private AppFacade application;
-        private IQikDocumentGroup qikFile;
+        private IQikTemplateDocumentSet qikTemplateDocumentSet;
         private ICodeDocument scriptFile;
         private ICompiler compiler;
         private Row selectedRow;
 
-        public QikScriptCtrl(AppFacade application, IQikDocumentGroup qikFile)
+        public QikScriptCtrl(AppFacade application, IQikTemplateDocumentSet qikTemplateDocumentSet)
         {
             InitializeComponent();
 
             this.application = application;
-            this.qikFile = qikFile;
-            this.scriptFile = qikFile.ScriptFile;
-            this.compiler = qikFile.Compiler;
+            this.qikTemplateDocumentSet = qikTemplateDocumentSet;
+            this.scriptFile = qikTemplateDocumentSet.ScriptFile;
+            this.compiler = qikTemplateDocumentSet.Compiler;
 
             syntaxDocument.Text = this.scriptFile.Text;
             syntaxDocument.SyntaxFile = ConfigSettings.QikScriptSyntaxFile;
@@ -57,7 +57,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public bool IsModified { get; private set; }
 
-        public bool FileExists { get { return qikFile.ScriptFile.Exists; } }
+        public bool FileExists { get { return qikTemplateDocumentSet.ScriptFile.Exists; } }
 
         public void Revert()
         {
@@ -75,21 +75,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void RegisterFileEvents()
         {
-            qikFile.BeforeSave += qikFile_BeforeContentSaved;
-            qikFile.AfterSave += qikFile_ContentSaved;
+            qikTemplateDocumentSet.BeforeSave += qikTemplateDocumentSet_BeforeContentSaved;
+            qikTemplateDocumentSet.AfterSave += qikTemplateDocumentSet_ContentSaved;
             compiler.AfterCompile += compiler_AfterCompile;
             compiler.AfterInput += compiler_AfterInput;
             compiler.CompileError += compiler_CompileError;
             compiler.BeforeCompile += compiler_BeforeCompile;
         }
 
-        private void qikFile_ContentSaved(object sender, FileEventArgs e)
+        private void qikTemplateDocumentSet_ContentSaved(object sender, FileEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void qikFile_BeforeContentSaved(object sender, FileEventArgs e)
+        private void qikTemplateDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
         {
             scriptFile.Text = syntaxDocument.Text;
         }

@@ -49,13 +49,13 @@
     <Compile Include="AppFacade.cs" />
     <Compile Include="Base\BaseLibrary.cs" />
     <Compile Include="Base\IPersistableTarget.cs" />
-    <Compile Include="CodeGroup\CodeGroupDocumentGroup.cs" />
+    <Compile Include="CodeGroup\CodeGroupDocumentSet.cs" />
     <Compile Include="CodeGroup\CodeGroupIndex.cs" />
     <Compile Include="CodeGroup\CodeGroupIndexXmlRepository.cs" />
     <Compile Include="CodeGroup\CodeGroupKeywordIndexItem.cs" />
     <Compile Include="CodeGroup\CodeGroupKeywordSearchIndexRepository.cs" />
     <Compile Include="CodeGroup\CodeGroupLibrary.cs" />
-    <Compile Include="CodeGroup\ICodeGroupDocumentGroup.cs" />
+    <Compile Include="CodeGroup\ICodeGroupDocumentSet.cs" />
     <Compile Include="CodeGroup\ICodeGroupKeywordIndexItem.cs" />
     <Compile Include="Code\CodeKeywordIndexItem.cs" />
     <Compile Include="Code\CodeKeywordSearchIndexRepository.cs" />
@@ -69,14 +69,14 @@
     <Compile Include="Management\IndexExportImportData.cs" />
     <Compile Include="Management\ManageableProject.cs" />
     <Compile Include="ProjManFacade.cs" />
-    <Compile Include="Qik\Document\QikDocumentIndexXmlRepository.cs" />
-    <Compile Include="Qik\IQikDocumentGroup.cs" />
-    <Compile Include="Qik\IQikKeywordIndexItem.cs" />
-    <Compile Include="Qik\Document\QikDocumentIndex.cs" />
-    <Compile Include="Qik\QikDocumentGroup.cs" />
-    <Compile Include="Qik\QikKeywordIndexItem.cs" />
-    <Compile Include="Qik\QikKeywordSearchIndexRepository.cs" />
-    <Compile Include="Qik\QikLibrary.cs" />
+    <Compile Include="Qik\QikTemplateDocumentIndexXmlRepository.cs" />
+    <Compile Include="Qik\IQikTemplateDocumentSet.cs" />
+    <Compile Include="Qik\IQikTemplateKeywordIndexItem.cs" />
+    <Compile Include="Qik\QikTemplateDocumentIndex.cs" />
+    <Compile Include="Qik\QikTemplateDocumentSet.cs" />
+    <Compile Include="Qik\QikTemplateKeywordIndexItem.cs" />
+    <Compile Include="Qik\QikTemplateKeywordSearchIndexRepository.cs" />
+    <Compile Include="Qik\QikTemplateLibrary.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,6 +105,7 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
