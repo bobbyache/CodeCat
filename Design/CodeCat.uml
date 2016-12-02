@@ -36,7 +36,7 @@
 <XPD:ATTR name="Left" type="integer">396</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">156</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">164</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">303</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">329</XPD:ATTR>
 <XPD:REF name="Model">0y4ODjVDD0WQ0PgFMyZnKgAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="RRQw0+kRQEiLG63ZfLpplgAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="UBpKnOdhTUqLucc9jWP4owAA">
@@ -231,7 +231,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[6]" type="UMLAssociationView" guid="+PKGzN7U+0KZosHcPfMtnQAA">
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">469,540;469,458</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">469,540;469,484</XPD:ATTR>
 <XPD:REF name="Model">DYe9BU4O30m0FkefB3zDagAA</XPD:REF>
 <XPD:REF name="Head">cTGc8wdG40qQpya1CJCfWgAA</XPD:REF>
 <XPD:REF name="Tail">PK1PlZEF30W42UvMcyZMYgAA</XPD:REF>
@@ -313,7 +313,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[7]" type="UMLAssociationView" guid="Cxe5sIcXfEWSrREr8ab8kQAA">
-<XPD:ATTR name="Points" type="Points">628,412;559,364</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">628,416;559,372</XPD:ATTR>
 <XPD:REF name="Model">/3C/lAyM40Saz38meppiygAA</XPD:REF>
 <XPD:REF name="Head">cTGc8wdG40qQpya1CJCfWgAA</XPD:REF>
 <XPD:REF name="Tail">LMqOL0ihqkyup9QlDwrOtAAA</XPD:REF>
@@ -451,7 +451,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[10]" type="UMLRealizationView" guid="iRfQS8hpwkm8O++kBe+0ZQAA">
-<XPD:ATTR name="Points" type="Points">559,319;880,366</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">559,330;880,368</XPD:ATTR>
 <XPD:REF name="Model">R/KmvJX/gEaUl+9FszPgigAA</XPD:REF>
 <XPD:REF name="Head">unSxXS7SnU+GsySUd9Rs2gAA</XPD:REF>
 <XPD:REF name="Tail">cTGc8wdG40qQpya1CJCfWgAA</XPD:REF>
@@ -551,7 +551,7 @@ keyword -&gt; index.id -&gt; item(s)
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[15]" type="UMLDependencyView" guid="rRKpaTqim0+HAup/tN8dRQAA">
-<XPD:ATTR name="Points" type="Points">252,372;396,330</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">252,376;396,340</XPD:ATTR>
 <XPD:REF name="Model">M5veasZiLUC1dC6MDh+BGQAA</XPD:REF>
 <XPD:REF name="Head">cTGc8wdG40qQpya1CJCfWgAA</XPD:REF>
 <XPD:REF name="Tail">Ux3CXnDWq0aY2hpcDHyd4wAA</XPD:REF>
@@ -699,7 +699,7 @@ properties like the way &quot;Syntax&quot; was added to:
 <XPD:REF name="ClientDependencies[0]">R/KmvJX/gEaUl+9FszPgigAA</XPD:REF>
 <XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
 <XPD:REF name="SupplierDependencies[0]">M5veasZiLUC1dC6MDh+BGQAA</XPD:REF>
-<XPD:ATTR name="#Operations" type="integer">12</XPD:ATTR>
+<XPD:ATTR name="#Operations" type="integer">14</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="h9loYMdjvUu2ReloM5qDnwAA">
 <XPD:ATTR name="Name" type="string">Add</XPD:ATTR>
 <XPD:REF name="Owner">0y4ODjVDD0WQ0PgFMyZnKgAA</XPD:REF>
@@ -746,6 +746,14 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 <XPD:OBJ name="Operations[11]" type="UMLOperation" guid="6xPF5RNS1kaLCKf2GmPxUAAA">
 <XPD:ATTR name="Name" type="string">Update</XPD:ATTR>
+<XPD:REF name="Owner">0y4ODjVDD0WQ0PgFMyZnKgAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Operations[12]" type="UMLOperation" guid="VegFOjRzr0an9NWghFcF3wAA">
+<XPD:ATTR name="Name" type="string">IndexesExistFor</XPD:ATTR>
+<XPD:REF name="Owner">0y4ODjVDD0WQ0PgFMyZnKgAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Operations[13]" type="UMLOperation" guid="dsFFsYORyka0o8t0ZCKC7wAA">
+<XPD:ATTR name="Name" type="string">ValidateRemoveKeywords</XPD:ATTR>
 <XPD:REF name="Owner">0y4ODjVDD0WQ0PgFMyZnKgAA</XPD:REF>
 </XPD:OBJ>
 <XPD:ATTR name="#Associations" type="integer">3</XPD:ATTR>

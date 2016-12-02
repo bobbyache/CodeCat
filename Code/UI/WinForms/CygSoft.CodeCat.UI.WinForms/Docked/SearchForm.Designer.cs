@@ -28,27 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.searchPanel = new System.Windows.Forms.Panel();
             this.btnFind = new System.Windows.Forms.Button();
             this.keywordsLabel = new System.Windows.Forms.Label();
             this.keywordsTextBox = new System.Windows.Forms.TextBox();
-            this.listView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuContextViewSnippet = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuContextViewKeywords = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuContextAddKeywords = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuContextRemoveKeywords = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuContextCopyKeywords = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuContextCopyIdentifier = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.codeSearchResultsControl1 = new CygSoft.CodeCat.UI.WinForms.Controls.CodeSearchResultsControl();
             this.searchPanel.SuspendLayout();
-            this.contextMenu.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // searchPanel
@@ -91,129 +80,51 @@
             this.keywordsTextBox.Size = new System.Drawing.Size(797, 20);
             this.keywordsTextBox.TabIndex = 0;
             // 
-            // listView
+            // tabControl1
             // 
-            this.listView.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.listView.FullRowSelect = true;
-            this.listView.HideSelection = false;
-            this.listView.Location = new System.Drawing.Point(0, 29);
-            this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(961, 194);
-            this.listView.TabIndex = 3;
-            this.listView.UseCompatibleStateImageBehavior = false;
-            this.listView.View = System.Windows.Forms.View.Details;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Location = new System.Drawing.Point(0, 29);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(961, 428);
+            this.tabControl1.TabIndex = 3;
             // 
-            // columnHeader1
+            // tabPage1
             // 
-            this.columnHeader1.Text = "Title";
-            this.columnHeader1.Width = 528;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Date Created";
-            this.columnHeader4.Width = 138;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Date Modified";
-            this.columnHeader5.Width = 141;
-            // 
-            // contextMenu
-            // 
-            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuContextViewSnippet,
-            this.toolStripMenuItem8,
-            this.menuContextViewKeywords,
-            this.menuContextAddKeywords,
-            this.menuContextRemoveKeywords,
-            this.toolStripMenuItem5,
-            this.menuContextCopyKeywords,
-            this.menuContextCopyIdentifier});
-            this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(186, 148);
-            // 
-            // menuContextViewSnippet
-            // 
-            this.menuContextViewSnippet.Name = "menuContextViewSnippet";
-            this.menuContextViewSnippet.Size = new System.Drawing.Size(185, 22);
-            this.menuContextViewSnippet.Text = "View\\Modify Snippet";
-            this.menuContextViewSnippet.Click += new System.EventHandler(this.menuContextViewSnippet_Click);
-            // 
-            // toolStripMenuItem8
-            // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(182, 6);
-            // 
-            // menuContextViewKeywords
-            // 
-            this.menuContextViewKeywords.Name = "menuContextViewKeywords";
-            this.menuContextViewKeywords.Size = new System.Drawing.Size(185, 22);
-            this.menuContextViewKeywords.Text = "View Keywords";
-            this.menuContextViewKeywords.Click += new System.EventHandler(this.menuContextViewKeywords_Click);
-            // 
-            // menuContextAddKeywords
-            // 
-            this.menuContextAddKeywords.Name = "menuContextAddKeywords";
-            this.menuContextAddKeywords.Size = new System.Drawing.Size(185, 22);
-            this.menuContextAddKeywords.Text = "Add Keywords";
-            this.menuContextAddKeywords.Click += new System.EventHandler(this.menuContextAddKeywords_Click);
-            // 
-            // menuContextRemoveKeywords
-            // 
-            this.menuContextRemoveKeywords.Name = "menuContextRemoveKeywords";
-            this.menuContextRemoveKeywords.Size = new System.Drawing.Size(185, 22);
-            this.menuContextRemoveKeywords.Text = "Remove Keywords";
-            this.menuContextRemoveKeywords.Click += new System.EventHandler(this.menuContextRemoveKeywords_Click);
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(182, 6);
-            // 
-            // menuContextCopyKeywords
-            // 
-            this.menuContextCopyKeywords.Name = "menuContextCopyKeywords";
-            this.menuContextCopyKeywords.Size = new System.Drawing.Size(185, 22);
-            this.menuContextCopyKeywords.Text = "Copy Keywords";
-            this.menuContextCopyKeywords.Click += new System.EventHandler(this.menuContextCopyKeywords_Click);
-            // 
-            // menuContextCopyIdentifier
-            // 
-            this.menuContextCopyIdentifier.Name = "menuContextCopyIdentifier";
-            this.menuContextCopyIdentifier.Size = new System.Drawing.Size(185, 22);
-            this.menuContextCopyIdentifier.Text = "Copy Identifier";
-            this.menuContextCopyIdentifier.Click += new System.EventHandler(this.menuContextCopyIdentifier_Click);
+            this.tabPage1.Controls.Add(this.codeSearchResultsControl1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(953, 402);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Code && Snippets";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // codeSearchResultsControl1
             // 
-            this.codeSearchResultsControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.codeSearchResultsControl1.Location = new System.Drawing.Point(0, 229);
+            this.codeSearchResultsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.codeSearchResultsControl1.Location = new System.Drawing.Point(3, 3);
             this.codeSearchResultsControl1.Name = "codeSearchResultsControl1";
-            this.codeSearchResultsControl1.Size = new System.Drawing.Size(961, 221);
-            this.codeSearchResultsControl1.TabIndex = 4;
+            this.codeSearchResultsControl1.Size = new System.Drawing.Size(947, 396);
+            this.codeSearchResultsControl1.TabIndex = 6;
             // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(961, 457);
-            this.Controls.Add(this.codeSearchResultsControl1);
-            this.Controls.Add(this.listView);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.searchPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SearchForm";
             this.Text = "Keywords";
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
-            this.contextMenu.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -224,19 +135,8 @@
         private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.Label keywordsLabel;
         private System.Windows.Forms.TextBox keywordsTextBox;
-        private System.Windows.Forms.ListView listView;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ContextMenuStrip contextMenu;
-        private System.Windows.Forms.ToolStripMenuItem menuContextViewSnippet;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
-        private System.Windows.Forms.ToolStripMenuItem menuContextViewKeywords;
-        private System.Windows.Forms.ToolStripMenuItem menuContextAddKeywords;
-        private System.Windows.Forms.ToolStripMenuItem menuContextRemoveKeywords;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem menuContextCopyKeywords;
-        private System.Windows.Forms.ToolStripMenuItem menuContextCopyIdentifier;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
         private Controls.CodeSearchResultsControl codeSearchResultsControl1;
     }
 }

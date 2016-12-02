@@ -22,6 +22,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
+        public event EventHandler<SearchDelimitedKeywordEventArgs> SearchExecuted;
 
         public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
         public event EventHandler<SelectSnippetEventArgs> SelectSnippet;
@@ -73,6 +74,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             IKeywordIndexItem[] indexItems = this.application.FindIndeces(keywords);
             this.ReloadListview(indexItems);
+
+
+            if (this.SearchExecuted != null)
+                SearchExecuted(this, new SearchDelimitedKeywordEventArgs(keywords, indexItems.Length));
         }
 
         private void ReloadListview(IKeywordIndexItem[] indexItems)
@@ -164,6 +169,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void listView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             listViewSorter.Sort(e.Column);
+        }
+
+        private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            OpenSelectedSnippet();
         }
 
         private void menuContextViewSnippet_Click(object sender, EventArgs e)
