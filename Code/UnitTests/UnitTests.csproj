@@ -62,7 +62,6 @@
     <Compile Include="Tests\Converters\Version1ToVersion2_Tests.cs" />
     <Compile Include="Tests\DocumentManagement\DocumentIndex_Tests.cs" />
     <Compile Include="Tests\DocumentManagement\Document_Tests.cs" />
-    <Compile Include="Tests\Keywords\KeyPhrase_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Files\ProjectFiles\CodeFile V1.xml" />

@@ -3,10 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CygSoft.CodeCat.Search.KeywordIndex;
 using System.Collections.Generic;
 
-namespace UnitTests.Tests.Keywords
+namespace UnitTests.Search.KeywordIndex
 {
     [TestClass]
-    public class KeyPhrase_Tests
+    public class KeyPhrases_Tests
     {
         [TestMethod]
         public void KeyPhrases_Ensure_No_Exception_WithEmptyAdd()
@@ -56,7 +56,7 @@ namespace UnitTests.Tests.Keywords
         [TestMethod]
         public void KeyPhrases_Ensure_No_Empty_Keyword_SavedFromParameter_List()
         {
-            KeyPhrases keyPhrases = new KeyPhrases(new List<string> { "yellow", "black", ""});
+            KeyPhrases keyPhrases = new KeyPhrases(new List<string> { "yellow", "black", "" });
 
             Assert.AreEqual(2, keyPhrases.Phrases.Length);
             Assert.AreEqual("BLACK", keyPhrases.Phrases[0]);

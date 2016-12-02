@@ -1,13 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Search.KeywordIndex;
 using Moq;
+using CygSoft.CodeCat.Search.KeywordIndex;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 
-namespace UnitTests.SearchIndex
+namespace UnitTests.Search.KeywordIndex
 {
     [TestClass]
-    public class DevTests
+    public class KeywordSearchIndex_Tests
     {
         [TestMethod]
         public void KeywordSearchIndex_Create()

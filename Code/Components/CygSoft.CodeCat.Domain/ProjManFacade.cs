@@ -2,7 +2,7 @@
 using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Domain.Qik;
-using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;

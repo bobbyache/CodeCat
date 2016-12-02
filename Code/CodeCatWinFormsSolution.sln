@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.ProjectConv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Etier.IconHelper", "Components\Etier.IconHelper\Etier.IconHelper.csproj", "{44368ACC-95E7-4BE0-ADE4-ABB8AAE9B9D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Infrastructure.Search.KeywordIndex", "Components\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex.csproj", "{9D7E248A-E4EF-42DE-A624-9F18D827BA42}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Search.KeywordIndex.Infrastructure", "Components\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Search.KeywordIndex.Infrastructure.csproj", "{9D7E248A-E4EF-42DE-A624-9F18D827BA42}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.DocumentManager", "Components\CygSoft.CodeCat.DocumentManager\CygSoft.CodeCat.DocumentManager.csproj", "{D3C89AA0-FD50-4D0E-9492-15EFD952958A}"
 EndProject
@@ -29,6 +29,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests.DocumentManager", "Components\UnitTests.DocumentManager\UnitTests.DocumentManager.csproj", "{BEA08610-DC23-4BEF-93ED-627652E2F92E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.UI.ProjectExporter", "UI\WinForms\CygSoft.CodeCat.UI.ProjectExporter\CygSoft.CodeCat.UI.ProjectExporter.csproj", "{50A711A2-3C3C-4E2B-8BE6-466CE4AC6172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests.Search.KeywordIndex", "Components\UnitTests.SearchIndex\UnitTests.Search.KeywordIndex.csproj", "{1CF97F26-7EED-4C93-9138-A7312C05C9B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +86,10 @@ Global
 		{50A711A2-3C3C-4E2B-8BE6-466CE4AC6172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50A711A2-3C3C-4E2B-8BE6-466CE4AC6172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50A711A2-3C3C-4E2B-8BE6-466CE4AC6172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CF97F26-7EED-4C93-9138-A7312C05C9B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CF97F26-7EED-4C93-9138-A7312C05C9B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CF97F26-7EED-4C93-9138-A7312C05C9B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CF97F26-7EED-4C93-9138-A7312C05C9B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

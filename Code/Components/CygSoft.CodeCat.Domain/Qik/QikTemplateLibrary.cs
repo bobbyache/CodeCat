@@ -2,7 +2,7 @@
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
 using System;
 using System.Collections.Generic;

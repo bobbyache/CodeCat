@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.IO;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
-using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 

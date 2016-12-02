@@ -6,8 +6,8 @@
     <ProjectGuid>{1CF97F26-7EED-4C93-9138-A7312C05C9B4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTests.SearchIndex</RootNamespace>
-    <AssemblyName>UnitTests.SearchIndex</AssemblyName>
+    <RootNamespace>UnitTests.Search.KeywordIndex</RootNamespace>
+    <AssemblyName>UnitTests.Search.KeywordIndex</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,8 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq, Version=4.5.28.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moq.4.5.28\lib\net45\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -54,10 +58,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DevTests.cs" />
+    <Compile Include="KeywordSearchIndex_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="KeyPhrases_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Search.KeywordIndex.Infrastructure.csproj">
+      <Project>{9d7e248a-e4ef-42de-a624-9f18d827ba42}</Project>
+      <Name>CygSoft.CodeCat.Search.KeywordIndex.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>

@@ -7,8 +7,8 @@
     <ProjectGuid>{9D7E248A-E4EF-42DE-A624-9F18D827BA42}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CygSoft.CodeCat.Infrastructure.Search.KeywordIndex</RootNamespace>
-    <AssemblyName>CygSoft.CodeCat.Infrastructure.Search.KeywordIndex</AssemblyName>
+    <RootNamespace>CygSoft.CodeCat.Search.KeywordIndex.Infrastructure</RootNamespace>
+    <AssemblyName>CygSoft.CodeCat.Search.KeywordIndex.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

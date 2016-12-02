@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.CodeGroup;
-using CygSoft.CodeCat.Infrastructure.Search.KeywordIndex;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Domain;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls

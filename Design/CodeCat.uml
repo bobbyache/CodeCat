@@ -1116,6 +1116,7 @@ properties like the way &quot;Syntax&quot; was added to:
 <XPD:REF name="Diagram">RCTaop5/YUa3K4UujSjGFQAA</XPD:REF>
 <XPD:ATTR name="#OwnedViews" type="integer">29</XPD:ATTR>
 <XPD:OBJ name="OwnedViews[0]" type="UMLComponentView" guid="c6fCC8Vf0kyEXwwSVMVqnwAA">
+<XPD:ATTR name="FillColor" type="string">$00DDDDDD</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">552</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">152</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">219</XPD:ATTR>
@@ -1140,6 +1141,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[1]" type="UMLComponentView" guid="PcPwVl2skEOZ93G+P2VbeQAA">
+<XPD:ATTR name="FillColor" type="string">$00FFFF80</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">556</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">388</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">181</XPD:ATTR>
@@ -1164,6 +1166,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[2]" type="UMLComponentView" guid="OxiTBKYQM0KMfNwIj9l2BgAA">
+<XPD:ATTR name="FillColor" type="string">$0080FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">228</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">392</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">210</XPD:ATTR>
@@ -1238,6 +1241,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[5]" type="UMLComponentView" guid="Un/yc931I0CiYqljccGjygAA">
+<XPD:ATTR name="FillColor" type="string">$0080FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">12</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">292</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">132</XPD:ATTR>
@@ -1287,6 +1291,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[7]" type="UMLComponentView" guid="6oezDYtbjk2CLgeCL1PDBAAA">
+<XPD:ATTR name="FillColor" type="string">$0080FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">12</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">236</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">177</XPD:ATTR>
@@ -1336,6 +1341,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[9]" type="UMLComponentView" guid="Dq/1J8MZ1EuoghK/I19dBQAA">
+<XPD:ATTR name="FillColor" type="string">$00DDDDDD</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">552</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">92</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">346</XPD:ATTR>
@@ -1345,7 +1351,7 @@ properties like the way &quot;Syntax&quot; was added to:
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="DGwYTGhYkkiD0NY8zMdhEgAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="YJ1vc3zWVE2/JV5CiHG+VgAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">CygSoft.CodeCat.Infrastructure.Search.KeywordIndex</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">CygSoft.CodeCat.Search.KeywordIndex.Infrastructure</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="9ftYbv0qM0+YntKaEj2cigAA">
 <XPD:ATTR name="Text" type="string">&lt;&lt;component&gt;&gt;</XPD:ATTR>
@@ -1385,6 +1391,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[11]" type="UMLComponentView" guid="X4nqh8+/yUWL0mQLGL2ACgAA">
+<XPD:ATTR name="FillColor" type="string">$00DDDDDD</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">552</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">32</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">330</XPD:ATTR>
@@ -1434,6 +1441,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[13]" type="UMLComponentView" guid="HstQ3Mfg1kOW7Sd/jcVQjQAA">
+<XPD:ATTR name="FillColor" type="string">$00DDDDDD</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">552</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">212</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">285</XPD:ATTR>
@@ -1483,6 +1491,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[15]" type="UMLComponentView" guid="XszkWegPP0+5gbp50IpvHAAA">
+<XPD:ATTR name="FillColor" type="string">$0080FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">12</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">168</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">287</XPD:ATTR>
@@ -1532,6 +1541,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[17]" type="UMLComponentView" guid="q0CHZkrUlUisUlOfJUXSKgAA">
+<XPD:ATTR name="FillColor" type="string">$00FFFF80</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">848</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">468</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">246</XPD:ATTR>
@@ -1606,6 +1616,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[20]" type="UMLComponentView" guid="slP0Hk7UIUu+poGMzdrcbwAA">
+<XPD:ATTR name="FillColor" type="string">$00FFFF80</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">792</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">388</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">262</XPD:ATTR>
@@ -1705,6 +1716,7 @@ properties like the way &quot;Syntax&quot; was added to:
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[24]" type="UMLComponentView" guid="0YaFAGcTbk+RoBHy4Iw3ogAA">
+<XPD:ATTR name="FillColor" type="string">$00FFFF80</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">672</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">292</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">201</XPD:ATTR>
@@ -1915,7 +1927,7 @@ types.
 <XPD:REF name="Views[3]">53qdjsKG+06F+McMVyJirwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[9]" type="UMLComponent" guid="LKmcpTB65kKFLBoAazQUUwAA">
-<XPD:ATTR name="Name" type="string">CygSoft.CodeCat.Infrastructure.Search.KeywordIndex</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">CygSoft.CodeCat.Search.KeywordIndex.Infrastructure</XPD:ATTR>
 <XPD:REF name="Namespace">2XhA0bT+90Wv0Bt5YA01zwAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">2</XPD:ATTR>
 <XPD:REF name="Views[0]">Dq/1J8MZ1EuoghK/I19dBQAA</XPD:REF>

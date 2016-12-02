@@ -47,9 +47,9 @@
     <Compile Include="XmlKeywordIndexItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex.csproj">
+    <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Search.KeywordIndex.Infrastructure.csproj">
       <Project>{9d7e248a-e4ef-42de-a624-9f18d827ba42}</Project>
-      <Name>CygSoft.CodeCat.Infrastructure.Search.KeywordIndex</Name>
+      <Name>CygSoft.CodeCat.Search.KeywordIndex.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

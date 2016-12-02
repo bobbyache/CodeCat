@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CygSoft.CodeCat.Infrastructure.Search.KeywordIndex")]
+[assembly: AssemblyTitle("CygSoft.CodeCat.Search.KeywordIndex.Infrastructure")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CygSoft.CodeCat.Infrastructure.Search.KeywordIndex")]
+[assembly: AssemblyProduct("CygSoft.CodeCat.Search.KeywordIndex.Infrastructure")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
