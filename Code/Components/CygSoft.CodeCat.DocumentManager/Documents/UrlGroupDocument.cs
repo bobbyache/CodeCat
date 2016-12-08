@@ -65,6 +65,9 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
     public class UrlGroupDocument : BaseDocument, IUrlGroupDocument
     {
+        public event EventHandler Paste;
+        public event EventHandler PasteConflict;
+
         internal UrlGroupDocument(string folder, string title)
             : base(new DocumentPathGenerator(folder, "urlgrp"), title, null)
         {
@@ -96,26 +99,32 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         protected override void OpenFile()
         {
+            XDocument document = XDocument.Load(this.FilePath);
+            IEnumerable<XElement> elements = document.Element("UrlGroup").Elements("Urls").Elements();
+
+            List<IUrlItem> urlItems = ExtractFromXml(elements);
+            this.urlItemList = urlItems.OfType<IUrlItem>().ToList();
+        }
+
+        private List<IUrlItem> ExtractFromXml(IEnumerable<XElement> elements)
+        {
             List<IUrlItem> urlItems = new List<IUrlItem>();
 
-            XDocument document = XDocument.Load(this.FilePath);
-
-            foreach (XElement element in document.Element("UrlGroup").Elements("Urls").Elements())
+            foreach (XElement element in elements)
             {
                 IUrlItem item = new UrlItem(
-                    (string)element.Attribute("Id"), 
+                    (string)element.Attribute("Id"),
                     (string)element.Attribute("Title"),
-                    element.Attribute("Category") != null ? (string)element.Attribute("Category") : "Unknown", 
-                    (string)element.Attribute("Description"), 
-                    (string)element.Attribute("Url"), 
-                    DateTime.Parse((string)element.Attribute("Created")), 
+                    element.Attribute("Category") != null ? (string)element.Attribute("Category") : "Unknown",
+                    (string)element.Attribute("Description"),
+                    (string)element.Attribute("Url"),
+                    DateTime.Parse((string)element.Attribute("Created")),
                     DateTime.Parse((string)element.Attribute("Modified"))
                 );
 
                 urlItems.Add(item);
             }
-
-            this.urlItemList = urlItems.OfType<IUrlItem>().ToList();
+            return urlItems.ToList();
         }
 
         protected override void SaveFile()
@@ -138,9 +147,15 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             XElement element = indexDocument.Element("UrlGroup").Element("Urls");
             element.RemoveNodes();
 
+            AppendToContainerElement(element, items);
+            indexDocument.Save(this.FilePath);
+        }
+
+        private void AppendToContainerElement(XElement containerElement, IUrlItem[] items)
+        {
             foreach (IUrlItem item in items)
             {
-                element.Add(new XElement("UrlItem",
+                containerElement.Add(new XElement("UrlItem",
                     new XAttribute("Id", item.Id),
                     new XAttribute("Title", item.Title),
                     new XAttribute("Category", item.Category != null ? item.Category : "Unknown"),
@@ -150,10 +165,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
                     new XAttribute("Modified", item.DateModified.ToString())
                 ));
             }
-
-            indexDocument.Save(this.FilePath);
         }
-
 
         public void Add(IUrlItem urlItem)
         {
@@ -163,6 +175,51 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         public void Remove(IUrlItem urlItem)
         {
             urlItemList.Remove(urlItem);
+        }
+
+        public string CopyXmlFor(string[] ids)
+        {
+            XDocument indexDocument = new XDocument();
+            XElement element = new XElement("UrlCopy");
+            indexDocument.Add(element);
+
+            IUrlItem[] selection = Items.Join(ids, itm => itm.Id, id => id,
+                (itm, id) => itm).ToArray();
+
+            AppendToContainerElement(element, selection);
+
+            return indexDocument.ToString();
+        }
+
+        public void PasteXml(string xml)
+        {
+            try
+            {
+                XElement parentElement = XElement.Parse(xml);
+                List<IUrlItem> urlItems = ExtractFromXml(parentElement.Elements());
+
+                // check that none exist within the list already...
+                var conflictCount = urlItems.Join(urlItemList, nw => nw.Id, ex => ex.Id,
+                    (nw, ex) => nw).Count();
+
+                if (conflictCount == 0)
+                {
+                    foreach (IUrlItem item in urlItems)
+                        this.urlItemList.Add(item);
+
+                    if (Paste != null)
+                        Paste(this, new EventArgs());
+                }
+                else
+                {
+                    if (PasteConflict != null)
+                        PasteConflict(this, new EventArgs());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -44,14 +44,17 @@
             this.urlListview = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colHostName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colCreated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuNavigate = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.contextMenu.SuspendLayout();
@@ -176,9 +179,8 @@
             this.colModified});
             this.urlListview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.urlListview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.urlListview.FullRowSelect = true;
             this.urlListview.HideSelection = false;
-            this.urlListview.HotTracking = true;
-            this.urlListview.HoverSelection = true;
             this.urlListview.Location = new System.Drawing.Point(0, 25);
             this.urlListview.Name = "urlListview";
             this.urlListview.Size = new System.Drawing.Size(595, 380);
@@ -186,7 +188,7 @@
             this.urlListview.UseCompatibleStateImageBehavior = false;
             this.urlListview.View = System.Windows.Forms.View.Details;
             this.urlListview.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.urlListview_ColumnClick);
-            this.urlListview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.urlListview_MouseClick);
+            this.urlListview.MouseUp += new System.Windows.Forms.MouseEventHandler(this.urlListview_MouseUp);
             // 
             // colTitle
             // 
@@ -198,6 +200,11 @@
             this.colHostName.Text = "Host";
             this.colHostName.Width = 180;
             // 
+            // colDescription
+            // 
+            this.colDescription.Text = "Description";
+            this.colDescription.Width = 600;
+            // 
             // colCreated
             // 
             this.colCreated.Text = "Created";
@@ -208,20 +215,18 @@
             this.colModified.Text = "Modified";
             this.colModified.Width = 120;
             // 
-            // colDescription
-            // 
-            this.colDescription.Text = "Description";
-            this.colDescription.Width = 600;
-            // 
             // contextMenu
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuNavigate,
             this.toolStripMenuItem1,
             this.mnuEdit,
-            this.mnuDelete});
+            this.mnuDelete,
+            this.toolStripMenuItem2,
+            this.mnuCopy,
+            this.mnuPaste});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(131, 76);
+            this.contextMenu.Size = new System.Drawing.Size(131, 126);
             // 
             // mnuNavigate
             // 
@@ -248,6 +253,25 @@
             this.mnuDelete.Size = new System.Drawing.Size(130, 22);
             this.mnuDelete.Text = "Delete";
             this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(127, 6);
+            // 
+            // mnuCopy
+            // 
+            this.mnuCopy.Name = "mnuCopy";
+            this.mnuCopy.Size = new System.Drawing.Size(130, 22);
+            this.mnuCopy.Text = "Copy";
+            this.mnuCopy.Click += new System.EventHandler(this.mnuCopy_Click);
+            // 
+            // mnuPaste
+            // 
+            this.mnuPaste.Name = "mnuPaste";
+            this.mnuPaste.Size = new System.Drawing.Size(130, 22);
+            this.mnuPaste.Text = "Paste";
+            this.mnuPaste.Click += new System.EventHandler(this.mnuPaste_Click);
             // 
             // UrlGroupControl
             // 
@@ -292,5 +316,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuEdit;
         private System.Windows.Forms.ToolStripMenuItem mnuDelete;
         private System.Windows.Forms.ColumnHeader colHostName;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem mnuCopy;
+        private System.Windows.Forms.ToolStripMenuItem mnuPaste;
     }
 }

@@ -38,8 +38,32 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             ReloadGroups();
             LoadListOfUrls();
-            RegisterDataFieldEvents();
-            RegisterFileEvents();
+
+            txtTitle.TextChanged += (s, e) => { SetModified(); };
+            codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
+            codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
+            urlDocument.Paste += urlDocument_Paste;
+            urlDocument.PasteConflict += urlDocument_PasteConflict;
+            this.Disposed += (s, e) =>
+            {
+                urlDocument.Paste -= urlDocument_Paste;
+                urlDocument.PasteConflict -= urlDocument_PasteConflict;
+            };
+        }
+
+        
+
+        private void urlDocument_PasteConflict(object sender, EventArgs e)
+        {
+            Dialogs.UrlsPasteConflictDetected(this);
+        }
+
+        private void urlDocument_Paste(object sender, EventArgs e)
+        {
+            ReloadGroups();
+            ReloadListview(urlListview, urlDocument.Items);
+            SetModified();
+            Dialogs.UrlsPastedSuccessfully(this);
         }
 
         public event EventHandler Modified;
@@ -63,17 +87,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public void Revert()
         {
-        }
-
-        private void RegisterDataFieldEvents()
-        {
-            txtTitle.TextChanged += (s, e) => { SetModified(); };
-        }
-
-        private void RegisterFileEvents()
-        {
-            codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
-            codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
         }
 
         private void LoadListOfUrls()
@@ -200,7 +213,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DeleteReference();
+            DeleteReferences();
         }
 
         private void EditReference()
@@ -220,16 +233,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void DeleteReference()
+        private void DeleteReferences()
         {
-            if (urlListview.SelectedItems.Count == 1)
+            if (urlListview.SelectedItems.Count >= 1)
             {
                 DialogResult result = Dialogs.DeleteUrlDialogPrompt(this);
 
                 if (result == DialogResult.Yes)
                 {
-                    IUrlItem item = urlListview.SelectedItems[0].Tag as IUrlItem;
-                    urlDocument.Remove(item);
+                    //IUrlItem item = urlListview.SelectedItems[0].Tag as IUrlItem;
+
+                    IEnumerable<IUrlItem> items = urlListview.SelectedItems.Cast<ListViewItem>()
+                        .Select(lv => lv.Tag).Cast<IUrlItem>();
+
+                    foreach (IUrlItem item in items)
+                        urlDocument.Remove(item);
+
                     ReloadGroups();
                     ReloadListview(urlListview, urlDocument.Items);
                     SetModified();
@@ -260,23 +279,24 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             return null;
         }
 
-        private void urlListview_MouseClick(object sender, MouseEventArgs e)
+        private void urlListview_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                if (urlListview.FocusedItem.Bounds.Contains(e.Location) == true)
-                {
-                    NavigateToUrl();
-                }
-            }
             if (e.Button == MouseButtons.Right)
             {
-                if (urlListview.FocusedItem.Bounds.Contains(e.Location) == true)
-                {
-                    contextMenu.Show(Cursor.Position);
-                }
-            }
+                int cnt = urlListview.SelectedItems.Count;
+                bool onItem = false;
 
+                if (urlListview.FocusedItem != null)
+                    onItem = urlListview.FocusedItem.Bounds.Contains(e.Location);
+
+                mnuPaste.Enabled = Clipboard.ContainsText();
+                mnuCopy.Enabled = cnt > 0 && onItem;
+                mnuNavigate.Enabled = cnt == 1 && onItem;
+                mnuEdit.Enabled = cnt == 1 && onItem;
+                mnuDelete.Enabled = cnt >= 1;
+
+                contextMenu.Show(Cursor.Position);
+            }
         }
 
         private void mnuNavigate_Click(object sender, EventArgs e)
@@ -291,12 +311,36 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void mnuDelete_Click(object sender, EventArgs e)
         {
-            DeleteReference();
+            DeleteReferences();
         }
 
         private void urlListview_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             listViewSorter.Sort(e.Column);
+        }
+
+        private void mnuCopy_Click(object sender, EventArgs e)
+        {
+            string[] ids = urlListview.SelectedItems.Cast<ListViewItem>()
+                .Select(lv => lv.Tag).Cast<IUrlItem>()
+                .Select(url => url.Id).ToArray();
+
+            string copyXml = urlDocument.CopyXmlFor(ids);
+            Clipboard.Clear();
+            Clipboard.SetText(copyXml);
+        }
+
+        private void mnuPaste_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string xml = Clipboard.GetText();
+                urlDocument.PasteXml(xml);
+            }
+            catch (Exception ex)
+            {
+                Dialogs.PasteUrlErrorDialogPrompt(this, ex);
+            }
         }
     }
 }

@@ -57,9 +57,15 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
+        public static void PasteUrlErrorDialogPrompt(IWin32Window owner, Exception exception)
+        {
+            MessageBox.Show(owner, string.Format("An error occurred while attempting to paste into this document:\n{0}", exception.Message),
+            ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         public static DialogResult DeleteUrlDialogPrompt(IWin32Window owner)
         {
-            return MessageBox.Show(owner, "Sure you want to delete this URL reference?",
+            return MessageBox.Show(owner, "Sure you want to delete these URL references?",
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
@@ -167,6 +173,18 @@ namespace CygSoft.CodeCat.UI.WinForms
         private static string CreateProjectFileFilter(string projectFileExt)
         {
             return string.Format("Code Cat Project Files *.{0} (*.{0})|*.{0}", projectFileExt);
+        }
+
+        public static void UrlsPastedSuccessfully(IWin32Window owner)
+        {
+            MessageBox.Show(owner, "URL set has been pasted successfully.",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void UrlsPasteConflictDetected(IWin32Window owner)
+        {
+            MessageBox.Show(owner, "URL set has paste has been aborted. Items with the same identifiers already exist within the document.",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
     }
 }

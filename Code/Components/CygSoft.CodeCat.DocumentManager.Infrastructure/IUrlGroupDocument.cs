@@ -20,6 +20,9 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 
     public interface IUrlGroupDocument : IVersionableFile, IPositionedItem
     {
+        event EventHandler Paste;
+        event EventHandler PasteConflict;
+
         string Title { get; set; }
         string DocumentType { get; set; }
         string Description { get; set; }
@@ -27,5 +30,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string[] Categories { get; }
         void Add(IUrlItem urlItem);
         void Remove(IUrlItem urlItem);
+        string CopyXmlFor(string[] ids);
+        void PasteXml(string xml);
     }
 }

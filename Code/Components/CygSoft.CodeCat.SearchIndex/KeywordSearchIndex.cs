@@ -102,18 +102,6 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         }
 
         /// <summary>
-        /// Fires the IndexModified event and is used to save after something has happened to the index.
-        /// Index items may have been modified for instance, their keywords have been changed.
-        /// </summary>
-        public void Update()
-        {
-            // At some point you might wish the code index items to raise their own changed events to 
-            // kick off this event.
-            if (IndexModified != null)
-                IndexModified(this, new EventArgs());
-        }
-
-        /// <summary>
         /// A single item has been  changed. This will be used when a code index items is added.
         /// </summary>
         /// <param name="item"></param>
@@ -152,7 +140,8 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             {
                 index.AddKeywords(delimitedKeywordList);
             }
-            this.Update();
+            if (IndexModified != null)
+                IndexModified(this, new EventArgs());
         }
 
         public void RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords)
@@ -163,7 +152,8 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             {
                 index.RemoveKeywords(keywords);
             }
-            this.Update();
+            if (IndexModified != null)
+                IndexModified(this, new EventArgs());
         }
 
         public bool IndexesExistFor(IKeywordIndexItem[] indeces, out IKeywordIndexItem[] existingIndeces)

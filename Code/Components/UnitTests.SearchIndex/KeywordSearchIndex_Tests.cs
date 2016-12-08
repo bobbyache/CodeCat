@@ -18,12 +18,17 @@ namespace UnitTests.Search.KeywordIndex
             Assert.AreEqual(searchIndex.CurrentVersion, 2);
             Assert.AreEqual(searchIndex.FilePath, @"C:\keywords\keyword_index.xml");
             Assert.AreEqual(searchIndex.FileTitle, "keyword_index.xml");
+
+            //searchIndex.Update(
         }
 
         [TestMethod]
         public void KeywordSearchIndex_AddItems()
         {
-            //IKeywordSearchIndex searchIndex = new KeywordSearchIndex(@"C:\keywords\keyword_index.xml", 2);
+            IKeywordSearchIndex searchIndex = new KeywordSearchIndex(@"C:\keywords\keyword_index.xml", 2);
+            
+            //KeywordIndexItem keywordIndexItem = new 
+
             //searchIndex.AddKeywords(
         }
     }
