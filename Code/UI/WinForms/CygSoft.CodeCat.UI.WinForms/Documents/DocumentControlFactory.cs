@@ -35,8 +35,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 return NewImageDocument(document, groupOwner, application, modifiedEventHandler);
             else if (document is IImageSetDocument)
                 return NewImageSetControl(document, groupOwner, application, modifiedEventHandler);
+            else if (document is IRichTextDocument)
+                return NewRichTextDocument(document, groupOwner, application, modifiedEventHandler);
             else
                 return null;
+        }
+
+        private static IDocumentItemControl NewRichTextDocument(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        {
+            RtfDocumentControl documentControl = new RtfDocumentControl(application, groupOwner as ICodeGroupDocumentSet, document as IRichTextDocument);
+            documentControl.Modified += modifiedEventHandler;
+            return documentControl;
         }
 
         private static IDocumentItemControl NewImageSetControl(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)

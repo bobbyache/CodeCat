@@ -19,6 +19,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         public const string PDF = "PDF";
         public const string IMG = "PNG";
         public const string WEB = "HTML";
+        public const string RTF = "RTF";
 
         private static ImageList imageList = new ImageList();
         private static Dictionary<string, Icon> iconDictonary = new Dictionary<string, Icon>();

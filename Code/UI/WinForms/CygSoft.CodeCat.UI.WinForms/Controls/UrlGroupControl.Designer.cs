@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UrlGroupControl));
-            this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
@@ -59,14 +58,6 @@
             this.toolStrip2.SuspendLayout();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // syntaxDocument
-            // 
-            this.syntaxDocument.Lines = new string[] {
-        ""};
-            this.syntaxDocument.MaxUndoBufferSize = 1000;
-            this.syntaxDocument.Modified = false;
-            this.syntaxDocument.UndoStep = 0;
             // 
             // toolStrip1
             // 
@@ -294,7 +285,6 @@
 
         #endregion
 
-        private Alsing.SourceCode.SyntaxDocument syntaxDocument;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private ToolStripSpringTextBox txtTitle;

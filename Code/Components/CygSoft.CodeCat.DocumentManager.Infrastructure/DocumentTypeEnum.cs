@@ -13,6 +13,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         PdfDocument,
         QikScript,
         ImageDocument,
-        ImageSet
+        ImageSet,
+        RichTextDocument
     }
 }

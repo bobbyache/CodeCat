@@ -45,6 +45,9 @@ namespace CygSoft.CodeCat.DocumentManager
             if (docArgs.DocumentType == "IMAGESET")
                 return CreateImageSet(docArgs);
 
+            if (docArgs.DocumentType == "RICHTEXT")
+                return CreateRichText(docArgs);
+
             return null;
         }
 
@@ -69,6 +72,8 @@ namespace CygSoft.CodeCat.DocumentManager
 
                 case "IMAGESET":
                     return DocumentTypeEnum.ImageSet;
+                case "RICHTEXT":
+                    return DocumentTypeEnum.RichTextDocument;
 
                 default:
                     return DocumentTypeEnum.CodeSnippet;
@@ -91,6 +96,8 @@ namespace CygSoft.CodeCat.DocumentManager
                     return "IMAGEDOCUMENT";
                 case DocumentTypeEnum.ImageSet:
                     return "IMAGESET";
+                case DocumentTypeEnum.RichTextDocument:
+                    return "RICHTEXT";
                 default:
                     return "CODESNIPPET";
             }
@@ -110,6 +117,14 @@ namespace CygSoft.CodeCat.DocumentManager
                 return new ImageDocument(docArgs.Folder, docArgs.Title, docArgs.Extension);
             else
                 return new ImageDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description);
+        }
+
+        private static IDocument CreateRichText(DocArgs docArgs)
+        {
+            if (docArgs.Id == null)
+                return new RichTextDocument(docArgs.Folder, docArgs.Title);
+            else
+                return new RichTextDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
         private static IDocument CreatePdfDocument(DocArgs docArgs)

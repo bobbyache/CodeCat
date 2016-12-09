@@ -326,6 +326,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsModified = true;
         }
 
+        private void btnRichText_Click(object sender, EventArgs e)
+        {
+            IRichTextDocument richTextDocument = codeItemFile.AddDocument(DocumentTypeEnum.RichTextDocument, null, "rtf") as IRichTextDocument;
+            this.IsModified = true;
+        }
+
         private void btnRemoveCodeItem_Click(object sender, EventArgs e)
         {
             if (!tabManager.HasTabs)
@@ -401,13 +407,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         #endregion
-
-
-
-
-
-
-
 
     }
 }

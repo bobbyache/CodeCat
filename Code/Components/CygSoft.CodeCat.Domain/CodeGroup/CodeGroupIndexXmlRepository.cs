@@ -137,6 +137,19 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", urlFile.Ordinal.ToString())
                         ));
                 }
+                else if (docFile is IRichTextDocument)
+                {
+                    IRichTextDocument urlFile = docFile as IRichTextDocument;
+
+                    filesElement.Add(new XElement("Document",
+                        new XAttribute("Id", urlFile.Id),
+                        new XAttribute("Title", urlFile.Title),
+                        new XAttribute("DocType", urlFile.DocumentType),
+                        new XAttribute("Description", urlFile.Description == null ? "" : urlFile.Description),
+                        new XAttribute("Ext", urlFile.FileExtension),
+                        new XAttribute("Ordinal", urlFile.Ordinal.ToString())
+                        ));
+                }
             }
 
             indexDocument.Save(this.filePath);

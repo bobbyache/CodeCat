@@ -56,6 +56,7 @@
     <Compile Include="Documents\ImageSet\OrderedImageSetDocument.cs" />
     <Compile Include="Documents\PdfDocument.cs" />
     <Compile Include="Documents\QikScriptDocument.cs" />
+    <Compile Include="Documents\RichTextDocument.cs" />
     <Compile Include="Documents\TextDocument.cs" />
     <Compile Include="Documents\TextDocumentVersion.cs" />
     <Compile Include="Documents\UrlGroupDocument.cs" />
