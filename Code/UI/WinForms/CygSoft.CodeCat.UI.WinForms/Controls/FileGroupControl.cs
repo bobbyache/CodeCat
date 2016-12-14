@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain;
+using System.Diagnostics;
+using System.IO;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -24,8 +26,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             InitializeComponent();
 
-            this.listViewSorter = new ListViewSorter(this.urlListview);
-            urlListview.Sorting = SortOrder.Ascending;
+            this.listViewSorter = new ListViewSorter(this.fileListview);
+            fileListview.Sorting = SortOrder.Ascending;
 
             btnAdd.Image = Resources.GetImage(Constants.ImageKeys.AddSnippet);
             btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
@@ -76,7 +78,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void LoadListOfUrls()
         {
             txtTitle.Text = fileDocument.Title;
-            ReloadListview(urlListview, fileDocument.Items);
+            ReloadListview(fileListview, fileDocument.Items);
             this.IsModified = false;
             SetChangeStatus();
         }
@@ -85,6 +87,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ReloadListview(ListView listView, IFileGroupFile[] indexItems)
         {
             listView.Items.Clear();
+            listView.SmallImageList = IconRepository.NewFileImageList(indexItems.Select(idx => idx.FileExtension).ToArray());
+
             foreach (IFileGroupFile item in indexItems)
             {
                 ListViewItem listItem = CreateListviewItem(listView, item);
@@ -100,11 +104,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             ListViewItem listItem = new ListViewItem();
 
             listItem.Name = item.Id;
+            listItem.ImageKey = item.FileExtension;
             listItem.Tag = item;
             listItem.ToolTipText = item.FileName;
             listItem.Text = item.Title;
-            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.FileName));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Description));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.FileName));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
 
@@ -113,22 +118,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void ReloadGroups()
         {
-            this.urlListview.Groups.Clear();
+            this.fileListview.Groups.Clear();
             string[] categories = this.fileDocument.Categories;
             foreach (string category in categories)
             {
                 ListViewGroup group = new ListViewGroup(category);
                 group.HeaderAlignment = HorizontalAlignment.Left;
-                this.urlListview.Groups.Add(group);
+                this.fileListview.Groups.Add(group);
             }
-            urlListview.ShowGroups = this.urlListview.Groups.Count > 1;
+            fileListview.ShowGroups = this.fileListview.Groups.Count > 1;
         }
 
         private void GroupItem(ListViewItem listItem, IFileGroupFile item)
         {
             bool groupExists = false;
 
-            foreach (ListViewGroup group in this.urlListview.Groups)
+            foreach (ListViewGroup group in this.fileListview.Groups)
             {
                 if (group.Header == item.Category)
                 {
@@ -144,7 +149,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 ListViewGroup group = new ListViewGroup(item.Category);
                 group.HeaderAlignment = HorizontalAlignment.Left;
-                this.urlListview.Groups.Add(group);
+                this.fileListview.Groups.Add(group);
                 listItem.Group = group;
             }
         }
@@ -184,7 +189,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 fileDocument.Add(dialog.EditedFile);
                 ReloadGroups();
-                ReloadListview(urlListview, fileDocument.Items);
+                ReloadListview(fileListview, fileDocument.Items);
                 SetModified();
             }
         }
@@ -201,17 +206,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void EditReference()
         {
-            if (urlListview.SelectedItems.Count == 1)
+            if (fileListview.SelectedItems.Count == 1)
             {
                 // TODO: Instead of pulling the file object out of the ListViewItemTag we should be getting it from the FileGroup object. In fact, need to run a search on .Tag and see where you can improve this design.
-                IFileGroupFile item = urlListview.SelectedItems[0].Tag as IFileGroupFile;
+                IFileGroupFile item = fileListview.SelectedItems[0].Tag as IFileGroupFile;
                 FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(item, fileDocument);
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
                     ReloadGroups();
-                    ReloadListview(urlListview, fileDocument.Items);
+                    ReloadListview(fileListview, fileDocument.Items);
                     SetModified();
                 }
             }
@@ -219,7 +224,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void DeleteReferences()
         {
-            if (urlListview.SelectedItems.Count >= 1)
+            if (fileListview.SelectedItems.Count >= 1)
             {
                 DialogResult result = Dialogs.DeleteUrlDialogPrompt(this);
 
@@ -227,14 +232,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 {
                     //IFileGroupFile item = urlListview.SelectedItems[0].Tag as IFileGroupFile;
 
-                    IEnumerable<IFileGroupFile> items = urlListview.SelectedItems.Cast<ListViewItem>()
+                    IEnumerable<IFileGroupFile> items = fileListview.SelectedItems.Cast<ListViewItem>()
                         .Select(lv => lv.Tag).Cast<IFileGroupFile>();
 
                     foreach (IFileGroupFile item in items)
                         fileDocument.Remove(item);
 
                     ReloadGroups();
-                    ReloadListview(urlListview, fileDocument.Items);
+                    ReloadListview(fileListview, fileDocument.Items);
                     SetModified();
                 }
             }
@@ -267,15 +272,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (e.Button == MouseButtons.Right)
             {
-                int cnt = urlListview.SelectedItems.Count;
+                int cnt = fileListview.SelectedItems.Count;
                 bool onItem = false;
 
-                if (urlListview.FocusedItem != null)
-                    onItem = urlListview.FocusedItem.Bounds.Contains(e.Location);
+                if (fileListview.FocusedItem != null)
+                    onItem = fileListview.FocusedItem.Bounds.Contains(e.Location);
 
-                mnuPaste.Enabled = Clipboard.ContainsText();
-                mnuCopy.Enabled = cnt > 0 && onItem;
-                mnuNavigate.Enabled = cnt == 1 && onItem;
+                mnuOpenWith.Enabled = false;
+                mnuSaveAs.Enabled = cnt == 1 && onItem;
+                //mnuPaste.Enabled = Clipboard.ContainsText();
+                //mnuCopy.Enabled = cnt > 0 && onItem;
+                mnuOpen.Enabled = cnt == 1 && onItem;
                 mnuEdit.Enabled = cnt == 1 && onItem;
                 mnuDelete.Enabled = cnt >= 1;
 
@@ -285,7 +292,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void mnuNavigate_Click(object sender, EventArgs e)
         {
-            //NavigateToUrl();
+            OpenFile();
+        }
+
+
+        private void OpenFile()
+        {
+            try
+            {
+                IFileGroupFile item = SelectedItem(fileListview);
+                if (item != null)
+                    System.Diagnostics.Process.Start(item.FilePath);
+            }
+            catch (Exception ex)
+            {
+                Dialogs.WebPageErrorNotification(this, ex);
+            }
         }
 
         private void mnuEdit_Click(object sender, EventArgs e)
@@ -301,6 +323,49 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void urlListview_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             listViewSorter.Sort(e.Column);
+        }
+
+        private void mnuOpenWith_Click(object sender, EventArgs e)
+        {
+            //IFileGroupFile item = SelectedItem(fileListview);
+            //if (item != null)
+            //{
+            //    OpenWithDialog dialog = new OpenWithDialog();
+            //    dialog.Open(item.FilePath);
+            //}
+        }
+
+        private void mnuSaveAs_Click(object sender, EventArgs e)
+        {
+            IFileGroupFile item = SelectedItem(fileListview);
+            if (item != null)
+            {
+                SaveFileDialog saveDialog = new SaveFileDialog();
+                saveDialog.Filter = string.Format("File *{0} (*{0})|*{0}", item.FileExtension);
+                saveDialog.DefaultExt = "*{0}";
+                saveDialog.Title = string.Format("Save File");
+                saveDialog.AddExtension = true;
+                saveDialog.FilterIndex = 0;
+                saveDialog.OverwritePrompt = true;
+
+                DialogResult result = saveDialog.ShowDialog(this);
+                string filePath = saveDialog.FileName;
+
+                if (result == DialogResult.OK)
+                {
+                    File.Copy(item.FilePath, saveDialog.FileName, true);
+                }
+            }
+        }
+
+        private void mnuEdit_Click_1(object sender, EventArgs e)
+        {
+            EditReference();
+        }
+
+        private void mnuDelete_Click_1(object sender, EventArgs e)
+        {
+            DeleteReferences();
         }
     }
 }

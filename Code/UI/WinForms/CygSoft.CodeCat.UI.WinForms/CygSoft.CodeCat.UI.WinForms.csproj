@@ -171,6 +171,7 @@
     <Compile Include="Dialogs\ImageDescriptionDialog.Designer.cs">
       <DependentUpon>ImageDescriptionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\OpenWithDialog.cs" />
     <Compile Include="Dialogs\UrlItemEditDialog.cs">
       <SubType>Form</SubType>
     </Compile>

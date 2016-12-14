@@ -35,15 +35,17 @@
             this.mnuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuNavigate = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuOpenWith = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.colModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colCreated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colFileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.urlListview = new System.Windows.Forms.ListView();
+            this.fileListview = new System.Windows.Forms.ListView();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -61,42 +63,48 @@
             // 
             // mnuPaste
             // 
+            this.mnuPaste.Enabled = false;
             this.mnuPaste.Name = "mnuPaste";
-            this.mnuPaste.Size = new System.Drawing.Size(130, 22);
+            this.mnuPaste.Size = new System.Drawing.Size(152, 22);
             this.mnuPaste.Text = "Paste";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(127, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
             // 
             // mnuDelete
             // 
             this.mnuDelete.Name = "mnuDelete";
-            this.mnuDelete.Size = new System.Drawing.Size(130, 22);
+            this.mnuDelete.Size = new System.Drawing.Size(152, 22);
             this.mnuDelete.Text = "Delete";
+            this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click_1);
             // 
             // mnuEdit
             // 
             this.mnuEdit.Name = "mnuEdit";
-            this.mnuEdit.Size = new System.Drawing.Size(130, 22);
+            this.mnuEdit.Size = new System.Drawing.Size(152, 22);
             this.mnuEdit.Text = "Edit";
+            this.mnuEdit.Click += new System.EventHandler(this.mnuEdit_Click_1);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(127, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
-            // mnuNavigate
+            // mnuOpen
             // 
-            this.mnuNavigate.Name = "mnuNavigate";
-            this.mnuNavigate.Size = new System.Drawing.Size(130, 22);
-            this.mnuNavigate.Text = "Navigate...";
+            this.mnuOpen.Name = "mnuOpen";
+            this.mnuOpen.Size = new System.Drawing.Size(152, 22);
+            this.mnuOpen.Text = "Open...";
+            this.mnuOpen.Click += new System.EventHandler(this.mnuNavigate_Click);
             // 
             // contextMenu
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuNavigate,
+            this.mnuOpen,
+            this.mnuOpenWith,
+            this.mnuSaveAs,
             this.toolStripMenuItem1,
             this.mnuEdit,
             this.mnuDelete,
@@ -104,12 +112,28 @@
             this.mnuCopy,
             this.mnuPaste});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(131, 126);
+            this.contextMenu.Size = new System.Drawing.Size(153, 192);
+            // 
+            // mnuOpenWith
+            // 
+            this.mnuOpenWith.Enabled = false;
+            this.mnuOpenWith.Name = "mnuOpenWith";
+            this.mnuOpenWith.Size = new System.Drawing.Size(152, 22);
+            this.mnuOpenWith.Text = "Open with...";
+            this.mnuOpenWith.Click += new System.EventHandler(this.mnuOpenWith_Click);
+            // 
+            // mnuSaveAs
+            // 
+            this.mnuSaveAs.Name = "mnuSaveAs";
+            this.mnuSaveAs.Size = new System.Drawing.Size(152, 22);
+            this.mnuSaveAs.Text = "Save as...";
+            this.mnuSaveAs.Click += new System.EventHandler(this.mnuSaveAs_Click);
             // 
             // mnuCopy
             // 
+            this.mnuCopy.Enabled = false;
             this.mnuCopy.Name = "mnuCopy";
-            this.mnuCopy.Size = new System.Drawing.Size(130, 22);
+            this.mnuCopy.Size = new System.Drawing.Size(152, 22);
             this.mnuCopy.Text = "Copy";
             // 
             // colModified
@@ -137,25 +161,26 @@
             this.colTitle.Text = "Title";
             this.colTitle.Width = 550;
             // 
-            // urlListview
+            // fileListview
             // 
-            this.urlListview.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.urlListview.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.fileListview.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.fileListview.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colTitle,
-            this.colFileName,
             this.colDescription,
+            this.colFileName,
             this.colCreated,
             this.colModified});
-            this.urlListview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.urlListview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.urlListview.FullRowSelect = true;
-            this.urlListview.HideSelection = false;
-            this.urlListview.Location = new System.Drawing.Point(0, 25);
-            this.urlListview.Name = "urlListview";
-            this.urlListview.Size = new System.Drawing.Size(485, 423);
-            this.urlListview.TabIndex = 12;
-            this.urlListview.UseCompatibleStateImageBehavior = false;
-            this.urlListview.View = System.Windows.Forms.View.Details;
+            this.fileListview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileListview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fileListview.FullRowSelect = true;
+            this.fileListview.HideSelection = false;
+            this.fileListview.Location = new System.Drawing.Point(0, 25);
+            this.fileListview.Name = "fileListview";
+            this.fileListview.Size = new System.Drawing.Size(485, 423);
+            this.fileListview.TabIndex = 12;
+            this.fileListview.UseCompatibleStateImageBehavior = false;
+            this.fileListview.View = System.Windows.Forms.View.Details;
+            this.fileListview.MouseUp += new System.Windows.Forms.MouseEventHandler(this.urlListview_MouseUp);
             // 
             // lblEditStatus
             // 
@@ -261,7 +286,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.urlListview);
+            this.Controls.Add(this.fileListview);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.toolStrip1);
             this.Name = "FileGroupControl";
@@ -283,7 +308,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuDelete;
         private System.Windows.Forms.ToolStripMenuItem mnuEdit;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem mnuNavigate;
+        private System.Windows.Forms.ToolStripMenuItem mnuOpen;
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuCopy;
         private System.Windows.Forms.ColumnHeader colModified;
@@ -291,7 +316,7 @@
         private System.Windows.Forms.ColumnHeader colDescription;
         private System.Windows.Forms.ColumnHeader colFileName;
         private System.Windows.Forms.ColumnHeader colTitle;
-        private System.Windows.Forms.ListView urlListview;
+        private System.Windows.Forms.ListView fileListview;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
         private System.Windows.Forms.ToolStripComboBox cboFontSize;
         private System.Windows.Forms.ToolStrip toolStrip2;
@@ -302,5 +327,7 @@
         private ToolStripSpringTextBox txtTitle;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mnuOpenWith;
+        private System.Windows.Forms.ToolStripMenuItem mnuSaveAs;
     }
 }

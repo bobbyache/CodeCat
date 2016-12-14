@@ -26,6 +26,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public static ImageList ImageList { get { return imageList; } }
 
+
+
         private static Icon qikIcon;
         public static Icon QikIcon
         {
@@ -117,6 +119,19 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
 
             iconDictonary.Add(PDF, IconByExtension(PDF));
+        }
+
+        public static ImageList NewFileImageList(string[] extensions)
+        {
+            ImageList imageList = new ImageList();
+
+            foreach (string ext in extensions)
+            {
+                Icon icon = IconByExtension(ext);
+                if (!imageList.Images.ContainsKey(ext))
+                    imageList.Images.Add(ext, icon);
+            }
+            return imageList;
         }
 
         public static Image GetImage(string syntax)

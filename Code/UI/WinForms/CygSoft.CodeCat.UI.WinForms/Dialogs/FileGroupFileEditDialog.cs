@@ -71,7 +71,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
                 fileGroupFile.Title = txtTitle.Text;
                 fileGroupFile.ChangeFileName(txtFileName.Text.Trim() + lblExtension.Text);
-                //fileItem.FileName = Path.GetFileName(txtFile.Text.Trim());
                 fileGroupFile.Description = txtDescription.Text;
                 fileGroupFile.DateModified = DateTime.Now;
                 fileGroupFile.Category = string.IsNullOrEmpty(cboCategory.Text) ? "Unknown" : cboCategory.Text.ToString();
@@ -86,18 +85,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 Dialogs.NoInputValueForMandatoryField(this, "Title");
                 return false;
             }
-
-            //if (this.fileGroupFile == null)
-            //{
-            //    if (file
-            //}
-            //if (fileGroupDocument.ValidateFileName(
-
-            //if (txtFilePath.Text.Trim() == "" || !File.Exists(txtFilePath.Text.Trim()))
-            //{
-            //    Dialogs.NoInputValueForMandatoryField(this, "File Path");
-            //    return false;
-            //}
 
             // In this case, no file name exists (no file has ever been captured for a source file)... hence no extension.
             // so ensure the user has actually selected a file.
