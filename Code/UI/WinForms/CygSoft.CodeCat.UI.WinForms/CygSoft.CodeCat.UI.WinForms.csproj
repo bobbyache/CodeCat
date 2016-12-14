@@ -82,6 +82,12 @@
     <Compile Include="Controls\CodeItemCtrl.Designer.cs">
       <DependentUpon>CodeItemCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FileGroupControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FileGroupControl.Designer.cs">
+      <DependentUpon>FileGroupControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -153,6 +159,12 @@
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Args.cs" />
+    <Compile Include="Dialogs\FileGroupFileEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FileGroupFileEditDialog.Designer.cs">
+      <DependentUpon>FileGroupFileEditDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ImageDescriptionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,6 +276,9 @@
     <EmbeddedResource Include="Controls\CodeSearchResultsControl.resx">
       <DependentUpon>CodeSearchResultsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FileGroupControl.resx">
+      <DependentUpon>FileGroupControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ImageControl.resx">
       <DependentUpon>ImageControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -296,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EnterKeywordsDialog.resx">
       <DependentUpon>EnterKeywordsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FileGroupFileEditDialog.resx">
+      <DependentUpon>FileGroupFileEditDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ImageDescriptionDialog.resx">
       <DependentUpon>ImageDescriptionDialog.cs</DependentUpon>

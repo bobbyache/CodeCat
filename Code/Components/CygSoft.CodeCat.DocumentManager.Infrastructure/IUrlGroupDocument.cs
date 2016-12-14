@@ -32,5 +32,6 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         void Remove(IUrlItem urlItem);
         string CopyXmlFor(string[] ids);
         void PasteXml(string xml);
+        IUrlItem CreateNewUrl();
     }
 }

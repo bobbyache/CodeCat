@@ -250,11 +250,5 @@ namespace CygSoft.CodeCat.Domain
         {
             return this.codeGroupLibrary.OpenTarget(keywordIndexItem) as ICodeGroupDocumentSet;
         }
-
-        public IUrlItem NewUrl()
-        {
-            IUrlItem item = new UrlItem();
-            return item;
-        }
     }
 }

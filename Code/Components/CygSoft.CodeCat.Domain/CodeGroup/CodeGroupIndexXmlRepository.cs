@@ -100,54 +100,67 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                 }
                 else if (docFile is IPdfDocument)
                 {
-                    IPdfDocument urlFile = docFile as IPdfDocument;
+                    IPdfDocument pdfDoc = docFile as IPdfDocument;
 
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", urlFile.Id),
-                        new XAttribute("Title", urlFile.Title),
-                        new XAttribute("DocType", urlFile.DocumentType),
-                        new XAttribute("Description", urlFile.Description == null ? "" : urlFile.Description),
-                        new XAttribute("Ext", urlFile.FileExtension),
-                        new XAttribute("Ordinal", urlFile.Ordinal.ToString())
+                        new XAttribute("Id", pdfDoc.Id),
+                        new XAttribute("Title", pdfDoc.Title),
+                        new XAttribute("DocType", pdfDoc.DocumentType),
+                        new XAttribute("Description", pdfDoc.Description == null ? "" : pdfDoc.Description),
+                        new XAttribute("Ext", pdfDoc.FileExtension),
+                        new XAttribute("Ordinal", pdfDoc.Ordinal.ToString())
                         ));
                 }
                 else if (docFile is IImageDocument)
                 {
-                    IImageDocument urlFile = docFile as IImageDocument;
+                    IImageDocument imgFile = docFile as IImageDocument;
 
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", urlFile.Id),
-                        new XAttribute("Title", urlFile.Title),
-                        new XAttribute("DocType", urlFile.DocumentType),
-                        new XAttribute("Description", urlFile.Description == null ? "" : urlFile.Description),
-                        new XAttribute("Ext", urlFile.FileExtension),
-                        new XAttribute("Ordinal", urlFile.Ordinal.ToString())
+                        new XAttribute("Id", imgFile.Id),
+                        new XAttribute("Title", imgFile.Title),
+                        new XAttribute("DocType", imgFile.DocumentType),
+                        new XAttribute("Description", imgFile.Description == null ? "" : imgFile.Description),
+                        new XAttribute("Ext", imgFile.FileExtension),
+                        new XAttribute("Ordinal", imgFile.Ordinal.ToString())
                         ));
                 }
                 else if (docFile is IImageSetDocument)
                 {
-                    IImageSetDocument urlFile = docFile as IImageSetDocument;
+                    IImageSetDocument imgSetFile = docFile as IImageSetDocument;
 
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", urlFile.Id),
-                        new XAttribute("Title", urlFile.Title),
-                        new XAttribute("DocType", urlFile.DocumentType),
-                        new XAttribute("Description", urlFile.Description == null ? "" : urlFile.Description),
-                        new XAttribute("Ext", urlFile.FileExtension),
-                        new XAttribute("Ordinal", urlFile.Ordinal.ToString())
+                        new XAttribute("Id", imgSetFile.Id),
+                        new XAttribute("Title", imgSetFile.Title),
+                        new XAttribute("DocType", imgSetFile.DocumentType),
+                        new XAttribute("Description", imgSetFile.Description == null ? "" : imgSetFile.Description),
+                        new XAttribute("Ext", imgSetFile.FileExtension),
+                        new XAttribute("Ordinal", imgSetFile.Ordinal.ToString())
                         ));
                 }
                 else if (docFile is IRichTextDocument)
                 {
-                    IRichTextDocument urlFile = docFile as IRichTextDocument;
+                    IRichTextDocument rtfFile = docFile as IRichTextDocument;
 
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", urlFile.Id),
-                        new XAttribute("Title", urlFile.Title),
-                        new XAttribute("DocType", urlFile.DocumentType),
-                        new XAttribute("Description", urlFile.Description == null ? "" : urlFile.Description),
-                        new XAttribute("Ext", urlFile.FileExtension),
-                        new XAttribute("Ordinal", urlFile.Ordinal.ToString())
+                        new XAttribute("Id", rtfFile.Id),
+                        new XAttribute("Title", rtfFile.Title),
+                        new XAttribute("DocType", rtfFile.DocumentType),
+                        new XAttribute("Description", rtfFile.Description == null ? "" : rtfFile.Description),
+                        new XAttribute("Ext", rtfFile.FileExtension),
+                        new XAttribute("Ordinal", rtfFile.Ordinal.ToString())
+                        ));
+                }
+                else if (docFile is IFileGroupDocument)
+                {
+                    IFileGroupDocument fileGrpFile = docFile as IFileGroupDocument;
+
+                    filesElement.Add(new XElement("Document",
+                        new XAttribute("Id", fileGrpFile.Id),
+                        new XAttribute("Title", fileGrpFile.Title),
+                        new XAttribute("DocType", fileGrpFile.DocumentType),
+                        new XAttribute("Description", fileGrpFile.Description == null ? "" : fileGrpFile.Description),
+                        new XAttribute("Ext", fileGrpFile.FileExtension),
+                        new XAttribute("Ordinal", fileGrpFile.Ordinal.ToString())
                         ));
                 }
             }

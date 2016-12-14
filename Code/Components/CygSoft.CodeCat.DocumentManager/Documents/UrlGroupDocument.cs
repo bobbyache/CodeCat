@@ -91,6 +91,12 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             get { return this.Items.Select(r => r.Category).Distinct().ToArray(); }
         }
 
+        public IUrlItem CreateNewUrl()
+        {
+            IUrlItem item = new UrlItem();
+            return item;
+        }
+
         protected override IFileVersion NewVersion(DateTime timeStamp, string description)
         {
             //return new TextDocumentVersion(new VersionPathGenerator(this.FilePath, timeStamp), description, this.Text);

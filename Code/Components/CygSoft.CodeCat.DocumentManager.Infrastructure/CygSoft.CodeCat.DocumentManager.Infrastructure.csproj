@@ -47,6 +47,7 @@
     <Compile Include="IDocument.cs" />
     <Compile Include="IDocumentIndexRepository.cs" />
     <Compile Include="IFile.cs" />
+    <Compile Include="IFileGroupDocument.cs" />
     <Compile Include="IFileVersion.cs" />
     <Compile Include="IDocumentIndex.cs" />
     <Compile Include="IImageDocument.cs" />

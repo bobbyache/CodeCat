@@ -48,9 +48,12 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAddItem = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnAddCode = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAddPdfDocument = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAddImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRichText = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAddHyperlinks = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAddPdfDocument = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnAddImage = new System.Windows.Forms.ToolStripMenuItem();
             this.btnImageSet = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRemoveCodeItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -58,9 +61,7 @@
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.tabControlFile = new System.Windows.Forms.TabControl();
-            this.btnRichText = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnFileGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -215,6 +216,7 @@
             this.btnAddCode,
             this.btnRichText,
             this.toolStripMenuItem1,
+            this.btnFileGroup,
             this.btnAddHyperlinks,
             this.btnAddPdfDocument,
             this.toolStripMenuItem2,
@@ -233,19 +235,17 @@
             this.btnAddCode.Text = "Single Code Snippet";
             this.btnAddCode.Click += new System.EventHandler(this.btnAddCode_Click);
             // 
-            // btnAddPdfDocument
+            // btnRichText
             // 
-            this.btnAddPdfDocument.Name = "btnAddPdfDocument";
-            this.btnAddPdfDocument.Size = new System.Drawing.Size(216, 22);
-            this.btnAddPdfDocument.Text = "Single PDF Document";
-            this.btnAddPdfDocument.Click += new System.EventHandler(this.btnAddPdfDocument_Click);
+            this.btnRichText.Name = "btnRichText";
+            this.btnRichText.Size = new System.Drawing.Size(216, 22);
+            this.btnRichText.Text = "Single Rich Text Document";
+            this.btnRichText.Click += new System.EventHandler(this.btnRichText_Click);
             // 
-            // btnAddImage
+            // toolStripMenuItem1
             // 
-            this.btnAddImage.Name = "btnAddImage";
-            this.btnAddImage.Size = new System.Drawing.Size(216, 22);
-            this.btnAddImage.Text = "Single Image View";
-            this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(213, 6);
             // 
             // btnAddHyperlinks
             // 
@@ -253,6 +253,25 @@
             this.btnAddHyperlinks.Size = new System.Drawing.Size(216, 22);
             this.btnAddHyperlinks.Text = "Web References";
             this.btnAddHyperlinks.Click += new System.EventHandler(this.btnAddHyperlinks_Click);
+            // 
+            // btnAddPdfDocument
+            // 
+            this.btnAddPdfDocument.Name = "btnAddPdfDocument";
+            this.btnAddPdfDocument.Size = new System.Drawing.Size(216, 22);
+            this.btnAddPdfDocument.Text = "Single PDF Document";
+            this.btnAddPdfDocument.Click += new System.EventHandler(this.btnAddPdfDocument_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(213, 6);
+            // 
+            // btnAddImage
+            // 
+            this.btnAddImage.Name = "btnAddImage";
+            this.btnAddImage.Size = new System.Drawing.Size(216, 22);
+            this.btnAddImage.Text = "Single Image View";
+            this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
             // 
             // btnImageSet
             // 
@@ -313,22 +332,12 @@
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
             // 
-            // btnRichText
+            // btnFileGroup
             // 
-            this.btnRichText.Name = "btnRichText";
-            this.btnRichText.Size = new System.Drawing.Size(216, 22);
-            this.btnRichText.Text = "Single Rich Text Document";
-            this.btnRichText.Click += new System.EventHandler(this.btnRichText_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(213, 6);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(213, 6);
+            this.btnFileGroup.Name = "btnFileGroup";
+            this.btnFileGroup.Size = new System.Drawing.Size(216, 22);
+            this.btnFileGroup.Text = "File Group";
+            this.btnFileGroup.Click += new System.EventHandler(this.btnFileGroup_Click);
             // 
             // CodeGroupDocument
             // 
@@ -386,5 +395,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnRichText;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem btnFileGroup;
     }
 }

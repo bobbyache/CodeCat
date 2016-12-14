@@ -332,6 +332,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsModified = true;
         }
 
+        private void btnFileGroup_Click(object sender, EventArgs e)
+        {
+            IFileGroupDocument richTextDocument = codeItemFile.AddDocument(DocumentTypeEnum.FileGroup, null, null) as IFileGroupDocument;
+            this.IsModified = true;
+        }
+
         private void btnRemoveCodeItem_Click(object sender, EventArgs e)
         {
             if (!tabManager.HasTabs)
@@ -407,6 +413,5 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         #endregion
-
     }
 }

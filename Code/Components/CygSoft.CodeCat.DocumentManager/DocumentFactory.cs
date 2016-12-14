@@ -21,6 +21,7 @@ namespace CygSoft.CodeCat.DocumentManager
             public string Description { get; set; }
             public string Extension {get; set;}
             public string Syntax { get; set; }
+            public string FileName { get; set; }
         }
 
         public static IDocument Create(DocumentTypeEnum documentType, string folder, string title, string id = null, int ordinal = 0, string description = null, string extension = null, string syntax = null)
@@ -47,6 +48,9 @@ namespace CygSoft.CodeCat.DocumentManager
 
             if (docArgs.DocumentType == "RICHTEXT")
                 return CreateRichText(docArgs);
+
+            if (docArgs.DocumentType == "FILEGROUP")
+                return CreateFileGroup(docArgs);
 
             return null;
         }
@@ -75,6 +79,9 @@ namespace CygSoft.CodeCat.DocumentManager
                 case "RICHTEXT":
                     return DocumentTypeEnum.RichTextDocument;
 
+                case "FILEGROUP":
+                    return DocumentTypeEnum.FileGroup;
+
                 default:
                     return DocumentTypeEnum.CodeSnippet;
             }
@@ -98,9 +105,21 @@ namespace CygSoft.CodeCat.DocumentManager
                     return "IMAGESET";
                 case DocumentTypeEnum.RichTextDocument:
                     return "RICHTEXT";
+                case DocumentTypeEnum.FileGroup:
+                    return "FILEGROUP";
+
                 default:
                     return "CODESNIPPET";
             }
+        }
+
+
+        private static IDocument CreateFileGroup(DocArgs docArgs)
+        {
+            if (docArgs.Id == null)
+                return new FileGroupDocument(docArgs.Folder, docArgs.Title);
+            else
+                return new FileGroupDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
         private static IDocument CreateImageSet(DocArgs docArgs)

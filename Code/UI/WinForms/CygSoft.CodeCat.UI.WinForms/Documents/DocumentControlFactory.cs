@@ -29,6 +29,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
             else if (document is IUrlGroupDocument)
                 return NewUrlGroupControl(document, groupOwner, application, modifiedEventHandler);
+            else if (document is IFileGroupDocument)
+                return NewFileGroupControl(document, groupOwner, application, modifiedEventHandler);
             else if (document is IPdfDocument)
                 return NewPdfDocument(document, groupOwner, application, modifiedEventHandler);
             else if (document is IImageDocument)
@@ -39,6 +41,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 return NewRichTextDocument(document, groupOwner, application, modifiedEventHandler);
             else
                 return null;
+        }
+
+        private static IDocumentItemControl NewFileGroupControl(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        {
+            FileGroupControl documentControl = new FileGroupControl(application, groupOwner as ICodeGroupDocumentSet, document as IFileGroupDocument);
+            documentControl.Modified += modifiedEventHandler;
+            return documentControl;
         }
 
         private static IDocumentItemControl NewRichTextDocument(IDocument document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)

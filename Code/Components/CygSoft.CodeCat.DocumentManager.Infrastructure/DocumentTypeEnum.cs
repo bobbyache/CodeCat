@@ -14,6 +14,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         QikScript,
         ImageDocument,
         ImageSet,
-        RichTextDocument
+        RichTextDocument,
+        FileGroup
     }
 }

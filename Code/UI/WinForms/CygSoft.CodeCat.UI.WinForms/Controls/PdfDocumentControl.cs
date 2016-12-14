@@ -41,6 +41,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void LoadIfExists()
         {
             if (this.pdfDocument.Exists)
+                //pdfControl.src = this.pdfDocument.FilePath;
                 pdfControl.LoadFile(this.pdfDocument.FilePath);
         }
 

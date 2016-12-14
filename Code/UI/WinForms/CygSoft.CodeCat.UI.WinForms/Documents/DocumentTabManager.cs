@@ -159,6 +159,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 item.Image = IconRepository.ImageByExtension(IconRepository.WEB);
             else if (document is IRichTextDocument)
                 item.Image = IconRepository.ImageByExtension(IconRepository.RTF);
+            else if (document is IFileGroupDocument)
+                item.Image = IconRepository.ImageByExtension(IconRepository.RTF);
 
             else
                 item.Image = IconRepository.GetImage("TEXT");

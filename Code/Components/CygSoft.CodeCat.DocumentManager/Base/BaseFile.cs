@@ -25,6 +25,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public string FilePath { get; protected set; }
         public string FileName { get; private set; }
         public string FileExtension { get; private set; }
+        protected BaseFilePathGenerator filePathGenerator;
 
         public virtual string Folder
         {
@@ -49,6 +50,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         public BaseFile(BaseFilePathGenerator filePathGenerator)
         {
+            this.filePathGenerator = filePathGenerator;
             this.Id = filePathGenerator.Id;
             this.FileExtension = filePathGenerator.FileExtension;
             this.FilePath = filePathGenerator.FilePath;
@@ -149,7 +151,6 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             if (AfterClose != null)
                 AfterClose(this, new FileEventArgs(this));
         }
-
 
         private string CleanExtension(string extension)
         {

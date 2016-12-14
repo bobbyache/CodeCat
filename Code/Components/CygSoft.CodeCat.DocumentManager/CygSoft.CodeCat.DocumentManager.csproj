@@ -48,6 +48,8 @@
     <Compile Include="Base\BaseVersionFile.cs" />
     <Compile Include="Base\BaseVersionableFile.cs" />
     <Compile Include="Documents\CodeDocument.cs" />
+    <Compile Include="Documents\FileGroupDocument.cs" />
+    <Compile Include="Documents\FileGroup\FileGroupFile.cs" />
     <Compile Include="Documents\ImageDocument.cs" />
     <Compile Include="Documents\ImageSetDocument.cs" />
     <Compile Include="Documents\ImageSet\ImageSetIndex.cs" />
@@ -63,6 +65,8 @@
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="PathGenerators\DocumentIndexPathGenerator.cs" />
     <Compile Include="PathGenerators\DocumentPathGenerator.cs" />
+    <Compile Include="PathGenerators\FileGroupPathGenerator.cs" />
+    <Compile Include="PathGenerators\FilePathGenerator.cs" />
     <Compile Include="PathGenerators\ImagePathGenerator.cs" />
     <Compile Include="PathGenerators\ImageSetIndexPathGenerator.cs" />
     <Compile Include="PathGenerators\VersionPathGenerator.cs" />

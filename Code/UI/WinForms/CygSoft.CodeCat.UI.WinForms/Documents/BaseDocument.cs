@@ -210,6 +210,11 @@ namespace CygSoft.CodeCat.UI.WinForms
                             else
                                 e.Cancel = true;
                         }
+                        else if (result == System.Windows.Forms.DialogResult.No)
+                        {
+                            if (this.Reverting != null)
+                                Reverting(this, new EventArgs());
+                        }
                         else if (result == System.Windows.Forms.DialogResult.Cancel)
                             e.Cancel = true;
                     }
