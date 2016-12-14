@@ -207,6 +207,7 @@
             this.btnUpdateFileName.TabIndex = 32;
             this.btnUpdateFileName.Text = "Update from Path";
             this.btnUpdateFileName.UseVisualStyleBackColor = true;
+            this.btnUpdateFileName.Click += new System.EventHandler(this.btnUpdateFileName_Click);
             // 
             // FileGroupFileEditDialog
             // 

@@ -97,7 +97,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public static DialogResult WillConflictDialogPrompt(IWin32Window owner, string fieldName)
         {
-            string msg = string.Format("{0} will conflict with an existing {0}. You must rename this field before you can save this item.", fieldName);
+            string msg = string.Format("{0} will conflict with an existing {0}. You must rename this field before you can save this item.\n" +
+                "Note, if you have recently deleted an item with the same file name, you must first save. Once saved you'll be able to add a new item with the specified file name.", fieldName);
 
             return MessageBox.Show(owner, msg,
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);

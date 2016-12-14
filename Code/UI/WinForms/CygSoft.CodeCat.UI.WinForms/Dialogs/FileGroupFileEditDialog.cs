@@ -98,6 +98,21 @@ namespace CygSoft.CodeCat.UI.WinForms
             //    Dialogs.NoInputValueForMandatoryField(this, "File Path");
             //    return false;
             //}
+
+            // In this case, no file name exists (no file has ever been captured for a source file)... hence no extension.
+            // so ensure the user has actually selected a file.
+            if (this.fileGroupFile == null && (string.IsNullOrEmpty(txtFilePath.Text.Trim()) || !File.Exists(txtFilePath.Text.Trim())))
+            {
+                Dialogs.NoInputValueForMandatoryField(this, "File Path");
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(txtFileName.Text.Trim()) && string.IsNullOrEmpty(lblExtension.Text))
+            {
+                Dialogs.NoInputValueForMandatoryField(this, "File Path");
+                return false;
+            }
+
             if (txtFileName.Text.Trim() == "")
             {
                 
@@ -145,6 +160,17 @@ namespace CygSoft.CodeCat.UI.WinForms
                 if (string.IsNullOrEmpty(txtFileName.Text))
                     txtFileName.Text = fileTitle;
                 lblExtension.Text = Path.GetExtension(fileName);
+            }
+        }
+
+        private void btnUpdateFileName_Click(object sender, EventArgs e)
+        {
+            string filePath = txtFilePath.Text.Trim();
+            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            {
+                
+                txtFileName.Text = Path.GetFileNameWithoutExtension(filePath);
+                lblExtension.Text = Path.GetExtension(filePath);
             }
         }
     }
