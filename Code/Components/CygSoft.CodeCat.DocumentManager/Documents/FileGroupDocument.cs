@@ -147,6 +147,23 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             removedList.Add(file);
         }
 
+        public bool ValidateFileName(string fileName, string id = "")
+        {
+            if (File.Exists(Path.Combine(this.Folder, fileName)))
+            {
+                foreach (IFileGroupFile checkFile in this.fileList)
+                {
+                    if (checkFile.Id != id && checkFile.HasFileName(fileName))
+                        return false;
+                }
+                foreach (IFileGroupFile checkFile in this.removedList)
+                {
+                    if (checkFile.Id != id && checkFile.HasFileName(fileName))
+                        return false;
+                }
+            }
+            return true;
+        }
 
         public IFileGroupFile CreateNewFile(string fileName, string sourceFilePath)
         {

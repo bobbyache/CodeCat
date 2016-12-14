@@ -95,6 +95,14 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        public static DialogResult WillConflictDialogPrompt(IWin32Window owner, string fieldName)
+        {
+            string msg = string.Format("{0} will conflict with an existing {0}. You must rename this field before you can save this item.", fieldName);
+
+            return MessageBox.Show(owner, msg,
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         public static DialogResult SaveDocumentChangesDialogPrompt(IWin32Window owner)
         {
             return MessageBox.Show(owner, string.Format("{0}\n You have not saved this snippet. Would you like to save it first?", (owner as IContentDocument).Text),

@@ -26,7 +26,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.fileGroupDocument = fileGroupDocument;
             this.txtFilePath.Text = "";
             this.txtTitle.Text = fileGroupFile.Title;
-            this.txtFileName.Text = fileGroupFile.FileName;
+            this.txtFileName.Text = fileGroupFile.FileTitle;
+            this.lblExtension.Text = fileGroupFile != null ? fileGroupFile.FileExtension : "";
             this.txtDescription.Text = fileGroupFile.Description;
             this.cboCategory.Items.AddRange(fileGroupDocument.Categories);
             this.cboCategory.Sorted = true;
@@ -41,6 +42,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.txtFilePath.Text = "";
             this.txtTitle.Text = "";
             this.txtFileName.Text = "";
+            this.lblExtension.Text = fileGroupFile != null ? fileGroupFile.FileExtension : "";
             this.txtDescription.Text = "";
             this.cboCategory.Items.AddRange(fileGroupDocument.Categories);
             this.cboCategory.Sorted = true;
@@ -61,14 +63,14 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 if (this.fileGroupFile == null)
                 {
-                    this.fileGroupFile = fileGroupDocument.CreateNewFile(txtFileName.Text.Trim(), txtFilePath.Text.Trim());
+                    this.fileGroupFile = fileGroupDocument.CreateNewFile(txtFileName.Text.Trim() + lblExtension.Text, txtFilePath.Text.Trim());
                 }
 
                 if (!string.IsNullOrEmpty(this.txtFilePath.Text.Trim()))
                     fileGroupFile.ImportFile(this.txtFilePath.Text.Trim());
 
                 fileGroupFile.Title = txtTitle.Text;
-                fileGroupFile.ChangeFileName(txtFileName.Text.Trim());
+                fileGroupFile.ChangeFileName(txtFileName.Text.Trim() + lblExtension.Text);
                 //fileItem.FileName = Path.GetFileName(txtFile.Text.Trim());
                 fileGroupFile.Description = txtDescription.Text;
                 fileGroupFile.DateModified = DateTime.Now;
@@ -84,6 +86,13 @@ namespace CygSoft.CodeCat.UI.WinForms
                 Dialogs.NoInputValueForMandatoryField(this, "Title");
                 return false;
             }
+
+            //if (this.fileGroupFile == null)
+            //{
+            //    if (file
+            //}
+            //if (fileGroupDocument.ValidateFileName(
+
             //if (txtFilePath.Text.Trim() == "" || !File.Exists(txtFilePath.Text.Trim()))
             //{
             //    Dialogs.NoInputValueForMandatoryField(this, "File Path");
@@ -91,9 +100,18 @@ namespace CygSoft.CodeCat.UI.WinForms
             //}
             if (txtFileName.Text.Trim() == "")
             {
+                
                 Dialogs.NoInputValueForMandatoryField(this, "File Name");
                 return false;
             }
+
+            string id = fileGroupFile == null ? "" : fileGroupFile.Id;
+            if (!fileGroupDocument.ValidateFileName(txtFileName.Text.Trim() + lblExtension.Text, id))
+            {
+                Dialogs.WillConflictDialogPrompt(this, "File Name");
+                return false;
+            }
+
             if (txtDescription.Text.Trim() == "")
             {
                 Dialogs.NoInputValueForMandatoryField(this, "Description");
@@ -117,6 +135,16 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (result == DialogResult.OK)
             {
                 txtFilePath.Text = filePath;
+                string fileName = Path.GetFileName(txtFilePath.Text);
+                string fileTitle = Path.GetFileNameWithoutExtension(fileName);
+
+                if (string.IsNullOrEmpty(txtDescription.Text))
+                    txtDescription.Text = fileTitle;
+                if (string.IsNullOrEmpty(txtTitle.Text))
+                    txtTitle.Text = fileTitle;
+                if (string.IsNullOrEmpty(txtFileName.Text))
+                    txtFileName.Text = fileTitle;
+                lblExtension.Text = Path.GetExtension(fileName);
             }
         }
     }

@@ -43,6 +43,8 @@
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
+            this.lblExtension = new System.Windows.Forms.Label();
+            this.btnUpdateFileName = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -106,6 +108,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnUpdateFileName);
+            this.groupBox2.Controls.Add(this.lblExtension);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txtFileName);
             this.groupBox2.Controls.Add(this.label4);
@@ -133,7 +137,7 @@
             // 
             this.txtFileName.Location = new System.Drawing.Point(109, 46);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(548, 20);
+            this.txtFileName.Size = new System.Drawing.Size(367, 20);
             this.txtFileName.TabIndex = 29;
             // 
             // label4
@@ -185,6 +189,25 @@
             this.txtTitle.Size = new System.Drawing.Size(548, 20);
             this.txtTitle.TabIndex = 23;
             // 
+            // lblExtension
+            // 
+            this.lblExtension.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExtension.Location = new System.Drawing.Point(483, 46);
+            this.lblExtension.Name = "lblExtension";
+            this.lblExtension.Size = new System.Drawing.Size(51, 19);
+            this.lblExtension.TabIndex = 31;
+            this.lblExtension.Text = ".html";
+            this.lblExtension.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnUpdateFileName
+            // 
+            this.btnUpdateFileName.Location = new System.Drawing.Point(531, 44);
+            this.btnUpdateFileName.Name = "btnUpdateFileName";
+            this.btnUpdateFileName.Size = new System.Drawing.Size(126, 23);
+            this.btnUpdateFileName.TabIndex = 32;
+            this.btnUpdateFileName.Text = "Update from Path";
+            this.btnUpdateFileName.UseVisualStyleBackColor = true;
+            // 
             // FileGroupFileEditDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,5 +247,7 @@
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtTitle;
+        private System.Windows.Forms.Button btnUpdateFileName;
+        private System.Windows.Forms.Label lblExtension;
     }
 }

@@ -44,14 +44,21 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
             get { return this.currentFilePathGenerator.Id; }
         }
 
+        public string FilePath { get { return currentFilePathGenerator.FilePath; } }
         public string FileName { get { return currentFilePathGenerator.FileName; } }
+        public string FileTitle { get { return Path.GetFileNameWithoutExtension(currentFilePathGenerator.FileName); } }
         public string FileExtension { get { return currentFilePathGenerator.FileExtension; } }
+        public string ModifiedFileName { get { return currentFilePathGenerator.ModifiedFileName; } }
         public string Category { get; set; }
         public DateTime DateModified { get; set; }
         public DateTime DateCreated { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
+        public bool HasFileName(string fileName)
+        {
+            return FileName.ToUpper() == fileName.ToUpper();
+        }
 
         public bool ValidateImportFile(string filePath)
         {
@@ -62,7 +69,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
                 return false;
 
             string extension = Path.GetExtension(filePath);
-            if (Path.GetExtension(filePath) != this.FileExtension)
+            if (extension != this.FileExtension && !string.IsNullOrEmpty(this.FileExtension))
                 return false;
 
             return true;
@@ -70,7 +77,6 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
 
         public void Delete()
         {
-            // TODO: Bug, if the filename is changed, and then delete is called nothing is deleted!!!
             if (File.Exists(originalFilePathGenerator.FilePath)) File.Delete(originalFilePathGenerator.FilePath);
             if (File.Exists(currentFilePathGenerator.ModifiedFilePath)) File.Delete(currentFilePathGenerator.ModifiedFilePath);
             if (File.Exists(currentFilePathGenerator.FilePath)) File.Delete(currentFilePathGenerator.FilePath);
