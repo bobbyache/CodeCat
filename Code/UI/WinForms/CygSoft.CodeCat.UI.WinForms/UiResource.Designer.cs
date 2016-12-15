@@ -93,6 +93,16 @@ namespace CygSoft.CodeCat.UI.WinForms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Attachment {
+            get {
+                object obj = ResourceManager.GetObject("Attachment", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CodeGroup {
             get {
                 object obj = ResourceManager.GetObject("CodeGroup", resourceCulture);

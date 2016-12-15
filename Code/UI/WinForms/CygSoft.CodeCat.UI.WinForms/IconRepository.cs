@@ -84,6 +84,22 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        private static Icon fileGroupIcon;
+        public static Icon FileGroupIcon
+        {
+            get
+            {
+                if (fileGroupIcon == null)
+                {
+                    Bitmap fileGroupBitmap = new Bitmap(Resources.GetImage(Constants.ImageKeys.CodeGroup));
+                    IntPtr iconPtr = fileGroupBitmap.GetHicon();
+                    fileGroupIcon = Icon.FromHandle(iconPtr);
+                }
+                return fileGroupIcon;
+            }
+        }
+        
+
         public static void Load(SyntaxFile[] syntaxFiles)
         {
             iconDictonary.Add(CodeGroupKey, CodeGroupIcon);

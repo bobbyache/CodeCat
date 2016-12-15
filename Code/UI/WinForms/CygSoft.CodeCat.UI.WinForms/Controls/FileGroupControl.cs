@@ -347,6 +347,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 saveDialog.AddExtension = true;
                 saveDialog.FilterIndex = 0;
                 saveDialog.OverwritePrompt = true;
+                saveDialog.FileName = item.FileName;
 
                 DialogResult result = saveDialog.ShowDialog(this);
                 string filePath = saveDialog.FileName;
