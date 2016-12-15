@@ -148,22 +148,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             item.Text = document.Title;
 
             if (document is ICodeDocument)
-                item.Image = IconRepository.GetImage((document as ICodeDocument).Syntax);
+                item.Image = IconRepository.Get((document as ICodeDocument).Syntax).Image;
             else if (document is IPdfDocument)
-                item.Image = IconRepository.GetImage(IconRepository.PDF);
+                item.Image = IconRepository.Get(IconRepository.Documents.PDF).Image;
             else if (document is IImageDocument)
-                item.Image = IconRepository.ImageByExtension(document.FileExtension);
+                item.Image = IconRepository.Get(IconRepository.Documents.SingleImage).Image;
             else if (document is IImageSetDocument)
-                item.Image = IconRepository.ImageByExtension(IconRepository.IMG);
+                item.Image = IconRepository.Get(IconRepository.Documents.ImageSet).Image;
             else if (document is IUrlGroupDocument)
-                item.Image = IconRepository.ImageByExtension(IconRepository.WEB);
+                item.Image = IconRepository.Get(IconRepository.Documents.HyperlinkSet).Image;
             else if (document is IRichTextDocument)
-                item.Image = IconRepository.ImageByExtension(IconRepository.RTF);
+                item.Image = IconRepository.Get(IconRepository.Documents.RTF).Image; 
             else if (document is IFileGroupDocument)
-                item.Image = Resources.GetImage(Constants.ImageKeys.Attachment);
+                item.Image = IconRepository.Get(IconRepository.Documents.FileSet).Image; 
 
             else
-                item.Image = IconRepository.GetImage("TEXT");
+                item.Image = IconRepository.Get(IconRepository.Documents.Unknown).Image;
 
             item.Click += item_Click;
             this.tabMenuButton.DropDownItems.Add(item);

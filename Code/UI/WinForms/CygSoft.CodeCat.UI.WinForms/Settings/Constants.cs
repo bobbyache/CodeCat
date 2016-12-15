@@ -36,6 +36,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string ShowText = "Text";
             public const string EditText = "EditText";
             public const string Attachment = "Attachment";
+            public const string Web = "Web";
+            public const string ImageSet = "ImageSet";
             //public const string SaveProject = "SaveProject";
         }
     }

@@ -31,9 +31,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             get { return txtTitle.Text; }
         }
 
-        public int ImageKey { get { return IconRepository.ImageKeyFor(IconRepository.IMG); } }
-        public Icon ImageIcon { get { return IconRepository.GetIcon(IconRepository.IMG); } }
-        public Image IconImage { get { return IconRepository.GetImage(IconRepository.IMG); } }
+        public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.ImageSet).Index; } }
+        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.ImageSet).Icon; } }
+        public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.ImageSet).Image; } }
 
         public bool IsModified { get; private set; }
 

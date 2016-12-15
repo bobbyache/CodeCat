@@ -75,11 +75,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             get { return this.txtTitle.Text; }
         }
 
-        public int ImageKey { get { return IconRepository.ImageKeyFor("HTML"); } }
-
-        public Icon ImageIcon { get { return IconRepository.GetIcon("HTML"); } }
-
-        public Image IconImage { get { return IconRepository.GetImage("HTML"); } }
+        public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.HyperlinkSet).Index; } }
+        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.HyperlinkSet).Icon; } }
+        public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.HyperlinkSet).Image; } }
 
         public bool IsModified { get; private set; }
 

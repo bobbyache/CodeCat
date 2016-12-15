@@ -26,6 +26,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             InitializeComponent();
 
+            fileListview.SmallImageList = IconRepository.ImageList;
             this.listViewSorter = new ListViewSorter(this.fileListview);
             fileListview.Sorting = SortOrder.Ascending;
 
@@ -61,11 +62,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             get { return this.txtTitle.Text; }
         }
 
-        public int ImageKey { get { return IconRepository.ImageKeyFor("HTML"); } }
-
-        public Icon ImageIcon { get { return IconRepository.GetIcon("HTML"); } }
-
-        public Image IconImage { get { return IconRepository.GetImage("HTML"); } }
+        public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.FileSet).Index; } }
+        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.FileSet).Icon; } }
+        public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.FileSet).Image; } }
 
         public bool IsModified { get; private set; }
 
@@ -87,7 +86,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ReloadListview(ListView listView, IFileGroupFile[] indexItems)
         {
             listView.Items.Clear();
-            listView.SmallImageList = IconRepository.NewFileImageList(indexItems.Select(idx => idx.FileExtension).ToArray());
+            IconRepository.AddFileExtensions(indexItems.Select(idx => idx.FileExtension));
+            //listView.SmallImageList = IconRepository.ImageList; // IconRepository.NewFileImageList(indexItems.Select(idx => idx.FileExtension).ToArray());
 
             foreach (IFileGroupFile item in indexItems)
             {

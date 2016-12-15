@@ -47,9 +47,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             UpdateAutoList();
         }
 
-        public int ImageKey { get { return IconRepository.ImageKeyFor(cboSyntax.SelectedItem.ToString()); } }
-        public Icon ImageIcon { get { return IconRepository.GetIcon(cboSyntax.SelectedItem.ToString()); } }
-        public Image IconImage { get { return IconRepository.GetImage(cboSyntax.SelectedItem.ToString()); } }
+        public int ImageKey { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
+        public Icon ImageIcon { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
+        public Image IconImage { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
 
         public string Id { get; private set; }
 
@@ -236,7 +236,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             string syntaxFile = application.GetSyntaxFile(syn);
             this.outputSyntaxBox.Document.SyntaxFile = syntaxFile;
 
-            this.lblEditStatus.Image = IconRepository.GetIcon(syn).ToBitmap();
+            this.lblEditStatus.Image = IconRepository.Get(syn).Image;
         }
 
         private void SetDefaultFont()

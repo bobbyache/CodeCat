@@ -141,6 +141,15 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnMoveLeft.Image = Resources.GetImage(Constants.ImageKeys.MoveLeft);
             btnMoveRight.Image = Resources.GetImage(Constants.ImageKeys.MoveRight);
             btnMenu.Image = Resources.GetImage(Constants.ImageKeys.GroupMenu);
+
+            btnAddPdfDocument.Image = IconRepository.Get(IconRepository.Documents.PDF).Image;
+            btnAddImage.Image = IconRepository.Get(IconRepository.Documents.SingleImage).Image;
+            btnAddHyperlinks.Image = IconRepository.Get(IconRepository.Documents.HyperlinkSet).Image;
+            btnFileGroup.Image = IconRepository.Get(IconRepository.Documents.FileSet).Image;
+            btnImageSet.Image = IconRepository.Get(IconRepository.Documents.ImageSet).Image;
+            btnRichText.Image = IconRepository.Get(IconRepository.Documents.RTF).Image;
+            btnAddCode.Image = IconRepository.Get(IconRepository.Documents.CodeFile).Image;
+
             this.Icon = IconRepository.CodeGroupIcon;
         }
 

@@ -42,8 +42,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
             this.application = new AppFacade(ConfigSettings.SyntaxFilePath);
 
-            InitializeIconImages();
             InitializeFileIcons();
+            InitializeIconImages();
+            
 
             dockPanel.ContentAdded += dockPanel_ContentAdded;
             dockPanel.ContentRemoved += dockPanel_ContentRemoved;
@@ -65,19 +66,22 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeFileIcons()
         {
-            IconRepository.Load(application.GetSyntaxFileInfo());
+            Resources.Namespace = "CygSoft.CodeCat.UI.WinForms.UiResource";
+            Resources.ExecutingAssembly = Assembly.GetExecutingAssembly();
 
+            IconRepository.AddDocuments();
+            IconRepository.AddSyntaxes(application.GetSyntaxFileInfo());
         }
 
         private void InitializeIconImages()
         {
-            Resources.Namespace = "CygSoft.CodeCat.UI.WinForms.UiResource";
-            Resources.ExecutingAssembly = Assembly.GetExecutingAssembly();
-
             mnuFileOpen.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
             mnuFileCreateNew.Image = Resources.GetImage(Constants.ImageKeys.NewProject);
             mnuSnippetsViewModify.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
             mnuSnippetsAdd.Image = Resources.GetImage(Constants.ImageKeys.AddSnippet);
+            mnuAddCodeGroup.Image = IconRepository.Get(IconRepository.Documents.CodeGroup).Image;
+            mnuAddQikTemplate.Image = IconRepository.Get(IconRepository.Documents.QikGroup).Image;
+            mnuWindowKeywordSearch.Image = Resources.GetImage(Constants.ImageKeys.FindSnippets);
         }
 
         private void InitializeMenuClickEvents()

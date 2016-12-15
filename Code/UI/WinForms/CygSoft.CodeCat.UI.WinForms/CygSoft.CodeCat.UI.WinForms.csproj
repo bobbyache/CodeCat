@@ -200,6 +200,8 @@
     <Compile Include="Documents\QikCodeDocument.Designer.cs">
       <DependentUpon>QikCodeDocument.cs</DependentUpon>
     </Compile>
+    <Compile Include="Images\ImageLibrary.cs" />
+    <Compile Include="Images\ImageOutput.cs" />
     <Compile Include="Settings\ConfigSettings.cs" />
     <Compile Include="Settings\Constants.cs" />
     <Compile Include="Dialogs.cs" />
@@ -451,6 +453,8 @@
     <None Include="Resources\report.png" />
     <None Include="Resources\report_key.png" />
     <None Include="Resources\attach.png" />
+    <None Include="Resources\world.png" />
+    <None Include="Resources\presentation_chart.png" />
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

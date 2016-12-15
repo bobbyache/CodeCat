@@ -148,7 +148,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             this.tabControl.ImageList = IconRepository.ImageList;
             this.tabPageCode.ImageKey = (base.persistableTarget as CodeFile).Syntax;
-            this.Icon = IconRepository.GetIcon((base.persistableTarget as CodeFile).Syntax);
+            this.Icon = IconRepository.Get((base.persistableTarget as CodeFile).Syntax).Icon;
             lblEditStatus.Image = this.IconImage;
         }
 
@@ -244,9 +244,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.syntaxBox.Document.SyntaxFile = syntaxFile;
             this.snapshotListCtrl1.SyntaxFile = syntaxFile;
 
-            this.Icon = IconRepository.GetIcon(syntax);
+            this.Icon = IconRepository.Get(syntax).Icon;
             this.tabPageCode.ImageKey = syntax;
-            this.lblEditStatus.Image = IconRepository.GetIcon(syntax).ToBitmap();
+            this.lblEditStatus.Image = IconRepository.Get(syntax).Image;
         }
 
         private void UpdateSnapshotsTab()

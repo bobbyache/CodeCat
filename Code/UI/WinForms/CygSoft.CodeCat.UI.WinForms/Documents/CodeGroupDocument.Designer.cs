@@ -50,6 +50,7 @@
             this.btnAddCode = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRichText = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnFileGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAddHyperlinks = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAddPdfDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -61,7 +62,6 @@
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.tabControlFile = new System.Windows.Forms.TabControl();
-            this.btnFileGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -211,7 +211,6 @@
             // 
             // btnAddItem
             // 
-            this.btnAddItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnAddItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAddCode,
             this.btnRichText,
@@ -225,8 +224,8 @@
             this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
             this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(29, 22);
-            this.btnAddItem.Text = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(100, 22);
+            this.btnAddItem.Text = "Add Section";
             // 
             // btnAddCode
             // 
@@ -246,6 +245,13 @@
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(213, 6);
+            // 
+            // btnFileGroup
+            // 
+            this.btnFileGroup.Name = "btnFileGroup";
+            this.btnFileGroup.Size = new System.Drawing.Size(216, 22);
+            this.btnFileGroup.Text = "File Group";
+            this.btnFileGroup.Click += new System.EventHandler(this.btnFileGroup_Click);
             // 
             // btnAddHyperlinks
             // 
@@ -282,12 +288,11 @@
             // 
             // btnRemoveCodeItem
             // 
-            this.btnRemoveCodeItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnRemoveCodeItem.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveCodeItem.Image")));
             this.btnRemoveCodeItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRemoveCodeItem.Name = "btnRemoveCodeItem";
-            this.btnRemoveCodeItem.Size = new System.Drawing.Size(23, 22);
-            this.btnRemoveCodeItem.Text = "Remove Template";
+            this.btnRemoveCodeItem.Size = new System.Drawing.Size(102, 22);
+            this.btnRemoveCodeItem.Text = "Delete Section";
             this.btnRemoveCodeItem.Click += new System.EventHandler(this.btnRemoveCodeItem_Click);
             // 
             // toolStripSeparator3
@@ -320,7 +325,7 @@
             this.txtToolStripTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtToolStripTitle.Name = "txtToolStripTitle";
             this.txtToolStripTitle.ReadOnly = true;
-            this.txtToolStripTitle.Size = new System.Drawing.Size(502, 25);
+            this.txtToolStripTitle.Size = new System.Drawing.Size(100, 22);
             this.txtToolStripTitle.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tabControlFile
@@ -331,13 +336,6 @@
             this.tabControlFile.SelectedIndex = 0;
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
-            // 
-            // btnFileGroup
-            // 
-            this.btnFileGroup.Name = "btnFileGroup";
-            this.btnFileGroup.Size = new System.Drawing.Size(216, 22);
-            this.btnFileGroup.Text = "File Group";
-            this.btnFileGroup.Click += new System.EventHandler(this.btnFileGroup_Click);
             // 
             // CodeGroupDocument
             // 
