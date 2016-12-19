@@ -49,6 +49,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
         public string FileTitle { get { return Path.GetFileNameWithoutExtension(currentFilePathGenerator.FileName); } }
         public string FileExtension { get { return currentFilePathGenerator.FileExtension; } }
         public string ModifiedFileName { get { return currentFilePathGenerator.ModifiedFileName; } }
+        public string ModifiedFilePath { get { return currentFilePathGenerator.ModifiedFilePath; } }
         public string Category { get; set; }
         public DateTime DateModified { get; set; }
         public DateTime DateCreated { get; set; }

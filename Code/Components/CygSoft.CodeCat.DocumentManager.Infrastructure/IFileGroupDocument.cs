@@ -15,6 +15,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string FilePath { get; }
         string FileTitle { get; }
         string ModifiedFileName { get; }
+        string ModifiedFilePath { get; }
         string FileExtension { get; }
         string Description { get; set; }
         DateTime DateModified { get; set; }

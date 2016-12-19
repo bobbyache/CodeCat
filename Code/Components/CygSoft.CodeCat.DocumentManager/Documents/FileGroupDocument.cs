@@ -103,6 +103,26 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             base.OnBeforeRevert();
         }
 
+        protected override void OnAfterDelete()
+        {
+            base.OnAfterDelete();
+            foreach (IFileGroupFile file in this.fileList)
+            {
+                if (File.Exists(file.FilePath))
+                    File.Delete(file.FilePath);
+                if (File.Exists(file.ModifiedFilePath))
+                    File.Delete(file.ModifiedFilePath);
+            }
+        }
+
+        //protected override void OnAfterRevert()
+        //{
+        //    base.OnAfterRevert();
+
+        //    foreach (IFileGroupFile file in this.fileList)
+        //        file.Revert();
+        //}
+
         private void CreateFile()
         {
             XElement rootElement = new XElement("FileGroup", new XElement("Files"));

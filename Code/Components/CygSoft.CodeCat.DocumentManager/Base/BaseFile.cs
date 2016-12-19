@@ -87,7 +87,9 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                     BeforeRevert(this, new FileEventArgs(this));
 
                 OnBeforeRevert();
-                OpenFile();
+
+                if (File.Exists(this.FilePath))
+                    OpenFile();
                 OnAfterRevert();
 
                 this.Loaded = true;
