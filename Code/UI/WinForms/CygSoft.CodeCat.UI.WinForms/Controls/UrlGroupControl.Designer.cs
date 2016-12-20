@@ -38,7 +38,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.urlListview = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -127,29 +126,12 @@
             this.toolStrip2.AutoSize = false;
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cboFontSize,
             this.lblEditStatus});
             this.toolStrip2.Location = new System.Drawing.Point(0, 405);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(595, 25);
             this.toolStrip2.TabIndex = 8;
             this.toolStrip2.Text = "toolStrip2";
-            // 
-            // cboFontSize
-            // 
-            this.cboFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFontSize.Items.AddRange(new object[] {
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16"});
-            this.cboFontSize.Name = "cboFontSize";
-            this.cboFontSize.Size = new System.Drawing.Size(75, 25);
             // 
             // lblEditStatus
             // 
@@ -289,7 +271,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private ToolStripSpringTextBox txtTitle;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripComboBox cboFontSize;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
         private System.Windows.Forms.ListView urlListview;
         private System.Windows.Forms.ColumnHeader colTitle;

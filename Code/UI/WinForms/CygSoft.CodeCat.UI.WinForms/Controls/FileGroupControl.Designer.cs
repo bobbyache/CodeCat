@@ -47,7 +47,6 @@
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileListview = new System.Windows.Forms.ListView();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
-            this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -65,37 +64,37 @@
             // 
             this.mnuPaste.Enabled = false;
             this.mnuPaste.Name = "mnuPaste";
-            this.mnuPaste.Size = new System.Drawing.Size(152, 22);
+            this.mnuPaste.Size = new System.Drawing.Size(138, 22);
             this.mnuPaste.Text = "Paste";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(135, 6);
             // 
             // mnuDelete
             // 
             this.mnuDelete.Name = "mnuDelete";
-            this.mnuDelete.Size = new System.Drawing.Size(152, 22);
+            this.mnuDelete.Size = new System.Drawing.Size(138, 22);
             this.mnuDelete.Text = "Delete";
             this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click_1);
             // 
             // mnuEdit
             // 
             this.mnuEdit.Name = "mnuEdit";
-            this.mnuEdit.Size = new System.Drawing.Size(152, 22);
+            this.mnuEdit.Size = new System.Drawing.Size(138, 22);
             this.mnuEdit.Text = "Edit";
             this.mnuEdit.Click += new System.EventHandler(this.mnuEdit_Click_1);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(135, 6);
             // 
             // mnuOpen
             // 
             this.mnuOpen.Name = "mnuOpen";
-            this.mnuOpen.Size = new System.Drawing.Size(152, 22);
+            this.mnuOpen.Size = new System.Drawing.Size(138, 22);
             this.mnuOpen.Text = "Open...";
             this.mnuOpen.Click += new System.EventHandler(this.mnuNavigate_Click);
             // 
@@ -112,20 +111,20 @@
             this.mnuCopy,
             this.mnuPaste});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(153, 192);
+            this.contextMenu.Size = new System.Drawing.Size(139, 170);
             // 
             // mnuOpenWith
             // 
             this.mnuOpenWith.Enabled = false;
             this.mnuOpenWith.Name = "mnuOpenWith";
-            this.mnuOpenWith.Size = new System.Drawing.Size(152, 22);
+            this.mnuOpenWith.Size = new System.Drawing.Size(138, 22);
             this.mnuOpenWith.Text = "Open with...";
             this.mnuOpenWith.Click += new System.EventHandler(this.mnuOpenWith_Click);
             // 
             // mnuSaveAs
             // 
             this.mnuSaveAs.Name = "mnuSaveAs";
-            this.mnuSaveAs.Size = new System.Drawing.Size(152, 22);
+            this.mnuSaveAs.Size = new System.Drawing.Size(138, 22);
             this.mnuSaveAs.Text = "Save as...";
             this.mnuSaveAs.Click += new System.EventHandler(this.mnuSaveAs_Click);
             // 
@@ -133,7 +132,7 @@
             // 
             this.mnuCopy.Enabled = false;
             this.mnuCopy.Name = "mnuCopy";
-            this.mnuCopy.Size = new System.Drawing.Size(152, 22);
+            this.mnuCopy.Size = new System.Drawing.Size(138, 22);
             this.mnuCopy.Text = "Copy";
             // 
             // colModified
@@ -190,28 +189,11 @@
             this.lblEditStatus.Text = "No Changes";
             this.lblEditStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // cboFontSize
-            // 
-            this.cboFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFontSize.Items.AddRange(new object[] {
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16"});
-            this.cboFontSize.Name = "cboFontSize";
-            this.cboFontSize.Size = new System.Drawing.Size(75, 25);
-            // 
             // toolStrip2
             // 
             this.toolStrip2.AutoSize = false;
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cboFontSize,
             this.lblEditStatus});
             this.toolStrip2.Location = new System.Drawing.Point(0, 448);
             this.toolStrip2.Name = "toolStrip2";
@@ -318,7 +300,6 @@
         private System.Windows.Forms.ColumnHeader colTitle;
         private System.Windows.Forms.ListView fileListview;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
-        private System.Windows.Forms.ToolStripComboBox cboFontSize;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
