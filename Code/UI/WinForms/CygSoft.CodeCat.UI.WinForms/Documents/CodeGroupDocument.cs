@@ -352,7 +352,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!tabManager.HasTabs)
                 return;
 
-            DialogResult dialogResult = Dialogs.RemoveQikTemplateDialogPrompt(this);
+            DialogResult dialogResult = Dialogs.DeleteItemDialog(this, "template");
 
             if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {

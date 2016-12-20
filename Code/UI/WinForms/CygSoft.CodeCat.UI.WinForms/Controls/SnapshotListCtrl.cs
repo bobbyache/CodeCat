@@ -44,7 +44,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (listviewSnapshots.SelectedItems.Count == 1)
             {
-                DialogResult result = Dialogs.DeleteSnapshotDialogPrompt(this);
+                DialogResult result = Dialogs.DeleteItemDialog(this, "snapshot");
 
                 if (result == DialogResult.Yes)
                 {

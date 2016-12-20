@@ -63,29 +63,18 @@ namespace CygSoft.CodeCat.UI.WinForms
             ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public static DialogResult DeleteUrlDialogPrompt(IWin32Window owner)
+        public static DialogResult DeleteItemDialog(IWin32Window owner, string itemName)
         {
-            return MessageBox.Show(owner, "Sure you want to delete these URL references?",
+            return MessageBox.Show(owner, string.Format("Sure you want to delete this {0}?", itemName),
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
-        public static DialogResult DeleteDocumentDialogPrompt(IWin32Window owner)
+        public static DialogResult DeleteMultipleItemsDialog(IWin32Window owner, string itemNames)
         {
-            return MessageBox.Show(owner, "Sure you want to delete this document?",
+            return MessageBox.Show(owner, string.Format("Sure you want to delete these {0}?", itemNames),
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
         }
 
-        public static DialogResult DeleteSnapshotDialogPrompt(IWin32Window owner)
-        {
-            return MessageBox.Show(owner, "Sure you want to delete this snapshot?",
-                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-        }
-
-        public static DialogResult RemoveQikTemplateDialogPrompt(IWin32Window owner)
-        {
-            return MessageBox.Show(owner, "Sure you want to delete this template?",
-                ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-        }
 
         public static DialogResult NoInputValueForMandatoryField(IWin32Window owner, string fieldName)
         {

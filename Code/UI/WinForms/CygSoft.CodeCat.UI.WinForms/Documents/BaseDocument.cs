@@ -122,7 +122,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (this.IsNew)
                 return;
 
-            DialogResult result = Dialogs.DeleteDocumentDialogPrompt(this);
+            DialogResult result = Dialogs.DeleteItemDialog(this, "document");
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {

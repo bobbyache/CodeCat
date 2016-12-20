@@ -226,7 +226,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (fileListview.SelectedItems.Count >= 1)
             {
-                DialogResult result = Dialogs.DeleteUrlDialogPrompt(this);
+                DialogResult result = Dialogs.DeleteMultipleItemsDialog(this, "files");
 
                 if (result == DialogResult.Yes)
                 {

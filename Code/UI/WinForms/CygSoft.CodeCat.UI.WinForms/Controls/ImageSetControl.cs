@@ -305,7 +305,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (ImageSetExists())
             {
-                DialogResult result = Dialogs.DeleteDocumentDialogPrompt(this);
+                DialogResult result = Dialogs.DeleteItemDialog(this, "image");
 
                 if (result == DialogResult.Yes)
                     this.imageDocument.Remove(currentImage);

@@ -235,7 +235,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (urlListview.SelectedItems.Count >= 1)
             {
-                DialogResult result = Dialogs.DeleteUrlDialogPrompt(this);
+                DialogResult result = Dialogs.DeleteMultipleItemsDialog(this, "hyperlinks");
 
                 if (result == DialogResult.Yes)
                 {
