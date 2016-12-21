@@ -347,6 +347,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void SnippetDocument_ModifyStatusChanged(object sender, EventArgs e)
         {
+            CodeFile codeFile = base.persistableTarget as CodeFile;
+            txtToolStripTitle.Text = codeFile.Title;
+
             if (base.IsNew)
                 lblEditStatus.Text = base.IsModified ? "Edited" : "No Changes";
             else
