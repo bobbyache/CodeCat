@@ -534,7 +534,9 @@
             this.rtbDoc.TabIndex = 6;
             this.rtbDoc.Text = "";
             this.rtbDoc.TextChanged += new System.EventHandler(this.rtbDoc_TextChanged);
+            this.rtbDoc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rtbDoc_KeyDown);
             this.rtbDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rtbDoc_KeyPress);
+            this.rtbDoc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.rtbDoc_KeyUp);
             // 
             // RtfEditorControl
             // 

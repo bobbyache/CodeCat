@@ -140,6 +140,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void BoldToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
+            FormatToBold();
+        }
+
+        private void FormatToBold()
+        {
             try
             {
                 if (!(rtbDoc.SelectionFont == null))
@@ -156,7 +161,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void ItalicToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void FormatToItalic()
         {
             try
             {
@@ -176,7 +181,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void UnderlineToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void FormatToUnderline()
         {
             try
             {
@@ -194,6 +199,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 throw;
             }
+        }
+
+        private void ItalicToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            FormatToItalic();
+        }
+
+        private void UnderlineToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            FormatToUnderline();
         }
 
         private void NormalToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -448,19 +463,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void tbrBold_Click(object sender, System.EventArgs e)
         {
-            BoldToolStripMenuItem_Click(this, e);
+            FormatToBold();
         }
 
 
         private void tbrItalic_Click(object sender, System.EventArgs e)
         {
-            ItalicToolStripMenuItem_Click(this, e);
+            FormatToItalic();
         }
 
 
         private void tbrUnderline_Click(object sender, System.EventArgs e)
         {
-            UnderlineToolStripMenuItem_Click(this, e);
+            FormatToUnderline();
         }
 
 
@@ -506,6 +521,31 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void rtbDoc_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //if (e.KeyChar == Key
+        }
+
+        private void rtbDoc_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void rtbDoc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.I)
+            {
+                FormatToItalic();
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.B)
+            {
+                FormatToBold();
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.U)
+            {
+                FormatToUnderline();
+                e.SuppressKeyPress = true;
+            }
         }
      }
 }
