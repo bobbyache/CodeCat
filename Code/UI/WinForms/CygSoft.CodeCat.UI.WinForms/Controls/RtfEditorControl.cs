@@ -16,6 +16,25 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public RtfEditorControl()
         {
             InitializeComponent();
+
+            ctxmnuBold.Image = tbrBold.Image;
+            ctxmnuItalic.Image = tbrItalic.Image;
+            ctxmnuUnderline.Image = tbrUnderline.Image;
+            ctxmnuAlignLeft.Image = tbrLeft.Image;
+            ctxmnuAlignRight.Image = tbrRight.Image;
+            ctxmnuAlignCenter.Image = tbrCenter.Image;
+            ctxmnuFont.Image = tbrFont.Image;
+            ctxmnuFontColor.Image = tspColor.Image;
+
+            SelectFontToolStripMenuItem.Image = tbrFont.Image;
+            FontColorToolStripMenuItem.Image = tspColor.Image;
+            BoldToolStripMenuItem.Image = tbrBold.Image;
+            ItalicToolStripMenuItem.Image = tbrItalic.Image;
+            UnderlineToolStripMenuItem.Image = tbrUnderline.Image;
+            LeftToolStripMenuItem.Image = tbrLeft.Image;
+            CenterToolStripMenuItem.Image = tbrCenter.Image;
+            RightToolStripMenuItem.Image = tbrRight.Image;
+
             this.FilePath = string.Empty;
             rtbDoc.SetInnerMargins(24, 24, 24, 24);
         }
@@ -54,7 +73,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void SelectAllToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void SelectAll()
         {
             try
             {
@@ -66,10 +85,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
+        private void SelectAllToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            SelectAll();
+        }
 
-
-
-        private void CopyToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void CopySelection()
         {
             try
             {
@@ -81,24 +102,51 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void CutToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void PasteToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void CutSelection()
         {
             try
             {
-                rtbDoc.Paste();
+                rtbDoc.Cut();
             }
-            catch
+            catch (Exception)
             {
                 throw;
             }
         }
 
+        private void PasteSelection()
+        {
+            try
+            {
+                rtbDoc.Paste();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void CopyToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            CopySelection();
+        }
+
+        private void CutToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            CutSelection();
+        }
+
+        private void PasteToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            PasteSelection();
+        }
+
         private void SelectFontToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            FormatToFont();
+        }
+
+        private void FormatToFont()
         {
             try
             {
@@ -122,7 +170,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void FontColorToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void FormatToFontColor()
         {
             try
             {
@@ -136,6 +184,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 throw;
             }
+        }
+
+        private void FontColorToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            FormatToFontColor();
         }
 
         private void BoldToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -275,7 +328,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void LeftToolStripMenuItem_Click_1(object sender, System.EventArgs e)
+        private void AlignLeft()
         {
             try
             {
@@ -287,7 +340,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void CenterToolStripMenuItem_Click_1(object sender, System.EventArgs e)
+        private void AlignRight()
+        {
+            try
+            {
+                rtbDoc.SelectionAlignment = HorizontalAlignment.Right;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error");
+            }
+        }
+
+        private void AlignCenter()
         {
             try
             {
@@ -299,16 +364,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
+        private void LeftToolStripMenuItem_Click_1(object sender, System.EventArgs e)
+        {
+            AlignLeft();
+        }
+
+        private void CenterToolStripMenuItem_Click_1(object sender, System.EventArgs e)
+        {
+            AlignCenter();
+        }
+
         private void RightToolStripMenuItem_Click_1(object sender, System.EventArgs e)
         {
-            try
-            {
-                rtbDoc.SelectionAlignment = HorizontalAlignment.Right;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(), "Error");
-            }
+            AlignRight();
         }
 
         private void AddBulletsToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -481,25 +549,25 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void tbrFont_Click(object sender, System.EventArgs e)
         {
-            SelectFontToolStripMenuItem_Click(this, e);
+            FormatToFont();
         }
 
 
         private void tbrLeft_Click(object sender, System.EventArgs e)
         {
-            rtbDoc.SelectionAlignment = HorizontalAlignment.Left;
+            AlignLeft();
         }
 
 
         private void tbrCenter_Click(object sender, System.EventArgs e)
         {
-            rtbDoc.SelectionAlignment = HorizontalAlignment.Center;
+            AlignCenter();
         }
 
 
         private void tbrRight_Click(object sender, System.EventArgs e)
         {
-            rtbDoc.SelectionAlignment = HorizontalAlignment.Right;
+            AlignRight();
         }
 
 
@@ -510,7 +578,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void tspColor_Click(object sender, EventArgs e)
         {
-            FontColorToolStripMenuItem_Click(this, new EventArgs());
+            FormatToFontColor();
         }
 
         private void rtbDoc_TextChanged(object sender, EventArgs e)
@@ -546,6 +614,74 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 FormatToUnderline();
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void rtbDoc_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                contextMenu.Show(Cursor.Position);
+            }
+        }
+
+        private void ctxmnuAlignLeft_Click(object sender, EventArgs e)
+        {
+            AlignLeft();
+        }
+
+        private void ctxmnuAlignCenter_Click(object sender, EventArgs e)
+        {
+            AlignCenter();
+        }
+
+        private void ctxmnuAlignRight_Click(object sender, EventArgs e)
+        {
+            AlignRight();
+        }
+
+        private void ctxmnuCut_Click(object sender, EventArgs e)
+        {
+            CutSelection();
+        }
+
+        private void ctxmnuCopy_Click(object sender, EventArgs e)
+        {
+            CopySelection();
+        }
+
+        private void ctxmnuPaste_Click(object sender, EventArgs e)
+        {
+            PasteSelection();
+        }
+
+        private void ctxmnuSelectAll_Click(object sender, EventArgs e)
+        {
+            SelectAll();
+        }
+
+        private void ctxmnuFontColor_Click(object sender, EventArgs e)
+        {
+            FormatToFontColor();
+        }
+
+        private void ctxmnuFont_Click(object sender, EventArgs e)
+        {
+            FormatToFont();
+        }
+
+        private void ctxmnuBold_Click(object sender, EventArgs e)
+        {
+            FormatToBold();
+        }
+
+        private void ctxmnuItalic_Click(object sender, EventArgs e)
+        {
+            FormatToItalic();
+        }
+
+        private void ctxmnuUnderline_Click(object sender, EventArgs e)
+        {
+            FormatToUnderline();
         }
      }
 }

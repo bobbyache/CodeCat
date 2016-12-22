@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RtfEditorControl));
             this.ToolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tbrFont = new System.Windows.Forms.ToolStripButton();
@@ -88,8 +89,27 @@
             this.ToolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.OpenFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.rtbDoc = new ExtendedRichTextBox.RichTextBoxPrintCtrl();
+            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctxmnuBold = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxmnuItalic = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxmnuUnderline = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.alignmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxmnuAlignLeft = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxmnuAlignCenter = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxmnuAlignRight = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctxmnuFont = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxmnuFontColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctxmnuCut = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxmnuCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxmnuPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctxmnuSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStrip1.SuspendLayout();
             this.MenuStrip1.SuspendLayout();
+            this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolStrip1
@@ -537,6 +557,141 @@
             this.rtbDoc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rtbDoc_KeyDown);
             this.rtbDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rtbDoc_KeyPress);
             this.rtbDoc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.rtbDoc_KeyUp);
+            this.rtbDoc.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rtbDoc_MouseUp);
+            // 
+            // contextMenu
+            // 
+            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctxmnuBold,
+            this.ctxmnuItalic,
+            this.ctxmnuUnderline,
+            this.toolStripMenuItem1,
+            this.alignmentToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.ctxmnuFont,
+            this.ctxmnuFontColor,
+            this.toolStripMenuItem3,
+            this.ctxmnuCut,
+            this.ctxmnuCopy,
+            this.ctxmnuPaste,
+            this.toolStripMenuItem9,
+            this.ctxmnuSelectAll});
+            this.contextMenu.Name = "contextMenu";
+            this.contextMenu.Size = new System.Drawing.Size(153, 270);
+            // 
+            // ctxmnuBold
+            // 
+            this.ctxmnuBold.Name = "ctxmnuBold";
+            this.ctxmnuBold.Size = new System.Drawing.Size(152, 22);
+            this.ctxmnuBold.Text = "Bold";
+            this.ctxmnuBold.Click += new System.EventHandler(this.ctxmnuBold_Click);
+            // 
+            // ctxmnuItalic
+            // 
+            this.ctxmnuItalic.Name = "ctxmnuItalic";
+            this.ctxmnuItalic.Size = new System.Drawing.Size(152, 22);
+            this.ctxmnuItalic.Text = "Italic";
+            this.ctxmnuItalic.Click += new System.EventHandler(this.ctxmnuItalic_Click);
+            // 
+            // ctxmnuUnderline
+            // 
+            this.ctxmnuUnderline.Name = "ctxmnuUnderline";
+            this.ctxmnuUnderline.Size = new System.Drawing.Size(152, 22);
+            this.ctxmnuUnderline.Text = "Underline";
+            this.ctxmnuUnderline.Click += new System.EventHandler(this.ctxmnuUnderline_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // alignmentToolStripMenuItem
+            // 
+            this.alignmentToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctxmnuAlignLeft,
+            this.ctxmnuAlignCenter,
+            this.ctxmnuAlignRight});
+            this.alignmentToolStripMenuItem.Name = "alignmentToolStripMenuItem";
+            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.alignmentToolStripMenuItem.Text = "Alignment";
+            // 
+            // ctxmnuAlignLeft
+            // 
+            this.ctxmnuAlignLeft.Name = "ctxmnuAlignLeft";
+            this.ctxmnuAlignLeft.Size = new System.Drawing.Size(109, 22);
+            this.ctxmnuAlignLeft.Text = "Left";
+            this.ctxmnuAlignLeft.Click += new System.EventHandler(this.ctxmnuAlignLeft_Click);
+            // 
+            // ctxmnuAlignCenter
+            // 
+            this.ctxmnuAlignCenter.Name = "ctxmnuAlignCenter";
+            this.ctxmnuAlignCenter.Size = new System.Drawing.Size(109, 22);
+            this.ctxmnuAlignCenter.Text = "Center";
+            this.ctxmnuAlignCenter.Click += new System.EventHandler(this.ctxmnuAlignCenter_Click);
+            // 
+            // ctxmnuAlignRight
+            // 
+            this.ctxmnuAlignRight.Name = "ctxmnuAlignRight";
+            this.ctxmnuAlignRight.Size = new System.Drawing.Size(109, 22);
+            this.ctxmnuAlignRight.Text = "Right";
+            this.ctxmnuAlignRight.Click += new System.EventHandler(this.ctxmnuAlignRight_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // ctxmnuFont
+            // 
+            this.ctxmnuFont.Name = "ctxmnuFont";
+            this.ctxmnuFont.Size = new System.Drawing.Size(152, 22);
+            this.ctxmnuFont.Text = "Font...";
+            this.ctxmnuFont.Click += new System.EventHandler(this.ctxmnuFont_Click);
+            // 
+            // ctxmnuFontColor
+            // 
+            this.ctxmnuFontColor.Name = "ctxmnuFontColor";
+            this.ctxmnuFontColor.Size = new System.Drawing.Size(152, 22);
+            this.ctxmnuFontColor.Text = "Font Color...";
+            this.ctxmnuFontColor.Click += new System.EventHandler(this.ctxmnuFontColor_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
+            // 
+            // ctxmnuCut
+            // 
+            this.ctxmnuCut.Name = "ctxmnuCut";
+            this.ctxmnuCut.Size = new System.Drawing.Size(152, 22);
+            this.ctxmnuCut.Text = "Cut";
+            this.ctxmnuCut.Click += new System.EventHandler(this.ctxmnuCut_Click);
+            // 
+            // ctxmnuCopy
+            // 
+            this.ctxmnuCopy.Name = "ctxmnuCopy";
+            this.ctxmnuCopy.Size = new System.Drawing.Size(152, 22);
+            this.ctxmnuCopy.Text = "Copy";
+            this.ctxmnuCopy.Click += new System.EventHandler(this.ctxmnuCopy_Click);
+            // 
+            // ctxmnuPaste
+            // 
+            this.ctxmnuPaste.Name = "ctxmnuPaste";
+            this.ctxmnuPaste.Size = new System.Drawing.Size(152, 22);
+            this.ctxmnuPaste.Text = "Paste";
+            this.ctxmnuPaste.Click += new System.EventHandler(this.ctxmnuPaste_Click);
+            // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(149, 6);
+            // 
+            // ctxmnuSelectAll
+            // 
+            this.ctxmnuSelectAll.Name = "ctxmnuSelectAll";
+            this.ctxmnuSelectAll.Size = new System.Drawing.Size(152, 22);
+            this.ctxmnuSelectAll.Text = "Select All";
+            this.ctxmnuSelectAll.Click += new System.EventHandler(this.ctxmnuSelectAll_Click);
             // 
             // RtfEditorControl
             // 
@@ -551,6 +706,7 @@
             this.ToolStrip1.PerformLayout();
             this.MenuStrip1.ResumeLayout(false);
             this.MenuStrip1.PerformLayout();
+            this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -617,6 +773,24 @@
         internal System.Windows.Forms.ToolStripSeparator ToolStripMenuItem7;
         private System.Windows.Forms.OpenFileDialog OpenFileDialog1;
         internal ExtendedRichTextBox.RichTextBoxPrintCtrl rtbDoc;
+        private System.Windows.Forms.ContextMenuStrip contextMenu;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuBold;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuItalic;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuUnderline;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem alignmentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuAlignLeft;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuAlignCenter;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuAlignRight;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuFont;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuFontColor;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuCut;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuCopy;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuPaste;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
+        private System.Windows.Forms.ToolStripMenuItem ctxmnuSelectAll;
 
     }
 }
