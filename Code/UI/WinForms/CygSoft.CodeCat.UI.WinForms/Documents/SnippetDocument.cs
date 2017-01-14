@@ -234,10 +234,14 @@ namespace CygSoft.CodeCat.UI.WinForms
             // ensures that all controls are up to date with the new syntax.
             string syn = syntax.ToUpper();
 
+            //TODO: Can't you do this with a single line? cboSyntax.SelectedItem
             foreach (object item in cboSyntax.Items)
             {
                 if (item.ToString() == syn)
+                {
                     cboSyntax.SelectedItem = item;
+                    break;
+                }
             }
 
             string syntaxFile = application.GetSyntaxFile(syn);

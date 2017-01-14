@@ -60,8 +60,7 @@ namespace CygSoft.CodeCat.Infrastructure
                 string key = language.ToUpper();
                 if (syntaxFiles.ContainsKey(key))
                 {
-                    if (File.Exists(syntaxFiles[key].FilePath))
-                        return syntaxFiles[key];
+                    return syntaxFiles[key];
                 }
                 return null;
             }
@@ -69,14 +68,32 @@ namespace CygSoft.CodeCat.Infrastructure
 
         public void Refresh()
         {
+            
             XElement xElement = XElement.Load(this.FilePath);
             syntaxFiles = (from m in xElement.Elements("SyntaxMapping")
                            select new SyntaxFile
                            (
                              (string)m.Attribute("Language"),
-                             (string)m.Attribute("FilePath"),
+                             RootedFilePath((string)m.Attribute("FilePath")),
                              (string)m.Attribute("FileExtension")
                            )).ToDictionary(r => r.Syntax.Trim().ToUpper(), r => r);
+        }
+
+        private string RootedFilePath(string relativeOrRootedPath)
+        {
+            string rootedFilePath = null;
+
+            if (!Path.IsPathRooted(relativeOrRootedPath))
+            {
+                string rootDirectory = Path.GetDirectoryName(this.FilePath);
+                rootedFilePath = Path.Combine(rootDirectory, relativeOrRootedPath);
+                return rootedFilePath;
+            }
+            else
+            {
+                rootedFilePath = relativeOrRootedPath;
+            }
+            return rootedFilePath;
         }
     }
 }
