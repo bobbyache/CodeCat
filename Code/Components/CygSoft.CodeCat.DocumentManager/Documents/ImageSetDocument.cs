@@ -56,6 +56,18 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             base.OnBeforeRevert();
         }
 
+        protected override void OnAfterDelete()
+        {
+            var imageFiles = this.documentIndex.DocumentFiles;
+            foreach (var imageFile in imageFiles)
+            {
+                if (imageFile.Exists)
+                    imageFile.Delete();
+            }
+
+            base.OnAfterDelete();
+        }
+
         public bool IsLastImage(IImgDocument imageItem)
         {
             return this.documentIndex.LastDocument.Ordinal <= imageItem.Ordinal;
