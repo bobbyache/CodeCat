@@ -209,20 +209,20 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                             try
                             {
                                 projectManagement.ImportData(exportData, 5);
-                                MessageBox.Show(this, "Selection has been successfully exported.", "Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show(this, "Selection has been successfully exported.", "Project Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             catch (Exception)
                             {
-                                MessageBox.Show(this, "Error occurred while trying to export", "Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(this, "Error occurred while trying to export", "Project Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         else
-                            MessageBox.Show("Selection contains possible duplicates. The importer cannot allow this operation.");
+                            MessageBox.Show(this, "Selection contains possible duplicates. The importer cannot allow this operation.", "Project Exporter");
 
                         Find();
                     }
                     else
-                        MessageBox.Show(this, "There is nothing to export. Please ensure the items you wish to export are checked.", "Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(this, "There is nothing to export. Please ensure the items you wish to export are checked.", "Project Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
