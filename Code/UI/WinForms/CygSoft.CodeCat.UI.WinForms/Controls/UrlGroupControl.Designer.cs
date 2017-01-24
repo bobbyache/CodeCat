@@ -53,6 +53,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCopyUrl = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.contextMenu.SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.txtTitle,
@@ -69,7 +71,7 @@
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(595, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(793, 27);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -84,7 +86,7 @@
             // txtTitle
             // 
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(412, 25);
+            this.txtTitle.Size = new System.Drawing.Size(599, 27);
             // 
             // btnAdd
             // 
@@ -92,7 +94,7 @@
             this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(23, 22);
+            this.btnAdd.Size = new System.Drawing.Size(24, 24);
             this.btnAdd.Text = "Add";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -102,14 +104,14 @@
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(23, 22);
+            this.btnEdit.Size = new System.Drawing.Size(24, 24);
             this.btnEdit.Text = "Edit";
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // btnDelete
             // 
@@ -117,7 +119,7 @@
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(23, 22);
+            this.btnDelete.Size = new System.Drawing.Size(24, 24);
             this.btnDelete.Text = "Delete";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -125,11 +127,12 @@
             // 
             this.toolStrip2.AutoSize = false;
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblEditStatus});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 405);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 498);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(595, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(793, 31);
             this.toolStrip2.TabIndex = 8;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -154,9 +157,10 @@
             this.urlListview.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.urlListview.FullRowSelect = true;
             this.urlListview.HideSelection = false;
-            this.urlListview.Location = new System.Drawing.Point(0, 25);
+            this.urlListview.Location = new System.Drawing.Point(0, 27);
+            this.urlListview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.urlListview.Name = "urlListview";
-            this.urlListview.Size = new System.Drawing.Size(595, 380);
+            this.urlListview.Size = new System.Drawing.Size(793, 471);
             this.urlListview.TabIndex = 9;
             this.urlListview.UseCompatibleStateImageBehavior = false;
             this.urlListview.View = System.Windows.Forms.View.Details;
@@ -190,8 +194,10 @@
             // 
             // contextMenu
             // 
+            this.contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuNavigate,
+            this.mnuCopyUrl,
             this.toolStripMenuItem1,
             this.mnuEdit,
             this.mnuDelete,
@@ -199,62 +205,70 @@
             this.mnuCopy,
             this.mnuPaste});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(131, 126);
+            this.contextMenu.Size = new System.Drawing.Size(182, 200);
             // 
             // mnuNavigate
             // 
             this.mnuNavigate.Name = "mnuNavigate";
-            this.mnuNavigate.Size = new System.Drawing.Size(130, 22);
+            this.mnuNavigate.Size = new System.Drawing.Size(181, 26);
             this.mnuNavigate.Text = "Navigate...";
             this.mnuNavigate.Click += new System.EventHandler(this.mnuNavigate_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(127, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(178, 6);
             // 
             // mnuEdit
             // 
             this.mnuEdit.Name = "mnuEdit";
-            this.mnuEdit.Size = new System.Drawing.Size(130, 22);
+            this.mnuEdit.Size = new System.Drawing.Size(181, 26);
             this.mnuEdit.Text = "Edit";
             this.mnuEdit.Click += new System.EventHandler(this.mnuEdit_Click);
             // 
             // mnuDelete
             // 
             this.mnuDelete.Name = "mnuDelete";
-            this.mnuDelete.Size = new System.Drawing.Size(130, 22);
+            this.mnuDelete.Size = new System.Drawing.Size(181, 26);
             this.mnuDelete.Text = "Delete";
             this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(127, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(178, 6);
             // 
             // mnuCopy
             // 
             this.mnuCopy.Name = "mnuCopy";
-            this.mnuCopy.Size = new System.Drawing.Size(130, 22);
+            this.mnuCopy.Size = new System.Drawing.Size(181, 26);
             this.mnuCopy.Text = "Copy";
             this.mnuCopy.Click += new System.EventHandler(this.mnuCopy_Click);
             // 
             // mnuPaste
             // 
             this.mnuPaste.Name = "mnuPaste";
-            this.mnuPaste.Size = new System.Drawing.Size(130, 22);
+            this.mnuPaste.Size = new System.Drawing.Size(181, 26);
             this.mnuPaste.Text = "Paste";
             this.mnuPaste.Click += new System.EventHandler(this.mnuPaste_Click);
             // 
+            // mnuCopyUrl
+            // 
+            this.mnuCopyUrl.Name = "mnuCopyUrl";
+            this.mnuCopyUrl.Size = new System.Drawing.Size(181, 26);
+            this.mnuCopyUrl.Text = "Copy Url";
+            this.mnuCopyUrl.Click += new System.EventHandler(this.mnuCopyUrl_Click);
+            // 
             // UrlGroupControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.urlListview);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.toolStrip2);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "UrlGroupControl";
-            this.Size = new System.Drawing.Size(595, 430);
+            this.Size = new System.Drawing.Size(793, 529);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
@@ -290,5 +304,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem mnuCopy;
         private System.Windows.Forms.ToolStripMenuItem mnuPaste;
+        private System.Windows.Forms.ToolStripMenuItem mnuCopyUrl;
     }
 }

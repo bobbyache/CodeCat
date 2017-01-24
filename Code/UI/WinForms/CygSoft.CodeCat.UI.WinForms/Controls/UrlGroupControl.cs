@@ -340,5 +340,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 Dialogs.PasteUrlErrorDialogPrompt(this, ex);
             }
         }
+
+        private void mnuCopyUrl_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IUrlItem item = SelectedItem(urlListview);
+                if (item != null)
+                {
+                    Clipboard.Clear();
+                    Clipboard.SetText(item.Url);
+                }
+            }
+            catch (Exception ex)
+            {
+                Dialogs.UrlCopyErrorNotification(this, ex);
+            }
+        }
     }
 }

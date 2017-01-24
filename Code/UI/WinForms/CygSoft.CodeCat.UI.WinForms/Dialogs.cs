@@ -112,6 +112,12 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        public static void UrlCopyErrorNotification(IWin32Window owner, Exception exception)
+        {
+            MessageBox.Show(owner, string.Format("An error occurred while trying to copyt the URL. \n{0}", exception.Message),
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         public static void DocumentSaveErrorNotification(IWin32Window owner, Exception exception)
         {
             MessageBox.Show(owner, string.Format("An error occurred while trying to save the document:\n{0}", exception.Message), 
