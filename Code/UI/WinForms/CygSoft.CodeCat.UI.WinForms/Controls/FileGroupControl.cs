@@ -274,17 +274,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 int cnt = fileListview.SelectedItems.Count;
                 bool onItem = false;
+                IFileGroupFile item = null;
 
                 if (fileListview.FocusedItem != null)
+                {
                     onItem = fileListview.FocusedItem.Bounds.Contains(e.Location);
+                    item = fileListview.FocusedItem.Tag as IFileGroupFile;
+                }
 
-                mnuOpenWith.Enabled = false;
+                mnuOpen.Enabled = cnt == 1 && onItem && item.AllowOpenOrExecute;
+                mnuOpenWith.Enabled = false && onItem && item.AllowOpenOrExecute;
                 mnuSaveAs.Enabled = cnt == 1 && onItem;
-                //mnuPaste.Enabled = Clipboard.ContainsText();
-                //mnuCopy.Enabled = cnt > 0 && onItem;
-                mnuOpen.Enabled = cnt == 1 && onItem;
                 mnuEdit.Enabled = cnt == 1 && onItem;
                 mnuDelete.Enabled = cnt >= 1;
+
+                //mnuPaste.Enabled = Clipboard.ContainsText();
+                //mnuCopy.Enabled = cnt > 0 && onItem;
 
                 contextMenu.Show(Cursor.Position);
             }
@@ -368,5 +373,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             DeleteReferences();
         }
+
+        //private void contextMenu_Opening(object sender, CancelEventArgs e)
+        //{
+        //    IFileGroupFile item = SelectedItem(fileListview);
+        //    if (item != null)
+        //    {
+        //        mnuOpen.Enabled = item.AllowOpenOrExecute;
+        //        mnuOpenWith.Enabled = item.AllowOpenOrExecute;
+        //    }
     }
 }

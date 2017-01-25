@@ -32,6 +32,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.cboCategory.Items.AddRange(fileGroupDocument.Categories);
             this.cboCategory.Sorted = true;
             this.cboCategory.SelectedItem = string.IsNullOrEmpty(fileGroupFile.Category) ? "Unknown" : fileGroupFile.Category;
+            this.chkAllowOpenOrExecute.Checked = fileGroupFile.AllowOpenOrExecute;
         }
 
         public FileGroupFileEditDialog(IFileGroupDocument fileGroupDocument)
@@ -47,6 +48,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.cboCategory.Items.AddRange(fileGroupDocument.Categories);
             this.cboCategory.Sorted = true;
             this.cboCategory.SelectedItem = "Unknown";
+            this.chkAllowOpenOrExecute.Checked = false;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -74,6 +76,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 fileGroupFile.Description = txtDescription.Text;
                 fileGroupFile.DateModified = DateTime.Now;
                 fileGroupFile.Category = string.IsNullOrEmpty(cboCategory.Text) ? "Unknown" : cboCategory.Text.ToString();
+                fileGroupFile.AllowOpenOrExecute = chkAllowOpenOrExecute.Checked;
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
             }
         }

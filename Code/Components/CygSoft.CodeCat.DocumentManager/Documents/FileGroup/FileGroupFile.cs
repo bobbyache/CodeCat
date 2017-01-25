@@ -23,18 +23,20 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
             this.Title = "";
             this.Description = "";
             this.Category = "Unknown";
+            this.AllowOpenOrExecute = false;
             this.DateCreated = DateTime.Now;
             this.DateModified = this.DateCreated;
             this.sourceFilePath = sourceFilePath;
         }
 
-        public FileGroupFile(string folder, string id, string title, string fileName, string category, string description, DateTime dateCreated, DateTime dateModified)
+        public FileGroupFile(string folder, string id, string title, string fileName, bool allowOpenOrExecute, string category, string description, DateTime dateCreated, DateTime dateModified)
         {
             this.originalFilePathGenerator = new FilePathGenerator(folder, fileName, id);
             this.currentFilePathGenerator = new FilePathGenerator(folder, fileName, id);
             this.Title = title;
             this.Description = description;
             this.Category = category;
+            this.AllowOpenOrExecute = allowOpenOrExecute;
             this.DateCreated = dateCreated;
             this.DateModified = dateModified;
         }
@@ -55,6 +57,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
         public DateTime DateCreated { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public bool AllowOpenOrExecute { get; set; }
 
         public bool HasFileName(string fileName)
         {

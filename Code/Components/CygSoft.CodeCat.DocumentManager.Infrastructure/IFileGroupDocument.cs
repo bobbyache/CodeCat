@@ -18,6 +18,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string ModifiedFilePath { get; }
         string FileExtension { get; }
         string Description { get; set; }
+        bool AllowOpenOrExecute { get; set; }
         DateTime DateModified { get; set; }
         DateTime DateCreated { get; set; }
 
