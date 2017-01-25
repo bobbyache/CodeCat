@@ -66,7 +66,7 @@
             this.keywordsLabel.AutoSize = true;
             this.keywordsLabel.Location = new System.Drawing.Point(12, 6);
             this.keywordsLabel.Name = "keywordsLabel";
-            this.keywordsLabel.Size = new System.Drawing.Size(53, 13);
+            this.keywordsLabel.Size = new System.Drawing.Size(69, 17);
             this.keywordsLabel.TabIndex = 1;
             this.keywordsLabel.Text = "Keywords";
             // 
@@ -75,9 +75,9 @@
             this.keywordsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.keywordsTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.keywordsTextBox.Location = new System.Drawing.Point(106, 3);
+            this.keywordsTextBox.Location = new System.Drawing.Point(85, 1);
             this.keywordsTextBox.Name = "keywordsTextBox";
-            this.keywordsTextBox.Size = new System.Drawing.Size(797, 20);
+            this.keywordsTextBox.Size = new System.Drawing.Size(820, 23);
             this.keywordsTextBox.TabIndex = 0;
             // 
             // tabControl1
@@ -95,10 +95,10 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.codeSearchResultsControl1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(953, 402);
+            this.tabPage1.Size = new System.Drawing.Size(953, 398);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Code && Snippets";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -107,13 +107,14 @@
             // 
             this.codeSearchResultsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.codeSearchResultsControl1.Location = new System.Drawing.Point(3, 3);
+            this.codeSearchResultsControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.codeSearchResultsControl1.Name = "codeSearchResultsControl1";
-            this.codeSearchResultsControl1.Size = new System.Drawing.Size(947, 396);
+            this.codeSearchResultsControl1.Size = new System.Drawing.Size(947, 392);
             this.codeSearchResultsControl1.TabIndex = 6;
             // 
             // SearchForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(961, 457);
             this.Controls.Add(this.tabControl1);
