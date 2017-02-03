@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using Moq;
 using NUnit.Framework;
+using Search.KeywordIndex.UnitTests.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,61 +33,73 @@ namespace Search.KeywordIndex.UnitTests
             Assert.AreEqual(searchIndex.FileTitle, "keyword_index.xml");
         }
 
-        //[Test]
-        //public void KeywordSearchIndex_WhenAddingKeywordsToIndexItems_ReturnsTrueOnSubsequentSearchForOneOfThoseKeywords()
-        //{
-            
+        [Test]
+        public void KeywordSearchIndex_WhenAddingKeywordsToIndexItems_ReturnsTrueOnSubsequentSearchForOneOfThoseKeywords()
+        {
+            var keywordSearchIndexItem = new TestKeywordIndexItem();
+            IKeywordSearchIndex searchIndex = new KeywordSearchIndex("", 2, new List<IKeywordIndexItem> { keywordSearchIndexItem });
+            searchIndex.AddKeywords(new IKeywordIndexItem[] { keywordSearchIndexItem }, @"test,testing,tested");
+            IKeywordIndexItem[] items = searchIndex.Find("TEST");
 
-        //    // ### ARRANGE ###
-        //    var stubKeywordIndexItem = new Mock<IKeywordIndexItem>();
-        //    stubKeywordIndexItem.Setup(ki => ki.CommaDelimitedKeywords).Returns("test,testing,tested");
-        //    stubKeywordIndexItem.Setup(ki => ki.Keywords).Returns(new string[] { "test", "testing", "tested" });
-        //    // currently have to mock as uppercase "TEST", should rather perform this case conversion in the "AllKeywordsFound()" method.
-        //    stubKeywordIndexItem.Setup(ki => ki.AllKeywordsFound(new string[] { "TEST" })).Returns(true);
-        //    IKeywordSearchIndex searchIndex = new KeywordSearchIndex(@"C:\keywords\keyword_index.xml", 2, new List<IKeywordIndexItem> { stubKeywordIndexItem.Object });
+            Assert.IsNotNull(items, "A single item should be found.");
+            Assert.IsTrue(items.Length == 1);
+        }
 
-        //    // ### ACT ###
-        //    /*
-        //     * This method of adding keywords to items within the search index does not feel right.
-        //     *                  searchIndex.AddKeywordsTo(string[] indexIds, string delimitedKeywords)
-        //     * ... is probably a better idea.
-        //     */
-        //    searchIndex.AddKeywords(new IKeywordIndexItem[] { stubKeywordIndexItem.Object }, @"test,testing,tested");
-        //    IKeywordIndexItem[] items = searchIndex.Find("TEST");
+        [Test]
+        public void KeywordSearchIndex_AfterRemovingKeywordsFromIndexItems_ReturnsFalseOnSubsequentSearchForThoseKeywords()
+        {
+            var keywordSearchIndexItem = new TestKeywordIndexItem();
+            var searchIndex = new KeywordSearchIndex("", 2, new List<IKeywordIndexItem> { keywordSearchIndexItem });
+            searchIndex.AddKeywords(new IKeywordIndexItem[] { keywordSearchIndexItem }, @"test,testing,tested");
 
-        //    // ### ASSERT ###
-        //    // Only finding a single item because we've added it into the index above....
+            searchIndex.RemoveKeywords(new IKeywordIndexItem[] { keywordSearchIndexItem }, new string[] { "test", "testing", "tested" });
+            var items = searchIndex.Find("TEST");
 
-        //    Assert.IsNotNull(items, "A single item should be found.");
-        //    Assert.IsTrue(items.Length == 1);
-        //}
+            Assert.IsNotNull(items, "A single item should be found.");
+            Assert.That(items.Length, Is.Zero);
+        }
 
-        //[Test]
-        //public void KeywordSearchIndex_WhenRemovingKeywordsFromIndexItems_ReturnsTrueOnSubsequentSearchForOneOfThoseKeywords()
-        //{
-        //    // ### ARRANGE ###
-        //    var stubKeywordIndexItem = new Mock<IKeywordIndexItem>();
-        //    stubKeywordIndexItem.Setup(ki => ki.CommaDelimitedKeywords).Returns("test,testing,tested");
-        //    stubKeywordIndexItem.Setup(ki => ki.Keywords).Returns(new string[] { "test", "testing", "tested" });
-        //    // currently have to mock as uppercase "TEST", should rather perform this case conversion in the "AllKeywordsFound()" method.
-        //    stubKeywordIndexItem.Setup(ki => ki.AllKeywordsFound(new string[] { "TEST" })).Returns(true);
-        //    IKeywordSearchIndex searchIndex = new KeywordSearchIndex(@"C:\keywords\keyword_index.xml", 2, new List<IKeywordIndexItem> { stubKeywordIndexItem.Object });
+        [Test]
+        public void KeywordSearchIndex_AfterAddingKeywordIndeces_ContainsIndeces()
+        {
+            var keywordSearchIndexItem = new TestKeywordIndexItem();
+            var searchIndex = new KeywordSearchIndex("", 2, new List<IKeywordIndexItem> { keywordSearchIndexItem });
+            searchIndex.AddKeywords(new IKeywordIndexItem[] { keywordSearchIndexItem }, @"test,testing,tested");
 
-        //    // ### ACT ###
-        //    /*
-        //     * This method of adding keywords to items within the search index does not feel right.
-        //     *                  searchIndex.AddKeywordsTo(string[] indexIds, string delimitedKeywords)
-        //     * ... is probably a better idea.
-        //     */
-        //    searchIndex.AddKeywords(new IKeywordIndexItem[] { stubKeywordIndexItem.Object }, @"test,testing,tested");
-        //    IKeywordIndexItem[] items = searchIndex.Find("TEST");
+            Assert.That(searchIndex.Contains(keywordSearchIndexItem), Is.True);
+            Assert.That(searchIndex.Contains(keywordSearchIndexItem.Id), Is.True);
+        }
 
-        //    // ### ASSERT ###
-        //    // Only finding a single item because we've added it into the index above....
+        [Test]
+        public void KeywordSearchIndex_AfterAddingItems_AllReturnsIndexItemCount()
+        {
+            List<IKeywordIndexItem> indexItems = (new List<TestKeywordIndexItem> {
+                new TestKeywordIndexItem("Title 1", "test,testing,tested"),
+                new TestKeywordIndexItem("Title 2", "red,black"),
+                new TestKeywordIndexItem("Title 3", "apple,pear")
+            }).OfType<IKeywordIndexItem>().ToList();
 
-        //    Assert.IsNotNull(items, "A single item should be found.");
-        //    Assert.IsTrue(items.Length == 1);
-        //}
+            var searchIndex = new KeywordSearchIndex("", 2, indexItems);
 
+            int numItemsInIndex = searchIndex.All().Length;
+
+            Assert.That(numItemsInIndex, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void KeywordSearchIndex_AfterAddingItems_AllKeywordsReturnsUniqueKeywords()
+        {
+            List<IKeywordIndexItem> indexItems = (new List<TestKeywordIndexItem> {
+                new TestKeywordIndexItem("Title 1", "test,testing,tested"),
+                new TestKeywordIndexItem("Title 2", "test,testing"),
+                new TestKeywordIndexItem("Title 3", "TESTING,TESTED")
+            }).OfType<IKeywordIndexItem>().ToList();
+
+            var searchIndex = new KeywordSearchIndex("", 2, indexItems);
+
+            string[] allKeywords = searchIndex.AllKeywords(searchIndex.All());
+
+            Assert.That(allKeywords.Length, Is.EqualTo(3));
+        }
     }
 }

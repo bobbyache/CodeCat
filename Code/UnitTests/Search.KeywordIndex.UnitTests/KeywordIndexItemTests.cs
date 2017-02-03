@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.Search.KeywordIndex;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using NUnit.Framework;
+using Search.KeywordIndex.UnitTests.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -124,21 +125,19 @@ namespace Search.KeywordIndex.UnitTests
             Assert.IsFalse(willResultNonSearchhableIndexItem);
         }
 
-        public class TestKeywordIndexItem : KeywordIndexItem
+        [Test]
+        public void IndexItem_AfterAddingIndexItems_ContainsOnlyUniqueKeywords()
         {
-            public TestKeywordIndexItem() : base()
-            {
-            }
+            // better to change from ValidateRemoveKeywords() to IsSearchableAfterRemove()
+            // perhaps add property "IsSearchable" or "HasKeywords" or both....
+            IKeywordIndexItem keywordIndexItem = new TestKeywordIndexItem("4ecac722-8ec5-441c-8e3e-00b192b30453", "Title", DateTime.Now, DateTime.Now, "");
+            keywordIndexItem.AddKeywords("banana,orange");
+            keywordIndexItem.AddKeywords("banana,ORANGE");
+            keywordIndexItem.AddKeywords("apple,BANANA");
 
-            public TestKeywordIndexItem(string title, string commaDelimitedKeywords) : base(title, commaDelimitedKeywords)
-            {
-
-            }
-
-            public TestKeywordIndexItem(string id, string title, DateTime dateCreated, DateTime dateModified, string commaDelimitedKeywords) : base(id, title, dateCreated, dateModified, commaDelimitedKeywords)
-            {
-
-            }
+            int keywordCount = keywordIndexItem.Keywords.Length;
+            Assert.That(keywordCount, Is.EqualTo(3));
         }
+
     }
 }
