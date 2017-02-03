@@ -89,8 +89,10 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         {
             foreach (string keyphrase in keyPhraseList)
             {
-                if (keyPhrases.Contains(keyphrase))
-                    keyPhrases.Remove(keyphrase);
+                string trimmedUpper = keyphrase.Trim().ToUpper();
+
+                if (keyPhrases.Contains(trimmedUpper))
+                    keyPhrases.Remove(trimmedUpper);
             }
         }
 
