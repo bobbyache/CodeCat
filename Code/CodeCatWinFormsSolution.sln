@@ -1,20 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Domain", "Components\CygSoft.CodeCat.Domain\CygSoft.CodeCat.Domain.csproj", "{7A97514D-BB47-49AA-8785-260F355D6F96}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7D7A9485-DD0E-48D1-9041-734EB15E3AFA}"
-	ProjectSection(SolutionItems) = preProject
-		default.runsettings = default.runsettings
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Search.KeywordIndex", "Components\CygSoft.CodeCat.SearchIndex\CygSoft.CodeCat.Search.KeywordIndex.csproj", "{A75E419A-7DF9-466E-8F5A-351310672CE6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Infrastructure", "Components\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj", "{8C992A57-BCBF-4B78-9F69-C88A30E39963}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.UI.WinForms", "UI\WinForms\CygSoft.CodeCat.UI.WinForms\CygSoft.CodeCat.UI.WinForms.csproj", "{4FDD2CB6-3FFE-458B-A186-2C57375F4AC0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{41D8C320-6C3C-4A1E-9A43-4A9EC8DE7577}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.ProjectConverter", "Components\CygSoft.CodeCat.ProjectConverter\CygSoft.CodeCat.ProjectConverter.csproj", "{C908F626-1812-4119-B551-E14840100203}"
 EndProject
@@ -26,11 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.DocumentMan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.DocumentManager.Infrastructure", "Components\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj", "{70BA46BA-7055-4E29-96A1-725A30B00B61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests.DocumentManager", "Components\UnitTests.DocumentManager\UnitTests.DocumentManager.csproj", "{BEA08610-DC23-4BEF-93ED-627652E2F92E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.UI.ProjectExporter", "UI\WinForms\CygSoft.CodeCat.UI.ProjectExporter\CygSoft.CodeCat.UI.ProjectExporter.csproj", "{50A711A2-3C3C-4E2B-8BE6-466CE4AC6172}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests.Search.KeywordIndex", "Components\UnitTests.SearchIndex\UnitTests.Search.KeywordIndex.csproj", "{1CF97F26-7EED-4C93-9138-A7312C05C9B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,10 +47,6 @@ Global
 		{4FDD2CB6-3FFE-458B-A186-2C57375F4AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FDD2CB6-3FFE-458B-A186-2C57375F4AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FDD2CB6-3FFE-458B-A186-2C57375F4AC0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{41D8C320-6C3C-4A1E-9A43-4A9EC8DE7577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41D8C320-6C3C-4A1E-9A43-4A9EC8DE7577}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41D8C320-6C3C-4A1E-9A43-4A9EC8DE7577}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41D8C320-6C3C-4A1E-9A43-4A9EC8DE7577}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C908F626-1812-4119-B551-E14840100203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C908F626-1812-4119-B551-E14840100203}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C908F626-1812-4119-B551-E14840100203}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -78,18 +67,10 @@ Global
 		{70BA46BA-7055-4E29-96A1-725A30B00B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70BA46BA-7055-4E29-96A1-725A30B00B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70BA46BA-7055-4E29-96A1-725A30B00B61}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BEA08610-DC23-4BEF-93ED-627652E2F92E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEA08610-DC23-4BEF-93ED-627652E2F92E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEA08610-DC23-4BEF-93ED-627652E2F92E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BEA08610-DC23-4BEF-93ED-627652E2F92E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50A711A2-3C3C-4E2B-8BE6-466CE4AC6172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{50A711A2-3C3C-4E2B-8BE6-466CE4AC6172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50A711A2-3C3C-4E2B-8BE6-466CE4AC6172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50A711A2-3C3C-4E2B-8BE6-466CE4AC6172}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CF97F26-7EED-4C93-9138-A7312C05C9B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CF97F26-7EED-4C93-9138-A7312C05C9B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CF97F26-7EED-4C93-9138-A7312C05C9B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CF97F26-7EED-4C93-9138-A7312C05C9B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
