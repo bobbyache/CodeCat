@@ -39,6 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FilePathValidator.cs" />
+    <Compile Include="FilePathValidatorFactory.cs" />
+    <Compile Include="IKeywordSearchIndexFileValidator.cs" />
+    <Compile Include="InvalidFileIndexVersionException.cs" />
     <Compile Include="XmlKeywordSearchIndexRepository.cs" />
     <Compile Include="KeywordSearchIndex.cs" />
     <Compile Include="KeywordIndexItem.cs" />

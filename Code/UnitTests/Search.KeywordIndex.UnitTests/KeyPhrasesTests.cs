@@ -70,5 +70,20 @@ namespace Search.KeywordIndex.UnitTests
             Assert.IsTrue(!keyPhrases.PhraseExists(""));
         }
 
+        [Test]
+        public void KeyPhrases_AddingKeywordsWithSpaces_HasSpacesCorrectlyStripped()
+        {
+            KeyPhrases keyPhrases = new KeyPhrases(new List<string> { " yellow ", "black ", " red" });
+            Assert.That(keyPhrases.PhraseExists("yellow"), Is.True);
+            Assert.That(keyPhrases.PhraseExists("black"), Is.True);
+            Assert.That(keyPhrases.PhraseExists("red"), Is.True);
+        }
+
+        [Test]
+        public void KeyPhrases_KeyPhrases_SortedAlphabetically()
+        {
+            KeyPhrases keyPhrases = new KeyPhrases(new List<string> { "yellow", "green", "black", "red" });
+            Assert.That(keyPhrases.DelimitKeyPhraseList(), Is.EqualTo("BLACK,GREEN,RED,YELLOW"));
+        }
     }
 }

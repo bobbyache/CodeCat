@@ -57,6 +57,7 @@
     <Compile Include="KeywordIndexItemTests.cs" />
     <Compile Include="KeywordSearchIndexTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlKeywordSearchIndexRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

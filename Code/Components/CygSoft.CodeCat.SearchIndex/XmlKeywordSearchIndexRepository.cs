@@ -21,6 +21,11 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
         public IKeywordSearchIndex OpenIndex(string filePath, int currentVersion)
         {
+            IKeywordSearchIndexFileValidator fileValidator = FilePathValidatorFactory.Create();
+
+            if (!fileValidator.Exists(filePath))
+                throw new FileNotFoundException();
+
             List<IndexItem> items = LoadIndexItems(filePath, currentVersion);
             IKeywordSearchIndex Index = new KeywordSearchIndex(filePath, currentVersion, items.Cast<IKeywordIndexItem>().ToList());
             return Index;
@@ -83,8 +88,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         }
 
         protected abstract List<IndexItem> LoadIndexItems(string filePath, int currentVersion);
-
-
+        
         public void ImportItems(string filePath, int currentVersion, IKeywordIndexItem[] importItems)
         {
             IndexItem[] imports = importItems.OfType<IndexItem>().ToArray();
