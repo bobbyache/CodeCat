@@ -82,11 +82,6 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             xmlDocument.Save(xmlFile);
         }
 
-        private void SaveProjectAs(string sourcePath, string destinationFilePath)
-        {
-            File.Copy(sourcePath, destinationFilePath, true);
-        }
-
         protected abstract List<IndexItem> LoadIndexItems(string filePath, int currentVersion);
         
         public void ImportItems(string filePath, int currentVersion, IKeywordIndexItem[] importItems)
