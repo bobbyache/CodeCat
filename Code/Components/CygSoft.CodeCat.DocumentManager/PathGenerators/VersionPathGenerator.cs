@@ -1,10 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Base;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.PathGenerators
 {
@@ -24,11 +20,6 @@ namespace CygSoft.CodeCat.DocumentManager.PathGenerators
             this.sourceFilePath = sourceFilePath;
             this.timeStamp = timeStamp;
         }
-
-        // don't think this is necessary... its the 
-        //public string SourceFileName { get { return Path.GetFileName(sourceFilePath); } }
-        //public string SourceId { get { return Path.GetFileNameWithoutExtension(sourceFilePath); } }
-        //public string SourceFilePath { get { return this.sourceFilePath; } }
 
         public override string FileExtension
         {

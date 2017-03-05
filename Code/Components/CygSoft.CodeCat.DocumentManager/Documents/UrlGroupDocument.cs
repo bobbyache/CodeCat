@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
@@ -23,9 +21,8 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             get
             {
                 if (Uri.IsWellFormedUriString(this.Url, UriKind.Absolute))
-                {
                     return new Uri(this.Url).Host;
-                }
+                
                 return string.Empty;
             }
         }
@@ -56,10 +53,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         public string Id
         {
             get { return this.identifyingGuid.ToString(); }
-            set
-            {
-                this.identifyingGuid = new Guid(value);
-            }
+            set { this.identifyingGuid = new Guid(value); }
         }
     }
 
@@ -81,15 +75,8 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         private List<IUrlItem> urlItemList = new List<IUrlItem>();
 
-        public IUrlItem[] Items 
-        {
-            get { return urlItemList.ToArray(); }
-        }
-
-        public string[] Categories
-        {
-            get { return this.Items.Select(r => r.Category).Distinct().ToArray(); }
-        }
+        public IUrlItem[] Items { get { return urlItemList.ToArray(); } }
+        public string[] Categories { get { return this.Items.Select(r => r.Category).Distinct().ToArray(); } }
 
         public IUrlItem CreateNewUrl()
         {
@@ -99,7 +86,6 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         protected override IFileVersion NewVersion(DateTime timeStamp, string description)
         {
-            //return new TextDocumentVersion(new VersionPathGenerator(this.FilePath, timeStamp), description, this.Text);
             return null;
         }
 
@@ -213,13 +199,11 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
                     foreach (IUrlItem item in urlItems)
                         this.urlItemList.Add(item);
 
-                    if (Paste != null)
-                        Paste(this, new EventArgs());
+                    Paste?.Invoke(this, new EventArgs());
                 }
                 else
                 {
-                    if (PasteConflict != null)
-                        PasteConflict(this, new EventArgs());
+                    PasteConflict?.Invoke(this, new EventArgs());
                 }
             }
             catch (Exception)

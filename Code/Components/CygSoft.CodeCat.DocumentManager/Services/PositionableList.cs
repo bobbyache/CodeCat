@@ -1,10 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Exceptions;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Services
 {

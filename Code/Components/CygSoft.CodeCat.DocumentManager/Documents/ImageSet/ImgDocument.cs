@@ -2,12 +2,8 @@
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
 {
@@ -57,12 +53,10 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
         protected override IFileVersion NewVersion(DateTime timeStamp, string description)
         {
             return null;
-            //throw new NotImplementedException();
         }
 
         protected override void OpenFile()
         {
-            //throw new NotImplementedException();
         }
 
         // we are saving the file... the image saving component will write to the ModifiedFilePath

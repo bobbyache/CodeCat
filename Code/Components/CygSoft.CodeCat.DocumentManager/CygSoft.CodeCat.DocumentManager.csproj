@@ -55,7 +55,6 @@
     <Compile Include="Documents\ImageSet\ImageSetIndex.cs" />
     <Compile Include="Documents\ImageSet\ImageSetIndexXmlRepository.cs" />
     <Compile Include="Documents\ImageSet\ImgDocument.cs" />
-    <Compile Include="Documents\ImageSet\OrderedImageSetDocument.cs" />
     <Compile Include="Documents\PdfDocument.cs" />
     <Compile Include="Documents\QikScriptDocument.cs" />
     <Compile Include="Documents\RichTextDocument.cs" />
@@ -65,7 +64,6 @@
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="PathGenerators\DocumentIndexPathGenerator.cs" />
     <Compile Include="PathGenerators\DocumentPathGenerator.cs" />
-    <Compile Include="PathGenerators\FileGroupPathGenerator.cs" />
     <Compile Include="PathGenerators\FilePathGenerator.cs" />
     <Compile Include="PathGenerators\ImagePathGenerator.cs" />
     <Compile Include="PathGenerators\ImageSetIndexPathGenerator.cs" />

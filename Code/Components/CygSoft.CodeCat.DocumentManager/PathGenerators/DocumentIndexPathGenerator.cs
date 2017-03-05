@@ -1,10 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Base;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.PathGenerators
 {

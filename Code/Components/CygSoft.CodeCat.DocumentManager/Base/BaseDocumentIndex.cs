@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {
@@ -77,6 +75,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             return this.documentFiles.ItemsList.Exists(r => r.Id == id);
 
         }
+
         // IDocumentFile could be of a different type, so it needs to be created
         // elsewhere such as a IDocumentFile factory.
         public IDocument AddDocumentFile(IDocument documentFile)
@@ -85,8 +84,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             {
                 this.documentFiles.Insert(documentFile);
                 AfterAddDocumentFile();
-                if (DocumentAdded != null)
-                    DocumentAdded(this, new DocumentEventArgs(documentFile));
+                DocumentAdded?.Invoke(this, new DocumentEventArgs(documentFile));
 
                 return documentFile;
             }
@@ -107,8 +105,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 documentFiles.Remove(documentFile);
                 documentFile.Ordinal = -1;
 
-                if (DocumentRemoved != null)
-                    DocumentRemoved(this, new DocumentEventArgs(documentFile));
+                DocumentRemoved?.Invoke(this, new DocumentEventArgs(documentFile));
             }
             catch (Exception exception)
             {
@@ -165,8 +162,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public virtual void MoveDown(IDocument documentFile)
         {
             documentFiles.MoveDown(documentFile);
-            if (DocumentMovedDown != null)
-                DocumentMovedDown(this, new DocumentEventArgs(documentFile));
+            DocumentMovedDown?.Invoke(this, new DocumentEventArgs(documentFile));
         }
 
         public void MoveTo(IDocument documentFile, int ordinal)
@@ -177,8 +173,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public virtual void MoveUp(IDocument documentFile)
         {
             documentFiles.MoveUp(documentFile);
-            if (DocumentMovedUp != null)
-                DocumentMovedUp(this, new DocumentEventArgs(documentFile));
+            DocumentMovedUp?.Invoke(this, new DocumentEventArgs(documentFile));
         }
 
         public void MoveLast(IDocument documentFile)

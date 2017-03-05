@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
@@ -115,14 +113,6 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
                     File.Delete(file.ModifiedFilePath);
             }
         }
-
-        //protected override void OnAfterRevert()
-        //{
-        //    base.OnAfterRevert();
-
-        //    foreach (IFileGroupFile file in this.fileList)
-        //        file.Revert();
-        //}
 
         private void CreateFile()
         {

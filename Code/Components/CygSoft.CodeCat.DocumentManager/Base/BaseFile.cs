@@ -1,10 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {
@@ -61,17 +57,13 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                if (BeforeOpen != null)
-                    BeforeOpen(this, new FileEventArgs(this));
-
+                BeforeOpen?.Invoke(this, new FileEventArgs(this));
                 OnBeforeOpen();
                 OpenFile();
                 OnAfterOpen();
 
                 this.Loaded = true;
-
-                if (AfterOpen != null)
-                    AfterOpen(this, new FileEventArgs(this));
+                AfterOpen?.Invoke(this, new FileEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -83,9 +75,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                if (BeforeRevert != null)
-                    BeforeRevert(this, new FileEventArgs(this));
-
+                BeforeRevert?.Invoke(this, new FileEventArgs(this));
                 OnBeforeRevert();
 
                 if (File.Exists(this.FilePath))
@@ -93,9 +83,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 OnAfterRevert();
 
                 this.Loaded = true;
-
-                if (AfterRevert != null)
-                    AfterRevert(this, new FileEventArgs(this));
+                AfterRevert?.Invoke(this, new FileEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -105,9 +93,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         public void Delete()
         {
-            if (BeforeDelete != null)
-                BeforeDelete(this, new FileEventArgs(this));
-
+            BeforeDelete?.Invoke(this, new FileEventArgs(this));
             OnBeforeDelete();
 
             if (File.Exists(this.FilePath))
@@ -116,26 +102,19 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             OnAfterDelete();
 
             this.Loaded = false;
-
-            if (AfterDelete != null)
-                AfterDelete(this, new FileEventArgs(this));
+            AfterDelete?.Invoke(this, new FileEventArgs(this));
         }
 
         public void Save()
         {
             try
             {
-                if (BeforeSave != null)
-                    BeforeSave(this, new FileEventArgs(this));
-
+                BeforeSave?.Invoke(this, new FileEventArgs(this));
                 OnBeforeSave();
                 SaveFile();
                 OnAfterSave();
-
                 this.Loaded = true;
-
-                if (AfterSave != null)
-                    AfterSave(this, new FileEventArgs(this));
+                AfterSave?.Invoke(this, new FileEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -144,14 +123,10 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         }
         public void Close()
         {
-            if (BeforeClose != null)
-                BeforeClose(this, new FileEventArgs(this));
-
+            BeforeClose?.Invoke(this, new FileEventArgs(this));
             this.OnClose();
             this.Loaded = false;
-
-            if (AfterClose != null)
-                AfterClose(this, new FileEventArgs(this));
+            AfterClose?.Invoke(this, new FileEventArgs(this));
         }
 
         private string CleanExtension(string extension)

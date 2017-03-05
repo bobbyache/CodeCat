@@ -2,14 +2,8 @@
 using CygSoft.CodeCat.DocumentManager.Documents.ImageSet;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
-using CygSoft.CodeCat.DocumentManager.Services;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
@@ -122,8 +116,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             imgDocument.Description = description;
             this.documentIndex.AddDocumentFile(imgDocument);
 
-            if (ImageAdded != null)
-                ImageAdded(this, new EventArgs());
+            ImageAdded?.Invoke(this, new EventArgs());
 
             return imgDocument;
         }
@@ -132,8 +125,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         public void Remove(IImgDocument imageItem)
         {
             this.documentIndex.RemoveDocumentFile(imageItem.Id);
-            if (ImageRemoved != null)
-                ImageRemoved(this, new EventArgs());
+            ImageRemoved?.Invoke(this, new EventArgs());
         }
 
         public bool CanMovePrevious(IImgDocument documentFile)
@@ -149,15 +141,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         public virtual void MovePrevious(IImgDocument documentFile)
         {
             this.documentIndex.MoveUp(documentFile);
-            if (ImageMovedUp != null)
-                ImageMovedUp(this, new EventArgs());
+            ImageMovedUp?.Invoke(this, new EventArgs());
         }
 
         public virtual void MoveNext(IImgDocument documentFile)
         {
             this.documentIndex.MoveDown(documentFile);
-            if (ImageMovedDown != null)
-                ImageMovedDown(this, new EventArgs());
+            ImageMovedDown?.Invoke(this, new EventArgs());
         }
 
     }
