@@ -3,13 +3,8 @@ using CygSoft.CodeCat.DocumentManager.Base;
 using CygSoft.CodeCat.DocumentManager.Documents;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {

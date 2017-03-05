@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Infrastructure
 {
-   public class SyntaxRepository
+    public class SyntaxRepository
     {
         private Dictionary<string, SyntaxFile> syntaxFiles;
 

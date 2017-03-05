@@ -1,18 +1,13 @@
-﻿using CygSoft.CodeCat.DocumentManager.Documents;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Domain.Code;
+﻿using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Code.Base;
 using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Domain
 {
@@ -110,7 +105,6 @@ namespace CygSoft.CodeCat.Domain
         public string GetSyntaxFile(string syntax)
         {
             return this.syntaxRepository[syntax].FilePath;
-            //return this.syntaxRepository.
         }
 
         public IKeywordIndexItem[] FindIndeces(string commaDelimitedKeywords)

@@ -42,8 +42,6 @@
     <Compile Include="FileSys.cs" />
     <Compile Include="LastCodeFileRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Qik\IQikScriptFile.cs" />
-    <Compile Include="Qik\ITemplateFile.cs" />
     <Compile Include="SyntaxFile.cs" />
     <Compile Include="SyntaxRepository.cs" />
   </ItemGroup>

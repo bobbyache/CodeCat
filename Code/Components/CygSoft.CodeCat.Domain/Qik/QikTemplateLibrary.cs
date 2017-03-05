@@ -1,14 +1,8 @@
 ﻿using CygSoft.CodeCat.Domain.Base;
-using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Management;
-using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.Search.KeywordIndex;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
@@ -30,6 +24,7 @@ namespace CygSoft.CodeCat.Domain.Qik
                 QikTemplateDocumentSet codeFile = new QikTemplateDocumentSet(indexItem as QikTemplateKeywordIndexItem, this.FolderPath);
                 exportList.Add(new IndexExportImportData(indexItem.Id, codeFile.Folder, indexItem.Id, indexItem));
             }
+
             return exportList.ToArray();
         }
 
@@ -67,6 +62,7 @@ namespace CygSoft.CodeCat.Domain.Qik
 
                 if (this.openFiles == null)
                     this.openFiles = new Dictionary<string, IPersistableTarget>();
+
                 this.openFiles.Add(persistableFile.Id, persistableFile);
 
                 persistableFile.Open();

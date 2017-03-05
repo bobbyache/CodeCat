@@ -4,10 +4,7 @@ using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Domain.CodeGroup
 {
@@ -117,17 +114,10 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         public string CommaDelimitedKeywords
         {
             get { return this.IndexItem.CommaDelimitedKeywords; }
-            set
-            {
-                this.IndexItem.SetKeywords(value);
-            }
+            set { this.IndexItem.SetKeywords(value); }
         }
 
-        public int HitCount
-        {
-            get;
-            private set;
-        }
+        public int HitCount { get; private set; }
 
         public bool DocumentExists(string id)
         {
@@ -195,88 +185,72 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         private void documentIndex_AfterOpen(object sender, FileEventArgs e)
         {
-            if (AfterOpen != null)
-                AfterOpen(this, e);
+            AfterOpen?.Invoke(this, e);
         }
 
         private void documentIndex_BeforeOpen(object sender, FileEventArgs e)
         {
-            if (BeforeOpen != null)
-                BeforeOpen(this, e);
+            BeforeOpen?.Invoke(this, e);
         }
 
         private void documentIndex_BeforeRevert(object sender, FileEventArgs e)
         {
-            if (BeforeRevert != null)
-                BeforeRevert(this, e);
+            BeforeRevert?.Invoke(this, e);
         }
 
         private void documentIndex_AfterRevert(object sender, FileEventArgs e)
         {
-            if (AfterRevert != null)
-                AfterRevert(this, e);
+            AfterRevert?.Invoke(this, e);
         }
 
         private void documentIndex_AfterDelete(object sender, FileEventArgs e)
         {
-            if (AfterDelete != null)
-                AfterDelete(this, e);
+            AfterDelete?.Invoke(this, e);
         }
 
         private void documentIndex_BeforeDelete(object sender, FileEventArgs e)
         {
-            if (BeforeDelete != null)
-                BeforeDelete(this, e);
+            BeforeDelete?.Invoke(this, e);
         }
 
         private void documentIndex_AfterClose(object sender, FileEventArgs e)
         {
-            if (AfterClose != null)
-                AfterClose(this, e);
+            AfterClose?.Invoke(this, e);
         }
 
         private void documentIndex_BeforeClose(object sender, FileEventArgs e)
         {
-            if (BeforeClose != null)
-                BeforeClose(this, e);
+            BeforeClose?.Invoke(this, e);
         }
-
 
         private void documentIndex_AfterSave(object sender, FileEventArgs e)
         {
-            if (AfterSave != null)
-                AfterSave(this, e);
+            AfterSave?.Invoke(this, e);
         }
 
         private void documentIndex_BeforeSave(object sender, FileEventArgs e)
         {
-            if (BeforeSave != null)
-                BeforeSave(this, e);
+            BeforeSave?.Invoke(this, e);
         }
 
         private void documentIndex_DocumentMovedRight(object sender, DocumentEventArgs e)
         {
-            if (DocumentMovedRight != null)
-                DocumentMovedRight(this, e);
+            DocumentMovedRight?.Invoke(this, e);
         }
 
         private void documentIndex_DocumentMovedLeft(object sender, DocumentEventArgs e)
         {
-            if (DocumentMovedLeft != null)
-                DocumentMovedLeft(this, e);
+            DocumentMovedLeft?.Invoke(this, e);
         }
 
         private void documentIndex_DocumentRemoved(object sender, DocumentEventArgs e)
         {
-            if (DocumentRemoved != null)
-                DocumentRemoved(this, e);
+            DocumentRemoved?.Invoke(this, e);
         }
 
         private void documentIndex_DocumentAdded(object sender, DocumentEventArgs e)
         {
-            if (DocumentAdded != null)
-                DocumentAdded(this, e);
+            DocumentAdded?.Invoke(this, e);
         }
-
     }
 }

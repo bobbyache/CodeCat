@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Search.KeywordIndex;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
@@ -116,55 +111,36 @@ namespace CygSoft.CodeCat.Domain.Code
         public string CommaDelimitedKeywords
         {
             get { return this.IndexItem.CommaDelimitedKeywords; }
-            set
-            {
-                this.IndexItem.SetKeywords(value);
-            }
+            set { this.IndexItem.SetKeywords(value); }
         }
 
-        public int HitCount
-        {
-            get;
-            private set;
-        }
+        public int HitCount { get; private set; }
 
         public void Revert()
         {
-            if (this.BeforeRevert != null)
-                this.BeforeRevert(this, new FileEventArgs(null));
-
+            this.BeforeRevert?.Invoke(this, new FileEventArgs(null));
             bool opened = this.ReadData();
-
-            if (this.AfterRevert != null)
-                this.AfterRevert(this, new FileEventArgs(null));
+            this.AfterRevert?.Invoke(this, new FileEventArgs(null));
         }
 
         public void Open()
         {
-            if (BeforeOpen != null)
-                BeforeOpen(this, new FileEventArgs(null));
-
+            BeforeOpen?.Invoke(this, new FileEventArgs(null));
             bool opened = this.ReadData();
             if (opened)
             {
                 this.IncrementHitCount();
                 this.WriteData();
                 this.loaded = true;
-
-                if (AfterOpen != null)
-                    AfterOpen(this, new FileEventArgs(null));
+                AfterOpen?.Invoke(this, new FileEventArgs(null));
             }
         }
 
         public void Close()
         {
-            if (BeforeClose != null)
-                BeforeClose(this, new FileEventArgs(null));
-
+            BeforeClose?.Invoke(this, new FileEventArgs(null));
             this.loaded = false;
-
-            if (AfterClose != null)
-                AfterClose(this, new FileEventArgs(null));
+            AfterClose?.Invoke(this, new FileEventArgs(null));
         }
 
         private bool ReadData()
@@ -205,13 +181,9 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Save()
         {
-            if (this.BeforeSave != null)
-                BeforeSave(this, new FileEventArgs(null));
-
+            BeforeSave?.Invoke(this, new FileEventArgs(null));
             this.WriteData();
-
-            if (this.AfterSave != null)
-                AfterSave(this, new FileEventArgs(null));
+            AfterSave?.Invoke(this, new FileEventArgs(null));
         }
 
         public void TakeSnapshot(string description = "")
@@ -222,9 +194,7 @@ namespace CygSoft.CodeCat.Domain.Code
             this.snapshots.Add(snapshot);
 
             this.WriteData();
-
-            if (SnapshotTaken != null)
-                SnapshotTaken(this, new EventArgs());
+            SnapshotTaken?.Invoke(this, new EventArgs());
         }
 
         public void DeleteSnapshot(string snapshotId)
@@ -233,21 +203,15 @@ namespace CygSoft.CodeCat.Domain.Code
             this.snapshots.Remove(snapshot);
 
             this.WriteData();
-
-            if (SnapshotDeleted != null)
-                SnapshotDeleted(this, new EventArgs());
+            SnapshotDeleted?.Invoke(this, new EventArgs());
         }
 
         public void Delete()
         {
-            if (BeforeDelete != null)
-                BeforeDelete(this, new FileEventArgs(null));
-
+            BeforeDelete?.Invoke(this, new FileEventArgs(null));
             File.Delete(this.FilePath);
             this.loaded = false;
-
-            if (AfterDelete != null)
-                AfterDelete(this, new FileEventArgs(null));
+            AfterDelete?.Invoke(this, new FileEventArgs(null));
         }
 
         private void IncrementHitCount()

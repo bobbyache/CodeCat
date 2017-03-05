@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.Qik.LanguageEngine.Infrastructure;
 using System;
+
 namespace CygSoft.CodeCat.Domain.Qik
 {
     public interface IQikTemplateDocumentSet : IPersistableTarget

@@ -1,10 +1,6 @@
-﻿using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.Search.KeywordIndex;
-using System;
+﻿using CygSoft.CodeCat.Search.KeywordIndex;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik

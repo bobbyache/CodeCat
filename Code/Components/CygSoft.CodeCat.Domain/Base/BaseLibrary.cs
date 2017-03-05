@@ -1,14 +1,10 @@
-﻿using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.Management;
+﻿using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.Search.KeywordIndex;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Domain.Base
 {
