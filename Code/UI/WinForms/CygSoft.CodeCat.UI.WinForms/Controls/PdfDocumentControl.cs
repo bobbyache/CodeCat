@@ -19,8 +19,18 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     // https://sourceforge.net/p/dockpanelsuite/discussion/402316/thread/f29acfe2/
     public partial class PdfDocumentControl :  UserControl, IDocumentItemControl
     {
+        public event EventHandler Modified;
+
         private IPdfDocument pdfDocument;
         private ICodeGroupDocumentSet codeGroupDocumentSet;
+
+        public string Id { get; private set; }
+        public string Title { get { return txtTitle.Text; } }
+        public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.PDF).Index; } }
+        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.PDF).Icon; } }
+        public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.PDF).Image; } }
+        public bool IsModified { get; private set; }
+        public bool FileExists { get { return false; } }
 
         public PdfDocumentControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IPdfDocument pdfDocument)
         {
@@ -28,9 +38,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.pdfDocument = pdfDocument;
             this.codeGroupDocumentSet = codeGroupDocumentSet;
 
-            this.btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
-            this.btnReload.Image = Resources.GetImage(Constants.ImageKeys.NewProject);
-            this.Id = pdfDocument.Id;
+            btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
+            btnReload.Image = Resources.GetImage(Constants.ImageKeys.NewProject);
+            Id = pdfDocument.Id;
 
             ResetFieldValues();
             RegisterDataFieldEvents();
@@ -38,32 +48,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             LoadIfExists();
         }
 
-        private void LoadIfExists()
-        {
-            if (this.pdfDocument.Exists)
-                //pdfControl.src = this.pdfDocument.FilePath;
-                pdfControl.LoadFile(this.pdfDocument.FilePath);
-        }
-
-        public event EventHandler Modified;
-
-        public string Id { get; private set; }
-
-        public string Title
-        {
-            get { return txtTitle.Text; }
-        }
-
-        public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.PDF).Index; } }
-        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.PDF).Icon; } }
-        public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.PDF).Image; } }
-
-        public bool IsModified { get; private set; }
-
-        public bool FileExists { get { return false; } }
-
         public void Revert()
         {
+        }
+
+        private void LoadIfExists()
+        {
+            if (pdfDocument.Exists)
+                //pdfControl.src = this.pdfDocument.FilePath;
+                pdfControl.LoadFile(pdfDocument.FilePath);
         }
 
         private void RegisterFileEvents()
@@ -75,13 +68,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ResetFieldValues()
         {
             txtTitle.Text = pdfDocument.Title;
-            this.IsModified = false;
+            IsModified = false;
         }
 
         private void RegisterDataFieldEvents()
         {
             txtTitle.TextChanged += SetModified;
-            this.Modified += CodeItemCtrl_Modified;
+            Modified += CodeItemCtrl_Modified;
         }
 
         private void codeGroupDocumentSet_ContentSaved(object sender, FileEventArgs e)
@@ -108,15 +101,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void SetModified(object sender, EventArgs e)
         {
-            this.IsModified = true;
-
-            if (this.Modified != null)
-                this.Modified(this, new EventArgs());
+            IsModified = true;
+            Modified?.Invoke(this, new EventArgs());
         }
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            if (!Directory.Exists(Path.GetDirectoryName(this.pdfDocument.FilePath)))
+            if (!pdfDocument.FolderExists)
             {
                 Dialogs.MustSaveGroupBeforeAction(this);
                 return;
@@ -135,7 +126,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             if (result == DialogResult.OK)
             {
-                File.Copy(filePath, this.pdfDocument.FilePath, true);
+                File.Copy(filePath, pdfDocument.FilePath, true);
                 LoadIfExists();
             }
         }

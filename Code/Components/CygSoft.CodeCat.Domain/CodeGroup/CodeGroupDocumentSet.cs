@@ -4,6 +4,7 @@ using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
+using System.IO;
 using System.Linq;
 
 namespace CygSoft.CodeCat.Domain.CodeGroup
@@ -82,6 +83,11 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         public string Folder
         {
             get { return this.documentIndex.Folder; }
+        }
+
+        public virtual bool FolderExists
+        {
+            get { return Directory.Exists(Path.GetDirectoryName(this.FilePath)); }
         }
 
         public bool Loaded

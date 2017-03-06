@@ -25,6 +25,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         void Save();
         void Delete();
         void Revert();
+        void Open();
 
     }
 

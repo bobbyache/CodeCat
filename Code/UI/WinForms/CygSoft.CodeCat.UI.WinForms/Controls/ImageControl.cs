@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
@@ -16,8 +10,18 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class ImageControl :  UserControl, IDocumentItemControl
     {
+        public event EventHandler Modified;
+
         private IImageDocument imageDocument;
         private ICodeGroupDocumentSet codeGroupDocumentSet;
+
+        public string Id { get; private set; }
+        public string Title { get { return txtTitle.Text; } }
+        public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.SingleImage).Index; } }
+        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.SingleImage).Icon; } }
+        public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.SingleImage).Image; } }
+        public bool IsModified { get; private set; }
+        public bool FileExists { get { return false; } }
 
         public ImageControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IImageDocument imageDocument)
         {
@@ -40,9 +44,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             LoadIfExists();
         }
 
+        public void Revert()
+        {
+        }
+
         private void UpdateStatusBar()
         {
-            //zoomLevelsToolStripComboBox.Text = string.Format("{0}%", imageBox.Zoom);
             lblScrollPosition.Text = this.FormatPoint(imageBox.AutoScrollPosition);
             lblSize.Text = this.FormatRectangle(imageBox.GetImageViewPort());
             lblZoomLevel.Text = string.Format("{0}%", imageBox.Zoom);
@@ -60,7 +67,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void imageBox_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
                 ShowContextMenu(imageBox, e.Location);
         }
 
@@ -72,7 +79,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadIfExists()
         {
-            if (this.imageDocument.Exists)
+            if (imageDocument.Exists)
             {
                 Image image = LoadBitmap(this.imageDocument.FilePath);
                 imageBox.Image = image;
@@ -84,37 +91,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private Bitmap LoadBitmap(string path)
         {
-            //Open file in read only mode
             using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-            //Get a binary reader for the file stream
             using (BinaryReader reader = new BinaryReader(stream))
             {
-                //copy the content of the file into a memory stream
                 var memoryStream = new MemoryStream(reader.ReadBytes((int)stream.Length));
-                //make a new Bitmap object the owner of the MemoryStream
                 return new Bitmap(memoryStream);
             }
-        }
-
-        public event EventHandler Modified;
-
-        public string Id { get; private set; }
-
-        public string Title
-        {
-            get { return txtTitle.Text; }
-        }
-
-        public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.SingleImage).Index; } }
-        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.SingleImage).Icon; } }
-        public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.SingleImage).Image; } }
-
-        public bool IsModified { get; private set; }
-
-        public bool FileExists { get { return false; } }
-
-        public void Revert()
-        {
         }
 
         private void RegisterFileEvents()
@@ -126,7 +108,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ResetFieldValues()
         {
             txtTitle.Text = imageDocument.Title;
-            this.IsModified = false;
+            IsModified = false;
         }
 
         private void RegisterDataFieldEvents()
@@ -137,7 +119,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupDocumentSet_ContentSaved(object sender, FileEventArgs e)
         {
-            this.IsModified = false;
+            IsModified = false;
             SetChangeStatus();
         }
 
@@ -159,10 +141,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void SetModified(object sender, EventArgs e)
         {
-            this.IsModified = true;
-
-            if (this.Modified != null)
-                this.Modified(this, new EventArgs());
+            IsModified = true;
+            Modified?.Invoke(this, new EventArgs());
         }
 
         private void btnImport_Click(object sender, EventArgs e)
@@ -172,7 +152,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void Import()
         {
-            if (!Directory.Exists(Path.GetDirectoryName(this.imageDocument.FilePath)))
+            if (!imageDocument.FolderExists)
             {
                 Dialogs.MustSaveGroupBeforeAction(this);
                 return;

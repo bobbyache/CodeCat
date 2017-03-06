@@ -45,23 +45,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             txtTitle.TextChanged += (s, e) => { SetModified(); };
             codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
             codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
-
-            // unwire events...
-            this.Disposed += (s, e) =>
-            {
-            };
-
         }
 
         public event EventHandler Modified;
 
         public string Id { get; private set; }
-
-        public string Title
-        {
-            get { return this.txtTitle.Text; }
-        }
-
+        public string Title { get { return this.txtTitle.Text; } }
         public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.FileSet).Index; } }
         public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.FileSet).Icon; } }
         public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.FileSet).Image; } }
@@ -82,12 +71,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             SetChangeStatus();
         }
 
-
         private void ReloadListview(ListView listView, IFileGroupFile[] indexItems)
         {
             listView.Items.Clear();
             IconRepository.AddFileExtensions(indexItems.Select(idx => idx.FileExtension));
-            //listView.SmallImageList = IconRepository.ImageList; // IconRepository.NewFileImageList(indexItems.Select(idx => idx.FileExtension).ToArray());
 
             foreach (IFileGroupFile item in indexItems)
             {
@@ -120,12 +107,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             this.fileListview.Groups.Clear();
             string[] categories = this.fileDocument.Categories;
+
             foreach (string category in categories)
             {
                 ListViewGroup group = new ListViewGroup(category);
                 group.HeaderAlignment = HorizontalAlignment.Left;
                 this.fileListview.Groups.Add(group);
             }
+
             fileListview.ShowGroups = this.fileListview.Groups.Count > 1;
         }
 
@@ -175,9 +164,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             this.IsModified = true;
             SetChangeStatus();
-
-            if (this.Modified != null)
-                this.Modified(this, new EventArgs());
+            Modified?.Invoke(this, new EventArgs());
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -230,8 +217,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
                 if (result == DialogResult.Yes)
                 {
-                    //IFileGroupFile item = urlListview.SelectedItems[0].Tag as IFileGroupFile;
-
                     IEnumerable<IFileGroupFile> items = fileListview.SelectedItems.Cast<ListViewItem>()
                         .Select(lv => lv.Tag).Cast<IFileGroupFile>();
 
@@ -245,26 +230,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        //private void NavigateToUrl()
-        //{
-        //    try
-        //    {
-        //        IFileGroupFile item = SelectedItem(urlListview);
-        //        if (item != null)
-        //            System.Diagnostics.Process.Start(item.Url);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Dialogs.WebPageErrorNotification(this, ex);
-        //    }
-        //}
-
         private IFileGroupFile SelectedItem(ListView listView)
         {
             if (listView.SelectedItems.Count == 1)
-            {
                 return listView.SelectedItems[0].Tag as IFileGroupFile;
-            }
+            
             return null;
         }
 
@@ -288,9 +258,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 mnuEdit.Enabled = cnt == 1 && onItem;
                 mnuDelete.Enabled = cnt >= 1;
 
-                //mnuPaste.Enabled = Clipboard.ContainsText();
-                //mnuCopy.Enabled = cnt > 0 && onItem;
-
                 contextMenu.Show(Cursor.Position);
             }
         }
@@ -300,14 +267,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             OpenFile();
         }
 
-
         private void OpenFile()
         {
             try
             {
                 IFileGroupFile item = SelectedItem(fileListview);
                 if (item != null)
-                    System.Diagnostics.Process.Start(item.FilePath);
+                    item.Open();
             }
             catch (Exception ex)
             {
@@ -328,16 +294,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void urlListview_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             listViewSorter.Sort(e.Column);
-        }
-
-        private void mnuOpenWith_Click(object sender, EventArgs e)
-        {
-            //IFileGroupFile item = SelectedItem(fileListview);
-            //if (item != null)
-            //{
-            //    OpenWithDialog dialog = new OpenWithDialog();
-            //    dialog.Open(item.FilePath);
-            //}
         }
 
         private void mnuSaveAs_Click(object sender, EventArgs e)
@@ -373,14 +329,5 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             DeleteReferences();
         }
-
-        //private void contextMenu_Opening(object sender, CancelEventArgs e)
-        //{
-        //    IFileGroupFile item = SelectedItem(fileListview);
-        //    if (item != null)
-        //    {
-        //        mnuOpen.Enabled = item.AllowOpenOrExecute;
-        //        mnuOpenWith.Enabled = item.AllowOpenOrExecute;
-        //    }
     }
 }

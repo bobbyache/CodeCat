@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Domain.Code;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -27,12 +21,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
         public event EventHandler<SelectSnippetEventArgs> SelectSnippet;
 
-
-        public AppFacade Application
-        {
-            set { this.application = value; }
-        }
-
+        public AppFacade Application { set { this.application = value; } }
         public bool SingleSnippetSelected { get { return this.listView.SelectedItems.Count == 1; } }
         public bool MultipleSnippetsSelected { get { return this.listView.SelectedItems.Count > 1; } }
         
@@ -67,17 +56,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             InitializeComponent();
             listView.SmallImageList = IconRepository.ImageList;
-            this.listViewSorter = new ListViewSorter(this.listView);
+            listViewSorter = new ListViewSorter(this.listView);
         }
 
         public void ExecuteSearch(string keywords)
         {
             IKeywordIndexItem[] indexItems = this.application.FindIndeces(keywords);
-            this.ReloadListview(indexItems);
-
-
-            if (this.SearchExecuted != null)
-                SearchExecuted(this, new SearchDelimitedKeywordEventArgs(keywords, indexItems.Length));
+            ReloadListview(indexItems);
+            SearchExecuted?.Invoke(this, new SearchDelimitedKeywordEventArgs(keywords, indexItems.Length));
         }
 
         private void ReloadListview(IKeywordIndexItem[] indexItems)
@@ -89,43 +75,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             listViewSorter.Sort(0);
         }
 
-        private void CreateListviewItem(ListView listView, IKeywordIndexItem item, bool select = false)
+        private void CreateListviewItem(ListView listView, IKeywordIndexItem keywordIndexItem, bool select = false)
         {
             ListViewItem listItem = new ListViewItem();
-
-            if (item is ICodeKeywordIndexItem)
-            {
-                ICodeKeywordIndexItem codeItem = item as ICodeKeywordIndexItem;
-                listItem.Name = item.Id;
-                listItem.Tag = item;
-                listItem.ImageKey = codeItem.Syntax;
-                listItem.Text = item.Title;
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
-                listView.Items.Add(listItem);
-            }
-            else if (item is IQikTemplateKeywordIndexItem)
-            {
-                IQikTemplateKeywordIndexItem codeItem = item as IQikTemplateKeywordIndexItem;
-                listItem.Name = item.Id;
-                listItem.Tag = item;
-                listItem.ImageKey = IconRepository.Documents.QikGroup;
-                listItem.Text = item.Title;
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
-                listView.Items.Add(listItem);
-            }
-            else if (item is ICodeGroupKeywordIndexItem)
-            {
-                ICodeGroupKeywordIndexItem codeItem = item as ICodeGroupKeywordIndexItem;
-                listItem.Name = item.Id;
-                listItem.Tag = item;
-                listItem.ImageKey = IconRepository.Documents.CodeGroup;
-                listItem.Text = item.Title;
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
-                listView.Items.Add(listItem);
-            }
+            
+            listItem.Name = keywordIndexItem.Id;
+            listItem.Tag = keywordIndexItem;
+            listItem.Text = keywordIndexItem.Title;
+            listItem.ImageKey = GetImageKey(keywordIndexItem);
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, keywordIndexItem.DateCreated.ToShortDateString()));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, keywordIndexItem.DateModified.ToShortDateString()));
+            listView.Items.Add(listItem);
 
             if (select)
             {
@@ -135,23 +95,35 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
+        private string GetImageKey(IKeywordIndexItem item)
+        {
+            string imageKey = null;
+
+            if (item is ICodeKeywordIndexItem)
+                imageKey = (item as ICodeKeywordIndexItem).Syntax;
+
+            else if (item is IQikTemplateKeywordIndexItem)
+                imageKey = IconRepository.Documents.QikGroup;
+
+            else if (item is ICodeGroupKeywordIndexItem)
+                imageKey = IconRepository.Documents.CodeGroup;
+
+            return imageKey;
+        }
+
         private void OpenSelectedSnippet()
         {
             IKeywordIndexItem codeItem = SelectedItem(listView);
 
             if (codeItem != null)
-            {
-                if (OpenSnippet != null)
-                    OpenSnippet(this, new OpenSnippetEventArgs(codeItem));
-            }
+                OpenSnippet?.Invoke(this, new OpenSnippetEventArgs(codeItem));
         }
 
         private IKeywordIndexItem SelectedItem(ListView listView)
         {
             if (listView.SelectedItems.Count == 1)
-            {
                 return listView.SelectedItems[0].Tag as IKeywordIndexItem;
-            }
+            
             return null;
         }
 
@@ -195,14 +167,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             EnterKeywordsDialog frm = new EnterKeywordsDialog();
             DialogResult result = frm.ShowDialog(this);
 
-            if (result == System.Windows.Forms.DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 string delimitedKeywordList = frm.Keywords;
                 IKeywordIndexItem[] indexItems = this.SelectedSnippets;
                 application.AddKeywords(indexItems, delimitedKeywordList);
-
-                if (KeywordsAdded != null)
-                    KeywordsAdded(this, new SearchKeywordsModifiedEventArgs(delimitedKeywordList, indexItems));
+                KeywordsAdded?.Invoke(this, new SearchKeywordsModifiedEventArgs(delimitedKeywordList, indexItems));
             }
         }
 
@@ -215,7 +185,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             DialogResult result = frm.ShowDialog(this);
 
-            if (result == System.Windows.Forms.DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 string[] keywords = frm.Keywords;
                 IKeywordIndexItem[] invalidItems;
@@ -225,9 +195,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 if (validated)
                 {
                     string delimitedKeywordList = application.KeywordArrayToDelimitedText(keywords);
-
-                    if (KeywordsRemoved != null)
-                        KeywordsRemoved(this, new SearchKeywordsModifiedEventArgs(delimitedKeywordList, indexItems));
+                    KeywordsRemoved?.Invoke(this, new SearchKeywordsModifiedEventArgs(delimitedKeywordList, indexItems));
                 }
                 else
                 {
@@ -255,9 +223,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void listView_SelectedIndexChanged(object sender, EventArgs e)
         {
             IKeywordIndexItem codeItem = SelectedItem(listView);
-
-            if (SelectSnippet != null)
-                SelectSnippet(this, new SelectSnippetEventArgs(codeItem));
+            SelectSnippet?.Invoke(this, new SelectSnippetEventArgs(codeItem));
         }
 
         private void listView_MouseClick(object sender, MouseEventArgs e)

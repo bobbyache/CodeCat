@@ -28,6 +28,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             get { return Path.GetDirectoryName(this.FilePath); }
         }
 
+        public virtual bool FolderExists
+        {
+            get { return Directory.Exists(Path.GetDirectoryName(this.FilePath)); }
+        }
+
         public bool Exists { get { return File.Exists(this.FilePath); } }
         public bool Loaded { get; private set; }
 

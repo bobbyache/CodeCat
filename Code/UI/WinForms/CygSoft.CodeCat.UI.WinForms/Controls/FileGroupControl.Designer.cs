@@ -120,7 +120,6 @@
             this.mnuOpenWith.Name = "mnuOpenWith";
             this.mnuOpenWith.Size = new System.Drawing.Size(181, 26);
             this.mnuOpenWith.Text = "Open with...";
-            this.mnuOpenWith.Click += new System.EventHandler(this.mnuOpenWith_Click);
             // 
             // mnuSaveAs
             // 

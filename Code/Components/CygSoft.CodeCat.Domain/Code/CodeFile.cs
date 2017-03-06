@@ -73,6 +73,10 @@ namespace CygSoft.CodeCat.Domain.Code
         public string FileName { get { return this.IndexItem.FileTitle; } }
         public string Folder { get; private set; }
 
+        public virtual bool FolderExists
+        {
+            get { return Directory.Exists(Path.GetDirectoryName(this.FilePath)); }
+        }
         public bool Exists { get { return File.Exists(GetFilePath()); } }
 
         public string Title

@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DynamicTypeDescriptor;
+using System.Drawing.Design;
+using CygSoft.Qik.LanguageEngine.Infrastructure;
 
 using Dyn = DynamicTypeDescriptor;
 using Scm = System.ComponentModel;
-using System.Drawing.Design;
-using CygSoft.Qik.LanguageEngine.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -86,7 +80,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             Dyn.PropertyDescriptor propertyDescriptor = new Dyn.PropertyDescriptor(propertyGrid.SelectedObject.GetType(),
                                                         expression.Symbol,
                                                         typeof(string), expression.Value,
-                //typeof(string), null,
                                                         new Scm.BrowsableAttribute(true),
                                                         new Scm.DisplayNameAttribute(expression.Title),
                                                         new Scm.DescriptionAttribute(CreatePropertyDescription(expression)),
@@ -128,16 +121,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (this.compiler != null)
             {
-                //this.compiler.BeforeCompile -= compiler_BeforeCompile;
-                this.compiler.AfterCompile -= compiler_AfterCompile;
-                //this.compiler.BeforeInput -= compiler_BeforeInput;
+                this.compiler.AfterCompile -= compiler_AfterCompile;;
                 this.compiler.AfterInput -= compiler_AfterInput;
             }
 
             this.compiler = compiler;
-            //this.compiler.BeforeCompile += compiler_BeforeCompile;
             this.compiler.AfterCompile += compiler_AfterCompile;
-            //this.compiler.BeforeInput += compiler_BeforeInput;
             this.compiler.AfterInput += compiler_AfterInput;
         }
 
@@ -204,19 +193,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             propertyGrid.Refresh();
         }
 
-        //private void compiler_BeforeInput(object sender, EventArgs e)
-        //{
-        //    //throw new NotImplementedException();
-        //}
-
         private void compiler_AfterCompile(object sender, EventArgs e)
         {
             CreateControls();
         }
-
-        //private void compiler_BeforeCompile(object sender, EventArgs e)
-        //{
-        //    //throw new NotImplementedException();
-        //}
     }
 }

@@ -22,6 +22,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string FileName { get; }
         string FileExtension { get; }
         string Folder { get; }
+        bool FolderExists { get; }
         bool Exists { get; }
         bool Loaded { get; }
 

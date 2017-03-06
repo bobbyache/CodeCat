@@ -7,6 +7,7 @@ using CygSoft.Qik.LanguageEngine;
 using CygSoft.Qik.LanguageEngine.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
@@ -99,6 +100,11 @@ namespace CygSoft.CodeCat.Domain.Qik
         public string Folder
         {
             get { return this.documentIndex.Folder; }
+        }
+
+        public virtual bool FolderExists
+        {
+            get { return Directory.Exists(Path.GetDirectoryName(this.FilePath)); }
         }
 
         public bool Loaded
