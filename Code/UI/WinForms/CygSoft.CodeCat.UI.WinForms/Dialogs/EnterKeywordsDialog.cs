@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
@@ -14,7 +7,7 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         public string Keywords
         {
-            get { return this.textBox1.Text.Trim().ToUpper(); }
+            get { return textBox1.Text.Trim().ToUpper(); }
         }
         public EnterKeywordsDialog()
         {
@@ -23,12 +16,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         private void EnterKeywordsDialog_Activated(object sender, EventArgs e)

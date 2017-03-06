@@ -1,13 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Domain;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
@@ -22,18 +14,18 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
             this.urlItem = urlItem;
-            this.txtUrl.Text = urlItem.Url;
-            this.txtTitle.Text = urlItem.Title;
-            this.txtDescription.Text = urlItem.Description;
-            this.cboCategory.Items.AddRange(categories);
-            this.cboCategory.Sorted = true;
-            this.cboCategory.SelectedItem = string.IsNullOrEmpty(urlItem.Category) ? "Unknown" : urlItem.Category;
+            txtUrl.Text = urlItem.Url;
+            txtTitle.Text = urlItem.Title;
+            txtDescription.Text = urlItem.Description;
+            cboCategory.Items.AddRange(categories);
+            cboCategory.Sorted = true;
+            cboCategory.SelectedItem = string.IsNullOrEmpty(urlItem.Category) ? "Unknown" : urlItem.Category;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -45,7 +37,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 urlItem.Description = txtDescription.Text;
                 urlItem.DateModified = DateTime.Now;
                 urlItem.Category = string.IsNullOrEmpty(cboCategory.Text) ? "Unknown" : cboCategory.Text.ToString();
-                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                DialogResult = DialogResult.OK;
             }
         }
 
