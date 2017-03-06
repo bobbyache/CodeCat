@@ -236,7 +236,6 @@
             this.tbrFind.Name = "tbrFind";
             this.tbrFind.Size = new System.Drawing.Size(23, 22);
             this.tbrFind.Text = "Find";
-            this.tbrFind.Click += new System.EventHandler(this.tbrFind_Click);
             // 
             // RemoveBulletsToolStripMenuItem
             // 
@@ -555,8 +554,6 @@
             this.rtbDoc.Text = "";
             this.rtbDoc.TextChanged += new System.EventHandler(this.rtbDoc_TextChanged);
             this.rtbDoc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rtbDoc_KeyDown);
-            this.rtbDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rtbDoc_KeyPress);
-            this.rtbDoc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.rtbDoc_KeyUp);
             this.rtbDoc.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rtbDoc_MouseUp);
             // 
             // contextMenu

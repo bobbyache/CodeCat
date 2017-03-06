@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
 
 namespace CygSoft.CodeCat.UI.WinForms
@@ -25,9 +17,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             get
             {
                 if (listviewSnapshots.SelectedItems.Count == 1)
-                {
                     return (CodeSnapshot)listviewSnapshots.SelectedItems[0].Tag;
-                }
                 else
                     return null;
             }
@@ -58,14 +48,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void listviewSnapshots_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listviewSnapshots.SelectedItems.Count == 1)
-            {
                 syntaxBox.Document.Text = ((CodeSnapshot)listviewSnapshots.SelectedItems[0].Tag).Text;
-            }
             else
                 syntaxBox.Document.Text = string.Empty;
 
-            if (SnapshotSelectionChanged != null)
-                SnapshotSelectionChanged(this, new EventArgs());
+            SnapshotSelectionChanged?.Invoke(this, new EventArgs());
         }
 
         private CodeFile codeFile = null;

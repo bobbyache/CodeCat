@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Qik;
@@ -45,18 +39,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.QikGroup).Index; } }
         public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.QikGroup).Icon; } }
         public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.QikGroup).Image; } }
-
         public string Id { get { return this.scriptFile.Id; } }
-
         public string Title { get { return this.scriptFile.Title; } }
-
-        public string ScriptText
-        {
-            get { return this.syntaxDocument.Text; }
-        }
-
+        public string ScriptText { get { return this.syntaxDocument.Text; } }
         public bool IsModified { get; private set; }
-
         public bool FileExists { get { return qikTemplateDocumentSet.ScriptFile.Exists; } }
 
         public void Revert()
@@ -116,12 +102,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             cboFontSize.SelectedIndexChanged -= cboFontSize_SelectedIndexChanged;
             syntaxBoxControl.TextChanged -= SetModified;
-            this.Modified -= ScriptCodeCtrl_Modified;
+            Modified -= ScriptCodeCtrl_Modified;
         }
 
         private void cboFontSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.syntaxBoxControl.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
+            syntaxBoxControl.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
         }
 
         private void compiler_AfterInput(object sender, EventArgs e)
@@ -134,19 +120,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void SetModified(object sender, EventArgs e)
         {
-            this.IsModified = true;
+            IsModified = true;
 
-            if (this.Modified != null)
-                this.Modified(this, new EventArgs());
+            Modified?.Invoke(this, new EventArgs());
         }
 
         private void SetDefaultFont()
         {
-            int index = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
-            if (index >= 0)
-                cboFontSize.SelectedIndex = index;
-            else
-                cboFontSize.SelectedIndex = 4;
+            cboFontSize.SelectedIndex = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
         }
 
         private void syntaxBoxControl_RowClick(object sender, Alsing.Windows.Forms.SyntaxBox.RowMouseEventArgs e)

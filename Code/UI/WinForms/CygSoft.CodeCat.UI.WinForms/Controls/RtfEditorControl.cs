@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
@@ -35,19 +31,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             CenterToolStripMenuItem.Image = tbrCenter.Image;
             RightToolStripMenuItem.Image = tbrRight.Image;
 
-            this.FilePath = string.Empty;
+            FilePath = string.Empty;
             rtbDoc.SetInnerMargins(24, 24, 24, 24);
         }
 
         public string FilePath { get; private set; }
-        public bool Modified { get { return this.rtbDoc.Modified; } }
+        public bool Modified { get { return rtbDoc.Modified; } }
 
         public void OpenFile(string filePath)
         {
             try
             {
                 rtbDoc.LoadFile(filePath, RichTextBoxStreamType.RichText);
-                this.FilePath = filePath;
+                FilePath = filePath;
                 rtbDoc.SelectionStart = 0;
                 rtbDoc.SelectionLength = 0;
                 rtbDoc.Modified = false;
@@ -63,8 +59,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             try
             {
-                this.FilePath = filePath;
-                rtbDoc.SaveFile(this.FilePath);
+                FilePath = filePath;
+                rtbDoc.SaveFile(FilePath);
                 rtbDoc.Modified = false;
             }
             catch (Exception)
@@ -85,7 +81,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void SelectAllToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectAll();
         }
@@ -126,22 +122,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void CopyToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CopySelection();
         }
 
-        private void CutToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CutSelection();
         }
 
-        private void PasteToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PasteSelection();
         }
 
-        private void SelectFontToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void SelectFontToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormatToFont();
         }
@@ -159,7 +155,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                     FontDialog1.Font = null;
                 }
                 FontDialog1.ShowApply = true;
-                if (FontDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (FontDialog1.ShowDialog() == DialogResult.OK)
                 {
                     rtbDoc.SelectionFont = FontDialog1.Font;
                 }
@@ -175,10 +171,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             try
             {
                 ColorDialog1.Color = rtbDoc.ForeColor;
-                if (ColorDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
+                if (ColorDialog1.ShowDialog() == DialogResult.OK)
                     rtbDoc.SelectionColor = ColorDialog1.Color;
-                }
             }
             catch (Exception)
             {
@@ -186,12 +180,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void FontColorToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void FontColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormatToFontColor();
         }
 
-        private void BoldToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void BoldToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormatToBold();
         }
@@ -202,8 +196,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 if (!(rtbDoc.SelectionFont == null))
                 {
-                    System.Drawing.Font currentFont = rtbDoc.SelectionFont;
-                    System.Drawing.FontStyle newFontStyle;
+                    Font currentFont = rtbDoc.SelectionFont;
+                    FontStyle newFontStyle;
                     newFontStyle = rtbDoc.SelectionFont.Style ^ FontStyle.Bold;
                     rtbDoc.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
                 }
@@ -220,8 +214,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 if (!(rtbDoc.SelectionFont == null))
                 {
-                    System.Drawing.Font currentFont = rtbDoc.SelectionFont;
-                    System.Drawing.FontStyle newFontStyle;
+                    Font currentFont = rtbDoc.SelectionFont;
+                    FontStyle newFontStyle;
 
                     newFontStyle = rtbDoc.SelectionFont.Style ^ FontStyle.Italic;
 
@@ -240,8 +234,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 if (!(rtbDoc.SelectionFont == null))
                 {
-                    System.Drawing.Font currentFont = rtbDoc.SelectionFont;
-                    System.Drawing.FontStyle newFontStyle;
+                    Font currentFont = rtbDoc.SelectionFont;
+                    FontStyle newFontStyle;
 
                     newFontStyle = rtbDoc.SelectionFont.Style ^ FontStyle.Underline;
 
@@ -254,24 +248,24 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void ItalicToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void ItalicToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormatToItalic();
         }
 
-        private void UnderlineToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void UnderlineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormatToUnderline();
         }
 
-        private void NormalToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void NormalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!(rtbDoc.SelectionFont == null))
                 {
-                    System.Drawing.Font currentFont = rtbDoc.SelectionFont;
-                    System.Drawing.FontStyle newFontStyle;
+                    Font currentFont = rtbDoc.SelectionFont;
+                    FontStyle newFontStyle;
                     newFontStyle = FontStyle.Regular;
                     rtbDoc.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
                 }
@@ -282,12 +276,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void PageColorToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void PageColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 ColorDialog1.Color = rtbDoc.BackColor;
-                if (ColorDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (ColorDialog1.ShowDialog() == DialogResult.OK)
                 {
                     rtbDoc.BackColor = ColorDialog1.Color;
                 }
@@ -298,7 +292,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void mnuUndo_Click(object sender, System.EventArgs e)
+        private void mnuUndo_Click(object sender, EventArgs e)
         {
             try
             {
@@ -313,7 +307,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void mnuRedo_Click(object sender, System.EventArgs e)
+        private void mnuRedo_Click(object sender, EventArgs e)
         {
             try
             {
@@ -364,22 +358,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void LeftToolStripMenuItem_Click_1(object sender, System.EventArgs e)
+        private void LeftToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             AlignLeft();
         }
 
-        private void CenterToolStripMenuItem_Click_1(object sender, System.EventArgs e)
+        private void CenterToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             AlignCenter();
         }
 
-        private void RightToolStripMenuItem_Click_1(object sender, System.EventArgs e)
+        private void RightToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             AlignRight();
         }
 
-        private void AddBulletsToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void AddBulletsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -392,7 +386,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void RemoveBulletsToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void RemoveBulletsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -404,7 +398,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void mnuIndent0_Click(object sender, System.EventArgs e)
+        private void mnuIndent0_Click(object sender, EventArgs e)
         {
             try
             {
@@ -416,7 +410,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void mnuIndent5_Click(object sender, System.EventArgs e)
+        private void mnuIndent5_Click(object sender, EventArgs e)
         {
             try
             {
@@ -428,7 +422,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void mnuIndent10_Click(object sender, System.EventArgs e)
+        private void mnuIndent10_Click(object sender, EventArgs e)
         {
             try
             {
@@ -440,7 +434,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void mnuIndent15_Click(object sender, System.EventArgs e)
+        private void mnuIndent15_Click(object sender, EventArgs e)
         {
             try
             {
@@ -452,7 +446,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void mnuIndent20_Click(object sender, System.EventArgs e)
+        private void mnuIndent20_Click(object sender, EventArgs e)
         {
             try
             {
@@ -464,15 +458,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void FindToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void FindToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
 
-        private void FindAndReplaceToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void FindAndReplaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
 
-        private void mnuPageSetup_Click(object sender, System.EventArgs e)
+        private void mnuPageSetup_Click(object sender, EventArgs e)
         {
             try
             {
@@ -485,7 +479,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void InsertImageToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void InsertImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             OpenFileDialog1.Title = "RTE - Insert Image File";
@@ -507,9 +501,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                     Clipboard.SetDataObject(img);
                     DataFormats.Format df;
                     df = DataFormats.GetFormat(DataFormats.Bitmap);
-                    if (this.rtbDoc.CanPaste(df))
+                    if (rtbDoc.CanPaste(df))
                     {
-                        this.rtbDoc.Paste(df);
+                        rtbDoc.Paste(df);
                     }
                 }
                 catch (Exception)
@@ -529,52 +523,46 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void tbrBold_Click(object sender, System.EventArgs e)
+        private void tbrBold_Click(object sender, EventArgs e)
         {
             FormatToBold();
         }
 
 
-        private void tbrItalic_Click(object sender, System.EventArgs e)
+        private void tbrItalic_Click(object sender, EventArgs e)
         {
             FormatToItalic();
         }
 
 
-        private void tbrUnderline_Click(object sender, System.EventArgs e)
+        private void tbrUnderline_Click(object sender, EventArgs e)
         {
             FormatToUnderline();
         }
 
 
-        private void tbrFont_Click(object sender, System.EventArgs e)
+        private void tbrFont_Click(object sender, EventArgs e)
         {
             FormatToFont();
         }
 
 
-        private void tbrLeft_Click(object sender, System.EventArgs e)
+        private void tbrLeft_Click(object sender, EventArgs e)
         {
             AlignLeft();
         }
 
 
-        private void tbrCenter_Click(object sender, System.EventArgs e)
+        private void tbrCenter_Click(object sender, EventArgs e)
         {
             AlignCenter();
         }
 
 
-        private void tbrRight_Click(object sender, System.EventArgs e)
+        private void tbrRight_Click(object sender, EventArgs e)
         {
             AlignRight();
         }
-
-
-        private void tbrFind_Click(object sender, System.EventArgs e)
-        {
-        }
-
 
         private void tspColor_Click(object sender, EventArgs e)
         {
@@ -583,18 +571,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void rtbDoc_TextChanged(object sender, EventArgs e)
         {
-            if (ContentChanged != null)
-                ContentChanged(this, new EventArgs());
-        }
-
-        private void rtbDoc_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //if (e.KeyChar == Key
-        }
-
-        private void rtbDoc_KeyUp(object sender, KeyEventArgs e)
-        {
-
+            ContentChanged?.Invoke(this, new EventArgs());
         }
 
         private void rtbDoc_KeyDown(object sender, KeyEventArgs e)
@@ -618,10 +595,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void rtbDoc_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
-            {
+            if (e.Button == MouseButtons.Right)
                 contextMenu.Show(Cursor.Position);
-            }
         }
 
         private void ctxmnuAlignLeft_Click(object sender, EventArgs e)
@@ -685,244 +660,3 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         }
      }
 }
-
-
-
-
-//private void tbrOpen_Click(object sender, System.EventArgs e)
-//{
-//    OpenToolStripMenuItem_Click(this, e);
-//}
-
-
-//private void tbrNew_Click(object sender, System.EventArgs e)
-//{
-//    NewToolStripMenuItem_Click(this, e);
-//}
-
-//private void PreviewToolStripMenuItem_Click(object sender, System.EventArgs e)
-//{
-//    try
-//    {
-//        PrintPreviewDialog1.Document = PrintDocument1;
-//        PrintPreviewDialog1.ShowDialog();
-//    }
-//    catch (Exception ex)
-//    {
-//        MessageBox.Show(ex.Message.ToString(), "Error");
-//    }
-//}
-
-
-
-
-//private void PrintToolStripMenuItem_Click(object sender, System.EventArgs e)
-//{
-//    try
-//    {
-//        PrintDialog1.Document = PrintDocument1;
-//        if (PrintDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-//        {
-//            PrintDocument1.Print();
-//        }
-//    }
-//    catch (Exception ex)
-//    {
-//        MessageBox.Show(ex.Message.ToString(), "Error");
-//    }
-//}
-
-//private void SaveToolStripMenuItem_Click(object sender, System.EventArgs e)
-//{
-//    try
-//    {
-//        if (currentFile == string.Empty)
-//        {
-//            SaveAsToolStripMenuItem_Click(this, e);
-//            return;
-//        }
-
-//        try
-//        {
-//            string strExt;
-//            strExt = System.IO.Path.GetExtension(currentFile);
-//            strExt = strExt.ToUpper();
-//            if (strExt == ".RTF")
-//            {
-//                rtbDoc.SaveFile(currentFile);
-//            }
-//            else
-//            {
-//                System.IO.StreamWriter txtWriter;
-//                txtWriter = new System.IO.StreamWriter(currentFile);
-//                txtWriter.Write(rtbDoc.Text);
-//                txtWriter.Close();
-//                txtWriter = null;
-//                rtbDoc.SelectionStart = 0;
-//                rtbDoc.SelectionLength = 0;
-//            }
-
-//            this.Text = "Editor: " + currentFile.ToString();
-//            rtbDoc.Modified = false;
-//        }
-//        catch (Exception ex)
-//        {
-//            MessageBox.Show(ex.Message.ToString(), "File Save Error");
-//        }
-//    }
-//    catch (Exception ex)
-//    {
-//        MessageBox.Show(ex.Message.ToString(), "Error");
-//    }
-
-
-//}
-
-//private void NewToolStripMenuItem_Click(object sender, System.EventArgs e)
-//{
-//    try
-//    {
-//        if (rtbDoc.Modified == true)
-//        {
-//            System.Windows.Forms.DialogResult answer;
-//            answer = MessageBox.Show("Save current document before creating new document?", "Unsaved Document", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-//            if (answer == System.Windows.Forms.DialogResult.No)
-//            {
-//                currentFile = "";
-//                this.Text = "Editor: New Document";
-//                rtbDoc.Modified = false;
-//                rtbDoc.Clear();
-//                return;
-//            }
-//            else
-//            {
-//                SaveToolStripMenuItem_Click(this, new EventArgs());
-//                rtbDoc.Modified = false;
-//                rtbDoc.Clear();
-//                currentFile = "";
-//                this.Text = "Editor: New Document";
-//                return;
-//            }
-//        }
-//        else
-//        {
-//            currentFile = "";
-//            this.Text = "Editor: New Document";
-//            rtbDoc.Modified = false;
-//            rtbDoc.Clear();
-//            return;
-//        }
-//    }
-//    catch (Exception ex)
-//    {
-//        MessageBox.Show(ex.Message.ToString(), "Error");
-//    }
-
-//private void ExitToolStripMenuItem_Click(object sender, System.EventArgs e)
-//{
-//    try
-//    {
-//        if (rtbDoc.Modified == true)
-//        {
-//            System.Windows.Forms.DialogResult answer;
-//            answer = MessageBox.Show("Save this document before closing?", "Unsaved Document", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-//            if (answer == System.Windows.Forms.DialogResult.Yes)
-//            {
-//                return;
-//            }
-//            else
-//            {
-//                rtbDoc.Modified = false;
-//                Application.Exit();
-//            }
-//        }
-//        else
-//        {
-//            rtbDoc.Modified = false;
-//            Application.Exit();
-//        }
-//    }
-//    catch (Exception ex)
-//    {
-//        MessageBox.Show(ex.Message.ToString(), "Error");
-//    }
-//}
-
-
-//public bool Find(string searchText, StringComparison searchType)
-//{
-//    int startPosition = rtbDoc.Text.IndexOf(searchText, searchType); ;
-//    return FindText(searchText, startPosition, searchType);
-//}
-
-//public bool FindNext(string searchText, StringComparison searchType)
-//{
-//    int startPosition = rtbDoc.Text.IndexOf(searchText, rtbDoc.SelectionStart + 2, searchType);
-//    return FindText(searchText, startPosition, searchType);
-//}
-
-//private bool FindText(string searchText, int startPosition, StringComparison searchType)
-//{
-//    if (startPosition == 0 || startPosition < 0)
-//    {
-//        return false;
-//    }
-//    else
-//    {
-//        rtbDoc.Select(startPosition, searchText.Length);
-//        rtbDoc.ScrollToCaret();
-//        this.Focus();
-
-//        return true;
-//    }
-//}
-
-//public bool Replace(string searchText, string replaceText, StringComparison searchType, bool replaceAll = false)
-//{
-//    if (rtbDoc.SelectedText.Length != 0)
-//    {
-//        rtbDoc.SelectedText = replaceText;
-//    }
-
-//    int startPosition = rtbDoc.Text.IndexOf(searchText, rtbDoc.SelectionStart + 2, searchType);
-//    bool found = FindText(searchText, startPosition, searchType);
-
-//    if (found)
-//    {
-
-//    }
-
-//    return found;
-//}
-
-//public void DestroyMe()
-//{
-//    try
-//    {
-//        if (rtbDoc.Modified == true)
-//        {
-//            System.Windows.Forms.DialogResult answer;
-//            answer = MessageBox.Show("Save current document before exiting?", "Unsaved Document", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-//            if (answer == System.Windows.Forms.DialogResult.No)
-//            {
-//                rtbDoc.Modified = false;
-//                rtbDoc.Clear();
-//                return;
-//            }
-//            else
-//            {
-//                Save(currentFile);
-//            }
-//        }
-//        else
-//        {
-//            rtbDoc.Clear();
-//        }
-//        currentFile = "";
-//        this.Text = "Editor: New Document";
-//    }
-//    catch (Exception ex)
-//    {
-//        MessageBox.Show(ex.Message.ToString(), "Error");
-//    }
-//}

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.CodeGroup;
@@ -24,7 +21,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             InitializeComponent();
 
-            this.listViewSorter = new ListViewSorter(this.urlListview);
+            listViewSorter = new ListViewSorter(urlListview);
             urlListview.Sorting = SortOrder.Ascending;
 
             btnAdd.Image = Resources.GetImage(Constants.ImageKeys.AddSnippet);
@@ -34,7 +31,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.urlDocument = urlDocument;
             this.codeGroupDocumentSet = codeGroupDocumentSet;
             this.application = application;
-            this.Id = urlDocument.Id;
+            Id = urlDocument.Id;
 
             ReloadGroups();
             LoadListOfUrls();
@@ -44,7 +41,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
             urlDocument.Paste += urlDocument_Paste;
             urlDocument.PasteConflict += urlDocument_PasteConflict;
-            this.Disposed += (s, e) =>
+            Disposed += (s, e) =>
             {
                 urlDocument.Paste -= urlDocument_Paste;
                 urlDocument.PasteConflict -= urlDocument_PasteConflict;
@@ -69,18 +66,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler Modified;
 
         public string Id { get; private set; }
-
-        public string Title
-        {
-            get { return this.txtTitle.Text; }
-        }
-
+        public string Title { get { return txtTitle.Text; } }
         public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.HyperlinkSet).Index; } }
         public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.HyperlinkSet).Icon; } }
         public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.HyperlinkSet).Image; } }
-
         public bool IsModified { get; private set; }
-
         public bool FileExists { get { return false; } }
 
         public void Revert()
@@ -91,7 +81,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             txtTitle.Text = urlDocument.Title;
             ReloadListview(urlListview, urlDocument.Items);
-            this.IsModified = false;
+            IsModified = false;
             SetChangeStatus();
         }
 
@@ -127,22 +117,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void ReloadGroups()
         {
-            this.urlListview.Groups.Clear();
-            string[] categories = this.urlDocument.Categories;
+            urlListview.Groups.Clear();
+            string[] categories = urlDocument.Categories;
             foreach (string category in categories)
             {
                 ListViewGroup group = new ListViewGroup(category);
                 group.HeaderAlignment = HorizontalAlignment.Left;
-                this.urlListview.Groups.Add(group);
+                urlListview.Groups.Add(group);
             }
-            urlListview.ShowGroups = this.urlListview.Groups.Count > 1;
+            urlListview.ShowGroups = urlListview.Groups.Count > 1;
         }
 
         private void GroupItem(ListViewItem listItem, IUrlItem item)
         {
             bool groupExists = false;
 
-            foreach (ListViewGroup group in this.urlListview.Groups)
+            foreach (ListViewGroup group in urlListview.Groups)
             {
                 if (group.Header == item.Category)
                 {
@@ -158,35 +148,33 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 ListViewGroup group = new ListViewGroup(item.Category);
                 group.HeaderAlignment = HorizontalAlignment.Left;
-                this.urlListview.Groups.Add(group);
+                urlListview.Groups.Add(group);
                 listItem.Group = group;
             }
         }
 
         private void codeGroupDocumentSet_ContentSaved(object sender, FileEventArgs e)
         {
-            this.IsModified = false;
+            IsModified = false;
             SetChangeStatus();
         }
 
         private void codeGroupDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
         {
-            this.urlDocument.Title = txtTitle.Text;
+            urlDocument.Title = txtTitle.Text;
         }
 
         private void SetChangeStatus()
         {
-            lblEditStatus.Text = this.IsModified ? "Edited" : "Saved";
-            lblEditStatus.ForeColor = this.IsModified ? Color.DarkRed : Color.Black;
+            lblEditStatus.Text = IsModified ? "Edited" : "Saved";
+            lblEditStatus.ForeColor = IsModified ? Color.DarkRed : Color.Black;
         }
 
         private void SetModified()
         {
-            this.IsModified = true;
+            IsModified = true;
             SetChangeStatus();
-
-            if (this.Modified != null)
-                this.Modified(this, new EventArgs());
+            Modified?.Invoke(this, new EventArgs());
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

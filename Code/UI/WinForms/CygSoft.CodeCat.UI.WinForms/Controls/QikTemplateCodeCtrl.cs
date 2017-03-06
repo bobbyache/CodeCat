@@ -25,9 +25,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             
             this.application = application;
             this.qikTemplateDocumentSet = qikTemplateDocumentSet;
-            this.compiler = qikTemplateDocumentSet.Compiler;
             this.templateFile = templateFile;
-            this.Id = templateFile.Id;
+            compiler = qikTemplateDocumentSet.Compiler;
+            
+            Id = templateFile.Id;
 
             templateSyntaxDocument.SyntaxFile = ConfigSettings.QikTemplateSyntaxFile;
 
@@ -45,21 +46,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public int ImageKey { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
         public Icon ImageIcon { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
         public Image IconImage { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
-
         public string Id { get; private set; }
-
-        public string Title
-        {
-            get { return this.txtTitle.Text; }
-        }
-
-        public string TemplateText
-        {
-            get { return this.templateSyntaxDocument.Text; }
-        }
-
+        public string Title { get { return txtTitle.Text; } }
+        public string TemplateText { get { return templateSyntaxDocument.Text; } }
         public bool IsModified { get; private set; }
-
         public bool FileExists { get { return templateFile.Exists; } }
 
         public void Revert()
@@ -102,7 +92,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             outputSyntaxBox.Document.Text = string.Empty;
             SelectSyntax(templateFile.Syntax);
 
-            this.IsModified = false;
+            IsModified = false;
             SetChangeStatus();
         }
 
@@ -128,15 +118,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void qikTemplateDocumentSet_ContentSaved(object sender, FileEventArgs e)
         {
-            this.IsModified = false;
+            IsModified = false;
             SetChangeStatus();
         }
 
         private void qikTemplateDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
         {
-            this.templateFile.Title = txtTitle.Text;
-            this.templateFile.Text = templateSyntaxDocument.Text;
-            this.templateFile.Syntax = cboSyntax.SelectedItem.ToString();
+            templateFile.Title = txtTitle.Text;
+            templateFile.Text = templateSyntaxDocument.Text;
+            templateFile.Syntax = cboSyntax.SelectedItem.ToString();
         }
 
         private void RegisterSyntaxEditorEvents()
@@ -152,7 +142,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             cboFontSize.SelectedIndexChanged += cboFontSize_SelectedIndexChanged;
             txtTitle.TextChanged += SetModified;
             templateSyntaxBox.TextChanged += SetModified;
-            this.Modified += QikTemplateCodeCtrl_Modified;
+            Modified += QikTemplateCodeCtrl_Modified;
         }
 
         private void templateSyntaxBox_RowClick(object sender, Alsing.Windows.Forms.SyntaxBox.RowMouseEventArgs e)
@@ -172,8 +162,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void SetChangeStatus()
         {
-            lblEditStatus.Text = this.IsModified ? "Edited" : "Saved";
-            lblEditStatus.ForeColor = this.IsModified ? Color.DarkRed : Color.Black;
+            lblEditStatus.Text = IsModified ? "Edited" : "Saved";
+            lblEditStatus.ForeColor = IsModified ? Color.DarkRed : Color.Black;
         }
 
         private void UnregisterDataFieldEvents()
@@ -182,13 +172,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             cboFontSize.SelectedIndexChanged -= cboFontSize_SelectedIndexChanged;
             txtTitle.TextChanged -= SetModified;
             templateSyntaxBox.TextChanged -= SetModified;
-            this.Modified -= QikTemplateCodeCtrl_Modified;
+            Modified -= QikTemplateCodeCtrl_Modified;
         }
 
         private void cboFontSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.templateSyntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
-            this.outputSyntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
+            templateSyntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
+            outputSyntaxBox.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
         }
 
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
@@ -202,10 +192,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void SetModified(object sender, EventArgs e)
         {
-            this.IsModified = true;
+            IsModified = true;
 
-            if (this.Modified != null)
-                this.Modified(this, new EventArgs());
+            Modified?.Invoke(this, new EventArgs());
         }
 
         private void InitializeSyntaxList()
@@ -222,9 +211,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 cboSyntax.SelectedIndex = index;
 
             string syntaxFile = application.GetSyntaxFile(syn);
-            this.outputSyntaxBox.Document.SyntaxFile = syntaxFile;
+            outputSyntaxBox.Document.SyntaxFile = syntaxFile;
 
-            this.lblEditStatus.Image = IconRepository.Get(syn).Image;
+            lblEditStatus.Image = IconRepository.Get(syn).Image;
         }
 
         private void SetDefaultFont()
@@ -234,15 +223,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void templateSyntaxBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!this.templateSyntaxBox.ReadOnly)
+            if (!templateSyntaxBox.ReadOnly)
             {
                 if (e.KeyData == (Keys.Shift | Keys.F8) || e.KeyData == Keys.F8)
-                //if (e.KeyData == (Keys.ControlKey | Keys.F8) || e.KeyData == (Keys.Control | Keys.J))
                 {
-                    if (this.compiler.Placeholders.Count() > 0)
+                    if (compiler.Placeholders.Count() > 0)
                     {
-                        this.templateSyntaxBox.AutoListPosition = new TextPoint(templateSyntaxBox.Caret.Position.X, templateSyntaxBox.Caret.Position.Y);
-                        this.templateSyntaxBox.AutoListVisible = true;
+                        templateSyntaxBox.AutoListPosition = new TextPoint(templateSyntaxBox.Caret.Position.X, templateSyntaxBox.Caret.Position.Y);
+                        templateSyntaxBox.AutoListVisible = true;
                     }
                 }
             }
