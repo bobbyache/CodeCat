@@ -162,7 +162,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             get
             {
                 if (!defaultFontSize.HasValue)
-                    defaultFontSize = Int32.Parse(ConfigurationManager.AppSettings["DefaultFontSize"]);
+                {
+                    int fontSize;
+                    bool success = int.TryParse(ConfigurationManager.AppSettings["DefaultFontSize"], out fontSize);
+                    defaultFontSize = (success && fontSize >= 0) ? fontSize : 10;
+                }
 
                 return defaultFontSize.Value;
             }

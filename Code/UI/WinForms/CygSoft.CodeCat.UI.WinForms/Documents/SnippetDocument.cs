@@ -1,16 +1,8 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
@@ -222,27 +214,15 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void SetDefaultFont()
         {
-            int index = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
-            if (index >= 0)
-                cboFontSize.SelectedIndex = index;
-            else
-                cboFontSize.SelectedIndex = 4;
+            cboFontSize.SelectedIndex = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
         }
 
         private void SelectSyntax(string syntax)
         {
-            // ensures that all controls are up to date with the new syntax.
-            string syn = syntax.ToUpper();
-
-            //TODO: Can't you do this with a single line? cboSyntax.SelectedItem
-            foreach (object item in cboSyntax.Items)
-            {
-                if (item.ToString() == syn)
-                {
-                    cboSyntax.SelectedItem = item;
-                    break;
-                }
-            }
+            string syn = string.IsNullOrEmpty(syntax) ? ConfigSettings.DefaultSyntax.ToUpper() : syntax.ToUpper();
+            int index = cboSyntax.FindStringExact(syn);
+            if (index >= 0)
+                cboSyntax.SelectedIndex = index;
 
             string syntaxFile = application.GetSyntaxFile(syn);
             this.syntaxBox.Document.SyntaxFile = syntaxFile;

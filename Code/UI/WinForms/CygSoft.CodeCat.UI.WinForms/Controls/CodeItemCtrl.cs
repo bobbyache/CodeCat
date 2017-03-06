@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain;
-using Alsing.SourceCode;
-using CygSoft.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.CodeGroup;
 
@@ -46,21 +37,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public int ImageKey { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
         public Icon ImageIcon { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
         public Image IconImage { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
-
         public string Id { get; private set; }
-
-        public string Title
-        {
-            get { return this.txtTitle.Text; }
-        }
-
-        public string TemplateText
-        {
-            get { return this.syntaxDocument.Text; }
-        }
-
+        public string Title { get { return this.txtTitle.Text; } }
+        public string TemplateText { get { return this.syntaxDocument.Text; } }
         public bool IsModified { get; private set; }
-
         public bool FileExists { get { return codeFile.Exists; } }
 
         public void Revert()
@@ -104,7 +84,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
             cboFontSize.SelectedIndexChanged += cboFontSize_SelectedIndexChanged;
             txtTitle.TextChanged += SetModified;
-            //txtTitle.Validated += txtTitle_Validated;
             syntaxBoxControl.TextChanged += SetModified;
             this.Modified += CodeItemCtrl_Modified;
         }
@@ -125,7 +104,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             cboSyntax.SelectedIndexChanged -= cboSyntax_SelectedIndexChanged;
             cboFontSize.SelectedIndexChanged -= cboFontSize_SelectedIndexChanged;
             txtTitle.TextChanged -= SetModified;
-            //txtTitle.Validated += txtTitle_Validated;
             syntaxBoxControl.TextChanged -= SetModified;
             this.Modified -= CodeItemCtrl_Modified;
         }
@@ -148,9 +126,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void SetModified(object sender, EventArgs e)
         {
             this.IsModified = true;
-
-            if (this.Modified != null)
-                this.Modified(this, new EventArgs());
+            this.Modified?.Invoke(this, new EventArgs());
         }
 
         private void InitializeSyntaxList()
@@ -161,20 +137,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void SelectSyntax(string syntax)
         {
-            string syn;
-            if (string.IsNullOrEmpty(syntax))
-                syn = ConfigSettings.DefaultSyntax.ToUpper();
-            else
-                syn = syntax.ToUpper();
-
-            foreach (object item in cboSyntax.Items)
-            {
-                if (item.ToString() == syn)
-                {
-                    cboSyntax.SelectedItem = item;
-                    break;
-                }
-            }
+            string syn = string.IsNullOrEmpty(syntax) ? ConfigSettings.DefaultSyntax.ToUpper() : syntax.ToUpper();
+            int index = cboSyntax.FindStringExact(syn);
+            if (index >= 0)
+                cboSyntax.SelectedIndex = index;
 
             string syntaxFile = application.GetSyntaxFile(syn);
             this.syntaxBoxControl.Document.SyntaxFile = syntaxFile;
@@ -184,11 +150,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void SetDefaultFont()
         {
-            int index = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
-            if (index >= 0)
-                cboFontSize.SelectedIndex = index;
-            else
-                cboFontSize.SelectedIndex = 4;
+            cboFontSize.SelectedIndex = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
         }
     }
 }

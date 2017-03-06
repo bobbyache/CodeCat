@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain;
@@ -221,17 +216,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void SelectSyntax(string syntax)
         {
-            string syn;
-            if (string.IsNullOrEmpty(syntax))
-                syn = ConfigSettings.DefaultSyntax.ToUpper();
-            else
-                syn = syntax.ToUpper();
-
-            foreach (object item in cboSyntax.Items)
-            {
-                if (item.ToString() == syn)
-                    cboSyntax.SelectedItem = item;
-            }
+            string syn = string.IsNullOrEmpty(syntax) ? ConfigSettings.DefaultSyntax.ToUpper() : syntax.ToUpper();
+            int index = cboSyntax.FindStringExact(syn);
+            if (index >= 0)
+                cboSyntax.SelectedIndex = index;
 
             string syntaxFile = application.GetSyntaxFile(syn);
             this.outputSyntaxBox.Document.SyntaxFile = syntaxFile;
@@ -241,11 +229,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void SetDefaultFont()
         {
-            int index = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
-            if (index >= 0)
-                cboFontSize.SelectedIndex = index;
-            else
-                cboFontSize.SelectedIndex = 4;
+            cboFontSize.SelectedIndex = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
         }
 
         private void templateSyntaxBox_KeyDown(object sender, KeyEventArgs e)
