@@ -2,20 +2,14 @@
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Qik;
-using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.UI.WinForms;
 using CygX1.UI.WinForms.RecentFileMenu;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -150,9 +144,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             DialogResult result = Dialogs.OpenProjectFileDialog(this, application.ProjectFileExtension, out filePath);
 
             if (result == System.Windows.Forms.DialogResult.OK)
-            {
                 OpenProject(filePath);
-            }
         }
 
         private void PromptCreateProject()
@@ -161,9 +153,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             DialogResult result = Dialogs.CreateProjectFileDialog(this, application.ProjectFileExtension, out filePath);
 
             if (result == System.Windows.Forms.DialogResult.OK)
-            {
                 CreateProject(filePath);
-            }
         }
 
         private bool LoadLastProject()
@@ -230,9 +220,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 IKeywordIndexItem[] indeces = application.GetLastOpenedIds();
                 foreach (IKeywordIndexItem index in indeces)
-                {
                     OpenSnippetDocument(index);
-                }
             }
             catch (Exception exception)
             {

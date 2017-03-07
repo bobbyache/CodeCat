@@ -1,15 +1,8 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Base;
-using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -36,8 +29,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             get
             {
-                if (this.persistableTarget != null)
-                    return this.persistableTarget.Id;
+                if (persistableTarget != null)
+                    return persistableTarget.Id;
                 return null;
             }
         }
@@ -46,28 +39,27 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             get
             {
-                if (this.persistableTarget != null)
-                    return this.persistableTarget.CommaDelimitedKeywords;
+                if (persistableTarget != null)
+                    return persistableTarget.CommaDelimitedKeywords;
                 return null;
             }
         }
 
         public Image IconImage
         {
-            get { return this.Icon.ToBitmap(); }
+            get { return Icon.ToBitmap(); }
         }
 
         protected bool isNew;
         public virtual bool IsNew
         {
-            get { return this.isNew; }
+            get { return isNew; }
             protected set
             {
-                if (this.isNew != value)
+                if (isNew != value)
                 {
-                    this.isNew = value;
-                    if (this.NewStatusChanged != null)
-                        this.NewStatusChanged(this, new EventArgs());
+                    isNew = value;
+                    NewStatusChanged?.Invoke(this, new EventArgs());
                 }
             }
         }
@@ -75,14 +67,13 @@ namespace CygSoft.CodeCat.UI.WinForms
         protected bool isModified;
         public virtual bool IsModified
         {
-            get { return this.isModified; }
+            get { return isModified; }
             protected set
             {
-                if (this.isModified != value)
+                if (isModified != value)
                 {
-                    this.isModified = value;
-                    if (this.ModifyStatusChanged != null)
-                        this.ModifyStatusChanged(this, new EventArgs());
+                    isModified = value;
+                    ModifyStatusChanged?.Invoke(this, new EventArgs());
                 }
             }
         }
@@ -93,9 +84,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             get { return headerFieldsVisible; }
             set
             {
-                this.headerFieldsVisible = value;
-                if (HeaderFieldsVisibilityChanged != null)
-                    HeaderFieldsVisibilityChanged(this, new EventArgs());
+                headerFieldsVisible = value;
+                HeaderFieldsVisibilityChanged?.Invoke(this, new EventArgs());
             }
         }
 
@@ -105,36 +95,32 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
-            this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
-            this.CloseButtonVisible = true;
-            this.CloseButton = true;
+            DockAreas = DockAreas.Document;
+            CloseButtonVisible = true;
+            CloseButton = true;
         }
 
         public IKeywordIndexItem GetKeywordIndex()
         {
-            if (this.persistableTarget != null)
-                return this.persistableTarget.IndexItem;
+            if (persistableTarget != null)
+                return persistableTarget.IndexItem;
             return null;
         }
 
         protected void Delete()
         {
-            if (this.IsNew)
+            if (IsNew)
                 return;
 
             DialogResult result = Dialogs.DeleteItemDialog(this, "document");
 
-            if (result == System.Windows.Forms.DialogResult.Yes)
+            if (result == DialogResult.Yes)
             {
-                this.flagForDelete = true;
+                flagForDelete = true;
+                Deleting?.Invoke(this, new EventArgs());
+                DocumentDeleted?.Invoke(this, new EventArgs());
 
-                if (Deleting != null)
-                    Deleting(this, new EventArgs());
-
-                if (DocumentDeleted != null)
-                    DocumentDeleted(this, new EventArgs());
-
-                this.Close();
+                Close();
             }
         }
 
@@ -143,23 +129,21 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected string AddKeywords(string keywords)
         {
-            return this.application.AddKeywordsToDelimitedText(this.persistableTarget.CommaDelimitedKeywords, keywords);
+            return application.AddKeywordsToDelimitedText(persistableTarget.CommaDelimitedKeywords, keywords);
         }
 
         protected string RemoveKeywords(string keywords)
         {
-            return this.application.RemoveKeywordsFromDelimitedText(this.persistableTarget.CommaDelimitedKeywords, keywords);
+            return application.RemoveKeywordsFromDelimitedText(persistableTarget.CommaDelimitedKeywords, keywords);
         }
 
         protected void RevertChanges()
         {
             DialogResult result = Dialogs.RevertDocumentChangesDialogPrompt(this);
-            if (result == System.Windows.Forms.DialogResult.Yes)
+            if (result == DialogResult.Yes)
             {
-                if (Reverting != null)
-                    Reverting(this, new EventArgs());
-
-                this.IsModified = false;
+                Reverting?.Invoke(this, new EventArgs());
+                IsModified = false;
             }
         }
 
@@ -171,11 +155,10 @@ namespace CygSoft.CodeCat.UI.WinForms
                 {
                     SaveFields();
 
-                    this.IsModified = false;
-                    this.IsNew = false;
+                    IsModified = false;
+                    IsNew = false;
 
-                    if (DocumentSaved != null)
-                        DocumentSaved(this, new DocumentSavedFileEventArgs(target, contentDocument));
+                    DocumentSaved?.Invoke(this, new DocumentSavedFileEventArgs(target, contentDocument));
 
                     return true;
                 }
@@ -192,30 +175,26 @@ namespace CygSoft.CodeCat.UI.WinForms
             // if this form cancels close, seems to stop the application from closing!
             // if forcing close (flagging for delete or closing from the main form)
             // want any dialog boxes popping up. 
-            if (!this.CloseWithoutPrompts && !flagForDelete)
+            if (!CloseWithoutPrompts && !flagForDelete)
             {
-                if (this.IsModified)
+                if (IsModified)
                 {
-                    if (e.CloseReason != CloseReason.MdiFormClosing && !this.CloseWithoutPrompts)
+                    if (e.CloseReason != CloseReason.MdiFormClosing && !CloseWithoutPrompts)
                     {
                         DialogResult result = Dialogs.SaveDocumentChangesDialogPrompt(this);
 
-                        if (result == System.Windows.Forms.DialogResult.Yes)
+                        if (result == DialogResult.Yes)
                         {
-                            if (this.ValidateChanges())
-                            {
-                                if (this.Saving != null)
-                                    Saving(this, new EventArgs());
-                            }
+                            if (ValidateChanges())
+                                Saving?.Invoke(this, new EventArgs());
                             else
                                 e.Cancel = true;
                         }
-                        else if (result == System.Windows.Forms.DialogResult.No)
+                        else if (result == DialogResult.No)
                         {
-                            if (this.Reverting != null)
-                                Reverting(this, new EventArgs());
+                            Reverting?.Invoke(this, new EventArgs());
                         }
-                        else if (result == System.Windows.Forms.DialogResult.Cancel)
+                        else if (result == DialogResult.Cancel)
                             e.Cancel = true;
                     }
                 }
@@ -225,7 +204,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            this.persistableTarget.Close();
+            persistableTarget.Close();
             base.OnFormClosed(e);
         }
     }

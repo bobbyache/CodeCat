@@ -5,11 +5,6 @@ using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Documents
 {

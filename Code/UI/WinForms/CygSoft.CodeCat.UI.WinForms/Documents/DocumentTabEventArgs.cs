@@ -15,9 +15,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         public DocumentTabEventArgs(TabPage tabPage, UserControl tabControl)
         {
-            this.TabUserControl = tabControl;
-            this.TabPage = tabPage;
-            this.ItemId = tabPage.Name;
+            TabUserControl = tabControl;
+            TabPage = tabPage;
+            ItemId = tabPage.Name;
         }
     }
 }
