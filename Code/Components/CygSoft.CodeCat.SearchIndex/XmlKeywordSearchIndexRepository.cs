@@ -19,15 +19,22 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             this.RootElement = rootElement;
         }
 
-        public IKeywordSearchIndex OpenIndex(string filePath, int currentVersion)
+        public IKeywordSearchIndex OpenIndex(string filePath, int expectedVersion)
         {
-            IKeywordSearchIndexFileValidator fileValidator = FilePathValidatorFactory.Create();
+            var indexFile = NewIndexFile(filePath);
+            string fileText = indexFile.Open();
 
-            if (!fileValidator.Exists(filePath))
-                throw new FileNotFoundException();
+            if (!indexFile.FileExists)
+                throw new FileNotFoundException("Index file not found.");
 
-            List<IndexItem> items = LoadIndexItems(filePath, currentVersion);
-            IKeywordSearchIndex Index = new KeywordSearchIndex(filePath, currentVersion, items.Cast<IKeywordIndexItem>().ToList());
+            if (!indexFile.CorrectFormat)
+                throw new InvalidDataException("The file format for the target file does not match the format expected or the file is corrupt.");
+
+            if (!indexFile.CorrectVersion)
+                throw new InvalidFileIndexVersionException("The file version is not compatible with the current application version.");
+
+            List<IndexItem> items = LoadIndexItems(fileText, expectedVersion);
+            IKeywordSearchIndex Index = new KeywordSearchIndex(filePath, expectedVersion, items.Cast<IKeywordIndexItem>().ToList());
             return Index;
         }
 
@@ -43,7 +50,13 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
                 xElement.Add(item.Serialize());
             }
 
-            xmlDocument.Save(Index.FilePath);
+            var indexFile = NewIndexFile(Index.FilePath);
+            indexFile.Save(xmlDocument.ToString());
+        }
+
+        protected virtual IKeywordSearchIndexFile NewIndexFile(string filePath)
+        {
+            return new KeywordSearchIndexFile(filePath);
         }
 
         public IKeywordSearchIndex SaveIndexAs(IKeywordSearchIndex Index, string filePath)
@@ -60,21 +73,21 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             return newIndex;
         }
 
-        public IKeywordSearchIndex CreateIndex(string filePath, int currentVersion)
+        public IKeywordSearchIndex CreateIndex(string filePath, int expectedVersion)
         {
-            CreateNew(filePath, currentVersion);
-            IKeywordSearchIndex Index = new KeywordSearchIndex(filePath, currentVersion);
+            CreateNew(filePath, expectedVersion);
+            IKeywordSearchIndex Index = new KeywordSearchIndex(filePath, expectedVersion);
             return Index;
         }
 
-        private void CreateNew(string xmlFile, int currentVersion)
+        private void CreateNew(string xmlFile, int expectedVersion)
         {
             XmlDocument xmlDocument = new XmlDocument();
 
             XmlDeclaration xmlDeclaration = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
             XmlElement root = xmlDocument.CreateElement(this.RootElement);
             XmlAttribute version = xmlDocument.CreateAttribute("Version");
-            version.Value = currentVersion.ToString();
+            version.Value = expectedVersion.ToString();
 
             root.Attributes.Append(version);
             xmlDocument.InsertBefore(xmlDeclaration, xmlDocument.DocumentElement);
@@ -82,17 +95,17 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             xmlDocument.Save(xmlFile);
         }
 
-        protected abstract List<IndexItem> LoadIndexItems(string filePath, int currentVersion);
+        protected abstract List<IndexItem> LoadIndexItems(string fileText, int expectedVersion);
         
-        public void ImportItems(string filePath, int currentVersion, IKeywordIndexItem[] importItems)
+        public void ImportItems(string filePath, int expectedVersion, IKeywordIndexItem[] importItems)
         {
             IndexItem[] imports = importItems.OfType<IndexItem>().ToArray();
 
             XDocument xDocument = XDocument.Load(filePath);
-            CheckVersion(xDocument.Root, currentVersion);
+            CheckVersion(xDocument.Root, expectedVersion);
 
             // ensure ids do not already exist.
-            List<IndexItem> existingItems = LoadIndexItems(filePath, currentVersion);
+            List<IndexItem> existingItems = LoadIndexItems(filePath, expectedVersion);
 
             bool exist = existingItems.Join(importItems, ex => ex.Id, im => im.Id,
                 (ex, im) => ex.Id).Count() > 0;
@@ -116,17 +129,17 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             xDocument.Save(filePath);
         }
 
-        protected void CheckVersion(XElement xElement, int currentVersion)
+        protected virtual void CheckVersion(XElement xElement, int expectedVersion)
         {
             try
             {
                 XAttribute xVersion = xElement.Attribute("Version");
-                if (Int32.Parse(xVersion.Value) != currentVersion)
+                if (Int32.Parse(xVersion.Value) != expectedVersion)
                     throw new Exception();
             }
             catch (Exception)
             {
-                throw new ApplicationException("Project file is incompatible with the current application release.");
+                throw new ApplicationException("Project file is incompatible with the file version that the application expects.");
             }
         }
     }

@@ -7,27 +7,27 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
     {
         public CodeGroupKeywordIndexItem()
         {
-            this.Syntax = string.Empty;
+            Syntax = string.Empty;
         }
 
         public CodeGroupKeywordIndexItem(string title, string syntax, string commaDelimitedKeywords)
                     : base(title, syntax, commaDelimitedKeywords)
         {
-            this.Syntax = syntax;
+            Syntax = syntax;
         }
 
         public string Syntax { get; set; }
 
-        public override void Deserialize(System.Xml.Linq.XElement element)
+        public override void Deserialize(XElement element)
         {
             base.Deserialize(element);
-            this.Syntax = (string)element.Element("Syntax");
+            Syntax = (string)element.Element("Syntax");
         }
 
-        public override System.Xml.Linq.XElement Serialize()
+        public override XElement Serialize()
         {
             XElement element = base.Serialize();
-            element.Add(new XElement("Syntax", this.Syntax));
+            element.Add(new XElement("Syntax", Syntax));
 
             return element;
         }

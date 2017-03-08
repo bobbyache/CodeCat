@@ -21,33 +21,29 @@ namespace Search.KeywordIndex.UnitTests
         [Test]
         public void XmlIndexRepository_OpeningNonExistingFile_ThrowsFileNotFoundException()
         {
-            var fileValidator = new StubFileValidator();
-            fileValidator.FileExists = false;
-            FilePathValidatorFactory.SetValidator(fileValidator);
-
             TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement");
-            Assert.That(() => repository.OpenIndex("", 2), Throws.InstanceOf(typeof(FileNotFoundException)));
+            repository.IsExistingFile = false; // simulate that the index file is not found at the path expected.
+
+            Assert.That(() => repository.OpenIndex("", 2), Throws.InstanceOf(typeof(FileNotFoundException)),
+                "Stub method simulated that an Index file was not found at the path specified. Repository should have thrown a FileNotFoundException.");
         }
 
         [Test]
         public void XmlIndexRepository_OpeningIncorrectFormat_ThrowsArgumentException()
         {
-            var fileValidator = new StubFileValidator();
-            fileValidator.FormatCorrect = false;
-            FilePathValidatorFactory.SetValidator(fileValidator);
-
             TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement");
-            Assert.That(() => repository.OpenIndex("", 2), Throws.InstanceOf(typeof(InvalidDataException)));
+            repository.IsCorrectFormat = false; // simulate that the index file format is incorrect
+
+            Assert.That(() => repository.OpenIndex("", 2), Throws.InstanceOf(typeof(InvalidDataException)),
+                "Stub method simulated that an Index file format was invalid but a InvalidDataException was not thrown.");
         }
 
         [Test]
         public void XmlIndexRepository_OpeningIncorrectVersion_ThrowsVersionException()
         {
-            var fileValidator = new StubFileValidator();
-            fileValidator.VersionCorrect = false;
-            FilePathValidatorFactory.SetValidator(fileValidator);
-
             TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement");
+            repository.IsCorrectVersion = false; // simulate that the index file version is incorrect
+
             Assert.That(() => repository.OpenIndex("", 2), Throws.InstanceOf(typeof(InvalidFileIndexVersionException)));
         }
 
@@ -76,30 +72,42 @@ namespace Search.KeywordIndex.UnitTests
             Assert.That(newSearchIndex.Contains(indexItems[2]), Is.True);
         }
 
-        class StubFileValidator : IKeywordSearchIndexFileValidator
+        class StubKeywordSearchIndexFile : IKeywordSearchIndexFile
         {
-            public bool FileExists = true;
-            public bool FormatCorrect = true;
-            public bool VersionCorrect = true;
+            public bool IsCorrectFormat = true;
+            public bool IsCorrectVersion = true;
+            public bool IsExistingFile = true;
 
-            public bool CorrectFormat(string filePath)
+            public string FilePath { get; private set; }
+
+            public string Text { get { return ""; } }
+
+            public bool CorrectFormat { get { return IsCorrectFormat; } }
+
+            public bool CorrectVersion { get { return IsCorrectVersion; } }
+
+            public bool FileExists {  get { return IsExistingFile; } } 
+
+            public void Save(string fileText) {  }
+
+            public string Open()
             {
-                return FormatCorrect;
+                return string.Empty;
             }
 
-            public bool CorrectVersion(string filePath)
+            public void SaveAs(string fileText, string filePath)
             {
-                return VersionCorrect;
-            }
-
-            public bool Exists(string filePath)
-            {
-                return FileExists;
+                FilePath = filePath;
             }
         }
 
         class TestXmlKeywordSearchIndexRepository : XmlKeywordSearchIndexRepository<TestXmlKeywordIndexItem>
         {
+
+            public bool IsExistingFile = true;
+            public bool IsCorrectFormat = true;
+            public bool IsCorrectVersion = true;
+
             public TestXmlKeywordSearchIndexRepository(string rootElement) : base(rootElement)
             {
             }
@@ -107,6 +115,16 @@ namespace Search.KeywordIndex.UnitTests
             protected override List<TestXmlKeywordIndexItem> LoadIndexItems(string filePath, int currentVersion)
             {
                 return new List<TestXmlKeywordIndexItem>();
+            }
+
+            protected override IKeywordSearchIndexFile NewIndexFile(string filePath)
+            {
+                StubKeywordSearchIndexFile stubFile = new StubKeywordSearchIndexFile();
+                stubFile.IsCorrectFormat = IsCorrectFormat;
+                stubFile.IsCorrectVersion = IsCorrectVersion;
+                stubFile.IsExistingFile = IsExistingFile;
+
+                return stubFile;
             }
         }
 

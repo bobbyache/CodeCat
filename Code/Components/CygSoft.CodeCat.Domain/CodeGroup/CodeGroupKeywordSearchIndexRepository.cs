@@ -13,10 +13,10 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         }
 
-        protected override List<CodeGroupKeywordIndexItem> LoadIndexItems(string filePath, int currentVersion)
+        protected override List<CodeGroupKeywordIndexItem> LoadIndexItems(string fileText, int expectedVersion)
         {
-            XElement xElement = XElement.Load(filePath);
-            CheckVersion(xElement, currentVersion);
+            XElement xElement = XElement.Parse(fileText);
+            CheckVersion(xElement, expectedVersion);
 
             List<CodeGroupKeywordIndexItem> indexItems = new List<CodeGroupKeywordIndexItem>();
 
