@@ -77,13 +77,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             Modified += CodeItemCtrl_Modified;
         }
 
-        private void codeGroupDocumentSet_ContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_ContentSaved(object sender, DocumentIndexEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void codeGroupDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
         {
             this.pdfDocument.Title = txtTitle.Text;
         }

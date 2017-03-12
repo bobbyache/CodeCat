@@ -69,13 +69,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             compiler.BeforeCompile += compiler_BeforeCompile;
         }
 
-        private void qikTemplateDocumentSet_ContentSaved(object sender, FileEventArgs e)
+        private void qikTemplateDocumentSet_ContentSaved(object sender, DocumentIndexEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void qikTemplateDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
+        private void qikTemplateDocumentSet_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
         {
             scriptFile.Text = syntaxDocument.Text;
         }

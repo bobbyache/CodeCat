@@ -66,13 +66,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             codeGroupFile.AfterSave += codeGroupFile_ContentSaved;
         }
 
-        private void codeGroupFile_ContentSaved(object sender, FileEventArgs e)
+        private void codeGroupFile_ContentSaved(object sender, DocumentIndexEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void codeGroupFile_BeforeContentSaved(object sender, FileEventArgs e)
+        private void codeGroupFile_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
         {
             this.codeFile.Title = txtTitle.Text;
             this.codeFile.Text = syntaxDocument.Text;

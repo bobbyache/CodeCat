@@ -316,13 +316,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             UpdateStatusBar();
         }
 
-        private void codeGroupDocumentSet_ContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_ContentSaved(object sender, DocumentIndexEventArgs e)
         {
             IsModified = false;
             SetChangeStatus();
         }
 
-        private void codeGroupDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
+        private void codeGroupDocumentSet_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
         {
             imageDocument.Title = txtTitle.Text;
         }
