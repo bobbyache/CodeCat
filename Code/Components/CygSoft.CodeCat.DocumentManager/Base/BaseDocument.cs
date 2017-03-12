@@ -2,7 +2,7 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {
-    public abstract class BaseDocument : BaseVersionableFile, IDocument
+    public abstract class BaseDocument : BaseFile, IDocument
     {
         public int Ordinal { get; set; }
         public string Title { get; set; }

@@ -37,11 +37,6 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             get { return this.Items.Select(r => r.Category).Distinct().ToArray(); }
         }
 
-        protected override IFileVersion NewVersion(DateTime timeStamp, string description)
-        {
-            return null;
-        }
-
         protected override void OpenFile()
         {
             XDocument document = XDocument.Load(this.FilePath);

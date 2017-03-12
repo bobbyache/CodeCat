@@ -2,7 +2,7 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IImageSetDocument : IVersionableFile, IPositionedItem
+    public interface IImageSetDocument : IFile, IPositionedItem
     {
         event EventHandler ImageAdded;
         event EventHandler ImageRemoved;

@@ -46,7 +46,6 @@
     <Compile Include="Base\BaseFile.cs" />
     <Compile Include="Base\BaseDocumentIndex.cs" />
     <Compile Include="Base\BaseVersionFile.cs" />
-    <Compile Include="Base\BaseVersionableFile.cs" />
     <Compile Include="Documents\CodeDocument.cs" />
     <Compile Include="Documents\FileGroupDocument.cs" />
     <Compile Include="Documents\FileGroup\FileGroupFile.cs" />

@@ -50,10 +50,10 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
             this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.ImageDocument);
         }
 
-        protected override IFileVersion NewVersion(DateTime timeStamp, string description)
-        {
-            return null;
-        }
+        //protected override IFileVersion NewVersion(DateTime timeStamp, string description)
+        //{
+        //    return null;
+        //}
 
         protected override void OpenFile()
         {

@@ -88,11 +88,6 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
                 return imageItem;
         }
 
-        protected override IFileVersion NewVersion(DateTime timeStamp, string description)
-        {
-            return null;
-        }
-
         protected override void OpenFile()
         {
             this.documentIndex.Open();

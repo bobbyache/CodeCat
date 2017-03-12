@@ -29,7 +29,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 
     }
 
-    public interface IFileGroupDocument : IVersionableFile, IPositionedItem
+    public interface IFileGroupDocument : IFile, IPositionedItem
     {
         string Title { get; set; }
         string DocumentType { get; set; }

@@ -60,7 +60,6 @@
     <Compile Include="IRichTextDocument.cs" />
     <Compile Include="ITextDocument.cs" />
     <Compile Include="IUrlGroupDocument.cs" />
-    <Compile Include="IVersionableFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

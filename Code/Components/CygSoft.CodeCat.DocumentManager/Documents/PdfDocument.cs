@@ -24,11 +24,6 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.PdfDocument);
         }
 
-        protected override IFileVersion NewVersion(DateTime timeStamp, string description)
-        {
-            return null;
-        }
-
         protected override void OpenFile()
         {
             // DON'T WANT TO IMPLEMENT THIS BECAUSE THE FILE IS NOT OPENED THE SAME WAY OTHER DOCUMENTS ARE OPENED.

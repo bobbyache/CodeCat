@@ -22,11 +22,6 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             this.Text = null;
         }
 
-        protected override IFileVersion NewVersion(DateTime timeStamp, string description)
-        {
-            return new TextDocumentVersion(new VersionPathGenerator(this.FilePath, timeStamp), description, this.Text);
-        }
-
         protected override void OpenFile()
         {
             this.Text = File.ReadAllText(this.FilePath);

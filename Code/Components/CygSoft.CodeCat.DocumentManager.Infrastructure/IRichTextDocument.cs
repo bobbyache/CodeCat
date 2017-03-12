@@ -2,7 +2,7 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IRichTextDocument : IVersionableFile, IPositionedItem
+    public interface IRichTextDocument : IFile, IPositionedItem
     {
         event EventHandler RequestSaveRtf;
 

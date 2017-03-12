@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IImageDocument :  IVersionableFile, IPositionedItem
+    public interface IImageDocument :  IFile, IPositionedItem
     {
         string Title { get; set; }
         string DocumentType { get; set; }

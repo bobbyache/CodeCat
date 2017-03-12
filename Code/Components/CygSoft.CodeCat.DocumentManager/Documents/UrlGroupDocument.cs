@@ -84,10 +84,10 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             return item;
         }
 
-        protected override IFileVersion NewVersion(DateTime timeStamp, string description)
-        {
-            return null;
-        }
+        //protected override IFileVersion NewVersion(DateTime timeStamp, string description)
+        //{
+        //    return null;
+        //}
 
         protected override void OpenFile()
         {
