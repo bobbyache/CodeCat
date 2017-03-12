@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentEventArgs.cs" />
+    <Compile Include="DocumentIndexEventArgs.cs" />
     <Compile Include="DocumentTypeEnum.cs" />
     <Compile Include="FileEventArgs.cs" />
     <Compile Include="ICodeDocument.cs" />

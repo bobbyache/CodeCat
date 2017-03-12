@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.Domain.Management;
+﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
@@ -273,7 +274,7 @@ namespace CygSoft.CodeCat.Domain.Base
             indexRepository.SaveIndex(this.index);
         }
 
-        private void target_AfterDelete(object sender, DocumentManager.Infrastructure.FileEventArgs e)
+        private void target_AfterDelete(object sender, DocumentIndexEventArgs e)
         {
             IPersistableTarget target = sender as IPersistableTarget;
 
@@ -286,13 +287,13 @@ namespace CygSoft.CodeCat.Domain.Base
             this.index.Remove(target.Id);
         }
 
-        private void target_AfterSave(object sender, DocumentManager.Infrastructure.FileEventArgs e)
+        private void target_AfterSave(object sender, DocumentIndexEventArgs e)
         {
             IPersistableTarget targetFile = sender as IPersistableTarget;
             this.index.Update(targetFile.IndexItem);
         }
 
-        private void target_BeforeClose(object sender, DocumentManager.Infrastructure.FileEventArgs e)
+        private void target_BeforeClose(object sender, DocumentIndexEventArgs e)
         {
             IPersistableTarget target = sender as IPersistableTarget;
 

@@ -2,12 +2,38 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IDocumentIndex : IFile
+    public interface IDocumentIndex
     {
+        event EventHandler<DocumentIndexEventArgs> BeforeDelete;
+        event EventHandler<DocumentIndexEventArgs> AfterDelete;
+        event EventHandler<DocumentIndexEventArgs> BeforeOpen;
+        event EventHandler<DocumentIndexEventArgs> AfterOpen;
+        event EventHandler<DocumentIndexEventArgs> BeforeSave;
+        event EventHandler<DocumentIndexEventArgs> AfterSave;
+        event EventHandler<DocumentIndexEventArgs> BeforeClose;
+        event EventHandler<DocumentIndexEventArgs> AfterClose;
+        event EventHandler<DocumentIndexEventArgs> BeforeRevert;
+        event EventHandler<DocumentIndexEventArgs> AfterRevert;
+
         event EventHandler<DocumentEventArgs> DocumentAdded;
         event EventHandler<DocumentEventArgs> DocumentRemoved;
         event EventHandler<DocumentEventArgs> DocumentMovedUp;
         event EventHandler<DocumentEventArgs> DocumentMovedDown;
+
+        string Id { get; }
+        string FilePath { get; }
+        string FileName { get; }
+        string FileExtension { get; }
+        string Folder { get; }
+        bool FolderExists { get; }
+        bool Exists { get; }
+        bool Loaded { get; }
+
+        void Open();
+        void Delete();
+        void Save();
+        void Close();
+        void Revert();
 
         // files within the document group
         IDocument[] DocumentFiles { get; }

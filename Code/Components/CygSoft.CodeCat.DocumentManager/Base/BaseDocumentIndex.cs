@@ -7,12 +7,42 @@ using System.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {
-    public abstract class BaseDocumentIndex : BaseFile, IDocumentIndex
+    public abstract class BaseDocumentIndex : IDocumentIndex
     {
         public event EventHandler<DocumentEventArgs> DocumentAdded;
         public event EventHandler<DocumentEventArgs> DocumentRemoved;
         public event EventHandler<DocumentEventArgs> DocumentMovedUp;
         public event EventHandler<DocumentEventArgs> DocumentMovedDown;
+
+        public event EventHandler<DocumentIndexEventArgs> BeforeDelete;
+        public event EventHandler<DocumentIndexEventArgs> AfterDelete;
+        public event EventHandler<DocumentIndexEventArgs> BeforeOpen;
+        public event EventHandler<DocumentIndexEventArgs> AfterOpen;
+        public event EventHandler<DocumentIndexEventArgs> BeforeSave;
+        public event EventHandler<DocumentIndexEventArgs> AfterSave;
+        public event EventHandler<DocumentIndexEventArgs> BeforeClose;
+        public event EventHandler<DocumentIndexEventArgs> AfterClose;
+        public event EventHandler<DocumentIndexEventArgs> BeforeRevert;
+        public event EventHandler<DocumentIndexEventArgs> AfterRevert;
+
+        public string Id { get; private set; }
+        public string FilePath { get; protected set; }
+        public string FileName { get; private set; }
+        public string FileExtension { get; private set; }
+        protected BaseFilePathGenerator filePathGenerator;
+
+        public virtual string Folder
+        {
+            get { return Path.GetDirectoryName(this.FilePath); }
+        }
+
+        public virtual bool FolderExists
+        {
+            get { return Directory.Exists(Path.GetDirectoryName(this.FilePath)); }
+        }
+
+        public bool Exists { get { return File.Exists(this.FilePath); } }
+        public bool Loaded { get; private set; }
 
         protected PositionableList<IDocument> documentFiles = new PositionableList<IDocument>();
         private List<IDocument> removedDocumentFiles = new List<IDocument>();
@@ -36,12 +66,24 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         protected abstract List<IDocument> LoadDocumentFiles();
         protected abstract void SaveDocumentIndex();
 
-        public BaseDocumentIndex(IDocumentIndexRepository indexRepository, BaseFilePathGenerator filePathGenerator): base(filePathGenerator)
+        public BaseDocumentIndex(IDocumentIndexRepository indexRepository, BaseFilePathGenerator filePathGenerator)
         {
             this.indexRepository = indexRepository;
+            this.filePathGenerator = filePathGenerator;
+            this.Id = filePathGenerator.Id;
+            this.FileExtension = filePathGenerator.FileExtension;
+            this.FilePath = filePathGenerator.FilePath;
+            this.FileName = filePathGenerator.FileName;
         }
 
-        protected override void OpenFile()
+        protected virtual void OnBeforeDelete() { }
+        protected virtual void OnBeforeOpen() { }
+        protected virtual void OnAfterOpen() { }
+        protected virtual void OnBeforeSave() { }
+        protected virtual void OnAfterSave() { }
+        protected virtual void OnClose() { }
+
+        protected virtual void OpenFile()
         {
             try
             {
@@ -53,7 +95,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
-        protected override void SaveFile()
+        protected virtual void SaveFile()
         {
             try
             {
@@ -113,21 +155,20 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
-        protected override void OnAfterDelete()
+        protected virtual void OnAfterDelete()
         {
             DeleteDocumentFiles();
             if (Directory.Exists(this.Folder))
                 Directory.Delete(this.Folder);
         }
 
-        protected override void OnBeforeRevert()
+        protected virtual void OnBeforeRevert()
         {
             foreach (IDocument documentFile in this.DocumentFiles)
                 documentFile.Revert();
-            base.OnBeforeRevert();
         }
 
-        protected override void OnAfterRevert()
+        protected virtual void OnAfterRevert()
         {
             this.removedDocumentFiles.Clear();
         }
@@ -186,6 +227,82 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             documentFiles.MoveFirst(documentFile);
         }
 
+        public void Open()
+        {
+            try
+            {
+                BeforeOpen?.Invoke(this, new DocumentIndexEventArgs(this));
+                OnBeforeOpen();
+                OpenFile();
+                OnAfterOpen();
+
+                this.Loaded = true;
+                AfterOpen?.Invoke(this, new DocumentIndexEventArgs(this));
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public void Revert()
+        {
+            try
+            {
+                BeforeRevert?.Invoke(this, new DocumentIndexEventArgs(this));
+                OnBeforeRevert();
+
+                if (File.Exists(this.FilePath))
+                    OpenFile();
+                OnAfterRevert();
+
+                this.Loaded = true;
+                AfterRevert?.Invoke(this, new DocumentIndexEventArgs(this));
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public void Delete()
+        {
+            BeforeDelete?.Invoke(this, new DocumentIndexEventArgs(this));
+            OnBeforeDelete();
+
+            if (File.Exists(this.FilePath))
+                File.Delete(this.FilePath);
+
+            OnAfterDelete();
+
+            this.Loaded = false;
+            AfterDelete?.Invoke(this, new DocumentIndexEventArgs(this));
+        }
+
+        public void Save()
+        {
+            try
+            {
+                BeforeSave?.Invoke(this, new DocumentIndexEventArgs(this));
+                OnBeforeSave();
+                SaveFile();
+                OnAfterSave();
+                this.Loaded = true;
+                AfterSave?.Invoke(this, new DocumentIndexEventArgs(this));
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+        public void Close()
+        {
+            BeforeClose?.Invoke(this, new DocumentIndexEventArgs(this));
+            this.OnClose();
+            this.Loaded = false;
+            AfterClose?.Invoke(this, new DocumentIndexEventArgs(this));
+        }
+
         private void OpenDocumentFiles()
         {
             try
@@ -194,7 +311,6 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
                 foreach (IDocument documentFile in docFiles)
                     documentFile.Open();
-                    //documentFile.Open(Path.Combine(this.Folder, documentFile.Id + "." + documentFile.FileExtension));
 
                 this.documentFiles.InitializeList(docFiles);
             }

@@ -14,16 +14,16 @@ namespace CygSoft.CodeCat.Domain.Qik
 {
     internal class QikTemplateDocumentSet : IPersistableTarget, IQikTemplateDocumentSet
     {
-        public event EventHandler<FileEventArgs> BeforeDelete;
-        public event EventHandler<FileEventArgs> AfterDelete;
-        public event EventHandler<FileEventArgs> BeforeOpen;
-        public event EventHandler<FileEventArgs> AfterOpen;
-        public event EventHandler<FileEventArgs> BeforeSave;
-        public event EventHandler<FileEventArgs> AfterSave;
-        public event EventHandler<FileEventArgs> BeforeClose;
-        public event EventHandler<FileEventArgs> AfterClose;
-        public event EventHandler<FileEventArgs> BeforeRevert;
-        public event EventHandler<FileEventArgs> AfterRevert;
+        public event EventHandler<DocumentIndexEventArgs> BeforeDelete;
+        public event EventHandler<DocumentIndexEventArgs> AfterDelete;
+        public event EventHandler<DocumentIndexEventArgs> BeforeOpen;
+        public event EventHandler<DocumentIndexEventArgs> AfterOpen;
+        public event EventHandler<DocumentIndexEventArgs> BeforeSave;
+        public event EventHandler<DocumentIndexEventArgs> AfterSave;
+        public event EventHandler<DocumentIndexEventArgs> BeforeClose;
+        public event EventHandler<DocumentIndexEventArgs> AfterClose;
+        public event EventHandler<DocumentIndexEventArgs> BeforeRevert;
+        public event EventHandler<DocumentIndexEventArgs> AfterRevert;
 
         public event EventHandler<DocumentEventArgs> DocumentAdded;
         public event EventHandler<DocumentEventArgs> DocumentRemoved;
@@ -224,52 +224,52 @@ namespace CygSoft.CodeCat.Domain.Qik
             return false;
         }
 
-        private void documentIndex_AfterOpen(object sender, FileEventArgs e)
+        private void documentIndex_AfterOpen(object sender, DocumentIndexEventArgs e)
         {
             AfterOpen?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeOpen(object sender, FileEventArgs e)
+        private void documentIndex_BeforeOpen(object sender, DocumentIndexEventArgs e)
         {
             BeforeOpen?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeRevert(object sender, FileEventArgs e)
+        private void documentIndex_BeforeRevert(object sender, DocumentIndexEventArgs e)
         {
             BeforeRevert?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterRevert(object sender, FileEventArgs e)
+        private void documentIndex_AfterRevert(object sender, DocumentIndexEventArgs e)
         {
             AfterRevert?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterDelete(object sender, FileEventArgs e)
+        private void documentIndex_AfterDelete(object sender, DocumentIndexEventArgs e)
         {
             AfterDelete?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeDelete(object sender, FileEventArgs e)
+        private void documentIndex_BeforeDelete(object sender, DocumentIndexEventArgs e)
         {
             BeforeDelete?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterClose(object sender, FileEventArgs e)
+        private void documentIndex_AfterClose(object sender, DocumentIndexEventArgs e)
         {
             AfterClose?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeClose(object sender, FileEventArgs e)
+        private void documentIndex_BeforeClose(object sender, DocumentIndexEventArgs e)
         {
             BeforeClose?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterSave(object sender, FileEventArgs e)
+        private void documentIndex_AfterSave(object sender, DocumentIndexEventArgs e)
         {
             AfterSave?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeSave(object sender, FileEventArgs e)
+        private void documentIndex_BeforeSave(object sender, DocumentIndexEventArgs e)
         {
             BeforeSave?.Invoke(this, e);
         }
