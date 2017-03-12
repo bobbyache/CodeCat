@@ -43,13 +43,10 @@
     <Compile Include="DocumentEventArgs.cs" />
     <Compile Include="DocumentIndexEventArgs.cs" />
     <Compile Include="DocumentTypeEnum.cs" />
-    <Compile Include="FileEventArgs.cs" />
     <Compile Include="ICodeDocument.cs" />
     <Compile Include="IDocument.cs" />
     <Compile Include="IDocumentIndexRepository.cs" />
-    <Compile Include="IFile.cs" />
     <Compile Include="IFileGroupDocument.cs" />
-    <Compile Include="IFileVersion.cs" />
     <Compile Include="IDocumentIndex.cs" />
     <Compile Include="IImageDocument.cs" />
     <Compile Include="IImageItem.cs" />

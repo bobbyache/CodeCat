@@ -43,9 +43,7 @@
     <Compile Include="Base\BaseFilePathGenerator.cs" />
     <Compile Include="DocumentFactory.cs" />
     <Compile Include="Base\BaseDocument.cs" />
-    <Compile Include="Base\BaseFile.cs" />
     <Compile Include="Base\BaseDocumentIndex.cs" />
-    <Compile Include="Base\BaseVersionFile.cs" />
     <Compile Include="Documents\CodeDocument.cs" />
     <Compile Include="Documents\FileGroupDocument.cs" />
     <Compile Include="Documents\FileGroup\FileGroupFile.cs" />
@@ -58,7 +56,6 @@
     <Compile Include="Documents\QikScriptDocument.cs" />
     <Compile Include="Documents\RichTextDocument.cs" />
     <Compile Include="Documents\TextDocument.cs" />
-    <Compile Include="Documents\TextDocumentVersion.cs" />
     <Compile Include="Documents\UrlGroupDocument.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="PathGenerators\DocumentIndexPathGenerator.cs" />
