@@ -14,14 +14,11 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         DateTime DateCreated { get; set; }
     }
 
-    public interface IUrlGroupDocument : IFile, IPositionedItem
+    public interface IUrlGroupDocument : IDocument, IPositionedItem
     {
         event EventHandler Paste;
         event EventHandler PasteConflict;
 
-        string Title { get; set; }
-        string DocumentType { get; set; }
-        string Description { get; set; }
         IUrlItem[] Items { get; }
         string[] Categories { get; }
         void Add(IUrlItem urlItem);

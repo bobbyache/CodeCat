@@ -29,11 +29,8 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 
     }
 
-    public interface IFileGroupDocument : IFile, IPositionedItem
+    public interface IFileGroupDocument : IDocument, IPositionedItem
     {
-        string Title { get; set; }
-        string DocumentType { get; set; }
-        string Description { get; set; }
         IFileGroupFile[] Items { get; }
         string[] Categories { get; }
         void Add(IFileGroupFile file);

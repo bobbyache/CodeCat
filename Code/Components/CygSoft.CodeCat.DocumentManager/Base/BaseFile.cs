@@ -133,16 +133,5 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             this.Loaded = false;
             AfterClose?.Invoke(this, new FileEventArgs(this));
         }
-
-        private string CleanExtension(string extension)
-        {
-            if (extension.Length > 0)
-            {
-                if (extension.StartsWith("."))
-                    return extension.Substring(1);
-            }
-
-            return extension;
-        }
     }
 }

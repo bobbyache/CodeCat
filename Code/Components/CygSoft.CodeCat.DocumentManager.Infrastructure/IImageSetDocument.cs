@@ -2,16 +2,13 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IImageSetDocument : IFile, IPositionedItem
+    public interface IImageSetDocument : IDocument, IPositionedItem
     {
         event EventHandler ImageAdded;
         event EventHandler ImageRemoved;
         event EventHandler ImageMovedUp;
         event EventHandler ImageMovedDown;
 
-        string Title { get; set; }
-        string DocumentType { get; set; }
-        string Description { get; set; }
         int ImageCount { get; }
         IImgDocument FirstImage { get; }
 

@@ -59,6 +59,7 @@
     <Compile Include="IQikScriptDocument.cs" />
     <Compile Include="IRichTextDocument.cs" />
     <Compile Include="ITextDocument.cs" />
+    <Compile Include="TopicSectionEventArgs.cs" />
     <Compile Include="IUrlGroupDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
