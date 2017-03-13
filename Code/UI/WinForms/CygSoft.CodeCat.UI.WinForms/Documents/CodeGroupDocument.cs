@@ -194,7 +194,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void RebuildTabs()
         {
             tabManager.Clear();
-            foreach (IDocument document in codeItemFile.Documents)
+            foreach (ITopicSection document in codeItemFile.Documents)
             {
                 AddDocument(document, false);
             }
@@ -281,7 +281,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #endregion
 
-        private void AddDocument(IDocument document, bool selected)
+        private void AddDocument(ITopicSection document, bool selected)
         {
             tabManager.AddTab(document,
                 DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),

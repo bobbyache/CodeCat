@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IPdfDocument : IDocument, IPositionedItem
+    public interface IPdfDocument : ITopicSection, IPositionedItem
     {
     }
 }

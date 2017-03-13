@@ -181,18 +181,18 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public void MoveDocumentRight(string id)
         {
-            IDocument document = this.documentIndex.GetDocumentFile(id);
+            ITopicSection topicSection = this.documentIndex.GetDocumentFile(id);
             
             // can't move the script file and we can't move behind the script file.
-            if (document.Id != this.ScriptFile.Id && !IsSecondLast(document.Id))
-                this.documentIndex.MoveDown(document);
+            if (topicSection.Id != this.ScriptFile.Id && !IsSecondLast(topicSection.Id))
+                this.documentIndex.MoveDown(topicSection);
         }
 
         public void MoveDocumentLeft(string id)
         {
-            IDocument document = this.documentIndex.GetDocumentFile(id);
-            if (document.Id != this.ScriptFile.Id)
-                this.documentIndex.MoveUp(document);
+            ITopicSection topicSection = this.documentIndex.GetDocumentFile(id);
+            if (topicSection.Id != this.ScriptFile.Id)
+                this.documentIndex.MoveUp(topicSection);
         }
 
         public ICodeDocument AddTemplate(string syntax)

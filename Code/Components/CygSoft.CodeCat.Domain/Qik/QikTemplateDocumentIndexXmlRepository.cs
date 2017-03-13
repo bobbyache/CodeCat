@@ -19,9 +19,9 @@ namespace CygSoft.CodeCat.Domain.Qik
             this.folder =  Path.GetDirectoryName(indexPathGenerator.FilePath);
         }
 
-        public List<IDocument> LoadDocuments()
+        public List<ITopicSection> LoadDocuments()
         {
-            List<IDocument> documents = new List<IDocument>();
+            List<ITopicSection> documents = new List<ITopicSection>();
 
             XDocument indexDocument = XDocument.Load(this.filePath);
             foreach (XElement documentElement in indexDocument.Element("QikFile").Element("Documents").Elements())
@@ -40,14 +40,14 @@ namespace CygSoft.CodeCat.Domain.Qik
                 else
                     documentType = documentElement.Attribute("DocType") != null ? (string)documentElement.Attribute("DocType") : "CODESNIPPET";
 
-                IDocument scriptDocument = DocumentFactory.Create(DocumentFactory.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
+                ITopicSection scriptDocument = DocumentFactory.Create(DocumentFactory.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
                 documents.Add(scriptDocument);
             }
 
-            return documents.OfType<IDocument>().ToList();
+            return documents.OfType<ITopicSection>().ToList();
         }
 
-        public void WriteDocuments(List<IDocument> documents)
+        public void WriteDocuments(List<ITopicSection> documents)
         {
             if (!Directory.Exists(this.folder))
                 CreateFile();
@@ -63,7 +63,7 @@ namespace CygSoft.CodeCat.Domain.Qik
             document.Save(this.filePath);
         }
 
-        private void WriteFile(List<IDocument> documents)
+        private void WriteFile(List<ITopicSection> documents)
         {
             ICodeDocument[] docFiles = documents.OfType<ICodeDocument>().ToArray();
 

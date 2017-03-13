@@ -64,7 +64,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         public string Text { get; set; }
 
         // would like to remove this at some point see... TemplateFiles property below...
-        public IDocument[] Documents { get { return this.documentIndex.DocumentFiles.ToArray(); } }
+        public ITopicSection[] Documents { get { return this.documentIndex.DocumentFiles.ToArray(); } }
 
         public string Id { get { return this.IndexItem.Id; } }
         public string FilePath { get { return this.documentIndex.FilePath; } }
@@ -130,7 +130,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             return this.documentIndex.DocumentExists(id);
         }
 
-        public IDocument GetDocument(string id)
+        public ITopicSection GetDocument(string id)
         {
             return this.documentIndex.GetDocumentFile(id) as ICodeDocument;
         }
@@ -163,17 +163,17 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         public void MoveDocumentRight(string id)
         {
-            IDocument document = this.documentIndex.GetDocumentFile(id);
-            this.documentIndex.MoveDown(document);
+            ITopicSection topicSection = this.documentIndex.GetDocumentFile(id);
+            this.documentIndex.MoveDown(topicSection);
         }
 
         public void MoveDocumentLeft(string id)
         {
-            IDocument document = this.documentIndex.GetDocumentFile(id);
-            this.documentIndex.MoveUp(document);
+            ITopicSection topicSection = this.documentIndex.GetDocumentFile(id);
+            this.documentIndex.MoveUp(topicSection);
         }
 
-        public IDocument AddDocument(DocumentTypeEnum documentType, string syntax = null, string extension = "txt")
+        public ITopicSection AddDocument(DocumentTypeEnum documentType, string syntax = null, string extension = "txt")
         {
             return this.documentIndex.AddDocumentFile(DocumentFactory.Create(documentType, documentIndex.Folder,
                 "New Document", null, 0, null, extension, syntax));

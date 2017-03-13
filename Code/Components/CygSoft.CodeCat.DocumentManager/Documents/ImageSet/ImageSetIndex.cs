@@ -13,7 +13,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
         {
         }
 
-        protected override List<DocumentManager.Infrastructure.IDocument> LoadDocumentFiles()
+        protected override List<DocumentManager.Infrastructure.ITopicSection> LoadDocumentFiles()
         {
             return base.indexRepository.LoadDocuments();
         }

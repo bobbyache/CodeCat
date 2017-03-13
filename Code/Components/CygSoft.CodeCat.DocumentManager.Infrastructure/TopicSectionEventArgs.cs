@@ -8,9 +8,9 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
     public class TopicSectionEventArgs : EventArgs
     {
-        public IDocument File { get; private set; }
+        public ITopicSection File { get; private set; }
 
-        public TopicSectionEventArgs(IDocument file)
+        public TopicSectionEventArgs(ITopicSection file)
         {
             this.File = file;
         }

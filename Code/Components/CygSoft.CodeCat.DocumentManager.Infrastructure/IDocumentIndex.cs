@@ -36,25 +36,25 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         void Revert();
 
         // files within the document group
-        IDocument[] DocumentFiles { get; }
+        ITopicSection[] DocumentFiles { get; }
 
         bool DocumentExists(string id);
 
-        IDocument AddDocumentFile(IDocument documentFile); // necessary, because document files could be of different types...
+        ITopicSection AddDocumentFile(ITopicSection topicSection); // necessary, because document files could be of different types...
                                                           // need to be created elsewhere like a document factory.
         void RemoveDocumentFile(string id);
-        IDocument GetDocumentFile(string id);
+        ITopicSection GetDocumentFile(string id);
 
-        IDocument FirstDocument { get; }
-        IDocument LastDocument { get; }
+        ITopicSection FirstDocument { get; }
+        ITopicSection LastDocument { get; }
 
-        bool CanMoveDown(IDocument documentFile);
-        bool CanMoveTo(IDocument documentFile, int ordinal);
-        bool CanMoveUp(IDocument documentFile);
-        void MoveDown(IDocument documentFile);
-        void MoveTo(IDocument documentFile, int ordinal);
-        void MoveUp(IDocument documentFile);
-        void MoveLast(IDocument documentFile);
-        void MoveFirst(IDocument documentFile);
+        bool CanMoveDown(ITopicSection topicSection);
+        bool CanMoveTo(ITopicSection topicSection, int ordinal);
+        bool CanMoveUp(ITopicSection topicSection);
+        void MoveDown(ITopicSection topicSection);
+        void MoveTo(ITopicSection topicSection, int ordinal);
+        void MoveUp(ITopicSection topicSection);
+        void MoveLast(ITopicSection topicSection);
+        void MoveFirst(ITopicSection topicSection);
     }
 }

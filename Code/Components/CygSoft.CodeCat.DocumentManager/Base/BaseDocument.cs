@@ -4,7 +4,7 @@ using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {
-    public abstract class BaseDocument : IDocument
+    public abstract class BaseDocument : ITopicSection
     {
         public event EventHandler<TopicSectionEventArgs> BeforeDelete;
         public event EventHandler<TopicSectionEventArgs> AfterDelete;

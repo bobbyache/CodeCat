@@ -17,9 +17,9 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
             this.folder = Path.GetDirectoryName(indexPathGenerator.FilePath);
         }
 
-        public List<IDocument> LoadDocuments()
+        public List<ITopicSection> LoadDocuments()
         {
-            List<IDocument> imageItems = new List<IDocument>();
+            List<ITopicSection> imageItems = new List<ITopicSection>();
             XDocument document = XDocument.Load(this.filePath);
 
             foreach (XElement element in document.Element("ImageSet").Elements("Images").Elements())
@@ -40,7 +40,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
             return imageItems;
         }
 
-        public void WriteDocuments(List<IDocument> documents)
+        public void WriteDocuments(List<ITopicSection> documents)
         {
             if (!File.Exists(this.filePath))
                 CreateFile();
@@ -56,13 +56,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
             document.Save(this.filePath);
         }
 
-        private void WriteFile(List<IDocument> documents)
+        private void WriteFile(List<ITopicSection> documents)
         {
             XDocument indexDocument = XDocument.Load(this.filePath);
             XElement filesElement = indexDocument.Element("ImageSet").Element("Images");
             filesElement.RemoveNodes();
 
-            foreach (IDocument docFile in documents)
+            foreach (ITopicSection docFile in documents)
             {
                 if (docFile is IImgDocument)
                 {

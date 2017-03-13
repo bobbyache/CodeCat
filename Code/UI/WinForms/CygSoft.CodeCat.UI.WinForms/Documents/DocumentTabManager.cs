@@ -34,17 +34,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             return tabPageDictionary[Id].Controls[0] as IDocumentItemControl;
         }
 
-        public void OrderTabs(IDocument[] documents)
+        public void OrderTabs(ITopicSection[] documents)
         {
             tabControl.TabPages.Clear();
-            foreach (IDocument document in documents)
+            foreach (ITopicSection document in documents)
             {
                 TabPage tabPage = tabPageDictionary[document.Id];
                 tabControl.TabPages.Add(tabPage);
             }
         }
 
-        public TabPage AddTab(IDocument document, IDocumentItemControl tabUserControl, bool visible = true, bool select = false)
+        public TabPage AddTab(ITopicSection document, IDocumentItemControl tabUserControl, bool visible = true, bool select = false)
         {
             TabPage tabPage = new TabPage(document.Title);
             tabPage.Name = document.Id;
@@ -138,7 +138,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             this.tabMenuButton.DropDownItems.Add(item);
         }
 
-        private void AddTabMenuItem(IDocument document)
+        private void AddTabMenuItem(ITopicSection document)
         {
             ToolStripMenuItem item = new ToolStripMenuItem();
             item.Name = document.Id;

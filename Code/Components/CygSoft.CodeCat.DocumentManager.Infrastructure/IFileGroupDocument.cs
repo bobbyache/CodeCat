@@ -29,7 +29,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 
     }
 
-    public interface IFileGroupDocument : IDocument, IPositionedItem
+    public interface IFileGroupDocument : ITopicSection, IPositionedItem
     {
         IFileGroupFile[] Items { get; }
         string[] Categories { get; }

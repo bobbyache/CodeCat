@@ -19,14 +19,14 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             this.folder = Path.GetDirectoryName(indexPathGenerator.FilePath);
         }
 
-        public List<IDocument> LoadDocuments()
+        public List<ITopicSection> LoadDocuments()
         {
-            List<IDocument> documents = new List<IDocument>();
+            List<ITopicSection> documents = new List<ITopicSection>();
 
             XDocument indexDocument = XDocument.Load(this.filePath);
             foreach (XElement documentElement in indexDocument.Element("CodeGroup").Element("Documents").Elements())
             {
-                IDocument templateDocument = null;
+                ITopicSection templateDocument = null;
 
                 string documentId = (string)documentElement.Attribute("Id");
                 string documentTitle = (string)documentElement.Attribute("Title");
@@ -41,10 +41,10 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                 documents.Add(templateDocument);
             }
 
-            return documents.OfType<IDocument>().ToList();
+            return documents.OfType<ITopicSection>().ToList();
         }
 
-        public void WriteDocuments(List<IDocument> documents)
+        public void WriteDocuments(List<ITopicSection> documents)
         {
             if (!Directory.Exists(this.folder))
                 CreateFile();
@@ -60,13 +60,13 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             document.Save(this.filePath);
         }
 
-        private void WriteFile(List<IDocument> documents)
+        private void WriteFile(List<ITopicSection> documents)
         {
             XDocument indexDocument = XDocument.Load(this.filePath);
             XElement filesElement = indexDocument.Element("CodeGroup").Element("Documents");
             filesElement.RemoveNodes();
 
-            foreach (IDocument docFile in documents)
+            foreach (ITopicSection docFile in documents)
             {
                 if (docFile is ICodeDocument)
                 {

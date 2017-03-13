@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         DateTime DateCreated { get; set; }
     }
 
-    public interface IUrlGroupDocument : IDocument, IPositionedItem
+    public interface IUrlGroupDocument : ITopicSection, IPositionedItem
     {
         event EventHandler Paste;
         event EventHandler PasteConflict;

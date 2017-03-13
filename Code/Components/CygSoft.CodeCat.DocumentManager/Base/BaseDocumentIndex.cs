@@ -44,26 +44,26 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public bool Exists { get { return File.Exists(this.FilePath); } }
         public bool Loaded { get; private set; }
 
-        protected PositionableList<IDocument> documentFiles = new PositionableList<IDocument>();
-        private List<IDocument> removedDocumentFiles = new List<IDocument>();
+        protected PositionableList<ITopicSection> topicSections = new PositionableList<ITopicSection>();
+        private List<ITopicSection> removedDocumentFiles = new List<ITopicSection>();
         protected IDocumentIndexRepository indexRepository;
 
-        public IDocument[] DocumentFiles
+        public ITopicSection[] DocumentFiles
         {
-            get { return documentFiles.ItemsList.ToArray(); }
+            get { return topicSections.ItemsList.ToArray(); }
         }
 
-        public IDocument FirstDocument
+        public ITopicSection FirstDocument
         {
-            get { return documentFiles.FirstItem; }
+            get { return topicSections.FirstItem; }
         }
 
-        public IDocument LastDocument
+        public ITopicSection LastDocument
         {
-            get { return documentFiles.LastItem; }
+            get { return topicSections.LastItem; }
         }
 
-        protected abstract List<IDocument> LoadDocumentFiles();
+        protected abstract List<ITopicSection> LoadDocumentFiles();
         protected abstract void SaveDocumentIndex();
 
         public BaseDocumentIndex(IDocumentIndexRepository indexRepository, BaseFilePathGenerator filePathGenerator)
@@ -114,21 +114,21 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         public bool DocumentExists(string id)
         {
-            return this.documentFiles.ItemsList.Exists(r => r.Id == id);
+            return this.topicSections.ItemsList.Exists(r => r.Id == id);
 
         }
 
         // IDocumentFile could be of a different type, so it needs to be created
         // elsewhere such as a IDocumentFile factory.
-        public IDocument AddDocumentFile(IDocument documentFile)
+        public ITopicSection AddDocumentFile(ITopicSection topicSection)
         {
             try
             {
-                this.documentFiles.Insert(documentFile);
+                this.topicSections.Insert(topicSection);
                 AfterAddDocumentFile();
-                DocumentAdded?.Invoke(this, new DocumentEventArgs(documentFile));
+                DocumentAdded?.Invoke(this, new DocumentEventArgs(topicSection));
 
-                return documentFile;
+                return topicSection;
             }
             catch (Exception exception)
             {
@@ -142,12 +142,12 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                IDocument documentFile = this.documentFiles.ItemsList.Where(f => f.Id == id).SingleOrDefault();
-                removedDocumentFiles.Add(documentFile);
-                documentFiles.Remove(documentFile);
-                documentFile.Ordinal = -1;
+                ITopicSection topicSection = this.topicSections.ItemsList.Where(f => f.Id == id).SingleOrDefault();
+                removedDocumentFiles.Add(topicSection);
+                topicSections.Remove(topicSection);
+                topicSection.Ordinal = -1;
 
-                DocumentRemoved?.Invoke(this, new DocumentEventArgs(documentFile));
+                DocumentRemoved?.Invoke(this, new DocumentEventArgs(topicSection));
             }
             catch (Exception exception)
             {
@@ -164,8 +164,8 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         protected virtual void OnBeforeRevert()
         {
-            foreach (IDocument documentFile in this.DocumentFiles)
-                documentFile.Revert();
+            foreach (ITopicSection topicSection in this.DocumentFiles)
+                topicSection.Revert();
         }
 
         protected virtual void OnAfterRevert()
@@ -173,11 +173,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             this.removedDocumentFiles.Clear();
         }
 
-        public IDocument GetDocumentFile(string id)
+        public ITopicSection GetDocumentFile(string id)
         {
             try
             {
-                return this.documentFiles.ItemsList.Where(f => f.Id == id).SingleOrDefault();
+                return this.topicSections.ItemsList.Where(f => f.Id == id).SingleOrDefault();
             }
             catch (Exception exception)
             {
@@ -185,46 +185,46 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
-        public bool CanMoveDown(IDocument documentFile)
+        public bool CanMoveDown(ITopicSection topicSection)
         {
-            return documentFiles.CanMoveDown(documentFile);
+            return topicSections.CanMoveDown(topicSection);
         }
 
-        public bool CanMoveTo(IDocument documentFile, int ordinal)
+        public bool CanMoveTo(ITopicSection topicSection, int ordinal)
         {
-            return documentFiles.CanMoveTo(documentFile, ordinal);
+            return topicSections.CanMoveTo(topicSection, ordinal);
         }
 
-        public bool CanMoveUp(IDocument documentFile)
+        public bool CanMoveUp(ITopicSection topicSection)
         {
-            return documentFiles.CanMoveUp(documentFile);
+            return topicSections.CanMoveUp(topicSection);
         }
 
-        public virtual void MoveDown(IDocument documentFile)
+        public virtual void MoveDown(ITopicSection topicSection)
         {
-            documentFiles.MoveDown(documentFile);
-            DocumentMovedDown?.Invoke(this, new DocumentEventArgs(documentFile));
+            topicSections.MoveDown(topicSection);
+            DocumentMovedDown?.Invoke(this, new DocumentEventArgs(topicSection));
         }
 
-        public void MoveTo(IDocument documentFile, int ordinal)
+        public void MoveTo(ITopicSection topicSection, int ordinal)
         {
-            documentFiles.MoveTo(documentFile, ordinal);
+            topicSections.MoveTo(topicSection, ordinal);
         }
 
-        public virtual void MoveUp(IDocument documentFile)
+        public virtual void MoveUp(ITopicSection topicSection)
         {
-            documentFiles.MoveUp(documentFile);
-            DocumentMovedUp?.Invoke(this, new DocumentEventArgs(documentFile));
+            topicSections.MoveUp(topicSection);
+            DocumentMovedUp?.Invoke(this, new DocumentEventArgs(topicSection));
         }
 
-        public void MoveLast(IDocument documentFile)
+        public void MoveLast(ITopicSection topicSection)
         {
-            documentFiles.MoveLast(documentFile);
+            topicSections.MoveLast(topicSection);
         }
 
-        public void MoveFirst(IDocument documentFile)
+        public void MoveFirst(ITopicSection topicSection)
         {
-            documentFiles.MoveFirst(documentFile);
+            topicSections.MoveFirst(topicSection);
         }
 
         public void Open()
@@ -307,12 +307,12 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                List<IDocument> docFiles = LoadDocumentFiles();
+                List<ITopicSection> docFiles = LoadDocumentFiles();
 
-                foreach (IDocument documentFile in docFiles)
-                    documentFile.Open();
+                foreach (ITopicSection topicSection in docFiles)
+                    topicSection.Open();
 
-                this.documentFiles.InitializeList(docFiles);
+                this.topicSections.InitializeList(docFiles);
             }
             catch (Exception exception)
             {
@@ -322,23 +322,23 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         private void SaveDocumentFiles()
         {
-            foreach (IDocument documentFile in this.DocumentFiles)
-                documentFile.Save();
+            foreach (ITopicSection topicSection in this.DocumentFiles)
+                topicSection.Save();
         }
 
         private void DeleteDocumentFiles()
         {
             try
             {
-                foreach (IDocument documentFile in this.documentFiles.ItemsList)
+                foreach (ITopicSection topicSection in this.topicSections.ItemsList)
                 {
-                    documentFile.Delete();
+                    topicSection.Delete();
                 }
-                documentFiles.Clear();
+                topicSections.Clear();
 
-                foreach (IDocument documentFile in this.removedDocumentFiles)
+                foreach (ITopicSection topicSection in this.removedDocumentFiles)
                 {
-                    documentFile.Delete();
+                    topicSection.Delete();
                 }
                 removedDocumentFiles.Clear();
             }
@@ -350,7 +350,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         private void DeleteRemovedDocumentFiles()
         {
-            foreach (IDocument document in removedDocumentFiles)
+            foreach (ITopicSection document in removedDocumentFiles)
             {
                 document.Delete();
             }

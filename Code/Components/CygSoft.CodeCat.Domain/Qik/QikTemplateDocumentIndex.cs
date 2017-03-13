@@ -30,7 +30,7 @@ namespace CygSoft.CodeCat.Domain.Qik
             }
         }
 
-        protected override List<DocumentManager.Infrastructure.IDocument> LoadDocumentFiles()
+        protected override List<ITopicSection> LoadDocumentFiles()
         {
             return base.indexRepository.LoadDocuments();
         }
@@ -42,7 +42,7 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         protected override void AfterAddDocumentFile()
         {
-            base.documentFiles.MoveLast(this.ScriptDocument as IDocument);
+            base.topicSections.MoveLast(this.ScriptDocument as ITopicSection);
         }
     }
 }

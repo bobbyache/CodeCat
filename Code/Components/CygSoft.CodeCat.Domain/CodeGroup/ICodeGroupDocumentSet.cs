@@ -17,10 +17,10 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         // don't like this... should not be returning "all" documents.
         // should be treating a collection of Template and a collection of Script.
-        IDocument[] Documents { get; }
-        IDocument GetDocument(string id);
+        ITopicSection[] Documents { get; }
+        ITopicSection GetDocument(string id);
 
-        IDocument AddDocument(DocumentTypeEnum documentType, string syntax = null, string extension = null);
+        ITopicSection AddDocument(DocumentTypeEnum documentType, string syntax = null, string extension = null);
         void RemoveDocument(string id);
 
         void MoveDocumentLeft(string id);

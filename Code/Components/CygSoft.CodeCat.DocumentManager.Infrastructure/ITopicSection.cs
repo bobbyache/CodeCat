@@ -2,7 +2,7 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IDocument  : IPositionedItem
+    public interface ITopicSection  : IPositionedItem
     {
         event EventHandler<TopicSectionEventArgs> BeforeDelete;
         event EventHandler<TopicSectionEventArgs> AfterDelete;

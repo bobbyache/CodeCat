@@ -44,7 +44,7 @@
     <Compile Include="DocumentIndexEventArgs.cs" />
     <Compile Include="DocumentTypeEnum.cs" />
     <Compile Include="ICodeDocument.cs" />
-    <Compile Include="IDocument.cs" />
+    <Compile Include="ITopicSection.cs" />
     <Compile Include="IDocumentIndexRepository.cs" />
     <Compile Include="IFileGroupDocument.cs" />
     <Compile Include="IDocumentIndex.cs" />

@@ -24,7 +24,7 @@ namespace CygSoft.CodeCat.DocumentManager
             public string FileName { get; set; }
         }
 
-        public static IDocument Create(DocumentTypeEnum documentType, string folder, string title, string id = null, int ordinal = 0, string description = null, string extension = null, string syntax = null)
+        public static ITopicSection Create(DocumentTypeEnum documentType, string folder, string title, string id = null, int ordinal = 0, string description = null, string extension = null, string syntax = null)
         {
             DocArgs docArgs = new DocArgs { DocumentType = GetDocumentType(documentType), Folder = folder, Title = title, Id = id, Ordinal = ordinal, Description = description, Extension = extension, Syntax = syntax };
 
@@ -114,7 +114,7 @@ namespace CygSoft.CodeCat.DocumentManager
         }
 
 
-        private static IDocument CreateFileGroup(DocArgs docArgs)
+        private static ITopicSection CreateFileGroup(DocArgs docArgs)
         {
             if (docArgs.Id == null)
                 return new FileGroupDocument(docArgs.Folder, docArgs.Title);
@@ -122,7 +122,7 @@ namespace CygSoft.CodeCat.DocumentManager
                 return new FileGroupDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
-        private static IDocument CreateImageSet(DocArgs docArgs)
+        private static ITopicSection CreateImageSet(DocArgs docArgs)
         {
             if (docArgs.Id == null)
                 return new ImageSetDocument(docArgs.Folder, docArgs.Title);
@@ -130,7 +130,7 @@ namespace CygSoft.CodeCat.DocumentManager
                 return new ImageSetDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
-        private static IDocument CreateImageDocument(DocArgs docArgs)
+        private static ITopicSection CreateImageDocument(DocArgs docArgs)
         {
             if (docArgs.Id == null)
                 return new ImageDocument(docArgs.Folder, docArgs.Title, docArgs.Extension);
@@ -138,7 +138,7 @@ namespace CygSoft.CodeCat.DocumentManager
                 return new ImageDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description);
         }
 
-        private static IDocument CreateRichText(DocArgs docArgs)
+        private static ITopicSection CreateRichText(DocArgs docArgs)
         {
             if (docArgs.Id == null)
                 return new RichTextDocument(docArgs.Folder, docArgs.Title);
@@ -146,7 +146,7 @@ namespace CygSoft.CodeCat.DocumentManager
                 return new RichTextDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
-        private static IDocument CreatePdfDocument(DocArgs docArgs)
+        private static ITopicSection CreatePdfDocument(DocArgs docArgs)
         {
             if (docArgs.Id == null)
                 return new PdfDocument(docArgs.Folder, docArgs.Title);
@@ -154,7 +154,7 @@ namespace CygSoft.CodeCat.DocumentManager
                 return new PdfDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
-        private static IDocument CreateUrlGroup(DocArgs docArgs)
+        private static ITopicSection CreateUrlGroup(DocArgs docArgs)
         {
             if (docArgs.Id == null)
                 return new UrlGroupDocument(docArgs.Folder, docArgs.Title);
@@ -162,7 +162,7 @@ namespace CygSoft.CodeCat.DocumentManager
                 return new UrlGroupDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
-        private static IDocument CreateCodeSnippet(DocArgs docArgs)
+        private static ITopicSection CreateCodeSnippet(DocArgs docArgs)
         {
             if (docArgs.Id == null)
                 return new CodeDocument(docArgs.Folder, docArgs.Title, docArgs.Extension, docArgs.Syntax);
@@ -170,7 +170,7 @@ namespace CygSoft.CodeCat.DocumentManager
                 return new CodeDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description, docArgs.Syntax);
         }
 
-        private static IDocument CreateQikScript(DocArgs docArgs)
+        private static ITopicSection CreateQikScript(DocArgs docArgs)
         {
             if (docArgs.Id == null)
                 return new QikScriptDocument(docArgs.Folder, docArgs.Title, docArgs.Extension, docArgs.Syntax);
