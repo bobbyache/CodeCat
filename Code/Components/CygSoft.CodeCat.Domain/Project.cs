@@ -28,21 +28,21 @@ namespace CygSoft.CodeCat.Domain
 
         private void CreateNew(string filePath)
         {
-            XmlDocument document = new XmlDocument();
+            XmlDocument xmlDocument = new XmlDocument();
 
-            XmlDeclaration xmlDeclaration = document.CreateXmlDeclaration("1.0", "utf-8", null);
-            XmlElement root = document.CreateElement("CodeCat_Project");
+            XmlDeclaration xmlDeclaration = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
+            XmlElement root = xmlDocument.CreateElement("CodeCat_Project");
 
-            root.Attributes.Append(CreateVersionAttributes(document));
+            root.Attributes.Append(CreateVersionAttributes(xmlDocument));
 
-            document.InsertBefore(xmlDeclaration, document.DocumentElement);
-            document.AppendChild(root);
-            document.Save(filePath);
+            xmlDocument.InsertBefore(xmlDeclaration, xmlDocument.DocumentElement);
+            xmlDocument.AppendChild(root);
+            xmlDocument.Save(filePath);
         }
 
-        private XmlAttribute CreateVersionAttributes(XmlDocument document)
+        private XmlAttribute CreateVersionAttributes(XmlDocument xmlDocument)
         {
-            XmlAttribute version = document.CreateAttribute("Version");
+            XmlAttribute version = xmlDocument.CreateAttribute("Version");
             version.Value = this.CurrentVersion.ToString();
             return version;
         }

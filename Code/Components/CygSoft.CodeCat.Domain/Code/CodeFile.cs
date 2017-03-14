@@ -245,8 +245,8 @@ namespace CygSoft.CodeCat.Domain.Code
 
             snippetElement.Add(snapshotsElement);
 
-            XDocument document = new XDocument(snippetElement);
-            document.Save(GetFilePath());
+            XDocument xDocument = new XDocument(snippetElement);
+            xDocument.Save(GetFilePath());
         }
 
         private string GetFilePath()

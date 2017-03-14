@@ -56,8 +56,8 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             Directory.CreateDirectory(this.folder);
 
             XElement rootElement = new XElement("CodeGroup", new XElement("Documents"));
-            XDocument document = new XDocument(rootElement);
-            document.Save(this.filePath);
+            XDocument xDocument = new XDocument(rootElement);
+            xDocument.Save(this.filePath);
         }
 
         private void WriteFile(List<ITopicSection> documents)

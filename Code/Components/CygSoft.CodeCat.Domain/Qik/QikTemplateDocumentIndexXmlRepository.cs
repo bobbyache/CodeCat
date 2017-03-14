@@ -59,8 +59,8 @@ namespace CygSoft.CodeCat.Domain.Qik
             Directory.CreateDirectory(this.folder);
 
             XElement rootElement = new XElement("QikFile", new XElement("Documents"));
-            XDocument document = new XDocument(rootElement);
-            document.Save(this.filePath);
+            XDocument xDocument = new XDocument(rootElement);
+            xDocument.Save(this.filePath);
         }
 
         private void WriteFile(List<ITopicSection> documents)

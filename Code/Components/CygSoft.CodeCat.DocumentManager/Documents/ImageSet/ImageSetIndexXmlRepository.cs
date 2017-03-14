@@ -20,9 +20,9 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
         public List<ITopicSection> LoadDocuments()
         {
             List<ITopicSection> imageItems = new List<ITopicSection>();
-            XDocument document = XDocument.Load(this.filePath);
+            XDocument xDocument = XDocument.Load(this.filePath);
 
-            foreach (XElement element in document.Element("ImageSet").Elements("Images").Elements())
+            foreach (XElement element in xDocument.Element("ImageSet").Elements("Images").Elements())
             {
                 string id = (string)element.Attribute("Id");
                 string extension = (string)element.Attribute("Extension");
@@ -52,8 +52,8 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
             Directory.CreateDirectory(this.folder);
 
             XElement rootElement = new XElement("ImageSet", new XElement("Images"));
-            XDocument document = new XDocument(rootElement);
-            document.Save(this.filePath);
+            XDocument xDocument = new XDocument(rootElement);
+            xDocument.Save(this.filePath);
         }
 
         private void WriteFile(List<ITopicSection> documents)

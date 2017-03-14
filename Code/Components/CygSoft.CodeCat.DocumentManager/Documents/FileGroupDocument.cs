@@ -39,8 +39,8 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         protected override void OpenFile()
         {
-            XDocument document = XDocument.Load(this.FilePath);
-            IEnumerable<XElement> elements = document.Element("FileGroup").Elements("Files").Elements();
+            XDocument xDocument = XDocument.Load(this.FilePath);
+            IEnumerable<XElement> elements = xDocument.Element("FileGroup").Elements("Files").Elements();
 
             List<IFileGroupFile> files = ExtractFromXml(elements);
             this.fileList = files.OfType<IFileGroupFile>().ToList();
@@ -112,8 +112,8 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         private void CreateFile()
         {
             XElement rootElement = new XElement("FileGroup", new XElement("Files"));
-            XDocument document = new XDocument(rootElement);
-            document.Save(this.FilePath);
+            XDocument xDocument = new XDocument(rootElement);
+            xDocument.Save(this.FilePath);
         }
 
         private void WriteFile(IFileGroupFile[] items)

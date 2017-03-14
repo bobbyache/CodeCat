@@ -91,8 +91,8 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         protected override void OpenFile()
         {
-            XDocument document = XDocument.Load(this.FilePath);
-            IEnumerable<XElement> elements = document.Element("UrlGroup").Elements("Urls").Elements();
+            XDocument xDocument = XDocument.Load(this.FilePath);
+            IEnumerable<XElement> elements = xDocument.Element("UrlGroup").Elements("Urls").Elements();
 
             List<IUrlItem> urlItems = ExtractFromXml(elements);
             this.urlItemList = urlItems.OfType<IUrlItem>().ToList();
@@ -129,8 +129,8 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         private void CreateFile()
         {
             XElement rootElement = new XElement("UrlGroup", new XElement("Urls"));
-            XDocument document = new XDocument(rootElement);
-            document.Save(this.FilePath);
+            XDocument xDocument = new XDocument(rootElement);
+            xDocument.Save(this.FilePath);
         }
 
         private void WriteFile(IUrlItem[] items)

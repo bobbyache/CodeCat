@@ -104,12 +104,12 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             foreach (IKeywordIndexItem item in e.Items)
             {
-                IContentDocument document = dockPanel.Documents
+                IContentDocument contentDocument = dockPanel.Documents
                     .Where(doc => (doc as IContentDocument).Id == item.Id)
                     .OfType<IContentDocument>().SingleOrDefault();
 
-                if (document != null)
-                    document.RemoveKeywords(e.Keywords, false);
+                if (contentDocument != null)
+                    contentDocument.RemoveKeywords(e.Keywords, false);
             }
         }
 
@@ -117,12 +117,12 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             foreach (IKeywordIndexItem item in e.Items)
             {
-                IContentDocument document = dockPanel.Documents
+                IContentDocument contentDocument = dockPanel.Documents
                     .Where(doc => (doc as IContentDocument).Id == item.Id)
                     .OfType<IContentDocument>().SingleOrDefault();
 
-                if (document != null)
-                    document.AddKeywords(e.Keywords, false);
+                if (contentDocument != null)
+                    contentDocument.AddKeywords(e.Keywords, false);
             }
         }
 
@@ -380,18 +380,18 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private IContentDocument GetOpenDocument(string snippetId)
         {
-            IContentDocument document = dockPanel.Documents
+            IContentDocument contentDocument = dockPanel.Documents
                 .Where(doc => (doc as IContentDocument).Id == snippetId)
                 .OfType<IContentDocument>().SingleOrDefault();
 
-            return document;
+            return contentDocument;
         }
 
         private void ActivateSnippet(IKeywordIndexItem snippetIndex)
         {
-            IContentDocument document = GetOpenDocument(snippetIndex.Id);
-            if (document != null)
-                document.Activate();
+            IContentDocument contentDocument = GetOpenDocument(snippetIndex.Id);
+            if (contentDocument != null)
+                contentDocument.Activate();
         }
 
         private bool SnippetIsOpen(IKeywordIndexItem snippetIndex)
@@ -409,12 +409,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private bool SaveAllDocuments()
         {
-            IEnumerable<IContentDocument> documents = this.dockPanel.Contents.OfType<IContentDocument>().Where(doc => doc.IsModified == true);
-            foreach (IContentDocument document in documents)
+            IEnumerable<IContentDocument> contentDocuments = this.dockPanel.Contents.OfType<IContentDocument>().Where(doc => doc.IsModified == true);
+            foreach (IContentDocument contentDocument in contentDocuments)
             {
-                if (!document.SaveChanges())
+                if (!contentDocument.SaveChanges())
                 {
-                    document.Activate();
+                    contentDocument.Activate();
                     return false;
                 }
             }
@@ -494,8 +494,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void snippetForm_DocumentSaved(object sender, DocumentSavedFileEventArgs e)
         {
             searchForm.ExecuteSearch(e.Item.Id);
-            mnuDocuments.DropDownItems[e.Item.Id].Text = e.Document.Text;
-            mnuDocuments.DropDownItems[e.Item.Id].Image = e.Document.IconImage;
+            mnuDocuments.DropDownItems[e.Item.Id].Text = e.ContentDocument.Text;
+            mnuDocuments.DropDownItems[e.Item.Id].Image = e.ContentDocument.IconImage;
         }
 
         private void mnuFileOpen_Click(object sender, EventArgs e)
