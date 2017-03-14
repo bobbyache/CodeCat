@@ -13,14 +13,14 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
         {
         }
 
-        protected override List<DocumentManager.Infrastructure.ITopicSection> LoadDocumentFiles()
+        protected override List<DocumentManager.Infrastructure.ITopicSection> LoadTopicSections()
         {
             return base.indexRepository.LoadDocuments();
         }
 
         protected override void SaveDocumentIndex()
         {
-            base.indexRepository.WriteDocuments(base.DocumentFiles.ToList());
+            base.indexRepository.WriteDocuments(base.TopicSections.ToList());
         }
     }
 }

@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocumentEventArgs.cs" />
     <Compile Include="DocumentIndexEventArgs.cs" />
     <Compile Include="DocumentTypeEnum.cs" />
     <Compile Include="ICodeDocument.cs" />

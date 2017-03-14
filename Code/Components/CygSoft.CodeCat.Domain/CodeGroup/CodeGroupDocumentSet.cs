@@ -22,10 +22,10 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         public event EventHandler<DocumentIndexEventArgs> BeforeRevert;
         public event EventHandler<DocumentIndexEventArgs> AfterRevert;
 
-        public event EventHandler<DocumentEventArgs> DocumentAdded;
-        public event EventHandler<DocumentEventArgs> DocumentRemoved;
-        public event EventHandler<DocumentEventArgs> DocumentMovedLeft;
-        public event EventHandler<DocumentEventArgs> DocumentMovedRight;
+        public event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
+        public event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;
+        public event EventHandler<TopicSectionEventArgs> TopicSectionMovedLeft;
+        public event EventHandler<TopicSectionEventArgs> TopicSectionMovedRight;
 
         private IKeywordIndexItem indexItem;
         private CodeGroupIndex documentIndex = null;
@@ -50,10 +50,10 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             this.documentIndex.BeforeOpen += documentIndex_BeforeOpen;
             this.documentIndex.AfterOpen += documentIndex_AfterOpen;
             
-            this.documentIndex.DocumentAdded += documentIndex_DocumentAdded;
-            this.documentIndex.DocumentRemoved += documentIndex_DocumentRemoved;
-            this.documentIndex.DocumentMovedUp += documentIndex_DocumentMovedLeft;
-            this.documentIndex.DocumentMovedDown += documentIndex_DocumentMovedRight;
+            this.documentIndex.TopicSectionAdded += documentIndex_TopicSectionAdded;
+            this.documentIndex.TopicSectionRemoved += documentIndex_TopicSectionRemoved;
+            this.documentIndex.TopicSectionMovedUp += documentIndex_TopicSectionMovedLeft;
+            this.documentIndex.TopicSectionMovedDown += documentIndex_TopicSectionMovedRight;
         }
 
         public IKeywordIndexItem IndexItem
@@ -64,7 +64,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         public string Text { get; set; }
 
         // would like to remove this at some point see... TemplateFiles property below...
-        public ITopicSection[] Documents { get { return this.documentIndex.DocumentFiles.ToArray(); } }
+        public ITopicSection[] TopicSections { get { return this.documentIndex.TopicSections.ToArray(); } }
 
         public string Id { get { return this.IndexItem.Id; } }
         public string FilePath { get { return this.documentIndex.FilePath; } }
@@ -125,14 +125,14 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         public int HitCount { get; private set; }
 
-        public bool DocumentExists(string id)
+        public bool TopicSectionExists(string id)
         {
-            return this.documentIndex.DocumentExists(id);
+            return this.documentIndex.TopicSectionExists(id);
         }
 
-        public ITopicSection GetDocument(string id)
+        public ITopicSection GetTopicSection(string id)
         {
-            return this.documentIndex.GetDocumentFile(id) as ICodeDocument;
+            return this.documentIndex.GetTopicSection(id) as ICodeDocument;
         }
 
 
@@ -161,27 +161,27 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             this.documentIndex.Delete();
         }
 
-        public void MoveDocumentRight(string id)
+        public void MoveTopicSectionRight(string id)
         {
-            ITopicSection topicSection = this.documentIndex.GetDocumentFile(id);
+            ITopicSection topicSection = this.documentIndex.GetTopicSection(id);
             this.documentIndex.MoveDown(topicSection);
         }
 
-        public void MoveDocumentLeft(string id)
+        public void MoveTopicSectionLeft(string id)
         {
-            ITopicSection topicSection = this.documentIndex.GetDocumentFile(id);
+            ITopicSection topicSection = this.documentIndex.GetTopicSection(id);
             this.documentIndex.MoveUp(topicSection);
         }
 
-        public ITopicSection AddDocument(DocumentTypeEnum documentType, string syntax = null, string extension = "txt")
+        public ITopicSection AddTopicSection(TopicSectionType documentType, string syntax = null, string extension = "txt")
         {
-            return this.documentIndex.AddDocumentFile(DocumentFactory.Create(documentType, documentIndex.Folder,
+            return this.documentIndex.AddTopicSection(DocumentFactory.Create(documentType, documentIndex.Folder,
                 "New Document", null, 0, null, extension, syntax));
         }
 
-        public void RemoveDocument(string id)
+        public void RemoveTopicSection(string id)
         {
-            this.documentIndex.RemoveDocumentFile(id);
+            this.documentIndex.RemoveTopicSection(id);
         }
 
         private void IncrementHitCount()
@@ -239,24 +239,24 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             BeforeSave?.Invoke(this, e);
         }
 
-        private void documentIndex_DocumentMovedRight(object sender, DocumentEventArgs e)
+        private void documentIndex_TopicSectionMovedRight(object sender, TopicSectionEventArgs e)
         {
-            DocumentMovedRight?.Invoke(this, e);
+            TopicSectionMovedRight?.Invoke(this, e);
         }
 
-        private void documentIndex_DocumentMovedLeft(object sender, DocumentEventArgs e)
+        private void documentIndex_TopicSectionMovedLeft(object sender, TopicSectionEventArgs e)
         {
-            DocumentMovedLeft?.Invoke(this, e);
+            TopicSectionMovedLeft?.Invoke(this, e);
         }
 
-        private void documentIndex_DocumentRemoved(object sender, DocumentEventArgs e)
+        private void documentIndex_TopicSectionRemoved(object sender, TopicSectionEventArgs e)
         {
-            DocumentRemoved?.Invoke(this, e);
+            TopicSectionRemoved?.Invoke(this, e);
         }
 
-        private void documentIndex_DocumentAdded(object sender, DocumentEventArgs e)
+        private void documentIndex_TopicSectionAdded(object sender, TopicSectionEventArgs e)
         {
-            DocumentAdded?.Invoke(this, e);
+            TopicSectionAdded?.Invoke(this, e);
         }
     }
 }

@@ -15,13 +15,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         internal PdfDocument(string folder, string title)
             : base(new DocumentPathGenerator(folder, "pdf"), title, null)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.PdfDocument);
+            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.PdfDocument);
         }
 
         internal PdfDocument(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "pdf", id), title, description, ordinal)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.PdfDocument);
+            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.PdfDocument);
         }
 
         protected override void OpenFile()

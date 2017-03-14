@@ -33,10 +33,10 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.tabControlFile.ImageList = IconRepository.ImageList;
             base.application = application;
             this.codeItemFile = codeItemFile;
-            this.codeItemFile.DocumentAdded += codeItemFile_DocumentAdded;
-            this.codeItemFile.DocumentRemoved += codeItemFile_DocumentRemoved;
-            this.codeItemFile.DocumentMovedLeft += codeItemFile_DocumentMovedLeft;
-            this.codeItemFile.DocumentMovedRight += codeItemFile_DocumentMovedRight;
+            this.codeItemFile.TopicSectionAdded += codeItemFile_TopicSectionAdded;
+            this.codeItemFile.TopicSectionRemoved += codeItemFile_TopicSectionRemoved;
+            this.codeItemFile.TopicSectionMovedLeft += codeItemFile_TopicSectionMovedLeft;
+            this.codeItemFile.TopicSectionMovedRight += codeItemFile_TopicSectionMovedRight;
             base.persistableTarget = codeItemFile;
             this.Tag = codeItemFile.Id;
             this.tabManager = new DocumentTabManager(this.tabControlFile, this.btnMenu);
@@ -194,9 +194,9 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void RebuildTabs()
         {
             tabManager.Clear();
-            foreach (ITopicSection document in codeItemFile.Documents)
+            foreach (ITopicSection topicSection in codeItemFile.TopicSections)
             {
-                AddDocument(document, false);
+                AddTopicSection(topicSection, false);
             }
         }
 
@@ -242,49 +242,49 @@ namespace CygSoft.CodeCat.UI.WinForms
             codeItemFile.Syntax = string.Empty;
         }
 
-        private void codeItemFile_DocumentMovedRight(object sender, DocumentEventArgs e)
+        private void codeItemFile_TopicSectionMovedRight(object sender, TopicSectionEventArgs e)
         {
             this.IsModified = true;
             ControlGraphics.SuspendDrawing(this);
-            tabManager.OrderTabs(codeItemFile.Documents);
-            tabManager.DisplayTab(e.Document.Id, true);
+            tabManager.OrderTabs(codeItemFile.TopicSections);
+            tabManager.DisplayTab(e.TopicSection.Id, true);
             ControlGraphics.ResumeDrawing(this);
         }
 
-        private void codeItemFile_DocumentMovedLeft(object sender, DocumentEventArgs e)
+        private void codeItemFile_TopicSectionMovedLeft(object sender, TopicSectionEventArgs e)
         {
             this.IsModified = true;
             ControlGraphics.SuspendDrawing(this);
-            tabManager.OrderTabs(codeItemFile.Documents);
-            tabManager.DisplayTab(e.Document.Id, true);
+            tabManager.OrderTabs(codeItemFile.TopicSections);
+            tabManager.DisplayTab(e.TopicSection.Id, true);
             ControlGraphics.ResumeDrawing(this);
         }
 
-        private void codeItemFile_DocumentRemoved(object sender, DocumentEventArgs e)
+        private void codeItemFile_TopicSectionRemoved(object sender, TopicSectionEventArgs e)
         {
             ControlGraphics.SuspendDrawing(this);
-            tabManager.RemoveTab(e.Document.Id);
-            tabManager.OrderTabs(codeItemFile.Documents);
+            tabManager.RemoveTab(e.TopicSection.Id);
+            tabManager.OrderTabs(codeItemFile.TopicSections);
             ControlGraphics.ResumeDrawing(this);
         }
 
-        private void codeItemFile_DocumentAdded(object sender, DocumentEventArgs e)
+        private void codeItemFile_TopicSectionAdded(object sender, TopicSectionEventArgs e)
         {
             ControlGraphics.SuspendDrawing(this);
 
-            AddDocument(e.Document, true);
+            AddTopicSection(e.TopicSection, true);
 
-            tabManager.OrderTabs(codeItemFile.Documents);
-            tabManager.DisplayTab(e.Document.Id, true);
+            tabManager.OrderTabs(codeItemFile.TopicSections);
+            tabManager.DisplayTab(e.TopicSection.Id, true);
             ControlGraphics.ResumeDrawing(this);
         }
 
         #endregion
 
-        private void AddDocument(ITopicSection document, bool selected)
+        private void AddTopicSection(ITopicSection topicSection, bool selected)
         {
-            tabManager.AddTab(document,
-                DocumentControlFactory.Create(document, this.codeItemFile, this.application, codeItemCtrl_Modified),
+            tabManager.AddTab(topicSection,
+                DocumentControlFactory.Create(topicSection, this.codeItemFile, this.application, codeItemCtrl_Modified),
                 true, selected);
         }
 
@@ -307,43 +307,43 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddCode_Click(object sender, EventArgs e)
         {
-            ICodeDocument templateFile = codeItemFile.AddDocument(DocumentTypeEnum.CodeSnippet, ConfigSettings.DefaultSyntax, "txt") as ICodeDocument;
+            ICodeDocument templateFile = codeItemFile.AddTopicSection(TopicSectionType.CodeSnippet, ConfigSettings.DefaultSyntax, "txt") as ICodeDocument;
             this.IsModified = true;
         }
 
         private void btnAddHyperlinks_Click(object sender, EventArgs e)
         {
-            IUrlGroupDocument urlFile = codeItemFile.AddDocument(DocumentTypeEnum.UrlGroup) as IUrlGroupDocument;
+            IUrlGroupDocument urlFile = codeItemFile.AddTopicSection(TopicSectionType.UrlGroup) as IUrlGroupDocument;
             this.IsModified = true;
         }
 
         private void btnAddPdfDocument_Click(object sender, EventArgs e)
         {
-            IPdfDocument pdfDocument = codeItemFile.AddDocument(DocumentTypeEnum.PdfDocument) as IPdfDocument;
+            IPdfDocument pdfDocument = codeItemFile.AddTopicSection(TopicSectionType.PdfDocument) as IPdfDocument;
             this.IsModified = true;
         }
 
         private void btnImageSet_Click(object sender, EventArgs e)
         {
-            IImageSetDocument imageSetDocument = codeItemFile.AddDocument(DocumentTypeEnum.ImageSet) as IImageSetDocument;
+            IImageSetDocument imageSetDocument = codeItemFile.AddTopicSection(TopicSectionType.ImageSet) as IImageSetDocument;
             this.IsModified = true;
         }
 
         private void btnAddImage_Click(object sender, EventArgs e)
         {
-            IImageDocument imageDocument = codeItemFile.AddDocument(DocumentTypeEnum.ImageDocument, null, "png") as IImageDocument;
+            IImageDocument imageDocument = codeItemFile.AddTopicSection(TopicSectionType.ImageDocument, null, "png") as IImageDocument;
             this.IsModified = true;
         }
 
         private void btnRichText_Click(object sender, EventArgs e)
         {
-            IRichTextDocument richTextDocument = codeItemFile.AddDocument(DocumentTypeEnum.RichTextDocument, null, "rtf") as IRichTextDocument;
+            IRichTextDocument richTextDocument = codeItemFile.AddTopicSection(TopicSectionType.RichTextDocument, null, "rtf") as IRichTextDocument;
             this.IsModified = true;
         }
 
         private void btnFileGroup_Click(object sender, EventArgs e)
         {
-            IFileGroupDocument richTextDocument = codeItemFile.AddDocument(DocumentTypeEnum.FileGroup, null, null) as IFileGroupDocument;
+            IFileGroupDocument richTextDocument = codeItemFile.AddTopicSection(TopicSectionType.FileGroup, null, null) as IFileGroupDocument;
             this.IsModified = true;
         }
 
@@ -357,7 +357,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {
                 string id = tabManager.SelectedTabId;
-                codeItemFile.RemoveDocument(id);
+                codeItemFile.RemoveTopicSection(id);
                 this.IsModified = true;
             }
         }
@@ -374,12 +374,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnMoveLeft_Click(object sender, EventArgs e)
         {
-            this.codeItemFile.MoveDocumentLeft(tabManager.SelectedTabId);
+            this.codeItemFile.MoveTopicSectionLeft(tabManager.SelectedTabId);
         }
 
         private void btnMoveRight_Click(object sender, EventArgs e)
         {
-            this.codeItemFile.MoveDocumentRight(tabManager.SelectedTabId);
+            this.codeItemFile.MoveTopicSectionRight(tabManager.SelectedTabId);
         }
 
         #endregion

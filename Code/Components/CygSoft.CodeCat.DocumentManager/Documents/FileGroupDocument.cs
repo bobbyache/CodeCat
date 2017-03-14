@@ -15,13 +15,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         internal FileGroupDocument(string folder, string title)
             : base(new DocumentPathGenerator(folder, "filgrp"), title, null)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.FileGroup);
+            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.FileGroup);
         }
 
         internal FileGroupDocument(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "filgrp", id), title, description, ordinal)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.FileGroup);
+            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.FileGroup);
         }
 
         private List<IFileGroupFile> fileList = new List<IFileGroupFile>();

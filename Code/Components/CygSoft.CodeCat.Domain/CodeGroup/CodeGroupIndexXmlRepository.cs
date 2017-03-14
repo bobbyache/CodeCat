@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         public List<ITopicSection> LoadDocuments()
         {
-            List<ITopicSection> documents = new List<ITopicSection>();
+            List<ITopicSection> topicSections = new List<ITopicSection>();
 
             XDocument indexDocument = XDocument.Load(this.filePath);
             foreach (XElement documentElement in indexDocument.Element("CodeGroup").Element("Documents").Elements())
@@ -38,17 +38,17 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
                 templateDocument = DocumentFactory.Create(DocumentFactory.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
 
-                documents.Add(templateDocument);
+                topicSections.Add(templateDocument);
             }
 
-            return documents.OfType<ITopicSection>().ToList();
+            return topicSections.OfType<ITopicSection>().ToList();
         }
 
-        public void WriteDocuments(List<ITopicSection> documents)
+        public void WriteDocuments(List<ITopicSection> topicSections)
         {
             if (!Directory.Exists(this.folder))
                 CreateFile();
-            WriteFile(documents);
+            WriteFile(topicSections);
         }
 
         private void CreateFile()

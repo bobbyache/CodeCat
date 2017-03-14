@@ -25,10 +25,10 @@ namespace CygSoft.CodeCat.Domain.Qik
         public event EventHandler<DocumentIndexEventArgs> BeforeRevert;
         public event EventHandler<DocumentIndexEventArgs> AfterRevert;
 
-        public event EventHandler<DocumentEventArgs> DocumentAdded;
-        public event EventHandler<DocumentEventArgs> DocumentRemoved;
-        public event EventHandler<DocumentEventArgs> DocumentMovedLeft;
-        public event EventHandler<DocumentEventArgs> DocumentMovedRight;
+        public event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
+        public event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;
+        public event EventHandler<TopicSectionEventArgs> TopicSectionMovedLeft;
+        public event EventHandler<TopicSectionEventArgs> TopicSectionMovedRight;
 
         private IKeywordIndexItem indexItem;
         private QikTemplateDocumentIndex documentIndex = null;
@@ -54,10 +54,10 @@ namespace CygSoft.CodeCat.Domain.Qik
             this.documentIndex.BeforeOpen += documentIndex_BeforeOpen;
             this.documentIndex.AfterOpen += documentIndex_AfterOpen;
             
-            this.documentIndex.DocumentAdded += documentIndex_DocumentAdded;
-            this.documentIndex.DocumentRemoved += documentIndex_DocumentRemoved;
-            this.documentIndex.DocumentMovedUp += documentIndex_DocumentMovedLeft;
-            this.documentIndex.DocumentMovedDown += documentIndex_DocumentMovedRight;
+            this.documentIndex.TopicSectionAdded += documentIndex_TopicSectionAdded;
+            this.documentIndex.TopicSectionRemoved += documentIndex_TopicSectionRemoved;
+            this.documentIndex.TopicSectionMovedUp += documentIndex_TopicSectionMovedLeft;
+            this.documentIndex.TopicSectionMovedDown += documentIndex_TopicSectionMovedRight;
         }
 
         public IKeywordIndexItem IndexItem
@@ -70,13 +70,13 @@ namespace CygSoft.CodeCat.Domain.Qik
         public string Text { get; set; }
 
         // would like to remove this at some point see... TemplateFiles property below...
-        public ICodeDocument[] Documents { get { return this.documentIndex.DocumentFiles.OfType<ICodeDocument>().ToArray(); } }
+        public ICodeDocument[] Documents { get { return this.documentIndex.TopicSections.OfType<ICodeDocument>().ToArray(); } }
 
         public ICodeDocument[] TemplateFiles
         {
             get
             {
-                List<ICodeDocument> codeDocuments = this.documentIndex.DocumentFiles.OfType<ICodeDocument>().ToList();
+                List<ICodeDocument> codeDocuments = this.documentIndex.TopicSections.OfType<ICodeDocument>().ToList();
                 IQikScriptDocument scriptDoc = codeDocuments.OfType<IQikScriptDocument>().SingleOrDefault();
                 codeDocuments.Remove(scriptDoc);
                 return codeDocuments.ToArray();
@@ -144,12 +144,12 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public bool TemplateExists(string id)
         {
-            return this.documentIndex.DocumentExists(id);
+            return this.documentIndex.TopicSectionExists(id);
         }
 
         public ICodeDocument GetTemplate(string id)
         {
-            return this.documentIndex.GetDocumentFile(id) as ICodeDocument;
+            return this.documentIndex.GetTopicSection(id) as ICodeDocument;
         }
 
         public ICodeDocument ScriptFile { get { return this.documentIndex.ScriptDocument; } }
@@ -181,7 +181,7 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public void MoveDocumentRight(string id)
         {
-            ITopicSection topicSection = this.documentIndex.GetDocumentFile(id);
+            ITopicSection topicSection = this.documentIndex.GetTopicSection(id);
             
             // can't move the script file and we can't move behind the script file.
             if (topicSection.Id != this.ScriptFile.Id && !IsSecondLast(topicSection.Id))
@@ -190,20 +190,20 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public void MoveDocumentLeft(string id)
         {
-            ITopicSection topicSection = this.documentIndex.GetDocumentFile(id);
+            ITopicSection topicSection = this.documentIndex.GetTopicSection(id);
             if (topicSection.Id != this.ScriptFile.Id)
                 this.documentIndex.MoveUp(topicSection);
         }
 
         public ICodeDocument AddTemplate(string syntax)
         {
-            return this.documentIndex.AddDocumentFile(DocumentFactory.Create(DocumentTypeEnum.CodeSnippet, documentIndex.Folder, 
+            return this.documentIndex.AddTopicSection(DocumentFactory.Create(TopicSectionType.CodeSnippet, documentIndex.Folder, 
                 "New Template", null, 0, null, "tpl", syntax)) as ICodeDocument;
         }
 
         public void RemoveTemplate(string id)
         {
-            this.documentIndex.RemoveDocumentFile(id);
+            this.documentIndex.RemoveTopicSection(id);
         }
 
         private void IncrementHitCount()
@@ -213,12 +213,12 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         private bool IsSecondLast(string id)
         {
-            int count = documentIndex.DocumentFiles.Count();
+            int count = documentIndex.TopicSections.Count();
 
             if (count == 2)
                 return true;
 
-            else if (documentIndex.DocumentFiles.ElementAt(count - 2).Id == id)
+            else if (documentIndex.TopicSections.ElementAt(count - 2).Id == id)
                 return true;
             
             return false;
@@ -274,24 +274,24 @@ namespace CygSoft.CodeCat.Domain.Qik
             BeforeSave?.Invoke(this, e);
         }
 
-        private void documentIndex_DocumentMovedRight(object sender, DocumentEventArgs e)
+        private void documentIndex_TopicSectionMovedRight(object sender, TopicSectionEventArgs e)
         {
-            DocumentMovedRight?.Invoke(this, e);
+            TopicSectionMovedRight?.Invoke(this, e);
         }
 
-        private void documentIndex_DocumentMovedLeft(object sender, DocumentEventArgs e)
+        private void documentIndex_TopicSectionMovedLeft(object sender, TopicSectionEventArgs e)
         {
-            DocumentMovedLeft?.Invoke(this, e);
+            TopicSectionMovedLeft?.Invoke(this, e);
         }
 
-        private void documentIndex_DocumentRemoved(object sender, DocumentEventArgs e)
+        private void documentIndex_TopicSectionRemoved(object sender, TopicSectionEventArgs e)
         {
-            DocumentRemoved?.Invoke(this, e);
+            TopicSectionRemoved?.Invoke(this, e);
         }
 
-        private void documentIndex_DocumentAdded(object sender, DocumentEventArgs e)
+        private void documentIndex_TopicSectionAdded(object sender, TopicSectionEventArgs e)
         {
-            DocumentAdded?.Invoke(this, e);
+            TopicSectionAdded?.Invoke(this, e);
         }
     }
 }

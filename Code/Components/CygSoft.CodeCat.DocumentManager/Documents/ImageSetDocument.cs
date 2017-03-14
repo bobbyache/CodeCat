@@ -18,11 +18,11 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         private IDocumentIndexRepository repository;
         private ImageSetIndex documentIndex;
 
-        public int ImageCount { get { return this.documentIndex.DocumentFiles.Count(); } }
+        public int ImageCount { get { return this.documentIndex.TopicSections.Count(); } }
 
         public IImgDocument FirstImage
         {
-            get { return this.documentIndex.FirstDocument as IImgDocument; }
+            get { return this.documentIndex.FirstTopicSection as IImgDocument; }
         }
 
 
@@ -31,7 +31,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         {
             indexPathGenerator = new ImageSetIndexPathGenerator(folder, "imgset", this.Id);
             repository = new ImageSetIndexXmlRepository(indexPathGenerator);
-            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.ImageSet);
+            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.ImageSet);
             this.documentIndex = new ImageSetIndex(repository, indexPathGenerator);
         }
 
@@ -40,7 +40,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         {
             indexPathGenerator = new ImageSetIndexPathGenerator(folder, "imgset", this.Id);
             repository = new ImageSetIndexXmlRepository(indexPathGenerator);
-            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.ImageSet);
+            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.ImageSet);
             this.documentIndex = new ImageSetIndex(repository, indexPathGenerator);
         }
 
@@ -52,7 +52,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         protected override void OnAfterDelete()
         {
-            var imageFiles = this.documentIndex.DocumentFiles;
+            var imageFiles = this.documentIndex.TopicSections;
             foreach (var imageFile in imageFiles)
             {
                 if (imageFile.Exists)
@@ -64,26 +64,26 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         public bool IsLastImage(IImgDocument imageItem)
         {
-            return this.documentIndex.LastDocument.Ordinal <= imageItem.Ordinal;
+            return this.documentIndex.LastTopicSection.Ordinal <= imageItem.Ordinal;
         }
 
         public IImgDocument NextImage(IImgDocument imageItem)
         {
-            if (this.documentIndex.LastDocument.Ordinal > imageItem.Ordinal)
-                return this.documentIndex.DocumentFiles.Where(img => img.Ordinal == imageItem.Ordinal + 1).OfType<IImgDocument>().SingleOrDefault();
+            if (this.documentIndex.LastTopicSection.Ordinal > imageItem.Ordinal)
+                return this.documentIndex.TopicSections.Where(img => img.Ordinal == imageItem.Ordinal + 1).OfType<IImgDocument>().SingleOrDefault();
             else
                 return imageItem;
         }
 
         public bool IsFirstImage(IImgDocument imageItem)
         {
-            return this.documentIndex.FirstDocument.Ordinal >= imageItem.Ordinal;
+            return this.documentIndex.FirstTopicSection.Ordinal >= imageItem.Ordinal;
         }
 
         public IImgDocument PreviousImage(IImgDocument imageItem)
         {
-            if (this.documentIndex.FirstDocument.Ordinal <= imageItem.Ordinal)
-                return this.documentIndex.DocumentFiles.Where(img => img.Ordinal == imageItem.Ordinal - 1).OfType<IImgDocument>().SingleOrDefault();
+            if (this.documentIndex.FirstTopicSection.Ordinal <= imageItem.Ordinal)
+                return this.documentIndex.TopicSections.Where(img => img.Ordinal == imageItem.Ordinal - 1).OfType<IImgDocument>().SingleOrDefault();
             else
                 return imageItem;
         }
@@ -109,7 +109,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             ImagePathGenerator imagePathGenerator = new ImagePathGenerator(this.Folder, extension);
             ImgDocument imgDocument = new ImgDocument(imagePathGenerator);
             imgDocument.Description = description;
-            this.documentIndex.AddDocumentFile(imgDocument);
+            this.documentIndex.AddTopicSection(imgDocument);
 
             ImageAdded?.Invoke(this, new EventArgs());
 
@@ -119,7 +119,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         public void Remove(IImgDocument imageItem)
         {
-            this.documentIndex.RemoveDocumentFile(imageItem.Id);
+            this.documentIndex.RemoveTopicSection(imageItem.Id);
             ImageRemoved?.Invoke(this, new EventArgs());
         }
 

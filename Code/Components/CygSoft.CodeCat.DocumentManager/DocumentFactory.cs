@@ -24,7 +24,7 @@ namespace CygSoft.CodeCat.DocumentManager
             public string FileName { get; set; }
         }
 
-        public static ITopicSection Create(DocumentTypeEnum documentType, string folder, string title, string id = null, int ordinal = 0, string description = null, string extension = null, string syntax = null)
+        public static ITopicSection Create(TopicSectionType documentType, string folder, string title, string id = null, int ordinal = 0, string description = null, string extension = null, string syntax = null)
         {
             DocArgs docArgs = new DocArgs { DocumentType = GetDocumentType(documentType), Folder = folder, Title = title, Id = id, Ordinal = ordinal, Description = description, Extension = extension, Syntax = syntax };
 
@@ -55,57 +55,57 @@ namespace CygSoft.CodeCat.DocumentManager
             return null;
         }
 
-        public static DocumentTypeEnum GetDocumentType(string documentType)
+        public static TopicSectionType GetDocumentType(string documentType)
         {
             switch (documentType)
             {
                 case "CODESNIPPET":
-                    return DocumentTypeEnum.CodeSnippet;
+                    return TopicSectionType.CodeSnippet;
 
                 case "QIKSCRIPT":
-                    return DocumentTypeEnum.QikScript;
+                    return TopicSectionType.QikScript;
 
                 case "URLGROUP":
-                    return DocumentTypeEnum.UrlGroup;
+                    return TopicSectionType.UrlGroup;
 
                 case "PDFDOCUMENT":
-                    return DocumentTypeEnum.PdfDocument;
+                    return TopicSectionType.PdfDocument;
 
                 case "IMAGEDOCUMENT":
-                    return DocumentTypeEnum.ImageDocument;
+                    return TopicSectionType.ImageDocument;
 
                 case "IMAGESET":
-                    return DocumentTypeEnum.ImageSet;
+                    return TopicSectionType.ImageSet;
                 case "RICHTEXT":
-                    return DocumentTypeEnum.RichTextDocument;
+                    return TopicSectionType.RichTextDocument;
 
                 case "FILEGROUP":
-                    return DocumentTypeEnum.FileGroup;
+                    return TopicSectionType.FileGroup;
 
                 default:
-                    return DocumentTypeEnum.CodeSnippet;
+                    return TopicSectionType.CodeSnippet;
             }
         }
 
-        public static string GetDocumentType(DocumentTypeEnum documentType)
+        public static string GetDocumentType(TopicSectionType documentType)
         {
             switch (documentType)
             {
-                case DocumentTypeEnum.CodeSnippet:
+                case TopicSectionType.CodeSnippet:
                     return "CODESNIPPET";
-                case DocumentTypeEnum.QikScript:
+                case TopicSectionType.QikScript:
                     return "QIKSCRIPT";
-                case DocumentTypeEnum.UrlGroup:
+                case TopicSectionType.UrlGroup:
                     return "URLGROUP";
-                case DocumentTypeEnum.PdfDocument:
+                case TopicSectionType.PdfDocument:
                     return "PDFDOCUMENT";
-                case DocumentTypeEnum.ImageDocument:
+                case TopicSectionType.ImageDocument:
                     return "IMAGEDOCUMENT";
-                case DocumentTypeEnum.ImageSet:
+                case TopicSectionType.ImageSet:
                     return "IMAGESET";
-                case DocumentTypeEnum.RichTextDocument:
+                case TopicSectionType.RichTextDocument:
                     return "RICHTEXT";
-                case DocumentTypeEnum.FileGroup:
+                case TopicSectionType.FileGroup:
                     return "FILEGROUP";
 
                 default:

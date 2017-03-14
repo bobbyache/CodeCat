@@ -11,13 +11,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
     {
         internal QikScriptDocument(string folder, string title, string extension, string syntax) : base(folder, title, extension, syntax)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.QikScript);
+            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.QikScript);
         }
 
         internal QikScriptDocument(string folder, string id, string title, string extension, int ordinal, string description, string syntax)
             : base(folder, id, title, extension, ordinal, description, syntax)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(DocumentTypeEnum.QikScript);
+            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.QikScript);
         }
     }
 }

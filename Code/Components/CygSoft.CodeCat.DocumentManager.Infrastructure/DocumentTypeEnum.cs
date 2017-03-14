@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public enum DocumentTypeEnum
+    public enum TopicSectionType
     {
         CodeSnippet,
         UrlGroup,

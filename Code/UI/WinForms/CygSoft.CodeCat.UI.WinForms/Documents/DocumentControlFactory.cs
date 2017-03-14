@@ -10,93 +10,93 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 {
     public static class DocumentControlFactory
     {
-        public static IDocumentItemControl Create(ITopicSection document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        public static IDocumentItemControl Create(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            if (document is ICodeDocument)
+            if (topicSection is ICodeDocument)
             {
-                if (document is IQikScriptDocument)
-                    return NewQikScriptControl(document, groupOwner, application, modifiedEventHandler);
-                else if (document.FileExtension == "tpl")
-                    return NewQikTemplateControl(document, groupOwner, application, modifiedEventHandler);
+                if (topicSection is IQikScriptDocument)
+                    return NewQikScriptControl(topicSection, groupOwner, application, modifiedEventHandler);
+                else if (topicSection.FileExtension == "tpl")
+                    return NewQikTemplateControl(topicSection, groupOwner, application, modifiedEventHandler);
                 else
-                    return NewCodeControl(document, groupOwner, application, modifiedEventHandler);
+                    return NewCodeControl(topicSection, groupOwner, application, modifiedEventHandler);
             }
 
-            else if (document is IUrlGroupDocument)
-                return NewUrlGroupControl(document, groupOwner, application, modifiedEventHandler);
-            else if (document is IFileGroupDocument)
-                return NewFileGroupControl(document, groupOwner, application, modifiedEventHandler);
-            else if (document is IPdfDocument)
-                return NewPdfDocument(document, groupOwner, application, modifiedEventHandler);
-            else if (document is IImageDocument)
-                return NewImageDocument(document, groupOwner, application, modifiedEventHandler);
-            else if (document is IImageSetDocument)
-                return NewImageSetControl(document, groupOwner, application, modifiedEventHandler);
-            else if (document is IRichTextDocument)
-                return NewRichTextDocument(document, groupOwner, application, modifiedEventHandler);
+            else if (topicSection is IUrlGroupDocument)
+                return NewUrlGroupControl(topicSection, groupOwner, application, modifiedEventHandler);
+            else if (topicSection is IFileGroupDocument)
+                return NewFileGroupControl(topicSection, groupOwner, application, modifiedEventHandler);
+            else if (topicSection is IPdfDocument)
+                return NewPdfDocument(topicSection, groupOwner, application, modifiedEventHandler);
+            else if (topicSection is IImageDocument)
+                return NewImageDocument(topicSection, groupOwner, application, modifiedEventHandler);
+            else if (topicSection is IImageSetDocument)
+                return NewImageSetControl(topicSection, groupOwner, application, modifiedEventHandler);
+            else if (topicSection is IRichTextDocument)
+                return NewRichTextDocument(topicSection, groupOwner, application, modifiedEventHandler);
             else
                 return null;
         }
 
-        private static IDocumentItemControl NewFileGroupControl(ITopicSection document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        private static IDocumentItemControl NewFileGroupControl(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            FileGroupControl documentControl = new FileGroupControl(application, groupOwner as ICodeGroupDocumentSet, document as IFileGroupDocument);
+            FileGroupControl documentControl = new FileGroupControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IFileGroupDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
-        private static IDocumentItemControl NewRichTextDocument(ITopicSection document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        private static IDocumentItemControl NewRichTextDocument(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            RtfDocumentControl documentControl = new RtfDocumentControl(application, groupOwner as ICodeGroupDocumentSet, document as IRichTextDocument);
+            RtfDocumentControl documentControl = new RtfDocumentControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IRichTextDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
-        private static IDocumentItemControl NewImageSetControl(ITopicSection document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        private static IDocumentItemControl NewImageSetControl(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            ImageSetControl documentControl = new ImageSetControl(application, groupOwner as ICodeGroupDocumentSet, document as IImageSetDocument);
+            ImageSetControl documentControl = new ImageSetControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IImageSetDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
-        private static IDocumentItemControl NewImageDocument(ITopicSection document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        private static IDocumentItemControl NewImageDocument(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            ImageControl documentControl = new ImageControl(application, groupOwner as ICodeGroupDocumentSet, document as IImageDocument);
+            ImageControl documentControl = new ImageControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IImageDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
-        private static IDocumentItemControl NewPdfDocument(ITopicSection document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        private static IDocumentItemControl NewPdfDocument(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            PdfDocumentControl documentControl = new PdfDocumentControl(application, groupOwner as ICodeGroupDocumentSet, document as IPdfDocument);
+            PdfDocumentControl documentControl = new PdfDocumentControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IPdfDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
-        private static IDocumentItemControl NewQikScriptControl(ITopicSection document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        private static IDocumentItemControl NewQikScriptControl(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
             QikScriptCtrl documentControl = new QikScriptCtrl(application, groupOwner as IQikTemplateDocumentSet);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
-        private static IDocumentItemControl NewQikTemplateControl(ITopicSection document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        private static IDocumentItemControl NewQikTemplateControl(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            QikTemplateCodeCtrl documentControl = new QikTemplateCodeCtrl(application, groupOwner as IQikTemplateDocumentSet, document as ICodeDocument);
+            QikTemplateCodeCtrl documentControl = new QikTemplateCodeCtrl(application, groupOwner as IQikTemplateDocumentSet, topicSection as ICodeDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
-        private static IDocumentItemControl NewCodeControl(ITopicSection document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        private static IDocumentItemControl NewCodeControl(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            CodeItemCtrl documentControl = new CodeItemCtrl(application, groupOwner as ICodeGroupDocumentSet, document as ICodeDocument);
+            CodeItemCtrl documentControl = new CodeItemCtrl(application, groupOwner as ICodeGroupDocumentSet, topicSection as ICodeDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
-        private static IDocumentItemControl NewUrlGroupControl(ITopicSection document, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
+        private static IDocumentItemControl NewUrlGroupControl(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            UrlGroupControl documentControl = new UrlGroupControl(application, groupOwner as ICodeGroupDocumentSet, document as IUrlGroupDocument);
+            UrlGroupControl documentControl = new UrlGroupControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IUrlGroupDocument);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }

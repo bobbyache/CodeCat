@@ -34,20 +34,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             return tabPageDictionary[Id].Controls[0] as IDocumentItemControl;
         }
 
-        public void OrderTabs(ITopicSection[] documents)
+        public void OrderTabs(ITopicSection[] topicSections)
         {
             tabControl.TabPages.Clear();
-            foreach (ITopicSection document in documents)
+            foreach (ITopicSection topicSection in topicSections)
             {
-                TabPage tabPage = tabPageDictionary[document.Id];
+                TabPage tabPage = tabPageDictionary[topicSection.Id];
                 tabControl.TabPages.Add(tabPage);
             }
         }
 
-        public TabPage AddTab(ITopicSection document, IDocumentItemControl tabUserControl, bool visible = true, bool select = false)
+        public TabPage AddTab(ITopicSection topicSection, IDocumentItemControl tabUserControl, bool visible = true, bool select = false)
         {
-            TabPage tabPage = new TabPage(document.Title);
-            tabPage.Name = document.Id;
+            TabPage tabPage = new TabPage(topicSection.Title);
+            tabPage.Name = topicSection.Id;
             tabPage.ImageIndex = tabUserControl.ImageKey;
 
             // Add the specialized "control" (code, script, template, whatever...)
@@ -56,7 +56,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             tabUserControl.Modified += tabUserControl_Modified;
 
             // add to the dictionary....
-            tabPageDictionary.Add(document.Id, tabPage);
+            tabPageDictionary.Add(topicSection.Id, tabPage);
 
             if (visible)
             {
@@ -64,7 +64,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 // in the case of a qik script tab, we may only want to view it when making changes
                 // to the script.
                 tabControl.TabPages.Add(tabPage);
-                AddTabMenuItem(document);
+                AddTabMenuItem(topicSection);
                 if (select)
                     tabControl.SelectedTab = tabPage;
             }
@@ -138,25 +138,25 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             this.tabMenuButton.DropDownItems.Add(item);
         }
 
-        private void AddTabMenuItem(ITopicSection document)
+        private void AddTabMenuItem(ITopicSection topicSection)
         {
             ToolStripMenuItem item = new ToolStripMenuItem();
-            item.Name = document.Id;
-            item.Text = document.Title;
+            item.Name = topicSection.Id;
+            item.Text = topicSection.Title;
 
-            if (document is ICodeDocument)
-                item.Image = IconRepository.Get((document as ICodeDocument).Syntax).Image;
-            else if (document is IPdfDocument)
+            if (topicSection is ICodeDocument)
+                item.Image = IconRepository.Get((topicSection as ICodeDocument).Syntax).Image;
+            else if (topicSection is IPdfDocument)
                 item.Image = IconRepository.Get(IconRepository.Documents.PDF).Image;
-            else if (document is IImageDocument)
+            else if (topicSection is IImageDocument)
                 item.Image = IconRepository.Get(IconRepository.Documents.SingleImage).Image;
-            else if (document is IImageSetDocument)
+            else if (topicSection is IImageSetDocument)
                 item.Image = IconRepository.Get(IconRepository.Documents.ImageSet).Image;
-            else if (document is IUrlGroupDocument)
+            else if (topicSection is IUrlGroupDocument)
                 item.Image = IconRepository.Get(IconRepository.Documents.HyperlinkSet).Image;
-            else if (document is IRichTextDocument)
+            else if (topicSection is IRichTextDocument)
                 item.Image = IconRepository.Get(IconRepository.Documents.RTF).Image; 
-            else if (document is IFileGroupDocument)
+            else if (topicSection is IFileGroupDocument)
                 item.Image = IconRepository.Get(IconRepository.Documents.FileSet).Image; 
 
             else

@@ -44,10 +44,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             tabControlFile.ImageList = IconRepository.ImageList;
 
-            qikFile.DocumentAdded += qikFile_DocumentAdded;
-            qikFile.DocumentRemoved += qikFile_DocumentRemoved;
-            qikFile.DocumentMovedLeft += qikFile_DocumentMovedLeft;
-            qikFile.DocumentMovedRight += qikFile_DocumentMovedRight;
+            qikFile.TopicSectionAdded += qikFile_TopicSectionAdded;
+            qikFile.TopicSectionRemoved += qikFile_TopicSectionRemoved;
+            qikFile.TopicSectionMovedLeft += qikFile_TopicSectionMovedLeft;
+            qikFile.TopicSectionMovedRight += qikFile_TopicSectionMovedRight;
 
             
             Tag = qikFile.Id;
@@ -273,44 +273,44 @@ namespace CygSoft.CodeCat.UI.WinForms
             qikFile.Syntax = string.Empty;
         }
 
-        private void qikFile_DocumentMovedRight(object sender, DocumentEventArgs e)
+        private void qikFile_TopicSectionMovedRight(object sender, TopicSectionEventArgs e)
         {
             IsModified = true;
             ControlGraphics.SuspendDrawing(this);
             tabManager.OrderTabs(qikFile.Documents);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
-            tabManager.DisplayTab(e.Document.Id, true);
+            tabManager.DisplayTab(e.TopicSection.Id, true);
             ControlGraphics.ResumeDrawing(this);
         }
 
-        private void qikFile_DocumentMovedLeft(object sender, DocumentEventArgs e)
+        private void qikFile_TopicSectionMovedLeft(object sender, TopicSectionEventArgs e)
         {
             IsModified = true;
             ControlGraphics.SuspendDrawing(this);
             tabManager.OrderTabs(qikFile.Documents);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
-            tabManager.DisplayTab(e.Document.Id, true);
+            tabManager.DisplayTab(e.TopicSection.Id, true);
             ControlGraphics.ResumeDrawing(this);
         }
 
-        private void qikFile_DocumentRemoved(object sender, DocumentEventArgs e)
+        private void qikFile_TopicSectionRemoved(object sender, TopicSectionEventArgs e)
         {
             ControlGraphics.SuspendDrawing(this);
-            tabManager.RemoveTab(e.Document.Id);
+            tabManager.RemoveTab(e.TopicSection.Id);
             tabManager.OrderTabs(qikFile.Documents);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
             ControlGraphics.ResumeDrawing(this);
         }
 
-        private void qikFile_DocumentAdded(object sender, DocumentEventArgs e)
+        private void qikFile_TopicSectionAdded(object sender, TopicSectionEventArgs e)
         {
             ControlGraphics.SuspendDrawing(this);
-            tabManager.AddTab(e.Document,
-                DocumentControlFactory.Create(e.Document, qikFile, application, codeCtrl_Modified),
+            tabManager.AddTab(e.TopicSection,
+                DocumentControlFactory.Create(e.TopicSection, qikFile, application, codeCtrl_Modified),
                 true, true);
             tabManager.OrderTabs(qikFile.Documents);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
-            tabManager.DisplayTab(e.Document.Id, true);
+            tabManager.DisplayTab(e.TopicSection.Id, true);
             ControlGraphics.ResumeDrawing(this);
         }
 

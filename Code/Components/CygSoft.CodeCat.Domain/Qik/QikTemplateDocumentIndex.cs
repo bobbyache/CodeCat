@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.Domain.Qik
         { 
             get 
             {
-                return base.DocumentFiles.OfType<QikScriptDocument>().SingleOrDefault();
+                return base.TopicSections.OfType<QikScriptDocument>().SingleOrDefault();
             } 
         }
 
@@ -24,23 +24,23 @@ namespace CygSoft.CodeCat.Domain.Qik
             if (!base.Exists)
             {
                 // creating this document for the very first time... so we need to ensure that we create a script document!
-                ICodeDocument scriptDoc = DocumentFactory.Create(DocumentTypeEnum.QikScript, this.Folder, "Qik Script", null, 0, null, "qik", "Qik") as ICodeDocument;
+                ICodeDocument scriptDoc = DocumentFactory.Create(TopicSectionType.QikScript, this.Folder, "Qik Script", null, 0, null, "qik", "Qik") as ICodeDocument;
                 scriptDoc.Ordinal = 1;  // should always be the last item, but is the first over here.
-                this.AddDocumentFile(scriptDoc);
+                this.AddTopicSection(scriptDoc);
             }
         }
 
-        protected override List<ITopicSection> LoadDocumentFiles()
+        protected override List<ITopicSection> LoadTopicSections()
         {
             return base.indexRepository.LoadDocuments();
         }
 
         protected override void SaveDocumentIndex()
         {
-            base.indexRepository.WriteDocuments(base.DocumentFiles.ToList());
+            base.indexRepository.WriteDocuments(base.TopicSections.ToList());
         }
 
-        protected override void AfterAddDocumentFile()
+        protected override void AfterAddTopicSection()
         {
             base.topicSections.MoveLast(this.ScriptDocument as ITopicSection);
         }

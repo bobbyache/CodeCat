@@ -15,10 +15,10 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         event EventHandler<DocumentIndexEventArgs> BeforeRevert;
         event EventHandler<DocumentIndexEventArgs> AfterRevert;
 
-        event EventHandler<DocumentEventArgs> DocumentAdded;
-        event EventHandler<DocumentEventArgs> DocumentRemoved;
-        event EventHandler<DocumentEventArgs> DocumentMovedUp;
-        event EventHandler<DocumentEventArgs> DocumentMovedDown;
+        event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
+        event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;
+        event EventHandler<TopicSectionEventArgs> TopicSectionMovedUp;
+        event EventHandler<TopicSectionEventArgs> TopicSectionMovedDown;
 
         string Id { get; }
         string FilePath { get; }
@@ -36,17 +36,17 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         void Revert();
 
         // files within the document group
-        ITopicSection[] DocumentFiles { get; }
+        ITopicSection[] TopicSections { get; }
 
-        bool DocumentExists(string id);
+        bool TopicSectionExists(string id);
 
-        ITopicSection AddDocumentFile(ITopicSection topicSection); // necessary, because document files could be of different types...
+        ITopicSection AddTopicSection(ITopicSection topicSection); // necessary, because document files could be of different types...
                                                           // need to be created elsewhere like a document factory.
-        void RemoveDocumentFile(string id);
-        ITopicSection GetDocumentFile(string id);
+        void RemoveTopicSection(string id);
+        ITopicSection GetTopicSection(string id);
 
-        ITopicSection FirstDocument { get; }
-        ITopicSection LastDocument { get; }
+        ITopicSection FirstTopicSection { get; }
+        ITopicSection LastTopicSection { get; }
 
         bool CanMoveDown(ITopicSection topicSection);
         bool CanMoveTo(ITopicSection topicSection, int ordinal);

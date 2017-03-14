@@ -7,10 +7,10 @@ namespace CygSoft.CodeCat.Domain.Qik
 {
     public interface IQikTemplateDocumentSet : IPersistableTarget
     {
-        event EventHandler<DocumentEventArgs> DocumentAdded;
-        event EventHandler<DocumentEventArgs> DocumentRemoved;
-        event EventHandler<DocumentEventArgs> DocumentMovedLeft;
-        event EventHandler<DocumentEventArgs> DocumentMovedRight;
+        event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
+        event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;
+        event EventHandler<TopicSectionEventArgs> TopicSectionMovedLeft;
+        event EventHandler<TopicSectionEventArgs> TopicSectionMovedRight;
 
         ICompiler Compiler { get; }
 
