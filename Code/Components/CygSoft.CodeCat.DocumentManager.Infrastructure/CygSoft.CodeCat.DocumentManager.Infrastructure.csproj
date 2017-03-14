@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="DocumentIndexEventArgs.cs" />
     <Compile Include="DocumentTypeEnum.cs" />
-    <Compile Include="ICodeDocument.cs" />
+    <Compile Include="ICodeTopicSection.cs" />
     <Compile Include="ITopicSection.cs" />
     <Compile Include="IDocumentIndexRepository.cs" />
     <Compile Include="IFileGroupDocument.cs" />
@@ -55,7 +55,7 @@
     <Compile Include="IPositionedItem.cs" />
     <Compile Include="IQikScriptDocument.cs" />
     <Compile Include="IRichTextDocument.cs" />
-    <Compile Include="ITextDocument.cs" />
+    <Compile Include="ITextTopicSection.cs" />
     <Compile Include="TopicSectionEventArgs.cs" />
     <Compile Include="IUrlGroupDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

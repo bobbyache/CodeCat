@@ -307,7 +307,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddCode_Click(object sender, EventArgs e)
         {
-            ICodeDocument templateFile = codeItemFile.AddTopicSection(TopicSectionType.CodeSnippet, ConfigSettings.DefaultSyntax, "txt") as ICodeDocument;
+            ICodeTopicSection templateFile = codeItemFile.AddTopicSection(TopicSectionType.CodeSnippet, ConfigSettings.DefaultSyntax, "txt") as ICodeTopicSection;
             this.IsModified = true;
         }
 

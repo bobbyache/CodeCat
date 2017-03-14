@@ -41,10 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseFilePathGenerator.cs" />
-    <Compile Include="DocumentFactory.cs" />
+    <Compile Include="TopicSectionFactory.cs" />
     <Compile Include="Base\TopicSection.cs" />
     <Compile Include="Base\BaseDocumentIndex.cs" />
-    <Compile Include="Documents\CodeDocument.cs" />
+    <Compile Include="Documents\CodeTopicSection.cs" />
     <Compile Include="Documents\FileGroupDocument.cs" />
     <Compile Include="Documents\FileGroup\FileGroupFile.cs" />
     <Compile Include="Documents\ImageDocument.cs" />
@@ -55,7 +55,7 @@
     <Compile Include="Documents\PdfDocument.cs" />
     <Compile Include="Documents\QikScriptDocument.cs" />
     <Compile Include="Documents\RichTextDocument.cs" />
-    <Compile Include="Documents\TextDocument.cs" />
+    <Compile Include="Documents\TextTopicSection.cs" />
     <Compile Include="Documents\UrlGroupDocument.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="PathGenerators\DocumentIndexPathGenerator.cs" />

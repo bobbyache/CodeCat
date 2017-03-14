@@ -65,12 +65,12 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         internal UrlGroupDocument(string folder, string title)
             : base(new DocumentPathGenerator(folder, "urlgrp"), title, null)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.UrlGroup);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.UrlGroup);
         }
 
         internal UrlGroupDocument(string folder, string id, string title, int ordinal, string description) : base(new DocumentPathGenerator(folder, "urlgrp", id), title, description, ordinal)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.UrlGroup);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.UrlGroup);
         }
 
         private List<IUrlItem> urlItemList = new List<IUrlItem>();

@@ -40,7 +40,7 @@ namespace CygSoft.CodeCat.Domain.Qik
                 else
                     documentType = documentElement.Attribute("DocType") != null ? (string)documentElement.Attribute("DocType") : "CODESNIPPET";
 
-                ITopicSection scriptDocument = DocumentFactory.Create(DocumentFactory.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
+                ITopicSection scriptDocument = TopicSectionFactory.Create(TopicSectionFactory.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
                 topicSections.Add(scriptDocument);
             }
 
@@ -65,13 +65,13 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         private void WriteFile(List<ITopicSection> documents)
         {
-            ICodeDocument[] docFiles = documents.OfType<ICodeDocument>().ToArray();
+            ICodeTopicSection[] codeTopicSections = documents.OfType<ICodeTopicSection>().ToArray();
 
             XDocument indexDocument = XDocument.Load(this.filePath);
             XElement filesElement = indexDocument.Element("QikFile").Element("Documents");
             filesElement.RemoveNodes();
 
-            foreach (ICodeDocument docFile in docFiles)
+            foreach (ICodeTopicSection docFile in codeTopicSections)
             {
                 filesElement.Add(new XElement("Document",
                     new XAttribute("Id", docFile.Id),

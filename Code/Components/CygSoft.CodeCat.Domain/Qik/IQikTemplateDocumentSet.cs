@@ -20,17 +20,17 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         // don't like this... should not be returning "all" documents.
         // should be treating a collection of Template and a collection of Script.
-        ICodeDocument[] Documents { get; }
+        ICodeTopicSection[] TopicSections { get; }
 
-        ICodeDocument[] TemplateFiles { get; }
+        ICodeTopicSection[] TemplateSections { get; }
 
-        ICodeDocument ScriptFile { get; }
-        ICodeDocument GetTemplate(string id);
+        ICodeTopicSection ScriptSection { get; }
+        ICodeTopicSection GetTemplateSection(string id);
 
-        ICodeDocument AddTemplate(string syntax);
-        void RemoveTemplate(string id);
+        ICodeTopicSection AddTemplateSection(string syntax);
+        void RemoveTemplateSection(string id);
 
-        void MoveDocumentLeft(string id);
-        void MoveDocumentRight(string id);
+        void MoveTemplateSectionLeft(string id);
+        void MoveTemplateSectionRight(string id);
     }
 }

@@ -40,14 +40,14 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
             : base(imagePathGenerator, "", null)
         {
             this.imagePathGenerator = imagePathGenerator;
-            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.ImageDocument);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImageDocument);
         }
 
         internal ImgDocument(ImagePathGenerator imagePathGenerator, int ordinal, string description)
             : base(imagePathGenerator, "", description, ordinal)
         {
             this.imagePathGenerator = imagePathGenerator;
-            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.ImageDocument);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImageDocument);
         }
 
         //protected override IFileVersion NewVersion(DateTime timeStamp, string description)

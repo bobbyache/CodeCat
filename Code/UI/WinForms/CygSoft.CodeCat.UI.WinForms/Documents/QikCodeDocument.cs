@@ -206,13 +206,13 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void RebuildTabs()
         {
             tabManager.Clear();
-            foreach (ICodeDocument document in qikFile.TemplateFiles)
+            foreach (ICodeTopicSection document in qikFile.TemplateSections)
             {
                 tabManager.AddTab(document,
                     DocumentControlFactory.Create(document, qikFile, application, codeCtrl_Modified), true, false);
             }
 
-            IQikScriptDocument scriptDocument = qikFile.ScriptFile as IQikScriptDocument;
+            IQikScriptDocument scriptDocument = qikFile.ScriptSection as IQikScriptDocument;
             scriptControl = (QikScriptCtrl)DocumentControlFactory.Create(scriptDocument, qikFile, application, codeCtrl_Modified);
             tabManager.AddTab(scriptDocument, scriptControl, btnShowScript.Checked, false);
         }
@@ -277,7 +277,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             IsModified = true;
             ControlGraphics.SuspendDrawing(this);
-            tabManager.OrderTabs(qikFile.Documents);
+            tabManager.OrderTabs(qikFile.TopicSections);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
             tabManager.DisplayTab(e.TopicSection.Id, true);
             ControlGraphics.ResumeDrawing(this);
@@ -287,7 +287,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             IsModified = true;
             ControlGraphics.SuspendDrawing(this);
-            tabManager.OrderTabs(qikFile.Documents);
+            tabManager.OrderTabs(qikFile.TopicSections);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
             tabManager.DisplayTab(e.TopicSection.Id, true);
             ControlGraphics.ResumeDrawing(this);
@@ -297,7 +297,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             ControlGraphics.SuspendDrawing(this);
             tabManager.RemoveTab(e.TopicSection.Id);
-            tabManager.OrderTabs(qikFile.Documents);
+            tabManager.OrderTabs(qikFile.TopicSections);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
             ControlGraphics.ResumeDrawing(this);
         }
@@ -308,7 +308,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             tabManager.AddTab(e.TopicSection,
                 DocumentControlFactory.Create(e.TopicSection, qikFile, application, codeCtrl_Modified),
                 true, true);
-            tabManager.OrderTabs(qikFile.Documents);
+            tabManager.OrderTabs(qikFile.TopicSections);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);
             tabManager.DisplayTab(e.TopicSection.Id, true);
             ControlGraphics.ResumeDrawing(this);
@@ -335,7 +335,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddTemplate_Click(object sender, EventArgs e)
         {
-            ICodeDocument templateFile = qikFile.AddTemplate(ConfigSettings.DefaultSyntax);
+            ICodeTopicSection templateFile = qikFile.AddTemplateSection(ConfigSettings.DefaultSyntax);
             IsModified = true;
         }
 
@@ -344,7 +344,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!tabManager.HasTabs)
                 return;
 
-            if (tabManager.SelectedTabId == qikFile.ScriptFile.Id)
+            if (tabManager.SelectedTabId == qikFile.ScriptSection.Id)
             {
                 Dialogs.CannotRemoveTemplateScriptNotification(this);
                 return;
@@ -355,7 +355,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {
                 string id = tabManager.SelectedTabId;
-                qikFile.RemoveTemplate(id);
+                qikFile.RemoveTemplateSection(id);
                 IsModified = true;
             }
         }
@@ -387,12 +387,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnMoveLeft_Click(object sender, EventArgs e)
         {
-            qikFile.MoveDocumentLeft(tabManager.SelectedTabId);
+            qikFile.MoveTemplateSectionLeft(tabManager.SelectedTabId);
         }
 
         private void btnMoveRight_Click(object sender, EventArgs e)
         {
-            qikFile.MoveDocumentRight(tabManager.SelectedTabId);
+            qikFile.MoveTemplateSectionRight(tabManager.SelectedTabId);
         }
 
         #endregion

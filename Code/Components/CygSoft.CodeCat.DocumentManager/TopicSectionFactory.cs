@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager
 {
-    public class DocumentFactory
+    public class TopicSectionFactory
     {
         private class DocArgs
         {
@@ -165,9 +165,9 @@ namespace CygSoft.CodeCat.DocumentManager
         private static ITopicSection CreateCodeSnippet(DocArgs docArgs)
         {
             if (docArgs.Id == null)
-                return new CodeDocument(docArgs.Folder, docArgs.Title, docArgs.Extension, docArgs.Syntax);
+                return new CodeTopicSection(docArgs.Folder, docArgs.Title, docArgs.Extension, docArgs.Syntax);
             else
-                return new CodeDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description, docArgs.Syntax);
+                return new CodeTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description, docArgs.Syntax);
         }
 
         private static ITopicSection CreateQikScript(DocArgs docArgs)

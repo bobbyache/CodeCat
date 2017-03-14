@@ -14,12 +14,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
-        private ICodeDocument templateFile;
+        private ICodeTopicSection templateFile;
         private AppFacade application;
         private IQikTemplateDocumentSet qikTemplateDocumentSet;
         private ICompiler compiler;
 
-        public QikTemplateCodeCtrl(AppFacade application, IQikTemplateDocumentSet qikTemplateDocumentSet, ICodeDocument templateFile)
+        public QikTemplateCodeCtrl(AppFacade application, IQikTemplateDocumentSet qikTemplateDocumentSet, ICodeTopicSection templateFile)
         {
             InitializeComponent();
             

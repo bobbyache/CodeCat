@@ -15,7 +15,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private AppFacade application;
         private IQikTemplateDocumentSet qikTemplateDocumentSet;
-        private ICodeDocument scriptFile;
+        private ICodeTopicSection scriptFile;
         private ICompiler compiler;
         private Row selectedRow;
 
@@ -25,7 +25,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             this.application = application;
             this.qikTemplateDocumentSet = qikTemplateDocumentSet;
-            this.scriptFile = qikTemplateDocumentSet.ScriptFile;
+            this.scriptFile = qikTemplateDocumentSet.ScriptSection;
             this.compiler = qikTemplateDocumentSet.Compiler;
 
             syntaxDocument.Text = this.scriptFile.Text;
@@ -43,7 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public string Title { get { return this.scriptFile.Title; } }
         public string ScriptText { get { return this.syntaxDocument.Text; } }
         public bool IsModified { get; private set; }
-        public bool FileExists { get { return qikTemplateDocumentSet.ScriptFile.Exists; } }
+        public bool FileExists { get { return qikTemplateDocumentSet.ScriptSection.Exists; } }
 
         public void Revert()
         {

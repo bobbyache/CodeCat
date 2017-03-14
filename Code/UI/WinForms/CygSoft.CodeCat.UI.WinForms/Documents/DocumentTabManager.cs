@@ -144,8 +144,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             item.Name = topicSection.Id;
             item.Text = topicSection.Title;
 
-            if (topicSection is ICodeDocument)
-                item.Image = IconRepository.Get((topicSection as ICodeDocument).Syntax).Image;
+            if (topicSection is ICodeTopicSection)
+                item.Image = IconRepository.Get((topicSection as ICodeTopicSection).Syntax).Image;
             else if (topicSection is IPdfDocument)
                 item.Image = IconRepository.Get(IconRepository.Documents.PDF).Image;
             else if (topicSection is IImageDocument)

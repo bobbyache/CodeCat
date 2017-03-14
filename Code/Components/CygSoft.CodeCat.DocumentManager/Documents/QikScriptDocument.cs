@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public class QikScriptDocument : CodeDocument, IQikScriptDocument
+    public class QikScriptDocument : CodeTopicSection, IQikScriptDocument
     {
         internal QikScriptDocument(string folder, string title, string extension, string syntax) : base(folder, title, extension, syntax)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.QikScript);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.QikScript);
         }
 
         internal QikScriptDocument(string folder, string id, string title, string extension, int ordinal, string description, string syntax)
             : base(folder, id, title, extension, ordinal, description, syntax)
         {
-            this.DocumentType = DocumentFactory.GetDocumentType(TopicSectionType.QikScript);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.QikScript);
         }
     }
 }

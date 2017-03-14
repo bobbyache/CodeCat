@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface ICodeDocument : ITextDocument
+    public interface ICodeTopicSection : ITextTopicSection
     {
         string Syntax { get; set; }
     }

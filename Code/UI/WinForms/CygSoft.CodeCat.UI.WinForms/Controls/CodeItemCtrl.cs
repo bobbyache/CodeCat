@@ -11,16 +11,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
-        private ICodeDocument codeFile;
+        private ICodeTopicSection codeTopicSection;
         private AppFacade application;
         private ICodeGroupDocumentSet codeGroupFile;
 
-        public CodeItemCtrl(AppFacade application, ICodeGroupDocumentSet codeGroupFile, ICodeDocument codeFile)
+        public CodeItemCtrl(AppFacade application, ICodeGroupDocumentSet codeGroupFile, ICodeTopicSection codeFile)
         {
             InitializeComponent();
             
             this.application = application;
-            this.codeFile = codeFile;
+            this.codeTopicSection = codeFile;
             this.codeGroupFile = codeGroupFile;
             this.Id = codeFile.Id;
 
@@ -41,7 +41,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public string Title { get { return this.txtTitle.Text; } }
         public string TemplateText { get { return this.syntaxDocument.Text; } }
         public bool IsModified { get; private set; }
-        public bool FileExists { get { return codeFile.Exists; } }
+        public bool FileExists { get { return codeTopicSection.Exists; } }
 
         public void Revert()
         {
@@ -52,9 +52,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void ResetFieldValues()
         {
-            txtTitle.Text = codeFile.Title;
-            syntaxBoxControl.Document.Text = codeFile.Text;
-            SelectSyntax(codeFile.Syntax);
+            txtTitle.Text = codeTopicSection.Title;
+            syntaxBoxControl.Document.Text = codeTopicSection.Text;
+            SelectSyntax(codeTopicSection.Syntax);
 
             this.IsModified = false;
             SetChangeStatus();
@@ -74,9 +74,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupFile_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
         {
-            this.codeFile.Title = txtTitle.Text;
-            this.codeFile.Text = syntaxDocument.Text;
-            this.codeFile.Syntax = cboSyntax.SelectedItem.ToString();
+            this.codeTopicSection.Title = txtTitle.Text;
+            this.codeTopicSection.Text = syntaxDocument.Text;
+            this.codeTopicSection.Syntax = cboSyntax.SelectedItem.ToString();
         }
 
         private void RegisterDataFieldEvents()

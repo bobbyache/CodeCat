@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface ITextDocument : ITopicSection
+    public interface ITextTopicSection : ITopicSection
     {
         string Text { get; set; }
     }

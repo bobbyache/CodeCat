@@ -12,7 +12,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
     {
         public static IDocumentItemControl Create(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            if (topicSection is ICodeDocument)
+            if (topicSection is ICodeTopicSection)
             {
                 if (topicSection is IQikScriptDocument)
                     return NewQikScriptControl(topicSection, groupOwner, application, modifiedEventHandler);
@@ -82,14 +82,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         private static IDocumentItemControl NewQikTemplateControl(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            QikTemplateCodeCtrl documentControl = new QikTemplateCodeCtrl(application, groupOwner as IQikTemplateDocumentSet, topicSection as ICodeDocument);
+            QikTemplateCodeCtrl documentControl = new QikTemplateCodeCtrl(application, groupOwner as IQikTemplateDocumentSet, topicSection as ICodeTopicSection);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
         private static IDocumentItemControl NewCodeControl(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            CodeItemCtrl documentControl = new CodeItemCtrl(application, groupOwner as ICodeGroupDocumentSet, topicSection as ICodeDocument);
+            CodeItemCtrl documentControl = new CodeItemCtrl(application, groupOwner as ICodeGroupDocumentSet, topicSection as ICodeTopicSection);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }

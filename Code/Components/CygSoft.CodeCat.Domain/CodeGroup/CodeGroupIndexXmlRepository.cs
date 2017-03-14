@@ -36,7 +36,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                 string documentExt = documentElement.Attribute("Ext") != null ? (string)documentElement.Attribute("Ext") : null;
                 string documentSyntax = documentElement.Attribute("Syntax") != null ? (string)documentElement.Attribute("Syntax") : null;
 
-                templateDocument = DocumentFactory.Create(DocumentFactory.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
+                templateDocument = TopicSectionFactory.Create(TopicSectionFactory.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
 
                 topicSections.Add(templateDocument);
             }
@@ -60,31 +60,31 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             xDocument.Save(this.filePath);
         }
 
-        private void WriteFile(List<ITopicSection> documents)
+        private void WriteFile(List<ITopicSection> topicSections)
         {
             XDocument indexDocument = XDocument.Load(this.filePath);
             XElement filesElement = indexDocument.Element("CodeGroup").Element("Documents");
             filesElement.RemoveNodes();
 
-            foreach (ITopicSection docFile in documents)
+            foreach (ITopicSection topicSection in topicSections)
             {
-                if (docFile is ICodeDocument)
+                if (topicSection is ICodeTopicSection)
                 {
-                    ICodeDocument codeDoc = docFile as ICodeDocument;
+                    ICodeTopicSection codeTopicSection = topicSection as ICodeTopicSection;
 
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", codeDoc.Id),
-                        new XAttribute("Title", codeDoc.Title),
-                        new XAttribute("DocType", codeDoc.DocumentType),
-                        new XAttribute("Description", codeDoc.Description == null ? "" : codeDoc.Description),
-                        new XAttribute("Ext", codeDoc.FileExtension),
-                        new XAttribute("Syntax", codeDoc.Syntax),
-                        new XAttribute("Ordinal", codeDoc.Ordinal.ToString())
+                        new XAttribute("Id", codeTopicSection.Id),
+                        new XAttribute("Title", codeTopicSection.Title),
+                        new XAttribute("DocType", codeTopicSection.DocumentType),
+                        new XAttribute("Description", codeTopicSection.Description == null ? "" : codeTopicSection.Description),
+                        new XAttribute("Ext", codeTopicSection.FileExtension),
+                        new XAttribute("Syntax", codeTopicSection.Syntax),
+                        new XAttribute("Ordinal", codeTopicSection.Ordinal.ToString())
                         ));
                 }
-                else if (docFile is IUrlGroupDocument)
+                else if (topicSection is IUrlGroupDocument)
                 {
-                    IUrlGroupDocument urlFile = docFile as IUrlGroupDocument;
+                    IUrlGroupDocument urlFile = topicSection as IUrlGroupDocument;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", urlFile.Id),
@@ -95,9 +95,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", urlFile.Ordinal.ToString())
                         ));
                 }
-                else if (docFile is IPdfDocument)
+                else if (topicSection is IPdfDocument)
                 {
-                    IPdfDocument pdfDoc = docFile as IPdfDocument;
+                    IPdfDocument pdfDoc = topicSection as IPdfDocument;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", pdfDoc.Id),
@@ -108,9 +108,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", pdfDoc.Ordinal.ToString())
                         ));
                 }
-                else if (docFile is IImageDocument)
+                else if (topicSection is IImageDocument)
                 {
-                    IImageDocument imgFile = docFile as IImageDocument;
+                    IImageDocument imgFile = topicSection as IImageDocument;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", imgFile.Id),
@@ -121,9 +121,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", imgFile.Ordinal.ToString())
                         ));
                 }
-                else if (docFile is IImageSetDocument)
+                else if (topicSection is IImageSetDocument)
                 {
-                    IImageSetDocument imgSetFile = docFile as IImageSetDocument;
+                    IImageSetDocument imgSetFile = topicSection as IImageSetDocument;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", imgSetFile.Id),
@@ -134,9 +134,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", imgSetFile.Ordinal.ToString())
                         ));
                 }
-                else if (docFile is IRichTextDocument)
+                else if (topicSection is IRichTextDocument)
                 {
-                    IRichTextDocument rtfFile = docFile as IRichTextDocument;
+                    IRichTextDocument rtfFile = topicSection as IRichTextDocument;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", rtfFile.Id),
@@ -147,9 +147,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", rtfFile.Ordinal.ToString())
                         ));
                 }
-                else if (docFile is IFileGroupDocument)
+                else if (topicSection is IFileGroupDocument)
                 {
-                    IFileGroupDocument fileGrpFile = docFile as IFileGroupDocument;
+                    IFileGroupDocument fileGrpFile = topicSection as IFileGroupDocument;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", fileGrpFile.Id),

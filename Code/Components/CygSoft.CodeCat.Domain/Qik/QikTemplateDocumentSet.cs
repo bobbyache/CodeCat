@@ -70,13 +70,13 @@ namespace CygSoft.CodeCat.Domain.Qik
         public string Text { get; set; }
 
         // would like to remove this at some point see... TemplateFiles property below...
-        public ICodeDocument[] Documents { get { return this.documentIndex.TopicSections.OfType<ICodeDocument>().ToArray(); } }
+        public ICodeTopicSection[] TopicSections { get { return this.documentIndex.TopicSections.OfType<ICodeTopicSection>().ToArray(); } }
 
-        public ICodeDocument[] TemplateFiles
+        public ICodeTopicSection[] TemplateSections
         {
             get
             {
-                List<ICodeDocument> codeDocuments = this.documentIndex.TopicSections.OfType<ICodeDocument>().ToList();
+                List<ICodeTopicSection> codeDocuments = this.documentIndex.TopicSections.OfType<ICodeTopicSection>().ToList();
                 IQikScriptDocument scriptDoc = codeDocuments.OfType<IQikScriptDocument>().SingleOrDefault();
                 codeDocuments.Remove(scriptDoc);
                 return codeDocuments.ToArray();
@@ -147,12 +147,12 @@ namespace CygSoft.CodeCat.Domain.Qik
             return this.documentIndex.TopicSectionExists(id);
         }
 
-        public ICodeDocument GetTemplate(string id)
+        public ICodeTopicSection GetTemplateSection(string id)
         {
-            return this.documentIndex.GetTopicSection(id) as ICodeDocument;
+            return this.documentIndex.GetTopicSection(id) as ICodeTopicSection;
         }
 
-        public ICodeDocument ScriptFile { get { return this.documentIndex.ScriptDocument; } }
+        public ICodeTopicSection ScriptSection { get { return this.documentIndex.ScriptDocument; } }
 
         public void Revert()
         {
@@ -179,29 +179,29 @@ namespace CygSoft.CodeCat.Domain.Qik
             this.documentIndex.Delete();
         }
 
-        public void MoveDocumentRight(string id)
+        public void MoveTemplateSectionRight(string id)
         {
             ITopicSection topicSection = this.documentIndex.GetTopicSection(id);
             
             // can't move the script file and we can't move behind the script file.
-            if (topicSection.Id != this.ScriptFile.Id && !IsSecondLast(topicSection.Id))
+            if (topicSection.Id != this.ScriptSection.Id && !IsSecondLast(topicSection.Id))
                 this.documentIndex.MoveDown(topicSection);
         }
 
-        public void MoveDocumentLeft(string id)
+        public void MoveTemplateSectionLeft(string id)
         {
             ITopicSection topicSection = this.documentIndex.GetTopicSection(id);
-            if (topicSection.Id != this.ScriptFile.Id)
+            if (topicSection.Id != this.ScriptSection.Id)
                 this.documentIndex.MoveUp(topicSection);
         }
 
-        public ICodeDocument AddTemplate(string syntax)
+        public ICodeTopicSection AddTemplateSection(string syntax)
         {
-            return this.documentIndex.AddTopicSection(DocumentFactory.Create(TopicSectionType.CodeSnippet, documentIndex.Folder, 
-                "New Template", null, 0, null, "tpl", syntax)) as ICodeDocument;
+            return this.documentIndex.AddTopicSection(TopicSectionFactory.Create(TopicSectionType.CodeSnippet, documentIndex.Folder, 
+                "New Template", null, 0, null, "tpl", syntax)) as ICodeTopicSection;
         }
 
-        public void RemoveTemplate(string id)
+        public void RemoveTemplateSection(string id)
         {
             this.documentIndex.RemoveTopicSection(id);
         }

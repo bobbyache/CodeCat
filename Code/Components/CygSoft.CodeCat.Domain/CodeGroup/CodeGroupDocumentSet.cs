@@ -132,7 +132,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         public ITopicSection GetTopicSection(string id)
         {
-            return this.documentIndex.GetTopicSection(id) as ICodeDocument;
+            return this.documentIndex.GetTopicSection(id) as ICodeTopicSection;
         }
 
 
@@ -175,7 +175,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         public ITopicSection AddTopicSection(TopicSectionType documentType, string syntax = null, string extension = "txt")
         {
-            return this.documentIndex.AddTopicSection(DocumentFactory.Create(documentType, documentIndex.Folder,
+            return this.documentIndex.AddTopicSection(TopicSectionFactory.Create(documentType, documentIndex.Folder,
                 "New Document", null, 0, null, extension, syntax));
         }
 

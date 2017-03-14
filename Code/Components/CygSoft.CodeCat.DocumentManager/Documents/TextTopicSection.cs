@@ -6,17 +6,17 @@ using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public abstract class TextDocument : TopicSection, ITextDocument
+    public abstract class TextTopicSection : TopicSection, ITextTopicSection
     {
         public string Text { get; set; }
 
         // Only create these documents internally.
-        internal TextDocument(string folder, string title, string extension) : base(new DocumentPathGenerator(folder, extension), title, null)
+        internal TextTopicSection(string folder, string title, string extension) : base(new DocumentPathGenerator(folder, extension), title, null)
         {
             this.Text = null;
         }
 
-        internal TextDocument(string folder, string id, string title, string extension, int ordinal, string description)
+        internal TextTopicSection(string folder, string id, string title, string extension, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, extension, id), title, description, ordinal)
         {
             this.Text = null;
