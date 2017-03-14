@@ -5,7 +5,7 @@ using System;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public class RichTextDocument : BaseDocument, IRichTextDocument
+    public class RichTextDocument : TopicSection, IRichTextDocument
     {
         // YOU MIGHT NOT NEED TO INHERIT FROM BASEDOCUMENT HERE BECAUSE YOU ACTUALLY DON'T WRITE THE 
         // THE DOCUMENT (However some events etc. might be used further upstream.

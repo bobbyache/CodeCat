@@ -7,7 +7,7 @@ using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
 {
-    public class ImgDocument :  BaseDocument, IImgDocument
+    public class ImgDocument :  TopicSection, IImgDocument
     {
         private ImagePathGenerator imagePathGenerator;
 

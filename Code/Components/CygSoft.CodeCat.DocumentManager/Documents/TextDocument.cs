@@ -6,7 +6,7 @@ using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public abstract class TextDocument : BaseDocument, ITextDocument
+    public abstract class TextDocument : TopicSection, ITextDocument
     {
         public string Text { get; set; }
 

@@ -4,7 +4,7 @@ using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {
-    public abstract class BaseDocument : ITopicSection
+    public abstract class TopicSection : ITopicSection
     {
         public event EventHandler<TopicSectionEventArgs> BeforeDelete;
         public event EventHandler<TopicSectionEventArgs> AfterDelete;
@@ -32,7 +32,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public bool Exists { get { return File.Exists(this.FilePath); } }
         public bool Loaded { get; private set; }
 
-        public BaseDocument(BaseFilePathGenerator filePathGenerator, string title, string description = null)
+        public TopicSection(BaseFilePathGenerator filePathGenerator, string title, string description = null)
         {
             this.Ordinal = -1;
             this.Title = title;
@@ -45,7 +45,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             this.FileName = filePathGenerator.FileName;
         }
 
-        public BaseDocument(BaseFilePathGenerator filePathGenerator, string title, string description = null, int ordinal = -1)
+        public TopicSection(BaseFilePathGenerator filePathGenerator, string title, string description = null, int ordinal = -1)
         {
             this.Ordinal = -1;
             this.Title = title;

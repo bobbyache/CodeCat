@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public class ImageSetDocument : BaseDocument, IImageSetDocument
+    public class ImageSetDocument : TopicSection, IImageSetDocument
     {
         public event EventHandler ImageAdded;
         public event EventHandler ImageRemoved;

@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Base\BaseFilePathGenerator.cs" />
     <Compile Include="DocumentFactory.cs" />
-    <Compile Include="Base\BaseDocument.cs" />
+    <Compile Include="Base\TopicSection.cs" />
     <Compile Include="Base\BaseDocumentIndex.cs" />
     <Compile Include="Documents\CodeDocument.cs" />
     <Compile Include="Documents\FileGroupDocument.cs" />

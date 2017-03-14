@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public class FileGroupDocument : BaseDocument, IFileGroupDocument
+    public class FileGroupDocument : TopicSection, IFileGroupDocument
     {
         internal FileGroupDocument(string folder, string title)
             : base(new DocumentPathGenerator(folder, "filgrp"), title, null)

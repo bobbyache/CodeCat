@@ -57,7 +57,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         }
     }
 
-    public class UrlGroupDocument : BaseDocument, IUrlGroupDocument
+    public class UrlGroupDocument : TopicSection, IUrlGroupDocument
     {
         public event EventHandler Paste;
         public event EventHandler PasteConflict;
