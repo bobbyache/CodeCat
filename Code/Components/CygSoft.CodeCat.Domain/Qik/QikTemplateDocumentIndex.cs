@@ -10,11 +10,11 @@ namespace CygSoft.CodeCat.Domain.Qik
 {
     public class QikTemplateDocumentIndex : BaseDocumentIndex
     {
-        public IQikScriptDocument ScriptDocument 
+        public IQikScriptTopicSection QikScriptSection 
         { 
             get 
             {
-                return base.TopicSections.OfType<QikScriptDocument>().SingleOrDefault();
+                return base.TopicSections.OfType<QikScriptTopicSection>().SingleOrDefault();
             } 
         }
 
@@ -42,7 +42,7 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         protected override void AfterAddTopicSection()
         {
-            base.topicSections.MoveLast(this.ScriptDocument as ITopicSection);
+            base.topicSections.MoveLast(this.QikScriptSection as ITopicSection);
         }
     }
 }

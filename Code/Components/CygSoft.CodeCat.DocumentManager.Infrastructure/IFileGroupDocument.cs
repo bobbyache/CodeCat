@@ -2,7 +2,7 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IFileGroupFile
+    public interface IFileAttachment
     {
         string Id { get; }
         string Title { get; set; }
@@ -29,13 +29,13 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 
     }
 
-    public interface IFileGroupDocument : ITopicSection, IPositionedItem
+    public interface IFileAttachmentsTopicSection : ITopicSection, IPositionedItem
     {
-        IFileGroupFile[] Items { get; }
+        IFileAttachment[] Items { get; }
         string[] Categories { get; }
-        void Add(IFileGroupFile file);
-        void Remove(IFileGroupFile file);
+        void Add(IFileAttachment fileAttachment);
+        void Remove(IFileAttachment fileAttachment);
         bool ValidateFileName(string fileName, string id = "");
-        IFileGroupFile CreateNewFile(string fileName, string sourcePath);
+        IFileAttachment CreateNewFile(string fileName, string sourcePath);
     }
 }

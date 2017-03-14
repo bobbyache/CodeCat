@@ -6,7 +6,7 @@ using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
 {
-    public class FileGroupFile : IFileGroupFile
+    public class FileGroupFile : IFileAttachment
     {
         private string sourceFilePath;
         private FilePathGenerator originalFilePathGenerator;

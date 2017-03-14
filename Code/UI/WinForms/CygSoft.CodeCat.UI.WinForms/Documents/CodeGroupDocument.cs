@@ -343,7 +343,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnFileGroup_Click(object sender, EventArgs e)
         {
-            IFileGroupDocument richTextDocument = codeItemFile.AddTopicSection(TopicSectionType.FileGroup, null, null) as IFileGroupDocument;
+            IFileAttachmentsTopicSection fileAttachmentsTopicSection = codeItemFile.AddTopicSection(TopicSectionType.FileGroup, null, null) as IFileAttachmentsTopicSection;
             this.IsModified = true;
         }
 

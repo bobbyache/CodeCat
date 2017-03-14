@@ -212,9 +212,9 @@ namespace CygSoft.CodeCat.UI.WinForms
                     DocumentControlFactory.Create(document, qikFile, application, codeCtrl_Modified), true, false);
             }
 
-            IQikScriptDocument scriptDocument = qikFile.ScriptSection as IQikScriptDocument;
-            scriptControl = (QikScriptCtrl)DocumentControlFactory.Create(scriptDocument, qikFile, application, codeCtrl_Modified);
-            tabManager.AddTab(scriptDocument, scriptControl, btnShowScript.Checked, false);
+            IQikScriptTopicSection qikScriptTopicSection = qikFile.ScriptSection as IQikScriptTopicSection;
+            scriptControl = (QikScriptCtrl)DocumentControlFactory.Create(qikScriptTopicSection, qikFile, application, codeCtrl_Modified);
+            tabManager.AddTab(qikScriptTopicSection, scriptControl, btnShowScript.Checked, false);
         }
 
         private void Compile()

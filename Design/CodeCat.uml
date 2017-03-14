@@ -5614,7 +5614,7 @@ when the old single CodeFile system is removed.
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="gN8CnBvLB06ZqjlJ7jiY3wAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="IOZza3CsCkSE5Yi7aZTmsAAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">BaseDocument</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">TopicSection</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="scjdgEpI30CVVk16emIh8wAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -6620,7 +6620,7 @@ Adds a text property for saving text files.
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="jXpUzmqttU+ro9+p5skX7gAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="z2HTCDFg10iL9pgfU5yNIwAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">BaseDocument</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">TopicSection</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="76YgF9zQ4kqr//qMvU800gAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -6722,7 +6722,7 @@ Adds a text property for saving text files.
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="lX4SLNzH70awkWSqnriANwAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="bj7AmFCLjEW41oiPvh27pQAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">TextDocument</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">TextTopicSection</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="qpsC7ZFJh0iEXu+sRkGAnwAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -6773,7 +6773,7 @@ Adds a text property for saving text files.
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="7OCcNZ2ZFkWtIMKxmSRkPAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="ht1e7K78l0mpa3F7oABsZwAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">CodeDocument</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">CodeTopicSection</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="uYmYZPn740qUg3s7k8flXwAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -6854,13 +6854,13 @@ Adds a text property for saving text files.
 <XPD:OBJ name="OwnedViews[9]" type="UMLClassView" guid="/qf9+rN2j0Kz94GglRuEeQAA">
 <XPD:ATTR name="Left" type="integer">908</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">312</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">121</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">175</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">43</XPD:ATTR>
 <XPD:REF name="Model">8kkEtAQn2k2adH1iyhGYyQAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="YSOWNqhd30ir0n+EuzxppgAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="vpwkCki7eUqNd+rq+jqpCQAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">FileGroupDocument</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">FileAttachmentsTopicSection</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="y4JWk/aMiE+VgEwf5xZ3PAAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -6912,13 +6912,13 @@ Adds a text property for saving text files.
 <XPD:OBJ name="OwnedViews[11]" type="UMLClassView" guid="ATT+bVFE1ke7I60B5cW2ZQAA">
 <XPD:ATTR name="Left" type="integer">500</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">532</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">119</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">133</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">43</XPD:ATTR>
 <XPD:REF name="Model">DFndYwnpAE6gaw1GYlcodAAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="jOijDoyzFUWEw9S3NCm+7gAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="/ET3nhAOUkupTbEX/TXAGQAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">QikScriptDocument</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">QikScriptTopicSection</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="u6thc8iXAEO4AMEdARVLrAAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -8000,7 +8000,7 @@ Test Events, Id creation etc.
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[3]" type="UMLClass" guid="feWMSoPUHkG3hdZVCPbhkwAA">
-<XPD:ATTR name="Name" type="string">BaseDocument</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">TopicSection</XPD:ATTR>
 <XPD:REF name="Namespace">ehJDtD9ohUK360F0ZP/0wAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">8</XPD:ATTR>
 <XPD:REF name="Views[0]">/7o2RxosWU2aH1KkZdA97QAA</XPD:REF>
@@ -8037,7 +8037,7 @@ Test Events, Id creation etc.
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[4]" type="UMLClass" guid="T0CAB4yBv0ejF7nx6P6Z6gAA">
-<XPD:ATTR name="Name" type="string">TextDocument</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">TextTopicSection</XPD:ATTR>
 <XPD:REF name="Namespace">ehJDtD9ohUK360F0ZP/0wAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">A8rlJW9sfkeXD8nRO288QgAA</XPD:REF>
@@ -8055,7 +8055,7 @@ Test Events, Id creation etc.
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[5]" type="UMLClass" guid="WPRQAX5dPUCMOs/1R0tDRAAA">
-<XPD:ATTR name="Name" type="string">CodeDocument</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">CodeTopicSection</XPD:ATTR>
 <XPD:REF name="Namespace">ehJDtD9ohUK360F0ZP/0wAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">jBMza1+eRE6rNb7VkFo0RgAA</XPD:REF>
@@ -8366,7 +8366,7 @@ Test Events, Id creation etc.
 <XPD:REF name="Generalizations[0]">x/lyy2AKRkGslxjhlC+7rQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[25]" type="UMLClass" guid="8kkEtAQn2k2adH1iyhGYyQAA">
-<XPD:ATTR name="Name" type="string">FileGroupDocument</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">FileAttachmentsTopicSection</XPD:ATTR>
 <XPD:REF name="Namespace">ehJDtD9ohUK360F0ZP/0wAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">/qf9+rN2j0Kz94GglRuEeQAA</XPD:REF>
@@ -8390,7 +8390,7 @@ Test Events, Id creation etc.
 <XPD:REF name="Associations[0]">J+cUK1ZlbU6jFngOzqIaOQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[27]" type="UMLClass" guid="DFndYwnpAE6gaw1GYlcodAAA">
-<XPD:ATTR name="Name" type="string">QikScriptDocument</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">QikScriptTopicSection</XPD:ATTR>
 <XPD:REF name="Namespace">ehJDtD9ohUK360F0ZP/0wAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">ATT+bVFE1ke7I60B5cW2ZQAA</XPD:REF>

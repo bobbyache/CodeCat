@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
         {
             if (topicSection is ICodeTopicSection)
             {
-                if (topicSection is IQikScriptDocument)
+                if (topicSection is IQikScriptTopicSection)
                     return NewQikScriptControl(topicSection, groupOwner, application, modifiedEventHandler);
                 else if (topicSection.FileExtension == "tpl")
                     return NewQikTemplateControl(topicSection, groupOwner, application, modifiedEventHandler);
@@ -24,7 +24,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
             else if (topicSection is IUrlGroupDocument)
                 return NewUrlGroupControl(topicSection, groupOwner, application, modifiedEventHandler);
-            else if (topicSection is IFileGroupDocument)
+            else if (topicSection is IFileAttachmentsTopicSection)
                 return NewFileGroupControl(topicSection, groupOwner, application, modifiedEventHandler);
             else if (topicSection is IPdfDocument)
                 return NewPdfDocument(topicSection, groupOwner, application, modifiedEventHandler);
@@ -40,7 +40,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         private static IDocumentItemControl NewFileGroupControl(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            FileGroupControl documentControl = new FileGroupControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IFileGroupDocument);
+            FileGroupControl documentControl = new FileGroupControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IFileAttachmentsTopicSection);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }

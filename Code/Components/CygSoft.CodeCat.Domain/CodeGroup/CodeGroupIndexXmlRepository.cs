@@ -147,17 +147,17 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", rtfFile.Ordinal.ToString())
                         ));
                 }
-                else if (topicSection is IFileGroupDocument)
+                else if (topicSection is IFileAttachmentsTopicSection)
                 {
-                    IFileGroupDocument fileGrpFile = topicSection as IFileGroupDocument;
+                    IFileAttachmentsTopicSection fileAttachmentsTopicSection = topicSection as IFileAttachmentsTopicSection;
 
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", fileGrpFile.Id),
-                        new XAttribute("Title", fileGrpFile.Title),
-                        new XAttribute("DocType", fileGrpFile.DocumentType),
-                        new XAttribute("Description", fileGrpFile.Description == null ? "" : fileGrpFile.Description),
-                        new XAttribute("Ext", fileGrpFile.FileExtension),
-                        new XAttribute("Ordinal", fileGrpFile.Ordinal.ToString())
+                        new XAttribute("Id", fileAttachmentsTopicSection.Id),
+                        new XAttribute("Title", fileAttachmentsTopicSection.Title),
+                        new XAttribute("DocType", fileAttachmentsTopicSection.DocumentType),
+                        new XAttribute("Description", fileAttachmentsTopicSection.Description == null ? "" : fileAttachmentsTopicSection.Description),
+                        new XAttribute("Ext", fileAttachmentsTopicSection.FileExtension),
+                        new XAttribute("Ordinal", fileAttachmentsTopicSection.Ordinal.ToString())
                         ));
                 }
             }

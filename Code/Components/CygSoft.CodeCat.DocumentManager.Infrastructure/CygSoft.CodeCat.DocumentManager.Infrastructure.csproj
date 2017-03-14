@@ -53,7 +53,7 @@
     <Compile Include="IImgDocument.cs" />
     <Compile Include="IPdfDocument.cs" />
     <Compile Include="IPositionedItem.cs" />
-    <Compile Include="IQikScriptDocument.cs" />
+    <Compile Include="IQikScriptTopicSection.cs" />
     <Compile Include="IRichTextDocument.cs" />
     <Compile Include="ITextTopicSection.cs" />
     <Compile Include="TopicSectionEventArgs.cs" />

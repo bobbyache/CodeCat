@@ -156,7 +156,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 item.Image = IconRepository.Get(IconRepository.Documents.HyperlinkSet).Image;
             else if (topicSection is IRichTextDocument)
                 item.Image = IconRepository.Get(IconRepository.Documents.RTF).Image; 
-            else if (topicSection is IFileGroupDocument)
+            else if (topicSection is IFileAttachmentsTopicSection)
                 item.Image = IconRepository.Get(IconRepository.Documents.FileSet).Image; 
 
             else

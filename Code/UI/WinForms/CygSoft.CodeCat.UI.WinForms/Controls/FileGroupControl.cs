@@ -17,12 +17,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class FileGroupControl : UserControl, IDocumentItemControl
     {
-        private IFileGroupDocument fileDocument;
+        private IFileAttachmentsTopicSection fileAttachmentsTopicSection;
         private ICodeGroupDocumentSet codeGroupDocumentSet;
         private AppFacade application;
         private ListViewSorter listViewSorter;
 
-        public FileGroupControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IFileGroupDocument fileDocument)
+        public FileGroupControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IFileAttachmentsTopicSection fileAttachmentsTopicSection)
         {
             InitializeComponent();
 
@@ -34,10 +34,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
             btnEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
 
-            this.fileDocument = fileDocument;
+            this.fileAttachmentsTopicSection = fileAttachmentsTopicSection;
             this.codeGroupDocumentSet = codeGroupDocumentSet;
             this.application = application;
-            this.Id = fileDocument.Id;
+            this.Id = fileAttachmentsTopicSection.Id;
 
             ReloadGroups();
             LoadListOfUrls();
@@ -65,28 +65,28 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadListOfUrls()
         {
-            txtTitle.Text = fileDocument.Title;
-            ReloadListview(fileListview, fileDocument.Items);
+            txtTitle.Text = fileAttachmentsTopicSection.Title;
+            ReloadListview(fileListview, fileAttachmentsTopicSection.Items);
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void ReloadListview(ListView listView, IFileGroupFile[] indexItems)
+        private void ReloadListview(ListView listView, IFileAttachment[] fileAttachments)
         {
             listView.Items.Clear();
-            IconRepository.AddFileExtensions(indexItems.Select(idx => idx.FileExtension));
+            IconRepository.AddFileExtensions(fileAttachments.Select(idx => idx.FileExtension));
 
-            foreach (IFileGroupFile item in indexItems)
+            foreach (IFileAttachment fileAttachment in fileAttachments)
             {
-                ListViewItem listItem = CreateListviewItem(listView, item);
-                GroupItem(listItem, item);
+                ListViewItem listItem = CreateListviewItem(listView, fileAttachment);
+                GroupItem(listItem, fileAttachment);
                 listView.Items.Add(listItem);
             }
 
             listViewSorter.Sort(0);
         }
 
-        private ListViewItem CreateListviewItem(ListView listView, IFileGroupFile item, bool select = false)
+        private ListViewItem CreateListviewItem(ListView listView, IFileAttachment item, bool select = false)
         {
             ListViewItem listItem = new ListViewItem();
 
@@ -106,7 +106,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ReloadGroups()
         {
             this.fileListview.Groups.Clear();
-            string[] categories = this.fileDocument.Categories;
+            string[] categories = this.fileAttachmentsTopicSection.Categories;
 
             foreach (string category in categories)
             {
@@ -118,13 +118,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             fileListview.ShowGroups = this.fileListview.Groups.Count > 1;
         }
 
-        private void GroupItem(ListViewItem listItem, IFileGroupFile item)
+        private void GroupItem(ListViewItem listItem, IFileAttachment fileAttachment)
         {
             bool groupExists = false;
 
             foreach (ListViewGroup group in this.fileListview.Groups)
             {
-                if (group.Header == item.Category)
+                if (group.Header == fileAttachment.Category)
                 {
                     // Add item to the group.
                     // Alternative is: group.Items.Add(item);
@@ -136,7 +136,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             if (!groupExists)
             {
-                ListViewGroup group = new ListViewGroup(item.Category);
+                ListViewGroup group = new ListViewGroup(fileAttachment.Category);
                 group.HeaderAlignment = HorizontalAlignment.Left;
                 this.fileListview.Groups.Add(group);
                 listItem.Group = group;
@@ -151,7 +151,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupDocumentSet_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
         {
-            this.fileDocument.Title = txtTitle.Text;
+            this.fileAttachmentsTopicSection.Title = txtTitle.Text;
         }
 
         private void SetChangeStatus()
@@ -169,14 +169,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(fileDocument);
+            FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(fileAttachmentsTopicSection);
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
-                fileDocument.Add(dialog.EditedFile);
+                fileAttachmentsTopicSection.Add(dialog.EditedFile);
                 ReloadGroups();
-                ReloadListview(fileListview, fileDocument.Items);
+                ReloadListview(fileListview, fileAttachmentsTopicSection.Items);
                 SetModified();
             }
         }
@@ -196,14 +196,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             if (fileListview.SelectedItems.Count == 1)
             {
                 // TODO: Instead of pulling the file object out of the ListViewItemTag we should be getting it from the FileGroup object. In fact, need to run a search on .Tag and see where you can improve this design.
-                IFileGroupFile item = fileListview.SelectedItems[0].Tag as IFileGroupFile;
-                FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(item, fileDocument);
+                IFileAttachment fileAttachment = fileListview.SelectedItems[0].Tag as IFileAttachment;
+                FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(fileAttachment, fileAttachmentsTopicSection);
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
                     ReloadGroups();
-                    ReloadListview(fileListview, fileDocument.Items);
+                    ReloadListview(fileListview, fileAttachmentsTopicSection.Items);
                     SetModified();
                 }
             }
@@ -217,23 +217,23 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
                 if (result == DialogResult.Yes)
                 {
-                    IEnumerable<IFileGroupFile> items = fileListview.SelectedItems.Cast<ListViewItem>()
-                        .Select(lv => lv.Tag).Cast<IFileGroupFile>();
+                    IEnumerable<IFileAttachment> fileAttachments = fileListview.SelectedItems.Cast<ListViewItem>()
+                        .Select(lv => lv.Tag).Cast<IFileAttachment>();
 
-                    foreach (IFileGroupFile item in items)
-                        fileDocument.Remove(item);
+                    foreach (IFileAttachment fileAttachment in fileAttachments)
+                        fileAttachmentsTopicSection.Remove(fileAttachment);
 
                     ReloadGroups();
-                    ReloadListview(fileListview, fileDocument.Items);
+                    ReloadListview(fileListview, fileAttachmentsTopicSection.Items);
                     SetModified();
                 }
             }
         }
 
-        private IFileGroupFile SelectedItem(ListView listView)
+        private IFileAttachment SelectedFileAttachment(ListView listView)
         {
             if (listView.SelectedItems.Count == 1)
-                return listView.SelectedItems[0].Tag as IFileGroupFile;
+                return listView.SelectedItems[0].Tag as IFileAttachment;
             
             return null;
         }
@@ -244,12 +244,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 int cnt = fileListview.SelectedItems.Count;
                 bool onItem = false;
-                IFileGroupFile item = null;
+                IFileAttachment item = null;
 
                 if (fileListview.FocusedItem != null)
                 {
                     onItem = fileListview.FocusedItem.Bounds.Contains(e.Location);
-                    item = fileListview.FocusedItem.Tag as IFileGroupFile;
+                    item = fileListview.FocusedItem.Tag as IFileAttachment;
                 }
 
                 mnuOpen.Enabled = cnt == 1 && onItem && item.AllowOpenOrExecute;
@@ -271,7 +271,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             try
             {
-                IFileGroupFile item = SelectedItem(fileListview);
+                IFileAttachment item = SelectedFileAttachment(fileListview);
                 if (item != null)
                     item.Open();
             }
@@ -298,24 +298,24 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void mnuSaveAs_Click(object sender, EventArgs e)
         {
-            IFileGroupFile item = SelectedItem(fileListview);
-            if (item != null)
+            IFileAttachment fileAttachment = SelectedFileAttachment(fileListview);
+            if (fileAttachment != null)
             {
                 SaveFileDialog saveDialog = new SaveFileDialog();
-                saveDialog.Filter = string.Format("File *{0} (*{0})|*{0}", item.FileExtension);
+                saveDialog.Filter = string.Format("File *{0} (*{0})|*{0}", fileAttachment.FileExtension);
                 saveDialog.DefaultExt = "*{0}";
                 saveDialog.Title = string.Format("Save File");
                 saveDialog.AddExtension = true;
                 saveDialog.FilterIndex = 0;
                 saveDialog.OverwritePrompt = true;
-                saveDialog.FileName = item.FileName;
+                saveDialog.FileName = fileAttachment.FileName;
 
                 DialogResult result = saveDialog.ShowDialog(this);
                 string filePath = saveDialog.FileName;
 
                 if (result == DialogResult.OK)
                 {
-                    File.Copy(item.FilePath, saveDialog.FileName, true);
+                    File.Copy(fileAttachment.FilePath, saveDialog.FileName, true);
                 }
             }
         }

@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IQikScriptDocument : ICodeTopicSection
+    public interface IQikScriptTopicSection : ICodeTopicSection
     {
     }
 }

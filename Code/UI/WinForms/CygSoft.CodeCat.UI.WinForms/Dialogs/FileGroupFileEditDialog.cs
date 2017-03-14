@@ -14,36 +14,36 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class FileGroupFileEditDialog : Form
     {
-        private IFileGroupFile fileGroupFile;
-        public IFileGroupFile EditedFile { get { return fileGroupFile; } }
-        private IFileGroupDocument fileGroupDocument;
+        private IFileAttachment fileAttachment;
+        public IFileAttachment EditedFile { get { return fileAttachment; } }
+        private IFileAttachmentsTopicSection fileAttachmentsTopicSection;
 
-        public FileGroupFileEditDialog(IFileGroupFile fileGroupFile, IFileGroupDocument fileGroupDocument)
+        public FileGroupFileEditDialog(IFileAttachment fileAttachment, IFileAttachmentsTopicSection fileAttachmentsTopicSection)
         {
             InitializeComponent();
 
-            this.fileGroupFile = fileGroupFile;
-            this.fileGroupDocument = fileGroupDocument;
+            this.fileAttachment = fileAttachment;
+            this.fileAttachmentsTopicSection = fileAttachmentsTopicSection;
             txtFilePath.Text = "";
-            txtTitle.Text = fileGroupFile.Title;
-            txtFileName.Text = fileGroupFile.FileTitle;
-            lblExtension.Text = fileGroupFile != null ? fileGroupFile.FileExtension : "";
-            txtDescription.Text = fileGroupFile.Description;
-            cboCategory.Items.AddRange(fileGroupDocument.Categories);
+            txtTitle.Text = fileAttachment.Title;
+            txtFileName.Text = fileAttachment.FileTitle;
+            lblExtension.Text = fileAttachment != null ? fileAttachment.FileExtension : "";
+            txtDescription.Text = fileAttachment.Description;
+            cboCategory.Items.AddRange(fileAttachmentsTopicSection.Categories);
             cboCategory.Sorted = true;
-            cboCategory.SelectedItem = string.IsNullOrEmpty(fileGroupFile.Category) ? "Unknown" : fileGroupFile.Category;
-            chkAllowOpenOrExecute.Checked = fileGroupFile.AllowOpenOrExecute;
+            cboCategory.SelectedItem = string.IsNullOrEmpty(fileAttachment.Category) ? "Unknown" : fileAttachment.Category;
+            chkAllowOpenOrExecute.Checked = fileAttachment.AllowOpenOrExecute;
         }
 
-        public FileGroupFileEditDialog(IFileGroupDocument fileGroupDocument)
+        public FileGroupFileEditDialog(IFileAttachmentsTopicSection fileGroupDocument)
         {
             InitializeComponent();
 
-            this.fileGroupDocument = fileGroupDocument;
+            this.fileAttachmentsTopicSection = fileGroupDocument;
             txtFilePath.Text = "";
             txtTitle.Text = "";
             txtFileName.Text = "";
-            lblExtension.Text = fileGroupFile != null ? fileGroupFile.FileExtension : "";
+            lblExtension.Text = fileAttachment != null ? fileAttachment.FileExtension : "";
             txtDescription.Text = "";
             cboCategory.Items.AddRange(fileGroupDocument.Categories);
             cboCategory.Sorted = true;
@@ -63,20 +63,20 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (ValidateFields())
             {
-                if (fileGroupFile == null)
+                if (fileAttachment == null)
                 {
-                    fileGroupFile = fileGroupDocument.CreateNewFile(txtFileName.Text.Trim() + lblExtension.Text, txtFilePath.Text.Trim());
+                    fileAttachment = fileAttachmentsTopicSection.CreateNewFile(txtFileName.Text.Trim() + lblExtension.Text, txtFilePath.Text.Trim());
                 }
 
                 if (!string.IsNullOrEmpty(txtFilePath.Text.Trim()))
-                    fileGroupFile.ImportFile(txtFilePath.Text.Trim());
+                    fileAttachment.ImportFile(txtFilePath.Text.Trim());
 
-                fileGroupFile.Title = txtTitle.Text;
-                fileGroupFile.ChangeFileName(txtFileName.Text.Trim() + lblExtension.Text);
-                fileGroupFile.Description = txtDescription.Text;
-                fileGroupFile.DateModified = DateTime.Now;
-                fileGroupFile.Category = string.IsNullOrEmpty(cboCategory.Text) ? "Unknown" : cboCategory.Text.ToString();
-                fileGroupFile.AllowOpenOrExecute = chkAllowOpenOrExecute.Checked;
+                fileAttachment.Title = txtTitle.Text;
+                fileAttachment.ChangeFileName(txtFileName.Text.Trim() + lblExtension.Text);
+                fileAttachment.Description = txtDescription.Text;
+                fileAttachment.DateModified = DateTime.Now;
+                fileAttachment.Category = string.IsNullOrEmpty(cboCategory.Text) ? "Unknown" : cboCategory.Text.ToString();
+                fileAttachment.AllowOpenOrExecute = chkAllowOpenOrExecute.Checked;
                 DialogResult = DialogResult.OK;
             }
         }
@@ -91,7 +91,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             // In this case, no file name exists (no file has ever been captured for a source file)... hence no extension.
             // so ensure the user has actually selected a file.
-            if (fileGroupFile == null && (string.IsNullOrEmpty(txtFilePath.Text.Trim()) || !File.Exists(txtFilePath.Text.Trim())))
+            if (fileAttachment == null && (string.IsNullOrEmpty(txtFilePath.Text.Trim()) || !File.Exists(txtFilePath.Text.Trim())))
             {
                 Dialogs.NoInputValueForMandatoryField(this, "File Path");
                 return false;
@@ -110,8 +110,8 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return false;
             }
 
-            string id = fileGroupFile == null ? "" : fileGroupFile.Id;
-            if (!fileGroupDocument.ValidateFileName(txtFileName.Text.Trim() + lblExtension.Text, id))
+            string id = fileAttachment == null ? "" : fileAttachment.Id;
+            if (!fileAttachmentsTopicSection.ValidateFileName(txtFileName.Text.Trim() + lblExtension.Text, id))
             {
                 Dialogs.WillConflictDialogPrompt(this, "File Name");
                 return false;

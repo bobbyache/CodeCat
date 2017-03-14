@@ -77,8 +77,8 @@ namespace CygSoft.CodeCat.Domain.Qik
             get
             {
                 List<ICodeTopicSection> codeDocuments = this.documentIndex.TopicSections.OfType<ICodeTopicSection>().ToList();
-                IQikScriptDocument scriptDoc = codeDocuments.OfType<IQikScriptDocument>().SingleOrDefault();
-                codeDocuments.Remove(scriptDoc);
+                IQikScriptTopicSection qikScriptTopicSection = codeDocuments.OfType<IQikScriptTopicSection>().SingleOrDefault();
+                codeDocuments.Remove(qikScriptTopicSection);
                 return codeDocuments.ToArray();
             }
         }
@@ -152,7 +152,7 @@ namespace CygSoft.CodeCat.Domain.Qik
             return this.documentIndex.GetTopicSection(id) as ICodeTopicSection;
         }
 
-        public ICodeTopicSection ScriptSection { get { return this.documentIndex.ScriptDocument; } }
+        public ICodeTopicSection ScriptSection { get { return this.documentIndex.QikScriptSection; } }
 
         public void Revert()
         {

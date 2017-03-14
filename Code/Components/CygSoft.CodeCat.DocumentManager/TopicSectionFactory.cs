@@ -117,9 +117,9 @@ namespace CygSoft.CodeCat.DocumentManager
         private static ITopicSection CreateFileGroup(DocArgs docArgs)
         {
             if (docArgs.Id == null)
-                return new FileGroupDocument(docArgs.Folder, docArgs.Title);
+                return new FileAttachmentsTopicSection(docArgs.Folder, docArgs.Title);
             else
-                return new FileGroupDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
+                return new FileAttachmentsTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
         private static ITopicSection CreateImageSet(DocArgs docArgs)
@@ -173,9 +173,9 @@ namespace CygSoft.CodeCat.DocumentManager
         private static ITopicSection CreateQikScript(DocArgs docArgs)
         {
             if (docArgs.Id == null)
-                return new QikScriptDocument(docArgs.Folder, docArgs.Title, docArgs.Extension, docArgs.Syntax);
+                return new QikScriptTopicSection(docArgs.Folder, docArgs.Title, docArgs.Extension, docArgs.Syntax);
             else
-                return new QikScriptDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description, docArgs.Syntax);
+                return new QikScriptTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description, docArgs.Syntax);
         }
     }
 }

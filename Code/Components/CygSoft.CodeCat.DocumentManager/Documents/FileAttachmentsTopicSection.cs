@@ -10,26 +10,26 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public class FileGroupDocument : TopicSection, IFileGroupDocument
+    public class FileAttachmentsTopicSection : TopicSection, IFileAttachmentsTopicSection
     {
-        internal FileGroupDocument(string folder, string title)
+        internal FileAttachmentsTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "filgrp"), title, null)
         {
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.FileGroup);
         }
 
-        internal FileGroupDocument(string folder, string id, string title, int ordinal, string description)
+        internal FileAttachmentsTopicSection(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "filgrp", id), title, description, ordinal)
         {
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.FileGroup);
         }
 
-        private List<IFileGroupFile> fileList = new List<IFileGroupFile>();
-        private List<IFileGroupFile> removedList = new List<IFileGroupFile>();
+        private List<IFileAttachment> fileAttachmentList = new List<IFileAttachment>();
+        private List<IFileAttachment> removedFileAttachmentList = new List<IFileAttachment>();
 
-        public IFileGroupFile[] Items 
+        public IFileAttachment[] Items 
         {
-            get { return fileList.ToArray(); }
+            get { return fileAttachmentList.ToArray(); }
         }
 
         public string[] Categories
@@ -42,17 +42,17 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             XDocument xDocument = XDocument.Load(this.FilePath);
             IEnumerable<XElement> elements = xDocument.Element("FileGroup").Elements("Files").Elements();
 
-            List<IFileGroupFile> files = ExtractFromXml(elements);
-            this.fileList = files.OfType<IFileGroupFile>().ToList();
+            List<IFileAttachment> files = ExtractFromXml(elements);
+            this.fileAttachmentList = files.OfType<IFileAttachment>().ToList();
         }
 
-        private List<IFileGroupFile> ExtractFromXml(IEnumerable<XElement> elements)
+        private List<IFileAttachment> ExtractFromXml(IEnumerable<XElement> elements)
         {
-            List<IFileGroupFile> files = new List<IFileGroupFile>();
+            List<IFileAttachment> files = new List<IFileAttachment>();
 
             foreach (XElement element in elements)
             {
-                IFileGroupFile item = new FileGroupFile(
+                IFileAttachment fileAttachment = new FileGroupFile(
                     this.Folder,
                     (string)element.Attribute("Id"),
                     (string)element.Attribute("Title"),
@@ -64,20 +64,20 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
                     DateTime.Parse((string)element.Attribute("Modified"))
                 );
 
-                files.Add(item);
+                files.Add(fileAttachment);
             }
             return files.ToList();
         }
 
         protected override void SaveFile()
         {
-            foreach (IFileGroupFile file in fileList)
-                file.Save();
+            foreach (IFileAttachment fileAttachment in fileAttachmentList)
+                fileAttachment.Save();
 
-            foreach (IFileGroupFile file in removedList)
-                file.Delete();
+            foreach (IFileAttachment fileAttachment in removedFileAttachmentList)
+                fileAttachment.Delete();
 
-            removedList.Clear();
+            removedFileAttachmentList.Clear();
 
             if (!File.Exists(this.FilePath))
                 CreateFile();
@@ -86,13 +86,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         protected override void OnBeforeRevert()
         {
-            foreach (IFileGroupFile file in removedList)
+            foreach (IFileAttachment file in removedFileAttachmentList)
                 file.Revert();
 
-            foreach (IFileGroupFile file in fileList)
+            foreach (IFileAttachment file in fileAttachmentList)
                 file.Revert();
 
-            removedList.Clear();
+            removedFileAttachmentList.Clear();
 
             base.OnBeforeRevert();
         }
@@ -100,7 +100,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         protected override void OnAfterDelete()
         {
             base.OnAfterDelete();
-            foreach (IFileGroupFile file in this.fileList)
+            foreach (IFileAttachment file in this.fileAttachmentList)
             {
                 if (File.Exists(file.FilePath))
                     File.Delete(file.FilePath);
@@ -116,66 +116,66 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             xDocument.Save(this.FilePath);
         }
 
-        private void WriteFile(IFileGroupFile[] items)
+        private void WriteFile(IFileAttachment[] fileAttachments)
         {
             XDocument indexDocument = XDocument.Load(this.FilePath);
             XElement element = indexDocument.Element("FileGroup").Element("Files");
             element.RemoveNodes();
 
-            AppendToContainerElement(element, items);
+            AppendToContainerElement(element, fileAttachments);
             indexDocument.Save(this.FilePath);
         }
 
-        private void AppendToContainerElement(XElement containerElement, IFileGroupFile[] items)
+        private void AppendToContainerElement(XElement containerElement, IFileAttachment[] fileAttachments)
         {
-            foreach (IFileGroupFile item in items)
+            foreach (IFileAttachment fileAttachment in fileAttachments)
             {
                 containerElement.Add(new XElement("FileItem",
-                    new XAttribute("Id", item.Id),
-                    new XAttribute("Title", item.Title),
-                    new XAttribute("FileName", item.FileName),
-                    new XAttribute("AllowOpenOrExecute", item.AllowOpenOrExecute),
-                    new XAttribute("Category", item.Category != null ? item.Category : "Unknown"),
-                    new XAttribute("Description", item.Description),
-                    new XAttribute("Created", item.DateCreated.ToString()),
-                    new XAttribute("Modified", item.DateModified.ToString())
+                    new XAttribute("Id", fileAttachment.Id),
+                    new XAttribute("Title", fileAttachment.Title),
+                    new XAttribute("FileName", fileAttachment.FileName),
+                    new XAttribute("AllowOpenOrExecute", fileAttachment.AllowOpenOrExecute),
+                    new XAttribute("Category", fileAttachment.Category != null ? fileAttachment.Category : "Unknown"),
+                    new XAttribute("Description", fileAttachment.Description),
+                    new XAttribute("Created", fileAttachment.DateCreated.ToString()),
+                    new XAttribute("Modified", fileAttachment.DateModified.ToString())
                 ));
             }
         }
 
-        public void Add(IFileGroupFile file)
+        public void Add(IFileAttachment fileAttachment)
         {
-            fileList.Add(file);
+            fileAttachmentList.Add(fileAttachment);
         }
 
-        public void Remove(IFileGroupFile file)
+        public void Remove(IFileAttachment fileAttachment)
         {
-            fileList.Remove(file);
-            removedList.Add(file);
+            fileAttachmentList.Remove(fileAttachment);
+            removedFileAttachmentList.Add(fileAttachment);
         }
 
         public bool ValidateFileName(string fileName, string id = "")
         {
             if (File.Exists(Path.Combine(this.Folder, fileName)))
             {
-                foreach (IFileGroupFile checkFile in this.fileList)
+                foreach (IFileAttachment fileAttachment in this.fileAttachmentList)
                 {
-                    if (checkFile.Id != id && checkFile.HasFileName(fileName))
+                    if (fileAttachment.Id != id && fileAttachment.HasFileName(fileName))
                         return false;
                 }
-                foreach (IFileGroupFile checkFile in this.removedList)
+                foreach (IFileAttachment removedFileAttachment in this.removedFileAttachmentList)
                 {
-                    if (checkFile.Id != id && checkFile.HasFileName(fileName))
+                    if (removedFileAttachment.Id != id && removedFileAttachment.HasFileName(fileName))
                         return false;
                 }
             }
             return true;
         }
 
-        public IFileGroupFile CreateNewFile(string fileName, string sourceFilePath)
+        public IFileAttachment CreateNewFile(string fileName, string sourceFilePath)
         {
-            IFileGroupFile fileGroupFile = new FileGroupFile(this.Folder, fileName, sourceFilePath);
-            return fileGroupFile;
+            IFileAttachment fileAttachment = new FileGroupFile(this.Folder, fileName, sourceFilePath);
+            return fileAttachment;
         }
     }
 }
