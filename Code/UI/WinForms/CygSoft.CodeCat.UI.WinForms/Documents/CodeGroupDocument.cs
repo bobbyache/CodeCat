@@ -313,7 +313,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddHyperlinks_Click(object sender, EventArgs e)
         {
-            IUrlGroupDocument urlFile = codeItemFile.AddTopicSection(TopicSectionType.UrlGroup) as IUrlGroupDocument;
+            IWebReferencesTopicSection webReferencesTopicSection = codeItemFile.AddTopicSection(TopicSectionType.UrlGroup) as IWebReferencesTopicSection;
             this.IsModified = true;
         }
 

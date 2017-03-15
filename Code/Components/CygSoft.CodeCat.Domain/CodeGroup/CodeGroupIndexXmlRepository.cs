@@ -82,17 +82,17 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", codeTopicSection.Ordinal.ToString())
                         ));
                 }
-                else if (topicSection is IUrlGroupDocument)
+                else if (topicSection is IWebReferencesTopicSection)
                 {
-                    IUrlGroupDocument urlFile = topicSection as IUrlGroupDocument;
+                    IWebReferencesTopicSection webReferencesTopicSection = topicSection as IWebReferencesTopicSection;
 
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", urlFile.Id),
-                        new XAttribute("Title", urlFile.Title),
-                        new XAttribute("DocType", urlFile.DocumentType),
-                        new XAttribute("Description", urlFile.Description == null ? "" : urlFile.Description),
-                        new XAttribute("Ext", urlFile.FileExtension),
-                        new XAttribute("Ordinal", urlFile.Ordinal.ToString())
+                        new XAttribute("Id", webReferencesTopicSection.Id),
+                        new XAttribute("Title", webReferencesTopicSection.Title),
+                        new XAttribute("DocType", webReferencesTopicSection.DocumentType),
+                        new XAttribute("Description", webReferencesTopicSection.Description == null ? "" : webReferencesTopicSection.Description),
+                        new XAttribute("Ext", webReferencesTopicSection.FileExtension),
+                        new XAttribute("Ordinal", webReferencesTopicSection.Ordinal.ToString())
                         ));
                 }
                 else if (topicSection is IPdfDocument)

@@ -12,12 +12,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class UrlGroupControl : UserControl, IDocumentItemControl
     {
-        private IUrlGroupDocument urlDocument;
+        private IWebReferencesTopicSection webReferencesTopicSection;
         private ICodeGroupDocumentSet codeGroupDocumentSet;
         private AppFacade application;
         private ListViewSorter listViewSorter;
 
-        public UrlGroupControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IUrlGroupDocument urlDocument)
+        public UrlGroupControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IWebReferencesTopicSection webReferenceTopicSection)
         {
             InitializeComponent();
 
@@ -28,10 +28,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
             btnEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
 
-            this.urlDocument = urlDocument;
+            this.webReferencesTopicSection = webReferenceTopicSection;
             this.codeGroupDocumentSet = codeGroupDocumentSet;
             this.application = application;
-            Id = urlDocument.Id;
+            Id = webReferenceTopicSection.Id;
 
             ReloadGroups();
             LoadListOfUrls();
@@ -39,12 +39,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             txtTitle.TextChanged += (s, e) => { SetModified(); };
             codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
             codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
-            urlDocument.Paste += urlDocument_Paste;
-            urlDocument.PasteConflict += urlDocument_PasteConflict;
+            webReferenceTopicSection.Paste += urlDocument_Paste;
+            webReferenceTopicSection.PasteConflict += urlDocument_PasteConflict;
             Disposed += (s, e) =>
             {
-                urlDocument.Paste -= urlDocument_Paste;
-                urlDocument.PasteConflict -= urlDocument_PasteConflict;
+                webReferenceTopicSection.Paste -= urlDocument_Paste;
+                webReferenceTopicSection.PasteConflict -= urlDocument_PasteConflict;
             };
         }
 
@@ -58,7 +58,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void urlDocument_Paste(object sender, EventArgs e)
         {
             ReloadGroups();
-            ReloadListview(urlListview, urlDocument.Items);
+            ReloadListview(urlListview, webReferencesTopicSection.WebReferences);
             SetModified();
             Dialogs.UrlsPastedSuccessfully(this);
         }
@@ -79,38 +79,38 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadListOfUrls()
         {
-            txtTitle.Text = urlDocument.Title;
-            ReloadListview(urlListview, urlDocument.Items);
+            txtTitle.Text = webReferencesTopicSection.Title;
+            ReloadListview(urlListview, webReferencesTopicSection.WebReferences);
             IsModified = false;
             SetChangeStatus();
         }
 
 
-        private void ReloadListview(ListView listView, IUrlItem[] indexItems)
+        private void ReloadListview(ListView listView, IWebReference[] webReferences)
         {
             listView.Items.Clear();
-            foreach (IUrlItem item in indexItems)
+            foreach (IWebReference webReference in webReferences)
             {
-                ListViewItem listItem = CreateListviewItem(listView, item);
-                GroupItem(listItem, item);
+                ListViewItem listItem = CreateListviewItem(listView, webReference);
+                GroupItem(listItem, webReference);
                 listView.Items.Add(listItem);
             }
 
             listViewSorter.Sort(0);
         }
 
-        private ListViewItem CreateListviewItem(ListView listView, IUrlItem item, bool select = false)
+        private ListViewItem CreateListviewItem(ListView listView, IWebReference webReference, bool select = false)
         {
             ListViewItem listItem = new ListViewItem();
 
-            listItem.Name = item.Id;
-            listItem.Tag = item;
-            listItem.ToolTipText = item.Url;
-            listItem.Text = item.Title;
-            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.HostName));
-            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Description));
-            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
-            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
+            listItem.Name = webReference.Id;
+            listItem.Tag = webReference;
+            listItem.ToolTipText = webReference.Url;
+            listItem.Text = webReference.Title;
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, webReference.HostName));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, webReference.Description));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, webReference.DateCreated.ToShortDateString()));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, webReference.DateModified.ToShortDateString()));
             
             return listItem;
         }
@@ -118,7 +118,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ReloadGroups()
         {
             urlListview.Groups.Clear();
-            string[] categories = urlDocument.Categories;
+            string[] categories = webReferencesTopicSection.Categories;
             foreach (string category in categories)
             {
                 ListViewGroup group = new ListViewGroup(category);
@@ -128,13 +128,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             urlListview.ShowGroups = urlListview.Groups.Count > 1;
         }
 
-        private void GroupItem(ListViewItem listItem, IUrlItem item)
+        private void GroupItem(ListViewItem listItem, IWebReference webReference)
         {
             bool groupExists = false;
 
             foreach (ListViewGroup group in urlListview.Groups)
             {
-                if (group.Header == item.Category)
+                if (group.Header == webReference.Category)
                 {
                     // Add item to the group.
                     // Alternative is: group.Items.Add(item);
@@ -146,7 +146,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             if (!groupExists)
             {
-                ListViewGroup group = new ListViewGroup(item.Category);
+                ListViewGroup group = new ListViewGroup(webReference.Category);
                 group.HeaderAlignment = HorizontalAlignment.Left;
                 urlListview.Groups.Add(group);
                 listItem.Group = group;
@@ -161,7 +161,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupDocumentSet_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
         {
-            urlDocument.Title = txtTitle.Text;
+            webReferencesTopicSection.Title = txtTitle.Text;
         }
 
         private void SetChangeStatus()
@@ -179,15 +179,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            IUrlItem item = urlDocument.CreateNewUrl();
-            UrlItemEditDialog dialog = new UrlItemEditDialog(item, urlDocument.Categories);
+            IWebReference webReference = webReferencesTopicSection.CreateWebReference();
+            UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, webReferencesTopicSection.Categories);
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
-                urlDocument.Add(item);
+                webReferencesTopicSection.Add(webReference);
                 ReloadGroups();
-                ReloadListview(urlListview, urlDocument.Items);
+                ReloadListview(urlListview, webReferencesTopicSection.WebReferences);
                 SetModified();
             }
         }
@@ -206,14 +206,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (urlListview.SelectedItems.Count == 1)
             {
-                IUrlItem item = urlListview.SelectedItems[0].Tag as IUrlItem;
-                UrlItemEditDialog dialog = new UrlItemEditDialog(item, urlDocument.Categories);
+                IWebReference webReference = urlListview.SelectedItems[0].Tag as IWebReference;
+                UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, webReferencesTopicSection.Categories);
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
                     ReloadGroups();
-                    ReloadListview(urlListview, urlDocument.Items);
+                    ReloadListview(urlListview, webReferencesTopicSection.WebReferences);
                     SetModified();
                 }
             }
@@ -229,14 +229,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 {
                     //IUrlItem item = urlListview.SelectedItems[0].Tag as IUrlItem;
 
-                    IEnumerable<IUrlItem> items = urlListview.SelectedItems.Cast<ListViewItem>()
-                        .Select(lv => lv.Tag).Cast<IUrlItem>();
+                    IEnumerable<IWebReference> webReferences = urlListview.SelectedItems.Cast<ListViewItem>()
+                        .Select(lv => lv.Tag).Cast<IWebReference>();
 
-                    foreach (IUrlItem item in items)
-                        urlDocument.Remove(item);
+                    foreach (IWebReference webReference in webReferences)
+                        webReferencesTopicSection.Remove(webReference);
 
                     ReloadGroups();
-                    ReloadListview(urlListview, urlDocument.Items);
+                    ReloadListview(urlListview, webReferencesTopicSection.WebReferences);
                     SetModified();
                 }
             }
@@ -246,9 +246,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             try
             {
-                IUrlItem item = SelectedItem(urlListview);
-                if (item != null)
-                    System.Diagnostics.Process.Start(item.Url);
+                IWebReference webReference = SelectedItem(urlListview);
+                if (webReference != null)
+                    System.Diagnostics.Process.Start(webReference.Url);
             }
             catch (Exception ex)
             {
@@ -256,11 +256,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private IUrlItem SelectedItem(ListView listView)
+        private IWebReference SelectedItem(ListView listView)
         {
             if (listView.SelectedItems.Count == 1)
             {
-                return listView.SelectedItems[0].Tag as IUrlItem;
+                return listView.SelectedItems[0].Tag as IWebReference;
             }
             return null;
         }
@@ -308,10 +308,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void mnuCopy_Click(object sender, EventArgs e)
         {
             string[] ids = urlListview.SelectedItems.Cast<ListViewItem>()
-                .Select(lv => lv.Tag).Cast<IUrlItem>()
+                .Select(lv => lv.Tag).Cast<IWebReference>()
                 .Select(url => url.Id).ToArray();
 
-            string copyXml = urlDocument.CopyXmlFor(ids);
+            string copyXml = webReferencesTopicSection.CopyXmlFor(ids);
             Clipboard.Clear();
             Clipboard.SetText(copyXml);
         }
@@ -321,7 +321,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             try
             {
                 string xml = Clipboard.GetText();
-                urlDocument.PasteXml(xml);
+                webReferencesTopicSection.PasteXml(xml);
             }
             catch (Exception ex)
             {
@@ -333,11 +333,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             try
             {
-                IUrlItem item = SelectedItem(urlListview);
-                if (item != null)
+                IWebReference webReference = SelectedItem(urlListview);
+                if (webReference != null)
                 {
                     Clipboard.Clear();
-                    Clipboard.SetText(item.Url);
+                    Clipboard.SetText(webReference.Url);
                 }
             }
             catch (Exception ex)

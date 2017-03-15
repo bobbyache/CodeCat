@@ -8,18 +8,18 @@ namespace CygSoft.CodeCat.UI.WinForms
 
     public partial class UrlItemEditDialog : Form
     {
-        private IUrlItem urlItem;
+        private IWebReference webReference;
 
-        public UrlItemEditDialog(IUrlItem urlItem, string[] categories)
+        public UrlItemEditDialog(IWebReference webReference, string[] categories)
         {
             InitializeComponent();
-            this.urlItem = urlItem;
-            txtUrl.Text = urlItem.Url;
-            txtTitle.Text = urlItem.Title;
-            txtDescription.Text = urlItem.Description;
+            this.webReference = webReference;
+            txtUrl.Text = webReference.Url;
+            txtTitle.Text = webReference.Title;
+            txtDescription.Text = webReference.Description;
             cboCategory.Items.AddRange(categories);
             cboCategory.Sorted = true;
-            cboCategory.SelectedItem = string.IsNullOrEmpty(urlItem.Category) ? "Unknown" : urlItem.Category;
+            cboCategory.SelectedItem = string.IsNullOrEmpty(webReference.Category) ? "Unknown" : webReference.Category;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -32,11 +32,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (ValidateFields())
             {
-                urlItem.Title = txtTitle.Text;
-                urlItem.Url = txtUrl.Text;
-                urlItem.Description = txtDescription.Text;
-                urlItem.DateModified = DateTime.Now;
-                urlItem.Category = string.IsNullOrEmpty(cboCategory.Text) ? "Unknown" : cboCategory.Text.ToString();
+                webReference.Title = txtTitle.Text;
+                webReference.Url = txtUrl.Text;
+                webReference.Description = txtDescription.Text;
+                webReference.DateModified = DateTime.Now;
+                webReference.Category = string.IsNullOrEmpty(cboCategory.Text) ? "Unknown" : cboCategory.Text.ToString();
                 DialogResult = DialogResult.OK;
             }
         }

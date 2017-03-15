@@ -22,7 +22,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                     return NewCodeControl(topicSection, groupOwner, application, modifiedEventHandler);
             }
 
-            else if (topicSection is IUrlGroupDocument)
+            else if (topicSection is IWebReferencesTopicSection)
                 return NewUrlGroupControl(topicSection, groupOwner, application, modifiedEventHandler);
             else if (topicSection is IFileAttachmentsTopicSection)
                 return NewFileGroupControl(topicSection, groupOwner, application, modifiedEventHandler);
@@ -96,7 +96,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         private static IDocumentItemControl NewUrlGroupControl(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            UrlGroupControl documentControl = new UrlGroupControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IUrlGroupDocument);
+            UrlGroupControl documentControl = new UrlGroupControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IWebReferencesTopicSection);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }

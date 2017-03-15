@@ -157,9 +157,9 @@ namespace CygSoft.CodeCat.DocumentManager
         private static ITopicSection CreateUrlGroup(DocArgs docArgs)
         {
             if (docArgs.Id == null)
-                return new UrlGroupDocument(docArgs.Folder, docArgs.Title);
+                return new WebReferencesTopicSection(docArgs.Folder, docArgs.Title);
             else
-                return new UrlGroupDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
+                return new WebReferencesTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
         private static ITopicSection CreateCodeSnippet(DocArgs docArgs)

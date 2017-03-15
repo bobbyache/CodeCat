@@ -57,7 +57,7 @@
     <Compile Include="IRichTextDocument.cs" />
     <Compile Include="ITextTopicSection.cs" />
     <Compile Include="TopicSectionEventArgs.cs" />
-    <Compile Include="IUrlGroupDocument.cs" />
+    <Compile Include="IWebReferencesTopicSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

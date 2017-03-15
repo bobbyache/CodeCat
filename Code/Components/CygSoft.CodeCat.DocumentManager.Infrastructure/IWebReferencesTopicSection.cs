@@ -2,7 +2,7 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IUrlItem
+    public interface IWebReference
     {
         string Id { get; set; }
         string Title { get; set; }
@@ -14,17 +14,17 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         DateTime DateCreated { get; set; }
     }
 
-    public interface IUrlGroupDocument : ITopicSection, IPositionedItem
+    public interface IWebReferencesTopicSection : ITopicSection, IPositionedItem
     {
         event EventHandler Paste;
         event EventHandler PasteConflict;
 
-        IUrlItem[] Items { get; }
+        IWebReference[] WebReferences { get; }
         string[] Categories { get; }
-        void Add(IUrlItem urlItem);
-        void Remove(IUrlItem urlItem);
+        void Add(IWebReference webReference);
+        void Remove(IWebReference webReference);
         string CopyXmlFor(string[] ids);
         void PasteXml(string xml);
-        IUrlItem CreateNewUrl();
+        IWebReference CreateWebReference();
     }
 }

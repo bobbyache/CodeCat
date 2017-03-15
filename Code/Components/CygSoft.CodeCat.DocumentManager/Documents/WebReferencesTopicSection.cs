@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public class UrlItem : IUrlItem
+    public class WebReference : IWebReference
     {
         public string Title { get; set; }
         public string Url { get; set; }
@@ -29,14 +29,14 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         private Guid identifyingGuid;
 
-        public UrlItem()
+        public WebReference()
         {
             this.identifyingGuid = Guid.NewGuid();
             this.DateCreated = DateTime.Now;
             this.DateModified = this.DateCreated;
         }
 
-        public UrlItem(string id, string title, string category, string description, string url, DateTime dateCreated, DateTime dateModified)
+        public WebReference(string id, string title, string category, string description, string url, DateTime dateCreated, DateTime dateModified)
         {
             this.Title = title;
             this.Url = url;
@@ -52,59 +52,54 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         public string Id
         {
-            get { return this.identifyingGuid.ToString(); }
+            get { return identifyingGuid.ToString(); }
             set { this.identifyingGuid = new Guid(value); }
         }
     }
 
-    public class UrlGroupDocument : TopicSection, IUrlGroupDocument
+    public class WebReferencesTopicSection : TopicSection, IWebReferencesTopicSection
     {
         public event EventHandler Paste;
         public event EventHandler PasteConflict;
 
-        internal UrlGroupDocument(string folder, string title)
+        internal WebReferencesTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "urlgrp"), title, null)
         {
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.UrlGroup);
         }
 
-        internal UrlGroupDocument(string folder, string id, string title, int ordinal, string description) : base(new DocumentPathGenerator(folder, "urlgrp", id), title, description, ordinal)
+        internal WebReferencesTopicSection(string folder, string id, string title, int ordinal, string description) : base(new DocumentPathGenerator(folder, "urlgrp", id), title, description, ordinal)
         {
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.UrlGroup);
         }
 
-        private List<IUrlItem> urlItemList = new List<IUrlItem>();
+        private List<IWebReference> webReferenceList = new List<IWebReference>();
 
-        public IUrlItem[] Items { get { return urlItemList.ToArray(); } }
-        public string[] Categories { get { return this.Items.Select(r => r.Category).Distinct().ToArray(); } }
+        public IWebReference[] WebReferences { get { return webReferenceList.ToArray(); } }
+        public string[] Categories { get { return this.WebReferences.Select(r => r.Category).Distinct().ToArray(); } }
 
-        public IUrlItem CreateNewUrl()
+        public IWebReference CreateWebReference()
         {
-            IUrlItem item = new UrlItem();
-            return item;
+            IWebReference webReference = new WebReference();
+            return webReference;
         }
-
-        //protected override IFileVersion NewVersion(DateTime timeStamp, string description)
-        //{
-        //    return null;
-        //}
 
         protected override void OpenFile()
         {
             XDocument xDocument = XDocument.Load(this.FilePath);
             IEnumerable<XElement> elements = xDocument.Element("UrlGroup").Elements("Urls").Elements();
 
-            List<IUrlItem> urlItems = ExtractFromXml(elements);
-            this.urlItemList = urlItems.OfType<IUrlItem>().ToList();
+            List<IWebReference> webReferences = ExtractFromXml(elements);
+            webReferenceList = webReferences.OfType<IWebReference>().ToList();
         }
 
-        private List<IUrlItem> ExtractFromXml(IEnumerable<XElement> elements)
+        private List<IWebReference> ExtractFromXml(IEnumerable<XElement> elements)
         {
-            List<IUrlItem> urlItems = new List<IUrlItem>();
+            List<IWebReference> webReferences = new List<IWebReference>();
 
             foreach (XElement element in elements)
             {
-                IUrlItem item = new UrlItem(
+                IWebReference item = new WebReference(
                     (string)element.Attribute("Id"),
                     (string)element.Attribute("Title"),
                     element.Attribute("Category") != null ? (string)element.Attribute("Category") : "Unknown",
@@ -114,59 +109,59 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
                     DateTime.Parse((string)element.Attribute("Modified"))
                 );
 
-                urlItems.Add(item);
+                webReferences.Add(item);
             }
-            return urlItems.ToList();
+            return webReferences.ToList();
         }
 
         protected override void SaveFile()
         {
-            if (!File.Exists(this.FilePath))
+            if (!File.Exists(FilePath))
                 CreateFile();
-            WriteFile(this.Items);
+            WriteFile(WebReferences);
         }
 
         private void CreateFile()
         {
             XElement rootElement = new XElement("UrlGroup", new XElement("Urls"));
             XDocument xDocument = new XDocument(rootElement);
-            xDocument.Save(this.FilePath);
+            xDocument.Save(FilePath);
         }
 
-        private void WriteFile(IUrlItem[] items)
+        private void WriteFile(IWebReference[] webReferences)
         {
-            XDocument indexDocument = XDocument.Load(this.FilePath);
+            XDocument indexDocument = XDocument.Load(FilePath);
             XElement element = indexDocument.Element("UrlGroup").Element("Urls");
             element.RemoveNodes();
 
-            AppendToContainerElement(element, items);
-            indexDocument.Save(this.FilePath);
+            AppendToContainerElement(element, webReferences);
+            indexDocument.Save(FilePath);
         }
 
-        private void AppendToContainerElement(XElement containerElement, IUrlItem[] items)
+        private void AppendToContainerElement(XElement containerElement, IWebReference[] webReferences)
         {
-            foreach (IUrlItem item in items)
+            foreach (IWebReference webReference in webReferences)
             {
                 containerElement.Add(new XElement("UrlItem",
-                    new XAttribute("Id", item.Id),
-                    new XAttribute("Title", item.Title),
-                    new XAttribute("Category", item.Category != null ? item.Category : "Unknown"),
-                    new XAttribute("Description", item.Description),
-                    new XAttribute("Url", item.Url),
-                    new XAttribute("Created", item.DateCreated.ToString()),
-                    new XAttribute("Modified", item.DateModified.ToString())
+                    new XAttribute("Id", webReference.Id),
+                    new XAttribute("Title", webReference.Title),
+                    new XAttribute("Category", webReference.Category != null ? webReference.Category : "Unknown"),
+                    new XAttribute("Description", webReference.Description),
+                    new XAttribute("Url", webReference.Url),
+                    new XAttribute("Created", webReference.DateCreated.ToString()),
+                    new XAttribute("Modified", webReference.DateModified.ToString())
                 ));
             }
         }
 
-        public void Add(IUrlItem urlItem)
+        public void Add(IWebReference webReference)
         {
-            urlItemList.Add(urlItem);
+            webReferenceList.Add(webReference);
         }
 
-        public void Remove(IUrlItem urlItem)
+        public void Remove(IWebReference webReference)
         {
-            urlItemList.Remove(urlItem);
+            webReferenceList.Remove(webReference);
         }
 
         public string CopyXmlFor(string[] ids)
@@ -175,10 +170,10 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             XElement element = new XElement("UrlCopy");
             indexDocument.Add(element);
 
-            IUrlItem[] selection = Items.Join(ids, itm => itm.Id, id => id,
+            IWebReference[] webReferences = WebReferences.Join(ids, itm => itm.Id, id => id,
                 (itm, id) => itm).ToArray();
 
-            AppendToContainerElement(element, selection);
+            AppendToContainerElement(element, webReferences);
 
             return indexDocument.ToString();
         }
@@ -188,16 +183,16 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             try
             {
                 XElement parentElement = XElement.Parse(xml);
-                List<IUrlItem> urlItems = ExtractFromXml(parentElement.Elements());
+                List<IWebReference> webReferences = ExtractFromXml(parentElement.Elements());
 
                 // check that none exist within the list already...
-                var conflictCount = urlItems.Join(urlItemList, nw => nw.Id, ex => ex.Id,
+                var conflictCount = webReferences.Join(webReferenceList, nw => nw.Id, ex => ex.Id,
                     (nw, ex) => nw).Count();
 
                 if (conflictCount == 0)
                 {
-                    foreach (IUrlItem item in urlItems)
-                        this.urlItemList.Add(item);
+                    foreach (IWebReference item in webReferences)
+                        webReferenceList.Add(item);
 
                     Paste?.Invoke(this, new EventArgs());
                 }
