@@ -26,13 +26,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 return NewUrlGroupControl(topicSection, groupOwner, application, modifiedEventHandler);
             else if (topicSection is IFileAttachmentsTopicSection)
                 return NewFileGroupControl(topicSection, groupOwner, application, modifiedEventHandler);
-            else if (topicSection is IPdfDocument)
+            else if (topicSection is IPdfViewerTopicSection)
                 return NewPdfDocument(topicSection, groupOwner, application, modifiedEventHandler);
-            else if (topicSection is IImageDocument)
+            else if (topicSection is ISingleImageTopicSection)
                 return NewImageDocument(topicSection, groupOwner, application, modifiedEventHandler);
             else if (topicSection is IImageSetDocument)
                 return NewImageSetControl(topicSection, groupOwner, application, modifiedEventHandler);
-            else if (topicSection is IRichTextDocument)
+            else if (topicSection is IRichTextEditorTopicSection)
                 return NewRichTextDocument(topicSection, groupOwner, application, modifiedEventHandler);
             else
                 return null;
@@ -47,7 +47,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         private static IDocumentItemControl NewRichTextDocument(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            RtfDocumentControl documentControl = new RtfDocumentControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IRichTextDocument);
+            RtfDocumentControl documentControl = new RtfDocumentControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IRichTextEditorTopicSection);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
@@ -61,14 +61,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         private static IDocumentItemControl NewImageDocument(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            ImageControl documentControl = new ImageControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IImageDocument);
+            ImageControl documentControl = new ImageControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as ISingleImageTopicSection);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
         private static IDocumentItemControl NewPdfDocument(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            PdfDocumentControl documentControl = new PdfDocumentControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IPdfDocument);
+            PdfDocumentControl documentControl = new PdfDocumentControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IPdfViewerTopicSection);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }

@@ -47,14 +47,14 @@
     <Compile Include="Documents\CodeTopicSection.cs" />
     <Compile Include="Documents\FileAttachmentsTopicSection.cs" />
     <Compile Include="Documents\FileGroup\FileGroupFile.cs" />
-    <Compile Include="Documents\ImageDocument.cs" />
+    <Compile Include="Documents\SingleImageTopicSection.cs" />
     <Compile Include="Documents\ImageSetDocument.cs" />
     <Compile Include="Documents\ImageSet\ImageSetIndex.cs" />
     <Compile Include="Documents\ImageSet\ImageSetIndexXmlRepository.cs" />
     <Compile Include="Documents\ImageSet\ImgDocument.cs" />
-    <Compile Include="Documents\PdfDocument.cs" />
+    <Compile Include="Documents\PdfViewerTopicSection.cs" />
     <Compile Include="Documents\QikScriptTopicSection.cs" />
-    <Compile Include="Documents\RichTextDocument.cs" />
+    <Compile Include="Documents\RichTextEditorTopicSection.cs" />
     <Compile Include="Documents\TextTopicSection.cs" />
     <Compile Include="Documents\WebReferencesTopicSection.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />

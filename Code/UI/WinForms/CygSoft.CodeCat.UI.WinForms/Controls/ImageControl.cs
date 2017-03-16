@@ -12,7 +12,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
-        private IImageDocument imageDocument;
+        private ISingleImageTopicSection singleImageTopicSection;
         private ICodeGroupDocumentSet codeGroupDocumentSet;
 
         public string Id { get; private set; }
@@ -23,12 +23,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public bool IsModified { get; private set; }
         public bool FileExists { get { return false; } }
 
-        public ImageControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IImageDocument imageDocument)
+        public ImageControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, ISingleImageTopicSection singleImageTopicSection)
         {
             InitializeComponent();
 
             imageBox.GridScale = Cyotek.Windows.Forms.ImageBoxGridScale.None;
-            this.imageDocument = imageDocument;
+            this.singleImageTopicSection = singleImageTopicSection;
             this.codeGroupDocumentSet = codeGroupDocumentSet;
 
             lblScrollPosition.Image = Resources.GetImage(Constants.ImageKeys.ObjectPosition);
@@ -36,7 +36,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             lblZoomLevel.Image = Resources.GetImage(Constants.ImageKeys.ObjectZoom);
             this.btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
 
-            this.Id = imageDocument.Id;
+            this.Id = singleImageTopicSection.Id;
 
             ResetFieldValues();
             RegisterDataFieldEvents();
@@ -79,9 +79,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadIfExists()
         {
-            if (imageDocument.Exists)
+            if (singleImageTopicSection.Exists)
             {
-                Image image = LoadBitmap(this.imageDocument.FilePath);
+                Image image = LoadBitmap(this.singleImageTopicSection.FilePath);
                 imageBox.Image = image;
                 imageBox.Zoom = 100;
 
@@ -107,7 +107,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void ResetFieldValues()
         {
-            txtTitle.Text = imageDocument.Title;
+            txtTitle.Text = singleImageTopicSection.Title;
             IsModified = false;
         }
 
@@ -125,7 +125,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupDocumentSet_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
         {
-            this.imageDocument.Title = txtTitle.Text;
+            this.singleImageTopicSection.Title = txtTitle.Text;
         }
 
         private void CodeItemCtrl_Modified(object sender, EventArgs e)
@@ -152,7 +152,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void Import()
         {
-            if (!imageDocument.FolderExists)
+            if (!singleImageTopicSection.FolderExists)
             {
                 Dialogs.MustSaveGroupBeforeAction(this);
                 return;
@@ -174,7 +174,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 if (imageBox.Image != null)
                     imageBox.Image.Dispose();
 
-                File.Copy(filePath, this.imageDocument.FilePath, true);
+                File.Copy(filePath, this.singleImageTopicSection.FilePath, true);
                 LoadIfExists();
             }
         }
@@ -209,7 +209,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ReplaceImage()
         {
             Image image = Clipboard.GetImage();
-            image.Save((imageDocument.FilePath));
+            image.Save((singleImageTopicSection.FilePath));
             image.Dispose();
 
             LoadIfExists();

@@ -5,7 +5,7 @@ using System;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents
 {
-    public class RichTextDocument : TopicSection, IRichTextDocument
+    public class RichTextEditorTopicSection : TopicSection, IRichTextEditorTopicSection
     {
         // YOU MIGHT NOT NEED TO INHERIT FROM BASEDOCUMENT HERE BECAUSE YOU ACTUALLY DON'T WRITE THE 
         // THE DOCUMENT (However some events etc. might be used further upstream.
@@ -14,13 +14,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         public event EventHandler RequestSaveRtf;
 
-        internal RichTextDocument(string folder, string title)
+        internal RichTextEditorTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "rtf"), title, null)
         {
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.RichTextDocument);
         }
 
-        internal RichTextDocument(string folder, string id, string title, int ordinal, string description)
+        internal RichTextEditorTopicSection(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "rtf", id), title, description, ordinal)
         {
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.RichTextDocument);

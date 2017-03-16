@@ -319,7 +319,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddPdfDocument_Click(object sender, EventArgs e)
         {
-            IPdfDocument pdfDocument = codeItemFile.AddTopicSection(TopicSectionType.PdfDocument) as IPdfDocument;
+            IPdfViewerTopicSection pdfViewerTopicSection = codeItemFile.AddTopicSection(TopicSectionType.PdfDocument) as IPdfViewerTopicSection;
             this.IsModified = true;
         }
 
@@ -331,13 +331,13 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddImage_Click(object sender, EventArgs e)
         {
-            IImageDocument imageDocument = codeItemFile.AddTopicSection(TopicSectionType.ImageDocument, null, "png") as IImageDocument;
+            ISingleImageTopicSection singleImageTopicSection = codeItemFile.AddTopicSection(TopicSectionType.ImageDocument, null, "png") as ISingleImageTopicSection;
             this.IsModified = true;
         }
 
         private void btnRichText_Click(object sender, EventArgs e)
         {
-            IRichTextDocument richTextDocument = codeItemFile.AddTopicSection(TopicSectionType.RichTextDocument, null, "rtf") as IRichTextDocument;
+            IRichTextEditorTopicSection richTextEditorTopicSection = codeItemFile.AddTopicSection(TopicSectionType.RichTextDocument, null, "rtf") as IRichTextEditorTopicSection;
             this.IsModified = true;
         }
 

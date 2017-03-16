@@ -95,30 +95,30 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", webReferencesTopicSection.Ordinal.ToString())
                         ));
                 }
-                else if (topicSection is IPdfDocument)
+                else if (topicSection is IPdfViewerTopicSection)
                 {
-                    IPdfDocument pdfDoc = topicSection as IPdfDocument;
+                    IPdfViewerTopicSection pdfViewerTopicSection = topicSection as IPdfViewerTopicSection;
 
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", pdfDoc.Id),
-                        new XAttribute("Title", pdfDoc.Title),
-                        new XAttribute("DocType", pdfDoc.DocumentType),
-                        new XAttribute("Description", pdfDoc.Description == null ? "" : pdfDoc.Description),
-                        new XAttribute("Ext", pdfDoc.FileExtension),
-                        new XAttribute("Ordinal", pdfDoc.Ordinal.ToString())
+                        new XAttribute("Id", pdfViewerTopicSection.Id),
+                        new XAttribute("Title", pdfViewerTopicSection.Title),
+                        new XAttribute("DocType", pdfViewerTopicSection.DocumentType),
+                        new XAttribute("Description", pdfViewerTopicSection.Description == null ? "" : pdfViewerTopicSection.Description),
+                        new XAttribute("Ext", pdfViewerTopicSection.FileExtension),
+                        new XAttribute("Ordinal", pdfViewerTopicSection.Ordinal.ToString())
                         ));
                 }
-                else if (topicSection is IImageDocument)
+                else if (topicSection is ISingleImageTopicSection)
                 {
-                    IImageDocument imgFile = topicSection as IImageDocument;
+                    ISingleImageTopicSection singleImageTopicSection = topicSection as ISingleImageTopicSection;
 
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", imgFile.Id),
-                        new XAttribute("Title", imgFile.Title),
-                        new XAttribute("DocType", imgFile.DocumentType),
-                        new XAttribute("Description", imgFile.Description == null ? "" : imgFile.Description),
-                        new XAttribute("Ext", imgFile.FileExtension),
-                        new XAttribute("Ordinal", imgFile.Ordinal.ToString())
+                        new XAttribute("Id", singleImageTopicSection.Id),
+                        new XAttribute("Title", singleImageTopicSection.Title),
+                        new XAttribute("DocType", singleImageTopicSection.DocumentType),
+                        new XAttribute("Description", singleImageTopicSection.Description == null ? "" : singleImageTopicSection.Description),
+                        new XAttribute("Ext", singleImageTopicSection.FileExtension),
+                        new XAttribute("Ordinal", singleImageTopicSection.Ordinal.ToString())
                         ));
                 }
                 else if (topicSection is IImageSetDocument)
@@ -134,17 +134,17 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", imgSetFile.Ordinal.ToString())
                         ));
                 }
-                else if (topicSection is IRichTextDocument)
+                else if (topicSection is IRichTextEditorTopicSection)
                 {
-                    IRichTextDocument rtfFile = topicSection as IRichTextDocument;
+                    IRichTextEditorTopicSection richTextEditorTopicSection = topicSection as IRichTextEditorTopicSection;
 
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", rtfFile.Id),
-                        new XAttribute("Title", rtfFile.Title),
-                        new XAttribute("DocType", rtfFile.DocumentType),
-                        new XAttribute("Description", rtfFile.Description == null ? "" : rtfFile.Description),
-                        new XAttribute("Ext", rtfFile.FileExtension),
-                        new XAttribute("Ordinal", rtfFile.Ordinal.ToString())
+                        new XAttribute("Id", richTextEditorTopicSection.Id),
+                        new XAttribute("Title", richTextEditorTopicSection.Title),
+                        new XAttribute("DocType", richTextEditorTopicSection.DocumentType),
+                        new XAttribute("Description", richTextEditorTopicSection.Description == null ? "" : richTextEditorTopicSection.Description),
+                        new XAttribute("Ext", richTextEditorTopicSection.FileExtension),
+                        new XAttribute("Ordinal", richTextEditorTopicSection.Ordinal.ToString())
                         ));
                 }
                 else if (topicSection is IFileAttachmentsTopicSection)

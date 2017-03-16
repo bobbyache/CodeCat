@@ -133,25 +133,25 @@ namespace CygSoft.CodeCat.DocumentManager
         private static ITopicSection CreateImageDocument(DocArgs docArgs)
         {
             if (docArgs.Id == null)
-                return new ImageDocument(docArgs.Folder, docArgs.Title, docArgs.Extension);
+                return new SingleImageTopicSection(docArgs.Folder, docArgs.Title, docArgs.Extension);
             else
-                return new ImageDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description);
+                return new SingleImageTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description);
         }
 
         private static ITopicSection CreateRichText(DocArgs docArgs)
         {
             if (docArgs.Id == null)
-                return new RichTextDocument(docArgs.Folder, docArgs.Title);
+                return new RichTextEditorTopicSection(docArgs.Folder, docArgs.Title);
             else
-                return new RichTextDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
+                return new RichTextEditorTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
         private static ITopicSection CreatePdfDocument(DocArgs docArgs)
         {
             if (docArgs.Id == null)
-                return new PdfDocument(docArgs.Folder, docArgs.Title);
+                return new PdfViewerTopicSection(docArgs.Folder, docArgs.Title);
             else
-                return new PdfDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
+                return new PdfViewerTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
         private static ITopicSection CreateUrlGroup(DocArgs docArgs)

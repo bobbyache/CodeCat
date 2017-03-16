@@ -11,7 +11,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
-        private IRichTextDocument rtfDocument;
+        private IRichTextEditorTopicSection richTextEditorTopicSection;
         private ICodeGroupDocumentSet codeGroupDocumentSet;
 
         public string Id { get; private set; }
@@ -29,10 +29,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public bool FileExists { get { return false; } }
 
-        public RtfDocumentControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IRichTextDocument rtfDocument)
+        public RtfDocumentControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IRichTextEditorTopicSection rtfDocument)
         {
             InitializeComponent();
-            this.rtfDocument = rtfDocument;
+            this.richTextEditorTopicSection = rtfDocument;
             this.codeGroupDocumentSet = codeGroupDocumentSet;
             Id = rtfDocument.Id;
 
@@ -53,7 +53,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void rtfDocument_RequestSaveRtf(object sender, EventArgs e)
         {
-            rtfEditor.Save(rtfDocument.FilePath);
+            rtfEditor.Save(richTextEditorTopicSection.FilePath);
         }
 
         public void Revert()
@@ -70,13 +70,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadIfExists()
         {
-            if (rtfDocument.Exists)
-                rtfEditor.OpenFile(rtfDocument.FilePath);
+            if (richTextEditorTopicSection.Exists)
+                rtfEditor.OpenFile(richTextEditorTopicSection.FilePath);
         }
 
         private void ResetFieldValues()
         {
-            txtTitle.Text = rtfDocument.Title;
+            txtTitle.Text = richTextEditorTopicSection.Title;
             IsModified = false;
         }
 
@@ -88,7 +88,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupDocumentSet_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
         {
-            rtfDocument.Title = txtTitle.Text;
+            richTextEditorTopicSection.Title = txtTitle.Text;
         }
 
         private void SetChangeStatus()

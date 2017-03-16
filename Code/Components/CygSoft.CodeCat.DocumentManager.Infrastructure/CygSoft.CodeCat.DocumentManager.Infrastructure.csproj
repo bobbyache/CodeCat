@@ -47,14 +47,14 @@
     <Compile Include="IDocumentIndexRepository.cs" />
     <Compile Include="IFileGroupDocument.cs" />
     <Compile Include="IDocumentIndex.cs" />
-    <Compile Include="IImageDocument.cs" />
+    <Compile Include="ISingleImageTopicSection.cs" />
     <Compile Include="IImageItem.cs" />
     <Compile Include="IImageSetDocument.cs" />
     <Compile Include="IImgDocument.cs" />
-    <Compile Include="IPdfDocument.cs" />
+    <Compile Include="IPdfViewerTopicSection.cs" />
     <Compile Include="IPositionedItem.cs" />
     <Compile Include="IQikScriptTopicSection.cs" />
-    <Compile Include="IRichTextDocument.cs" />
+    <Compile Include="IRichTextEditorTopicSection.cs" />
     <Compile Include="ITextTopicSection.cs" />
     <Compile Include="TopicSectionEventArgs.cs" />
     <Compile Include="IWebReferencesTopicSection.cs" />

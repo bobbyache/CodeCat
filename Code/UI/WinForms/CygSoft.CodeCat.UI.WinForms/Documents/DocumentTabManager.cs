@@ -146,15 +146,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
             if (topicSection is ICodeTopicSection)
                 item.Image = IconRepository.Get((topicSection as ICodeTopicSection).Syntax).Image;
-            else if (topicSection is IPdfDocument)
+            else if (topicSection is IPdfViewerTopicSection)
                 item.Image = IconRepository.Get(IconRepository.Documents.PDF).Image;
-            else if (topicSection is IImageDocument)
+            else if (topicSection is ISingleImageTopicSection)
                 item.Image = IconRepository.Get(IconRepository.Documents.SingleImage).Image;
             else if (topicSection is IImageSetDocument)
                 item.Image = IconRepository.Get(IconRepository.Documents.ImageSet).Image;
             else if (topicSection is IWebReferencesTopicSection)
                 item.Image = IconRepository.Get(IconRepository.Documents.HyperlinkSet).Image;
-            else if (topicSection is IRichTextDocument)
+            else if (topicSection is IRichTextEditorTopicSection)
                 item.Image = IconRepository.Get(IconRepository.Documents.RTF).Image; 
             else if (topicSection is IFileAttachmentsTopicSection)
                 item.Image = IconRepository.Get(IconRepository.Documents.FileSet).Image; 
