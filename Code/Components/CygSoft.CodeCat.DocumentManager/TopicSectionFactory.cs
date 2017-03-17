@@ -11,7 +11,7 @@ namespace CygSoft.CodeCat.DocumentManager
 {
     public class TopicSectionFactory
     {
-        private class DocArgs
+        private class TopicSectionArgs
         {
             public string DocumentType { get; set; }
             public string Folder { get; set; }
@@ -26,31 +26,31 @@ namespace CygSoft.CodeCat.DocumentManager
 
         public static ITopicSection Create(TopicSectionType documentType, string folder, string title, string id = null, int ordinal = 0, string description = null, string extension = null, string syntax = null)
         {
-            DocArgs docArgs = new DocArgs { DocumentType = GetDocumentType(documentType), Folder = folder, Title = title, Id = id, Ordinal = ordinal, Description = description, Extension = extension, Syntax = syntax };
+            TopicSectionArgs topicSectionArgs = new TopicSectionArgs { DocumentType = GetDocumentType(documentType), Folder = folder, Title = title, Id = id, Ordinal = ordinal, Description = description, Extension = extension, Syntax = syntax };
 
-            if (docArgs.DocumentType == "CODESNIPPET")
-                return CreateCodeSnippet(docArgs);
+            if (topicSectionArgs.DocumentType == "CODESNIPPET")
+                return CreateCodeTopicSection(topicSectionArgs);
 
-            if (docArgs.DocumentType == "URLGROUP")
-                return CreateUrlGroup(docArgs);
+            if (topicSectionArgs.DocumentType == "URLGROUP")
+                return CreateWebReferencesTopicSection(topicSectionArgs);
 
-            if (docArgs.DocumentType == "QIKSCRIPT")
-                return CreateQikScript(docArgs);
+            if (topicSectionArgs.DocumentType == "QIKSCRIPT")
+                return CreateQikScriptTopicSection(topicSectionArgs);
 
-            if (docArgs.DocumentType == "PDFDOCUMENT")
-                return CreatePdfDocument(docArgs);
+            if (topicSectionArgs.DocumentType == "PDFDOCUMENT")
+                return CreatePdfViewerTopicSection(topicSectionArgs);
 
-            if (docArgs.DocumentType == "IMAGEDOCUMENT")
-                return CreateImageDocument(docArgs);
+            if (topicSectionArgs.DocumentType == "IMAGEDOCUMENT")
+                return CreateSingleImageTopicSection(topicSectionArgs);
 
-            if (docArgs.DocumentType == "IMAGESET")
-                return CreateImageSet(docArgs);
+            if (topicSectionArgs.DocumentType == "IMAGESET")
+                return CreateImagePagerTopicSection(topicSectionArgs);
 
-            if (docArgs.DocumentType == "RICHTEXT")
-                return CreateRichText(docArgs);
+            if (topicSectionArgs.DocumentType == "RICHTEXT")
+                return CreateRichTextEditorTopicSection(topicSectionArgs);
 
-            if (docArgs.DocumentType == "FILEGROUP")
-                return CreateFileGroup(docArgs);
+            if (topicSectionArgs.DocumentType == "FILEGROUP")
+                return CreateFileAttachmentsTopicSection(topicSectionArgs);
 
             return null;
         }
@@ -114,68 +114,68 @@ namespace CygSoft.CodeCat.DocumentManager
         }
 
 
-        private static ITopicSection CreateFileGroup(DocArgs docArgs)
+        private static ITopicSection CreateFileAttachmentsTopicSection(TopicSectionArgs topicSectionArgs)
         {
-            if (docArgs.Id == null)
-                return new FileAttachmentsTopicSection(docArgs.Folder, docArgs.Title);
+            if (topicSectionArgs.Id == null)
+                return new FileAttachmentsTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title);
             else
-                return new FileAttachmentsTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
+                return new FileAttachmentsTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Ordinal, topicSectionArgs.Description);
         }
 
-        private static ITopicSection CreateImageSet(DocArgs docArgs)
+        private static ITopicSection CreateImagePagerTopicSection(TopicSectionArgs topicSectionArgs)
         {
-            if (docArgs.Id == null)
-                return new ImagePagerTopicSection(docArgs.Folder, docArgs.Title);
+            if (topicSectionArgs.Id == null)
+                return new ImagePagerTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title);
             else
-                return new ImagePagerTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
+                return new ImagePagerTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Ordinal, topicSectionArgs.Description);
         }
 
-        private static ITopicSection CreateImageDocument(DocArgs docArgs)
+        private static ITopicSection CreateSingleImageTopicSection(TopicSectionArgs topicSectionArgs)
         {
-            if (docArgs.Id == null)
-                return new SingleImageTopicSection(docArgs.Folder, docArgs.Title, docArgs.Extension);
+            if (topicSectionArgs.Id == null)
+                return new SingleImageTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension);
             else
-                return new SingleImageTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description);
+                return new SingleImageTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description);
         }
 
-        private static ITopicSection CreateRichText(DocArgs docArgs)
+        private static ITopicSection CreateRichTextEditorTopicSection(TopicSectionArgs topicSectionArgs)
         {
-            if (docArgs.Id == null)
-                return new RichTextEditorTopicSection(docArgs.Folder, docArgs.Title);
+            if (topicSectionArgs.Id == null)
+                return new RichTextEditorTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title);
             else
-                return new RichTextEditorTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
+                return new RichTextEditorTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Ordinal, topicSectionArgs.Description);
         }
 
-        private static ITopicSection CreatePdfDocument(DocArgs docArgs)
+        private static ITopicSection CreatePdfViewerTopicSection(TopicSectionArgs topicSectionArgs)
         {
-            if (docArgs.Id == null)
-                return new PdfViewerTopicSection(docArgs.Folder, docArgs.Title);
+            if (topicSectionArgs.Id == null)
+                return new PdfViewerTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title);
             else
-                return new PdfViewerTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
+                return new PdfViewerTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Ordinal, topicSectionArgs.Description);
         }
 
-        private static ITopicSection CreateUrlGroup(DocArgs docArgs)
+        private static ITopicSection CreateWebReferencesTopicSection(TopicSectionArgs topicSectionArgs)
         {
-            if (docArgs.Id == null)
-                return new WebReferencesTopicSection(docArgs.Folder, docArgs.Title);
+            if (topicSectionArgs.Id == null)
+                return new WebReferencesTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title);
             else
-                return new WebReferencesTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
+                return new WebReferencesTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Ordinal, topicSectionArgs.Description);
         }
 
-        private static ITopicSection CreateCodeSnippet(DocArgs docArgs)
+        private static ITopicSection CreateCodeTopicSection(TopicSectionArgs topicSectionArgs)
         {
-            if (docArgs.Id == null)
-                return new CodeTopicSection(docArgs.Folder, docArgs.Title, docArgs.Extension, docArgs.Syntax);
+            if (topicSectionArgs.Id == null)
+                return new CodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Syntax);
             else
-                return new CodeTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description, docArgs.Syntax);
+                return new CodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description, topicSectionArgs.Syntax);
         }
 
-        private static ITopicSection CreateQikScript(DocArgs docArgs)
+        private static ITopicSection CreateQikScriptTopicSection(TopicSectionArgs topicSectionArgs)
         {
-            if (docArgs.Id == null)
-                return new QikScriptTopicSection(docArgs.Folder, docArgs.Title, docArgs.Extension, docArgs.Syntax);
+            if (topicSectionArgs.Id == null)
+                return new QikScriptTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Syntax);
             else
-                return new QikScriptTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Extension, docArgs.Ordinal, docArgs.Description, docArgs.Syntax);
+                return new QikScriptTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description, topicSectionArgs.Syntax);
         }
     }
 }
