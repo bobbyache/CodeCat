@@ -125,9 +125,9 @@ namespace CygSoft.CodeCat.DocumentManager
         private static ITopicSection CreateImageSet(DocArgs docArgs)
         {
             if (docArgs.Id == null)
-                return new ImageSetDocument(docArgs.Folder, docArgs.Title);
+                return new ImagePagerTopicSection(docArgs.Folder, docArgs.Title);
             else
-                return new ImageSetDocument(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
+                return new ImagePagerTopicSection(docArgs.Folder, docArgs.Id, docArgs.Title, docArgs.Ordinal, docArgs.Description);
         }
 
         private static ITopicSection CreateImageDocument(DocArgs docArgs)

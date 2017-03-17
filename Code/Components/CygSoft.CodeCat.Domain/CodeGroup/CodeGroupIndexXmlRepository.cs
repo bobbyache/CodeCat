@@ -66,11 +66,11 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             XElement filesElement = indexDocument.Element("CodeGroup").Element("Documents");
             filesElement.RemoveNodes();
 
-            foreach (ITopicSection topicSection in topicSections)
+            foreach (ITopicSection imagePagerTopicSection in topicSections)
             {
-                if (topicSection is ICodeTopicSection)
+                if (imagePagerTopicSection is ICodeTopicSection)
                 {
-                    ICodeTopicSection codeTopicSection = topicSection as ICodeTopicSection;
+                    ICodeTopicSection codeTopicSection = imagePagerTopicSection as ICodeTopicSection;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", codeTopicSection.Id),
@@ -82,9 +82,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", codeTopicSection.Ordinal.ToString())
                         ));
                 }
-                else if (topicSection is IWebReferencesTopicSection)
+                else if (imagePagerTopicSection is IWebReferencesTopicSection)
                 {
-                    IWebReferencesTopicSection webReferencesTopicSection = topicSection as IWebReferencesTopicSection;
+                    IWebReferencesTopicSection webReferencesTopicSection = imagePagerTopicSection as IWebReferencesTopicSection;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", webReferencesTopicSection.Id),
@@ -95,9 +95,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", webReferencesTopicSection.Ordinal.ToString())
                         ));
                 }
-                else if (topicSection is IPdfViewerTopicSection)
+                else if (imagePagerTopicSection is IPdfViewerTopicSection)
                 {
-                    IPdfViewerTopicSection pdfViewerTopicSection = topicSection as IPdfViewerTopicSection;
+                    IPdfViewerTopicSection pdfViewerTopicSection = imagePagerTopicSection as IPdfViewerTopicSection;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", pdfViewerTopicSection.Id),
@@ -108,9 +108,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", pdfViewerTopicSection.Ordinal.ToString())
                         ));
                 }
-                else if (topicSection is ISingleImageTopicSection)
+                else if (imagePagerTopicSection is ISingleImageTopicSection)
                 {
-                    ISingleImageTopicSection singleImageTopicSection = topicSection as ISingleImageTopicSection;
+                    ISingleImageTopicSection singleImageTopicSection = imagePagerTopicSection as ISingleImageTopicSection;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", singleImageTopicSection.Id),
@@ -121,9 +121,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", singleImageTopicSection.Ordinal.ToString())
                         ));
                 }
-                else if (topicSection is IImageSetDocument)
+                else if (imagePagerTopicSection is IImagePagerTopicSection)
                 {
-                    IImageSetDocument imgSetFile = topicSection as IImageSetDocument;
+                    IImagePagerTopicSection imgSetFile = imagePagerTopicSection as IImagePagerTopicSection;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", imgSetFile.Id),
@@ -134,9 +134,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", imgSetFile.Ordinal.ToString())
                         ));
                 }
-                else if (topicSection is IRichTextEditorTopicSection)
+                else if (imagePagerTopicSection is IRichTextEditorTopicSection)
                 {
-                    IRichTextEditorTopicSection richTextEditorTopicSection = topicSection as IRichTextEditorTopicSection;
+                    IRichTextEditorTopicSection richTextEditorTopicSection = imagePagerTopicSection as IRichTextEditorTopicSection;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", richTextEditorTopicSection.Id),
@@ -147,9 +147,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
                         new XAttribute("Ordinal", richTextEditorTopicSection.Ordinal.ToString())
                         ));
                 }
-                else if (topicSection is IFileAttachmentsTopicSection)
+                else if (imagePagerTopicSection is IFileAttachmentsTopicSection)
                 {
-                    IFileAttachmentsTopicSection fileAttachmentsTopicSection = topicSection as IFileAttachmentsTopicSection;
+                    IFileAttachmentsTopicSection fileAttachmentsTopicSection = imagePagerTopicSection as IFileAttachmentsTopicSection;
 
                     filesElement.Add(new XElement("Document",
                         new XAttribute("Id", fileAttachmentsTopicSection.Id),

@@ -49,8 +49,8 @@
     <Compile Include="IDocumentIndex.cs" />
     <Compile Include="ISingleImageTopicSection.cs" />
     <Compile Include="IImageItem.cs" />
-    <Compile Include="IImageSetDocument.cs" />
-    <Compile Include="IImgDocument.cs" />
+    <Compile Include="IImagePagerTopicSection.cs" />
+    <Compile Include="IImagePagerImageTopicSection.cs" />
     <Compile Include="IPdfViewerTopicSection.cs" />
     <Compile Include="IPositionedItem.cs" />
     <Compile Include="IQikScriptTopicSection.cs" />

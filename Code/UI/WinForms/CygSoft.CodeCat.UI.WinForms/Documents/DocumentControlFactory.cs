@@ -30,7 +30,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 return NewPdfDocument(topicSection, groupOwner, application, modifiedEventHandler);
             else if (topicSection is ISingleImageTopicSection)
                 return NewImageDocument(topicSection, groupOwner, application, modifiedEventHandler);
-            else if (topicSection is IImageSetDocument)
+            else if (topicSection is IImagePagerTopicSection)
                 return NewImageSetControl(topicSection, groupOwner, application, modifiedEventHandler);
             else if (topicSection is IRichTextEditorTopicSection)
                 return NewRichTextDocument(topicSection, groupOwner, application, modifiedEventHandler);
@@ -54,7 +54,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         private static IDocumentItemControl NewImageSetControl(ITopicSection topicSection, IPersistableTarget groupOwner, AppFacade application, EventHandler modifiedEventHandler)
         {
-            ImageSetControl documentControl = new ImageSetControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IImageSetDocument);
+            ImageSetControl documentControl = new ImageSetControl(application, groupOwner as ICodeGroupDocumentSet, topicSection as IImagePagerTopicSection);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }

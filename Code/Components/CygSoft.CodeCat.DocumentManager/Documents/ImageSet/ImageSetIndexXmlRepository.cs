@@ -28,7 +28,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
                 string extension = (string)element.Attribute("Extension");
                 ImagePathGenerator imagePathGenerator = new ImagePathGenerator(this.folder, extension, id);
 
-                IImgDocument item = new ImgDocument(
+                IImagePagerImageTopicSection item = new ImagePagerImageTopicSection(
                     imagePathGenerator,
                     (int)element.Attribute("Ordinal"),
                     (string)element.Element("Description")
@@ -64,9 +64,9 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
 
             foreach (ITopicSection docFile in documents)
             {
-                if (docFile is IImgDocument)
+                if (docFile is IImagePagerImageTopicSection)
                 {
-                    IImgDocument imgDoc = docFile as IImgDocument;
+                    IImagePagerImageTopicSection imgDoc = docFile as IImagePagerImageTopicSection;
 
                     filesElement.Add(new XElement("Image",
                         new XAttribute("Id", imgDoc.Id),

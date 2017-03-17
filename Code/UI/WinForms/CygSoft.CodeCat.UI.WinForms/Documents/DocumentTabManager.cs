@@ -150,7 +150,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 item.Image = IconRepository.Get(IconRepository.Documents.PDF).Image;
             else if (topicSection is ISingleImageTopicSection)
                 item.Image = IconRepository.Get(IconRepository.Documents.SingleImage).Image;
-            else if (topicSection is IImageSetDocument)
+            else if (topicSection is IImagePagerTopicSection)
                 item.Image = IconRepository.Get(IconRepository.Documents.ImageSet).Image;
             else if (topicSection is IWebReferencesTopicSection)
                 item.Image = IconRepository.Get(IconRepository.Documents.HyperlinkSet).Image;

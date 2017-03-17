@@ -7,7 +7,7 @@ using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
 {
-    public class ImgDocument :  TopicSection, IImgDocument
+    public class ImagePagerImageTopicSection :  TopicSection, IImagePagerImageTopicSection
     {
         private ImagePathGenerator imagePathGenerator;
 
@@ -36,14 +36,14 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
             get { return this.imagePathGenerator.ModifiedFilePath; }
         }
 
-        internal ImgDocument(ImagePathGenerator imagePathGenerator)
+        internal ImagePagerImageTopicSection(ImagePathGenerator imagePathGenerator)
             : base(imagePathGenerator, "", null)
         {
             this.imagePathGenerator = imagePathGenerator;
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImageDocument);
         }
 
-        internal ImgDocument(ImagePathGenerator imagePathGenerator, int ordinal, string description)
+        internal ImagePagerImageTopicSection(ImagePathGenerator imagePathGenerator, int ordinal, string description)
             : base(imagePathGenerator, "", description, ordinal)
         {
             this.imagePathGenerator = imagePathGenerator;

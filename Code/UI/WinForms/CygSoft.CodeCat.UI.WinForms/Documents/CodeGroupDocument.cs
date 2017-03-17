@@ -325,7 +325,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnImageSet_Click(object sender, EventArgs e)
         {
-            IImageSetDocument imageSetDocument = codeItemFile.AddTopicSection(TopicSectionType.ImageSet) as IImageSetDocument;
+            IImagePagerTopicSection imagePagerTopicSection = codeItemFile.AddTopicSection(TopicSectionType.ImageSet) as IImagePagerTopicSection;
             this.IsModified = true;
         }
 
