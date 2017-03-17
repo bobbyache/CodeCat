@@ -45,7 +45,7 @@
     <Compile Include="Base\TopicSection.cs" />
     <Compile Include="Base\BaseDocumentIndex.cs" />
     <Compile Include="Documents\CodeTopicSection.cs" />
-    <Compile Include="Documents\FileAttachmentsTopicSection.cs" />
+    <Compile Include="Documents\FileGroup\FileAttachmentsTopicSection.cs" />
     <Compile Include="Documents\FileGroup\FileAttachment.cs" />
     <Compile Include="Documents\SingleImageTopicSection.cs" />
     <Compile Include="Documents\ImagePagerTopicSection.cs" />

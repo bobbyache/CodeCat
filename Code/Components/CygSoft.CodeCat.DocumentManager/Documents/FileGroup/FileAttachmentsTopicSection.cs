@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace CygSoft.CodeCat.DocumentManager.Documents
+namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
 {
     public class FileAttachmentsTopicSection : TopicSection, IFileAttachmentsTopicSection
     {
