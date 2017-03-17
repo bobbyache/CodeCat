@@ -48,7 +48,7 @@
     <Compile Include="Documents\FileGroup\FileAttachmentsTopicSection.cs" />
     <Compile Include="Documents\FileGroup\FileAttachment.cs" />
     <Compile Include="Documents\SingleImageTopicSection.cs" />
-    <Compile Include="Documents\ImagePagerTopicSection.cs" />
+    <Compile Include="Documents\ImageSet\ImagePagerTopicSection.cs" />
     <Compile Include="Documents\ImageSet\ImageSetIndex.cs" />
     <Compile Include="Documents\ImageSet\ImageSetIndexXmlRepository.cs" />
     <Compile Include="Documents\ImageSet\ImagePagerImageTopicSection.cs" />

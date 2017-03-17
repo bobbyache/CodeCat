@@ -5,7 +5,7 @@ using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
 using System.Linq;
 
-namespace CygSoft.CodeCat.DocumentManager.Documents
+namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
 {
     public class ImagePagerTopicSection : TopicSection, IImagePagerTopicSection
     {

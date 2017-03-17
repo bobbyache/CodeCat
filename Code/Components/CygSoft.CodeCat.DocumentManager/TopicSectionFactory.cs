@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Documents;
 using CygSoft.CodeCat.DocumentManager.Documents.FileGroup;
+using CygSoft.CodeCat.DocumentManager.Documents.ImageSet;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using System;
 using System.Collections.Generic;
