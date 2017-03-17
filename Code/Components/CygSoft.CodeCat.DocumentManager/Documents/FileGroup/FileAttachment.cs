@@ -6,13 +6,13 @@ using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
 {
-    public class FileGroupFile : IFileAttachment
+    public class FileAttachment : IFileAttachment
     {
         private string sourceFilePath;
         private FilePathGenerator originalFilePathGenerator;
         private FilePathGenerator currentFilePathGenerator;
 
-        public FileGroupFile(string folder, string fileName, string sourceFilePath)
+        public FileAttachment(string folder, string fileName, string sourceFilePath)
         {
             this.originalFilePathGenerator = new FilePathGenerator(folder, fileName);
             this.currentFilePathGenerator = new FilePathGenerator(folder, fileName);
@@ -25,7 +25,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
             this.sourceFilePath = sourceFilePath;
         }
 
-        public FileGroupFile(string folder, string id, string title, string fileName, bool allowOpenOrExecute, string category, string description, DateTime dateCreated, DateTime dateModified)
+        public FileAttachment(string folder, string id, string title, string fileName, bool allowOpenOrExecute, string category, string description, DateTime dateCreated, DateTime dateModified)
         {
             this.originalFilePathGenerator = new FilePathGenerator(folder, fileName, id);
             this.currentFilePathGenerator = new FilePathGenerator(folder, fileName, id);

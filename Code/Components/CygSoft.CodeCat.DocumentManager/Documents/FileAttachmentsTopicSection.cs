@@ -52,7 +52,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
             foreach (XElement element in elements)
             {
-                IFileAttachment fileAttachment = new FileGroupFile(
+                IFileAttachment fileAttachment = new FileAttachment(
                     this.Folder,
                     (string)element.Attribute("Id"),
                     (string)element.Attribute("Title"),
@@ -174,7 +174,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
 
         public IFileAttachment CreateNewFile(string fileName, string sourceFilePath)
         {
-            IFileAttachment fileAttachment = new FileGroupFile(this.Folder, fileName, sourceFilePath);
+            IFileAttachment fileAttachment = new FileAttachment(this.Folder, fileName, sourceFilePath);
             return fileAttachment;
         }
     }

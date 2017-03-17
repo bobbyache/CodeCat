@@ -46,12 +46,12 @@
     <Compile Include="Base\BaseDocumentIndex.cs" />
     <Compile Include="Documents\CodeTopicSection.cs" />
     <Compile Include="Documents\FileAttachmentsTopicSection.cs" />
-    <Compile Include="Documents\FileGroup\FileGroupFile.cs" />
+    <Compile Include="Documents\FileGroup\FileAttachment.cs" />
     <Compile Include="Documents\SingleImageTopicSection.cs" />
     <Compile Include="Documents\ImagePagerTopicSection.cs" />
     <Compile Include="Documents\ImageSet\ImageSetIndex.cs" />
     <Compile Include="Documents\ImageSet\ImageSetIndexXmlRepository.cs" />
-    <Compile Include="Documents\ImageSet\ImgDocument.cs" />
+    <Compile Include="Documents\ImageSet\ImagePagerImageTopicSection.cs" />
     <Compile Include="Documents\PdfViewerTopicSection.cs" />
     <Compile Include="Documents\QikScriptTopicSection.cs" />
     <Compile Include="Documents\RichTextEditorTopicSection.cs" />
