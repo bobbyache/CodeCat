@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentIndexEventArgs.cs" />
-    <Compile Include="DocumentTypeEnum.cs" />
+    <Compile Include="TopicSectionType.cs" />
     <Compile Include="ICodeTopicSection.cs" />
     <Compile Include="ITopicSection.cs" />
     <Compile Include="IDocumentIndexRepository.cs" />

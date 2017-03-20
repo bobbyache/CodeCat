@@ -15,13 +15,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
         internal FileAttachmentsTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "filgrp"), title, null)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.FileGroup);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.FileAttachments);
         }
 
         internal FileAttachmentsTopicSection(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "filgrp", id), title, description, ordinal)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.FileGroup);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.FileAttachments);
         }
 
         private List<IFileAttachment> fileAttachmentList = new List<IFileAttachment>();

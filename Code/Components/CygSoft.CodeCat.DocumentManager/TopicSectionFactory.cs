@@ -65,30 +65,31 @@ namespace CygSoft.CodeCat.DocumentManager
             switch (documentType)
             {
                 case CODE_TOPIC_SECTION:
-                    return TopicSectionType.CodeSnippet;
+                    return TopicSectionType.Code;
 
                 case QIK_SCRIPT_TOPIC_SECTION:
                     return TopicSectionType.QikScript;
 
                 case WEB_REFERENCES_TOPIC_SECTION:
-                    return TopicSectionType.UrlGroup;
+                    return TopicSectionType.WebReferences;
 
                 case PDF_VIEWER_TOPIC_SECTION:
-                    return TopicSectionType.PdfDocument;
+                    return TopicSectionType.PdfViewer;
 
                 case SINGLE_IMAGE_TOPIC_SECTION:
-                    return TopicSectionType.ImageDocument;
+                    return TopicSectionType.SingleImage;
 
                 case IMAGE_PAGER_TOPIC_SECTION:
-                    return TopicSectionType.ImageSet;
+                    return TopicSectionType.ImagePager;
+
                 case RTF_EDITOR_TOPIC_SECTION:
-                    return TopicSectionType.RichTextDocument;
+                    return TopicSectionType.RtfEditor;
 
                 case FILE_ATTACHMENTS_TOPIC_SECTION:
-                    return TopicSectionType.FileGroup;
+                    return TopicSectionType.FileAttachments;
 
                 default:
-                    return TopicSectionType.CodeSnippet;
+                    return TopicSectionType.Code;
             }
         }
 
@@ -96,21 +97,28 @@ namespace CygSoft.CodeCat.DocumentManager
         {
             switch (documentType)
             {
-                case TopicSectionType.CodeSnippet:
+                case TopicSectionType.Code:
                     return CODE_TOPIC_SECTION;
+
                 case TopicSectionType.QikScript:
                     return QIK_SCRIPT_TOPIC_SECTION;
-                case TopicSectionType.UrlGroup:
+
+                case TopicSectionType.WebReferences:
                     return WEB_REFERENCES_TOPIC_SECTION;
-                case TopicSectionType.PdfDocument:
+
+                case TopicSectionType.PdfViewer:
                     return PDF_VIEWER_TOPIC_SECTION;
-                case TopicSectionType.ImageDocument:
+
+                case TopicSectionType.SingleImage:
                     return SINGLE_IMAGE_TOPIC_SECTION;
-                case TopicSectionType.ImageSet:
+
+                case TopicSectionType.ImagePager:
                     return IMAGE_PAGER_TOPIC_SECTION;
-                case TopicSectionType.RichTextDocument:
+
+                case TopicSectionType.RtfEditor:
                     return RTF_EDITOR_TOPIC_SECTION;
-                case TopicSectionType.FileGroup:
+
+                case TopicSectionType.FileAttachments:
                     return FILE_ATTACHMENTS_TOPIC_SECTION;
 
                 default:

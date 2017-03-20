@@ -15,13 +15,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         internal SingleImageTopicSection(string folder, string title, string extension)
             : base(new DocumentPathGenerator(folder, extension), title, null)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImageDocument);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.SingleImage);
         }
 
         internal SingleImageTopicSection(string folder, string id, string title, string extension, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, extension, id), title, description, ordinal)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImageDocument);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.SingleImage);
         }
 
         protected override void OpenFile()

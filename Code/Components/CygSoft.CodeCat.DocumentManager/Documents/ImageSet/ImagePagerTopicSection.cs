@@ -31,7 +31,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
         {
             indexPathGenerator = new ImageSetIndexPathGenerator(folder, "imgset", this.Id);
             repository = new ImageSetIndexXmlRepository(indexPathGenerator);
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImageSet);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImagePager);
             this.documentIndex = new ImageSetIndex(repository, indexPathGenerator);
         }
 
@@ -40,7 +40,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
         {
             indexPathGenerator = new ImageSetIndexPathGenerator(folder, "imgset", this.Id);
             repository = new ImageSetIndexXmlRepository(indexPathGenerator);
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImageSet);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImagePager);
             this.documentIndex = new ImageSetIndex(repository, indexPathGenerator);
         }
 

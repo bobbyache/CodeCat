@@ -197,7 +197,7 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public ICodeTopicSection AddTemplateSection(string syntax)
         {
-            return this.documentIndex.AddTopicSection(TopicSectionFactory.Create(TopicSectionType.CodeSnippet, documentIndex.Folder, 
+            return this.documentIndex.AddTopicSection(TopicSectionFactory.Create(TopicSectionType.Code, documentIndex.Folder, 
                 "New Template", null, 0, null, "tpl", syntax)) as ICodeTopicSection;
         }
 

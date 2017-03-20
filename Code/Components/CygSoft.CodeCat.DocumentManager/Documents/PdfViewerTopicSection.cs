@@ -15,13 +15,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         internal PdfViewerTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "pdf"), title, null)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.PdfDocument);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.PdfViewer);
         }
 
         internal PdfViewerTopicSection(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "pdf", id), title, description, ordinal)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.PdfDocument);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.PdfViewer);
         }
 
         protected override void OpenFile()

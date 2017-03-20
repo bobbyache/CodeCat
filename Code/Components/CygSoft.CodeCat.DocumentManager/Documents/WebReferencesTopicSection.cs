@@ -65,12 +65,12 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         internal WebReferencesTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "urlgrp"), title, null)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.UrlGroup);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.WebReferences);
         }
 
         internal WebReferencesTopicSection(string folder, string id, string title, int ordinal, string description) : base(new DocumentPathGenerator(folder, "urlgrp", id), title, description, ordinal)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.UrlGroup);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.WebReferences);
         }
 
         private List<IWebReference> webReferenceList = new List<IWebReference>();

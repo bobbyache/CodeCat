@@ -307,43 +307,43 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddCode_Click(object sender, EventArgs e)
         {
-            ICodeTopicSection templateFile = codeItemFile.AddTopicSection(TopicSectionType.CodeSnippet, ConfigSettings.DefaultSyntax, "txt") as ICodeTopicSection;
+            ICodeTopicSection templateFile = codeItemFile.AddTopicSection(TopicSectionType.Code, ConfigSettings.DefaultSyntax, "txt") as ICodeTopicSection;
             this.IsModified = true;
         }
 
         private void btnAddHyperlinks_Click(object sender, EventArgs e)
         {
-            IWebReferencesTopicSection webReferencesTopicSection = codeItemFile.AddTopicSection(TopicSectionType.UrlGroup) as IWebReferencesTopicSection;
+            IWebReferencesTopicSection webReferencesTopicSection = codeItemFile.AddTopicSection(TopicSectionType.WebReferences) as IWebReferencesTopicSection;
             this.IsModified = true;
         }
 
         private void btnAddPdfDocument_Click(object sender, EventArgs e)
         {
-            IPdfViewerTopicSection pdfViewerTopicSection = codeItemFile.AddTopicSection(TopicSectionType.PdfDocument) as IPdfViewerTopicSection;
+            IPdfViewerTopicSection pdfViewerTopicSection = codeItemFile.AddTopicSection(TopicSectionType.PdfViewer) as IPdfViewerTopicSection;
             this.IsModified = true;
         }
 
         private void btnImageSet_Click(object sender, EventArgs e)
         {
-            IImagePagerTopicSection imagePagerTopicSection = codeItemFile.AddTopicSection(TopicSectionType.ImageSet) as IImagePagerTopicSection;
+            IImagePagerTopicSection imagePagerTopicSection = codeItemFile.AddTopicSection(TopicSectionType.ImagePager) as IImagePagerTopicSection;
             this.IsModified = true;
         }
 
         private void btnAddImage_Click(object sender, EventArgs e)
         {
-            ISingleImageTopicSection singleImageTopicSection = codeItemFile.AddTopicSection(TopicSectionType.ImageDocument, null, "png") as ISingleImageTopicSection;
+            ISingleImageTopicSection singleImageTopicSection = codeItemFile.AddTopicSection(TopicSectionType.SingleImage, null, "png") as ISingleImageTopicSection;
             this.IsModified = true;
         }
 
         private void btnRichText_Click(object sender, EventArgs e)
         {
-            IRichTextEditorTopicSection richTextEditorTopicSection = codeItemFile.AddTopicSection(TopicSectionType.RichTextDocument, null, "rtf") as IRichTextEditorTopicSection;
+            IRichTextEditorTopicSection richTextEditorTopicSection = codeItemFile.AddTopicSection(TopicSectionType.RtfEditor, null, "rtf") as IRichTextEditorTopicSection;
             this.IsModified = true;
         }
 
         private void btnFileGroup_Click(object sender, EventArgs e)
         {
-            IFileAttachmentsTopicSection fileAttachmentsTopicSection = codeItemFile.AddTopicSection(TopicSectionType.FileGroup, null, null) as IFileAttachmentsTopicSection;
+            IFileAttachmentsTopicSection fileAttachmentsTopicSection = codeItemFile.AddTopicSection(TopicSectionType.FileAttachments, null, null) as IFileAttachmentsTopicSection;
             this.IsModified = true;
         }
 

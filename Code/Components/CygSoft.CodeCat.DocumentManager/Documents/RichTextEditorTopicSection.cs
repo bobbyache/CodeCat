@@ -17,13 +17,13 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
         internal RichTextEditorTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "rtf"), title, null)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.RichTextDocument);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.RtfEditor);
         }
 
         internal RichTextEditorTopicSection(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "rtf", id), title, description, ordinal)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.RichTextDocument);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.RtfEditor);
         }
 
         protected override void OpenFile()
