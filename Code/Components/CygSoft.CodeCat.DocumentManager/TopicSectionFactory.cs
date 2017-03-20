@@ -2,17 +2,20 @@
 using CygSoft.CodeCat.DocumentManager.Documents.FileGroup;
 using CygSoft.CodeCat.DocumentManager.Documents.ImageSet;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager
 {
     public class TopicSectionFactory
     {
+        private const string CODE_TOPIC_SECTION = "CODESNIPPET";
+        private const string PDF_VIEWER_TOPIC_SECTION = "PDFDOCUMENT";
+        private const string QIK_SCRIPT_TOPIC_SECTION = "QIKSCRIPT";
+        private const string RTF_EDITOR_TOPIC_SECTION = "RICHTEXT";
+        private const string SINGLE_IMAGE_TOPIC_SECTION = "IMAGEDOCUMENT";
+        private const string IMAGE_PAGER_TOPIC_SECTION = "IMAGESET";
+        private const string WEB_REFERENCES_TOPIC_SECTION = "URLGROUP";
+        private const string FILE_ATTACHMENTS_TOPIC_SECTION = "FILEGROUP";
+
         private class TopicSectionArgs
         {
             public string DocumentType { get; set; }
@@ -30,28 +33,28 @@ namespace CygSoft.CodeCat.DocumentManager
         {
             TopicSectionArgs topicSectionArgs = new TopicSectionArgs { DocumentType = GetDocumentType(documentType), Folder = folder, Title = title, Id = id, Ordinal = ordinal, Description = description, Extension = extension, Syntax = syntax };
 
-            if (topicSectionArgs.DocumentType == "CODESNIPPET")
+            if (topicSectionArgs.DocumentType == CODE_TOPIC_SECTION)
                 return CreateCodeTopicSection(topicSectionArgs);
 
-            if (topicSectionArgs.DocumentType == "URLGROUP")
+            if (topicSectionArgs.DocumentType == WEB_REFERENCES_TOPIC_SECTION)
                 return CreateWebReferencesTopicSection(topicSectionArgs);
 
-            if (topicSectionArgs.DocumentType == "QIKSCRIPT")
+            if (topicSectionArgs.DocumentType == QIK_SCRIPT_TOPIC_SECTION)
                 return CreateQikScriptTopicSection(topicSectionArgs);
 
-            if (topicSectionArgs.DocumentType == "PDFDOCUMENT")
+            if (topicSectionArgs.DocumentType == PDF_VIEWER_TOPIC_SECTION)
                 return CreatePdfViewerTopicSection(topicSectionArgs);
 
-            if (topicSectionArgs.DocumentType == "IMAGEDOCUMENT")
+            if (topicSectionArgs.DocumentType == SINGLE_IMAGE_TOPIC_SECTION)
                 return CreateSingleImageTopicSection(topicSectionArgs);
 
-            if (topicSectionArgs.DocumentType == "IMAGESET")
+            if (topicSectionArgs.DocumentType == IMAGE_PAGER_TOPIC_SECTION)
                 return CreateImagePagerTopicSection(topicSectionArgs);
 
-            if (topicSectionArgs.DocumentType == "RICHTEXT")
+            if (topicSectionArgs.DocumentType == RTF_EDITOR_TOPIC_SECTION)
                 return CreateRichTextEditorTopicSection(topicSectionArgs);
 
-            if (topicSectionArgs.DocumentType == "FILEGROUP")
+            if (topicSectionArgs.DocumentType == FILE_ATTACHMENTS_TOPIC_SECTION)
                 return CreateFileAttachmentsTopicSection(topicSectionArgs);
 
             return null;
@@ -61,27 +64,27 @@ namespace CygSoft.CodeCat.DocumentManager
         {
             switch (documentType)
             {
-                case "CODESNIPPET":
+                case CODE_TOPIC_SECTION:
                     return TopicSectionType.CodeSnippet;
 
-                case "QIKSCRIPT":
+                case QIK_SCRIPT_TOPIC_SECTION:
                     return TopicSectionType.QikScript;
 
-                case "URLGROUP":
+                case WEB_REFERENCES_TOPIC_SECTION:
                     return TopicSectionType.UrlGroup;
 
-                case "PDFDOCUMENT":
+                case PDF_VIEWER_TOPIC_SECTION:
                     return TopicSectionType.PdfDocument;
 
-                case "IMAGEDOCUMENT":
+                case SINGLE_IMAGE_TOPIC_SECTION:
                     return TopicSectionType.ImageDocument;
 
-                case "IMAGESET":
+                case IMAGE_PAGER_TOPIC_SECTION:
                     return TopicSectionType.ImageSet;
-                case "RICHTEXT":
+                case RTF_EDITOR_TOPIC_SECTION:
                     return TopicSectionType.RichTextDocument;
 
-                case "FILEGROUP":
+                case FILE_ATTACHMENTS_TOPIC_SECTION:
                     return TopicSectionType.FileGroup;
 
                 default:
@@ -94,27 +97,26 @@ namespace CygSoft.CodeCat.DocumentManager
             switch (documentType)
             {
                 case TopicSectionType.CodeSnippet:
-                    return "CODESNIPPET";
+                    return CODE_TOPIC_SECTION;
                 case TopicSectionType.QikScript:
-                    return "QIKSCRIPT";
+                    return QIK_SCRIPT_TOPIC_SECTION;
                 case TopicSectionType.UrlGroup:
-                    return "URLGROUP";
+                    return WEB_REFERENCES_TOPIC_SECTION;
                 case TopicSectionType.PdfDocument:
-                    return "PDFDOCUMENT";
+                    return PDF_VIEWER_TOPIC_SECTION;
                 case TopicSectionType.ImageDocument:
-                    return "IMAGEDOCUMENT";
+                    return SINGLE_IMAGE_TOPIC_SECTION;
                 case TopicSectionType.ImageSet:
-                    return "IMAGESET";
+                    return IMAGE_PAGER_TOPIC_SECTION;
                 case TopicSectionType.RichTextDocument:
-                    return "RICHTEXT";
+                    return RTF_EDITOR_TOPIC_SECTION;
                 case TopicSectionType.FileGroup:
-                    return "FILEGROUP";
+                    return FILE_ATTACHMENTS_TOPIC_SECTION;
 
                 default:
-                    return "CODESNIPPET";
+                    return CODE_TOPIC_SECTION;
             }
         }
-
 
         private static ITopicSection CreateFileAttachmentsTopicSection(TopicSectionArgs topicSectionArgs)
         {
