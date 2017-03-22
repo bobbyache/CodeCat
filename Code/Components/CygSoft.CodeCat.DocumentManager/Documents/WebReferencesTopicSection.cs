@@ -164,7 +164,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             webReferenceList.Remove(webReference);
         }
 
-        public string CopyXmlFor(string[] ids)
+        public string GetXml(string[] ids)
         {
             XDocument indexDocument = new XDocument();
             XElement element = new XElement("UrlCopy");
@@ -178,7 +178,7 @@ namespace CygSoft.CodeCat.DocumentManager.Documents
             return indexDocument.ToString();
         }
 
-        public void PasteXml(string xml)
+        public void AddXml(string xml)
         {
             try
             {

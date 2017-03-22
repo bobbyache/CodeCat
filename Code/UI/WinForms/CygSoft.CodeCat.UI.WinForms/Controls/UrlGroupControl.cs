@@ -311,7 +311,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 .Select(lv => lv.Tag).Cast<IWebReference>()
                 .Select(url => url.Id).ToArray();
 
-            string copyXml = webReferencesTopicSection.CopyXmlFor(ids);
+            string copyXml = webReferencesTopicSection.GetXml(ids);
             Clipboard.Clear();
             Clipboard.SetText(copyXml);
         }
@@ -321,7 +321,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             try
             {
                 string xml = Clipboard.GetText();
-                webReferencesTopicSection.PasteXml(xml);
+                webReferencesTopicSection.AddXml(xml);
             }
             catch (Exception ex)
             {

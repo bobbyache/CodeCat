@@ -23,8 +23,8 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string[] Categories { get; }
         void Add(IWebReference webReference);
         void Remove(IWebReference webReference);
-        string CopyXmlFor(string[] ids);
-        void PasteXml(string xml);
+        string GetXml(string[] ids);
+        void AddXml(string xml);
         IWebReference CreateWebReference();
     }
 }
