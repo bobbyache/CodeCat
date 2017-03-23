@@ -7,23 +7,23 @@ using System.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {
-    public abstract class BaseDocumentIndex : IDocumentIndex
+    public abstract class Topic : ITopic
     {
         public event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
         public event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;
         public event EventHandler<TopicSectionEventArgs> TopicSectionMovedUp;
         public event EventHandler<TopicSectionEventArgs> TopicSectionMovedDown;
 
-        public event EventHandler<DocumentIndexEventArgs> BeforeDelete;
-        public event EventHandler<DocumentIndexEventArgs> AfterDelete;
-        public event EventHandler<DocumentIndexEventArgs> BeforeOpen;
-        public event EventHandler<DocumentIndexEventArgs> AfterOpen;
-        public event EventHandler<DocumentIndexEventArgs> BeforeSave;
-        public event EventHandler<DocumentIndexEventArgs> AfterSave;
-        public event EventHandler<DocumentIndexEventArgs> BeforeClose;
-        public event EventHandler<DocumentIndexEventArgs> AfterClose;
-        public event EventHandler<DocumentIndexEventArgs> BeforeRevert;
-        public event EventHandler<DocumentIndexEventArgs> AfterRevert;
+        public event EventHandler<TopicEventArgs> BeforeDelete;
+        public event EventHandler<TopicEventArgs> AfterDelete;
+        public event EventHandler<TopicEventArgs> BeforeOpen;
+        public event EventHandler<TopicEventArgs> AfterOpen;
+        public event EventHandler<TopicEventArgs> BeforeSave;
+        public event EventHandler<TopicEventArgs> AfterSave;
+        public event EventHandler<TopicEventArgs> BeforeClose;
+        public event EventHandler<TopicEventArgs> AfterClose;
+        public event EventHandler<TopicEventArgs> BeforeRevert;
+        public event EventHandler<TopicEventArgs> AfterRevert;
 
         public string Id { get; private set; }
         public string FilePath { get; protected set; }
@@ -66,7 +66,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         protected abstract List<ITopicSection> LoadTopicSections();
         protected abstract void SaveDocumentIndex();
 
-        public BaseDocumentIndex(IDocumentIndexRepository indexRepository, BaseFilePathGenerator filePathGenerator)
+        public Topic(IDocumentIndexRepository indexRepository, BaseFilePathGenerator filePathGenerator)
         {
             this.indexRepository = indexRepository;
             this.filePathGenerator = filePathGenerator;
@@ -231,13 +231,13 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                BeforeOpen?.Invoke(this, new DocumentIndexEventArgs(this));
+                BeforeOpen?.Invoke(this, new TopicEventArgs(this));
                 OnBeforeOpen();
                 OpenFile();
                 OnAfterOpen();
 
                 this.Loaded = true;
-                AfterOpen?.Invoke(this, new DocumentIndexEventArgs(this));
+                AfterOpen?.Invoke(this, new TopicEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -249,7 +249,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                BeforeRevert?.Invoke(this, new DocumentIndexEventArgs(this));
+                BeforeRevert?.Invoke(this, new TopicEventArgs(this));
                 OnBeforeRevert();
 
                 if (File.Exists(this.FilePath))
@@ -257,7 +257,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 OnAfterRevert();
 
                 this.Loaded = true;
-                AfterRevert?.Invoke(this, new DocumentIndexEventArgs(this));
+                AfterRevert?.Invoke(this, new TopicEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -267,7 +267,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         public void Delete()
         {
-            BeforeDelete?.Invoke(this, new DocumentIndexEventArgs(this));
+            BeforeDelete?.Invoke(this, new TopicEventArgs(this));
             OnBeforeDelete();
 
             if (File.Exists(this.FilePath))
@@ -276,19 +276,19 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             OnAfterDelete();
 
             this.Loaded = false;
-            AfterDelete?.Invoke(this, new DocumentIndexEventArgs(this));
+            AfterDelete?.Invoke(this, new TopicEventArgs(this));
         }
 
         public void Save()
         {
             try
             {
-                BeforeSave?.Invoke(this, new DocumentIndexEventArgs(this));
+                BeforeSave?.Invoke(this, new TopicEventArgs(this));
                 OnBeforeSave();
                 SaveFile();
                 OnAfterSave();
                 this.Loaded = true;
-                AfterSave?.Invoke(this, new DocumentIndexEventArgs(this));
+                AfterSave?.Invoke(this, new TopicEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -297,10 +297,10 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         }
         public void Close()
         {
-            BeforeClose?.Invoke(this, new DocumentIndexEventArgs(this));
+            BeforeClose?.Invoke(this, new TopicEventArgs(this));
             this.OnClose();
             this.Loaded = false;
-            AfterClose?.Invoke(this, new DocumentIndexEventArgs(this));
+            AfterClose?.Invoke(this, new TopicEventArgs(this));
         }
 
         private void OpenTopicSections()

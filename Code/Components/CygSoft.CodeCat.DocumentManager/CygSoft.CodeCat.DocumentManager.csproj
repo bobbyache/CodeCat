@@ -43,7 +43,7 @@
     <Compile Include="Base\BaseFilePathGenerator.cs" />
     <Compile Include="TopicSectionFactory.cs" />
     <Compile Include="Base\TopicSection.cs" />
-    <Compile Include="Base\BaseDocumentIndex.cs" />
+    <Compile Include="Base\Topic.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="PathGenerators\DocumentIndexPathGenerator.cs" />
     <Compile Include="PathGenerators\DocumentPathGenerator.cs" />

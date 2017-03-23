@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace CygSoft.CodeCat.Domain.CodeGroup
 {
-    public class CodeGroupIndex : BaseDocumentIndex
+    public class CodeGroupIndex : Topic
     {
         public CodeGroupIndex(IDocumentIndexRepository repository, DocumentIndexPathGenerator indexPathGenerator)
             : base(repository, indexPathGenerator)

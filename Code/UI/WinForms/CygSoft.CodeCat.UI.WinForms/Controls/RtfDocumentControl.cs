@@ -80,13 +80,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             IsModified = false;
         }
 
-        private void codeGroupDocumentSet_ContentSaved(object sender, DocumentIndexEventArgs e)
+        private void codeGroupDocumentSet_ContentSaved(object sender, TopicEventArgs e)
         {
             IsModified = false;
             SetChangeStatus();
         }
 
-        private void codeGroupDocumentSet_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
+        private void codeGroupDocumentSet_BeforeContentSaved(object sender, TopicEventArgs e)
         {
             richTextEditorTopicSection.Title = txtTitle.Text;
         }

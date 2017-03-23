@@ -274,7 +274,7 @@ namespace CygSoft.CodeCat.Domain.Base
             indexRepository.SaveIndex(this.index);
         }
 
-        private void target_AfterDelete(object sender, DocumentIndexEventArgs e)
+        private void target_AfterDelete(object sender, TopicEventArgs e)
         {
             IPersistableTarget target = sender as IPersistableTarget;
 
@@ -287,13 +287,13 @@ namespace CygSoft.CodeCat.Domain.Base
             this.index.Remove(target.Id);
         }
 
-        private void target_AfterSave(object sender, DocumentIndexEventArgs e)
+        private void target_AfterSave(object sender, TopicEventArgs e)
         {
             IPersistableTarget targetFile = sender as IPersistableTarget;
             this.index.Update(targetFile.IndexItem);
         }
 
-        private void target_BeforeClose(object sender, DocumentIndexEventArgs e)
+        private void target_BeforeClose(object sender, TopicEventArgs e)
         {
             IPersistableTarget target = sender as IPersistableTarget;
 

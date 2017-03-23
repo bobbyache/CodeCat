@@ -116,13 +116,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             UpdateAutoList();
         }
 
-        private void qikTemplateDocumentSet_ContentSaved(object sender, DocumentIndexEventArgs e)
+        private void qikTemplateDocumentSet_ContentSaved(object sender, TopicEventArgs e)
         {
             IsModified = false;
             SetChangeStatus();
         }
 
-        private void qikTemplateDocumentSet_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
+        private void qikTemplateDocumentSet_BeforeContentSaved(object sender, TopicEventArgs e)
         {
             templateFile.Title = txtTitle.Text;
             templateFile.Text = templateSyntaxDocument.Text;

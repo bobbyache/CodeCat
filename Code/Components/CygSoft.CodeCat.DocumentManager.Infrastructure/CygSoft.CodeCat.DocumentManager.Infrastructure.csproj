@@ -40,13 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocumentIndexEventArgs.cs" />
+    <Compile Include="TopicEventArgs.cs" />
     <Compile Include="TopicSectionType.cs" />
     <Compile Include="ICodeTopicSection.cs" />
     <Compile Include="ITopicSection.cs" />
     <Compile Include="IDocumentIndexRepository.cs" />
     <Compile Include="IFileGroupDocument.cs" />
-    <Compile Include="IDocumentIndex.cs" />
+    <Compile Include="ITopic.cs" />
     <Compile Include="ISingleImageTopicSection.cs" />
     <Compile Include="IImageItem.cs" />
     <Compile Include="IImagePagerTopicSection.cs" />

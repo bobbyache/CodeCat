@@ -24,16 +24,16 @@ namespace CygSoft.CodeCat.Domain.Code
             }
         }
 
-        public event EventHandler<DocumentIndexEventArgs> BeforeDelete;
-        public event EventHandler<DocumentIndexEventArgs> AfterDelete;
-        public event EventHandler<DocumentIndexEventArgs> BeforeOpen;
-        public event EventHandler<DocumentIndexEventArgs> AfterOpen;
-        public event EventHandler<DocumentIndexEventArgs> BeforeSave;
-        public event EventHandler<DocumentIndexEventArgs> AfterSave;
-        public event EventHandler<DocumentIndexEventArgs> BeforeClose;
-        public event EventHandler<DocumentIndexEventArgs> AfterClose;
-        public event EventHandler<DocumentIndexEventArgs> BeforeRevert;
-        public event EventHandler<DocumentIndexEventArgs> AfterRevert;
+        public event EventHandler<TopicEventArgs> BeforeDelete;
+        public event EventHandler<TopicEventArgs> AfterDelete;
+        public event EventHandler<TopicEventArgs> BeforeOpen;
+        public event EventHandler<TopicEventArgs> AfterOpen;
+        public event EventHandler<TopicEventArgs> BeforeSave;
+        public event EventHandler<TopicEventArgs> AfterSave;
+        public event EventHandler<TopicEventArgs> BeforeClose;
+        public event EventHandler<TopicEventArgs> AfterClose;
+        public event EventHandler<TopicEventArgs> BeforeRevert;
+        public event EventHandler<TopicEventArgs> AfterRevert;
 
         public event EventHandler SnapshotTaken;
         public event EventHandler SnapshotDeleted;
@@ -122,29 +122,29 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Revert()
         {
-            this.BeforeRevert?.Invoke(this, new DocumentIndexEventArgs(null));
+            this.BeforeRevert?.Invoke(this, new TopicEventArgs(null));
             bool opened = this.ReadData();
-            this.AfterRevert?.Invoke(this, new DocumentIndexEventArgs(null));
+            this.AfterRevert?.Invoke(this, new TopicEventArgs(null));
         }
 
         public void Open()
         {
-            BeforeOpen?.Invoke(this, new DocumentIndexEventArgs(null));
+            BeforeOpen?.Invoke(this, new TopicEventArgs(null));
             bool opened = this.ReadData();
             if (opened)
             {
                 this.IncrementHitCount();
                 this.WriteData();
                 this.loaded = true;
-                AfterOpen?.Invoke(this, new DocumentIndexEventArgs(null));
+                AfterOpen?.Invoke(this, new TopicEventArgs(null));
             }
         }
 
         public void Close()
         {
-            BeforeClose?.Invoke(this, new DocumentIndexEventArgs(null));
+            BeforeClose?.Invoke(this, new TopicEventArgs(null));
             this.loaded = false;
-            AfterClose?.Invoke(this, new DocumentIndexEventArgs(null));
+            AfterClose?.Invoke(this, new TopicEventArgs(null));
         }
 
         private bool ReadData()
@@ -185,9 +185,9 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Save()
         {
-            BeforeSave?.Invoke(this, new DocumentIndexEventArgs(null));
+            BeforeSave?.Invoke(this, new TopicEventArgs(null));
             this.WriteData();
-            AfterSave?.Invoke(this, new DocumentIndexEventArgs(null));
+            AfterSave?.Invoke(this, new TopicEventArgs(null));
         }
 
         public void TakeSnapshot(string description = "")
@@ -212,10 +212,10 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Delete()
         {
-            BeforeDelete?.Invoke(this, new DocumentIndexEventArgs(null));
+            BeforeDelete?.Invoke(this, new TopicEventArgs(null));
             File.Delete(this.FilePath);
             this.loaded = false;
-            AfterDelete?.Invoke(this, new DocumentIndexEventArgs(null));
+            AfterDelete?.Invoke(this, new TopicEventArgs(null));
         }
 
         private void IncrementHitCount()

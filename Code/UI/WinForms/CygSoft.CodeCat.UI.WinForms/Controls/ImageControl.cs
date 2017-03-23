@@ -117,13 +117,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.Modified += CodeItemCtrl_Modified;
         }
 
-        private void codeGroupDocumentSet_ContentSaved(object sender, DocumentIndexEventArgs e)
+        private void codeGroupDocumentSet_ContentSaved(object sender, TopicEventArgs e)
         {
             IsModified = false;
             SetChangeStatus();
         }
 
-        private void codeGroupDocumentSet_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
+        private void codeGroupDocumentSet_BeforeContentSaved(object sender, TopicEventArgs e)
         {
             this.singleImageTopicSection.Title = txtTitle.Text;
         }

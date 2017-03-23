@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
 {
-    internal class ImagePager : BaseDocumentIndex
+    internal class ImagePager : Topic
     {
         public ImagePager(IDocumentIndexRepository repository, ImagePagerPathGenerator imagePagerPathGenerator)
             : base(repository, imagePagerPathGenerator)

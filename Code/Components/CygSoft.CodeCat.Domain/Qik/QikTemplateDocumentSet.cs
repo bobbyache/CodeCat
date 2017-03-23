@@ -14,16 +14,16 @@ namespace CygSoft.CodeCat.Domain.Qik
 {
     internal class QikTemplateDocumentSet : IPersistableTarget, IQikTemplateDocumentSet
     {
-        public event EventHandler<DocumentIndexEventArgs> BeforeDelete;
-        public event EventHandler<DocumentIndexEventArgs> AfterDelete;
-        public event EventHandler<DocumentIndexEventArgs> BeforeOpen;
-        public event EventHandler<DocumentIndexEventArgs> AfterOpen;
-        public event EventHandler<DocumentIndexEventArgs> BeforeSave;
-        public event EventHandler<DocumentIndexEventArgs> AfterSave;
-        public event EventHandler<DocumentIndexEventArgs> BeforeClose;
-        public event EventHandler<DocumentIndexEventArgs> AfterClose;
-        public event EventHandler<DocumentIndexEventArgs> BeforeRevert;
-        public event EventHandler<DocumentIndexEventArgs> AfterRevert;
+        public event EventHandler<TopicEventArgs> BeforeDelete;
+        public event EventHandler<TopicEventArgs> AfterDelete;
+        public event EventHandler<TopicEventArgs> BeforeOpen;
+        public event EventHandler<TopicEventArgs> AfterOpen;
+        public event EventHandler<TopicEventArgs> BeforeSave;
+        public event EventHandler<TopicEventArgs> AfterSave;
+        public event EventHandler<TopicEventArgs> BeforeClose;
+        public event EventHandler<TopicEventArgs> AfterClose;
+        public event EventHandler<TopicEventArgs> BeforeRevert;
+        public event EventHandler<TopicEventArgs> AfterRevert;
 
         public event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
         public event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;
@@ -224,52 +224,52 @@ namespace CygSoft.CodeCat.Domain.Qik
             return false;
         }
 
-        private void documentIndex_AfterOpen(object sender, DocumentIndexEventArgs e)
+        private void documentIndex_AfterOpen(object sender, TopicEventArgs e)
         {
             AfterOpen?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeOpen(object sender, DocumentIndexEventArgs e)
+        private void documentIndex_BeforeOpen(object sender, TopicEventArgs e)
         {
             BeforeOpen?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeRevert(object sender, DocumentIndexEventArgs e)
+        private void documentIndex_BeforeRevert(object sender, TopicEventArgs e)
         {
             BeforeRevert?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterRevert(object sender, DocumentIndexEventArgs e)
+        private void documentIndex_AfterRevert(object sender, TopicEventArgs e)
         {
             AfterRevert?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterDelete(object sender, DocumentIndexEventArgs e)
+        private void documentIndex_AfterDelete(object sender, TopicEventArgs e)
         {
             AfterDelete?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeDelete(object sender, DocumentIndexEventArgs e)
+        private void documentIndex_BeforeDelete(object sender, TopicEventArgs e)
         {
             BeforeDelete?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterClose(object sender, DocumentIndexEventArgs e)
+        private void documentIndex_AfterClose(object sender, TopicEventArgs e)
         {
             AfterClose?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeClose(object sender, DocumentIndexEventArgs e)
+        private void documentIndex_BeforeClose(object sender, TopicEventArgs e)
         {
             BeforeClose?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterSave(object sender, DocumentIndexEventArgs e)
+        private void documentIndex_AfterSave(object sender, TopicEventArgs e)
         {
             AfterSave?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeSave(object sender, DocumentIndexEventArgs e)
+        private void documentIndex_BeforeSave(object sender, TopicEventArgs e)
         {
             BeforeSave?.Invoke(this, e);
         }

@@ -222,7 +222,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region QikFile Events
 
-        private void codeItemFile_ContentReverted(object sender, DocumentIndexEventArgs e)
+        private void codeItemFile_ContentReverted(object sender, TopicEventArgs e)
         {
             ControlGraphics.SuspendDrawing(this);
             ResetFields();
@@ -230,12 +230,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             ControlGraphics.ResumeDrawing(this);
         }
 
-        private void codeItemFile_ContentSaved(object sender, DocumentIndexEventArgs e)
+        private void codeItemFile_ContentSaved(object sender, TopicEventArgs e)
         {
             ResetFields();
         }
 
-        private void codeItemFile_BeforeContentSaved(object sender, DocumentIndexEventArgs e)
+        private void codeItemFile_BeforeContentSaved(object sender, TopicEventArgs e)
         {
             codeItemFile.Title = this.txtTitle.Text.Trim();
             codeItemFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();

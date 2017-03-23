@@ -9,16 +9,16 @@ namespace CygSoft.CodeCat.Domain.Base
         int HitCount { get; }
         string Title { get; set; }
 
-        event EventHandler<DocumentIndexEventArgs> BeforeDelete;
-        event EventHandler<DocumentIndexEventArgs> AfterDelete;
-        event EventHandler<DocumentIndexEventArgs> BeforeOpen;
-        event EventHandler<DocumentIndexEventArgs> AfterOpen;
-        event EventHandler<DocumentIndexEventArgs> BeforeSave;
-        event EventHandler<DocumentIndexEventArgs> AfterSave;
-        event EventHandler<DocumentIndexEventArgs> BeforeClose;
-        event EventHandler<DocumentIndexEventArgs> AfterClose;
-        event EventHandler<DocumentIndexEventArgs> BeforeRevert;
-        event EventHandler<DocumentIndexEventArgs> AfterRevert;
+        event EventHandler<TopicEventArgs> BeforeDelete;
+        event EventHandler<TopicEventArgs> AfterDelete;
+        event EventHandler<TopicEventArgs> BeforeOpen;
+        event EventHandler<TopicEventArgs> AfterOpen;
+        event EventHandler<TopicEventArgs> BeforeSave;
+        event EventHandler<TopicEventArgs> AfterSave;
+        event EventHandler<TopicEventArgs> BeforeClose;
+        event EventHandler<TopicEventArgs> AfterClose;
+        event EventHandler<TopicEventArgs> BeforeRevert;
+        event EventHandler<TopicEventArgs> AfterRevert;
 
         // do not set file content here, this is the job of specialized file classes.
 

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public class DocumentIndexEventArgs : EventArgs
+    public class TopicEventArgs : EventArgs
     {
-        public IDocumentIndex File { get; private set; }
+        public ITopic Topic { get; private set; }
 
-        public DocumentIndexEventArgs(IDocumentIndex file)
+        public TopicEventArgs(ITopic topic)
         {
-            this.File = file;
+            this.Topic = topic;
         }
     }
 }

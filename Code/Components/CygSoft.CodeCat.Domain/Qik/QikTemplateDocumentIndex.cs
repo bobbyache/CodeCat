@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    public class QikTemplateDocumentIndex : BaseDocumentIndex
+    public class QikTemplateDocumentIndex : Topic
     {
         public IQikScriptTopicSection QikScriptSection 
         { 
