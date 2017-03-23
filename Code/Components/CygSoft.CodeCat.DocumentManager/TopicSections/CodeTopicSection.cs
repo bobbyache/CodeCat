@@ -1,6 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 
-namespace CygSoft.CodeCat.DocumentManager.Documents
+namespace CygSoft.CodeCat.DocumentManager.TopicSections
 {
     public class CodeTopicSection : TextTopicSection, ICodeTopicSection
     {

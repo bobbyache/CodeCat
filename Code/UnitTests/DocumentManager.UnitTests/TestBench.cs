@@ -1,6 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager;
 using CygSoft.CodeCat.DocumentManager.Base;
-using CygSoft.CodeCat.DocumentManager.Documents;
+using CygSoft.CodeCat.DocumentManager.TopicSections;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

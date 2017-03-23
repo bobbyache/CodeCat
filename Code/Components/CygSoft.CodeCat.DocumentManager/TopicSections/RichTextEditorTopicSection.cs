@@ -3,7 +3,7 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
 
-namespace CygSoft.CodeCat.DocumentManager.Documents
+namespace CygSoft.CodeCat.DocumentManager.TopicSections
 {
     public class RichTextEditorTopicSection : TopicSection, IRichTextEditorTopicSection
     {

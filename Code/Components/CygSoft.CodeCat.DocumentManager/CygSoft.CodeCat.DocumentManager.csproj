@@ -44,19 +44,6 @@
     <Compile Include="TopicSectionFactory.cs" />
     <Compile Include="Base\TopicSection.cs" />
     <Compile Include="Base\BaseDocumentIndex.cs" />
-    <Compile Include="Documents\CodeTopicSection.cs" />
-    <Compile Include="Documents\FileGroup\FileAttachmentsTopicSection.cs" />
-    <Compile Include="Documents\FileGroup\FileAttachment.cs" />
-    <Compile Include="Documents\SingleImageTopicSection.cs" />
-    <Compile Include="Documents\ImageSet\ImagePagerTopicSection.cs" />
-    <Compile Include="Documents\ImageSet\ImageSetIndex.cs" />
-    <Compile Include="Documents\ImageSet\ImageSetIndexXmlRepository.cs" />
-    <Compile Include="Documents\ImageSet\ImagePagerImageTopicSection.cs" />
-    <Compile Include="Documents\PdfViewerTopicSection.cs" />
-    <Compile Include="Documents\QikScriptTopicSection.cs" />
-    <Compile Include="Documents\RichTextEditorTopicSection.cs" />
-    <Compile Include="Documents\TextTopicSection.cs" />
-    <Compile Include="Documents\WebReferencesTopicSection.cs" />
     <Compile Include="Exceptions\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="PathGenerators\DocumentIndexPathGenerator.cs" />
     <Compile Include="PathGenerators\DocumentPathGenerator.cs" />
@@ -66,6 +53,19 @@
     <Compile Include="PathGenerators\VersionPathGenerator.cs" />
     <Compile Include="Services\PositionableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TopicSections\CodeTopicSection.cs" />
+    <Compile Include="TopicSections\FileAttachments\FileAttachment.cs" />
+    <Compile Include="TopicSections\FileAttachments\FileAttachmentsTopicSection.cs" />
+    <Compile Include="TopicSections\ImagePager\ImagePagerImageTopicSection.cs" />
+    <Compile Include="TopicSections\ImagePager\ImagePagerTopicSection.cs" />
+    <Compile Include="TopicSections\ImagePager\ImageSetIndex.cs" />
+    <Compile Include="TopicSections\ImagePager\ImageSetIndexXmlRepository.cs" />
+    <Compile Include="TopicSections\PdfViewerTopicSection.cs" />
+    <Compile Include="TopicSections\QikScriptTopicSection.cs" />
+    <Compile Include="TopicSections\RichTextEditorTopicSection.cs" />
+    <Compile Include="TopicSections\SingleImageTopicSection.cs" />
+    <Compile Include="TopicSections\TextTopicSection.cs" />
+    <Compile Include="TopicSections\WebReferencesTopicSection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">

@@ -4,7 +4,7 @@ using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
+namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
 {
     internal class ImageSetIndex : BaseDocumentIndex
     {

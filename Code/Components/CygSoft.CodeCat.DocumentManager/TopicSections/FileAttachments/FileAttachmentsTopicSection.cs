@@ -1,5 +1,4 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Base;
-using CygSoft.CodeCat.DocumentManager.Documents.FileGroup;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
@@ -8,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace CygSoft.CodeCat.DocumentManager.Documents.FileGroup
+namespace CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments
 {
     public class FileAttachmentsTopicSection : TopicSection, IFileAttachmentsTopicSection
     {

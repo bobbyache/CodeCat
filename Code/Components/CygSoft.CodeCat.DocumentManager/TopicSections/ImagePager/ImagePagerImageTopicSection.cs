@@ -5,7 +5,7 @@ using System;
 using System.Drawing;
 using System.IO;
 
-namespace CygSoft.CodeCat.DocumentManager.Documents.ImageSet
+namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
 {
     public class ImagePagerImageTopicSection :  TopicSection, IImagePagerImageTopicSection
     {

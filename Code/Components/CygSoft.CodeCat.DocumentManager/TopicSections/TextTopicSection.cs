@@ -4,7 +4,7 @@ using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
 using System.IO;
 
-namespace CygSoft.CodeCat.DocumentManager.Documents
+namespace CygSoft.CodeCat.DocumentManager.TopicSections
 {
     public abstract class TextTopicSection : TopicSection, ITextTopicSection
     {

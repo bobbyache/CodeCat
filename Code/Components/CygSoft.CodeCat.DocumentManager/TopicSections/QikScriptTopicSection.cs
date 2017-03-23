@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.DocumentManager.Documents
+namespace CygSoft.CodeCat.DocumentManager.TopicSections
 {
     public class QikScriptTopicSection : CodeTopicSection, IQikScriptTopicSection
     {

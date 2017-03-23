@@ -1,6 +1,6 @@
-﻿using CygSoft.CodeCat.DocumentManager.Documents;
-using CygSoft.CodeCat.DocumentManager.Documents.FileGroup;
-using CygSoft.CodeCat.DocumentManager.Documents.ImageSet;
+﻿using CygSoft.CodeCat.DocumentManager.TopicSections;
+using CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments;
+using CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 
 namespace CygSoft.CodeCat.DocumentManager
