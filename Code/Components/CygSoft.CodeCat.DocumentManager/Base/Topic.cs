@@ -159,7 +159,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             DeleteTopicSections();
             if (Directory.Exists(this.Folder))
-                Directory.Delete(this.Folder);
+                Directory.Delete(this.Folder, true);
         }
 
         protected virtual void OnBeforeRevert()
