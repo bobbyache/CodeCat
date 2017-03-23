@@ -10,20 +10,20 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         event EventHandler ImageMovedDown;
 
         int ImageCount { get; }
-        IImagePagerImageTopicSection FirstImage { get; }
+        IPagerImage FirstImage { get; }
 
-        bool IsLastImage(IImagePagerImageTopicSection imageItem);
-        IImagePagerImageTopicSection NextImage(IImagePagerImageTopicSection imageItem);
-        bool IsFirstImage(IImagePagerImageTopicSection imageItem);
-        IImagePagerImageTopicSection PreviousImage(IImagePagerImageTopicSection imageItem);
+        bool IsLastImage(IPagerImage pagerImage);
+        IPagerImage NextImage(IPagerImage pagerImage);
+        bool IsFirstImage(IPagerImage pagerImage);
+        IPagerImage PreviousImage(IPagerImage pagerImage);
 
 
-        IImagePagerImageTopicSection Add(); // Adds a blank image (default image/initial image)
-        IImagePagerImageTopicSection Add(string description, string extension);
-        void Remove(IImagePagerImageTopicSection urlItem);
-        bool CanMovePrevious(IImagePagerImageTopicSection documentFile);
-        bool CanMoveNext(IImagePagerImageTopicSection documentFile);
-        void MovePrevious(IImagePagerImageTopicSection documentFile);
-        void MoveNext(IImagePagerImageTopicSection documentFile);
+        IPagerImage Add(); // Adds a blank image (default image/initial image)
+        IPagerImage Add(string description, string extension);
+        void Remove(IPagerImage pagerImage);
+        bool CanMovePrevious(IPagerImage pagerImage);
+        bool CanMoveNext(IPagerImage pagerImage);
+        void MovePrevious(IPagerImage pagerImage);
+        void MoveNext(IPagerImage pagerImage);
     }
 }

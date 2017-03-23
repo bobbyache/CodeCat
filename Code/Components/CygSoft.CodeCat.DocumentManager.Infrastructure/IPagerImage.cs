@@ -2,7 +2,7 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IImagePagerImageTopicSection : ITopicSection, IPositionedItem
+    public interface IPagerImage : ITopicSection, IPositionedItem
     {
         bool IsModified { get; }
         string ModifyFilePath { get; }

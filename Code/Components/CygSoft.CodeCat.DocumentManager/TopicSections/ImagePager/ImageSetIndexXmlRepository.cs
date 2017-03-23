@@ -28,13 +28,13 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
                 string extension = (string)element.Attribute("Extension");
                 ImagePathGenerator imagePathGenerator = new ImagePathGenerator(this.folder, extension, id);
 
-                IImagePagerImageTopicSection item = new ImagePagerImageTopicSection(
+                IPagerImage pagerImage = new PagerImage(
                     imagePathGenerator,
                     (int)element.Attribute("Ordinal"),
                     (string)element.Element("Description")
                 );
 
-                imageItems.Add(item);
+                imageItems.Add(pagerImage);
             }
 
             return imageItems;
@@ -62,17 +62,17 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
             XElement filesElement = indexDocument.Element("ImageSet").Element("Images");
             filesElement.RemoveNodes();
 
-            foreach (ITopicSection docFile in documents)
+            foreach (ITopicSection topicSection in documents)
             {
-                if (docFile is IImagePagerImageTopicSection)
+                if (topicSection is IPagerImage)
                 {
-                    IImagePagerImageTopicSection imgDoc = docFile as IImagePagerImageTopicSection;
+                    IPagerImage pagerImage = topicSection as IPagerImage;
 
                     filesElement.Add(new XElement("Image",
-                        new XAttribute("Id", imgDoc.Id),
-                        new XAttribute("Extension", imgDoc.FileExtension),
-                        new XAttribute("Ordinal", imgDoc.Ordinal),
-                        new XElement("Description", new XCData(imgDoc.Description))
+                        new XAttribute("Id", pagerImage.Id),
+                        new XAttribute("Extension", pagerImage.FileExtension),
+                        new XAttribute("Ordinal", pagerImage.Ordinal),
+                        new XElement("Description", new XCData(pagerImage.Description))
                     ));
                 }
             }

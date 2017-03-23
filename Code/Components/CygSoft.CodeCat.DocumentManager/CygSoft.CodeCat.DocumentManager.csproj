@@ -56,7 +56,7 @@
     <Compile Include="TopicSections\CodeTopicSection.cs" />
     <Compile Include="TopicSections\FileAttachments\FileAttachment.cs" />
     <Compile Include="TopicSections\FileAttachments\FileAttachmentsTopicSection.cs" />
-    <Compile Include="TopicSections\ImagePager\ImagePagerImageTopicSection.cs" />
+    <Compile Include="TopicSections\ImagePager\PagerImage.cs" />
     <Compile Include="TopicSections\ImagePager\ImagePagerTopicSection.cs" />
     <Compile Include="TopicSections\ImagePager\ImageSetIndex.cs" />
     <Compile Include="TopicSections\ImagePager\ImageSetIndexXmlRepository.cs" />

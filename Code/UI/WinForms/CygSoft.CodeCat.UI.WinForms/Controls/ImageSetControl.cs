@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private IImagePagerTopicSection imagePagerTopicSection;
         private ICodeGroupDocumentSet codeGroupDocumentSet;
-        private IImagePagerImageTopicSection imagePagerImageTopicSection;
+        private IPagerImage pageImage;
 
         #region Public Properties
 
@@ -96,7 +96,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 AddBlankImage();
         }
 
-        private void LoadImage(IImagePagerImageTopicSection imageItem)
+        private void LoadImage(IPagerImage imageItem)
         {
             if (imageItem != null)
             {
@@ -104,7 +104,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 imageBox.Image = image;
                 imageBox.Text = imageItem.Description;
                 imageBox.Zoom = 100;
-                imagePagerImageTopicSection = imageItem;
+                pageImage = imageItem;
                 UpdateStatusBar();
             }
         }
@@ -114,8 +114,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             if (ImageSetExists())
             {
                 Image image = Clipboard.GetImage();
-                imagePagerImageTopicSection.SetImage(image);
-                LoadImage(imagePagerImageTopicSection);
+                pageImage.SetImage(image);
+                LoadImage(pageImage);
                 SetModified();
             }
         }
@@ -137,8 +137,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void AddBlankImage()
         {
-            imagePagerImageTopicSection = imagePagerTopicSection.Add();
-            LoadImage(imagePagerImageTopicSection);
+            pageImage = imagePagerTopicSection.Add();
+            LoadImage(pageImage);
         }
 
         private void SetModified()
@@ -160,7 +160,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 lblScrollPosition.Text = FormatPoint(imageBox.AutoScrollPosition);
                 lblSize.Text = FormatRectangle(imageBox.GetImageViewPort());
                 lblZoomLevel.Text = string.Format("{0}%", imageBox.Zoom);
-                lblImagePosition.Text = string.Format("Position {0} of {1}", imagePagerImageTopicSection.Ordinal, imagePagerTopicSection.ImageCount);
+                lblImagePosition.Text = string.Format("Position {0} of {1}", pageImage.Ordinal, imagePagerTopicSection.ImageCount);
             }
             else
             {
@@ -173,7 +173,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private bool ImageSetExists()
         {
-            return imagePagerTopicSection.ImageCount > 0 && imagePagerImageTopicSection != null;
+            return imagePagerTopicSection.ImageCount > 0 && pageImage != null;
         }
 
         private void Import()
@@ -202,8 +202,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                     if (imageBox.Image != null)
                         imageBox.Image.Dispose();
 
-                    imagePagerImageTopicSection.SetImage(filePath);
-                    LoadImage(imagePagerImageTopicSection);
+                    pageImage.SetImage(filePath);
+                    LoadImage(pageImage);
                     SetModified();
                 }
             }
@@ -241,17 +241,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void btnEditImageText_Click(object sender, EventArgs e)
         {
-            if (imagePagerImageTopicSection != null)
+            if (pageImage != null)
             {
                 ImageDescriptionDialog dialog = new ImageDescriptionDialog();
-                dialog.Description = imagePagerImageTopicSection.Description;
+                dialog.Description = pageImage.Description;
 
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
-                    imagePagerImageTopicSection.Description = dialog.Description;
-                    imageBox.Text = imagePagerImageTopicSection.Description;
+                    pageImage.Description = dialog.Description;
+                    imageBox.Text = pageImage.Description;
                     SetModified();
                 }
             }
@@ -286,7 +286,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 DialogResult result = Dialogs.DeleteItemDialog(this, "image");
 
                 if (result == DialogResult.Yes)
-                    imagePagerTopicSection.Remove(imagePagerImageTopicSection);
+                    imagePagerTopicSection.Remove(pageImage);
             }
         }
 
@@ -331,9 +331,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (ImageSetExists())
             {
-                if (imagePagerTopicSection.CanMovePrevious(imagePagerImageTopicSection))
+                if (imagePagerTopicSection.CanMovePrevious(pageImage))
                 {
-                    imagePagerTopicSection.MovePrevious(imagePagerImageTopicSection);
+                    imagePagerTopicSection.MovePrevious(pageImage);
                     SetModified();
                     UpdateStatusBar();
                 }
@@ -344,9 +344,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (ImageSetExists())
             {
-                if (imagePagerTopicSection.CanMoveNext(imagePagerImageTopicSection))
+                if (imagePagerTopicSection.CanMoveNext(pageImage))
                 {
-                    imagePagerTopicSection.MoveNext(imagePagerImageTopicSection);
+                    imagePagerTopicSection.MoveNext(pageImage);
                     SetModified();
                     UpdateStatusBar();
                 }
@@ -357,9 +357,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (ImageSetExists())
             {
-                if (!imagePagerTopicSection.IsFirstImage(imagePagerImageTopicSection))
+                if (!imagePagerTopicSection.IsFirstImage(pageImage))
                 {
-                    IImagePagerImageTopicSection imageItem = imagePagerTopicSection.PreviousImage(imagePagerImageTopicSection);
+                    IPagerImage imageItem = imagePagerTopicSection.PreviousImage(pageImage);
                     LoadImage(imageItem);
                 }
             }
@@ -369,10 +369,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (ImageSetExists())
             {
-                if (!imagePagerTopicSection.IsLastImage(imagePagerImageTopicSection))
+                if (!imagePagerTopicSection.IsLastImage(pageImage))
                 {
-                    IImagePagerImageTopicSection nextImageTopicSection = imagePagerTopicSection.NextImage(imagePagerImageTopicSection);
-                    LoadImage(nextImageTopicSection);
+                    IPagerImage nextPagerImage = imagePagerTopicSection.NextImage(pageImage);
+                    LoadImage(nextPagerImage);
                 }
             }
         }

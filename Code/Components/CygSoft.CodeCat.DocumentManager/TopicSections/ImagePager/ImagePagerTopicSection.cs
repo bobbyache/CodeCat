@@ -20,9 +20,9 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
 
         public int ImageCount { get { return this.documentIndex.TopicSections.Count(); } }
 
-        public IImagePagerImageTopicSection FirstImage
+        public IPagerImage FirstImage
         {
-            get { return this.documentIndex.FirstTopicSection as IImagePagerImageTopicSection; }
+            get { return this.documentIndex.FirstTopicSection as IPagerImage; }
         }
 
 
@@ -62,30 +62,30 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
             base.OnAfterDelete();
         }
 
-        public bool IsLastImage(IImagePagerImageTopicSection imagePagerImageTopicSection)
+        public bool IsLastImage(IPagerImage pagerImage)
         {
-            return this.documentIndex.LastTopicSection.Ordinal <= imagePagerImageTopicSection.Ordinal;
+            return this.documentIndex.LastTopicSection.Ordinal <= pagerImage.Ordinal;
         }
 
-        public IImagePagerImageTopicSection NextImage(IImagePagerImageTopicSection imagePagerImageTopicSection)
+        public IPagerImage NextImage(IPagerImage pagerImage)
         {
-            if (this.documentIndex.LastTopicSection.Ordinal > imagePagerImageTopicSection.Ordinal)
-                return this.documentIndex.TopicSections.Where(img => img.Ordinal == imagePagerImageTopicSection.Ordinal + 1).OfType<IImagePagerImageTopicSection>().SingleOrDefault();
+            if (this.documentIndex.LastTopicSection.Ordinal > pagerImage.Ordinal)
+                return this.documentIndex.TopicSections.Where(img => img.Ordinal == pagerImage.Ordinal + 1).OfType<IPagerImage>().SingleOrDefault();
             else
-                return imagePagerImageTopicSection;
+                return pagerImage;
         }
 
-        public bool IsFirstImage(IImagePagerImageTopicSection imagePagerImageTopicSection)
+        public bool IsFirstImage(IPagerImage pagerImage)
         {
-            return this.documentIndex.FirstTopicSection.Ordinal >= imagePagerImageTopicSection.Ordinal;
+            return this.documentIndex.FirstTopicSection.Ordinal >= pagerImage.Ordinal;
         }
 
-        public IImagePagerImageTopicSection PreviousImage(IImagePagerImageTopicSection imagePagerImageTopicSection)
+        public IPagerImage PreviousImage(IPagerImage pagerImage)
         {
-            if (this.documentIndex.FirstTopicSection.Ordinal <= imagePagerImageTopicSection.Ordinal)
-                return this.documentIndex.TopicSections.Where(img => img.Ordinal == imagePagerImageTopicSection.Ordinal - 1).OfType<IImagePagerImageTopicSection>().SingleOrDefault();
+            if (this.documentIndex.FirstTopicSection.Ordinal <= pagerImage.Ordinal)
+                return this.documentIndex.TopicSections.Where(img => img.Ordinal == pagerImage.Ordinal - 1).OfType<IPagerImage>().SingleOrDefault();
             else
-                return imagePagerImageTopicSection;
+                return pagerImage;
         }
 
         protected override void OpenFile()
@@ -98,50 +98,50 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
             this.documentIndex.Save();
         }
 
-        public IImagePagerImageTopicSection Add()
+        public IPagerImage Add()
         {
-            IImagePagerImageTopicSection imagePagerImageTopicSection = this.Add("Blank Image", "png");
-            return imagePagerImageTopicSection;
+            IPagerImage pagerImage = this.Add("Blank Image", "png");
+            return pagerImage;
         }
 
-        public IImagePagerImageTopicSection Add(string description, string extension)
+        public IPagerImage Add(string description, string extension)
         {
             ImagePathGenerator imagePathGenerator = new ImagePathGenerator(this.Folder, extension);
-            ImagePagerImageTopicSection imagePagerImageTopicSection = new ImagePagerImageTopicSection(imagePathGenerator);
-            imagePagerImageTopicSection.Description = description;
-            this.documentIndex.AddTopicSection(imagePagerImageTopicSection);
+            PagerImage pagerImage = new PagerImage(imagePathGenerator);
+            pagerImage.Description = description;
+            this.documentIndex.AddTopicSection(pagerImage);
 
             ImageAdded?.Invoke(this, new EventArgs());
 
-            return imagePagerImageTopicSection;
+            return pagerImage;
         }
 
 
-        public void Remove(IImagePagerImageTopicSection imagePagerImageTopicSection)
+        public void Remove(IPagerImage pagerImage)
         {
-            this.documentIndex.RemoveTopicSection(imagePagerImageTopicSection.Id);
+            this.documentIndex.RemoveTopicSection(pagerImage.Id);
             ImageRemoved?.Invoke(this, new EventArgs());
         }
 
-        public bool CanMovePrevious(IImagePagerImageTopicSection imagePagerImageTopicSection)
+        public bool CanMovePrevious(IPagerImage pagerImage)
         {
-            return this.documentIndex.CanMoveUp(imagePagerImageTopicSection);
+            return this.documentIndex.CanMoveUp(pagerImage);
         }
 
-        public bool CanMoveNext(IImagePagerImageTopicSection imagePagerImageTopicSection)
+        public bool CanMoveNext(IPagerImage pagerImage)
         {
-            return this.documentIndex.CanMoveDown(imagePagerImageTopicSection);
+            return this.documentIndex.CanMoveDown(pagerImage);
         }
 
-        public virtual void MovePrevious(IImagePagerImageTopicSection imagePagerImageTopicSection)
+        public virtual void MovePrevious(IPagerImage pagerImage)
         {
-            this.documentIndex.MoveUp(imagePagerImageTopicSection);
+            this.documentIndex.MoveUp(pagerImage);
             ImageMovedUp?.Invoke(this, new EventArgs());
         }
 
-        public virtual void MoveNext(IImagePagerImageTopicSection imagePagerImageTopicSection)
+        public virtual void MoveNext(IPagerImage pagerImage)
         {
-            this.documentIndex.MoveDown(imagePagerImageTopicSection);
+            this.documentIndex.MoveDown(pagerImage);
             ImageMovedDown?.Invoke(this, new EventArgs());
         }
 

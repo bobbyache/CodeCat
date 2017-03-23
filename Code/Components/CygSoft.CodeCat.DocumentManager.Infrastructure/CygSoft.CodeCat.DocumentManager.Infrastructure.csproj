@@ -50,7 +50,7 @@
     <Compile Include="ISingleImageTopicSection.cs" />
     <Compile Include="IImageItem.cs" />
     <Compile Include="IImagePagerTopicSection.cs" />
-    <Compile Include="IImagePagerImageTopicSection.cs" />
+    <Compile Include="IPagerImage.cs" />
     <Compile Include="IPdfViewerTopicSection.cs" />
     <Compile Include="IPositionedItem.cs" />
     <Compile Include="IQikScriptTopicSection.cs" />
