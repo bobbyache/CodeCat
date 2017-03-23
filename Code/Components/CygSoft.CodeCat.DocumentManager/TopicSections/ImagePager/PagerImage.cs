@@ -13,8 +13,7 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
 
         public bool IsModified
         {
-            // if the modified "temp" file exists, then we know that this image document is
-            // in a modified state.
+            // if the modified "temp" file exists, then this image document is in a modified state.
             get { return File.Exists(this.imagePathGenerator.ModifiedFilePath); }
         }
 
@@ -50,11 +49,6 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.SingleImage);
         }
 
-        //protected override IFileVersion NewVersion(DateTime timeStamp, string description)
-        //{
-        //    return null;
-        //}
-
         protected override void OpenFile()
         {
         }
@@ -83,13 +77,6 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
             DeleteTemporaryFile();
             base.OnBeforeDelete();
         }
-
-        private void DeleteTemporaryFile()
-        {
-            if (File.Exists(this.imagePathGenerator.ModifiedFilePath))
-                File.Delete(this.imagePathGenerator.ModifiedFilePath);
-        }
-
 
         public Bitmap GetDisplayImage()
         {
@@ -133,6 +120,12 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
             Image theImage = image.Clone() as Image;
             image.Save((this.imagePathGenerator.ModifiedFilePath));
             theImage.Dispose();
+        }
+
+        private void DeleteTemporaryFile()
+        {
+            if (File.Exists(this.imagePathGenerator.ModifiedFilePath))
+                File.Delete(this.imagePathGenerator.ModifiedFilePath);
         }
     }
 }

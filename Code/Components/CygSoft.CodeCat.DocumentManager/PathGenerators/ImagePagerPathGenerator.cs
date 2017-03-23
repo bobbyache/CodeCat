@@ -4,20 +4,20 @@ using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.PathGenerators
 {
-    public class ImageSetIndexPathGenerator : BaseFilePathGenerator
+    public class ImagePagerPathGenerator : BaseFilePathGenerator
     {
         private string folder;
         private string extension;
         private string id;
 
-        public ImageSetIndexPathGenerator(string folder, string extension)
+        public ImagePagerPathGenerator(string folder, string extension)
         {
             this.id = Guid.NewGuid().ToString();
             this.folder = folder;
             this.extension = extension;
         }
 
-        public ImageSetIndexPathGenerator(string folder, string extension, string id)
+        public ImagePagerPathGenerator(string folder, string extension, string id)
         {
             this.id = id;
             this.folder = folder;

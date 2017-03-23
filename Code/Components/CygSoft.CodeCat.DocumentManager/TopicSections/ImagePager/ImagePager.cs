@@ -6,14 +6,14 @@ using System.Linq;
 
 namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
 {
-    internal class ImageSetIndex : BaseDocumentIndex
+    internal class ImagePager : BaseDocumentIndex
     {
-        public ImageSetIndex(IDocumentIndexRepository repository, ImageSetIndexPathGenerator indexPathGenerator)
-            : base(repository, indexPathGenerator)
+        public ImagePager(IDocumentIndexRepository repository, ImagePagerPathGenerator imagePagerPathGenerator)
+            : base(repository, imagePagerPathGenerator)
         {
         }
 
-        protected override List<DocumentManager.Infrastructure.ITopicSection> LoadTopicSections()
+        protected override List<ITopicSection> LoadTopicSections()
         {
             return base.indexRepository.LoadDocuments();
         }

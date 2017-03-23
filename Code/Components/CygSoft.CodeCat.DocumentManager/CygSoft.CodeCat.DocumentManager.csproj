@@ -49,7 +49,7 @@
     <Compile Include="PathGenerators\DocumentPathGenerator.cs" />
     <Compile Include="PathGenerators\FilePathGenerator.cs" />
     <Compile Include="PathGenerators\ImagePathGenerator.cs" />
-    <Compile Include="PathGenerators\ImageSetIndexPathGenerator.cs" />
+    <Compile Include="PathGenerators\ImagePagerPathGenerator.cs" />
     <Compile Include="PathGenerators\VersionPathGenerator.cs" />
     <Compile Include="Services\PositionableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,7 +58,7 @@
     <Compile Include="TopicSections\FileAttachments\FileAttachmentsTopicSection.cs" />
     <Compile Include="TopicSections\ImagePager\PagerImage.cs" />
     <Compile Include="TopicSections\ImagePager\ImagePagerTopicSection.cs" />
-    <Compile Include="TopicSections\ImagePager\ImageSetIndex.cs" />
+    <Compile Include="TopicSections\ImagePager\ImagePager.cs" />
     <Compile Include="TopicSections\ImagePager\ImageSetIndexXmlRepository.cs" />
     <Compile Include="TopicSections\PdfViewerTopicSection.cs" />
     <Compile Include="TopicSections\QikScriptTopicSection.cs" />

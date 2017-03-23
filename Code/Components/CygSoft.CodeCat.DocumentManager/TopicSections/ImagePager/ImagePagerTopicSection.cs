@@ -14,9 +14,9 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
         public event EventHandler ImageMovedUp;
         public event EventHandler ImageMovedDown;
 
-        private ImageSetIndexPathGenerator indexPathGenerator;
+        private ImagePagerPathGenerator imagePagerPathGenerator;
         private IDocumentIndexRepository repository;
-        private ImageSetIndex documentIndex;
+        private ImagePager documentIndex;
 
         public int ImageCount { get { return this.documentIndex.TopicSections.Count(); } }
 
@@ -29,19 +29,19 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
         internal ImagePagerTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "imgset"), title, null)
         {
-            indexPathGenerator = new ImageSetIndexPathGenerator(folder, "imgset", this.Id);
-            repository = new ImageSetIndexXmlRepository(indexPathGenerator);
+            imagePagerPathGenerator = new ImagePagerPathGenerator(folder, "imgset", this.Id);
+            repository = new ImageSetIndexXmlRepository(imagePagerPathGenerator);
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImagePager);
-            this.documentIndex = new ImageSetIndex(repository, indexPathGenerator);
+            this.documentIndex = new ImagePager(repository, imagePagerPathGenerator);
         }
 
         internal ImagePagerTopicSection(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "imgset", id), title, description, ordinal)
         {
-            indexPathGenerator = new ImageSetIndexPathGenerator(folder, "imgset", this.Id);
-            repository = new ImageSetIndexXmlRepository(indexPathGenerator);
+            imagePagerPathGenerator = new ImagePagerPathGenerator(folder, "imgset", this.Id);
+            repository = new ImageSetIndexXmlRepository(imagePagerPathGenerator);
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImagePager);
-            this.documentIndex = new ImageSetIndex(repository, indexPathGenerator);
+            this.documentIndex = new ImagePager(repository, imagePagerPathGenerator);
         }
 
         protected override void OnBeforeRevert()

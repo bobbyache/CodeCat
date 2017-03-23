@@ -11,10 +11,10 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
         private readonly string filePath;
         private readonly string folder;
 
-        public ImageSetIndexXmlRepository(ImageSetIndexPathGenerator indexPathGenerator)
+        public ImageSetIndexXmlRepository(ImagePagerPathGenerator imagePagerPathGenerator)
         {
-            this.filePath = indexPathGenerator.FilePath;
-            this.folder = Path.GetDirectoryName(indexPathGenerator.FilePath);
+            this.filePath = imagePagerPathGenerator.FilePath;
+            this.folder = Path.GetDirectoryName(imagePagerPathGenerator.FilePath);
         }
 
         public List<ITopicSection> LoadDocuments()
