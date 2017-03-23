@@ -12,7 +12,6 @@ namespace CygSoft.CodeCat.DocumentManager.PathGenerators
     {
         private string folder;
         private string fileName;
-        //private string oldFileName;
         private string id;
 
         public FilePathGenerator(string folder, string fileName)
@@ -20,7 +19,6 @@ namespace CygSoft.CodeCat.DocumentManager.PathGenerators
             this.id = Guid.NewGuid().ToString();
             this.folder = folder;
             this.fileName = fileName;
-            //this.oldFileName = fileName;
         }
 
         public FilePathGenerator(string folder, string fileName, string id)
@@ -28,7 +26,6 @@ namespace CygSoft.CodeCat.DocumentManager.PathGenerators
             this.id = id;
             this.folder = folder;
             this.fileName = fileName;
-            //this.oldFileName = fileName;
         }
 
         public override string Id
@@ -48,20 +45,5 @@ namespace CygSoft.CodeCat.DocumentManager.PathGenerators
         {
             this.fileName = fileName;
         }
-
-        //public string OldFileName { get { return this.oldFileName; } }
-        //public string OldFilePath { get { return Path.Combine(this.FolderPath, this.oldFileName); } }
-        //public string OldFileExtension { get { return Path.GetExtension(this.oldFileName); } }
-
-        //public void Revert()
-        //{
-        //    this.fileName = this.oldFileName;
-        //}
-
-        //public void ChangeFileName(string fileName)
-        //{
-        //    this.fileName = fileName;
-        //}
-
     }
 }
