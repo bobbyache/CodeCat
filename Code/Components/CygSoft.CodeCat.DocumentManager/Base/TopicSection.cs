@@ -19,10 +19,10 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         protected BaseFilePathGenerator filePathGenerator;
 
-        public string Id { get; private set; }
-        public string FilePath { get; protected set; }
-        public string FileName { get; private set; }
-        public string FileExtension { get; private set; }
+        public string Id {  get { return filePathGenerator.Id; } }
+        public string FilePath {  get { return filePathGenerator.FilePath; } }
+        public string FileName {  get { return filePathGenerator.FilePath; } }
+        public string FileExtension {  get { return filePathGenerator.FileExtension; } }
         public int Ordinal { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -37,12 +37,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             Ordinal = -1;
             Title = title;
             Description = description;
-
             this.filePathGenerator = filePathGenerator;
-            Id = filePathGenerator.Id;
-            FileExtension = filePathGenerator.FileExtension;
-            FilePath = filePathGenerator.FilePath;
-            FileName = filePathGenerator.FileName;
         }
 
         public TopicSection(BaseFilePathGenerator filePathGenerator, string title, string description = null, int ordinal = -1)
@@ -50,12 +45,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             Ordinal = -1;
             Title = title;
             Description = description;
-
             this.filePathGenerator = filePathGenerator;
-            Id = filePathGenerator.Id;
-            FileExtension = filePathGenerator.FileExtension;
-            FilePath = filePathGenerator.FilePath;
-            FileName = filePathGenerator.FileName;
         }
 
         protected virtual void OnOpen() { }
@@ -93,9 +83,9 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 Loaded = true;
 
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                throw exception;
+                throw;
             }
         }
 
@@ -110,9 +100,9 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 Loaded = true;
                 
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                throw exception;
+                throw;
             }
         }
 
@@ -123,10 +113,17 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         public void Delete()
         {
-            OnBeforeDelete();
-            OnDelete();
-            OnAfterDelete();
-            Loaded = false;
+            try
+            {
+                OnBeforeDelete();
+                OnDelete();
+                OnAfterDelete();
+                Loaded = false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Save()
@@ -138,18 +135,25 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 OnAfterSave();
                 Loaded = true;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                throw exception;
+                throw;
             }
         }
 
         public void Close()
         {
-            OnBeforeClose();
-            OnClose();
-            OnAfterClose();
-            Loaded = false;
+            try
+            {
+                OnBeforeClose();
+                OnClose();
+                OnAfterClose();
+                Loaded = false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
