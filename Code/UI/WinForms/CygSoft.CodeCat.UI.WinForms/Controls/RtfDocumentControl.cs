@@ -39,6 +39,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             ResetFieldValues();
             LoadIfExists();
 
+            txtTitle.TextChanged += (s, e) => SetModified();
             codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
             codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
             rtfDocument.RequestSaveRtf += rtfDocument_RequestSaveRtf;
@@ -47,7 +48,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void rtfEditor_ContentChanged(object sender, EventArgs e)
         {
-            if (rtfEditor.Modified && !IsModified)
+            if (rtfEditor.Modified)
                 SetModified();
         }
 
@@ -63,9 +64,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void SetModified()
         {
-            IsModified = true;
-            SetChangeStatus();
-            Modified?.Invoke(this, new EventArgs());
+            if (!IsModified)
+            {
+                IsModified = true;
+                SetChangeStatus();
+                Modified?.Invoke(this, new EventArgs());
+            }
         }
 
         private void LoadIfExists()
