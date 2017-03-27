@@ -98,9 +98,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             {
                 BeforeRevert?.Invoke(this, new TopicSectionEventArgs(this));
                 OnBeforeRevert();
-
-                if (File.Exists(this.FilePath))
-                    OpenFile();
+                OpenFile();
                 OnAfterRevert();
 
                 this.Loaded = true;
@@ -112,14 +110,16 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
+        protected virtual void DeleteFile()
+        {
+            File.Delete(this.FilePath);
+        }
+
         public void Delete()
         {
             BeforeDelete?.Invoke(this, new TopicSectionEventArgs(this));
             OnBeforeDelete();
-
-            if (File.Exists(this.FilePath))
-                File.Delete(this.FilePath);
-
+            DeleteFile();
             OnAfterDelete();
 
             this.Loaded = false;
