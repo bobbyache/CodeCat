@@ -9,6 +9,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string Category { get; set; }
         string FileName { get; }
         string FilePath { get; }
+        bool FileExists { get; }
         string FileTitle { get; }
         string ModifiedFileName { get; }
         string ModifiedFilePath { get; }

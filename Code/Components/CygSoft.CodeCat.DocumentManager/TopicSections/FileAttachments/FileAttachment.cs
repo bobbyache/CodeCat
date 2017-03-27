@@ -60,6 +60,8 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments
             return FileName.ToUpper() == fileName.ToUpper();
         }
 
+        public bool FileExists { get { return File.Exists(FilePath); } }
+
         public bool ValidateImportFile(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))

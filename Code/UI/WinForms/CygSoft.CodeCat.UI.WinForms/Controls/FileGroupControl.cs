@@ -252,9 +252,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                     item = fileListview.FocusedItem.Tag as IFileAttachment;
                 }
 
-                mnuOpen.Enabled = cnt == 1 && onItem && item.AllowOpenOrExecute;
-                mnuOpenWith.Enabled = false && onItem && item.AllowOpenOrExecute;
-                mnuSaveAs.Enabled = cnt == 1 && onItem;
+                bool fileExists = item.FileExists;
+                mnuOpen.Enabled = cnt == 1 && onItem && item.AllowOpenOrExecute && fileExists;
+                mnuOpenWith.Enabled = false && onItem && item.AllowOpenOrExecute && fileExists;
+                mnuSaveAs.Enabled = cnt == 1 && onItem && fileExists;
                 mnuEdit.Enabled = cnt == 1 && onItem;
                 mnuDelete.Enabled = cnt >= 1;
 
