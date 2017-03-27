@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Search.KeywordIndex.UnitTests.Helpers
 {
+    /// <summary>
+    /// Required for testing. KeywordIndexItem is abstract.
+    /// </summary>
     public class TestKeywordIndexItem : KeywordIndexItem
     {
         public TestKeywordIndexItem() : base()

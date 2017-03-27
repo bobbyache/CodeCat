@@ -1,11 +1,8 @@
 ﻿using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Search.KeywordIndex
 {
@@ -110,8 +107,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             if (!Contains(item))
                 Add(item);
 
-            if (IndexModified != null)
-                IndexModified(this, new EventArgs());
+            IndexModified?.Invoke(this, new EventArgs());
         }
 
         public string[] AllKeywords(IKeywordIndexItem[] indeces)
@@ -140,8 +136,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             {
                 index.AddKeywords(delimitedKeywordList);
             }
-            if (IndexModified != null)
-                IndexModified(this, new EventArgs());
+            IndexModified?.Invoke(this, new EventArgs());
         }
 
         public void RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords)
@@ -152,8 +147,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             {
                 index.RemoveKeywords(keywords);
             }
-            if (IndexModified != null)
-                IndexModified(this, new EventArgs());
+            IndexModified?.Invoke(this, new EventArgs());
         }
 
         public bool IndexesExistFor(IKeywordIndexItem[] indeces, out IKeywordIndexItem[] existingIndeces)
@@ -201,8 +195,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             this.IndexItems.Remove(item);
             CreateKeywordIndex();
 
-            if (IndexModified != null)
-                IndexModified(this, new EventArgs());
+            IndexModified?.Invoke(this, new EventArgs());
         }
 
         private void CreateKeywordIndex()

@@ -29,7 +29,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             : base()
         {
             this.title = title;
-            this.SetKeywords(commaDelimitedKeywords);
+            this.KeywordsFromDelimitedList(commaDelimitedKeywords);
         }
 
         private KeyPhrases keyPhrases;
@@ -62,6 +62,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         public void AddKeywords(string commaDelimitedKeywords)
         {
             this.keyPhrases.AddKeyPhrases(commaDelimitedKeywords);
+            this.DateModified = DateTime.Now;
         }
 
         public bool ValidateRemoveKeywords(string[] keywords)
@@ -77,6 +78,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         public void RemoveKeywords(string[] keywords)
         {
             this.keyPhrases.RemovePhrases(keywords);
+            this.DateModified = DateTime.Now;
         }
 
         public bool AllKeywordsFound(string[] keywords)
@@ -84,7 +86,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             return keyPhrases.AllPhrasesExist(keywords);
         }
 
-        private void KeywordsFromDelimitedList(string commaDelimitedKeywords)
+        protected void KeywordsFromDelimitedList(string commaDelimitedKeywords)
         {
             this.keyPhrases = new KeyPhrases(commaDelimitedKeywords);
         }

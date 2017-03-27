@@ -30,7 +30,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             this.Title = (string)element.Element("Title");
             this.DateCreated = (DateTime)element.Element("DateCreated");
             this.DateModified = (DateTime)element.Element("DateModified");
-            this.SetKeywords((string)element.Element("Keywords"));
+            this.KeywordsFromDelimitedList((string)element.Element("Keywords"));
         }
 
         public virtual XElement Serialize()

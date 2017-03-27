@@ -34,6 +34,15 @@ namespace Search.KeywordIndex.UnitTests
         }
 
         [Test]
+        public void KeywordSearchIndex_AddKeywords_SetsDateModified()
+        {
+            IKeywordSearchIndex searchIndex = new KeywordSearchIndex(@"C:\keywords\keyword_index.xml", 2);
+            var keywordSearchIndexItem = new TestKeywordIndexItem();
+            searchIndex.AddKeywords(new IKeywordIndexItem[] { keywordSearchIndexItem }, @"test,testing,tested");
+
+        }
+
+        [Test]
         public void KeywordSearchIndex_WhenAddingKeywordsToIndexItems_ReturnsTrueOnSubsequentSearchForOneOfThoseKeywords()
         {
             var keywordSearchIndexItem = new TestKeywordIndexItem();

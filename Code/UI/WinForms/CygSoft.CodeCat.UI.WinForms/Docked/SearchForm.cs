@@ -47,7 +47,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             this.application = application;
             HideOnClose = true;
-            DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight;
+            DockAreas = DockAreas.DockLeft | DockAreas.DockRight;
             btnFind.Click += (s, e) => ExecuteSearch();
             keywordsTextBox.TextChanged += (s, e) => ExecuteSearch();
 
