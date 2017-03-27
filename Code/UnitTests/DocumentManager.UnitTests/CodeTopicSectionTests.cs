@@ -160,12 +160,37 @@ namespace DocumentManager.UnitTests
             Assert.That(codeTopicSection.OnDeleteCalled, Is.True);
         }
 
+        [Test]
+        public void CodeTopicSection_Close_OnCloseIsCalledTogetherWithAllEvents()
+        {
+            bool beforeCloseCalled = false;
+            bool afterCloseCalled = false;
+            TestCodeTopicSection codeTopicSection = new TestCodeTopicSection();
+
+            codeTopicSection.BeforeClose += (s, e) =>
+            {
+                beforeCloseCalled = true;
+            };
+
+            codeTopicSection.AfterClose += (s, e) =>
+            {
+                afterCloseCalled = true;
+            };
+
+            codeTopicSection.Close();
+
+            Assert.That(beforeCloseCalled, Is.True);
+            Assert.That(afterCloseCalled, Is.True);
+            Assert.That(codeTopicSection.OnCloseCalled, Is.True);
+        }
+
         public class TestCodeTopicSection : CodeTopicSection
         {
             public bool OpenFileCalled = false;
             public bool OnRevertCalled = false;
             public bool OnSaveCalled = false;
             public bool OnDeleteCalled = false;
+            public bool OnCloseCalled = false;
 
             public TestCodeTopicSection() : base(@"C:\TestFolder", "Test Code Section", "cs", "C#") { }
 
@@ -173,6 +198,8 @@ namespace DocumentManager.UnitTests
             protected override void OnSave() { OnSaveCalled = true; }
             protected override void OnOpen() { OpenFileCalled = true; }
             protected override void OnRevert() { OnRevertCalled = true; }
+
+            protected override void OnClose() { OnCloseCalled = true; }
         }
     }
 }

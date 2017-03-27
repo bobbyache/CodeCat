@@ -68,11 +68,10 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
             base.OnRevert();
         }
 
-        protected override void OnBeforeDelete()
+        protected override void OnDelete()
         {
-            // Need to delete the temporary file if it exists as well as this file.
-            base.OnBeforeDelete();
             DeleteTemporaryFile();
+            base.OnDelete();
         }
 
         public Bitmap GetDisplayImage()

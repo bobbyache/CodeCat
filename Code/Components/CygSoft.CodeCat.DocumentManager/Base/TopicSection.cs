@@ -27,57 +27,61 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public string Title { get; set; }
         public string Description { get; set; }
         public string DocumentType { get; set; }
-        public virtual string Folder { get { return Path.GetDirectoryName(this.FilePath); } }
-        public virtual bool FolderExists { get { return Directory.Exists(Path.GetDirectoryName(this.FilePath)); } }
-        public bool Exists { get { return File.Exists(this.FilePath); } }
+        public virtual string Folder { get { return Path.GetDirectoryName(FilePath); } }
+        public virtual bool FolderExists { get { return Directory.Exists(Path.GetDirectoryName(FilePath)); } }
+        public bool Exists { get { return File.Exists(FilePath); } }
         public bool Loaded { get; private set; }
 
         public TopicSection(BaseFilePathGenerator filePathGenerator, string title, string description = null)
         {
-            this.Ordinal = -1;
-            this.Title = title;
-            this.Description = description;
+            Ordinal = -1;
+            Title = title;
+            Description = description;
 
             this.filePathGenerator = filePathGenerator;
-            this.Id = filePathGenerator.Id;
-            this.FileExtension = filePathGenerator.FileExtension;
-            this.FilePath = filePathGenerator.FilePath;
-            this.FileName = filePathGenerator.FileName;
+            Id = filePathGenerator.Id;
+            FileExtension = filePathGenerator.FileExtension;
+            FilePath = filePathGenerator.FilePath;
+            FileName = filePathGenerator.FileName;
         }
 
         public TopicSection(BaseFilePathGenerator filePathGenerator, string title, string description = null, int ordinal = -1)
         {
-            this.Ordinal = -1;
-            this.Title = title;
-            this.Description = description;
+            Ordinal = -1;
+            Title = title;
+            Description = description;
 
             this.filePathGenerator = filePathGenerator;
-            this.Id = filePathGenerator.Id;
-            this.FileExtension = filePathGenerator.FileExtension;
-            this.FilePath = filePathGenerator.FilePath;
-            this.FileName = filePathGenerator.FileName;
+            Id = filePathGenerator.Id;
+            FileExtension = filePathGenerator.FileExtension;
+            FilePath = filePathGenerator.FilePath;
+            FileName = filePathGenerator.FileName;
         }
 
         protected virtual void OnOpen() { }
         protected virtual void OnSave() { }
-        protected virtual void OnBeforeDelete() { }
+        protected virtual void OnBeforeDelete() { BeforeDelete?.Invoke(this, new TopicSectionEventArgs(this)); }
+
+        protected virtual void OnAfterDelete()
+        {
+            Ordinal = -1;
+            AfterDelete?.Invoke(this, new TopicSectionEventArgs(this));
+        }
+
         protected virtual void OnBeforeOpen() { BeforeOpen?.Invoke(this, new TopicSectionEventArgs(this)); }
         protected virtual void OnAfterOpen() { AfterOpen?.Invoke(this, new TopicSectionEventArgs(this)); }
         protected virtual void OnBeforeRevert() { BeforeRevert?.Invoke(this, new TopicSectionEventArgs(this)); }
         protected virtual void OnAfterRevert() { AfterRevert?.Invoke(this, new TopicSectionEventArgs(this));  }
-        protected virtual void OnBeforeSave() { }
-        protected virtual void OnAfterSave() { }
+        protected virtual void OnBeforeSave() { BeforeSave?.Invoke(this, new TopicSectionEventArgs(this)); }
+        protected virtual void OnAfterSave() { AfterSave?.Invoke(this, new TopicSectionEventArgs(this)); }
         protected virtual void OnClose() { }
+        protected virtual void OnBeforeClose() { BeforeClose?.Invoke(this, new TopicSectionEventArgs(this)); }
+        protected virtual void OnAfterClose() { AfterClose?.Invoke(this, new TopicSectionEventArgs(this)); }
 
         /// <summary>
         /// Any extra logic that needs to be implemented during a revert should be handled by overriding this method.
         /// </summary>
         protected virtual void OnRevert() { }
-
-        protected virtual void OnAfterDelete()
-        {
-            this.Ordinal = -1;
-        }
 
         public void Open()
         {
@@ -86,7 +90,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 OnBeforeOpen();
                 OnOpen();
                 OnAfterOpen();
-                this.Loaded = true;
+                Loaded = true;
 
             }
             catch (Exception exception)
@@ -103,7 +107,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 OnRevert();
                 OnOpen();
                 OnAfterRevert();
-                this.Loaded = true;
+                Loaded = true;
                 
             }
             catch (Exception exception)
@@ -114,42 +118,38 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         protected virtual void OnDelete()
         {
-            File.Delete(this.FilePath);
+            File.Delete(FilePath);
         }
 
         public void Delete()
         {
-            BeforeDelete?.Invoke(this, new TopicSectionEventArgs(this));
             OnBeforeDelete();
             OnDelete();
             OnAfterDelete();
-
-            this.Loaded = false;
-            AfterDelete?.Invoke(this, new TopicSectionEventArgs(this));
+            Loaded = false;
         }
 
         public void Save()
         {
             try
             {
-                BeforeSave?.Invoke(this, new TopicSectionEventArgs(this));
                 OnBeforeSave();
                 OnSave();
                 OnAfterSave();
-                this.Loaded = true;
-                AfterSave?.Invoke(this, new TopicSectionEventArgs(this));
+                Loaded = true;
             }
             catch (Exception exception)
             {
                 throw exception;
             }
         }
+
         public void Close()
         {
-            BeforeClose?.Invoke(this, new TopicSectionEventArgs(this));
-            this.OnClose();
-            this.Loaded = false;
-            AfterClose?.Invoke(this, new TopicSectionEventArgs(this));
+            OnBeforeClose();
+            OnClose();
+            OnAfterClose();
+            Loaded = false;
         }
     }
 }
