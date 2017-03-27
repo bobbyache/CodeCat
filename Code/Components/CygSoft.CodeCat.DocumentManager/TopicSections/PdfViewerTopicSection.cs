@@ -23,15 +23,5 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
         {
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.PdfViewer);
         }
-
-        protected override void OpenFile()
-        {
-            // DON'T WANT TO IMPLEMENT THIS BECAUSE THE FILE IS NOT OPENED THE SAME WAY OTHER DOCUMENTS ARE OPENED.
-        }
-
-        protected override void SaveFile()
-        {
-            // DON'T WANT TO IMPLEMENT THIS BECAUSE THE FILE IS NOT SAVED THE SAME WAY OTHER DOCUMENTS ARE SAVED.
-        }
     }
 }

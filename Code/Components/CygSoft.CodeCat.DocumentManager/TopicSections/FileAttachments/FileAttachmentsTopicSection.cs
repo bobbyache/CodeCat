@@ -36,13 +36,15 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments
             get { return this.Items.Select(r => r.Category).Distinct().ToArray(); }
         }
 
-        protected override void OpenFile()
+        protected override void OnOpen()
         {
             XDocument xDocument = XDocument.Load(this.FilePath);
             IEnumerable<XElement> elements = xDocument.Element("FileGroup").Elements("Files").Elements();
 
             List<IFileAttachment> files = ExtractFromXml(elements);
             this.fileAttachmentList = files.OfType<IFileAttachment>().ToList();
+
+            base.OnOpen();
         }
 
         private List<IFileAttachment> ExtractFromXml(IEnumerable<XElement> elements)
@@ -68,7 +70,7 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments
             return files.ToList();
         }
 
-        protected override void SaveFile()
+        protected override void OnSave()
         {
             foreach (IFileAttachment fileAttachment in fileAttachmentList)
                 fileAttachment.Save();
@@ -81,9 +83,11 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments
             if (!File.Exists(this.FilePath))
                 CreateFile();
             WriteFile(this.Items);
+
+            base.OnSave();
         }
 
-        protected override void OnBeforeRevert()
+        protected override void OnRevert()
         {
             foreach (IFileAttachment file in removedFileAttachmentList)
                 file.Revert();
@@ -93,7 +97,7 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments
 
             removedFileAttachmentList.Clear();
 
-            base.OnBeforeRevert();
+            base.OnRevert();
         }
 
         protected override void OnAfterDelete()

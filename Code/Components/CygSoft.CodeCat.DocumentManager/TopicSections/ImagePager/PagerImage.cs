@@ -49,33 +49,30 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.SingleImage);
         }
 
-        protected override void OpenFile()
+        protected override void OnSave()
         {
-        }
-
-        // we are saving the file... the image saving component will write to the ModifiedFilePath
-        // here, we need to copy the modified file to the saved file and then delete the modified
-        // file.
-        protected override void SaveFile()
-        {
+            // we are saving the file... the image saving component will write to the ModifiedFilePath
+            // here, we need to copy the modified file to the saved file and then delete the modified
+            // file.
             if (this.IsModified)
             {
                 File.Copy(this.imagePathGenerator.ModifiedFilePath, this.FilePath, true);
                 DeleteTemporaryFile();
             }
+            base.OnSave();
         }
 
-        protected override void OnBeforeRevert()
+        protected override void OnRevert()
         {
             DeleteTemporaryFile();
-            base.OnBeforeRevert();
+            base.OnRevert();
         }
 
         protected override void OnBeforeDelete()
         {
             // Need to delete the temporary file if it exists as well as this file.
-            DeleteTemporaryFile();
             base.OnBeforeDelete();
+            DeleteTemporaryFile();
         }
 
         public Bitmap GetDisplayImage()

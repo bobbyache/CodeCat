@@ -26,15 +26,10 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.RtfEditor);
         }
 
-        protected override void OpenFile()
+        protected override void OnSave()
         {
-            // DON'T WANT TO IMPLEMENT THIS BECAUSE THE FILE IS NOT OPENED THE SAME WAY OTHER DOCUMENTS ARE OPENED.
-        }
-
-        protected override void SaveFile()
-        {
-            // Delegate the saving of this file to the caller.
             RequestSaveRtf?.Invoke(this, new EventArgs());
+            base.OnSave();
         }
     }
 }

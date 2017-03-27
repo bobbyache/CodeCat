@@ -84,13 +84,15 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
             return webReference;
         }
 
-        protected override void OpenFile()
+        protected override void OnOpen()
         {
             XDocument xDocument = XDocument.Load(this.FilePath);
             IEnumerable<XElement> elements = xDocument.Element("UrlGroup").Elements("Urls").Elements();
 
             List<IWebReference> webReferences = ExtractFromXml(elements);
             webReferenceList = webReferences.OfType<IWebReference>().ToList();
+
+            base.OnOpen();
         }
 
         private List<IWebReference> ExtractFromXml(IEnumerable<XElement> elements)
@@ -114,7 +116,7 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
             return webReferences.ToList();
         }
 
-        protected override void SaveFile()
+        protected override void OnSave()
         {
             if (!File.Exists(FilePath))
                 CreateFile();

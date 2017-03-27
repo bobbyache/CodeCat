@@ -22,14 +22,17 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
             this.Text = null;
         }
 
-        protected override void OpenFile()
+
+        protected override void OnOpen()
         {
             this.Text = File.ReadAllText(this.FilePath);
+            base.OnOpen();
         }
 
-        protected override void SaveFile()
+        protected override void OnSave()
         {
             File.WriteAllText(this.FilePath, this.Text);
+            base.OnSave();
         }
     }
 }

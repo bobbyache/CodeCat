@@ -44,10 +44,10 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
             this.documentIndex = new ImagePager(repository, imagePagerPathGenerator);
         }
 
-        protected override void OnBeforeRevert()
+        protected override void OnRevert()
         {
             this.documentIndex.Revert();
-            base.OnBeforeRevert();
+            base.OnRevert();
         }
 
         protected override void OnAfterDelete()
@@ -88,14 +88,16 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
                 return pagerImage;
         }
 
-        protected override void OpenFile()
+        protected override void OnOpen()
         {
             this.documentIndex.Open();
+            base.OnOpen();
         }
 
-        protected override void SaveFile()
+        protected override void OnSave()
         {
             this.documentIndex.Save();
+            base.OnSave();
         }
 
         public IPagerImage Add()

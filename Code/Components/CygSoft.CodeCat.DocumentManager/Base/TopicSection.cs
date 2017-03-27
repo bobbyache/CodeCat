@@ -58,16 +58,21 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             this.FileName = filePathGenerator.FileName;
         }
 
-        protected abstract void OpenFile();
-        protected abstract void SaveFile();
+        protected virtual void OnOpen() { }
+        protected virtual void OnSave() { }
         protected virtual void OnBeforeDelete() { }
-        protected virtual void OnBeforeOpen() { }
-        protected virtual void OnAfterOpen() { }
-        protected virtual void OnBeforeRevert() { }
-        protected virtual void OnAfterRevert() { }
+        protected virtual void OnBeforeOpen() { BeforeOpen?.Invoke(this, new TopicSectionEventArgs(this)); }
+        protected virtual void OnAfterOpen() { AfterOpen?.Invoke(this, new TopicSectionEventArgs(this)); }
+        protected virtual void OnBeforeRevert() { BeforeRevert?.Invoke(this, new TopicSectionEventArgs(this)); }
+        protected virtual void OnAfterRevert() { AfterRevert?.Invoke(this, new TopicSectionEventArgs(this));  }
         protected virtual void OnBeforeSave() { }
         protected virtual void OnAfterSave() { }
         protected virtual void OnClose() { }
+
+        /// <summary>
+        /// Any extra logic that needs to be implemented during a revert should be handled by overriding this method.
+        /// </summary>
+        protected virtual void OnRevert() { }
 
         protected virtual void OnAfterDelete()
         {
@@ -78,13 +83,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                BeforeOpen?.Invoke(this, new TopicSectionEventArgs(this));
                 OnBeforeOpen();
-                OpenFile();
+                OnOpen();
                 OnAfterOpen();
-
                 this.Loaded = true;
-                AfterOpen?.Invoke(this, new TopicSectionEventArgs(this));
+
             }
             catch (Exception exception)
             {
@@ -96,13 +99,12 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                BeforeRevert?.Invoke(this, new TopicSectionEventArgs(this));
                 OnBeforeRevert();
-                OpenFile();
+                OnRevert();
+                OnOpen();
                 OnAfterRevert();
-
                 this.Loaded = true;
-                AfterRevert?.Invoke(this, new TopicSectionEventArgs(this));
+                
             }
             catch (Exception exception)
             {
@@ -110,7 +112,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
-        protected virtual void DeleteFile()
+        protected virtual void OnDelete()
         {
             File.Delete(this.FilePath);
         }
@@ -119,7 +121,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             BeforeDelete?.Invoke(this, new TopicSectionEventArgs(this));
             OnBeforeDelete();
-            DeleteFile();
+            OnDelete();
             OnAfterDelete();
 
             this.Loaded = false;
@@ -132,7 +134,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             {
                 BeforeSave?.Invoke(this, new TopicSectionEventArgs(this));
                 OnBeforeSave();
-                SaveFile();
+                OnSave();
                 OnAfterSave();
                 this.Loaded = true;
                 AfterSave?.Invoke(this, new TopicSectionEventArgs(this));
