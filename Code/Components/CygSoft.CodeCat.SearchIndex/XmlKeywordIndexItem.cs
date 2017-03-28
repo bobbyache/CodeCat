@@ -26,7 +26,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
         public virtual void Deserialize(XElement element)
         {
-            this.Id = (string)element.Attribute("ID");
+            base.Id = (string)element.Attribute("ID");
             this.Title = (string)element.Element("Title");
             this.DateCreated = (DateTime)element.Element("DateCreated");
             this.DateModified = (DateTime)element.Element("DateModified");

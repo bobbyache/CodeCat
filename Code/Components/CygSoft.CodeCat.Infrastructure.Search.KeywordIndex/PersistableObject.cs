@@ -9,7 +9,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex.Infrastructure
 
         public PersistableObject()
         {
-            this.identifyingGuid = Guid.NewGuid();
+            this.identifyingGuid = Guid.Empty;
             this.DateCreated = DateTime.Now;
             this.DateModified = this.DateCreated;
         }
@@ -27,10 +27,15 @@ namespace CygSoft.CodeCat.Search.KeywordIndex.Infrastructure
         [Browsable(false)]
         public string Id
         {
-            get { return this.identifyingGuid.ToString(); }
-            set
+            get
             {
-                this.identifyingGuid = new Guid(value);
+                if (identifyingGuid == Guid.Empty)
+                    identifyingGuid = Guid.NewGuid();
+                return identifyingGuid.ToString();
+            }
+            protected set
+            {
+                identifyingGuid = new Guid(value);
             }
         }
     }

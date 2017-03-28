@@ -1,12 +1,7 @@
-﻿using CygSoft.CodeCat.Search.KeywordIndex;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+﻿using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using NUnit.Framework;
 using Search.KeywordIndex.UnitTests.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Search.KeywordIndex.UnitTests
 {
@@ -139,5 +134,28 @@ namespace Search.KeywordIndex.UnitTests
             Assert.That(keywordCount, Is.EqualTo(3));
         }
 
+        [Test]
+        public void IndexItem_InitializedWithParameterlessConstructor_ReturnsNewIdString()
+        {
+            IKeywordIndexItem keywordIndexItem = new TestKeywordIndexItem();
+            Guid guid = new Guid(keywordIndexItem.Id);
+            Assert.That(guid == Guid.Empty, Is.False);
+        }
+
+        [Test]
+        public void IndexItem_InitializedWithParameteredConstructor_ReturnsPassInIdString()
+        {
+            IKeywordIndexItem keywordIndexItem = new TestKeywordIndexItem("4ecac722-8ec5-441c-8e3e-00b192b30453", "Test Title", DateTime.Now, DateTime.Now, "test,testing");
+            string id = keywordIndexItem.Id;
+            Assert.That(id, Is.EqualTo("4ecac722-8ec5-441c-8e3e-00b192b30453"));
+        }
+
+        [Test]
+        public void IndexItem_InitializedWithParameteredConstructorNoId_ReturnsNewIdString()
+        {
+            IKeywordIndexItem keywordIndexItem = new TestKeywordIndexItem("Test Title", "test, testing");
+            Guid guid = new Guid(keywordIndexItem.Id);
+            Assert.That(guid == Guid.Empty, Is.False);
+        }
     }
 }

@@ -16,12 +16,14 @@ namespace Search.KeywordIndex.UnitTests.Helpers
         {
         }
 
-        public TestKeywordIndexItem(string title, string commaDelimitedKeywords) : base(title, commaDelimitedKeywords)
+        public TestKeywordIndexItem(string title, string commaDelimitedKeywords) : 
+            base(title, commaDelimitedKeywords)
         {
 
         }
 
-        public TestKeywordIndexItem(string id, string title, DateTime dateCreated, DateTime dateModified, string commaDelimitedKeywords) : base(id, title, dateCreated, dateModified, commaDelimitedKeywords)
+        public TestKeywordIndexItem(string id, string title, DateTime dateCreated, DateTime dateModified, string commaDelimitedKeywords) : 
+            base(id, title, dateCreated, dateModified, commaDelimitedKeywords)
         {
 
         }

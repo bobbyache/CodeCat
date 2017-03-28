@@ -8,7 +8,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex.Infrastructure
 {
     public interface IKeywordIndexItem
     {
-        string Id { get; set; }
+        string Id { get; }
         string FileTitle { get; }
         string[] Keywords { get; }
         string CommaDelimitedKeywords { get; }
