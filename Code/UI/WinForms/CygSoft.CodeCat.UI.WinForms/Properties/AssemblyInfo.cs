@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("CodeCat")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("CygSoft's CodeCat")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CygSoft")]
 [assembly: AssemblyProduct("CodeCat")]
