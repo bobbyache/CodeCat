@@ -13,29 +13,45 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
     public abstract class XmlKeywordSearchIndexRepository<IndexItem> : IKeywordSearchIndexRepository where IndexItem : XmlKeywordIndexItem, new()
     {
         public string RootElement { get; private set; }
+        protected readonly IIndexFileFunctions FileFunctions;
 
         public XmlKeywordSearchIndexRepository(string rootElement)
         {
             this.RootElement = rootElement;
+            this.FileFunctions = new IndexFileFunctions();
+        }
+
+        public XmlKeywordSearchIndexRepository(string rootElement, IIndexFileFunctions indexFileFunctions)
+        {
+            this.RootElement = rootElement;
+            this.FileFunctions = indexFileFunctions;
         }
 
         public IKeywordSearchIndex OpenIndex(string filePath, int expectedVersion)
         {
-            var indexFile = NewIndexFile(filePath);
-            string fileText = indexFile.Open();
-
-            if (!indexFile.FileExists)
+            if (!FileFunctions.Exists(filePath))
                 throw new FileNotFoundException("Index file not found.");
 
-            if (!indexFile.CorrectFormat)
-                throw new InvalidDataException("The file format for the target file does not match the format expected or the file is corrupt.");
+            string fileText = FileFunctions.Open(filePath);
 
-            if (!indexFile.CorrectVersion)
-                throw new InvalidFileIndexVersionException("The file version is not compatible with the current application version.");
+            CheckFormat(fileText);
+            CheckVersion(fileText, expectedVersion);
 
             List<IndexItem> items = LoadIndexItems(fileText, expectedVersion);
             IKeywordSearchIndex Index = new KeywordSearchIndex(filePath, expectedVersion, items.Cast<IKeywordIndexItem>().ToList());
             return Index;
+        }
+
+        protected void CheckFormat(string fileText)
+        {
+            if (!FileFunctions.CheckFormat(fileText))
+                throw new InvalidDataException("The file format for the target file does not match the format expected or the file is corrupt.");
+        }
+
+        protected void CheckVersion(string fileText, int expectedVersion)
+        {
+            if (!FileFunctions.CheckVersion(fileText, expectedVersion))
+                throw new InvalidFileIndexVersionException("The file version is not compatible with the current application version.");
         }
 
         public void SaveIndex(IKeywordSearchIndex Index)
@@ -50,13 +66,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
                 xElement.Add(item.Serialize());
             }
 
-            var indexFile = NewIndexFile(Index.FilePath);
-            indexFile.Save(xmlDocument.ToString());
-        }
-
-        protected virtual IKeywordSearchIndexFile NewIndexFile(string filePath)
-        {
-            return new KeywordSearchIndexFile(filePath);
+            FileFunctions.Save(xmlDocument.ToString(), Index.FilePath);
         }
 
         public IKeywordSearchIndex SaveIndexAs(IKeywordSearchIndex Index, string filePath)
@@ -100,9 +110,10 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         public void ImportItems(string filePath, int expectedVersion, IKeywordIndexItem[] importItems)
         {
             IndexItem[] imports = importItems.OfType<IndexItem>().ToArray();
-
             XDocument xDocument = XDocument.Load(filePath);
-            CheckVersion(xDocument.Root, expectedVersion);
+            string fileText = FileFunctions.Open(filePath);
+
+            CheckVersion(fileText, expectedVersion);
 
             // ensure ids do not already exist.
             List<IndexItem> existingItems = LoadIndexItems(filePath, expectedVersion);
@@ -113,34 +124,12 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             if (exist)
                 throw new ApplicationException("Matching index IDs already exist on the target index.");
 
-            //var duplicateItems = existingItems.Join(importItems, ex => ex.Id, im => im.Id,
-            //    (ex, im) => new { ex.Id, ex.Title,  SourceId = im.Id, SourceTitle = im.Title });
-
-            //foreach (var item in duplicateItems)
-            //{
-            //    Console.WriteLine(item.Id);
-            //}
-
             foreach (var importItem in imports)
             {
                 xDocument.Root.Add(importItem.Serialize());
             }
 
             xDocument.Save(filePath);
-        }
-
-        protected virtual void CheckVersion(XElement xElement, int expectedVersion)
-        {
-            try
-            {
-                XAttribute xVersion = xElement.Attribute("Version");
-                if (Int32.Parse(xVersion.Value) != expectedVersion)
-                    throw new Exception();
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("Project file is incompatible with the file version that the application expects.");
-            }
         }
     }
 }

@@ -15,11 +15,11 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         protected override List<QikTemplateKeywordIndexItem> LoadIndexItems(string fileText, int expectedVersion)
         {
-            XElement xElement = XElement.Parse(fileText);
-            CheckVersion(xElement, expectedVersion);
+            base.FileFunctions.CheckVersion(fileText, expectedVersion);
 
             List<QikTemplateKeywordIndexItem> indexItems = new List<QikTemplateKeywordIndexItem>();
 
+            XElement xElement = XElement.Parse(fileText);
             var items = from h in xElement.Elements("IndexItem")
                         select h;
 

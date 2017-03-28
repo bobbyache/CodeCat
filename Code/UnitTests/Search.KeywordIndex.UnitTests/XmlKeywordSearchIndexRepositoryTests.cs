@@ -21,8 +21,10 @@ namespace Search.KeywordIndex.UnitTests
         [Test]
         public void XmlIndexRepository_OpeningNonExistingFile_ThrowsFileNotFoundException()
         {
-            TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement");
-            repository.IsExistingFile = false; // simulate that the index file is not found at the path expected.
+            StubIndexFileFunctions stubFile = new StubIndexFileFunctions();
+            stubFile.IsExistingFile = false;
+
+            TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement", stubFile);
 
             Assert.That(() => repository.OpenIndex("", 2), Throws.InstanceOf(typeof(FileNotFoundException)),
                 "Stub method simulated that an Index file was not found at the path specified. Repository should have thrown a FileNotFoundException.");
@@ -31,8 +33,10 @@ namespace Search.KeywordIndex.UnitTests
         [Test]
         public void XmlIndexRepository_OpeningIncorrectFormat_ThrowsArgumentException()
         {
-            TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement");
-            repository.IsCorrectFormat = false; // simulate that the index file format is incorrect
+            StubIndexFileFunctions stubFile = new StubIndexFileFunctions();
+            stubFile.IsCorrectFormat = false;
+
+            TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement", stubFile);
 
             Assert.That(() => repository.OpenIndex("", 2), Throws.InstanceOf(typeof(InvalidDataException)),
                 "Stub method simulated that an Index file format was invalid but a InvalidDataException was not thrown.");
@@ -41,8 +45,10 @@ namespace Search.KeywordIndex.UnitTests
         [Test]
         public void XmlIndexRepository_OpeningIncorrectVersion_ThrowsVersionException()
         {
-            TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement");
-            repository.IsCorrectVersion = false; // simulate that the index file version is incorrect
+            StubIndexFileFunctions stubFile = new StubIndexFileFunctions();
+            stubFile.IsCorrectVersion = false;
+
+            TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement", stubFile);
 
             Assert.That(() => repository.OpenIndex("", 2), Throws.InstanceOf(typeof(InvalidFileIndexVersionException)));
         }
@@ -56,13 +62,14 @@ namespace Search.KeywordIndex.UnitTests
                 new TestKeywordIndexItem("Item 1", "green,red"),
                 new TestKeywordIndexItem("Item 1", "yellow,gray")
             };
+
             var stubKeywordSearchIndex = new Mock<IKeywordSearchIndex>();
             stubKeywordSearchIndex.Setup(m => m.All()).Returns(indexItems);
             stubKeywordSearchIndex.Setup(m => m.CurrentVersion).Returns(2);
 
             var keywordSearchIndex = new KeywordSearchIndex("C:File.xml", 2);
  
-            TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement");
+            TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement", new StubIndexFileFunctions());
             IKeywordSearchIndex newSearchIndex = repository.CloneIndex(stubKeywordSearchIndex.Object, @"C:\hello_world.txt");
 
             Assert.That(newSearchIndex, Is.Not.SameAs(stubKeywordSearchIndex.Object));
@@ -72,59 +79,44 @@ namespace Search.KeywordIndex.UnitTests
             Assert.That(newSearchIndex.Contains(indexItems[2]), Is.True);
         }
 
-        class StubKeywordSearchIndexFile : IKeywordSearchIndexFile
+        class StubIndexFileFunctions : IIndexFileFunctions
         {
             public bool IsCorrectFormat = true;
             public bool IsCorrectVersion = true;
             public bool IsExistingFile = true;
 
-            public string FilePath { get; private set; }
-
-            public string Text { get { return ""; } }
-
-            public bool CorrectFormat { get { return IsCorrectFormat; } }
-
-            public bool CorrectVersion { get { return IsCorrectVersion; } }
-
             public bool FileExists {  get { return IsExistingFile; } } 
 
-            public void Save(string fileText) {  }
-
-            public string Open()
+            public bool Exists(string filePath)
+            {
+                return IsExistingFile;
+            }
+            public string Open(string filePath)
             {
                 return string.Empty;
             }
+            public void Save(string fileText, string filePath) { }
 
-            public void SaveAs(string fileText, string filePath)
+            public bool CheckFormat(string fileText)
             {
-                FilePath = filePath;
+                return IsCorrectFormat;
+            }
+
+            public bool CheckVersion(string fileText, int expectedVersion)
+            {
+                return IsCorrectVersion;
             }
         }
 
         class TestXmlKeywordSearchIndexRepository : XmlKeywordSearchIndexRepository<TestXmlKeywordIndexItem>
         {
-
-            public bool IsExistingFile = true;
-            public bool IsCorrectFormat = true;
-            public bool IsCorrectVersion = true;
-
-            public TestXmlKeywordSearchIndexRepository(string rootElement) : base(rootElement)
+            public TestXmlKeywordSearchIndexRepository(string rootElement, StubIndexFileFunctions indexFileFunctions) : base(rootElement, indexFileFunctions)
             {
             }
 
             protected override List<TestXmlKeywordIndexItem> LoadIndexItems(string filePath, int currentVersion)
             {
                 return new List<TestXmlKeywordIndexItem>();
-            }
-
-            protected override IKeywordSearchIndexFile NewIndexFile(string filePath)
-            {
-                StubKeywordSearchIndexFile stubFile = new StubKeywordSearchIndexFile();
-                stubFile.IsCorrectFormat = IsCorrectFormat;
-                stubFile.IsCorrectVersion = IsCorrectVersion;
-                stubFile.IsExistingFile = IsExistingFile;
-
-                return stubFile;
             }
         }
 

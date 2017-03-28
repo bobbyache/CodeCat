@@ -39,8 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KeywordSearchIndexFile.cs" />
-    <Compile Include="IKeywordSearchIndexFile.cs" />
+    <Compile Include="IndexFileFunctions.cs" />
+    <Compile Include="IIndexFileFunctions.cs" />
     <Compile Include="InvalidFileIndexVersionException.cs" />
     <Compile Include="XmlKeywordSearchIndexRepository.cs" />
     <Compile Include="KeywordSearchIndex.cs" />

@@ -15,11 +15,11 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         protected override List<CodeGroupKeywordIndexItem> LoadIndexItems(string fileText, int expectedVersion)
         {
-            XElement xElement = XElement.Parse(fileText);
-            CheckVersion(xElement, expectedVersion);
+            base.FileFunctions.CheckVersion(fileText, expectedVersion);
 
             List<CodeGroupKeywordIndexItem> indexItems = new List<CodeGroupKeywordIndexItem>();
 
+            XElement xElement = XElement.Parse(fileText);
             var items = from h in xElement.Elements("IndexItem")
                         select h;
 
