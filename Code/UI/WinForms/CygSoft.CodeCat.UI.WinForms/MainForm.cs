@@ -191,7 +191,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ClearSnippetDocuments();
                 this.projectClosing = false;
 
-                this.application.Open(filePath, ConfigSettings.CodeLibraryIndexFileVersion);
+                this.application.Open(filePath, ConfigSettings.ProjectFileVersion);
                 this.Text = WindowCaption();
 
                 recentProjectMenu.Notify(filePath);
@@ -261,7 +261,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             ClearSnippetDocuments();
             this.projectClosing = false;
 
-            this.application.Create(filePath, ConfigSettings.CodeLibraryIndexFileVersion);
+            this.application.Create(filePath, ConfigSettings.ProjectFileVersion);
             this.Text = WindowCaption();
             searchForm.KeywordSearchText = string.Empty;
             searchForm.ExecuteSearch();
