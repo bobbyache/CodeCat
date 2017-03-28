@@ -26,7 +26,7 @@ namespace Search.KeywordIndex.UnitTests
 
             TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement", stubFile);
 
-            Assert.That(() => repository.OpenIndex("", 2), Throws.InstanceOf(typeof(FileNotFoundException)),
+            Assert.That(() => repository.OpenIndex("", new Version(2,0)), Throws.InstanceOf(typeof(FileNotFoundException)),
                 "Stub method simulated that an Index file was not found at the path specified. Repository should have thrown a FileNotFoundException.");
         }
 
@@ -38,7 +38,7 @@ namespace Search.KeywordIndex.UnitTests
 
             TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement", stubFile);
 
-            Assert.That(() => repository.OpenIndex("", 2), Throws.InstanceOf(typeof(InvalidDataException)),
+            Assert.That(() => repository.OpenIndex("", new Version(2, 0)), Throws.InstanceOf(typeof(InvalidDataException)),
                 "Stub method simulated that an Index file format was invalid but a InvalidDataException was not thrown.");
         }
 
@@ -50,7 +50,7 @@ namespace Search.KeywordIndex.UnitTests
 
             TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement", stubFile);
 
-            Assert.That(() => repository.OpenIndex("", 2), Throws.InstanceOf(typeof(InvalidFileIndexVersionException)));
+            Assert.That(() => repository.OpenIndex("", new Version(2, 0)), Throws.InstanceOf(typeof(InvalidFileIndexVersionException)));
         }
 
         [Test]
@@ -65,9 +65,9 @@ namespace Search.KeywordIndex.UnitTests
 
             var stubKeywordSearchIndex = new Mock<IKeywordSearchIndex>();
             stubKeywordSearchIndex.Setup(m => m.All()).Returns(indexItems);
-            stubKeywordSearchIndex.Setup(m => m.CurrentVersion).Returns(2);
+            stubKeywordSearchIndex.Setup(m => m.CurrentVersion).Returns(new Version(2, 0));
 
-            var keywordSearchIndex = new KeywordSearchIndex("C:File.xml", 2);
+            var keywordSearchIndex = new KeywordSearchIndex("C:File.xml", new Version(2, 0));
  
             TestXmlKeywordSearchIndexRepository repository = new TestXmlKeywordSearchIndexRepository("RootElement", new StubIndexFileFunctions());
             IKeywordSearchIndex newSearchIndex = repository.CloneIndex(stubKeywordSearchIndex.Object, @"C:\hello_world.txt");
@@ -102,7 +102,7 @@ namespace Search.KeywordIndex.UnitTests
                 return IsCorrectFormat;
             }
 
-            public bool CheckVersion(string fileText, int expectedVersion)
+            public bool CheckVersion(string fileText, Version expectedVersion)
             {
                 return IsCorrectVersion;
             }
@@ -114,7 +114,7 @@ namespace Search.KeywordIndex.UnitTests
             {
             }
 
-            protected override List<TestXmlKeywordIndexItem> LoadIndexItems(string filePath, int currentVersion)
+            protected override List<TestXmlKeywordIndexItem> LoadIndexItems(string filePath, Version currentVersion)
             {
                 return new List<TestXmlKeywordIndexItem>();
             }

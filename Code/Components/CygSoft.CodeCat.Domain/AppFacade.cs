@@ -8,6 +8,7 @@ using CygSoft.CodeCat.Search.KeywordIndex;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System;
 
 namespace CygSoft.CodeCat.Domain
 {
@@ -59,7 +60,7 @@ namespace CygSoft.CodeCat.Domain
             this.codeLibrary.OpenProjectFolder();
         }
 
-        public void Open(string filePath, int currentVersion)
+        public void Open(string filePath, Version currentVersion)
         {
             project.Open(filePath, currentVersion);
             this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
@@ -67,7 +68,7 @@ namespace CygSoft.CodeCat.Domain
             this.codeGroupLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
         }
 
-        public void Create(string filePath, int currentVersion)
+        public void Create(string filePath, Version currentVersion)
         {
             project.Create(filePath, currentVersion);
             this.codeLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);

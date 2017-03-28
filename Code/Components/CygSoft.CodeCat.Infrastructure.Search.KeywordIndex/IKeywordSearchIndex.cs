@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex.Infrastructure
         bool Contains(IKeywordIndexItem item);
         bool Contains(string id);
         string CopyAllKeywords(IKeywordIndexItem[] indeces);
-        int CurrentVersion { get; }
+        Version CurrentVersion { get; }
         string FilePath { get; }
         string FileTitle { get; }
         IKeywordIndexItem[] Find(string commaDelimitedKeywords);

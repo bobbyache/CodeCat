@@ -7,7 +7,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
     public class IndexFileFunctions : IIndexFileFunctions
     {
-        public bool CheckVersion(string fileText, int expectedVersion)
+        public bool CheckVersion(string fileText, Version expectedVersion)
         {
             if (!string.IsNullOrEmpty(fileText))
                 {
@@ -16,9 +16,9 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
                 if (xVersion != null)
                 {
-                    int result;
-                    bool success = Int32.TryParse(xVersion.Value, out result);
-                    if (success && result == expectedVersion)
+                    Version actualVersion;
+                    bool success = Version.TryParse(xVersion.Value, out actualVersion);
+                    if (success && actualVersion.ToString() == expectedVersion.ToString())
                         return true;
                 }
             }

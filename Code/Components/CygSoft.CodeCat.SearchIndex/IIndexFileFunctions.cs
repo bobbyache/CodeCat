@@ -12,6 +12,6 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         string Open(string filePath);
         void Save(string fileText, string filePath);
         bool CheckFormat(string fileText);
-        bool CheckVersion(string fileText, int expectedVersion);
+        bool CheckVersion(string fileText, Version expectedVersion);
     }
 }

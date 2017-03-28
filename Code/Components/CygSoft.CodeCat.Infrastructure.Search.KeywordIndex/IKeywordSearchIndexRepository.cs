@@ -8,12 +8,12 @@ namespace CygSoft.CodeCat.Search.KeywordIndex.Infrastructure
 {
     public interface IKeywordSearchIndexRepository
     {
-        IKeywordSearchIndex OpenIndex(string filePath, int expectedVersion);
+        IKeywordSearchIndex OpenIndex(string filePath, Version expectedVersion);
         void SaveIndex(IKeywordSearchIndex Index);
         IKeywordSearchIndex SaveIndexAs(IKeywordSearchIndex Index, string filePath);
         IKeywordSearchIndex CloneIndex(IKeywordSearchIndex sourceIndex, string filePath);
-        IKeywordSearchIndex CreateIndex(string filePath, int expectedVersion);
+        IKeywordSearchIndex CreateIndex(string filePath, Version expectedVersion);
 
-        void ImportItems(string filePath, int expectedVersion, IKeywordIndexItem[] items);
+        void ImportItems(string filePath, Version expectedVersion, IKeywordIndexItem[] items);
     }
 }

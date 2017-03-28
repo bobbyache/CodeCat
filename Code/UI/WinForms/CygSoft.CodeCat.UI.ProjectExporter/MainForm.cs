@@ -140,10 +140,20 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
+            Version version = GetVersion();
+
             projectManagement = new ProjManFacade();
-            projectManagement.LoadProjects(txtSourceProjectPath.Text, txtDestinationProjectPath.Text, 5);
+            projectManagement.LoadProjects(txtSourceProjectPath.Text, txtDestinationProjectPath.Text, version);
             Find();
             EnableExecution();
+        }
+
+        private Version GetVersion()
+        {
+            Version version;
+            if (Version.TryParse(txtVersion.Text.Trim(), out version))
+                return version;
+            return null;
         }
 
         private void Find()
@@ -203,7 +213,7 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                         {
                             try
                             {
-                                projectManagement.ImportData(exportData, 5);
+                                projectManagement.ImportData(exportData, GetVersion());
                                 MessageBox.Show(this, "Selection has been successfully exported.", "Project Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             catch (Exception)

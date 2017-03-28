@@ -34,7 +34,7 @@ namespace CygSoft.CodeCat.Domain.Management
             this.codeGroupLibrary = new CodeGroupLibrary();
         }
 
-        public void Open(string filePath, int currentVersion)
+        public void Open(string filePath, Version currentVersion)
         {
             project.Open(filePath, currentVersion);
             this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
@@ -91,7 +91,7 @@ namespace CygSoft.CodeCat.Domain.Management
             }
         }
 
-        public void ImportData(string sourceIndexFilePath, string destinationIndexFilePath, IndexExportImportData[] exportData, int currentVersion)
+        public void ImportData(string sourceIndexFilePath, string destinationIndexFilePath, IndexExportImportData[] exportData, Version currentVersion)
         {
             IKeywordIndexItem[] codeItems;
             IKeywordIndexItem[] qikItems;

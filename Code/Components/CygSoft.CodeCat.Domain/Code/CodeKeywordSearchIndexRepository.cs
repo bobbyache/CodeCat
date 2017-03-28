@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Search.KeywordIndex;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -12,7 +13,7 @@ namespace CygSoft.CodeCat.Domain.Code
 
         }
 
-        protected override List<CodeKeywordIndexItem> LoadIndexItems(string fileText, int expectedVersion)
+        protected override List<CodeKeywordIndexItem> LoadIndexItems(string fileText, Version expectedVersion)
         {
             base.FileFunctions.CheckVersion(fileText, expectedVersion);
 

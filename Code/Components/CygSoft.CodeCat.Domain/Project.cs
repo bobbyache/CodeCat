@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml;
 
 namespace CygSoft.CodeCat.Domain
@@ -9,17 +10,17 @@ namespace CygSoft.CodeCat.Domain
         public string FileTitle { get { return Path.GetFileName(this.FilePath); } }
         public string FolderPath { get { return Path.GetDirectoryName(this.FilePath); } }
 
-        public int CurrentVersion { get; private set; }
+        public Version CurrentVersion { get; private set; }
         public string ProjectFileExtension { get { return "codecat"; } }
 
-        public void Open(string filePath, int currentVersion)
+        public void Open(string filePath, Version currentVersion)
         {
             this.FilePath = filePath;
             this.CurrentVersion = currentVersion;
         }
 
 
-        public void Create(string filePath, int currentVersion)
+        public void Create(string filePath, Version currentVersion)
         {
             this.FilePath = filePath;
             this.CurrentVersion = currentVersion;

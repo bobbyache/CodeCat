@@ -26,9 +26,9 @@ namespace Search.KeywordIndex.UnitTests
         [Test]
         public void KeywordSearchIndex_Create()
         {
-            IKeywordSearchIndex searchIndex = new KeywordSearchIndex(@"C:\keywords\keyword_index.xml", 2);
+            IKeywordSearchIndex searchIndex = new KeywordSearchIndex(@"C:\keywords\keyword_index.xml", new Version(2,0));
 
-            Assert.AreEqual(searchIndex.CurrentVersion, 2);
+            Assert.AreEqual(searchIndex.CurrentVersion.ToString(), new Version(2, 0).ToString());
             Assert.AreEqual(searchIndex.FilePath, @"C:\keywords\keyword_index.xml");
             Assert.AreEqual(searchIndex.FileTitle, "keyword_index.xml");
         }
@@ -36,7 +36,7 @@ namespace Search.KeywordIndex.UnitTests
         [Test]
         public void KeywordSearchIndex_AddKeywords_SetsDateModified()
         {
-            IKeywordSearchIndex searchIndex = new KeywordSearchIndex(@"C:\keywords\keyword_index.xml", 2);
+            IKeywordSearchIndex searchIndex = new KeywordSearchIndex(@"C:\keywords\keyword_index.xml", new Version(2, 0));
             var keywordSearchIndexItem = new TestKeywordIndexItem();
             searchIndex.AddKeywords(new IKeywordIndexItem[] { keywordSearchIndexItem }, @"test,testing,tested");
 
@@ -46,7 +46,7 @@ namespace Search.KeywordIndex.UnitTests
         public void KeywordSearchIndex_WhenAddingKeywordsToIndexItems_ReturnsTrueOnSubsequentSearchForOneOfThoseKeywords()
         {
             var keywordSearchIndexItem = new TestKeywordIndexItem();
-            IKeywordSearchIndex searchIndex = new KeywordSearchIndex("", 2, new List<IKeywordIndexItem> { keywordSearchIndexItem });
+            IKeywordSearchIndex searchIndex = new KeywordSearchIndex("", new Version(2, 0), new List<IKeywordIndexItem> { keywordSearchIndexItem });
             searchIndex.AddKeywords(new IKeywordIndexItem[] { keywordSearchIndexItem }, @"test,testing,tested");
             IKeywordIndexItem[] items = searchIndex.Find("TEST");
 
@@ -58,7 +58,7 @@ namespace Search.KeywordIndex.UnitTests
         public void KeywordSearchIndex_AfterRemovingKeywordsFromIndexItems_ReturnsFalseOnSubsequentSearchForThoseKeywords()
         {
             var keywordSearchIndexItem = new TestKeywordIndexItem();
-            var searchIndex = new KeywordSearchIndex("", 2, new List<IKeywordIndexItem> { keywordSearchIndexItem });
+            var searchIndex = new KeywordSearchIndex("", new Version(2, 0), new List<IKeywordIndexItem> { keywordSearchIndexItem });
             searchIndex.AddKeywords(new IKeywordIndexItem[] { keywordSearchIndexItem }, @"test,testing,tested");
 
             searchIndex.RemoveKeywords(new IKeywordIndexItem[] { keywordSearchIndexItem }, new string[] { "test", "testing", "tested" });
@@ -72,7 +72,7 @@ namespace Search.KeywordIndex.UnitTests
         public void KeywordSearchIndex_AfterAddingKeywordIndeces_ContainsIndeces()
         {
             var keywordSearchIndexItem = new TestKeywordIndexItem();
-            var searchIndex = new KeywordSearchIndex("", 2, new List<IKeywordIndexItem> { keywordSearchIndexItem });
+            var searchIndex = new KeywordSearchIndex("", new Version(2, 0), new List<IKeywordIndexItem> { keywordSearchIndexItem });
             searchIndex.AddKeywords(new IKeywordIndexItem[] { keywordSearchIndexItem }, @"test,testing,tested");
 
             Assert.That(searchIndex.Contains(keywordSearchIndexItem), Is.True);
@@ -88,7 +88,7 @@ namespace Search.KeywordIndex.UnitTests
                 new TestKeywordIndexItem("Title 3", "apple,pear")
             }).OfType<IKeywordIndexItem>().ToList();
 
-            var searchIndex = new KeywordSearchIndex("", 2, indexItems);
+            var searchIndex = new KeywordSearchIndex("", new Version(2, 0), indexItems);
 
             int numItemsInIndex = searchIndex.All().Length;
 
@@ -104,7 +104,7 @@ namespace Search.KeywordIndex.UnitTests
                 new TestKeywordIndexItem("Title 3", "TESTING,TESTED")
             }).OfType<IKeywordIndexItem>().ToList();
 
-            var searchIndex = new KeywordSearchIndex("", 2, indexItems);
+            var searchIndex = new KeywordSearchIndex("", new Version(2, 0), indexItems);
 
             string[] allKeywords = searchIndex.AllKeywords(searchIndex.All());
 

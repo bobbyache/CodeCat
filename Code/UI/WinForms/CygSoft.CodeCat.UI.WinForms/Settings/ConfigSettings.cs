@@ -109,15 +109,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             get { return ConfigSettings.AssemblyDescription; }
         }
 
-        private static int codeLibraryIndexFileVersion = -1;
-        public static int CodeLibraryIndexFileVersion
+        public static Version ProjectFileVersion
         {
             get
             {
-                if (codeLibraryIndexFileVersion < 0)
-                    codeLibraryIndexFileVersion = Int32.Parse(ConfigurationManager.AppSettings["CodeLibraryIndexFileVersion"]);
-
-                return codeLibraryIndexFileVersion;
+                Version version = AssemblyVersion;
+                return new Version(version.Major, version.Minor);
             }
         }
 
@@ -262,7 +259,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             qikTemplateSyntaxFile = ConfigurationManager.AppSettings["QikTemplateSyntaxFile"];
             helpPageUrl = ConfigurationManager.AppSettings["HelpPageUrl"];
             defaultFontSize = Int32.Parse(ConfigurationManager.AppSettings["DefaultFontSize"]);
-            codeLibraryIndexFileVersion = Int32.Parse(ConfigurationManager.AppSettings["CodeLibraryIndexFileVersion"]);
         }
 
     }

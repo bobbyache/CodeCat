@@ -27,13 +27,13 @@ namespace CygSoft.CodeCat.Domain.Base
         public string FolderPath { get { return this.index.FolderPath; } }
 
         public int IndexCount { get { return this.index.ItemCount; } }
-        public int CurrentFileVersion
+        public Version CurrentFileVersion
         {
             get
             {
                 if (index != null)
                     return index.CurrentVersion;
-                return -1;
+                return null;
             }
         }
         public bool Loaded
@@ -93,7 +93,7 @@ namespace CygSoft.CodeCat.Domain.Base
             return target;
         }
 
-        public void Open(string parentFolder, int currentVersion)
+        public void Open(string parentFolder, Version currentVersion)
         {
             BeforeIndexLoad();
 
@@ -102,7 +102,7 @@ namespace CygSoft.CodeCat.Domain.Base
             AfterIndexLoad();
         }
 
-        public void Create(string parentFolder, int currentVersion)
+        public void Create(string parentFolder, Version currentVersion)
         {
             BeforeIndexLoad();
 

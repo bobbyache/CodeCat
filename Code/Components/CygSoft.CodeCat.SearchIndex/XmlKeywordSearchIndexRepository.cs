@@ -27,7 +27,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             this.FileFunctions = indexFileFunctions;
         }
 
-        public IKeywordSearchIndex OpenIndex(string filePath, int expectedVersion)
+        public IKeywordSearchIndex OpenIndex(string filePath, Version expectedVersion)
         {
             if (!FileFunctions.Exists(filePath))
                 throw new FileNotFoundException("Index file not found.");
@@ -48,7 +48,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
                 throw new InvalidDataException("The file format for the target file does not match the format expected or the file is corrupt.");
         }
 
-        protected void CheckVersion(string fileText, int expectedVersion)
+        protected void CheckVersion(string fileText, Version expectedVersion)
         {
             if (!FileFunctions.CheckVersion(fileText, expectedVersion))
                 throw new InvalidFileIndexVersionException("The file version is not compatible with the current application version.");
@@ -83,14 +83,14 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             return newIndex;
         }
 
-        public IKeywordSearchIndex CreateIndex(string filePath, int expectedVersion)
+        public IKeywordSearchIndex CreateIndex(string filePath, Version expectedVersion)
         {
             CreateNew(filePath, expectedVersion);
             IKeywordSearchIndex Index = new KeywordSearchIndex(filePath, expectedVersion);
             return Index;
         }
 
-        private void CreateNew(string xmlFile, int expectedVersion)
+        private void CreateNew(string xmlFile, Version expectedVersion)
         {
             XmlDocument xmlDocument = new XmlDocument();
 
@@ -105,9 +105,9 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             xmlDocument.Save(xmlFile);
         }
 
-        protected abstract List<IndexItem> LoadIndexItems(string fileText, int expectedVersion);
+        protected abstract List<IndexItem> LoadIndexItems(string fileText, Version expectedVersion);
         
-        public void ImportItems(string filePath, int expectedVersion, IKeywordIndexItem[] importItems)
+        public void ImportItems(string filePath, Version expectedVersion, IKeywordIndexItem[] importItems)
         {
             IndexItem[] imports = importItems.OfType<IndexItem>().ToArray();
             XDocument xDocument = XDocument.Load(filePath);

@@ -22,11 +22,11 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
         public bool FindAllForEmptySearch { get; set; }
 
-        public int CurrentVersion { get; private set; }
+        public Version CurrentVersion { get; private set; }
 
         public string LibraryFolderPath { get; private set; }
 
-        internal KeywordSearchIndex(string filePath, int currentVersion, List<IKeywordIndexItem> IndexItems)
+        internal KeywordSearchIndex(string filePath, Version currentVersion, List<IKeywordIndexItem> IndexItems)
         {
             this.FilePath = filePath;
 
@@ -36,7 +36,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             CreateKeywordIndex();
         }
 
-        internal KeywordSearchIndex(string filePath, int currentVersion)
+        internal KeywordSearchIndex(string filePath, Version currentVersion)
         {
             this.FilePath = filePath;
             this.CurrentVersion = currentVersion;
