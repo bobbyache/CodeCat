@@ -116,7 +116,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             CheckVersion(fileText, expectedVersion);
 
             // ensure ids do not already exist.
-            List<IndexItem> existingItems = LoadIndexItems(filePath, expectedVersion);
+            List<IndexItem> existingItems = LoadIndexItems(fileText, expectedVersion);
 
             bool exist = existingItems.Join(importItems, ex => ex.Id, im => im.Id,
                 (ex, im) => ex.Id).Count() > 0;

@@ -140,12 +140,19 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            Version version = GetVersion();
+            try
+            {
+                Version version = GetVersion();
 
-            projectManagement = new ProjManFacade();
-            projectManagement.LoadProjects(txtSourceProjectPath.Text, txtDestinationProjectPath.Text, version);
-            Find();
-            EnableExecution();
+                projectManagement = new ProjManFacade();
+                projectManagement.LoadProjects(txtSourceProjectPath.Text, txtDestinationProjectPath.Text, version);
+                Find();
+                EnableExecution();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, string.Format("Failed to load the projects.\n{0}", ex.Message), "Project Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private Version GetVersion()
@@ -216,9 +223,9 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                                 projectManagement.ImportData(exportData, GetVersion());
                                 MessageBox.Show(this, "Selection has been successfully exported.", "Project Exporter", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
-                                MessageBox.Show(this, "Error occurred while trying to export", "Project Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(this, string.Format("Error occurred while trying to export.\n{0}", ex.Message), "Project Exporter", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         else
