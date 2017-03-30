@@ -178,6 +178,34 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 LoadIfExists();
             }
         }
+        private void SaveAs()
+        {
+            if (!singleImageTopicSection.Exists)
+            {
+                Dialogs.MustSaveGroupBeforeAction(this);
+                return;
+            }
+
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Image Files *.png (*.png)|*.png";
+            saveDialog.DefaultExt = "*.png";
+            saveDialog.Title = string.Format("Save Image As...");
+            saveDialog.AddExtension = true;
+            saveDialog.FilterIndex = 0;
+            saveDialog.CheckPathExists = true;
+
+            DialogResult result = saveDialog.ShowDialog(this);
+            string filePath = saveDialog.FileName;
+
+            if (result == DialogResult.OK)
+            {
+                if (imageBox.Image != null)
+                {
+                    imageBox.Image.Save(filePath);
+                }
+            }
+        }
+
 
         private void ctxFileImportMenu_Click(object sender, EventArgs e)
         {
@@ -228,6 +256,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void imageBox_ZoomChanged(object sender, EventArgs e)
         {
             UpdateStatusBar();
+        }
+
+        private void ctxClipboardSaveAsMenu_Click(object sender, EventArgs e)
+        {
+            SaveAs();
         }
     }
 }

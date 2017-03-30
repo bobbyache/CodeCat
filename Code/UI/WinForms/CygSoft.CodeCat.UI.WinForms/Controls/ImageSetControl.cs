@@ -209,6 +209,37 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
+        private void SaveAs()
+        {
+            if (ImageSetExists())
+            {
+                if (!imagePagerTopicSection.FolderExists)
+                {
+                    Dialogs.MustSaveGroupBeforeAction(this);
+                    return;
+                }
+
+                SaveFileDialog saveDialog = new SaveFileDialog();
+                saveDialog.Filter = "Image Files *.png (*.png)|*.png";
+                saveDialog.DefaultExt = "*.png";
+                saveDialog.Title = string.Format("Save Image As...");
+                saveDialog.AddExtension = true;
+                saveDialog.FilterIndex = 0;
+                saveDialog.CheckPathExists = true;
+
+                DialogResult result = saveDialog.ShowDialog(this);
+                string filePath = saveDialog.FileName;
+
+                if (result == DialogResult.OK)
+                {
+                    if (imageBox.Image != null)
+                    {
+                        imageBox.Image.Save(filePath);
+                    }
+                }
+            }
+        }
+
         private void ShowContextMenu(Control ctrl, Point location)
         {
             ctxClipboardImportMenu.Enabled = Clipboard.ContainsImage();
@@ -385,6 +416,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ctxClipboardImportMenu_Click(object sender, EventArgs e)
         {
             ImportClipboardImage();
+        }
+
+        private void ctxClipboardSaveAsMenu_Click(object sender, EventArgs e)
+        {
+            SaveAs();
         }
 
         #endregion Private Events

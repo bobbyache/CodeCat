@@ -44,6 +44,8 @@
             this.ctxFileImportMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxClipboardImportMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.imageBox = new Cyotek.Windows.Forms.ImageBox();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctxClipboardSaveAsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.imageContextMenu.SuspendLayout();
@@ -146,9 +148,11 @@
             // 
             this.imageContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxFileImportMenu,
-            this.ctxClipboardImportMenu});
+            this.ctxClipboardImportMenu,
+            this.toolStripMenuItem1,
+            this.ctxClipboardSaveAsMenu});
             this.imageContextMenu.Name = "imageContextMenu";
-            this.imageContextMenu.Size = new System.Drawing.Size(195, 48);
+            this.imageContextMenu.Size = new System.Drawing.Size(195, 98);
             // 
             // ctxFileImportMenu
             // 
@@ -175,6 +179,18 @@
             this.imageBox.Scroll += new System.Windows.Forms.ScrollEventHandler(this.imageBox_Scroll);
             this.imageBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imageBox_MouseUp);
             this.imageBox.Resize += new System.EventHandler(this.imageBox_Resize);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(191, 6);
+            // 
+            // ctxClipboardSaveAsMenu
+            // 
+            this.ctxClipboardSaveAsMenu.Name = "ctxClipboardSaveAsMenu";
+            this.ctxClipboardSaveAsMenu.Size = new System.Drawing.Size(194, 22);
+            this.ctxClipboardSaveAsMenu.Text = "Save As...";
+            this.ctxClipboardSaveAsMenu.Click += new System.EventHandler(this.ctxClipboardSaveAsMenu_Click);
             // 
             // ImageControl
             // 
@@ -211,5 +227,7 @@
         private System.Windows.Forms.ToolStripLabel lblZoomLevel;
         private System.Windows.Forms.ToolStripLabel lblSize;
         private System.Windows.Forms.ToolStripLabel lblScrollPosition;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ctxClipboardSaveAsMenu;
     }
 }

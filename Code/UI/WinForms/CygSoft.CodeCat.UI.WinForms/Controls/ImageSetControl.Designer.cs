@@ -43,18 +43,20 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDisplayText = new System.Windows.Forms.ToolStripButton();
+            this.btnEditImageText = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDeleteImage = new System.Windows.Forms.ToolStripButton();
             this.btnAddImage = new System.Windows.Forms.ToolStripButton();
-            this.btnEditImageText = new System.Windows.Forms.ToolStripButton();
             this.btnForward = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.imageBox = new Cyotek.Windows.Forms.ImageBox();
             this.imageContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxFileImportMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxClipboardImportMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctxClipboardSaveAsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.imageContextMenu.SuspendLayout();
@@ -187,6 +189,11 @@
             this.btnMoveRight.Text = "Move Right";
             this.btnMoveRight.Click += new System.EventHandler(this.btnMoveRight_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // btnDisplayText
             // 
             this.btnDisplayText.Checked = true;
@@ -199,6 +206,16 @@
             this.btnDisplayText.Size = new System.Drawing.Size(23, 22);
             this.btnDisplayText.Text = "Display Text";
             this.btnDisplayText.Click += new System.EventHandler(this.btnDisplayText_Click);
+            // 
+            // btnEditImageText
+            // 
+            this.btnEditImageText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEditImageText.Image = ((System.Drawing.Image)(resources.GetObject("btnEditImageText.Image")));
+            this.btnEditImageText.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditImageText.Name = "btnEditImageText";
+            this.btnEditImageText.Size = new System.Drawing.Size(23, 22);
+            this.btnEditImageText.Text = "Edit Image Description";
+            this.btnEditImageText.Click += new System.EventHandler(this.btnEditImageText_Click);
             // 
             // toolStripSeparator2
             // 
@@ -224,16 +241,6 @@
             this.btnAddImage.Size = new System.Drawing.Size(23, 22);
             this.btnAddImage.Text = "Add Image";
             this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
-            // 
-            // btnEditImageText
-            // 
-            this.btnEditImageText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEditImageText.Image = ((System.Drawing.Image)(resources.GetObject("btnEditImageText.Image")));
-            this.btnEditImageText.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEditImageText.Name = "btnEditImageText";
-            this.btnEditImageText.Size = new System.Drawing.Size(23, 22);
-            this.btnEditImageText.Text = "Edit Image Description";
-            this.btnEditImageText.Click += new System.EventHandler(this.btnEditImageText_Click);
             // 
             // btnForward
             // 
@@ -277,9 +284,11 @@
             // 
             this.imageContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxFileImportMenu,
-            this.ctxClipboardImportMenu});
+            this.ctxClipboardImportMenu,
+            this.toolStripMenuItem1,
+            this.ctxClipboardSaveAsMenu});
             this.imageContextMenu.Name = "imageContextMenu";
-            this.imageContextMenu.Size = new System.Drawing.Size(195, 48);
+            this.imageContextMenu.Size = new System.Drawing.Size(195, 98);
             // 
             // ctxFileImportMenu
             // 
@@ -295,10 +304,17 @@
             this.ctxClipboardImportMenu.Text = "Import from Clipboard";
             this.ctxClipboardImportMenu.Click += new System.EventHandler(this.ctxClipboardImportMenu_Click);
             // 
-            // toolStripSeparator3
+            // toolStripMenuItem1
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(191, 6);
+            // 
+            // ctxClipboardSaveAsMenu
+            // 
+            this.ctxClipboardSaveAsMenu.Name = "ctxClipboardSaveAsMenu";
+            this.ctxClipboardSaveAsMenu.Size = new System.Drawing.Size(194, 22);
+            this.ctxClipboardSaveAsMenu.Text = "Save As...";
+            this.ctxClipboardSaveAsMenu.Click += new System.EventHandler(this.ctxClipboardSaveAsMenu_Click);
             // 
             // ImageSetControl
             // 
@@ -348,5 +364,7 @@
         private System.Windows.Forms.ToolStripButton btnAddImage;
         private System.Windows.Forms.ToolStripButton btnEditImageText;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ctxClipboardSaveAsMenu;
     }
 }
