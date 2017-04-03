@@ -38,6 +38,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string Attachment = "Attachment";
             public const string Web = "Web";
             public const string ImageSet = "ImageSet";
+            public const string Refresh = "Refresh";
             //public const string SaveProject = "SaveProject";
         }
     }

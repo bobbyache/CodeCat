@@ -454,6 +454,7 @@
     <None Include="Resources\attach.png" />
     <None Include="Resources\world.png" />
     <None Include="Resources\presentation_chart.png" />
+    <None Include="Resources\arrow_refresh.png" />
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

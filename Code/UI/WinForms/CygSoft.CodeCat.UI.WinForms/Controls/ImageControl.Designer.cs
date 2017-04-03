@@ -35,6 +35,7 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.btnImport = new System.Windows.Forms.ToolStripButton();
+            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.lblZoomLevel = new System.Windows.Forms.ToolStripLabel();
@@ -43,9 +44,12 @@
             this.imageContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctxFileImportMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxClipboardImportMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageBox = new Cyotek.Windows.Forms.ImageBox();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.ctxClipboardSaveAsMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxClipboardCopyMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctxEditMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageBox = new Cyotek.Windows.Forms.ImageBox();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.imageContextMenu.SuspendLayout();
@@ -64,7 +68,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.txtTitle,
-            this.btnImport});
+            this.btnImport,
+            this.btnRefresh});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(626, 25);
@@ -82,7 +87,7 @@
             // txtTitle
             // 
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(495, 25);
+            this.txtTitle.Size = new System.Drawing.Size(472, 25);
             // 
             // btnImport
             // 
@@ -93,6 +98,16 @@
             this.btnImport.Size = new System.Drawing.Size(23, 22);
             this.btnImport.Text = "Import";
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
+            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(23, 22);
+            this.btnRefresh.Text = "Refresh Image";
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // toolStrip2
             // 
@@ -150,9 +165,12 @@
             this.ctxFileImportMenu,
             this.ctxClipboardImportMenu,
             this.toolStripMenuItem1,
-            this.ctxClipboardSaveAsMenu});
+            this.ctxClipboardSaveAsMenu,
+            this.ctxClipboardCopyMenu,
+            this.toolStripMenuItem2,
+            this.ctxEditMenu});
             this.imageContextMenu.Name = "imageContextMenu";
-            this.imageContextMenu.Size = new System.Drawing.Size(195, 98);
+            this.imageContextMenu.Size = new System.Drawing.Size(195, 126);
             // 
             // ctxFileImportMenu
             // 
@@ -168,18 +186,6 @@
             this.ctxClipboardImportMenu.Text = "Import from Clipboard";
             this.ctxClipboardImportMenu.Click += new System.EventHandler(this.ctxClipboardImportMenu_Click);
             // 
-            // imageBox
-            // 
-            this.imageBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imageBox.Location = new System.Drawing.Point(0, 25);
-            this.imageBox.Name = "imageBox";
-            this.imageBox.Size = new System.Drawing.Size(626, 479);
-            this.imageBox.TabIndex = 12;
-            this.imageBox.ZoomChanged += new System.EventHandler(this.imageBox_ZoomChanged);
-            this.imageBox.Scroll += new System.Windows.Forms.ScrollEventHandler(this.imageBox_Scroll);
-            this.imageBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imageBox_MouseUp);
-            this.imageBox.Resize += new System.EventHandler(this.imageBox_Resize);
-            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -191,6 +197,37 @@
             this.ctxClipboardSaveAsMenu.Size = new System.Drawing.Size(194, 22);
             this.ctxClipboardSaveAsMenu.Text = "Save As...";
             this.ctxClipboardSaveAsMenu.Click += new System.EventHandler(this.ctxClipboardSaveAsMenu_Click);
+            // 
+            // ctxClipboardCopyMenu
+            // 
+            this.ctxClipboardCopyMenu.Name = "ctxClipboardCopyMenu";
+            this.ctxClipboardCopyMenu.Size = new System.Drawing.Size(194, 22);
+            this.ctxClipboardCopyMenu.Text = "Copy";
+            this.ctxClipboardCopyMenu.Click += new System.EventHandler(this.ctxClipboardCopyMenu_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(191, 6);
+            // 
+            // ctxEditMenu
+            // 
+            this.ctxEditMenu.Name = "ctxEditMenu";
+            this.ctxEditMenu.Size = new System.Drawing.Size(194, 22);
+            this.ctxEditMenu.Text = "Edit...";
+            this.ctxEditMenu.Click += new System.EventHandler(this.ctxEditMenu_Click);
+            // 
+            // imageBox
+            // 
+            this.imageBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageBox.Location = new System.Drawing.Point(0, 25);
+            this.imageBox.Name = "imageBox";
+            this.imageBox.Size = new System.Drawing.Size(626, 479);
+            this.imageBox.TabIndex = 12;
+            this.imageBox.ZoomChanged += new System.EventHandler(this.imageBox_ZoomChanged);
+            this.imageBox.Scroll += new System.Windows.Forms.ScrollEventHandler(this.imageBox_Scroll);
+            this.imageBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imageBox_MouseUp);
+            this.imageBox.Resize += new System.EventHandler(this.imageBox_Resize);
             // 
             // ImageControl
             // 
@@ -229,5 +266,9 @@
         private System.Windows.Forms.ToolStripLabel lblScrollPosition;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ctxClipboardSaveAsMenu;
+        private System.Windows.Forms.ToolStripMenuItem ctxClipboardCopyMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem ctxEditMenu;
+        private System.Windows.Forms.ToolStripButton btnRefresh;
     }
 }

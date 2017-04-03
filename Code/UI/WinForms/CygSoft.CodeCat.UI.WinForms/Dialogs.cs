@@ -39,6 +39,12 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        public static DialogResult CannotLoadImageEditor(IWin32Window owner)
+        {
+            return MessageBox.Show(owner, "The image editor cannot be loaded. Either the editor executeable doesn't exist or the file does not exist.",
+                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         public static DialogResult MustSaveGroupBeforeAction(IWin32Window owner)
         {
             return MessageBox.Show(owner, "The group must be saved before you can request this action.",

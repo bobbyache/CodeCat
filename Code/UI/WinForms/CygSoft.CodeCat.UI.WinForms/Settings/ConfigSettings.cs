@@ -103,6 +103,22 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        private static string msPaintEditorPath;
+        public static string MsPaintEditorPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(msPaintEditorPath))
+                    msPaintEditorPath = ConfigurationManager.AppSettings["MsPaintEditorPath"];
+
+                return msPaintEditorPath;
+            }
+            set
+            {
+                ConfigurationManager.AppSettings["RegistryPath"] = value;
+            }
+        }
+
         private static string applicationTitle;
         public static string ApplicationTitle
         {
@@ -259,6 +275,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             qikTemplateSyntaxFile = ConfigurationManager.AppSettings["QikTemplateSyntaxFile"];
             helpPageUrl = ConfigurationManager.AppSettings["HelpPageUrl"];
             defaultFontSize = Int32.Parse(ConfigurationManager.AppSettings["DefaultFontSize"]);
+            msPaintEditorPath = ConfigurationManager.AppSettings["MsPaintEditorPath"];
         }
 
     }

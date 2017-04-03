@@ -5,6 +5,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using System.IO;
+using System.Diagnostics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -86,6 +87,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             lblZoomLevel.Image = Resources.GetImage(Constants.ImageKeys.ObjectZoom);
             btnDisplayText.Image = Resources.GetImage(Constants.ImageKeys.ShowText);
             btnEditImageText.Image = Resources.GetImage(Constants.ImageKeys.EditText);
+            btnRefresh.Image = Resources.GetImage(Constants.ImageKeys.Refresh);
         }
 
         private void LoadInitialImage()
@@ -421,6 +423,29 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ctxClipboardSaveAsMenu_Click(object sender, EventArgs e)
         {
             SaveAs();
+        }
+
+        private void ctxCopyMenu_Click(object sender, EventArgs e)
+        {
+            if (imageBox.Image != null)
+                Clipboard.SetImage(imageBox.Image);
+        }
+
+        private void ctxEditMenu_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(ConfigSettings.MsPaintEditorPath) && File.Exists(pageImage.FilePath))
+            {
+                Process.Start(ConfigSettings.MsPaintEditorPath, pageImage.FilePath);
+            }
+            else
+            {
+                Dialogs.CannotLoadImageEditor(this);
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadImage(pageImage);
         }
 
         #endregion Private Events

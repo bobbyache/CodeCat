@@ -49,6 +49,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDeleteImage = new System.Windows.Forms.ToolStripButton();
             this.btnAddImage = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnForward = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.imageBox = new Cyotek.Windows.Forms.ImageBox();
@@ -57,6 +59,9 @@
             this.ctxClipboardImportMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.ctxClipboardSaveAsMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxCopyMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctxEditMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.imageContextMenu.SuspendLayout();
@@ -134,7 +139,9 @@
             this.btnEditImageText,
             this.toolStripSeparator2,
             this.btnDeleteImage,
-            this.btnAddImage});
+            this.btnAddImage,
+            this.toolStripSeparator4,
+            this.btnRefresh});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(766, 25);
@@ -152,7 +159,7 @@
             // txtTitle
             // 
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(479, 25);
+            this.txtTitle.Size = new System.Drawing.Size(450, 25);
             // 
             // btnImport
             // 
@@ -242,6 +249,21 @@
             this.btnAddImage.Text = "Add Image";
             this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
+            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(23, 22);
+            this.btnRefresh.Text = "Refresh Image";
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // btnForward
             // 
             this.btnForward.Dock = System.Windows.Forms.DockStyle.Right;
@@ -286,9 +308,12 @@
             this.ctxFileImportMenu,
             this.ctxClipboardImportMenu,
             this.toolStripMenuItem1,
-            this.ctxClipboardSaveAsMenu});
+            this.ctxClipboardSaveAsMenu,
+            this.ctxCopyMenu,
+            this.toolStripMenuItem2,
+            this.ctxEditMenu});
             this.imageContextMenu.Name = "imageContextMenu";
-            this.imageContextMenu.Size = new System.Drawing.Size(195, 98);
+            this.imageContextMenu.Size = new System.Drawing.Size(195, 126);
             // 
             // ctxFileImportMenu
             // 
@@ -315,6 +340,25 @@
             this.ctxClipboardSaveAsMenu.Size = new System.Drawing.Size(194, 22);
             this.ctxClipboardSaveAsMenu.Text = "Save As...";
             this.ctxClipboardSaveAsMenu.Click += new System.EventHandler(this.ctxClipboardSaveAsMenu_Click);
+            // 
+            // ctxCopyMenu
+            // 
+            this.ctxCopyMenu.Name = "ctxCopyMenu";
+            this.ctxCopyMenu.Size = new System.Drawing.Size(194, 22);
+            this.ctxCopyMenu.Text = "Copy";
+            this.ctxCopyMenu.Click += new System.EventHandler(this.ctxCopyMenu_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(191, 6);
+            // 
+            // ctxEditMenu
+            // 
+            this.ctxEditMenu.Name = "ctxEditMenu";
+            this.ctxEditMenu.Size = new System.Drawing.Size(194, 22);
+            this.ctxEditMenu.Text = "Edit...";
+            this.ctxEditMenu.Click += new System.EventHandler(this.ctxEditMenu_Click);
             // 
             // ImageSetControl
             // 
@@ -366,5 +410,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ctxClipboardSaveAsMenu;
+        private System.Windows.Forms.ToolStripMenuItem ctxCopyMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem ctxEditMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton btnRefresh;
     }
 }
