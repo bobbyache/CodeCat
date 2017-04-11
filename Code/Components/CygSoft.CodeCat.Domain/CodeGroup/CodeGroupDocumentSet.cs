@@ -30,7 +30,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         private IKeywordIndexItem indexItem;
         private CodeGroupIndex documentIndex = null;
 
-        public CodeGroupDocumentSet(CodeGroupKeywordIndexItem indexItem, string folderPath)
+        public CodeGroupDocumentSet(ICodeGroupKeywordIndexItem indexItem, string folderPath)
         {
             this.indexItem = indexItem;
 
@@ -141,7 +141,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             this.documentIndex.Revert();
         }
 
-        public void Open()
+        public virtual void Open()
         {
             this.documentIndex.Open();
         }

@@ -53,6 +53,7 @@
     <Compile Include="AppFacade.cs" />
     <Compile Include="Base\BaseLibrary.cs" />
     <Compile Include="Base\IPersistableTarget.cs" />
+    <Compile Include="Base\PersistableTargetFactory.cs" />
     <Compile Include="CodeGroup\CodeGroupDocumentSet.cs" />
     <Compile Include="CodeGroup\CodeGroupIndex.cs" />
     <Compile Include="CodeGroup\CodeGroupIndexXmlRepository.cs" />

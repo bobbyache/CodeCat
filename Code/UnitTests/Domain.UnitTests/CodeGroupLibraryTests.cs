@@ -28,22 +28,38 @@ namespace Domain.UnitTests
             Assert.That(persistableTarget, Is.Not.Null);
         }
 
-        //[Test]
-        //public void CodeGroupLibrary_OpenTarget_ReturnsExistingTarget()
-        //{
-        //    Mock<IKeywordSearchIndexRepository> stubSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
-        //    IKeywordSearchIndex keywordSearchIndex = new KeywordSearchIndex(@"C:\parent_folder\_code.xml", new Version("4.0.1"));
-        //    stubSearchIndexRepository
-        //        .Setup(stub => stub.OpenIndex(It.IsAny<string>(), It.IsAny<Version>()))
-        //        .Returns(keywordSearchIndex);
-        //    CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary(stubSearchIndexRepository.Object, "TestFolder");
-        //    CodeGroupKeywordIndexItem keywordIndexItem = new CodeGroupKeywordIndexItem("Code Group Index Item", "C#", "testing,tested,test");
+        [Test]
+        public void CodeGroupLibrary_OpenTarget_ReturnsExistingTarget()
+        {
+            /*
+             * Note this test is really just a test to get the structures into a testable state. You might wish to
+             * test the total "openFiles" property which is currently not exposed on the BaseLibrary but you think
+             * that you should expose some of the properties in order to test some of the state of the class!
+             */
 
-        //    codeGroupLibrary.Open(@"C:\parent_folder", new Version("4.0.1"));
-        //    IPersistableTarget persistableTarget = codeGroupLibrary.OpenTarget(keywordIndexItem);
+            // Arrange
+            Mock<IKeywordSearchIndexRepository> stubSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
+            IKeywordSearchIndex keywordSearchIndex = new KeywordSearchIndex(@"C:\parent_folder\_code.xml", new Version("4.0.1"));
+            stubSearchIndexRepository
+                .Setup(stub => stub.OpenIndex(It.IsAny<string>(), It.IsAny<Version>()))
+                .Returns(keywordSearchIndex);
+            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary(stubSearchIndexRepository.Object, "TestFolder");
+            CodeGroupKeywordIndexItem keywordIndexItem = new CodeGroupKeywordIndexItem("Code Group Index Item", "C#", "testing,tested,test");
+            
+            Mock<ICodeGroupDocumentSet> stubCodeGroupDocumentSet = new Mock<ICodeGroupDocumentSet>();
+            stubCodeGroupDocumentSet.Setup(stub => stub.Open());
+            stubCodeGroupDocumentSet.Setup(stub => stub.Id).Returns("4ecac722-8ec5-441c-8e3e-00b192b30453"); // You can fake a readonly property
 
-        //    Assert.That(persistableTarget, Is.Not.Null);
-        //}
+            PersistableTargetFactory.SetIndexItem(stubCodeGroupDocumentSet.Object);
+
+            codeGroupLibrary.Open(@"C:\parent_folder", new Version("4.0.1"));
+
+            // Act
+            IPersistableTarget persistableTarget = codeGroupLibrary.OpenTarget(keywordIndexItem);
+
+            // Assert
+            Assert.That(persistableTarget, Is.Not.Null);
+        }
 
         [Test]
         public void CodeGroupLibrary_WhenInitialized_IsNotLoaded()
@@ -54,6 +70,17 @@ namespace Domain.UnitTests
 
             // Assert
             Assert.That(codeGroupLibrary.Loaded, Is.False);
+        }
+
+        private Mock<IKeywordSearchIndexRepository> GetStubKeywordSearchIndexRepository()
+        {
+            Mock<IKeywordSearchIndexRepository> stubSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
+            IKeywordSearchIndex keywordSearchIndex = new KeywordSearchIndex(@"C:\parent_folder\_code.xml", new Version("4.0.1"));
+            stubSearchIndexRepository
+                .Setup(stub => stub.OpenIndex(It.IsAny<string>(), It.IsAny<Version>()))
+                .Returns(keywordSearchIndex);
+
+            return stubSearchIndexRepository;
         }
 
         [Test]
@@ -156,24 +183,5 @@ namespace Domain.UnitTests
             mockSearchIndexRepository.Verify(mock => mock.SaveIndexAs(It.IsAny<IKeywordSearchIndex>(), It.IsAny<string>()), Times.Once,
                 "IKeywordSearchIndexRepository.SaveIndexAs should have been called once while executing this method.");
         }
-
-        //public class TestKeywordIndexItem : KeywordIndexItem
-        //{
-        //    public TestKeywordIndexItem() : base()
-        //    {
-        //    }
-
-        //    public TestKeywordIndexItem(string title, string commaDelimitedKeywords) :
-        //        base(title, commaDelimitedKeywords)
-        //    {
-
-        //    }
-
-        //    public TestKeywordIndexItem(string id, string title, DateTime dateCreated, DateTime dateModified, string commaDelimitedKeywords) :
-        //        base(id, title, dateCreated, dateModified, commaDelimitedKeywords)
-        //    {
-
-        //    }
-        //}
     }
 }

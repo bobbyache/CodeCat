@@ -58,11 +58,10 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             {
                 persistableFile = this.openFiles[codeGroupIndexItem.Id];
             }
-
             else
             {
                 // retrieve the file and add it to the opened code files.
-                persistableFile = new CodeGroupDocumentSet(codeGroupIndexItem, this.FolderPath);
+                persistableFile = PersistableTargetFactory.Create(codeGroupIndexItem, this.FolderPath);
 
                 if (this.openFiles == null)
                     this.openFiles = new Dictionary<string, IPersistableTarget>();
