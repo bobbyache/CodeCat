@@ -14,6 +14,11 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             base.FileExtension = "*.xml";
         }
 
+        internal CodeGroupLibrary(IKeywordSearchIndexRepository keywordSearchIndexRepository, string subFolder) : base(keywordSearchIndexRepository, subFolder)
+        {
+            base.FileExtension = "*.xml";
+        }
+
         public override IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems)
         {
             List<IndexExportImportData> exportList = new List<IndexExportImportData>();
