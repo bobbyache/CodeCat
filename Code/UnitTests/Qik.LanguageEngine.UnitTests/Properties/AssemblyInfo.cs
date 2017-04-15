@@ -2,16 +2,14 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: InternalsVisibleTo("Qik.LanguageEngine.UnitTests")]
-
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CygSoft.CodeCat.Qik.LanguageEngine")]
+[assembly: AssemblyTitle("LanguageEngine.Tests.UnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CygSoft.CodeCat.Qik.LanguageEngine")]
+[assembly: AssemblyProduct("LanguageEngine.Tests.UnitTests")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -22,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("fade2bf1-6916-457c-9b0c-442227c59e62")]
+[assembly: Guid("55960733-f2bb-4e2b-a97b-92e4dd529be1")]
 
 // Version information for an assembly consists of the following four values:
 //
