@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Qik.Languag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure", "Components\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure.csproj", "{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{7668CAC5-9C55-4AD7-B9B7-13959A294089}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qik.LanguageEngine.IntegrationTests", "IntegrationTests\Qik.LanguageEngine.IntegrationTests\Qik.LanguageEngine.IntegrationTests.csproj", "{9FFC7814-DCEF-4723-9E4B-6B1154488E1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +107,10 @@ Global
 		{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FFC7814-DCEF-4723-9E4B-6B1154488E1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FFC7814-DCEF-4723-9E4B-6B1154488E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FFC7814-DCEF-4723-9E4B-6B1154488E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FFC7814-DCEF-4723-9E4B-6B1154488E1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,5 +119,6 @@ Global
 		{1A197477-07A4-4D30-9954-6EBEBD74B80A} = {A78E1C5A-3EC8-40B0-9CAA-ADFE337FF541}
 		{A6FDE996-91F8-4B8A-8285-E936CEB514A8} = {A78E1C5A-3EC8-40B0-9CAA-ADFE337FF541}
 		{85779F58-8D0F-4513-964B-33FA767D26E9} = {A78E1C5A-3EC8-40B0-9CAA-ADFE337FF541}
+		{9FFC7814-DCEF-4723-9E4B-6B1154488E1B} = {7668CAC5-9C55-4AD7-B9B7-13959A294089}
 	EndGlobalSection
 EndGlobal
