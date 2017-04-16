@@ -40,9 +40,6 @@
       <HintPath>..\..\..\packages\Alsing.SyntaxBox.1.4.10.1\lib\net45\Alsing.SyntaxBox.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CygSoft.Qik.LanguageEngine.Infrastructure">
-      <HintPath>..\..\..\External\CygSoft.Qik.LanguageEngine.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="CygX1.UI.WinForms.RecentFileMenu">
       <HintPath>..\..\..\External\CygX1.UI.WinForms.RecentFileMenu.dll</HintPath>
     </Reference>
@@ -406,6 +403,10 @@
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure.csproj">
+      <Project>{e73234b4-5bfa-40ad-b1fd-a35226ca0bb4}</Project>
+      <Name>CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Components\Etier.IconHelper\Etier.IconHelper.csproj">
       <Project>{44368acc-95e7-4be0-ade4-abb8aae9b9d0}</Project>

@@ -5,8 +5,8 @@ using System.Windows.Forms;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain;
 using Alsing.SourceCode;
-using CygSoft.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

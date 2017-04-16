@@ -1,6 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.Base;
-using CygSoft.Qik.LanguageEngine.Infrastructure;
+using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 using System;
 
 namespace CygSoft.CodeCat.Domain.Qik

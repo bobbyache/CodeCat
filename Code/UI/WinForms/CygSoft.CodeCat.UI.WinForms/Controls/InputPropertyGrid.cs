@@ -3,10 +3,10 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using DynamicTypeDescriptor;
 using System.Drawing.Design;
-using CygSoft.Qik.LanguageEngine.Infrastructure;
 
 using Dyn = DynamicTypeDescriptor;
 using Scm = System.ComponentModel;
+using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

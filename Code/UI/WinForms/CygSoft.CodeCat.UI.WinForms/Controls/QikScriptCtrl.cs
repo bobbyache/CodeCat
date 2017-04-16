@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Qik;
-using CygSoft.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using Alsing.SourceCode;
+using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

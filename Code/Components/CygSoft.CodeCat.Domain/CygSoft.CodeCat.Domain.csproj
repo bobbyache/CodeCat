@@ -35,12 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\External\Antlr4.Runtime.net45.dll</HintPath>
     </Reference>
-    <Reference Include="CygSoft.Qik.LanguageEngine">
-      <HintPath>..\..\External\CygSoft.Qik.LanguageEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="CygSoft.Qik.LanguageEngine.Infrastructure">
-      <HintPath>..\..\External\CygSoft.Qik.LanguageEngine.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -101,6 +95,14 @@
     <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure.csproj">
+      <Project>{e73234b4-5bfa-40ad-b1fd-a35226ca0bb4}</Project>
+      <Name>CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Qik.LanguageEngine\CygSoft.CodeCat.Qik.LanguageEngine.csproj">
+      <Project>{fade2bf1-6916-457c-9b0c-442227c59e62}</Project>
+      <Name>CygSoft.CodeCat.Qik.LanguageEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.SearchIndex\CygSoft.CodeCat.Search.KeywordIndex.csproj">
       <Project>{a75e419a-7df9-466e-8f5a-351310672ce6}</Project>
