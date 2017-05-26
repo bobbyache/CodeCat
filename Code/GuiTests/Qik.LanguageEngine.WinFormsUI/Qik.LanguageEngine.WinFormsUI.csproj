@@ -33,12 +33,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Alsing.SyntaxBox, Version=1.4.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Alsing.SyntaxBox.1.4.10.1\lib\net45\Alsing.SyntaxBox.dll</HintPath>
+      <HintPath>..\..\packages\Alsing.SyntaxBox.1.4.10.1\lib\net45\Alsing.SyntaxBox.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DynamicTypeDescriptor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\External\DynamicTypeDescriptor.dll</HintPath>
+    <Reference Include="DynamicTypeDescriptor">
+      <HintPath>..\..\External\DynamicTypeDescriptor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -93,10 +92,10 @@
     <EmbeddedResource Include="TemplateControl.resx">
       <DependentUpon>TemplateControl.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="qikblueprint.syn">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
