@@ -24,5 +24,17 @@ namespace AvalonDockExamples
         {
             InitializeComponent();
         }
+
+        private void OnCreateNewDocument(object sender, RoutedEventArgs e)
+        {
+
+            //Xceed.Wpf.AvalonDock.Controls.LayoutDocumentItem document = new Xceed.Wpf.AvalonDock.Controls.LayoutDocumentItem();
+            //Xceed.Wpf.AvalonDock.Controls.LayoutDocumentItem
+            EventDocument eventDocument = new EventDocument();
+                
+            //eventDocument.Sh
+
+            MessageBox.Show("hello world");
+        }
     }
 }

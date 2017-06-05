@@ -7,30 +7,58 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-
-        <avalonDock:DockingManager x:Name="dockingManager">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32" />
+            <RowDefinition />
+            <RowDefinition Height="32" />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="Window">
+                <MenuItem Header="Create New" Click="OnCreateNewDocument" />
+            </MenuItem>
+        </Menu>
+        <avalonDock:DockingManager Grid.Row="1" x:Name="dockingManager">
             <avalonDock:LayoutRoot>
                 <avalonDock:LayoutPanel Orientation="Horizontal">
-                    <!--<avalonDock:LayoutDocumentPane/>-->
-                    <avalonDock:LayoutDocumentPane>
-                        <avalonDock:LayoutDocument Title="Document...">
-
-                        </avalonDock:LayoutDocument>
-                        <avalonDock:LayoutDocument Title="Document and then...">
-
-                        </avalonDock:LayoutDocument>
-                    </avalonDock:LayoutDocumentPane>
-                    <avalonDock:LayoutAnchorablePane DockWidth="150">
-                        <avalonDock:LayoutAnchorable Title="Sample Tool Pane">
-                            <TextBox/>
-                        </avalonDock:LayoutAnchorable>
-                    </avalonDock:LayoutAnchorablePane>
+                    <avalonDock:LayoutDocumentPaneGroup>
+                        <avalonDock:LayoutDocumentPane>
+                            <avalonDock:LayoutDocument Title="Doc1">
+                                <TextBox/>
+                            </avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument Title="Doc2">
+                                <TextBox/>
+                            </avalonDock:LayoutDocument>
+                        </avalonDock:LayoutDocumentPane>
+                        <avalonDock:LayoutDocumentPane>
+                            <avalonDock:LayoutDocument Title="Doc3">
+                                <TextBox/>
+                            </avalonDock:LayoutDocument>
+                        </avalonDock:LayoutDocumentPane>
+                    </avalonDock:LayoutDocumentPaneGroup>
+                    <avalonDock:LayoutAnchorablePaneGroup DockWidth="150" Orientation="Vertical">
+                        <avalonDock:LayoutAnchorablePane>
+                            <avalonDock:LayoutAnchorable Title="Tool 1">
+                                <TextBox/>
+                            </avalonDock:LayoutAnchorable>
+                            <avalonDock:LayoutAnchorable Title="Tool 2">
+                                <TextBox/>
+                            </avalonDock:LayoutAnchorable>
+                        </avalonDock:LayoutAnchorablePane>
+                        <avalonDock:LayoutAnchorablePane>
+                            <avalonDock:LayoutAnchorable Title="Tool 3">
+                                <TextBox/>
+                            </avalonDock:LayoutAnchorable>
+                            <avalonDock:LayoutAnchorable Title="Tool 4">
+                                <TextBox/>
+                            </avalonDock:LayoutAnchorable>
+                        </avalonDock:LayoutAnchorablePane>
+                    </avalonDock:LayoutAnchorablePaneGroup>
                 </avalonDock:LayoutPanel>
                 <avalonDock:LayoutRoot.LeftSide>
                     <avalonDock:LayoutAnchorSide>
                         <avalonDock:LayoutAnchorGroup>
                             <avalonDock:LayoutAnchorable Title="Autohidden Content">
-                                <TextBox>This is a basic whatever...</TextBox>
+                                <TextBox/>
                             </avalonDock:LayoutAnchorable>
                         </avalonDock:LayoutAnchorGroup>
                     </avalonDock:LayoutAnchorSide>
