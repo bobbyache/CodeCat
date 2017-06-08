@@ -84,6 +84,17 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
             return webReference;
         }
 
+        public IWebReference CreateWebReference(string url, string title, string description, string category = "Unknown")
+        {
+            return new WebReference()
+            {
+                Title = title,
+                Url = url,
+                Description = description,
+                Category = category
+            };
+        }
+
         protected override void OnOpen()
         {
             XDocument xDocument = XDocument.Load(this.FilePath);
@@ -178,6 +189,28 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
             AppendToContainerElement(element, webReferences);
 
             return indexDocument.ToString();
+        }
+
+        public bool IsFullUrl(string url)
+        {
+            return Uri.IsWellFormedUriString(url, UriKind.Absolute);
+        }
+
+        public bool IsValidWebReferenceXml(string xml)
+        {
+            bool isValid = true;
+
+            try
+            {
+                XElement parentElement = XElement.Parse(xml);
+                List<IWebReference> webReferences = ExtractFromXml(parentElement.Elements());
+                isValid = webReferences.Count > 0;
+            }
+            catch (Exception)
+            {
+                isValid = false;
+            }
+            return isValid;
         }
 
         public void AddXml(string xml)

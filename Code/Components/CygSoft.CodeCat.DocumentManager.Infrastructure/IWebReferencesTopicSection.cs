@@ -26,5 +26,9 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string GetXml(string[] ids);
         void AddXml(string xml);
         IWebReference CreateWebReference();
+        IWebReference CreateWebReference(string url, string title, string description, string category = "Unknown");
+
+        bool IsFullUrl(string url);
+        bool IsValidWebReferenceXml(string xml);
     }
 }
