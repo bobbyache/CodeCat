@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
         private ISyntaxValidator syntaxValidator = null;
         private ICompileEngine compileEngine = null;
 
-        public bool HasErrors { get { return syntaxValidator.HasErrors; } }
+        public bool HasErrors { get { return syntaxValidator.HasErrors || compileEngine.HasErrors; } }
 
         public string[] Symbols { get { return compileEngine.Symbols; } }
         public string[] Placeholders { get { return compileEngine.Placeholders; } }
@@ -36,16 +36,10 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
         public void Compile(string scriptText)
         {
             CheckSyntax(scriptText);
+
             if (!syntaxValidator.HasErrors)
-            {
-                compileEngine.BeforeCompile += Compiler_BeforeCompile;
-                compileEngine.AfterCompile += Compiler_AfterCompile;
-
-                compileEngine.Compile(scriptText);
-
-                compileEngine.BeforeCompile -= Compiler_BeforeCompile;
-                compileEngine.AfterCompile -= Compiler_AfterCompile;
-            }
+                CheckCompilation(scriptText);
+            
         }
 
         public void Input(string symbol, string value)
@@ -99,17 +93,29 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
             return "@{" + text + "}";
         }
 
+        private void CheckCompilation(string scriptText)
+        {
+            compileEngine.BeforeCompile += Compiler_BeforeCompile;
+            compileEngine.AfterCompile += Compiler_AfterCompile;
+            compileEngine.CompileError += Compiler_CompileError;
+
+            compileEngine.Compile(scriptText);
+
+            compileEngine.CompileError -= Compiler_CompileError;
+            compileEngine.BeforeCompile -= Compiler_BeforeCompile;
+            compileEngine.AfterCompile -= Compiler_AfterCompile;
+        }
+
         private void CheckSyntax(string scriptText)
         {
-            syntaxValidator.CompileError += errorListener_SyntaxErrorDetected;
+            syntaxValidator.CompileError += Compiler_CompileError;
             syntaxValidator.Validate(scriptText);
-            syntaxValidator.CompileError -= errorListener_SyntaxErrorDetected;
+            syntaxValidator.CompileError -= Compiler_CompileError;
         }
 
         private void Compiler_AfterCompile(object sender, EventArgs e)
         {
-            if (AfterCompile != null)
-                AfterCompile(this, e);
+            AfterCompile?.Invoke(this, e);
         }
 
         private void Compiler_BeforeCompile(object sender, EventArgs e)
@@ -127,12 +133,7 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
             BeforeInput?.Invoke(this, e);
         }
 
-        private void errorReport_ExecutionErrorDetected(object sender, CompileErrorEventArgs e)
-        {
-            CompileError?.Invoke(this, e);
-        }
-
-        private void errorListener_SyntaxErrorDetected(object sender, CompileErrorEventArgs e)
+        private void Compiler_CompileError(object sender, CompileErrorEventArgs e)
         {
             CompileError?.Invoke(this, e);
         }

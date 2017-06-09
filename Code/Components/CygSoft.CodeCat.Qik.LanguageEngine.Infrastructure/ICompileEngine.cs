@@ -8,11 +8,14 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure
         event EventHandler AfterInput;
         event EventHandler BeforeCompile;
         event EventHandler AfterCompile;
+        event EventHandler<CompileErrorEventArgs> CompileError;
 
         string[] Placeholders { get; }
         string[] Symbols { get; }
         IInputField[] InputFields { get; }
         IExpression[] Expressions { get; }
+
+        bool HasErrors { get; }
 
         void CreateFieldInput(string symbol, string fieldName, string description);
 

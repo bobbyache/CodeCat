@@ -46,14 +46,21 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
             CheckSyntax(scriptText);
             if (!syntaxValidator.HasErrors)
             {
-                BeforeCompile += Compiler_BeforeCompile;
-                AfterCompile += Compiler_AfterCompile;
-
-                compileEngine.Compile(scriptText);
-
-                BeforeCompile -= Compiler_BeforeCompile;
-                AfterCompile -= Compiler_AfterCompile;
+                CheckCompilation(scriptText);
             }
+        }
+
+        private void CheckCompilation(string scriptText)
+        {
+            compileEngine.BeforeCompile += Compiler_BeforeCompile;
+            compileEngine.AfterCompile += Compiler_AfterCompile;
+            compileEngine.CompileError += Compiler_CompileError;
+
+            compileEngine.Compile(scriptText);
+
+            compileEngine.CompileError -= Compiler_CompileError;
+            compileEngine.BeforeCompile -= Compiler_BeforeCompile;
+            compileEngine.AfterCompile -= Compiler_AfterCompile;
         }
 
         public void Input(string symbol, string fieldValue)
@@ -93,9 +100,9 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
 
         private void CheckSyntax(string scriptText)
         {
-            syntaxValidator.CompileError += errorListener_SyntaxErrorDetected;
+            syntaxValidator.CompileError += Compiler_CompileError;
             syntaxValidator.Validate(scriptText);
-            syntaxValidator.CompileError -= errorListener_SyntaxErrorDetected;
+            syntaxValidator.CompileError -= Compiler_CompileError;
         }
 
         private void Compiler_AfterCompile(object sender, EventArgs e)
@@ -118,12 +125,7 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
             BeforeInput?.Invoke(this, e);
         }
 
-        private void errorReport_ExecutionErrorDetected(object sender, CompileErrorEventArgs e)
-        {
-            CompileError?.Invoke(this, e);
-        }
-
-        private void errorListener_SyntaxErrorDetected(object sender, CompileErrorEventArgs e)
+        private void Compiler_CompileError(object sender, CompileErrorEventArgs e)
         {
             CompileError?.Invoke(this, e);
         }
