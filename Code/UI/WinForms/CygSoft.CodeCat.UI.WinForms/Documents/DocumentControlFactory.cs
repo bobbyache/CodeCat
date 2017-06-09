@@ -18,12 +18,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                     return NewQikScriptControl(topicSection, groupOwner, application, modifiedEventHandler);
                 else if (topicSection.FileExtension == "tpl")
                     return NewQikTemplateControl(topicSection, groupOwner, application, modifiedEventHandler);
+                else if (topicSection is IVersionedCodeTopicSection)
+                    return NewVersionedCodeControl(topicSection, groupOwner, application, modifiedEventHandler);
                 else
                     return NewCodeControl(topicSection, groupOwner, application, modifiedEventHandler);
             }
 
-            else if (topicSection is IVersionedCodeTopicSection)
-                return NewVersionedCodeControl(topicSection, groupOwner, application, modifiedEventHandler);
+
 
             else if (topicSection is IWebReferencesTopicSection)
                 return NewUrlGroupControl(topicSection, groupOwner, application, modifiedEventHandler);

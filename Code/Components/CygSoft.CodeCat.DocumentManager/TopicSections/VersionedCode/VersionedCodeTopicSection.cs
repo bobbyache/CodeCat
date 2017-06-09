@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.TopicSections.VersionedCode
 {
-    public class VersionedCodeTopicSection : TopicSection, IVersionedCodeTopicSection
+    public class VersionedCodeTopicSection : CodeTopicSection, IVersionedCodeTopicSection
     {
-        internal VersionedCodeTopicSection(string folder, string title)
-            : base(new DocumentPathGenerator(folder, "vercod"), title, null)
+        internal VersionedCodeTopicSection(string folder, string title, string extension, string syntax) : base(folder, title, extension, syntax)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.FileAttachments);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.VersionedCode);
         }
 
-        internal VersionedCodeTopicSection(string folder, string id, string title, int ordinal, string description)
-            : base(new DocumentPathGenerator(folder, "vercod", id), title, description, ordinal)
+        internal VersionedCodeTopicSection(string folder, string id, string title, string extension, int ordinal, string description, string syntax)
+            : base(folder, id, title, extension, ordinal, description, syntax)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.FileAttachments);
+            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.VersionedCode);
         }
+
     }
 }

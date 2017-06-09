@@ -140,9 +140,9 @@ namespace CygSoft.CodeCat.DocumentManager
         private static ITopicSection CreateVersionedCodeTopicSection(TopicSectionArgs topicSectionArgs)
         {
             if (topicSectionArgs.Id == null)
-                return new VersionedCodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title);
+                return new VersionedCodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Syntax);
             else
-                return new VersionedCodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Ordinal, topicSectionArgs.Description);
+                return new VersionedCodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description, topicSectionArgs.Syntax);
         }
 
         private static ITopicSection CreateFileAttachmentsTopicSection(TopicSectionArgs topicSectionArgs)

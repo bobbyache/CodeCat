@@ -302,7 +302,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddVersionedCode_Click(object sender, EventArgs e)
         {
-            IVersionedCodeTopicSection versionedCodeTopicSection = codeItemFile.AddTopicSection(TopicSectionType.VersionedCode) as IVersionedCodeTopicSection;
+            IVersionedCodeTopicSection versionedCodeTopicSection = codeItemFile.AddTopicSection(TopicSectionType.VersionedCode, ConfigSettings.DefaultSyntax, "txt") as IVersionedCodeTopicSection;
             this.isModified = true;
         }
 
