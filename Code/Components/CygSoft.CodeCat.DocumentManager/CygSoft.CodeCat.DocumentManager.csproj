@@ -65,6 +65,7 @@
     <Compile Include="TopicSections\RichTextEditorTopicSection.cs" />
     <Compile Include="TopicSections\SingleImageTopicSection.cs" />
     <Compile Include="TopicSections\TextTopicSection.cs" />
+    <Compile Include="TopicSections\VersionedCode\VersionedCodeTopicSection.cs" />
     <Compile Include="TopicSections\WebReferencesTopicSection.cs" />
   </ItemGroup>
   <ItemGroup>

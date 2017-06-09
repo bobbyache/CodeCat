@@ -149,6 +149,12 @@
     <Compile Include="Controls\CodeSearchResultsControl.Designer.cs">
       <DependentUpon>CodeSearchResultsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\VersionedCodeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\VersionedCodeControl.Designer.cs">
+      <DependentUpon>VersionedCodeControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\AboutBoxDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UrlGroupControl.resx">
       <DependentUpon>UrlGroupControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\VersionedCodeControl.resx">
+      <DependentUpon>VersionedCodeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AboutBoxDialog.resx">
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>

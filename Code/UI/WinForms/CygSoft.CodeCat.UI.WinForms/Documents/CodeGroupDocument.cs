@@ -300,6 +300,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsModified = true;
         }
 
+        private void btnAddVersionedCode_Click(object sender, EventArgs e)
+        {
+            IVersionedCodeTopicSection versionedCodeTopicSection = codeItemFile.AddTopicSection(TopicSectionType.VersionedCode) as IVersionedCodeTopicSection;
+            this.isModified = true;
+        }
+
         private void btnAddHyperlinks_Click(object sender, EventArgs e)
         {
             IWebReferencesTopicSection webReferencesTopicSection = codeItemFile.AddTopicSection(TopicSectionType.WebReferences) as IWebReferencesTopicSection;
@@ -411,5 +417,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
 
         #endregion
+
+
     }
 }

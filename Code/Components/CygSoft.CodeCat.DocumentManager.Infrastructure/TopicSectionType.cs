@@ -3,6 +3,7 @@
     public enum TopicSectionType
     {
         Code,
+        VersionedCode,
         WebReferences,
         PdfViewer,
         QikScript,

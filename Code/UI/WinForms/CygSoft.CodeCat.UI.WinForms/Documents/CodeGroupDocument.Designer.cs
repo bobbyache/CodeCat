@@ -48,6 +48,7 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAddItem = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnAddCode = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAddVersionedCode = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRichText = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnFileGroup = new System.Windows.Forms.ToolStripMenuItem();
@@ -201,7 +202,7 @@
             this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
             this.btnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(61, 22);
+            this.btnMenu.Size = new System.Drawing.Size(60, 22);
             this.btnMenu.Text = "Tabs";
             // 
             // toolStripSeparator6
@@ -213,6 +214,7 @@
             // 
             this.btnAddItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAddCode,
+            this.btnAddVersionedCode,
             this.btnRichText,
             this.toolStripMenuItem1,
             this.btnFileGroup,
@@ -230,59 +232,66 @@
             // btnAddCode
             // 
             this.btnAddCode.Name = "btnAddCode";
-            this.btnAddCode.Size = new System.Drawing.Size(216, 22);
+            this.btnAddCode.Size = new System.Drawing.Size(215, 22);
             this.btnAddCode.Text = "Single Code Snippet";
             this.btnAddCode.Click += new System.EventHandler(this.btnAddCode_Click);
+            // 
+            // btnAddVersionedCode
+            // 
+            this.btnAddVersionedCode.Name = "btnAddVersionedCode";
+            this.btnAddVersionedCode.Size = new System.Drawing.Size(215, 22);
+            this.btnAddVersionedCode.Text = "Versioned Code Snippet";
+            this.btnAddVersionedCode.Click += new System.EventHandler(this.btnAddVersionedCode_Click);
             // 
             // btnRichText
             // 
             this.btnRichText.Name = "btnRichText";
-            this.btnRichText.Size = new System.Drawing.Size(216, 22);
+            this.btnRichText.Size = new System.Drawing.Size(215, 22);
             this.btnRichText.Text = "Single Rich Text Document";
             this.btnRichText.Click += new System.EventHandler(this.btnRichText_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(212, 6);
             // 
             // btnFileGroup
             // 
             this.btnFileGroup.Name = "btnFileGroup";
-            this.btnFileGroup.Size = new System.Drawing.Size(216, 22);
+            this.btnFileGroup.Size = new System.Drawing.Size(215, 22);
             this.btnFileGroup.Text = "File Group";
             this.btnFileGroup.Click += new System.EventHandler(this.btnFileGroup_Click);
             // 
             // btnAddHyperlinks
             // 
             this.btnAddHyperlinks.Name = "btnAddHyperlinks";
-            this.btnAddHyperlinks.Size = new System.Drawing.Size(216, 22);
+            this.btnAddHyperlinks.Size = new System.Drawing.Size(215, 22);
             this.btnAddHyperlinks.Text = "Web References";
             this.btnAddHyperlinks.Click += new System.EventHandler(this.btnAddHyperlinks_Click);
             // 
             // btnAddPdfDocument
             // 
             this.btnAddPdfDocument.Name = "btnAddPdfDocument";
-            this.btnAddPdfDocument.Size = new System.Drawing.Size(216, 22);
+            this.btnAddPdfDocument.Size = new System.Drawing.Size(215, 22);
             this.btnAddPdfDocument.Text = "Single PDF Document";
             this.btnAddPdfDocument.Click += new System.EventHandler(this.btnAddPdfDocument_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(212, 6);
             // 
             // btnAddImage
             // 
             this.btnAddImage.Name = "btnAddImage";
-            this.btnAddImage.Size = new System.Drawing.Size(216, 22);
+            this.btnAddImage.Size = new System.Drawing.Size(215, 22);
             this.btnAddImage.Text = "Single Image View";
             this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
             // 
             // btnImageSet
             // 
             this.btnImageSet.Name = "btnImageSet";
-            this.btnImageSet.Size = new System.Drawing.Size(216, 22);
+            this.btnImageSet.Size = new System.Drawing.Size(215, 22);
             this.btnImageSet.Text = "Image Set View";
             this.btnImageSet.Click += new System.EventHandler(this.btnImageSet_Click);
             // 
@@ -325,7 +334,7 @@
             this.txtToolStripTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtToolStripTitle.Name = "txtToolStripTitle";
             this.txtToolStripTitle.ReadOnly = true;
-            this.txtToolStripTitle.Size = new System.Drawing.Size(100, 22);
+            this.txtToolStripTitle.Size = new System.Drawing.Size(353, 25);
             this.txtToolStripTitle.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tabControlFile
@@ -394,5 +403,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem btnFileGroup;
+        private System.Windows.Forms.ToolStripMenuItem btnAddVersionedCode;
     }
 }

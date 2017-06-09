@@ -2,12 +2,14 @@
 using CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments;
 using CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.DocumentManager.TopicSections.VersionedCode;
 
 namespace CygSoft.CodeCat.DocumentManager
 {
     public class TopicSectionFactory
     {
         private const string CODE_TOPIC_SECTION = "CODESNIPPET";
+        private const string VERSIONED_CODE_TOPIC_SECTION = "VERSIONEDCODE";
         private const string PDF_VIEWER_TOPIC_SECTION = "PDFDOCUMENT";
         private const string QIK_SCRIPT_TOPIC_SECTION = "QIKSCRIPT";
         private const string RTF_EDITOR_TOPIC_SECTION = "RICHTEXT";
@@ -35,6 +37,9 @@ namespace CygSoft.CodeCat.DocumentManager
 
             if (topicSectionArgs.DocumentType == CODE_TOPIC_SECTION)
                 return CreateCodeTopicSection(topicSectionArgs);
+
+            if (topicSectionArgs.DocumentType == VERSIONED_CODE_TOPIC_SECTION)
+                return CreateVersionedCodeTopicSection(topicSectionArgs);
 
             if (topicSectionArgs.DocumentType == WEB_REFERENCES_TOPIC_SECTION)
                 return CreateWebReferencesTopicSection(topicSectionArgs);
@@ -66,6 +71,9 @@ namespace CygSoft.CodeCat.DocumentManager
             {
                 case CODE_TOPIC_SECTION:
                     return TopicSectionType.Code;
+
+                case VERSIONED_CODE_TOPIC_SECTION:
+                    return TopicSectionType.VersionedCode;
 
                 case QIK_SCRIPT_TOPIC_SECTION:
                     return TopicSectionType.QikScript;
@@ -100,6 +108,9 @@ namespace CygSoft.CodeCat.DocumentManager
                 case TopicSectionType.Code:
                     return CODE_TOPIC_SECTION;
 
+                case TopicSectionType.VersionedCode:
+                    return VERSIONED_CODE_TOPIC_SECTION;
+
                 case TopicSectionType.QikScript:
                     return QIK_SCRIPT_TOPIC_SECTION;
 
@@ -124,6 +135,14 @@ namespace CygSoft.CodeCat.DocumentManager
                 default:
                     return CODE_TOPIC_SECTION;
             }
+        }
+
+        private static ITopicSection CreateVersionedCodeTopicSection(TopicSectionArgs topicSectionArgs)
+        {
+            if (topicSectionArgs.Id == null)
+                return new VersionedCodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title);
+            else
+                return new VersionedCodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Ordinal, topicSectionArgs.Description);
         }
 
         private static ITopicSection CreateFileAttachmentsTopicSection(TopicSectionArgs topicSectionArgs)
