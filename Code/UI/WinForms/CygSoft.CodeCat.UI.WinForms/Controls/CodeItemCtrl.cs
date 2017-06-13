@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.Topics;
@@ -15,7 +13,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             InitializeComponent();
 
             syntaxDocument.SyntaxFile = base.SyntaxFile;
-            
             syntaxBoxControl.Document.Text = CodeTopicSection().Text;
 
             syntaxBoxControl.TextChanged += (s, e) =>

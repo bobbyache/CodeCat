@@ -29,18 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.syntaxBoxControl = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.SuspendLayout();
-            // 
-            // lblEditStatus
-            // 
-            this.lblEditStatus.AutoSize = false;
-            this.lblEditStatus.Name = "lblEditStatus";
-            this.lblEditStatus.Size = new System.Drawing.Size(100, 22);
-            this.lblEditStatus.Text = "No Changes";
-            this.lblEditStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // syntaxBoxControl
             // 
@@ -94,7 +85,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ToolStripLabel lblEditStatus;
         private Alsing.Windows.Forms.SyntaxBoxControl syntaxBoxControl;
         private Alsing.SourceCode.SyntaxDocument syntaxDocument;
     }
