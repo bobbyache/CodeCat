@@ -136,6 +136,9 @@ namespace Qik.LanguageEngine.WinFormsUI
             Dyn.TypeDescriptor.IntallTypeDescriptor(properties);
             propertyGrid.SelectedObject = properties;
 
+            if (compiler.HasErrors)
+                return;
+
             foreach (IInputField field in compiler.InputFields)
             {
                 if (field is ITextField)

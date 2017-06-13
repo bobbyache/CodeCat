@@ -20,6 +20,7 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
         private GlobalTable scopeTable = new GlobalTable();
         private IErrorReport errorReport = new ErrorReport();
 
+        public bool HasErrors { get; private set; }
 
         public string[] Symbols { get { return scopeTable.Symbols; } }
 
@@ -30,11 +31,13 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
 
         public CompileEngine()
         {
-
+            HasErrors = false;
         }
 
         public void CreateFieldInput(string symbol, string fieldName, string description)
         {
+            HasErrors = false;
+
             AutoInputSymbol autoInputSymbol = new AutoInputSymbol(this.errorReport, symbol, fieldName, description);
             if (!scopeTable.Symbols.Contains(autoInputSymbol.Symbol))
                 scopeTable.AddSymbol(autoInputSymbol);
@@ -42,17 +45,18 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
 
         public void Input(string symbol, string value)
         {
-            if (BeforeInput != null)
-                BeforeInput(this, new EventArgs());
+            HasErrors = false;
+
+            BeforeInput?.Invoke(this, new EventArgs());
 
             scopeTable.Input(symbol, value);
 
-            if (AfterInput != null)
-                AfterInput(this, new EventArgs());
+            AfterInput?.Invoke(this, new EventArgs());
         }
 
         public void Compile(string scriptText)
         {
+            HasErrors = false;
             BeforeCompile?.Invoke(this, new EventArgs());
 
             try
@@ -75,6 +79,7 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
             }
             catch (Exception exception)
             {
+                HasErrors = true;
                 CompileError?.Invoke(this, new CompileErrorEventArgs(exception));
             }
             finally
@@ -122,8 +127,8 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine
 
         private void errorReport_ExecutionErrorDetected(object sender, CompileErrorEventArgs e)
         {
-            if (CompileError != null)
-                CompileError(this, e);
+            HasErrors = true;
+            CompileError?.Invoke(this, e);
         }
 
         public ISymbolInfo GetSymbolInfo(string symbol)

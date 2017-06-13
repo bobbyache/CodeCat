@@ -180,6 +180,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void btnAdd_Click(object sender, EventArgs e)
         {
             IWebReference webReference = webReferencesTopicSection.CreateWebReference();
+            CreateReference(webReference);
+        }
+
+        private void CreateReference(IWebReference webReference)
+        {
+            
             UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, webReferencesTopicSection.Categories);
             DialogResult result = dialog.ShowDialog(this);
 
@@ -320,8 +326,23 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             try
             {
-                string xml = Clipboard.GetText();
-                webReferencesTopicSection.AddXml(xml);
+                if (Clipboard.ContainsText())
+                {
+                    string text = Clipboard.GetText().Trim();
+                    if (webReferencesTopicSection.IsFullUrl(text))
+                    {
+                        IWebReference webReference = webReferencesTopicSection.CreateWebReference(text, "", "");
+                        CreateReference(webReference);
+                    }
+                    else if (webReferencesTopicSection.IsValidWebReferenceXml(text))
+                        webReferencesTopicSection.AddXml(text);
+                    else
+                    {
+                        string firstLine = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)[0];
+                        IWebReference webReference = webReferencesTopicSection.CreateWebReference("", firstLine, "");
+                        CreateReference(webReference);
+                    }
+                }
             }
             catch (Exception ex)
             {

@@ -100,7 +100,6 @@ namespace Qik.LanguageEngine.WinFormsUI
 
         private void ExecuteScript()
         {
-            
             compiler.Compile(syntaxBox.Document.Text);
         }
 

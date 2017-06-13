@@ -2,21 +2,16 @@
 using CygSoft.CodeCat.Qik.LanguageEngine.Funcs;
 using CygSoft.CodeCat.Qik.LanguageEngine.Scope;
 using CygSoft.CodeCat.Qik.LanguageEngine.Symbols;
+using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace LanguageEngine.Tests.UnitTests
 {
     [TestFixture]
     public class TestBench
     {
-        [Test]
-        public void Test_LanguageEngine_Tests_UnitTests()
-        {
-            Assert.IsTrue(true);
-        }
-
-
         [Test]
         public void BatchCompiler_Generates_AutoInput()
         {
@@ -86,5 +81,47 @@ namespace LanguageEngine.Tests.UnitTests
             Assert.AreEqual("John Doe", textOutput_B);
             Assert.AreEqual("JOHN DOE", exprOutput_B);
         }
+
+        //[Test]
+        //public void TextInputSymbol_Initialized_WithNullTitle_ThrowsError()
+        //{
+        //    ErrorReport errorReport = new ErrorReport();
+        //    TextInputSymbol textInputSymbol = new TextInputSymbol(errorReport, "@testSymbol", "test title", "test description", null, true);
+        //    Assert.IsTrue(errorReport.HasErrors);
+        //    Assert.AreEqual("Symbol must be set and be a valid symbol starting with @.", errorReport.Errors[0].Message);
+        //}
+        //// IMPORTANT, ENSURE THAT A CHECK IS DONE FOR SYMBOL AND TITLE IN THE ACTUAL ANTLER PARSE !!!
+
+
+        //[Test]
+        //public void TextInputSymbol_Initialized_WithNullTitle_ThrowsError()
+        //{
+        //    Assert.Throws<System.Exception>(() => TestHelpers.CreateTextInputSymbol_Author(title: null, description: "Description", defaultValue: "Rob Blake"));
+        //}
+
+        //[Test]
+        //public void TextInputSymbol_Initialized_WithEmptyTitle_ThrowsError()
+        //{
+        //    Assert.Throws<System.Exception>(() => TestHelpers.CreateTextInputSymbol_Author(title: "", description: "Description", defaultValue: "Rob Blake"));
+        //}
+
+        //[Test]
+        //public void TextInputSymbol_Initialized_WithNullSymbol_ThrowsError()
+        //{
+        //    Assert.Throws<System.Exception>(() => TestHelpers.CreateTextInputSymbol_Author(symbol: null));
+        //}
+
+        //[Test]
+        //public void TextInputSymbol_Initialized_WithEmptySymbol_ThrowsError()
+        //{
+        //    Assert.Throws<System.Exception>(() => TestHelpers.CreateTextInputSymbol_Author(symbol: ""));
+        //}
+
+        //[Test]
+        //public void TextInputSymbol_Initialized_WithSymbolWithoutPrefix_ThrowsError()
+        //{
+        //    Assert.Throws<System.Exception>(() => TestHelpers.CreateTextInputSymbol_Author(symbol: "mySymbol"));
+        //}
+
     }
 }
