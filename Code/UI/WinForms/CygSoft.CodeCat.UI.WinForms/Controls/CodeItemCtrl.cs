@@ -9,7 +9,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class CodeItemCtrl : TopicSectionBaseControl, IDocumentItemControl
     {
-        public event EventHandler Modified;
+        
 
 
 
@@ -25,10 +25,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             RegisterFileEvents();
         }
 
-        
-        public string Title { get { return this.txtTitle.Text; } }
         public string TemplateText { get { return this.syntaxDocument.Text; } }
-        public bool IsModified { get; private set; }
         public bool FileExists { get { return topicSection.Exists; } }
 
         public void Revert()
@@ -45,11 +42,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void ResetFieldValues()
         {
-            txtTitle.Text = topicSection.Title;
             syntaxBoxControl.Document.Text = CodeTopicSection().Text;
             base.Syntax = CodeTopicSection().Syntax;
 
-            this.IsModified = false;
+            base.IsModified = false;
             SetChangeStatus();
         }
 
@@ -61,13 +57,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupFile_ContentSaved(object sender, TopicEventArgs e)
         {
-            this.IsModified = false;
+            base.IsModified = false;
             SetChangeStatus();
         }
 
         private void codeGroupFile_BeforeContentSaved(object sender, TopicEventArgs e)
         {
-            this.topicSection.Title = txtTitle.Text;
+            this.topicSection.Title = base.Title;
             this.CodeTopicSection().Text = syntaxDocument.Text;
             this.CodeTopicSection().Syntax = base.Syntax;
         }
@@ -77,7 +73,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             RegisterEvents();
             FontSizeChanged += Base_FontSizeChanged;
             SyntaxChanged += Base_SyntaxChanged;
-            txtTitle.TextChanged += SetModified;
             syntaxBoxControl.TextChanged += SetModified;
             this.Modified += CodeItemCtrl_Modified;
         }
@@ -111,15 +106,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void UnregisterDataFieldEvents()
         {
             UnregisterEvents();
-            txtTitle.TextChanged -= SetModified;
             syntaxBoxControl.TextChanged -= SetModified;
             this.Modified -= CodeItemCtrl_Modified;
         }
 
-        private void SetModified(object sender, EventArgs e)
-        {
-            this.IsModified = true;
-            this.Modified?.Invoke(this, new EventArgs());
-        }
+
     }
 }

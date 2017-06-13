@@ -137,9 +137,9 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
         protected System.Windows.Forms.ToolStrip FooterToolstrip;
         protected System.Windows.Forms.ToolStrip HeaderToolstrip;
-        protected ToolStripSpringTextBox txtTitle;
         protected System.Windows.Forms.ToolStripLabel lblEditStatus;
         private System.Windows.Forms.ToolStripComboBox cboFontSize;
         private System.Windows.Forms.ToolStripComboBox cboSyntax;
+        private ToolStripSpringTextBox txtTitle;
     }
 }

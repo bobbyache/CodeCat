@@ -15,6 +15,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class TopicSectionBaseControl : UserControl
     {
+        public event EventHandler Modified;
         public event EventHandler FontSizeChanged;
         public event EventHandler SyntaxChanged;
         public event EventHandler AfterSyntaxChanged;
@@ -24,6 +25,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         protected ITopicDocument topicDocument;
 
         public string Id { get; private set; }
+
+        public string Title { get { return this.txtTitle.Text; } }
 
         public Single FontSize { get { return Convert.ToSingle(cboFontSize.SelectedItem); } }
 
@@ -43,6 +46,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                     cboSyntax.SelectedIndex = index;
             }
         }
+
+        
 
         public int ImageKey { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
         public Icon ImageIcon { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
@@ -70,7 +75,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             SetDefaultFont();
             InitializeSyntaxList();
 
- 
+            txtTitle.Text = topicSection.Title;
         }
 
         private void InitializeSyntaxList()
@@ -88,12 +93,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             cboFontSize.SelectedIndexChanged += cboFontSize_SelectedIndexChanged;
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
+            txtTitle.TextChanged += SetModified;
         }
 
         protected void UnregisterEvents()
         {
             cboFontSize.SelectedIndexChanged -= cboFontSize_SelectedIndexChanged;
             cboSyntax.SelectedIndexChanged -= cboSyntax_SelectedIndexChanged;
+            txtTitle.TextChanged -= SetModified;
         }
 
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
@@ -101,8 +108,25 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             SyntaxChanged?.Invoke(this, new EventArgs());
 
             this.lblEditStatus.Image = IconRepository.Get(Syntax).Image;
-
+            
             AfterSyntaxChanged?.Invoke(this, new EventArgs());
+
+            this.IsModified = true;
+            this.Modified?.Invoke(this, new EventArgs());
+
+        }
+
+        public bool IsModified { get; protected set; }
+
+        protected void SetModified(object sender, EventArgs e)
+        {
+            SetModified();
+        }
+
+        public void SetModified()
+        {
+            this.IsModified = true;
+            this.Modified?.Invoke(this, new EventArgs());
         }
 
         public string SyntaxFile
