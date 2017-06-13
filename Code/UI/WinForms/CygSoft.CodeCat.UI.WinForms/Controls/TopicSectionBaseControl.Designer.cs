@@ -31,8 +31,6 @@
             this.HeaderToolstrip = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
-            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
-            this.cboSyntax = new System.Windows.Forms.ToolStripComboBox();
             this.FooterToolstrip = new System.Windows.Forms.ToolStrip();
             this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
@@ -44,9 +42,7 @@
             // 
             this.HeaderToolstrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
-            this.txtTitle,
-            this.toolStripLabel5,
-            this.cboSyntax});
+            this.txtTitle});
             this.HeaderToolstrip.Location = new System.Drawing.Point(0, 0);
             this.HeaderToolstrip.Name = "HeaderToolstrip";
             this.HeaderToolstrip.Size = new System.Drawing.Size(861, 25);
@@ -64,19 +60,7 @@
             // txtTitle
             // 
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(589, 25);
-            // 
-            // toolStripLabel5
-            // 
-            this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(41, 22);
-            this.toolStripLabel5.Text = "Syntax";
-            // 
-            // cboSyntax
-            // 
-            this.cboSyntax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSyntax.Name = "cboSyntax";
-            this.cboSyntax.Size = new System.Drawing.Size(121, 25);
+            this.txtTitle.Size = new System.Drawing.Size(753, 25);
             // 
             // FooterToolstrip
             // 
@@ -134,11 +118,9 @@
 
         #endregion
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel5;
         protected System.Windows.Forms.ToolStrip FooterToolstrip;
         protected System.Windows.Forms.ToolStrip HeaderToolstrip;
         private System.Windows.Forms.ToolStripComboBox cboFontSize;
-        private System.Windows.Forms.ToolStripComboBox cboSyntax;
         private ToolStripSpringTextBox txtTitle;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
     }
