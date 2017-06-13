@@ -1,7 +1,7 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Qik;
+using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygX1.UI.WinForms.RecentFileMenu;
 using System;
@@ -323,10 +323,10 @@ namespace CygSoft.CodeCat.UI.WinForms
                     snippetForm.DocumentSaved += snippetForm_DocumentSaved;
                     snippetForm.Show(dockPanel, DockState.Document);
                 }
-                else if (snippetIndex is ICodeGroupKeywordIndexItem)
+                else if (snippetIndex is ITopicKeywordIndexItem)
                 {
-                    ICodeGroupDocumentSet codeGroupFile = application.OpenCodeGroupDocumentGroup(snippetIndex);
-                    IContentDocument snippetForm = new CodeGroupDocument(codeGroupFile, application);
+                    ITopicDocument codeGroupFile = application.OpenTopicDocument(snippetIndex);
+                    IContentDocument snippetForm = new TopicDocumentForm(codeGroupFile, application);
                     snippetForm.HeaderFieldsVisible = false;
                     snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
                     snippetForm.DocumentSaved += snippetForm_DocumentSaved;
@@ -369,8 +369,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateCodeGroupDocument()
         {
-            ICodeGroupDocumentSet codeGroupFile = application.CreateCodeGroupDocumentGroup(ConfigSettings.DefaultSyntax);
-            IContentDocument snippetForm = new CodeGroupDocument(codeGroupFile, application, true);
+            ITopicDocument codeGroupFile = application.CreateTopicDocument(ConfigSettings.DefaultSyntax);
+            IContentDocument snippetForm = new TopicDocumentForm(codeGroupFile, application, true);
 
             snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
             snippetForm.DocumentSaved += snippetForm_DocumentSaved;

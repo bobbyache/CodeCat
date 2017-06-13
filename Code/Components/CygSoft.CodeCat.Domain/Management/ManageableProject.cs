@@ -1,7 +1,7 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Code.Base;
-using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Qik;
+using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.Domain.Management
     {
         private CodeLibrary codeLibrary;
         private QikTemplateLibrary qikLibrary;
-        private CodeGroupLibrary codeGroupLibrary;
+        private TopicLibrary codeGroupLibrary;
         private Project project = new Project();
 
         public bool Loaded
@@ -31,7 +31,7 @@ namespace CygSoft.CodeCat.Domain.Management
         {
             this.codeLibrary = new CodeLibrary();
             this.qikLibrary = new QikTemplateLibrary();
-            this.codeGroupLibrary = new CodeGroupLibrary();
+            this.codeGroupLibrary = new TopicLibrary();
         }
 
         public void Open(string filePath, Version currentVersion)
@@ -109,9 +109,9 @@ namespace CygSoft.CodeCat.Domain.Management
             if (anyExist)
                 throw new ApplicationException("they exist!");
 
-            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary();
+            TopicLibrary codeGroupLibrary = new TopicLibrary();
             codeGroupLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
-            codeGroupLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is ICodeGroupKeywordIndexItem).ToArray());
+            codeGroupLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is ITopicKeywordIndexItem).ToArray());
             
             CodeLibrary codeLibrary = new CodeLibrary();
             codeLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);

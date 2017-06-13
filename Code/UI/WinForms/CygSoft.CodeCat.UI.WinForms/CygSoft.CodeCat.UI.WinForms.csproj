@@ -186,11 +186,11 @@
     <Compile Include="Documents\BaseDocument.Designer.cs">
       <DependentUpon>BaseDocument.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\CodeGroupDocument.cs">
+    <Compile Include="Documents\TopicDocumentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\CodeGroupDocument.Designer.cs">
-      <DependentUpon>CodeGroupDocument.cs</DependentUpon>
+    <Compile Include="Documents\TopicDocumentForm.Designer.cs">
+      <DependentUpon>TopicDocumentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Documents\DocumentControlFactory.cs" />
     <Compile Include="Documents\DocumentTabEventArgs.cs" />
@@ -332,8 +332,8 @@
     <EmbeddedResource Include="Dialogs\UrlItemEditDialog.resx">
       <DependentUpon>UrlItemEditDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\CodeGroupDocument.resx">
-      <DependentUpon>CodeGroupDocument.cs</DependentUpon>
+    <EmbeddedResource Include="Documents\TopicDocumentForm.resx">
+      <DependentUpon>TopicDocumentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Documents\QikCodeDocument.resx">
       <DependentUpon>QikCodeDocument.cs</DependentUpon>

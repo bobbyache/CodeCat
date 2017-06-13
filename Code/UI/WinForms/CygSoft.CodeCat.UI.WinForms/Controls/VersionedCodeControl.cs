@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.CodeGroup;
+using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -18,19 +18,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler Modified;
 
         private AppFacade application;
-        private ICodeGroupDocumentSet codeGroupDocumentSet;
-        private IVersionedCodeTopicSection versionedCodeTopicSection;
+        private ITopicDocument topicDocument;
+        private IVersionedCodeTopicSection topicSection;
 
-        public VersionedCodeControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IVersionedCodeTopicSection versionedCodeTopicSection)
+        public VersionedCodeControl(AppFacade application, ITopicDocument topicDocument, IVersionedCodeTopicSection topicSection)
         {
             InitializeComponent();
 
             tabControl.Alignment = TabAlignment.Left;
 
             this.application = application;
-            this.codeGroupDocumentSet = codeGroupDocumentSet;
-            this.versionedCodeTopicSection = versionedCodeTopicSection;
-            this.Id = versionedCodeTopicSection.Id;
+            this.topicDocument = topicDocument;
+            this.topicSection = topicSection;
+            this.Id = topicSection.Id;
 
             SetDefaultFont();
             InitializeSyntaxList();
@@ -57,9 +57,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void ResetFieldValues()
         {
-            txtTitle.Text = versionedCodeTopicSection.Title;
-            syntaxBox.Document.Text = versionedCodeTopicSection.Text;
-            SelectSyntax(versionedCodeTopicSection.Syntax);
+            txtTitle.Text = topicSection.Title;
+            syntaxBox.Document.Text = topicSection.Text;
+            SelectSyntax(topicSection.Syntax);
 
             this.IsModified = false;
             SetChangeStatus();
@@ -67,8 +67,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void RegisterFileEvents()
         {
-            codeGroupDocumentSet.BeforeSave += codeGroupFile_BeforeContentSaved;
-            codeGroupDocumentSet.AfterSave += codeGroupFile_ContentSaved;
+            topicDocument.BeforeSave += codeGroupFile_BeforeContentSaved;
+            topicDocument.AfterSave += codeGroupFile_ContentSaved;
         }
 
         private void RegisterDataFieldEvents()
@@ -102,9 +102,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupFile_BeforeContentSaved(object sender, TopicEventArgs e)
         {
-            this.versionedCodeTopicSection.Title = txtTitle.Text;
-            this.versionedCodeTopicSection.Text = syntaxDocument.Text;
-            this.versionedCodeTopicSection.Syntax = cboSyntax.SelectedItem.ToString();
+            this.topicSection.Title = txtTitle.Text;
+            this.topicSection.Text = syntaxDocument.Text;
+            this.topicSection.Syntax = cboSyntax.SelectedItem.ToString();
         }
 
         private void cboFontSize_SelectedIndexChanged(object sender, EventArgs e)

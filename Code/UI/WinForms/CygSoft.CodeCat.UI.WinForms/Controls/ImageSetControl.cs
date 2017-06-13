@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using System.IO;
 using System.Diagnostics;
+using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -13,8 +13,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
-        private IImagePagerTopicSection imagePagerTopicSection;
-        private ICodeGroupDocumentSet codeGroupDocumentSet;
+        private IImagePagerTopicSection topicSection;
+        private ITopicDocument topicDocument;
         private IPagerImage pageImage;
 
         #region Public Properties
@@ -31,20 +31,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         #region Constructors
 
-        public ImageSetControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IImagePagerTopicSection imageDocument)
+        public ImageSetControl(AppFacade application, ITopicDocument topicDocument, IImagePagerTopicSection topicSection)
         {
             InitializeComponent();
 
-            Id = imageDocument.Id;
+            Id = topicSection.Id;
 
             imageBox.GridScale = Cyotek.Windows.Forms.ImageBoxGridScale.None;
-            this.imagePagerTopicSection = imageDocument;
-            this.codeGroupDocumentSet = codeGroupDocumentSet;
+            this.topicSection = topicSection;
+            this.topicDocument = topicDocument;
 
             CreateControlGraphics();
 
             // set initial data
-            txtTitle.Text = imageDocument.Title;
+            txtTitle.Text = topicSection.Title;
             IsModified = false;
 
             LoadInitialImage();
@@ -59,7 +59,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public void Revert()
         {
-            imagePagerTopicSection.Revert();
+            topicSection.Revert();
         }
 
         #endregion Public Methods
@@ -70,9 +70,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             txtTitle.TextChanged += (s, e) => { SetModified(); };
             Modified += CodeItemCtrl_Modified;
-            codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
-            codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
-            imagePagerTopicSection.ImageRemoved += imageDocument_ImageRemoved;
+            topicDocument.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
+            topicDocument.AfterSave += codeGroupDocumentSet_ContentSaved;
+            topicSection.ImageRemoved += imageDocument_ImageRemoved;
         }
 
         private void CreateControlGraphics()
@@ -92,8 +92,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadInitialImage()
         {
-            if (imagePagerTopicSection.ImageCount > 0)
-                LoadImage(imagePagerTopicSection.FirstImage);
+            if (topicSection.ImageCount > 0)
+                LoadImage(topicSection.FirstImage);
             else
                 AddBlankImage();
         }
@@ -139,7 +139,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void AddBlankImage()
         {
-            pageImage = imagePagerTopicSection.Add();
+            pageImage = topicSection.Add();
             LoadImage(pageImage);
         }
 
@@ -162,7 +162,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 lblScrollPosition.Text = FormatPoint(imageBox.AutoScrollPosition);
                 lblSize.Text = FormatRectangle(imageBox.GetImageViewPort());
                 lblZoomLevel.Text = string.Format("{0}%", imageBox.Zoom);
-                lblImagePosition.Text = string.Format("Position {0} of {1}", pageImage.Ordinal, imagePagerTopicSection.ImageCount);
+                lblImagePosition.Text = string.Format("Position {0} of {1}", pageImage.Ordinal, topicSection.ImageCount);
             }
             else
             {
@@ -175,14 +175,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private bool ImageSetExists()
         {
-            return imagePagerTopicSection.ImageCount > 0 && pageImage != null;
+            return topicSection.ImageCount > 0 && pageImage != null;
         }
 
         private void Import()
         {
             if (ImageSetExists())
             {
-                if (!imagePagerTopicSection.FolderExists)
+                if (!topicSection.FolderExists)
                 {
                     Dialogs.MustSaveGroupBeforeAction(this);
                     return;
@@ -215,7 +215,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (ImageSetExists())
             {
-                if (!imagePagerTopicSection.FolderExists)
+                if (!topicSection.FolderExists)
                 {
                     Dialogs.MustSaveGroupBeforeAction(this);
                     return;
@@ -319,14 +319,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 DialogResult result = Dialogs.DeleteItemDialog(this, "image");
 
                 if (result == DialogResult.Yes)
-                    imagePagerTopicSection.Remove(pageImage);
+                    topicSection.Remove(pageImage);
             }
         }
 
         private void imageDocument_ImageRemoved(object sender, EventArgs e)
         {
-            if (imagePagerTopicSection.ImageCount > 0)
-                LoadImage(imagePagerTopicSection.FirstImage);
+            if (topicSection.ImageCount > 0)
+                LoadImage(topicSection.FirstImage);
             else
             {
                 AddBlankImage();
@@ -357,16 +357,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupDocumentSet_BeforeContentSaved(object sender, TopicEventArgs e)
         {
-            imagePagerTopicSection.Title = txtTitle.Text;
+            topicSection.Title = txtTitle.Text;
         }
 
         private void btnMoveLeft_Click(object sender, EventArgs e)
         {
             if (ImageSetExists())
             {
-                if (imagePagerTopicSection.CanMovePrevious(pageImage))
+                if (topicSection.CanMovePrevious(pageImage))
                 {
-                    imagePagerTopicSection.MovePrevious(pageImage);
+                    topicSection.MovePrevious(pageImage);
                     SetModified();
                     UpdateStatusBar();
                 }
@@ -377,9 +377,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (ImageSetExists())
             {
-                if (imagePagerTopicSection.CanMoveNext(pageImage))
+                if (topicSection.CanMoveNext(pageImage))
                 {
-                    imagePagerTopicSection.MoveNext(pageImage);
+                    topicSection.MoveNext(pageImage);
                     SetModified();
                     UpdateStatusBar();
                 }
@@ -390,9 +390,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (ImageSetExists())
             {
-                if (!imagePagerTopicSection.IsFirstImage(pageImage))
+                if (!topicSection.IsFirstImage(pageImage))
                 {
-                    IPagerImage imageItem = imagePagerTopicSection.PreviousImage(pageImage);
+                    IPagerImage imageItem = topicSection.PreviousImage(pageImage);
                     LoadImage(imageItem);
                 }
             }
@@ -402,9 +402,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (ImageSetExists())
             {
-                if (!imagePagerTopicSection.IsLastImage(pageImage))
+                if (!topicSection.IsLastImage(pageImage))
                 {
-                    IPagerImage nextPagerImage = imagePagerTopicSection.NextImage(pageImage);
+                    IPagerImage nextPagerImage = topicSection.NextImage(pageImage);
                     LoadImage(nextPagerImage);
                 }
             }

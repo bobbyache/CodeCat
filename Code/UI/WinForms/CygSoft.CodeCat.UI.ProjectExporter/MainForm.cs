@@ -1,8 +1,8 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Domain.Qik;
+using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -101,9 +101,9 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
                 listView.Items.Add(listItem);
             }
-            else if (item is ICodeGroupKeywordIndexItem)
+            else if (item is ITopicKeywordIndexItem)
             {
-                ICodeGroupKeywordIndexItem codeItem = item as ICodeGroupKeywordIndexItem;
+                ITopicKeywordIndexItem codeItem = item as ITopicKeywordIndexItem;
                 listItem.Name = item.Id;
                 listItem.Tag = item;
                 listItem.Text = item.Title;

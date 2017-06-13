@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Domain.CodeGroup;
+using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -11,18 +11,18 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
-        private ICodeTopicSection codeTopicSection;
+        private ICodeTopicSection topicSection;
         private AppFacade application;
-        private ICodeGroupDocumentSet codeGroupDocumentSet;
+        private ITopicDocument topicDocument;
 
-        public CodeItemCtrl(AppFacade application, ICodeGroupDocumentSet codeGroupFile, ICodeTopicSection codeFile)
+        public CodeItemCtrl(AppFacade application, ITopicDocument topicDocument, ICodeTopicSection topicSection)
         {
             InitializeComponent();
             
             this.application = application;
-            this.codeTopicSection = codeFile;
-            this.codeGroupDocumentSet = codeGroupFile;
-            this.Id = codeFile.Id;
+            this.topicSection = topicSection;
+            this.topicDocument = topicDocument;
+            this.Id = topicSection.Id;
 
             syntaxDocument.SyntaxFile = ConfigSettings.QikTemplateSyntaxFile;
             
@@ -41,7 +41,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public string Title { get { return this.txtTitle.Text; } }
         public string TemplateText { get { return this.syntaxDocument.Text; } }
         public bool IsModified { get; private set; }
-        public bool FileExists { get { return codeTopicSection.Exists; } }
+        public bool FileExists { get { return topicSection.Exists; } }
 
         public void Revert()
         {
@@ -52,9 +52,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void ResetFieldValues()
         {
-            txtTitle.Text = codeTopicSection.Title;
-            syntaxBoxControl.Document.Text = codeTopicSection.Text;
-            SelectSyntax(codeTopicSection.Syntax);
+            txtTitle.Text = topicSection.Title;
+            syntaxBoxControl.Document.Text = topicSection.Text;
+            SelectSyntax(topicSection.Syntax);
 
             this.IsModified = false;
             SetChangeStatus();
@@ -62,8 +62,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void RegisterFileEvents()
         {
-            codeGroupDocumentSet.BeforeSave += codeGroupFile_BeforeContentSaved;
-            codeGroupDocumentSet.AfterSave += codeGroupFile_ContentSaved;
+            topicDocument.BeforeSave += codeGroupFile_BeforeContentSaved;
+            topicDocument.AfterSave += codeGroupFile_ContentSaved;
         }
 
         private void codeGroupFile_ContentSaved(object sender, TopicEventArgs e)
@@ -74,9 +74,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupFile_BeforeContentSaved(object sender, TopicEventArgs e)
         {
-            this.codeTopicSection.Title = txtTitle.Text;
-            this.codeTopicSection.Text = syntaxDocument.Text;
-            this.codeTopicSection.Syntax = cboSyntax.SelectedItem.ToString();
+            this.topicSection.Title = txtTitle.Text;
+            this.topicSection.Text = syntaxDocument.Text;
+            this.topicSection.Syntax = cboSyntax.SelectedItem.ToString();
         }
 
         private void RegisterDataFieldEvents()

@@ -1,16 +1,16 @@
 ﻿using CygSoft.CodeCat.Search.KeywordIndex;
 using System.Xml.Linq;
 
-namespace CygSoft.CodeCat.Domain.CodeGroup
+namespace CygSoft.CodeCat.Domain.Topics
 {
-    public class CodeGroupKeywordIndexItem : XmlKeywordIndexItem, ICodeGroupKeywordIndexItem
+    public class TopicKeywordIndexItem : XmlKeywordIndexItem, ITopicKeywordIndexItem
     {
-        public CodeGroupKeywordIndexItem()
+        public TopicKeywordIndexItem()
         {
             Syntax = string.Empty;
         }
 
-        public CodeGroupKeywordIndexItem(string title, string syntax, string commaDelimitedKeywords)
+        public TopicKeywordIndexItem(string title, string syntax, string commaDelimitedKeywords)
                     : base(title, syntax, commaDelimitedKeywords)
         {
             Syntax = syntax;

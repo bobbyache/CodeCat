@@ -8,21 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Domain;
 using System.Diagnostics;
 using System.IO;
+using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class FileGroupControl : UserControl, IDocumentItemControl
     {
-        private IFileAttachmentsTopicSection fileAttachmentsTopicSection;
-        private ICodeGroupDocumentSet codeGroupDocumentSet;
+        private IFileAttachmentsTopicSection topicSection;
+        private ITopicDocument topicDocument;
         private AppFacade application;
         private ListViewSorter listViewSorter;
 
-        public FileGroupControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IFileAttachmentsTopicSection fileAttachmentsTopicSection)
+        public FileGroupControl(AppFacade application, ITopicDocument topicDocument, IFileAttachmentsTopicSection topicSection)
         {
             InitializeComponent();
 
@@ -34,17 +34,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
             btnEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
 
-            this.fileAttachmentsTopicSection = fileAttachmentsTopicSection;
-            this.codeGroupDocumentSet = codeGroupDocumentSet;
+            this.topicSection = topicSection;
+            this.topicDocument = topicDocument;
             this.application = application;
-            this.Id = fileAttachmentsTopicSection.Id;
+            this.Id = topicSection.Id;
 
             ReloadGroups();
             LoadListOfUrls();
 
             txtTitle.TextChanged += (s, e) => { SetModified(); };
-            codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
-            codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
+            topicDocument.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
+            topicDocument.AfterSave += codeGroupDocumentSet_ContentSaved;
         }
 
         public event EventHandler Modified;
@@ -65,8 +65,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadListOfUrls()
         {
-            txtTitle.Text = fileAttachmentsTopicSection.Title;
-            ReloadListview(fileListview, fileAttachmentsTopicSection.Items);
+            txtTitle.Text = topicSection.Title;
+            ReloadListview(fileListview, topicSection.Items);
             this.IsModified = false;
             SetChangeStatus();
         }
@@ -106,7 +106,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ReloadGroups()
         {
             this.fileListview.Groups.Clear();
-            string[] categories = this.fileAttachmentsTopicSection.Categories;
+            string[] categories = this.topicSection.Categories;
 
             foreach (string category in categories)
             {
@@ -151,7 +151,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupDocumentSet_BeforeContentSaved(object sender, TopicEventArgs e)
         {
-            this.fileAttachmentsTopicSection.Title = txtTitle.Text;
+            this.topicSection.Title = txtTitle.Text;
         }
 
         private void SetChangeStatus()
@@ -169,14 +169,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(fileAttachmentsTopicSection);
+            FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(topicSection);
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
-                fileAttachmentsTopicSection.Add(dialog.EditedFile);
+                topicSection.Add(dialog.EditedFile);
                 ReloadGroups();
-                ReloadListview(fileListview, fileAttachmentsTopicSection.Items);
+                ReloadListview(fileListview, topicSection.Items);
                 SetModified();
             }
         }
@@ -197,13 +197,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 // TODO: Instead of pulling the file object out of the ListViewItemTag we should be getting it from the FileGroup object. In fact, need to run a search on .Tag and see where you can improve this design.
                 IFileAttachment fileAttachment = fileListview.SelectedItems[0].Tag as IFileAttachment;
-                FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(fileAttachment, fileAttachmentsTopicSection);
+                FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(fileAttachment, topicSection);
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
                     ReloadGroups();
-                    ReloadListview(fileListview, fileAttachmentsTopicSection.Items);
+                    ReloadListview(fileListview, topicSection.Items);
                     SetModified();
                 }
             }
@@ -221,10 +221,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                         .Select(lv => lv.Tag).Cast<IFileAttachment>();
 
                     foreach (IFileAttachment fileAttachment in fileAttachments)
-                        fileAttachmentsTopicSection.Remove(fileAttachment);
+                        topicSection.Remove(fileAttachment);
 
                     ReloadGroups();
-                    ReloadListview(fileListview, fileAttachmentsTopicSection.Items);
+                    ReloadListview(fileListview, topicSection.Items);
                     SetModified();
                 }
             }

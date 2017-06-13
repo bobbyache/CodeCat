@@ -1,4 +1,4 @@
-﻿using CygSoft.CodeCat.Domain.CodeGroup;
+﻿using CygSoft.CodeCat.Domain.Topics;
 using System;
 using System.IO;
 
@@ -8,7 +8,7 @@ namespace CygSoft.CodeCat.Domain.Management
     {
         public void Import(string sourceIndexFilePath, Version currentVersion, IndexExportImportData[] exportData)
         {
-            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary();
+            TopicLibrary codeGroupLibrary = new TopicLibrary();
             codeGroupLibrary.Open(Path.GetDirectoryName(sourceIndexFilePath), currentVersion);
         }
     }

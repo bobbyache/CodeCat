@@ -4,17 +4,17 @@ using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CygSoft.CodeCat.Domain.CodeGroup
+namespace CygSoft.CodeCat.Domain.Topics
 {
-    internal class CodeGroupLibrary : BaseLibrary
+    internal class TopicLibrary : BaseLibrary
     {
-        public CodeGroupLibrary()
-            : base(new CodeGroupKeywordSearchIndexRepository("CodeCat_CodeGroupIndex"), "codegroup")
+        public TopicLibrary()
+            : base(new TopicKeywordSearchIndexRepository("CodeCat_CodeGroupIndex"), "codegroup")
         {
             base.FileExtension = "*.xml";
         }
 
-        internal CodeGroupLibrary(IKeywordSearchIndexRepository keywordSearchIndexRepository, string subFolder) : base(keywordSearchIndexRepository, subFolder)
+        internal TopicLibrary(IKeywordSearchIndexRepository keywordSearchIndexRepository, string subFolder) : base(keywordSearchIndexRepository, subFolder)
         {
             base.FileExtension = "*.xml";
         }
@@ -24,9 +24,9 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             List<IndexExportImportData> exportList = new List<IndexExportImportData>();
             IKeywordIndexItem[] foundItems = base.FindIndecesByIds(indexItems.Select(r => r.Id).ToArray());
 
-            foreach (CodeGroupKeywordIndexItem indexItem in foundItems.OfType<CodeGroupKeywordIndexItem>())
+            foreach (TopicKeywordIndexItem indexItem in foundItems.OfType<TopicKeywordIndexItem>())
             {
-                CodeGroupDocumentSet codeFile = new CodeGroupDocumentSet(indexItem as CodeGroupKeywordIndexItem, this.FolderPath);
+                TopicDocument codeFile = new TopicDocument(indexItem as TopicKeywordIndexItem, this.FolderPath);
                 exportList.Add(new IndexExportImportData(indexItem.Id, codeFile.Folder, indexItem.Id, indexItem));
             }
             return exportList.ToArray();
@@ -34,8 +34,8 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         protected override IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem)
         {
-            CodeGroupKeywordIndexItem codeGroupIndexItem = indexItem as CodeGroupKeywordIndexItem;
-            CodeGroupDocumentSet codeGroupFile = new CodeGroupDocumentSet(codeGroupIndexItem, this.FolderPath);
+            TopicKeywordIndexItem codeGroupIndexItem = indexItem as TopicKeywordIndexItem;
+            TopicDocument codeGroupFile = new TopicDocument(codeGroupIndexItem, this.FolderPath);
 
             if (this.openFiles == null)
                 this.openFiles = new Dictionary<string, IPersistableTarget>();
@@ -47,7 +47,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
         protected override IPersistableTarget OpenSpecializedTarget(IKeywordIndexItem indexItem)
         {
-            CodeGroupKeywordIndexItem codeGroupIndexItem = indexItem as CodeGroupKeywordIndexItem;
+            TopicKeywordIndexItem codeGroupIndexItem = indexItem as TopicKeywordIndexItem;
             IPersistableTarget persistableFile;
 
             if (this.openFiles == null)

@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.UI.WinForms
 {
-    partial class CodeGroupDocument
+    partial class TopicDocumentForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CodeGroupDocument));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopicDocumentForm));
             this.syntaxDoc = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.chkEdit = new System.Windows.Forms.ToolStripButton();
             this.toolstripTitle = new System.Windows.Forms.ToolStrip();
@@ -346,7 +346,7 @@
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
             // 
-            // CodeGroupDocument
+            // TopicDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -356,8 +356,8 @@
             this.Controls.Add(this.toolstripKeywords);
             this.Controls.Add(this.toolstripCommands);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "CodeGroupDocument";
-            this.Text = "CodeGroupDocument";
+            this.Name = "TopicDocumentForm";
+            this.Text = "TopicDocumentForm";
             this.toolstripTitle.ResumeLayout(false);
             this.toolstripTitle.PerformLayout();
             this.toolstripKeywords.ResumeLayout(false);

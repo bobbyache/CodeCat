@@ -6,14 +6,14 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace CygSoft.CodeCat.Domain.CodeGroup
+namespace CygSoft.CodeCat.Domain.Topics
 {
-    internal class CodeGroupIndexXmlRepository : IDocumentIndexRepository
+    internal class TopicIndexXmlRepository : IDocumentIndexRepository
     {
         private readonly string filePath;
         private readonly string folder;
 
-        public CodeGroupIndexXmlRepository(DocumentIndexPathGenerator indexPathGenerator)
+        public TopicIndexXmlRepository(DocumentIndexPathGenerator indexPathGenerator)
         {
             this.filePath = indexPathGenerator.FilePath;
             this.folder = Path.GetDirectoryName(indexPathGenerator.FilePath);

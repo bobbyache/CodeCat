@@ -1,23 +1,22 @@
-﻿using CygSoft.CodeCat.Domain.CodeGroup;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+﻿using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.Domain.Base
 {
     public class PersistableTargetFactory
     {
-        private static ICodeGroupDocumentSet persistableTarget;
+        private static ITopicDocument persistableTarget;
 
-        public static IPersistableTarget Create(ICodeGroupKeywordIndexItem indexItem, string folderPath)
+        public static IPersistableTarget Create(ITopicKeywordIndexItem indexItem, string folderPath)
         {
             if (persistableTarget != null)
                 return persistableTarget;
 
-            return new CodeGroupDocumentSet(indexItem, folderPath);
+            return new TopicDocument(indexItem, folderPath);
         }
 
-        internal static void SetIndexItem(ICodeGroupDocumentSet codeGroupDocumentSet)
+        internal static void SetIndexItem(ITopicDocument topicDocument)
         {
-            persistableTarget = codeGroupDocumentSet;
+            persistableTarget = topicDocument;
         }
     }
 }

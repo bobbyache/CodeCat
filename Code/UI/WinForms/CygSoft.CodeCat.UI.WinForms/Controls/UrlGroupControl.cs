@@ -5,19 +5,19 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class UrlGroupControl : UserControl, IDocumentItemControl
     {
-        private IWebReferencesTopicSection webReferencesTopicSection;
-        private ICodeGroupDocumentSet codeGroupDocumentSet;
+        private IWebReferencesTopicSection topicSection;
+        private ITopicDocument topicDocument;
         private AppFacade application;
         private ListViewSorter listViewSorter;
 
-        public UrlGroupControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IWebReferencesTopicSection webReferenceTopicSection)
+        public UrlGroupControl(AppFacade application, ITopicDocument topicDocument, IWebReferencesTopicSection topicSection)
         {
             InitializeComponent();
 
@@ -28,23 +28,23 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
             btnEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
 
-            this.webReferencesTopicSection = webReferenceTopicSection;
-            this.codeGroupDocumentSet = codeGroupDocumentSet;
+            this.topicSection = topicSection;
+            this.topicDocument = topicDocument;
             this.application = application;
-            Id = webReferenceTopicSection.Id;
+            Id = topicSection.Id;
 
             ReloadGroups();
             LoadListOfUrls();
 
             txtTitle.TextChanged += (s, e) => { SetModified(); };
-            codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
-            codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
-            webReferenceTopicSection.Paste += urlDocument_Paste;
-            webReferenceTopicSection.PasteConflict += urlDocument_PasteConflict;
+            topicDocument.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
+            topicDocument.AfterSave += codeGroupDocumentSet_ContentSaved;
+            topicSection.Paste += urlDocument_Paste;
+            topicSection.PasteConflict += urlDocument_PasteConflict;
             Disposed += (s, e) =>
             {
-                webReferenceTopicSection.Paste -= urlDocument_Paste;
-                webReferenceTopicSection.PasteConflict -= urlDocument_PasteConflict;
+                topicSection.Paste -= urlDocument_Paste;
+                topicSection.PasteConflict -= urlDocument_PasteConflict;
             };
         }
 
@@ -58,7 +58,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void urlDocument_Paste(object sender, EventArgs e)
         {
             ReloadGroups();
-            ReloadListview(urlListview, webReferencesTopicSection.WebReferences);
+            ReloadListview(urlListview, topicSection.WebReferences);
             SetModified();
             Dialogs.UrlsPastedSuccessfully(this);
         }
@@ -79,8 +79,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadListOfUrls()
         {
-            txtTitle.Text = webReferencesTopicSection.Title;
-            ReloadListview(urlListview, webReferencesTopicSection.WebReferences);
+            txtTitle.Text = topicSection.Title;
+            ReloadListview(urlListview, topicSection.WebReferences);
             IsModified = false;
             SetChangeStatus();
         }
@@ -118,7 +118,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ReloadGroups()
         {
             urlListview.Groups.Clear();
-            string[] categories = webReferencesTopicSection.Categories;
+            string[] categories = topicSection.Categories;
             foreach (string category in categories)
             {
                 ListViewGroup group = new ListViewGroup(category);
@@ -161,7 +161,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupDocumentSet_BeforeContentSaved(object sender, TopicEventArgs e)
         {
-            webReferencesTopicSection.Title = txtTitle.Text;
+            topicSection.Title = txtTitle.Text;
         }
 
         private void SetChangeStatus()
@@ -179,21 +179,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            IWebReference webReference = webReferencesTopicSection.CreateWebReference();
+            IWebReference webReference = topicSection.CreateWebReference();
             CreateReference(webReference);
         }
 
         private void CreateReference(IWebReference webReference)
         {
             
-            UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, webReferencesTopicSection.Categories);
+            UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, topicSection.Categories);
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
-                webReferencesTopicSection.Add(webReference);
+                topicSection.Add(webReference);
                 ReloadGroups();
-                ReloadListview(urlListview, webReferencesTopicSection.WebReferences);
+                ReloadListview(urlListview, topicSection.WebReferences);
                 SetModified();
             }
         }
@@ -213,13 +213,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             if (urlListview.SelectedItems.Count == 1)
             {
                 IWebReference webReference = urlListview.SelectedItems[0].Tag as IWebReference;
-                UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, webReferencesTopicSection.Categories);
+                UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, topicSection.Categories);
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
                     ReloadGroups();
-                    ReloadListview(urlListview, webReferencesTopicSection.WebReferences);
+                    ReloadListview(urlListview, topicSection.WebReferences);
                     SetModified();
                 }
             }
@@ -239,10 +239,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                         .Select(lv => lv.Tag).Cast<IWebReference>();
 
                     foreach (IWebReference webReference in webReferences)
-                        webReferencesTopicSection.Remove(webReference);
+                        topicSection.Remove(webReference);
 
                     ReloadGroups();
-                    ReloadListview(urlListview, webReferencesTopicSection.WebReferences);
+                    ReloadListview(urlListview, topicSection.WebReferences);
                     SetModified();
                 }
             }
@@ -317,7 +317,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 .Select(lv => lv.Tag).Cast<IWebReference>()
                 .Select(url => url.Id).ToArray();
 
-            string copyXml = webReferencesTopicSection.GetXml(ids);
+            string copyXml = topicSection.GetXml(ids);
             Clipboard.Clear();
             Clipboard.SetText(copyXml);
         }
@@ -329,17 +329,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 if (Clipboard.ContainsText())
                 {
                     string text = Clipboard.GetText().Trim();
-                    if (webReferencesTopicSection.IsFullUrl(text))
+                    if (topicSection.IsFullUrl(text))
                     {
-                        IWebReference webReference = webReferencesTopicSection.CreateWebReference(text, "", "");
+                        IWebReference webReference = topicSection.CreateWebReference(text, "", "");
                         CreateReference(webReference);
                     }
-                    else if (webReferencesTopicSection.IsValidWebReferenceXml(text))
-                        webReferencesTopicSection.AddXml(text);
+                    else if (topicSection.IsValidWebReferenceXml(text))
+                        topicSection.AddXml(text);
                     else
                     {
                         string firstLine = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)[0];
-                        IWebReference webReference = webReferencesTopicSection.CreateWebReference("", firstLine, "");
+                        IWebReference webReference = topicSection.CreateWebReference("", firstLine, "");
                         CreateReference(webReference);
                     }
                 }

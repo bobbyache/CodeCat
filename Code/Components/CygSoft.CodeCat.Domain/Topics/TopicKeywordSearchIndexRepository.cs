@@ -4,21 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace CygSoft.CodeCat.Domain.CodeGroup
+namespace CygSoft.CodeCat.Domain.Topics
 {
-    public class CodeGroupKeywordSearchIndexRepository : XmlKeywordSearchIndexRepository<CodeGroupKeywordIndexItem>
+    public class TopicKeywordSearchIndexRepository : XmlKeywordSearchIndexRepository<TopicKeywordIndexItem>
     {
-        public CodeGroupKeywordSearchIndexRepository(string rootElement)
+        public TopicKeywordSearchIndexRepository(string rootElement)
             : base(rootElement)
         {
 
         }
 
-        protected override List<CodeGroupKeywordIndexItem> LoadIndexItems(string fileText, Version expectedVersion)
+        protected override List<TopicKeywordIndexItem> LoadIndexItems(string fileText, Version expectedVersion)
         {
             base.FileFunctions.CheckVersion(fileText, expectedVersion);
 
-            List<CodeGroupKeywordIndexItem> indexItems = new List<CodeGroupKeywordIndexItem>();
+            List<TopicKeywordIndexItem> indexItems = new List<TopicKeywordIndexItem>();
 
             XElement xElement = XElement.Parse(fileText);
             var items = from h in xElement.Elements("IndexItem")
@@ -26,7 +26,7 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
 
             foreach (var item in items)
             {
-                CodeGroupKeywordIndexItem indexItem = new CodeGroupKeywordIndexItem();
+                TopicKeywordIndexItem indexItem = new TopicKeywordIndexItem();
                 indexItem.Deserialize(item);
                 indexItems.Add(indexItem);
             }

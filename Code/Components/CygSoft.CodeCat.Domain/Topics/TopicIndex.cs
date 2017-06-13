@@ -4,11 +4,11 @@ using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CygSoft.CodeCat.Domain.CodeGroup
+namespace CygSoft.CodeCat.Domain.Topics
 {
-    public class CodeGroupIndex : Topic
+    public class TopicIndex : Topic
     {
-        public CodeGroupIndex(IDocumentIndexRepository repository, DocumentIndexPathGenerator indexPathGenerator)
+        public TopicIndex(IDocumentIndexRepository repository, DocumentIndexPathGenerator indexPathGenerator)
             : base(repository, indexPathGenerator)
         {
         }

@@ -1,5 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain.Base;
-using CygSoft.CodeCat.Domain.CodeGroup;
+using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Search.KeywordIndex;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using Moq;
@@ -12,24 +12,24 @@ namespace Domain.UnitTests
     public class CodeGroupLibraryTests
     {
         [Test]
-        public void CodeGroupLibrary_CreateTarget_ReturnsNonNullTarget()
+        public void TopicLibrary_CreateTarget_ReturnsNonNullTarget()
         {
             Mock<IKeywordSearchIndexRepository> stubSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
             IKeywordSearchIndex keywordSearchIndex = new KeywordSearchIndex(@"C:\parent_folder\_code.xml", new Version("4.0.1"));
             stubSearchIndexRepository
                 .Setup(stub => stub.OpenIndex(It.IsAny<string>(), It.IsAny<Version>()))
                 .Returns(keywordSearchIndex);
-            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary(stubSearchIndexRepository.Object, "TestFolder");
-            CodeGroupKeywordIndexItem keywordIndexItem = new CodeGroupKeywordIndexItem("Code Group Index Item", "C#", "testing,tested,test");
+            TopicLibrary topicLibrary = new TopicLibrary(stubSearchIndexRepository.Object, "TestFolder");
+            TopicKeywordIndexItem keywordIndexItem = new TopicKeywordIndexItem("Code Group Index Item", "C#", "testing,tested,test");
 
-            codeGroupLibrary.Open(@"C:\parent_folder", new Version("4.0.1"));
-            IPersistableTarget persistableTarget = codeGroupLibrary.CreateTarget(keywordIndexItem);
+            topicLibrary.Open(@"C:\parent_folder", new Version("4.0.1"));
+            IPersistableTarget persistableTarget = topicLibrary.CreateTarget(keywordIndexItem);
 
             Assert.That(persistableTarget, Is.Not.Null);
         }
 
         [Test]
-        public void CodeGroupLibrary_OpenTarget_ReturnsExistingTarget()
+        public void TopicLibrary_OpenTarget_ReturnsExistingTarget()
         {
             /*
              * Note this test is really just a test to get the structures into a testable state. You might wish to
@@ -43,10 +43,10 @@ namespace Domain.UnitTests
             stubSearchIndexRepository
                 .Setup(stub => stub.OpenIndex(It.IsAny<string>(), It.IsAny<Version>()))
                 .Returns(keywordSearchIndex);
-            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary(stubSearchIndexRepository.Object, "TestFolder");
-            CodeGroupKeywordIndexItem keywordIndexItem = new CodeGroupKeywordIndexItem("Code Group Index Item", "C#", "testing,tested,test");
+            TopicLibrary codeGroupLibrary = new TopicLibrary(stubSearchIndexRepository.Object, "TestFolder");
+            TopicKeywordIndexItem keywordIndexItem = new TopicKeywordIndexItem("Code Group Index Item", "C#", "testing,tested,test");
             
-            Mock<ICodeGroupDocumentSet> stubCodeGroupDocumentSet = new Mock<ICodeGroupDocumentSet>();
+            Mock<ITopicDocument> stubCodeGroupDocumentSet = new Mock<ITopicDocument>();
             stubCodeGroupDocumentSet.Setup(stub => stub.Open());
             stubCodeGroupDocumentSet.Setup(stub => stub.Id).Returns("4ecac722-8ec5-441c-8e3e-00b192b30453"); // You can fake a readonly property
 
@@ -62,11 +62,11 @@ namespace Domain.UnitTests
         }
 
         [Test]
-        public void CodeGroupLibrary_WhenInitialized_IsNotLoaded()
+        public void TopicLibrary_WhenInitialized_IsNotLoaded()
         {
             // Arrange
             Mock<IKeywordSearchIndexRepository> stubSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
-            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary(stubSearchIndexRepository.Object, "TestFolder");
+            TopicLibrary codeGroupLibrary = new TopicLibrary(stubSearchIndexRepository.Object, "TestFolder");
 
             // Assert
             Assert.That(codeGroupLibrary.Loaded, Is.False);
@@ -84,7 +84,7 @@ namespace Domain.UnitTests
         }
 
         [Test]
-        public void CodeGroupLibrary_WhenOpened_WithRepository_IsLoaded()
+        public void TopicLibrary_WhenOpened_WithRepository_IsLoaded()
         {
             // Arrange
             Mock<IKeywordSearchIndexRepository> stubSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
@@ -92,7 +92,7 @@ namespace Domain.UnitTests
             stubSearchIndexRepository
                 .Setup(stub => stub.OpenIndex(It.IsAny<string>(), It.IsAny<Version>()))
                 .Returns(keywordSearchIndex);
-            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary(stubSearchIndexRepository.Object, "TestFolder");
+            TopicLibrary codeGroupLibrary = new TopicLibrary(stubSearchIndexRepository.Object, "TestFolder");
 
             // Act
             codeGroupLibrary.Open(@"C:\parent_folder", new Version("4.0.1"));
@@ -102,7 +102,7 @@ namespace Domain.UnitTests
         }
 
         [Test]
-        public void CodeGroupLibrary_WhenOpened_HasCorrectFileTitle()
+        public void TopicLibrary_WhenOpened_HasCorrectFileTitle()
         {
             // Arrange
             Mock<IKeywordSearchIndexRepository> stubSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
@@ -110,7 +110,7 @@ namespace Domain.UnitTests
             stubSearchIndexRepository
                 .Setup(stub => stub.OpenIndex(It.IsAny<string>(), It.IsAny<Version>()))
                 .Returns(keywordSearchIndex);
-            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary(stubSearchIndexRepository.Object, "TestFolder");
+            TopicLibrary codeGroupLibrary = new TopicLibrary(stubSearchIndexRepository.Object, "TestFolder");
 
             // Act
             codeGroupLibrary.Open(@"C:\parent_folder", new Version("4.0.1"));
@@ -120,12 +120,12 @@ namespace Domain.UnitTests
         }
 
         [Test]
-        public void CodeGroupLibrary_WhenCreated_CallsCreateIndexOnKeywordSearchIndexRepository()
+        public void TopicLibrary_WhenCreated_CallsCreateIndexOnKeywordSearchIndexRepository()
         {
             // Arrange
             Mock<IKeywordSearchIndexRepository> mockSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
             mockSearchIndexRepository.Setup(mock => mock.CreateIndex(It.IsAny<string>(), It.IsAny<Version>()));
-            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary(mockSearchIndexRepository.Object, "TestFolder");
+            TopicLibrary codeGroupLibrary = new TopicLibrary(mockSearchIndexRepository.Object, "TestFolder");
 
             // Act
             codeGroupLibrary.Create(@"C:\parent_folder", new Version("4.0.1"));
@@ -136,12 +136,12 @@ namespace Domain.UnitTests
         }
 
         [Test]
-        public void CodeGroupLibrary_WhenOpened_CallsOpenIndexOnKeywordSearchIndexRepository()
+        public void TopicLibrary_WhenOpened_CallsOpenIndexOnKeywordSearchIndexRepository()
         {
             // Arrange
             Mock<IKeywordSearchIndexRepository> mockSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
             mockSearchIndexRepository.Setup(mock => mock.OpenIndex(It.IsAny<string>(), It.IsAny<Version>()));
-            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary(mockSearchIndexRepository.Object, "TestFolder");
+            TopicLibrary codeGroupLibrary = new TopicLibrary(mockSearchIndexRepository.Object, "TestFolder");
 
             // Act
             codeGroupLibrary.Open(@"C:\parentFolder", new Version("1.0.0"));
@@ -153,12 +153,12 @@ namespace Domain.UnitTests
         }
 
         [Test]
-        public void CodeGroupLibrary_WhenSaved_CallsSaveIndexOnKeywordSearchIndexRepository()
+        public void TopicLibrary_WhenSaved_CallsSaveIndexOnKeywordSearchIndexRepository()
         {
             // Arrange
             Mock<IKeywordSearchIndexRepository> mockSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
             mockSearchIndexRepository.Setup(mock => mock.SaveIndex(It.IsAny<IKeywordSearchIndex>()));
-            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary(mockSearchIndexRepository.Object, "TestFolder");
+            TopicLibrary codeGroupLibrary = new TopicLibrary(mockSearchIndexRepository.Object, "TestFolder");
 
             // Act
             codeGroupLibrary.Save();
@@ -169,12 +169,12 @@ namespace Domain.UnitTests
         }
 
         [Test]
-        public void CodeGroupLibrary_WhenSavedAs_CallsSaveIndexAsOnKeywordSearchIndexRepository()
+        public void TopicLibrary_WhenSavedAs_CallsSaveIndexAsOnKeywordSearchIndexRepository()
         {
             // Arrange
             Mock<IKeywordSearchIndexRepository> mockSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
             mockSearchIndexRepository.Setup(mock => mock.SaveIndexAs(It.IsAny<IKeywordSearchIndex>(), It.IsAny<string>()));
-            CodeGroupLibrary codeGroupLibrary = new CodeGroupLibrary(mockSearchIndexRepository.Object, "TestFolder");
+            TopicLibrary codeGroupLibrary = new TopicLibrary(mockSearchIndexRepository.Object, "TestFolder");
 
             // Act
             codeGroupLibrary.SaveAs("C:\test_file_path\testfile.xml");

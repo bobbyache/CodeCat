@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using System.IO;
+using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -21,8 +21,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
-        private IPdfViewerTopicSection pdfViewerTopicSection;
-        private ICodeGroupDocumentSet codeGroupDocumentSet;
+        private IPdfViewerTopicSection topicSection;
+        private ITopicDocument topicDocument;
 
         public string Id { get; private set; }
         public string Title { get { return txtTitle.Text; } }
@@ -32,15 +32,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public bool IsModified { get; private set; }
         public bool FileExists { get { return false; } }
 
-        public PdfDocumentControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IPdfViewerTopicSection pdfDocument)
+        public PdfDocumentControl(AppFacade application, ITopicDocument topicDocument, IPdfViewerTopicSection topicSection)
         {
             InitializeComponent();
-            this.pdfViewerTopicSection = pdfDocument;
-            this.codeGroupDocumentSet = codeGroupDocumentSet;
+            this.topicSection = topicSection;
+            this.topicDocument = topicDocument;
 
             btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
             btnReload.Image = Resources.GetImage(Constants.ImageKeys.NewProject);
-            Id = pdfDocument.Id;
+            Id = topicSection.Id;
 
             ResetFieldValues();
             RegisterDataFieldEvents();
@@ -54,20 +54,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadIfExists()
         {
-            if (pdfViewerTopicSection.Exists)
+            if (topicSection.Exists)
                 //pdfControl.src = this.pdfDocument.FilePath;
-                pdfControl.LoadFile(pdfViewerTopicSection.FilePath);
+                pdfControl.LoadFile(topicSection.FilePath);
         }
 
         private void RegisterFileEvents()
         {
-            codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
-            codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
+            topicDocument.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
+            topicDocument.AfterSave += codeGroupDocumentSet_ContentSaved;
         }
 
         private void ResetFieldValues()
         {
-            txtTitle.Text = pdfViewerTopicSection.Title;
+            txtTitle.Text = topicSection.Title;
             IsModified = false;
         }
 
@@ -85,7 +85,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupDocumentSet_BeforeContentSaved(object sender, TopicEventArgs e)
         {
-            this.pdfViewerTopicSection.Title = txtTitle.Text;
+            this.topicSection.Title = txtTitle.Text;
         }
 
         private void CodeItemCtrl_Modified(object sender, EventArgs e)
@@ -107,7 +107,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            if (!pdfViewerTopicSection.FolderExists)
+            if (!topicSection.FolderExists)
             {
                 Dialogs.MustSaveGroupBeforeAction(this);
                 return;
@@ -126,7 +126,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             if (result == DialogResult.OK)
             {
-                File.Copy(filePath, pdfViewerTopicSection.FilePath, true);
+                File.Copy(filePath, topicSection.FilePath, true);
                 LoadIfExists();
             }
         }

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain.Qik;
-using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -105,7 +105,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             else if (item is IQikTemplateKeywordIndexItem)
                 imageKey = IconRepository.Documents.QikGroup;
 
-            else if (item is ICodeGroupKeywordIndexItem)
+            else if (item is ITopicKeywordIndexItem)
                 imageKey = IconRepository.Documents.CodeGroup;
 
             return imageKey;

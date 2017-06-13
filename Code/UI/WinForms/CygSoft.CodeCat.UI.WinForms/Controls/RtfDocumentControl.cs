@@ -2,8 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.CodeGroup;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -11,8 +11,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
-        private IRichTextEditorTopicSection richTextEditorTopicSection;
-        private ICodeGroupDocumentSet codeGroupDocumentSet;
+        private IRichTextEditorTopicSection topicSection;
+        private ITopicDocument topicDocument;
 
         public string Id { get; private set; }
 
@@ -29,20 +29,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public bool FileExists { get { return false; } }
 
-        public RtfDocumentControl(AppFacade application, ICodeGroupDocumentSet codeGroupDocumentSet, IRichTextEditorTopicSection rtfDocument)
+        public RtfDocumentControl(AppFacade application, ITopicDocument topicDocument, IRichTextEditorTopicSection topicSection)
         {
             InitializeComponent();
-            this.richTextEditorTopicSection = rtfDocument;
-            this.codeGroupDocumentSet = codeGroupDocumentSet;
-            Id = rtfDocument.Id;
+            this.topicSection = topicSection;
+            this.topicDocument = topicDocument;
+            Id = topicSection.Id;
 
             ResetFieldValues();
             LoadIfExists();
 
             txtTitle.TextChanged += (s, e) => SetModified();
-            codeGroupDocumentSet.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
-            codeGroupDocumentSet.AfterSave += codeGroupDocumentSet_ContentSaved;
-            rtfDocument.RequestSaveRtf += rtfDocument_RequestSaveRtf;
+            topicDocument.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
+            topicDocument.AfterSave += codeGroupDocumentSet_ContentSaved;
+            topicSection.RequestSaveRtf += rtfDocument_RequestSaveRtf;
             rtfEditor.ContentChanged += rtfEditor_ContentChanged;
         }
 
@@ -54,7 +54,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void rtfDocument_RequestSaveRtf(object sender, EventArgs e)
         {
-            rtfEditor.Save(richTextEditorTopicSection.FilePath);
+            rtfEditor.Save(topicSection.FilePath);
         }
 
         public void Revert()
@@ -74,13 +74,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadIfExists()
         {
-            if (richTextEditorTopicSection.Exists)
-                rtfEditor.OpenFile(richTextEditorTopicSection.FilePath);
+            if (topicSection.Exists)
+                rtfEditor.OpenFile(topicSection.FilePath);
         }
 
         private void ResetFieldValues()
         {
-            txtTitle.Text = richTextEditorTopicSection.Title;
+            txtTitle.Text = topicSection.Title;
             IsModified = false;
         }
 
@@ -92,7 +92,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void codeGroupDocumentSet_BeforeContentSaved(object sender, TopicEventArgs e)
         {
-            richTextEditorTopicSection.Title = txtTitle.Text;
+            topicSection.Title = txtTitle.Text;
         }
 
         private void SetChangeStatus()

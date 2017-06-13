@@ -1,8 +1,8 @@
 ﻿using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 
-namespace CygSoft.CodeCat.Domain.CodeGroup
+namespace CygSoft.CodeCat.Domain.Topics
 {
-    public interface ICodeGroupKeywordIndexItem : IKeywordIndexItem
+    public interface ITopicKeywordIndexItem : IKeywordIndexItem
     {
         string Syntax { get; set; }
     }

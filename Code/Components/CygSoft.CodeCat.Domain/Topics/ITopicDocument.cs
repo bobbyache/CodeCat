@@ -2,9 +2,9 @@
 using CygSoft.CodeCat.Domain.Base;
 using System;
 
-namespace CygSoft.CodeCat.Domain.CodeGroup
+namespace CygSoft.CodeCat.Domain.Topics
 {
-    public interface ICodeGroupDocumentSet : IPersistableTarget
+    public interface ITopicDocument : IPersistableTarget
     {
         event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
         event EventHandler<TopicSectionEventArgs> TopicSectionMovedLeft;

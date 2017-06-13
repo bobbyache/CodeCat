@@ -7,9 +7,9 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace CygSoft.CodeCat.Domain.CodeGroup
+namespace CygSoft.CodeCat.Domain.Topics
 {
-    public class CodeGroupDocumentSet : IPersistableTarget, ICodeGroupDocumentSet
+    public class TopicDocument : IPersistableTarget, ITopicDocument
     {
         public event EventHandler<TopicEventArgs> BeforeDelete;
         public event EventHandler<TopicEventArgs> AfterDelete;
@@ -28,16 +28,16 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
         public event EventHandler<TopicSectionEventArgs> TopicSectionMovedRight;
 
         private IKeywordIndexItem indexItem;
-        private CodeGroupIndex documentIndex = null;
+        private TopicIndex documentIndex = null;
 
-        public CodeGroupDocumentSet(ICodeGroupKeywordIndexItem indexItem, string folderPath)
+        public TopicDocument(ITopicKeywordIndexItem indexItem, string folderPath)
         {
             this.indexItem = indexItem;
 
             DocumentIndexPathGenerator indexPathGenerator = new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id);
-            IDocumentIndexRepository repository = new CodeGroupIndexXmlRepository(indexPathGenerator);
+            IDocumentIndexRepository repository = new TopicIndexXmlRepository(indexPathGenerator);
 
-            this.documentIndex = new CodeGroupIndex(repository, indexPathGenerator);
+            this.documentIndex = new TopicIndex(repository, indexPathGenerator);
 
             this.documentIndex.BeforeSave += documentIndex_BeforeSave;
             this.documentIndex.AfterSave += documentIndex_AfterSave;
@@ -106,12 +106,12 @@ namespace CygSoft.CodeCat.Domain.CodeGroup
             get 
             {
                 if (this.indexItem != null)
-                    return (this.indexItem as CodeGroupKeywordIndexItem).Syntax;
+                    return (this.indexItem as TopicKeywordIndexItem).Syntax;
                 return null;
             }
             set
             {
-                CodeGroupKeywordIndexItem indexItem = this.indexItem as CodeGroupKeywordIndexItem;
+                TopicKeywordIndexItem indexItem = this.indexItem as TopicKeywordIndexItem;
                 if (indexItem != null)
                     indexItem.Syntax = value;
             }
