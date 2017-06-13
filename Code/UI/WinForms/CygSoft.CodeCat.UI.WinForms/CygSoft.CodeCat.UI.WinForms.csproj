@@ -137,6 +137,12 @@
     <Compile Include="Controls\RtfEditorControl.designer.cs">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TopicSectionBaseControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TopicSectionBaseControl.Designer.cs">
+      <DependentUpon>TopicSectionBaseControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UrlGroupControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -307,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RtfEditorControl.resx">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TopicSectionBaseControl.resx">
+      <DependentUpon>TopicSectionBaseControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UrlGroupControl.resx">
       <DependentUpon>UrlGroupControl.cs</DependentUpon>
