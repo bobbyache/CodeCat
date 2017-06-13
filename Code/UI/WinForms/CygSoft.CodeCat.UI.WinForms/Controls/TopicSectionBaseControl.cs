@@ -16,9 +16,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     public partial class TopicSectionBaseControl : UserControl
     {
         public event EventHandler Modified;
-        public event EventHandler FontSizeChanged;
-        public event EventHandler SyntaxChanged;
-        public event EventHandler AfterSyntaxChanged;
 
         protected ITopicSection topicSection;
         protected AppFacade application;
@@ -75,7 +72,36 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             SetDefaultFont();
             InitializeSyntaxList();
 
+            Syntax = CodeTopicSection().Syntax;
+
             txtTitle.Text = topicSection.Title;
+            this.IsModified = false;
+
+            topicDocument.BeforeSave += topicDocument_BeforeContentSaved;
+            topicDocument.AfterSave += topicDocument_AfterSave;
+
+            RegisterEvents();
+
+            SetChangeStatus();
+        }
+
+        private ICodeTopicSection CodeTopicSection()
+        {
+            return topicSection as ICodeTopicSection;
+        }
+
+        private void topicDocument_AfterSave(object sender, TopicEventArgs e)
+        {
+            this.IsModified = false;
+            SetChangeStatus();
+        }
+
+        public event EventHandler ContentSaved;
+
+        private void topicDocument_BeforeContentSaved(object sender, TopicEventArgs e)
+        {
+            this.topicSection.Title = Title;
+            ContentSaved?.Invoke(this, new EventArgs());
         }
 
         private void InitializeSyntaxList()
@@ -105,28 +131,36 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SyntaxChanged?.Invoke(this, new EventArgs());
-
             this.lblEditStatus.Image = IconRepository.Get(Syntax).Image;
-            
-            AfterSyntaxChanged?.Invoke(this, new EventArgs());
-
-            this.IsModified = true;
-            this.Modified?.Invoke(this, new EventArgs());
-
+            Modify();
         }
 
         public bool IsModified { get; protected set; }
 
         protected void SetModified(object sender, EventArgs e)
         {
-            SetModified();
+            Modify();
         }
 
-        public void SetModified()
+        public void Modify()
         {
-            this.IsModified = true;
-            this.Modified?.Invoke(this, new EventArgs());
+            if (!IsModified)
+            {
+                IsModified = true;
+                SetChangeStatus();
+                Modified?.Invoke(this, new EventArgs());
+            }
+        }
+
+        public event EventHandler Reverted;
+        public event EventHandler UnregisterFieldEvents;
+        public event EventHandler RegisterFieldEvents;
+
+        public void Revert()
+        {
+            UnregisterFieldEvents?.Invoke(this, new EventArgs());
+            Reverted?.Invoke(this, new EventArgs());
+            RegisterFieldEvents?.Invoke(this, new EventArgs());
         }
 
         public string SyntaxFile
@@ -142,7 +176,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void cboFontSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FontSizeChanged?.Invoke(this, new EventArgs());
+            Modify();
+        }
+
+        private void SetChangeStatus()
+        {
+            lblEditStatus.Text = this.IsModified ? "Edited" : "Saved";
+            lblEditStatus.ForeColor = this.IsModified ? Color.DarkRed : Color.Black;
         }
     }
 }

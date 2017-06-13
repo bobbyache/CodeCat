@@ -29,50 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.syntaxBoxControl = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
-            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel1,
-            this.toolStripLabel5});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(656, 25);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.AutoSize = false;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(65, 22);
-            this.toolStripLabel1.Text = "Title";
-            this.toolStripLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // toolStripLabel5
-            // 
-            this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(41, 22);
-            this.toolStripLabel5.Text = "Syntax";
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.AutoSize = false;
-            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip2.Location = new System.Drawing.Point(0, 492);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(656, 25);
-            this.toolStrip2.TabIndex = 5;
-            this.toolStrip2.Text = "toolStrip2";
             // 
             // lblEditStatus
             // 
@@ -125,26 +85,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.syntaxBoxControl);
-            this.Controls.Add(this.toolStrip2);
-            this.Controls.Add(this.toolStrip1);
             this.Name = "CodeItemCtrl";
             this.Size = new System.Drawing.Size(656, 517);
-            this.Controls.SetChildIndex(this.toolStrip1, 0);
-            this.Controls.SetChildIndex(this.toolStrip2, 0);
             this.Controls.SetChildIndex(this.syntaxBoxControl, 0);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel5;
-        private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
         private Alsing.Windows.Forms.SyntaxBoxControl syntaxBoxControl;
         private Alsing.SourceCode.SyntaxDocument syntaxDocument;
