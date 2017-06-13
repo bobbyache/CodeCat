@@ -31,25 +31,21 @@
             this.components = new System.ComponentModel.Container();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.cboSyntax = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.syntaxBoxControl = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.toolStrip1.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
-            this.txtTitle,
-            this.toolStripLabel5,
-            this.cboSyntax});
+            this.toolStripLabel5});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(656, 25);
@@ -64,51 +60,32 @@
             this.toolStripLabel1.Text = "Title";
             this.toolStripLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtTitle
-            // 
-            this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(384, 25);
-            // 
             // toolStripLabel5
             // 
             this.toolStripLabel5.Name = "toolStripLabel5";
             this.toolStripLabel5.Size = new System.Drawing.Size(41, 22);
             this.toolStripLabel5.Text = "Syntax";
             // 
+            // txtTitle
+            // 
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(384, 25);
+            // 
             // cboSyntax
             // 
             this.cboSyntax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSyntax.Name = "cboSyntax";
-            this.cboSyntax.Size = new System.Drawing.Size(121, 25);
+            this.cboSyntax.Size = new System.Drawing.Size(121, 23);
             // 
             // toolStrip2
             // 
             this.toolStrip2.AutoSize = false;
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cboFontSize,
-            this.lblEditStatus});
             this.toolStrip2.Location = new System.Drawing.Point(0, 492);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(656, 25);
             this.toolStrip2.TabIndex = 5;
             this.toolStrip2.Text = "toolStrip2";
-            // 
-            // cboFontSize
-            // 
-            this.cboFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFontSize.Items.AddRange(new object[] {
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16"});
-            this.cboFontSize.Name = "cboFontSize";
-            this.cboFontSize.Size = new System.Drawing.Size(75, 25);
             // 
             // lblEditStatus
             // 
@@ -122,7 +99,7 @@
             // 
             this.syntaxBoxControl.ActiveView = Alsing.Windows.Forms.ActiveView.BottomRight;
             this.syntaxBoxControl.AutoListPosition = null;
-            this.syntaxBoxControl.AutoListSelectedText = "";
+            this.syntaxBoxControl.AutoListSelectedText = "a123";
             this.syntaxBoxControl.AutoListVisible = false;
             this.syntaxBoxControl.BackColor = System.Drawing.Color.White;
             this.syntaxBoxControl.BorderStyle = Alsing.Windows.Forms.BorderStyle.None;
@@ -133,7 +110,7 @@
             this.syntaxBoxControl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.syntaxBoxControl.InfoTipCount = 1;
             this.syntaxBoxControl.InfoTipPosition = null;
-            this.syntaxBoxControl.InfoTipSelectedIndex = 0;
+            this.syntaxBoxControl.InfoTipSelectedIndex = 1;
             this.syntaxBoxControl.InfoTipVisible = false;
             this.syntaxBoxControl.Location = new System.Drawing.Point(0, 25);
             this.syntaxBoxControl.LockCursorUpdate = false;
@@ -165,10 +142,11 @@
             this.Controls.Add(this.toolStrip1);
             this.Name = "CodeItemCtrl";
             this.Size = new System.Drawing.Size(656, 517);
+            this.Controls.SetChildIndex(this.toolStrip1, 0);
+            this.Controls.SetChildIndex(this.toolStrip2, 0);
+            this.Controls.SetChildIndex(this.syntaxBoxControl, 0);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,7 +160,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
         private System.Windows.Forms.ToolStripComboBox cboSyntax;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripComboBox cboFontSize;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
         private Alsing.Windows.Forms.SyntaxBoxControl syntaxBoxControl;
         private Alsing.SourceCode.SyntaxDocument syntaxDocument;

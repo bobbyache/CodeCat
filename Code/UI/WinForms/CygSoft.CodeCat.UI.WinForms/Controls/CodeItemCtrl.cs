@@ -11,6 +11,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
+
+
         public CodeItemCtrl(AppFacade application, ITopicDocument topicDocument, ICodeTopicSection topicSection)
             : base(application, topicDocument, topicSection)
         {
@@ -18,7 +20,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             syntaxDocument.SyntaxFile = ConfigSettings.QikTemplateSyntaxFile;
             
-            SetDefaultFont();
             InitializeSyntaxList();
 
             ResetFieldValues();
@@ -78,11 +79,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void RegisterDataFieldEvents()
         {
+            RegisterEvents();
+            FontSizeChanged += Base_FontSizeChanged;
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
-            cboFontSize.SelectedIndexChanged += cboFontSize_SelectedIndexChanged;
             txtTitle.TextChanged += SetModified;
             syntaxBoxControl.TextChanged += SetModified;
             this.Modified += CodeItemCtrl_Modified;
+        }
+
+        private void Base_FontSizeChanged(object sender, EventArgs e)
+        {
+            this.syntaxBoxControl.FontSize = base.FontSize;
         }
 
         private void CodeItemCtrl_Modified(object sender, EventArgs e)
@@ -98,17 +105,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void UnregisterDataFieldEvents()
         {
+            UnregisterEvents();
             cboSyntax.SelectedIndexChanged -= cboSyntax_SelectedIndexChanged;
-            cboFontSize.SelectedIndexChanged -= cboFontSize_SelectedIndexChanged;
             txtTitle.TextChanged -= SetModified;
             syntaxBoxControl.TextChanged -= SetModified;
             this.Modified -= CodeItemCtrl_Modified;
-        }
-
-        private void cboFontSize_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.syntaxBoxControl.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
-            this.syntaxBoxControl.FontSize = Convert.ToSingle(cboFontSize.SelectedItem);
         }
 
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
@@ -143,11 +144,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.syntaxBoxControl.Document.SyntaxFile = syntaxFile;
 
             this.lblEditStatus.Image = IconRepository.Get(syn).Image;
-        }
-
-        private void SetDefaultFont()
-        {
-            cboFontSize.SelectedIndex = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
         }
     }
 }
