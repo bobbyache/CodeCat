@@ -32,16 +32,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.versionedCodeTopicSection = versionedCodeTopicSection;
             this.Id = versionedCodeTopicSection.Id;
 
-            syntaxDocument.SyntaxFile = ConfigSettings.QikTemplateSyntaxFile;
-
             SetDefaultFont();
             InitializeSyntaxList();
 
             ResetFieldValues();
             RegisterDataFieldEvents();
             RegisterFileEvents();
-
-            //txtTitle.TextChanged += (s, e) => SetModified();
         }
 
         public string Id { get; private set; }

@@ -13,7 +13,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private ICodeTopicSection codeTopicSection;
         private AppFacade application;
-        private ICodeGroupDocumentSet codeGroupFile;
+        private ICodeGroupDocumentSet codeGroupDocumentSet;
 
         public CodeItemCtrl(AppFacade application, ICodeGroupDocumentSet codeGroupFile, ICodeTopicSection codeFile)
         {
@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             
             this.application = application;
             this.codeTopicSection = codeFile;
-            this.codeGroupFile = codeGroupFile;
+            this.codeGroupDocumentSet = codeGroupFile;
             this.Id = codeFile.Id;
 
             syntaxDocument.SyntaxFile = ConfigSettings.QikTemplateSyntaxFile;
@@ -62,8 +62,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void RegisterFileEvents()
         {
-            codeGroupFile.BeforeSave += codeGroupFile_BeforeContentSaved;
-            codeGroupFile.AfterSave += codeGroupFile_ContentSaved;
+            codeGroupDocumentSet.BeforeSave += codeGroupFile_BeforeContentSaved;
+            codeGroupDocumentSet.AfterSave += codeGroupFile_ContentSaved;
         }
 
         private void codeGroupFile_ContentSaved(object sender, TopicEventArgs e)
