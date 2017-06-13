@@ -15,11 +15,38 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class TopicSectionBaseControl : UserControl
     {
+        public event EventHandler FontSizeChanged;
+        public event EventHandler SyntaxChanged;
+        public event EventHandler AfterSyntaxChanged;
+
         protected ITopicSection topicSection;
         protected AppFacade application;
         protected ITopicDocument topicDocument;
 
         public string Id { get; private set; }
+
+        public Single FontSize { get { return Convert.ToSingle(cboFontSize.SelectedItem); } }
+
+        public string Syntax
+        {
+            get
+            {
+                string currentSyntax = cboSyntax.SelectedItem.ToString();
+                string syntax = string.IsNullOrEmpty(currentSyntax) ? ConfigSettings.DefaultSyntax.ToUpper() : currentSyntax.ToUpper();
+                return syntax;
+            }
+            set
+            {
+                string syntax = string.IsNullOrEmpty(value) ? ConfigSettings.DefaultSyntax.ToUpper() : value.ToUpper();
+                int index = cboSyntax.FindStringExact(syntax);
+                if (index >= 0)
+                    cboSyntax.SelectedIndex = index;
+            }
+        }
+
+        public int ImageKey { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
+        public Icon ImageIcon { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
+        public Image IconImage { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
 
         public TopicSectionBaseControl()
             : this(null, null, null)
@@ -41,9 +68,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.topicDocument = topicDocument;
 
             SetDefaultFont();
-            //InitializeSyntaxList();
+            InitializeSyntaxList();
 
  
+        }
+
+        private void InitializeSyntaxList()
+        {
+            cboSyntax.Items.Clear();
+            cboSyntax.Items.AddRange(application.GetSyntaxes());
         }
 
         private void SetDefaultFont()
@@ -54,16 +87,34 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         protected void RegisterEvents()
         {
             cboFontSize.SelectedIndexChanged += cboFontSize_SelectedIndexChanged;
+            cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
         }
 
         protected void UnregisterEvents()
         {
             cboFontSize.SelectedIndexChanged -= cboFontSize_SelectedIndexChanged;
+            cboSyntax.SelectedIndexChanged -= cboSyntax_SelectedIndexChanged;
         }
 
-        public event EventHandler FontSizeChanged;
+        private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SyntaxChanged?.Invoke(this, new EventArgs());
 
-        public Single FontSize { get { return Convert.ToSingle(cboFontSize.SelectedItem); } }
+            this.lblEditStatus.Image = IconRepository.Get(Syntax).Image;
+
+            AfterSyntaxChanged?.Invoke(this, new EventArgs());
+        }
+
+        public string SyntaxFile
+        {
+            get
+            {
+                string currentSyntax = cboSyntax.SelectedItem.ToString();
+                string syn = string.IsNullOrEmpty(currentSyntax) ? ConfigSettings.DefaultSyntax.ToUpper() : currentSyntax.ToUpper();
+                string syntaxFile = application.GetSyntaxFile(syn);
+                return syntaxFile;
+            }
+        }
 
         private void cboFontSize_SelectedIndexChanged(object sender, EventArgs e)
         {

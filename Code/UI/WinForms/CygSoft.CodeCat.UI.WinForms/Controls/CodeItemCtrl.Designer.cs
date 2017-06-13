@@ -33,7 +33,6 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
-            this.cboSyntax = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.syntaxBoxControl = new Alsing.Windows.Forms.SyntaxBoxControl();
@@ -70,12 +69,6 @@
             // 
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(384, 25);
-            // 
-            // cboSyntax
-            // 
-            this.cboSyntax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSyntax.Name = "cboSyntax";
-            this.cboSyntax.Size = new System.Drawing.Size(121, 23);
             // 
             // toolStrip2
             // 
@@ -158,7 +151,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private ToolStripSpringTextBox txtTitle;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
-        private System.Windows.Forms.ToolStripComboBox cboSyntax;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
         private Alsing.Windows.Forms.SyntaxBoxControl syntaxBoxControl;

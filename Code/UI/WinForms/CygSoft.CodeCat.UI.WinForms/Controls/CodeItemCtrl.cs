@@ -20,16 +20,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             syntaxDocument.SyntaxFile = ConfigSettings.QikTemplateSyntaxFile;
             
-            InitializeSyntaxList();
-
             ResetFieldValues();
             RegisterDataFieldEvents();
             RegisterFileEvents();
         }
 
-        public int ImageKey { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
-        public Icon ImageIcon { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
-        public Image IconImage { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
         
         public string Title { get { return this.txtTitle.Text; } }
         public string TemplateText { get { return this.syntaxDocument.Text; } }
@@ -52,7 +47,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             txtTitle.Text = topicSection.Title;
             syntaxBoxControl.Document.Text = CodeTopicSection().Text;
-            SelectSyntax(CodeTopicSection().Syntax);
+            base.Syntax = CodeTopicSection().Syntax;
 
             this.IsModified = false;
             SetChangeStatus();
@@ -74,17 +69,27 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             this.topicSection.Title = txtTitle.Text;
             this.CodeTopicSection().Text = syntaxDocument.Text;
-            this.CodeTopicSection().Syntax = cboSyntax.SelectedItem.ToString();
+            this.CodeTopicSection().Syntax = base.Syntax;
         }
 
         private void RegisterDataFieldEvents()
         {
             RegisterEvents();
             FontSizeChanged += Base_FontSizeChanged;
-            cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
+            SyntaxChanged += Base_SyntaxChanged;
             txtTitle.TextChanged += SetModified;
             syntaxBoxControl.TextChanged += SetModified;
             this.Modified += CodeItemCtrl_Modified;
+        }
+
+        private void Base_SyntaxChanged(object sender, EventArgs e)
+        {
+            // don't want the syntax box to fire any events here...
+            syntaxBoxControl.TextChanged -= SetModified;
+            this.syntaxBoxControl.Document.SyntaxFile = base.SyntaxFile;
+            this.lblEditStatus.Image = IconRepository.Get(Syntax).Image;
+            syntaxBoxControl.TextChanged += SetModified;
+            SetModified(this, e);
         }
 
         private void Base_FontSizeChanged(object sender, EventArgs e)
@@ -106,44 +111,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void UnregisterDataFieldEvents()
         {
             UnregisterEvents();
-            cboSyntax.SelectedIndexChanged -= cboSyntax_SelectedIndexChanged;
             txtTitle.TextChanged -= SetModified;
             syntaxBoxControl.TextChanged -= SetModified;
             this.Modified -= CodeItemCtrl_Modified;
-        }
-
-        private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // don't want the syntax box to fire any events here...
-            syntaxBoxControl.TextChanged -= SetModified;
-            SelectSyntax(cboSyntax.SelectedItem.ToString());
-            syntaxBoxControl.TextChanged += SetModified;
-            SetModified(this, e);
         }
 
         private void SetModified(object sender, EventArgs e)
         {
             this.IsModified = true;
             this.Modified?.Invoke(this, new EventArgs());
-        }
-
-        private void InitializeSyntaxList()
-        {
-            cboSyntax.Items.Clear();
-            cboSyntax.Items.AddRange(application.GetSyntaxes());
-        }
-
-        private void SelectSyntax(string syntax)
-        {
-            string syn = string.IsNullOrEmpty(syntax) ? ConfigSettings.DefaultSyntax.ToUpper() : syntax.ToUpper();
-            int index = cboSyntax.FindStringExact(syn);
-            if (index >= 0)
-                cboSyntax.SelectedIndex = index;
-
-            string syntaxFile = application.GetSyntaxFile(syn);
-            this.syntaxBoxControl.Document.SyntaxFile = syntaxFile;
-
-            this.lblEditStatus.Image = IconRepository.Get(syn).Image;
         }
     }
 }
