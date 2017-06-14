@@ -16,6 +16,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             get
             {
+                if (this.SelectedItem == null)
+                    return null;
+
                 string currentSyntax = this.SelectedItem.ToString();
                 string syntax = string.IsNullOrEmpty(currentSyntax) ? ConfigSettings.DefaultSyntax.ToUpper() : currentSyntax.ToUpper();
                 return syntax;

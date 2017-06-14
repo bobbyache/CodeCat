@@ -10,6 +10,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
     public partial class BaseCodeTopicSectionControl : BaseTopicSectionControl
     {
         public event EventHandler FontModified;
+        public event EventHandler SyntaxModified;
 
         private ToolStripLabel lblSyntax = new ToolStripLabel("lblSyntax");
         private ToolStripSyntaxComboBox cboSyntax = new ToolStripSyntaxComboBox();
@@ -19,7 +20,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public override Icon ImageIcon { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
         public override Image IconImage { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
 
-        public string SyntaxFile {  get { return application.GetSyntaxFile(cboSyntax.Syntax); } }
+        
 
         public string Syntax
         {
@@ -29,7 +30,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         public Single FontSize { get { return Convert.ToSingle(cboFontSize.SelectedItem); } }
 
-        public string TemplateText { get { return this.syntaxDocument.Text; } }
+        
 
         public BaseCodeTopicSectionControl()
             : this(null, null, null)
@@ -57,27 +58,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             cboSyntax.Syntax = CodeTopicSection().Syntax;
             base.SetStateImage(IconRepository.Get(Syntax).Image);
 
-            syntaxDocument.SyntaxFile = SyntaxFile;
-            syntaxBoxControl.Document.Text = CodeTopicSection().Text;
-
-            syntaxBoxControl.TextChanged += (s, e) =>
-            {
-                if (!base.IsModified)
-                    base.Modify();
-            };
-
-            cboFontSize.SelectedIndexChanged += (s, e) =>
-            {
-                if (syntaxBoxControl.FontSize != FontSize)
-                    syntaxBoxControl.FontSize = FontSize;
-                FontModified?.Invoke(this, new EventArgs());
-            };
-
+            cboFontSize.SelectedIndexChanged += (s, e) => { FontModified?.Invoke(this, new EventArgs()); };
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
-            Reverted += Base_Reverted;
-            ContentSaved += Base_ContentSaved;
-            UnregisterFieldEvents += Base_UnregisterFieldEvents;
-            RegisterFieldEvents += Base_RegisterFieldEvents;
         }
 
         private ICodeTopicSection CodeTopicSection()
@@ -85,32 +67,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             return base.topicSection as ICodeTopicSection;
         }
 
-        private void Base_RegisterFieldEvents(object sender, EventArgs e)
-        {
-            syntaxBoxControl.TextChanged += SetModified;
-        }
-
-        private void Base_UnregisterFieldEvents(object sender, EventArgs e)
-        {
-            syntaxBoxControl.TextChanged -= SetModified;
-        }
-
-        private void Base_Reverted(object sender, EventArgs e)
-        {
-            syntaxBoxControl.Document.Text = CodeTopicSection().Text;
-        }
-
-        private void Base_ContentSaved(object sender, EventArgs e)
-        {
-            this.CodeTopicSection().Text = syntaxDocument.Text;
-            this.CodeTopicSection().Syntax = Syntax;
-        }
-
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (syntaxBoxControl.Document.SyntaxFile != SyntaxFile)
-                syntaxBoxControl.Document.SyntaxFile = SyntaxFile;
-
+            SyntaxModified?.Invoke(this, new EventArgs());
             base.SetStateImage(IconRepository.Get(Syntax).Image);
             base.Modify();
         }
