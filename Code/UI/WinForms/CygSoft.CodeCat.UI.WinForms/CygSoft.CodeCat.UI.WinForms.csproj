@@ -143,10 +143,10 @@
     <Compile Include="Controls\ToolStripSyntaxComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\TopicSectionBaseControl.cs">
+    <Compile Include="Controls\TopicSections\TopicSectionBaseControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\TopicSectionBaseControl.Designer.cs">
+    <Compile Include="Controls\TopicSections\TopicSectionBaseControl.Designer.cs">
       <DependentUpon>TopicSectionBaseControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\UrlGroupControl.cs">
@@ -320,7 +320,7 @@
     <EmbeddedResource Include="Controls\RtfEditorControl.resx">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSectionBaseControl.resx">
+    <EmbeddedResource Include="Controls\TopicSections\TopicSectionBaseControl.resx">
       <DependentUpon>TopicSectionBaseControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UrlGroupControl.resx">
