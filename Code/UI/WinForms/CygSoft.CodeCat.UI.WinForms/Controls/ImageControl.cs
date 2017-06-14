@@ -9,7 +9,7 @@ using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    public partial class ImageControl :  UserControl, IDocumentItemControl
+    public partial class ImageControl :  UserControl, ITopicSectionBaseControl
     {
         public event EventHandler Modified;
 

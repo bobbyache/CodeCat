@@ -10,7 +10,7 @@ using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    public partial class UrlGroupControl : UserControl, IDocumentItemControl
+    public partial class UrlGroupControl : UserControl, ITopicSectionBaseControl
     {
         private IWebReferencesTopicSection topicSection;
         private ITopicDocument topicDocument;

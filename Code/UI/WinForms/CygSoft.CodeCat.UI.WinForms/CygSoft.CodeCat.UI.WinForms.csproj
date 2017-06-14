@@ -91,7 +91,7 @@
     <Compile Include="Controls\ImageControl.Designer.cs">
       <DependentUpon>ImageControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IDocumentItemControl.cs" />
+    <Compile Include="Controls\ITopicSectionBaseControl.cs" />
     <Compile Include="Controls\ImageSetControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

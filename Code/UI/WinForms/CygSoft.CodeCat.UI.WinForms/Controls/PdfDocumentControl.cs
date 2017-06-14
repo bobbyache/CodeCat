@@ -17,7 +17,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     // TODO: Rename this to PdfDocumentCtrl. Also consider moving all items controls into their own directory?
     // TODO: Try and understand this for when your PDF document just dies on you when changing panes.
     // https://sourceforge.net/p/dockpanelsuite/discussion/402316/thread/f29acfe2/
-    public partial class PdfDocumentControl :  UserControl, IDocumentItemControl
+    public partial class PdfDocumentControl :  UserControl, ITopicSectionBaseControl
     {
         public event EventHandler Modified;
 

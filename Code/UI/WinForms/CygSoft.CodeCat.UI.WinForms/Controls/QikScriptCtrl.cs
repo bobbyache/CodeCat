@@ -9,7 +9,7 @@ using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    public partial class QikScriptCtrl : UserControl, IDocumentItemControl
+    public partial class QikScriptCtrl : UserControl, ITopicSectionBaseControl
     {
         public event EventHandler Modified;
 

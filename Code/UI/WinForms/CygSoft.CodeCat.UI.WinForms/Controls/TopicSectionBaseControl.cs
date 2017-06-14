@@ -13,9 +13,9 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    public partial class TopicSectionBaseControl : UserControl
+    public partial class TopicSectionBaseControl : UserControl, ITopicSectionBaseControl
     {
-        public event EventHandler FontChanged;
+        public event EventHandler FontModified;
         public event EventHandler Modified;
         public event EventHandler ContentSaved;
         public event EventHandler Reverted;
@@ -37,6 +37,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public virtual Image IconImage { get { return IconRepository.Get("TEXT").Image; } }
 
         public bool IsModified { get; protected set; }
+        public bool FileExists { get { return topicSection.Exists; } }
 
         public TopicSectionBaseControl()
             : this(null, null, null)
@@ -122,7 +123,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void cboFontSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FontChanged?.Invoke(this, new EventArgs());
+            FontModified?.Invoke(this, new EventArgs());
         }
 
         private void topicDocument_AfterSave(object sender, TopicEventArgs e)

@@ -29,9 +29,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             return tabPageDictionary.ContainsKey(id);
         }
 
-        public IDocumentItemControl FindDocumentControl(string Id)
+        public ITopicSectionBaseControl FindDocumentControl(string Id)
         {
-            return tabPageDictionary[Id].Controls[0] as IDocumentItemControl;
+            return tabPageDictionary[Id].Controls[0] as ITopicSectionBaseControl;
         }
 
         public void OrderTabs(ITopicSection[] topicSections)
@@ -44,7 +44,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             }
         }
 
-        public TabPage AddTab(ITopicSection topicSection, IDocumentItemControl tabUserControl, bool visible = true, bool select = false)
+        public TabPage AddTab(ITopicSection topicSection, ITopicSectionBaseControl tabUserControl, bool visible = true, bool select = false)
         {
             TabPage tabPage = new TabPage(topicSection.Title);
             tabPage.Name = topicSection.Id;
@@ -75,7 +75,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
         public void RemoveTab(string id)
         {
             TabPage tabPage = tabPageDictionary[id];
-            IDocumentItemControl itemControl = FindDocumentControl(id);
+            ITopicSectionBaseControl itemControl = FindDocumentControl(id);
             itemControl.Modified -= tabUserControl_Modified;
 
             if (BeforeDeleteTab != null)
@@ -115,7 +115,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 ToolStripMenuItem item = tabMenuButton.DropDownItems[tabPage.Name] as ToolStripMenuItem;
                 item.Click -= item_Click;
 
-                IDocumentItemControl itemControl = FindDocumentControl(tabPage.Name);
+                ITopicSectionBaseControl itemControl = FindDocumentControl(tabPage.Name);
                 itemControl.Modified -= tabUserControl_Modified;
 
                 if (BeforeDeleteTab != null)
@@ -129,7 +129,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         private void AddTabMenuItem(string id)
         {
-            IDocumentItemControl docControl = FindDocumentControl(id);
+            ITopicSectionBaseControl docControl = FindDocumentControl(id);
             ToolStripMenuItem item = new ToolStripMenuItem();
             item.Name = docControl.Id;
             item.Text = docControl.Title;
@@ -178,7 +178,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         private void tabUserControl_Modified(object sender, EventArgs e)
         {
-            IDocumentItemControl control = sender as IDocumentItemControl;
+            ITopicSectionBaseControl control = sender as ITopicSectionBaseControl;
             TabPage tabPage = tabPageDictionary[control.Id];
             ToolStripMenuItem item = this.tabMenuButton.DropDownItems[control.Id] as ToolStripMenuItem;
 

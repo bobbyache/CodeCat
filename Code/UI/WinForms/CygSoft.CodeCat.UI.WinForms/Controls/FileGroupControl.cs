@@ -15,7 +15,7 @@ using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    public partial class FileGroupControl : UserControl, IDocumentItemControl
+    public partial class FileGroupControl : UserControl, ITopicSectionBaseControl
     {
         private IFileAttachmentsTopicSection topicSection;
         private ITopicDocument topicDocument;

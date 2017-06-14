@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    public interface IDocumentItemControl
+    public interface ITopicSectionBaseControl
     {
         event EventHandler Modified;
 

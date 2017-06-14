@@ -13,7 +13,7 @@ using CygSoft.CodeCat.Domain.Topics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    public partial class VersionedCodeControl : UserControl, IDocumentItemControl
+    public partial class VersionedCodeControl : UserControl, ITopicSectionBaseControl
     {
         public event EventHandler Modified;
 

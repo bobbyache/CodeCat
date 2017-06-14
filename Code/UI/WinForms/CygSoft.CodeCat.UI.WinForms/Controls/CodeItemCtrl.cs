@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    public partial class CodeItemCtrl : TopicSectionBaseControl, IDocumentItemControl
+    public partial class CodeItemCtrl : TopicSectionBaseControl
     {
         private ToolStripLabel lblSyntax = new ToolStripLabel("lblSyntax");
         private ToolStripComboBox cboSyntax = new ToolStripComboBox("cboSyntax");
@@ -17,7 +17,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public override Image IconImage { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
 
         public string TemplateText { get { return this.syntaxDocument.Text; } }
-        public bool FileExists { get { return topicSection.Exists; } }
 
         public string SyntaxFile
         {
@@ -67,7 +66,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             };
 
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
-            FontChanged += Base_FontChanged;
+            FontModified += Base_FontChanged;
             Reverted += Base_Reverted;
             ContentSaved += Base_ContentSaved;
             UnregisterFieldEvents += Base_UnregisterFieldEvents;
