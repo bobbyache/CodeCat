@@ -73,11 +73,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlGraphics.cs" />
-    <Compile Include="Controls\TopicSections\CodeTopicSectionControl.cs">
+    <Compile Include="Controls\TopicSections\BaseCodeTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\TopicSections\CodeTopicSectionControl.Designer.cs">
-      <DependentUpon>CodeTopicSectionControl.cs</DependentUpon>
+    <Compile Include="Controls\TopicSections\BaseCodeTopicSectionControl.Designer.cs">
+      <DependentUpon>BaseCodeTopicSectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\FileGroupControl.cs">
       <SubType>UserControl</SubType>
@@ -143,11 +143,17 @@
     <Compile Include="Controls\ToolStripSyntaxComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\TopicSections\TopicSectionBaseControl.cs">
+    <Compile Include="Controls\TopicSections\BaseTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\TopicSections\TopicSectionBaseControl.Designer.cs">
-      <DependentUpon>TopicSectionBaseControl.cs</DependentUpon>
+    <Compile Include="Controls\TopicSections\BaseTopicSectionControl.Designer.cs">
+      <DependentUpon>BaseTopicSectionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TopicSections\SimpleCodeTopicSectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TopicSections\SimpleCodeTopicSectionControl.Designer.cs">
+      <DependentUpon>SimpleCodeTopicSectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\UrlGroupControl.cs">
       <SubType>UserControl</SubType>
@@ -287,8 +293,8 @@
       <DependentUpon>UiResource.resx</DependentUpon>
     </Compile>
     <Compile Include="WordWrapper.cs" />
-    <EmbeddedResource Include="Controls\TopicSections\CodeTopicSectionControl.resx">
-      <DependentUpon>CodeTopicSectionControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\TopicSections\BaseCodeTopicSectionControl.resx">
+      <DependentUpon>BaseCodeTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CodeSearchResultsControl.resx">
       <DependentUpon>CodeSearchResultsControl.cs</DependentUpon>
@@ -320,8 +326,11 @@
     <EmbeddedResource Include="Controls\RtfEditorControl.resx">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\TopicSectionBaseControl.resx">
-      <DependentUpon>TopicSectionBaseControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\TopicSections\BaseTopicSectionControl.resx">
+      <DependentUpon>BaseTopicSectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TopicSections\SimpleCodeTopicSectionControl.resx">
+      <DependentUpon>SimpleCodeTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UrlGroupControl.resx">
       <DependentUpon>UrlGroupControl.cs</DependentUpon>

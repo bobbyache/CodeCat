@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
-    public partial class CodeTopicSectionControl : TopicSectionBaseControl
+    public partial class BaseCodeTopicSectionControl : BaseTopicSectionControl
     {
         public event EventHandler FontModified;
 
@@ -31,10 +31,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         public string TemplateText { get { return this.syntaxDocument.Text; } }
 
-        public CodeTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ICodeTopicSection topicSection)
+        public BaseCodeTopicSectionControl()
+            : this(null, null, null)
+        {
+
+        }
+
+        public BaseCodeTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ICodeTopicSection topicSection)
             : base(application, topicDocument, topicSection)
         {
             InitializeComponent();
+
+            if (topicDocument == null)
+                return;
 
             lblSyntax.Text = "Syntax";
 

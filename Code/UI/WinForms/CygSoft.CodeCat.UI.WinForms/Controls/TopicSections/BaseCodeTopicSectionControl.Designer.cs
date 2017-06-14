@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
-    partial class CodeTopicSectionControl
+    partial class BaseCodeTopicSectionControl
     {
         /// <summary> 
         /// Required designer variable.

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
-    public partial class TopicSectionBaseControl : UserControl, ITopicSectionBaseControl
+    public partial class BaseTopicSectionControl : UserControl, ITopicSectionBaseControl
     {
         public event EventHandler Modified;
         public event EventHandler ContentSaved;
@@ -20,10 +20,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         protected ITopicDocument topicDocument;
 
         public string Id { get; private set; }
-
         public string Title { get { return this.txtTitle.Text; } }
-
-        
 
         public virtual int ImageKey {  get { return IconRepository.Get("TEXT").Index; } }
         public virtual Icon ImageIcon {  get { return IconRepository.Get("TEXT").Icon; } }
@@ -32,13 +29,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public bool IsModified { get; protected set; }
         public bool FileExists { get { return topicSection.Exists; } }
 
-        public TopicSectionBaseControl()
+        public BaseTopicSectionControl()
             : this(null, null, null)
         {
-            
+
         }
 
-        public TopicSectionBaseControl(AppFacade application, ITopicDocument topicDocument, ITopicSection topicSection)
+        public BaseTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ITopicSection topicSection)
         {
             InitializeComponent();
 
@@ -56,7 +53,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
             topicDocument.BeforeSave += topicDocument_BeforeContentSaved;
             topicDocument.AfterSave += topicDocument_AfterSave;
-            txtTitle.TextChanged += SetModified;
+            txtTitle.TextChanged += (s, e) => Modify(forceInvoke: true);
 
             SetChangeStatus();
         }
@@ -66,9 +63,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             this.lblEditStatus.Image = image;
         }
 
-        public void Modify()
+        public void Modify(bool forceInvoke = false)
         {
-            if (!IsModified)
+            if (!IsModified || forceInvoke)
             {
                 IsModified = true;
                 SetChangeStatus();

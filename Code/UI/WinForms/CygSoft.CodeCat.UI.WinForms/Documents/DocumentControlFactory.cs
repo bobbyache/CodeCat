@@ -92,7 +92,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         private static ITopicSectionBaseControl NewCodeControl(ITopicSection topicSection, IPersistableTarget topicDocument, AppFacade application, EventHandler modifiedEventHandler)
         {
-            CodeTopicSectionControl documentControl = new CodeTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as ICodeTopicSection);
+            SimpleCodeTopicSectionControl documentControl = new SimpleCodeTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as ICodeTopicSection);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
