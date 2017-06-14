@@ -10,52 +10,36 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     public partial class CodeItemCtrl : TopicSectionBaseControl
     {
         private ToolStripLabel lblSyntax = new ToolStripLabel("lblSyntax");
-        private ToolStripComboBox cboSyntax = new ToolStripComboBox("cboSyntax");
+        private ToolStripSyntaxComboBox cboSyntax = new ToolStripSyntaxComboBox();
 
         public override int ImageKey { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
         public override Icon ImageIcon { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
         public override Image IconImage { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
 
-        public string TemplateText { get { return this.syntaxDocument.Text; } }
-
-        public string SyntaxFile
-        {
-            get
-            {
-                string currentSyntax = cboSyntax.SelectedItem.ToString();
-                string syn = string.IsNullOrEmpty(currentSyntax) ? ConfigSettings.DefaultSyntax.ToUpper() : currentSyntax.ToUpper();
-                string syntaxFile = application.GetSyntaxFile(syn);
-                return syntaxFile;
-            }
-        }
+        public string SyntaxFile {  get { return application.GetSyntaxFile(cboSyntax.Syntax); } }
 
         public string Syntax
         {
-            get
-            {
-                string currentSyntax = cboSyntax.SelectedItem.ToString();
-                string syntax = string.IsNullOrEmpty(currentSyntax) ? ConfigSettings.DefaultSyntax.ToUpper() : currentSyntax.ToUpper();
-                return syntax;
-            }
-            set
-            {
-                string syntax = string.IsNullOrEmpty(value) ? ConfigSettings.DefaultSyntax.ToUpper() : value.ToUpper();
-                int index = cboSyntax.FindStringExact(syntax);
-                if (index >= 0)
-                    cboSyntax.SelectedIndex = index;
-            }
+            get { return cboSyntax.Syntax; }
+            set { cboSyntax.Syntax = value; }
         }
+
+        public string TemplateText { get { return this.syntaxDocument.Text; } }
 
         public CodeItemCtrl(AppFacade application, ITopicDocument topicDocument, ICodeTopicSection topicSection)
             : base(application, topicDocument, topicSection)
         {
             InitializeComponent();
+
             lblSyntax.Text = "Syntax";
+            cboSyntax.Name = "cboSyntax";
 
             HeaderToolstrip.Items.Add(lblSyntax);
             HeaderToolstrip.Items.Add(cboSyntax);
-            InitializeSyntaxList();
-            Syntax = CodeTopicSection().Syntax;
+
+            cboSyntax.LoadSyntaxes(application.GetSyntaxes());
+            cboSyntax.Syntax = CodeTopicSection().Syntax;
+
             syntaxDocument.SyntaxFile = SyntaxFile;
             syntaxBoxControl.Document.Text = CodeTopicSection().Text;
 
@@ -77,12 +61,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (syntaxBoxControl.FontSize != base.FontSize)
                 syntaxBoxControl.FontSize = base.FontSize;
-        }
-
-        private void InitializeSyntaxList()
-        {
-            cboSyntax.Items.Clear();
-            cboSyntax.Items.AddRange(application.GetSyntaxes());
         }
 
         private ICodeTopicSection CodeTopicSection()
