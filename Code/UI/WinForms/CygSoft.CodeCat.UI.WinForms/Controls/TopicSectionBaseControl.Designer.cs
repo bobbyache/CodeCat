@@ -32,7 +32,6 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.FooterToolstrip = new System.Windows.Forms.ToolStrip();
-            this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.HeaderToolstrip.SuspendLayout();
             this.FooterToolstrip.SuspendLayout();
@@ -67,29 +66,13 @@
             this.FooterToolstrip.AutoSize = false;
             this.FooterToolstrip.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.FooterToolstrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cboFontSize,
             this.lblEditStatus});
             this.FooterToolstrip.Location = new System.Drawing.Point(0, 508);
             this.FooterToolstrip.Name = "FooterToolstrip";
             this.FooterToolstrip.Size = new System.Drawing.Size(861, 25);
             this.FooterToolstrip.TabIndex = 6;
             this.FooterToolstrip.Text = "toolStrip2";
-            // 
-            // cboFontSize
-            // 
-            this.cboFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFontSize.Items.AddRange(new object[] {
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16"});
-            this.cboFontSize.Name = "cboFontSize";
-            this.cboFontSize.Size = new System.Drawing.Size(75, 25);
+
             // 
             // lblEditStatus
             // 
@@ -120,7 +103,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         protected System.Windows.Forms.ToolStrip FooterToolstrip;
         protected System.Windows.Forms.ToolStrip HeaderToolstrip;
-        private System.Windows.Forms.ToolStripComboBox cboFontSize;
+
         private ToolStripSpringTextBox txtTitle;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
     }

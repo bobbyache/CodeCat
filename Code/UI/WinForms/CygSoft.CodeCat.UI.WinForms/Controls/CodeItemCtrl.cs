@@ -9,8 +9,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class CodeItemCtrl : TopicSectionBaseControl
     {
+        public event EventHandler FontModified;
+
         private ToolStripLabel lblSyntax = new ToolStripLabel("lblSyntax");
         private ToolStripSyntaxComboBox cboSyntax = new ToolStripSyntaxComboBox();
+        private ToolStripFontSizeComboBox cboFontSize = new ToolStripFontSizeComboBox();
 
         public override int ImageKey { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
         public override Icon ImageIcon { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
@@ -24,6 +27,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             set { cboSyntax.Syntax = value; }
         }
 
+        public Single FontSize { get { return Convert.ToSingle(cboFontSize.SelectedItem); } }
+
         public string TemplateText { get { return this.syntaxDocument.Text; } }
 
         public CodeItemCtrl(AppFacade application, ITopicDocument topicDocument, ICodeTopicSection topicSection)
@@ -32,10 +37,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             InitializeComponent();
 
             lblSyntax.Text = "Syntax";
-            cboSyntax.Name = "cboSyntax";
 
             HeaderToolstrip.Items.Add(lblSyntax);
             HeaderToolstrip.Items.Add(cboSyntax);
+            FooterToolstrip.Items.Insert(0, cboFontSize);
+
+            cboFontSize.SetFont(ConfigSettings.DefaultFontSize);
 
             cboSyntax.LoadSyntaxes(application.GetSyntaxes());
             cboSyntax.Syntax = CodeTopicSection().Syntax;
@@ -49,18 +56,18 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                     base.Modify();
             };
 
+            cboFontSize.SelectedIndexChanged += (s, e) =>
+            {
+                if (syntaxBoxControl.FontSize != FontSize)
+                    syntaxBoxControl.FontSize = FontSize;
+                FontModified?.Invoke(this, new EventArgs());
+            };
+
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
-            FontModified += Base_FontChanged;
             Reverted += Base_Reverted;
             ContentSaved += Base_ContentSaved;
             UnregisterFieldEvents += Base_UnregisterFieldEvents;
             RegisterFieldEvents += Base_RegisterFieldEvents;
-        }
-
-        private void Base_FontChanged(object sender, EventArgs e)
-        {
-            if (syntaxBoxControl.FontSize != base.FontSize)
-                syntaxBoxControl.FontSize = base.FontSize;
         }
 
         private ICodeTopicSection CodeTopicSection()

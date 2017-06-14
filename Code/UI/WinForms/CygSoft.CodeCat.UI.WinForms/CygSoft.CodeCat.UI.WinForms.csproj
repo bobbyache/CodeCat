@@ -137,6 +137,9 @@
     <Compile Include="Controls\RtfEditorControl.designer.cs">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ToolStripFontSizeComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ToolStripSyntaxComboBox.cs">
       <SubType>Component</SubType>
     </Compile>

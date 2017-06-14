@@ -15,7 +15,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     public partial class TopicSectionBaseControl : UserControl, ITopicSectionBaseControl
     {
-        public event EventHandler FontModified;
         public event EventHandler Modified;
         public event EventHandler ContentSaved;
         public event EventHandler Reverted;
@@ -30,7 +29,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public string Title { get { return this.txtTitle.Text; } }
 
-        public Single FontSize { get { return Convert.ToSingle(cboFontSize.SelectedItem); } }
+        
 
         public virtual int ImageKey {  get { return IconRepository.Get("TEXT").Index; } }
         public virtual Icon ImageIcon {  get { return IconRepository.Get("TEXT").Icon; } }
@@ -57,16 +56,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.application = application;
             this.topicSection = topicSection;
             this.topicDocument = topicDocument;
-
-            SetDefaultFont();
-
+            
             txtTitle.Text = topicSection.Title;
             this.IsModified = false;
 
             topicDocument.BeforeSave += topicDocument_BeforeContentSaved;
             topicDocument.AfterSave += topicDocument_AfterSave;
-
-            RegisterEvents();
+            txtTitle.TextChanged += SetModified;
 
             SetChangeStatus();
         }
@@ -94,12 +90,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             RegisterFieldEvents?.Invoke(this, new EventArgs());
         }
 
-        protected void RegisterEvents()
-        {
-            cboFontSize.SelectedIndexChanged += cboFontSize_SelectedIndexChanged;
-            txtTitle.TextChanged += SetModified;
-        }
-
         protected void SetModified(object sender, EventArgs e)
         {
             Modify();
@@ -110,20 +100,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             return topicSection as ICodeTopicSection;
         }
 
-        private void SetDefaultFont()
-        {
-            cboFontSize.SelectedIndex = cboFontSize.FindStringExact(ConfigSettings.DefaultFontSize.ToString());
-        }
-
         private void SetChangeStatus()
         {
             lblEditStatus.Text = this.IsModified ? "Edited" : "Saved";
             lblEditStatus.ForeColor = this.IsModified ? Color.DarkRed : Color.Black;
-        }
-
-        private void cboFontSize_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FontModified?.Invoke(this, new EventArgs());
         }
 
         private void topicDocument_AfterSave(object sender, TopicEventArgs e)
