@@ -4,6 +4,7 @@ using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.Controls;
+using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
 using System;
 
 namespace CygSoft.CodeCat.UI.WinForms.Documents
@@ -91,14 +92,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
         private static ITopicSectionBaseControl NewCodeControl(ITopicSection topicSection, IPersistableTarget topicDocument, AppFacade application, EventHandler modifiedEventHandler)
         {
-            CodeItemCtrl documentControl = new CodeItemCtrl(application, topicDocument as ITopicDocument, topicSection as ICodeTopicSection);
+            CodeTopicSectionControl documentControl = new CodeTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as ICodeTopicSection);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }
 
         private static ITopicSectionBaseControl NewVersionedCodeControl(ITopicSection topicSection, IPersistableTarget topicDocument, AppFacade application, EventHandler modifiedEventHandler)
         {
-            VersionedCodeControl documentControl = new VersionedCodeControl(application, topicDocument as ITopicDocument, topicSection as IVersionedCodeTopicSection);
+            VersionedCodeTopicSectionControl documentControl = new VersionedCodeTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as IVersionedCodeTopicSection);
             documentControl.Modified += modifiedEventHandler;
             return documentControl;
         }

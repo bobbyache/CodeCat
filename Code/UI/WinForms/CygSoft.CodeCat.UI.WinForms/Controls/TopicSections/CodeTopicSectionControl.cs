@@ -5,9 +5,9 @@ using CygSoft.CodeCat.Domain.Topics;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace CygSoft.CodeCat.UI.WinForms.Controls
+namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
-    public partial class CodeItemCtrl : TopicSectionBaseControl
+    public partial class CodeTopicSectionControl : TopicSectionBaseControl
     {
         public event EventHandler FontModified;
 
@@ -31,7 +31,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public string TemplateText { get { return this.syntaxDocument.Text; } }
 
-        public CodeItemCtrl(AppFacade application, ITopicDocument topicDocument, ICodeTopicSection topicSection)
+        public CodeTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ICodeTopicSection topicSection)
             : base(application, topicDocument, topicSection)
         {
             InitializeComponent();

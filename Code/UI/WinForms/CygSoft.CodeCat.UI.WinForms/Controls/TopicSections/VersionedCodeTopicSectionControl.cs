@@ -11,9 +11,9 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
 
-namespace CygSoft.CodeCat.UI.WinForms.Controls
+namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
-    public partial class VersionedCodeControl : UserControl, ITopicSectionBaseControl
+    public partial class VersionedCodeTopicSectionControl : UserControl, ITopicSectionBaseControl
     {
         public event EventHandler Modified;
 
@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private ITopicDocument topicDocument;
         private IVersionedCodeTopicSection topicSection;
 
-        public VersionedCodeControl(AppFacade application, ITopicDocument topicDocument, IVersionedCodeTopicSection topicSection)
+        public VersionedCodeTopicSectionControl(AppFacade application, ITopicDocument topicDocument, IVersionedCodeTopicSection topicSection)
         {
             InitializeComponent();
 

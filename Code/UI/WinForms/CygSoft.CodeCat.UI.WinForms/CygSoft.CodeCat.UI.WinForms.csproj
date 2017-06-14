@@ -73,11 +73,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlGraphics.cs" />
-    <Compile Include="Controls\CodeItemCtrl.cs">
+    <Compile Include="Controls\TopicSections\CodeTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\CodeItemCtrl.Designer.cs">
-      <DependentUpon>CodeItemCtrl.cs</DependentUpon>
+    <Compile Include="Controls\TopicSections\CodeTopicSectionControl.Designer.cs">
+      <DependentUpon>CodeTopicSectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\FileGroupControl.cs">
       <SubType>UserControl</SubType>
@@ -161,11 +161,11 @@
     <Compile Include="Controls\CodeSearchResultsControl.Designer.cs">
       <DependentUpon>CodeSearchResultsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\VersionedCodeControl.cs">
+    <Compile Include="Controls\TopicSections\VersionedCodeTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\VersionedCodeControl.Designer.cs">
-      <DependentUpon>VersionedCodeControl.cs</DependentUpon>
+    <Compile Include="Controls\TopicSections\VersionedCodeTopicSectionControl.Designer.cs">
+      <DependentUpon>VersionedCodeTopicSectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\AboutBoxDialog.cs">
       <SubType>Form</SubType>
@@ -287,8 +287,8 @@
       <DependentUpon>UiResource.resx</DependentUpon>
     </Compile>
     <Compile Include="WordWrapper.cs" />
-    <EmbeddedResource Include="Controls\CodeItemCtrl.resx">
-      <DependentUpon>CodeItemCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\TopicSections\CodeTopicSectionControl.resx">
+      <DependentUpon>CodeTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CodeSearchResultsControl.resx">
       <DependentUpon>CodeSearchResultsControl.cs</DependentUpon>
@@ -326,8 +326,8 @@
     <EmbeddedResource Include="Controls\UrlGroupControl.resx">
       <DependentUpon>UrlGroupControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\VersionedCodeControl.resx">
-      <DependentUpon>VersionedCodeControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\TopicSections\VersionedCodeTopicSectionControl.resx">
+      <DependentUpon>VersionedCodeTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AboutBoxDialog.resx">
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>
