@@ -46,6 +46,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             cboSyntax.LoadSyntaxes(application.GetSyntaxes());
             cboSyntax.Syntax = CodeTopicSection().Syntax;
+            base.SetStateImage(IconRepository.Get(Syntax).Image);
 
             syntaxDocument.SyntaxFile = SyntaxFile;
             syntaxBoxControl.Document.Text = CodeTopicSection().Text;
@@ -100,7 +101,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (syntaxBoxControl.Document.SyntaxFile != SyntaxFile)
                 syntaxBoxControl.Document.SyntaxFile = SyntaxFile;
-            base.Modify(IconRepository.Get(Syntax).Image);
+
+            base.SetStateImage(IconRepository.Get(Syntax).Image);
+            base.Modify();
         }
     }
 }

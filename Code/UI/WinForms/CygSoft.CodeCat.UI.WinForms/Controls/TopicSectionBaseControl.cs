@@ -67,6 +67,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             SetChangeStatus();
         }
 
+        public void SetStateImage(Image image)
+        {
+            this.lblEditStatus.Image = image;
+        }
+
         public void Modify()
         {
             if (!IsModified)
@@ -75,12 +80,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 SetChangeStatus();
                 Modified?.Invoke(this, new EventArgs());
             }
-        }
-
-        public void Modify(Image statusImage)
-        {
-            Modify();
-            this.lblEditStatus.Image = statusImage;
         }
 
         public void Revert()
