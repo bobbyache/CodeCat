@@ -53,7 +53,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void urlDocument_PasteConflict(object sender, EventArgs e)
         {
-            Dialogs.UrlsPasteConflictDetected(this);
+            Gui.Dialogs.UrlsPasteConflictDetected(this);
         }
 
         private void urlDocument_Paste(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             ReloadGroups();
             ReloadListview(urlListview, topicSection.WebReferences);
             SetModified();
-            Dialogs.UrlsPastedSuccessfully(this);
+            Gui.Dialogs.UrlsPastedSuccessfully(this);
         }
 
         public event EventHandler Modified;
@@ -230,7 +230,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (urlListview.SelectedItems.Count >= 1)
             {
-                DialogResult result = Dialogs.DeleteMultipleItemsDialog(this, "hyperlinks");
+                DialogResult result = Gui.Dialogs.DeleteMultipleItemsDialog(this, "hyperlinks");
 
                 if (result == DialogResult.Yes)
                 {
@@ -259,7 +259,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
             catch (Exception ex)
             {
-                Dialogs.WebPageErrorNotification(this, ex);
+                Gui.Dialogs.WebPageErrorNotification(this, ex);
             }
         }
 
@@ -347,7 +347,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
             catch (Exception ex)
             {
-                Dialogs.PasteUrlErrorDialogPrompt(this, ex);
+                Gui.Dialogs.PasteUrlErrorDialogPrompt(this, ex);
             }
         }
 
@@ -364,7 +364,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
             catch (Exception ex)
             {
-                Dialogs.UrlCopyErrorNotification(this, ex);
+                Gui.Dialogs.UrlCopyErrorNotification(this, ex);
             }
         }
     }

@@ -110,7 +110,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (!topicSection.FolderExists)
             {
-                Dialogs.MustSaveGroupBeforeAction(this);
+                Gui.Dialogs.MustSaveGroupBeforeAction(this);
                 return;
             }
 

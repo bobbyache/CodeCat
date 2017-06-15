@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -85,7 +86,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (txtTitle.Text.Trim() == "")
             {
-                Dialogs.NoInputValueForMandatoryField(this, "Title");
+                Gui.Dialogs.NoInputValueForMandatoryField(this, "Title");
                 return false;
             }
 
@@ -93,33 +94,33 @@ namespace CygSoft.CodeCat.UI.WinForms
             // so ensure the user has actually selected a file.
             if (fileAttachment == null && (string.IsNullOrEmpty(txtFilePath.Text.Trim()) || !File.Exists(txtFilePath.Text.Trim())))
             {
-                Dialogs.NoInputValueForMandatoryField(this, "File Path");
+                Gui.Dialogs.NoInputValueForMandatoryField(this, "File Path");
                 return false;
             }
 
             if (!string.IsNullOrEmpty(txtFileName.Text.Trim()) && string.IsNullOrEmpty(lblExtension.Text))
             {
-                Dialogs.NoInputValueForMandatoryField(this, "File Path");
+                Gui.Dialogs.NoInputValueForMandatoryField(this, "File Path");
                 return false;
             }
 
             if (txtFileName.Text.Trim() == "")
             {
                 
-                Dialogs.NoInputValueForMandatoryField(this, "File Name");
+                Gui.Dialogs.NoInputValueForMandatoryField(this, "File Name");
                 return false;
             }
 
             string id = fileAttachment == null ? "" : fileAttachment.Id;
             if (!fileAttachmentsTopicSection.ValidateFileName(txtFileName.Text.Trim() + lblExtension.Text, id))
             {
-                Dialogs.WillConflictDialogPrompt(this, "File Name");
+                Gui.Dialogs.WillConflictDialogPrompt(this, "File Name");
                 return false;
             }
 
             if (txtDescription.Text.Trim() == "")
             {
-                Dialogs.NoInputValueForMandatoryField(this, "Description");
+                Gui.Dialogs.NoInputValueForMandatoryField(this, "Description");
                 return false;
             }
             return true;

@@ -72,7 +72,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlGraphics.cs" />
     <Compile Include="Controls\TopicSections\BaseCodeTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -224,7 +223,6 @@
     <Compile Include="Images\ImageOutput.cs" />
     <Compile Include="Settings\ConfigSettings.cs" />
     <Compile Include="Settings\Constants.cs" />
-    <Compile Include="Dialogs.cs" />
     <Compile Include="Dialogs\EnterKeywordsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -265,7 +263,6 @@
     <Compile Include="Dialogs\SelectKeywordsDialog.Designer.cs">
       <DependentUpon>SelectKeywordsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Resources.cs" />
     <Compile Include="Dialogs\SnapshotDescDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +284,8 @@
     <Compile Include="Controls\ToolStripSpringTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UiHelpers\Dialogs.cs" />
+    <Compile Include="UiHelpers\Drawing.cs" />
     <Compile Include="UiHelpers\GroupedListView.cs" />
     <Compile Include="UiHelpers\Resources.cs" />
     <Compile Include="UiHelpers\Text.cs" />

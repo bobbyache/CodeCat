@@ -68,7 +68,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
             catch (Exception ex)
             {
-                Dialogs.WebPageErrorNotification(this, ex);
+                Gui.Dialogs.WebPageErrorNotification(this, ex);
             }
         }
 
@@ -166,7 +166,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             if (listView.SelectedItems.Count >= 1)
             {
-                DialogResult result = Dialogs.DeleteMultipleItemsDialog(this, "files");
+                DialogResult result = Gui.Dialogs.DeleteMultipleItemsDialog(this, "files");
 
                 if (result == DialogResult.Yes)
                 {

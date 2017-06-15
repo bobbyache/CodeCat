@@ -89,14 +89,14 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
             {
-                Dialogs.MandatoryFieldRequired(this, "Title");
+                Gui.Dialogs.MandatoryFieldRequired(this, "Title");
                 base.HeaderFieldsVisible = true;
                 this.txtTitle.Focus();
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
             {
-                Dialogs.MandatoryFieldRequired(this, "Keywords");
+                Gui.Dialogs.MandatoryFieldRequired(this, "Keywords");
                 base.HeaderFieldsVisible = true;
                 this.txtKeywords.Focus();
                 return false;
@@ -214,10 +214,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void topicDocument_ContentReverted(object sender, TopicEventArgs e)
         {
-            ControlGraphics.SuspendDrawing(this);
+            Gui.Drawing.SuspendDrawing(this);
             ResetFields();
             RebuildTabs();
-            ControlGraphics.ResumeDrawing(this);
+            Gui.Drawing.ResumeDrawing(this);
         }
 
         private void topicDocument_ContentSaved(object sender, TopicEventArgs e)
@@ -235,38 +235,38 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void topicDocument_TopicSectionMovedRight(object sender, TopicSectionEventArgs e)
         {
             this.IsModified = true;
-            ControlGraphics.SuspendDrawing(this);
+            Gui.Drawing.SuspendDrawing(this);
             tabManager.OrderTabs(topicDocument.TopicSections);
             tabManager.DisplayTab(e.TopicSection.Id, true);
-            ControlGraphics.ResumeDrawing(this);
+            Gui.Drawing.ResumeDrawing(this);
         }
 
         private void topicDocument_TopicSectionMovedLeft(object sender, TopicSectionEventArgs e)
         {
             this.IsModified = true;
-            ControlGraphics.SuspendDrawing(this);
+            Gui.Drawing.SuspendDrawing(this);
             tabManager.OrderTabs(topicDocument.TopicSections);
             tabManager.DisplayTab(e.TopicSection.Id, true);
-            ControlGraphics.ResumeDrawing(this);
+            Gui.Drawing.ResumeDrawing(this);
         }
 
         private void topicDocument_TopicSectionRemoved(object sender, TopicSectionEventArgs e)
         {
-            ControlGraphics.SuspendDrawing(this);
+            Gui.Drawing.SuspendDrawing(this);
             tabManager.RemoveTab(e.TopicSection.Id);
             tabManager.OrderTabs(topicDocument.TopicSections);
-            ControlGraphics.ResumeDrawing(this);
+            Gui.Drawing.ResumeDrawing(this);
         }
 
         private void topicDocument_TopicSectionAdded(object sender, TopicSectionEventArgs e)
         {
-            ControlGraphics.SuspendDrawing(this);
+            Gui.Drawing.SuspendDrawing(this);
 
             AddTopicSection(e.TopicSection, true);
 
             tabManager.OrderTabs(topicDocument.TopicSections);
             tabManager.DisplayTab(e.TopicSection.Id, true);
-            ControlGraphics.ResumeDrawing(this);
+            Gui.Drawing.ResumeDrawing(this);
         }
 
         #endregion
@@ -348,7 +348,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!tabManager.HasTabs)
                 return;
 
-            DialogResult dialogResult = Dialogs.DeleteItemDialog(this, "template");
+            DialogResult dialogResult = Gui.Dialogs.DeleteItemDialog(this, "template");
 
             if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {
@@ -389,11 +389,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void TopicDocumentHeaderFieldsVisibilityChanged(object sender, EventArgs e)
         {
-            ControlGraphics.SuspendDrawing(this);
+            Gui.Drawing.SuspendDrawing(this);
             this.chkEdit.Checked = base.HeaderFieldsVisible;
             this.toolstripKeywords.Visible = base.HeaderFieldsVisible;
             this.toolstripTitle.Visible = base.HeaderFieldsVisible;
-            ControlGraphics.ResumeDrawing(this);
+            Gui.Drawing.ResumeDrawing(this);
         }
 
         private void TopicDocumentNewStatusChanged(object sender, EventArgs e)

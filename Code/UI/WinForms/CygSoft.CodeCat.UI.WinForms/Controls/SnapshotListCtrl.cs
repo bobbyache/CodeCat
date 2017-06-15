@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
@@ -34,7 +35,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (listviewSnapshots.SelectedItems.Count == 1)
             {
-                DialogResult result = Dialogs.DeleteItemDialog(this, "snapshot");
+                DialogResult result = Gui.Dialogs.DeleteItemDialog(this, "snapshot");
 
                 if (result == DialogResult.Yes)
                 {

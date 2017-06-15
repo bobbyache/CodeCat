@@ -142,7 +142,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void PromptOpenProject()
         {
             string filePath;
-            DialogResult result = Dialogs.OpenProjectFileDialog(this, application.ProjectFileExtension, out filePath);
+            DialogResult result = Gui.Dialogs.OpenProjectFileDialog(this, application.ProjectFileExtension, out filePath);
 
             if (result == System.Windows.Forms.DialogResult.OK)
                 OpenProject(filePath);
@@ -151,7 +151,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void PromptCreateProject()
         {
             string filePath;
-            DialogResult result = Dialogs.CreateProjectFileDialog(this, application.ProjectFileExtension, out filePath);
+            DialogResult result = Gui.Dialogs.CreateProjectFileDialog(this, application.ProjectFileExtension, out filePath);
 
             if (result == System.Windows.Forms.DialogResult.OK)
                 CreateProject(filePath);
@@ -170,7 +170,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             catch (Exception exception)
             {
-                Dialogs.LoadLastProjectErrorNotification(this, exception);
+                Gui.Dialogs.LoadLastProjectErrorNotification(this, exception);
             }
             return false;
         }
@@ -211,7 +211,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             catch (Exception exception)
             {
-                Dialogs.ProjectFileLoadErrorNotification(this, exception);
+                Gui.Dialogs.ProjectFileLoadErrorNotification(this, exception);
             }
         }
 
@@ -225,7 +225,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             catch (Exception exception)
             {
-                Dialogs.LoadLastOpenedDocumentsErrorNotification(this, exception);
+                Gui.Dialogs.LoadLastOpenedDocumentsErrorNotification(this, exception);
             }
         }
 
@@ -244,7 +244,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             catch (Exception exception)
             {
-                Dialogs.RecordLastOpenedDocumentsErrorNotification(this, exception);
+                Gui.Dialogs.RecordLastOpenedDocumentsErrorNotification(this, exception);
             }
         }
 
@@ -481,7 +481,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             else
             {
-                DialogResult result = Dialogs.RemoveRecentMenuItemDialogPrompt(this);
+                DialogResult result = Gui.Dialogs.RemoveRecentMenuItemDialogPrompt(this);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                     recentProjectMenu.Remove(e.RecentFile.FullPath);
             }
@@ -615,7 +615,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             catch (Exception ex)
             {
-                Dialogs.WebPageErrorNotification(this, ex);
+                Gui.Dialogs.WebPageErrorNotification(this, ex);
             }
         }
 

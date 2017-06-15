@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Windows.Forms;
 
@@ -45,17 +46,17 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (txtTitle.Text.Trim() == "")
             {
-                Dialogs.NoInputValueForMandatoryField(this, "Title");
+                Gui.Dialogs.NoInputValueForMandatoryField(this, "Title");
                 return false;
             }
             if (txtUrl.Text.Trim() == "")
             {
-                Dialogs.NoInputValueForMandatoryField(this, "Url (hyperlink)");
+                Gui.Dialogs.NoInputValueForMandatoryField(this, "Url (hyperlink)");
                 return false;
             }
             if (txtDescription.Text.Trim() == "")
             {
-                Dialogs.NoInputValueForMandatoryField(this, "Description");
+                Gui.Dialogs.NoInputValueForMandatoryField(this, "Description");
                 return false;
             }
             return true;

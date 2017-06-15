@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -112,7 +113,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (IsNew)
                 return;
 
-            DialogResult result = Dialogs.DeleteItemDialog(this, "document");
+            DialogResult result = Gui.Dialogs.DeleteItemDialog(this, "document");
 
             if (result == DialogResult.Yes)
             {
@@ -139,7 +140,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected void RevertChanges()
         {
-            DialogResult result = Dialogs.RevertDocumentChangesDialogPrompt(this);
+            DialogResult result = Gui.Dialogs.RevertDocumentChangesDialogPrompt(this);
             if (result == DialogResult.Yes)
             {
                 Reverting?.Invoke(this, new EventArgs());
@@ -164,7 +165,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 }
                 catch (Exception ex)
                 {
-                    Dialogs.DocumentSaveErrorNotification(this, ex);
+                    Gui.Dialogs.DocumentSaveErrorNotification(this, ex);
                 }
             }
             return false;
@@ -181,7 +182,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 {
                     if (e.CloseReason != CloseReason.MdiFormClosing && !CloseWithoutPrompts)
                     {
-                        DialogResult result = Dialogs.SaveDocumentChangesDialogPrompt(this);
+                        DialogResult result = Gui.Dialogs.SaveDocumentChangesDialogPrompt(this);
 
                         if (result == DialogResult.Yes)
                         {

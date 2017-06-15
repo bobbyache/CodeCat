@@ -84,21 +84,21 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
             {
-                Dialogs.MandatoryFieldRequired(this, "Title");
+                Gui.Dialogs.MandatoryFieldRequired(this, "Title");
                 base.HeaderFieldsVisible = true;
                 this.txtTitle.Focus();
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
             {
-                Dialogs.MandatoryFieldRequired(this, "Keywords");
+                Gui.Dialogs.MandatoryFieldRequired(this, "Keywords");
                 base.HeaderFieldsVisible = true;
                 this.txtKeywords.Focus();
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.cboSyntax.Text))
             {
-                Dialogs.MandatoryFieldRequired(this, "Syntax");
+                Gui.Dialogs.MandatoryFieldRequired(this, "Syntax");
                 base.HeaderFieldsVisible = true;
                 this.cboSyntax.Focus();
                 return false;
@@ -282,7 +282,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             // necessarily have to change.
             if (this.IsModified)
             {
-                Dialogs.TakeSnapshotInvalidInCurrentContext(this);
+                Gui.Dialogs.TakeSnapshotInvalidInCurrentContext(this);
                 return;
             }
 
@@ -318,11 +318,11 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void SnippetDocument_HeaderFieldsVisibilityChanged(object sender, EventArgs e)
         {
-            ControlGraphics.SuspendDrawing(this);
+            Gui.Drawing.SuspendDrawing(this);
             this.chkEdit.Checked = base.HeaderFieldsVisible;
             this.toolstripKeywords.Visible = base.HeaderFieldsVisible;
             this.toolstripTitle.Visible = base.HeaderFieldsVisible;
-            ControlGraphics.ResumeDrawing(this);
+            Gui.Drawing.ResumeDrawing(this);
         }
 
         private void SnippetDocument_NewStatusChanged(object sender, EventArgs e)

@@ -157,7 +157,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (!topicSection.FolderExists)
             {
-                Dialogs.MustSaveGroupBeforeAction(this);
+                Gui.Dialogs.MustSaveGroupBeforeAction(this);
                 return;
             }
 
@@ -185,7 +185,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             if (!topicSection.Exists)
             {
-                Dialogs.MustSaveGroupBeforeAction(this);
+                Gui.Dialogs.MustSaveGroupBeforeAction(this);
                 return;
             }
 
@@ -228,7 +228,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                     ReplaceImage();
                 else
                 {
-                    DialogResult result = Dialogs.ReplaceCurrentItemPrompt(this);
+                    DialogResult result = Gui.Dialogs.ReplaceCurrentItemPrompt(this);
                     if (result == DialogResult.Yes)
                     {
                         ReplaceImage();
@@ -280,7 +280,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
             else
             {
-                Dialogs.CannotLoadImageEditor(this);
+                Gui.Dialogs.CannotLoadImageEditor(this);
             }
         }
 
