@@ -338,7 +338,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnFileGroup_Click(object sender, EventArgs e)
         {
-            IFileAttachmentsTopicSection fileAttachmentsTopicSection = topicDocument.AddTopicSection(TopicSectionType.FileAttachments, null, null) as IFileAttachmentsTopicSection;
+            IFileAttachmentsTopicSection fileAttachmentsTopicSection = topicDocument.AddTopicSection(TopicSectionType.FileAttachments, "File Attachments", null, null) as IFileAttachmentsTopicSection;
             this.IsModified = true;
         }
 

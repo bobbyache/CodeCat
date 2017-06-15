@@ -173,10 +173,10 @@ namespace CygSoft.CodeCat.Domain.Topics
             this.documentIndex.MoveUp(topicSection);
         }
 
-        public ITopicSection AddTopicSection(TopicSectionType documentType, string syntax = null, string extension = "txt")
+        public ITopicSection AddTopicSection(TopicSectionType documentType, string title = "New Document", string syntax = null, string extension = "txt")
         {
             return this.documentIndex.AddTopicSection(TopicSectionFactory.Create(documentType, documentIndex.Folder,
-                "New Document", null, 0, null, extension, syntax));
+                title, null, 0, null, extension, syntax));
         }
 
         public void RemoveTopicSection(string id)

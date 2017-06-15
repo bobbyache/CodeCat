@@ -80,12 +80,6 @@
     <Compile Include="Controls\TopicSections\BaseCodeTopicSectionControl.Designer.cs">
       <DependentUpon>BaseCodeTopicSectionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FileGroupControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\FileGroupControl.Designer.cs">
-      <DependentUpon>FileGroupControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ImageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -305,9 +299,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CodeSearchResultsControl.resx">
       <DependentUpon>CodeSearchResultsControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\FileGroupControl.resx">
-      <DependentUpon>FileGroupControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ImageControl.resx">
       <DependentUpon>ImageControl.cs</DependentUpon>

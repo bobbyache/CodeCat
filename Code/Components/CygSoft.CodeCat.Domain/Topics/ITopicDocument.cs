@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.Domain.Topics
         ITopicSection[] TopicSections { get; }
         ITopicSection GetTopicSection(string id);
 
-        ITopicSection AddTopicSection(TopicSectionType documentType, string syntax = null, string extension = null);
+        ITopicSection AddTopicSection(TopicSectionType documentType, string title = "New Document", string syntax = null, string extension = null);
         void RemoveTopicSection(string id);
 
         void MoveTopicSectionLeft(string id);
