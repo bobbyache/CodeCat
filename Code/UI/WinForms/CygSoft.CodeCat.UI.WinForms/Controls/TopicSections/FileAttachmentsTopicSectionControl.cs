@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
@@ -21,6 +19,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripButton btnAdd;
         private ToolStripButton btnDelete;
 
+        public override int ImageKey { get { return IconRepository.Get(IconRepository.Documents.FileSet).Index; } }
+        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.FileSet).Icon; } }
+        public override Image IconImage { get { return IconRepository.Get(IconRepository.Documents.FileSet).Image; } }
 
         public FileAttachmentsTopicSectionControl()
             : this(null, null, null)
@@ -32,29 +33,66 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             : base(application, topicDocument, topicSection)
         {
             InitializeComponent();
+            
+            btnDelete = Ui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
+            btnAdd = Ui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
+            btnEdit = Ui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
 
-            btnDelete = new ToolStripButton();
-            btnEdit = new ToolStripButton();
-            btnAdd = new ToolStripButton();
-
-            CreateToolbarButton(btnAdd, Constants.ImageKeys.AddSnippet, "btnAdd", "Add", new System.EventHandler(this.btnAdd_Click));
-            CreateToolbarButton(btnEdit, Constants.ImageKeys.EditSnippet, "btnEdit", "Edit", new System.EventHandler(this.btnEdit_Click));
-            CreateToolbarButton(btnDelete, Constants.ImageKeys.DeleteSnippet, "btnDelete", "Delete", new System.EventHandler(this.btnDelete_Click));
-
-            fileListview.SmallImageList = IconRepository.ImageList;
-            listViewSorter = new ListViewSorter(this.fileListview);
-            fileListview.Sorting = SortOrder.Ascending;
+            listView.SmallImageList = IconRepository.ImageList;
+            listViewSorter = new ListViewSorter(this.listView);
+            listView.Sorting = SortOrder.Ascending;
 
             btnAdd.Image = Resources.GetImage(Constants.ImageKeys.AddSnippet);
             btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
             btnEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
 
-            ReloadListview(fileListview, FileAttachmentsTopicSection().Items);
+            ReloadListview(listView, FileAttachmentsTopicSection().Items, false);
+
+            listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
+            listView.MouseUp += listView_MouseUp;
+            mnuEdit.Click += (s, e) => Edit();
+            mnuDelete.Click += (s, e) => Delete();
+            mnuSaveAs.Click += (s, e) => SaveAs();
+            mnuOpen.Click += (s, e) => OpenFile();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void OpenFile()
         {
-            Delete();
+            try
+            {
+                IFileAttachment item = Ui.GroupedListView.SelectedItem<IFileAttachment>(listView);
+                if (item != null)
+                    item.Open();
+            }
+            catch (Exception ex)
+            {
+                Dialogs.WebPageErrorNotification(this, ex);
+            }
+        }
+
+        private void SaveAs()
+        {
+            IFileAttachment fileAttachment = Ui.GroupedListView.SelectedItem<IFileAttachment>(listView);
+
+            if (fileAttachment != null)
+            {
+                SaveFileDialog saveDialog = new SaveFileDialog();
+                saveDialog.Filter = string.Format("File *{0} (*{0})|*{0}", fileAttachment.FileExtension);
+                saveDialog.DefaultExt = "*{0}";
+                saveDialog.Title = string.Format("Save File");
+                saveDialog.AddExtension = true;
+                saveDialog.FilterIndex = 0;
+                saveDialog.OverwritePrompt = true;
+                saveDialog.FileName = fileAttachment.FileName;
+
+                DialogResult result = saveDialog.ShowDialog(this);
+                string filePath = saveDialog.FileName;
+
+                if (result == DialogResult.OK)
+                {
+                    File.Copy(fileAttachment.FilePath, saveDialog.FileName, true);
+                }
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -67,6 +105,31 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             Edit();
         }
 
+        private void listView_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                int cnt = listView.SelectedItems.Count;
+                bool onItem = false;
+                IFileAttachment item = null;
+
+                if (listView.FocusedItem != null)
+                {
+                    onItem = listView.FocusedItem.Bounds.Contains(e.Location);
+                    item = listView.FocusedItem.Tag as IFileAttachment;
+                }
+
+                bool fileExists = item.FileExists;
+                mnuOpen.Enabled = cnt == 1 && onItem && item.AllowOpenOrExecute && fileExists;
+                mnuOpenWith.Enabled = false && onItem && item.AllowOpenOrExecute && fileExists;
+                mnuSaveAs.Enabled = cnt == 1 && onItem && fileExists;
+                mnuEdit.Enabled = cnt == 1 && onItem;
+                mnuDelete.Enabled = cnt >= 1;
+
+                contextMenu.Show(Cursor.Position);
+            }
+        }
+
         private void Add()
         {
             FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(FileAttachmentsTopicSection());
@@ -75,26 +138,23 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             if (result == DialogResult.OK)
             {
                 FileAttachmentsTopicSection().Add(dialog.EditedFile);
-                ReloadGroups();
-                ReloadListview(fileListview, FileAttachmentsTopicSection().Items);
+                ReloadListview(listView, FileAttachmentsTopicSection().Items, true);
                 Modify();
             }
         }
 
         private void Edit()
         {
-            if (fileListview.SelectedItems.Count == 1)
+            if (listView.SelectedItems.Count == 1)
             {
-                // TODO: Instead of pulling the file object out of the ListViewItemTag we should be getting it from the FileGroup object. 
-                // In fact, need to run a search on .Tag and see where you can improve this design.
-                IFileAttachment fileAttachment = fileListview.SelectedItems[0].Tag as IFileAttachment;
+                IFileAttachment fileAttachment = Ui.GroupedListView.SelectedItem<IFileAttachment>(listView);
+
                 FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(fileAttachment, FileAttachmentsTopicSection());
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
-                    ReloadGroups();
-                    ReloadListview(fileListview, FileAttachmentsTopicSection().Items);
+                    ReloadListview(listView, FileAttachmentsTopicSection().Items, true);
                     Modify();
                 }
             }
@@ -102,34 +162,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void Delete()
         {
-            if (fileListview.SelectedItems.Count >= 1)
+            if (listView.SelectedItems.Count >= 1)
             {
                 DialogResult result = Dialogs.DeleteMultipleItemsDialog(this, "files");
 
                 if (result == DialogResult.Yes)
                 {
-                    IEnumerable<IFileAttachment> fileAttachments = fileListview.SelectedItems.Cast<ListViewItem>()
-                        .Select(lv => lv.Tag).Cast<IFileAttachment>();
+                    IEnumerable<IFileAttachment> fileAttachments = Ui.GroupedListView.SelectedItems<IFileAttachment>(listView);
+                    FileAttachmentsTopicSection().Remove(fileAttachments);
+                    Ui.GroupedListView.RemoveItems(listView);
 
-                    foreach (IFileAttachment fileAttachment in fileAttachments)
-                        FileAttachmentsTopicSection().Remove(fileAttachment);
-
-                    ReloadGroups();
-                    ReloadListview(fileListview, FileAttachmentsTopicSection().Items);
                     Modify();
                 }
             }
-        }
-
-        private void CreateToolbarButton(ToolStripButton btn, string imageKey, string buttonName, string buttonText, System.EventHandler handler)
-        {
-            btn.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btn.Image = Resources.GetImage(imageKey); ;
-            btn.ImageTransparentColor = Color.Magenta;
-            btn.Name = buttonName;
-            btn.Size = new Size(24, 24);
-            btn.Text = buttonText;
-            btn.Click += handler;
         }
 
         private ListViewItem CreateListviewItem(ListView listView, IFileAttachment item, bool select = false)
@@ -146,62 +191,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
 
+            listView.Items.Add(listItem);
+
             return listItem;
         }
 
-        private void ReloadListview(ListView listView, IFileAttachment[] fileAttachments)
+        private void ReloadListview(ListView listView, IFileAttachment[] fileAttachments, bool reloadGroups = true)
         {
-            listView.Items.Clear();
-            IconRepository.AddFileExtensions(fileAttachments.Select(idx => idx.FileExtension));
+            if (reloadGroups)
+                Ui.GroupedListView.ReloadGroups(this.listView, this.FileAttachmentsTopicSection().Categories);
 
-            foreach (IFileAttachment fileAttachment in fileAttachments)
-            {
-                ListViewItem listItem = CreateListviewItem(listView, fileAttachment);
-                GroupItem(listItem, fileAttachment);
-                listView.Items.Add(listItem);
-            }
+            IconRepository.AddFileExtensions(fileAttachments.Select(idx => idx.FileExtension));
+            Ui.GroupedListView.LoadAllItems<IFileAttachment>(this.listView, fileAttachments, this.CreateListviewItem);
 
             listViewSorter.Sort(0);
-        }
-
-        private void GroupItem(ListViewItem listItem, IFileAttachment fileAttachment)
-        {
-            bool groupExists = false;
-
-            foreach (ListViewGroup group in this.fileListview.Groups)
-            {
-                if (group.Header == fileAttachment.Category)
-                {
-                    // Add item to the group.
-                    // Alternative is: group.Items.Add(item);
-                    listItem.Group = group;
-                    groupExists = true;
-                    break;
-                }
-            }
-
-            if (!groupExists)
-            {
-                ListViewGroup group = new ListViewGroup(fileAttachment.Category);
-                group.HeaderAlignment = HorizontalAlignment.Left;
-                this.fileListview.Groups.Add(group);
-                listItem.Group = group;
-            }
-        }
-
-        private void ReloadGroups()
-        {
-            this.fileListview.Groups.Clear();
-            string[] categories = FileAttachmentsTopicSection().Categories;
-
-            foreach (string category in categories)
-            {
-                ListViewGroup group = new ListViewGroup(category);
-                group.HeaderAlignment = HorizontalAlignment.Left;
-                this.fileListview.Groups.Add(group);
-            }
-
-            fileListview.ShowGroups = this.fileListview.Groups.Count > 1;
         }
 
         private IFileAttachmentsTopicSection FileAttachmentsTopicSection()

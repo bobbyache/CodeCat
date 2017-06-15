@@ -157,6 +157,15 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments
             removedFileAttachmentList.Add(fileAttachment);
         }
 
+        public void Remove(IEnumerable<IFileAttachment> fileAttachments)
+        {
+            foreach (IFileAttachment fileAttachment in fileAttachments)
+            {
+                fileAttachmentList.Remove(fileAttachment);
+                removedFileAttachmentList.Add(fileAttachment);
+            }
+        }
+
         public bool ValidateFileName(string fileName, string id = "")
         {
             if (File.Exists(Path.Combine(this.Folder, fileName)))

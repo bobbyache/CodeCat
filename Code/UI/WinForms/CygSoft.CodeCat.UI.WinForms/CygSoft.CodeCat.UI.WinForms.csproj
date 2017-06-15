@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonControlHelpers.cs" />
     <Compile Include="ControlGraphics.cs" />
     <Compile Include="Controls\TopicSections\BaseCodeTopicSectionControl.cs">
       <SubType>UserControl</SubType>
