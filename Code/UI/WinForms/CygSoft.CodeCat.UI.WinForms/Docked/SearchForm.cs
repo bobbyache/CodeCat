@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -43,7 +44,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeComponent();
 
             codeSearchResultsControl1.Application = application;
-            btnFind.Image = Resources.GetImage(Constants.ImageKeys.FindSnippets);
+            btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
 
             this.application = application;
             HideOnClose = true;

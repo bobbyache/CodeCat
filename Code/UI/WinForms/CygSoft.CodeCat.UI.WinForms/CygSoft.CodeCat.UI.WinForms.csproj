@@ -72,7 +72,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonControlHelpers.cs" />
     <Compile Include="ControlGraphics.cs" />
     <Compile Include="Controls\TopicSections\BaseCodeTopicSectionControl.cs">
       <SubType>UserControl</SubType>
@@ -288,12 +287,15 @@
     <Compile Include="Controls\ToolStripSpringTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UiHelpers\GroupedListView.cs" />
+    <Compile Include="UiHelpers\Resources.cs" />
+    <Compile Include="UiHelpers\Text.cs" />
+    <Compile Include="UiHelpers\ToolBar.cs" />
     <Compile Include="UiResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UiResource.resx</DependentUpon>
     </Compile>
-    <Compile Include="WordWrapper.cs" />
     <EmbeddedResource Include="Controls\TopicSections\BaseCodeTopicSectionControl.resx">
       <DependentUpon>BaseCodeTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>

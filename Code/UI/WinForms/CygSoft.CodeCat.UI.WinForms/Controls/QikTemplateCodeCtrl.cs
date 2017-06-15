@@ -7,6 +7,7 @@ using CygSoft.CodeCat.Domain;
 using Alsing.SourceCode;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -79,7 +80,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             {
                 ISymbolInfo symbolInfo = compiler.GetPlaceholderInfo(placeholder);
                 string itemText = string.Format("{0} ({1})", symbolInfo.Title, symbolInfo.Placeholder);
-                string toolTip = string.Format("{0}\n{1}", itemText, WordWrapper.WordWrap(symbolInfo.Description, 150));
+                string toolTip = string.Format("{0}\n{1}", itemText, Gui.Text.WordWrap(symbolInfo.Description, 150));
 
                 templateSyntaxBox.AutoListAdd(itemText, placeholder, toolTip, 0);
             }

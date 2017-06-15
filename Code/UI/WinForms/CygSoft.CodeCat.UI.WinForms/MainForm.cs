@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygX1.UI.WinForms.RecentFileMenu;
 using System;
 using System.Collections.Generic;
@@ -60,8 +61,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeFileIcons()
         {
-            Resources.Namespace = "CygSoft.CodeCat.UI.WinForms.UiResource";
-            Resources.ExecutingAssembly = Assembly.GetExecutingAssembly();
+            Gui.Resources.Namespace = "CygSoft.CodeCat.UI.WinForms.UiResource";
+            Gui.Resources.ExecutingAssembly = Assembly.GetExecutingAssembly();
 
             IconRepository.AddDocuments();
             IconRepository.AddSyntaxes(application.GetSyntaxFileInfo());
@@ -69,13 +70,13 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeIconImages()
         {
-            mnuFileOpen.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
-            mnuFileCreateNew.Image = Resources.GetImage(Constants.ImageKeys.NewProject);
-            mnuSnippetsViewModify.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            mnuSnippetsAdd.Image = Resources.GetImage(Constants.ImageKeys.AddSnippet);
+            mnuFileOpen.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenProject);
+            mnuFileCreateNew.Image = Gui.Resources.GetImage(Constants.ImageKeys.NewProject);
+            mnuSnippetsViewModify.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            mnuSnippetsAdd.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
             mnuAddCodeGroup.Image = IconRepository.Get(IconRepository.Documents.CodeGroup).Image;
             mnuAddQikTemplate.Image = IconRepository.Get(IconRepository.Documents.QikGroup).Image;
-            mnuWindowKeywordSearch.Image = Resources.GetImage(Constants.ImageKeys.FindSnippets);
+            mnuWindowKeywordSearch.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
         }
 
         private void InitializeMenuClickEvents()

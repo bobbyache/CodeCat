@@ -6,6 +6,7 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using System.IO;
 using System.Diagnostics;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -77,17 +78,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void CreateControlGraphics()
         {
-            btnAddImage.Image = Resources.GetImage(Constants.ImageKeys.AddSnippet);
-            btnDeleteImage.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
-            btnMoveLeft.Image = Resources.GetImage(Constants.ImageKeys.MoveLeft);
-            btnMoveRight.Image = Resources.GetImage(Constants.ImageKeys.MoveRight);
-            lblScrollPosition.Image = Resources.GetImage(Constants.ImageKeys.ObjectPosition);
-            lblSize.Image = Resources.GetImage(Constants.ImageKeys.ObjectSize);
-            lblZoomLevel.Image = Resources.GetImage(Constants.ImageKeys.ObjectZoom);
-            btnDisplayText.Image = Resources.GetImage(Constants.ImageKeys.ShowText);
-            btnEditImageText.Image = Resources.GetImage(Constants.ImageKeys.EditText);
-            btnRefresh.Image = Resources.GetImage(Constants.ImageKeys.Refresh);
+            btnAddImage.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
+            btnDeleteImage.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            btnImport.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenProject);
+            btnMoveLeft.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveLeft);
+            btnMoveRight.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveRight);
+            lblScrollPosition.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectPosition);
+            lblSize.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectSize);
+            lblZoomLevel.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectZoom);
+            btnDisplayText.Image = Gui.Resources.GetImage(Constants.ImageKeys.ShowText);
+            btnEditImageText.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditText);
+            btnRefresh.Image = Gui.Resources.GetImage(Constants.ImageKeys.Refresh);
         }
 
         private void LoadInitialImage()

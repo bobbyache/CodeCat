@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Images;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -55,11 +56,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         public static void AddDocuments()
         {
             imageLibrary.Add(Documents.CodeFile, imageLibrary.IconByExtension("cpp"));
-            imageLibrary.Add(Documents.CodeGroup, Resources.GetImage(Constants.ImageKeys.CodeGroup));
-            imageLibrary.Add(Documents.QikGroup, Resources.GetImage(Constants.ImageKeys.QikGroup));
-            imageLibrary.Add(Documents.FileSet, Resources.GetImage(Constants.ImageKeys.Attachment));
-            imageLibrary.Add(Documents.HyperlinkSet, Resources.GetImage(Constants.ImageKeys.Web));
-            imageLibrary.Add(Documents.ImageSet, Resources.GetImage(Constants.ImageKeys.ImageSet));
+            imageLibrary.Add(Documents.CodeGroup, Gui.Resources.GetImage(Constants.ImageKeys.CodeGroup));
+            imageLibrary.Add(Documents.QikGroup, Gui.Resources.GetImage(Constants.ImageKeys.QikGroup));
+            imageLibrary.Add(Documents.FileSet, Gui.Resources.GetImage(Constants.ImageKeys.Attachment));
+            imageLibrary.Add(Documents.HyperlinkSet, Gui.Resources.GetImage(Constants.ImageKeys.Web));
+            imageLibrary.Add(Documents.ImageSet, Gui.Resources.GetImage(Constants.ImageKeys.ImageSet));
             imageLibrary.Add(Documents.Unknown, imageLibrary.IconByExtension("dat"));
             imageLibrary.Add(Documents.RTF, imageLibrary.IconByExtension("rtf"));
             imageLibrary.Add(Documents.PDF, imageLibrary.IconByExtension("pdf"));
@@ -73,7 +74,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 string syntax = syntaxFile.Syntax.ToUpper();
 
                 if (syntax == Documents.QikGroup)
-                    imageLibrary.Add(syntax, Resources.GetImage(Constants.ImageKeys.QikGroup));
+                    imageLibrary.Add(syntax, Gui.Resources.GetImage(Constants.ImageKeys.QikGroup));
                 else
                 {
                     Icon icon = imageLibrary[syntaxFile.Extension, true].Icon;

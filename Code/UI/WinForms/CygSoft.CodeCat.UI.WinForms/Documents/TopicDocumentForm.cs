@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Documents;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Windows.Forms;
 
@@ -120,16 +121,16 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
         private void InitializeImages()
         {
-            btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
-            chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
+            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            btnSave.Image = Gui.Resources.GetImage(Constants.ImageKeys.SaveSnippet);
+            chkEdit.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            btnDiscardChange.Image = Gui.Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
             
-            btnAddItem.Image = Resources.GetImage(Constants.ImageKeys.AddTemplate);
-            btnRemoveCodeItem.Image = Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
-            btnMoveLeft.Image = Resources.GetImage(Constants.ImageKeys.MoveLeft);
-            btnMoveRight.Image = Resources.GetImage(Constants.ImageKeys.MoveRight);
-            btnMenu.Image = Resources.GetImage(Constants.ImageKeys.GroupMenu);
+            btnAddItem.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddTemplate);
+            btnRemoveCodeItem.Image = Gui.Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
+            btnMoveLeft.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveLeft);
+            btnMoveRight.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveRight);
+            btnMenu.Image = Gui.Resources.GetImage(Constants.ImageKeys.GroupMenu);
 
             btnAddPdfDocument.Image = IconRepository.Get(IconRepository.Documents.PDF).Image;
             btnAddImage.Image = IconRepository.Get(IconRepository.Documents.SingleImage).Image;

@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -131,12 +132,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeImages()
         {
-            btnTakeSnapshot.Image = Resources.GetImage(Constants.ImageKeys.AddSnapshot);
-            btnDeleteSnapshot.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnapshot);
-            btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
-            chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
+            btnTakeSnapshot.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnapshot);
+            btnDeleteSnapshot.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnapshot);
+            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            btnSave.Image = Gui.Resources.GetImage(Constants.ImageKeys.SaveSnippet);
+            chkEdit.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            btnDiscardChange.Image = Gui.Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
 
             this.tabControl.ImageList = IconRepository.ImageList;
             this.tabPageCode.ImageKey = (base.persistableTarget as CodeFile).Syntax;

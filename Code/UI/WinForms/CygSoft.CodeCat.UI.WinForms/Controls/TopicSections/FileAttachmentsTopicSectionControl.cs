@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -34,17 +35,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             InitializeComponent();
             
-            btnDelete = Ui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
-            btnAdd = Ui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
-            btnEdit = Ui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
+            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
+            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
+            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
 
             listView.SmallImageList = IconRepository.ImageList;
             listViewSorter = new ListViewSorter(this.listView);
             listView.Sorting = SortOrder.Ascending;
 
-            btnAdd.Image = Resources.GetImage(Constants.ImageKeys.AddSnippet);
-            btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            btnAdd.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
+            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            btnEdit.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
 
             ReloadListview(listView, FileAttachmentsTopicSection().Items, false);
 
@@ -60,7 +61,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             try
             {
-                IFileAttachment item = Ui.GroupedListView.SelectedItem<IFileAttachment>(listView);
+                
+                IFileAttachment item = Gui.GroupedListView.SelectedItem<IFileAttachment>(listView);
                 if (item != null)
                     item.Open();
             }
@@ -72,7 +74,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void SaveAs()
         {
-            IFileAttachment fileAttachment = Ui.GroupedListView.SelectedItem<IFileAttachment>(listView);
+            IFileAttachment fileAttachment = Gui.GroupedListView.SelectedItem<IFileAttachment>(listView);
 
             if (fileAttachment != null)
             {
@@ -147,7 +149,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             if (listView.SelectedItems.Count == 1)
             {
-                IFileAttachment fileAttachment = Ui.GroupedListView.SelectedItem<IFileAttachment>(listView);
+                IFileAttachment fileAttachment = Gui.GroupedListView.SelectedItem<IFileAttachment>(listView);
 
                 FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(fileAttachment, FileAttachmentsTopicSection());
                 DialogResult result = dialog.ShowDialog(this);
@@ -168,9 +170,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
                 if (result == DialogResult.Yes)
                 {
-                    IEnumerable<IFileAttachment> fileAttachments = Ui.GroupedListView.SelectedItems<IFileAttachment>(listView);
+                    IEnumerable<IFileAttachment> fileAttachments = Gui.GroupedListView.SelectedItems<IFileAttachment>(listView);
                     FileAttachmentsTopicSection().Remove(fileAttachments);
-                    Ui.GroupedListView.RemoveItems(listView);
+                    Gui.GroupedListView.RemoveItems(listView);
 
                     Modify();
                 }
@@ -199,10 +201,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private void ReloadListview(ListView listView, IFileAttachment[] fileAttachments, bool reloadGroups = true)
         {
             if (reloadGroups)
-                Ui.GroupedListView.ReloadGroups(this.listView, this.FileAttachmentsTopicSection().Categories);
+                Gui.GroupedListView.ReloadGroups(this.listView, this.FileAttachmentsTopicSection().Categories);
 
             IconRepository.AddFileExtensions(fileAttachments.Select(idx => idx.FileExtension));
-            Ui.GroupedListView.LoadAllItems<IFileAttachment>(this.listView, fileAttachments, this.CreateListviewItem);
+            Gui.GroupedListView.LoadAllItems<IFileAttachment>(this.listView, fileAttachments, this.CreateListviewItem);
 
             listViewSorter.Sort(0);
         }

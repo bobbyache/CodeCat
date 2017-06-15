@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -24,9 +25,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             listViewSorter = new ListViewSorter(urlListview);
             urlListview.Sorting = SortOrder.Ascending;
 
-            btnAdd.Image = Resources.GetImage(Constants.ImageKeys.AddSnippet);
-            btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            btnAdd.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
+            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            btnEdit.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
 
             this.topicSection = topicSection;
             this.topicDocument = topicDocument;

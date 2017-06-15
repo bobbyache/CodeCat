@@ -4,6 +4,7 @@ using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Documents;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Windows.Forms;
 
@@ -150,18 +151,18 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
         private void InitializeImages()
         {
-            btnDelete.Image = Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnSave.Image = Resources.GetImage(Constants.ImageKeys.SaveSnippet);
-            chkEdit.Image = Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            btnDiscardChange.Image = Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
-            btnAddTemplate.Image = Resources.GetImage(Constants.ImageKeys.AddTemplate);
-            btnRemoveTemplate.Image = Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
-            btnShowProperties.Image = Resources.GetImage(Constants.ImageKeys.ShowProperties);
-            btnCompile.Image = Resources.GetImage(Constants.ImageKeys.Compile);
-            btnShowScript.Image = Resources.GetImage(Constants.ImageKeys.TemplateScript);
-            btnMoveLeft.Image = Resources.GetImage(Constants.ImageKeys.MoveLeft);
-            btnMoveRight.Image = Resources.GetImage(Constants.ImageKeys.MoveRight);
-            btnMenu.Image = Resources.GetImage(Constants.ImageKeys.GroupMenu);
+            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            btnSave.Image = Gui.Resources.GetImage(Constants.ImageKeys.SaveSnippet);
+            chkEdit.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            btnDiscardChange.Image = Gui.Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
+            btnAddTemplate.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddTemplate);
+            btnRemoveTemplate.Image = Gui.Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
+            btnShowProperties.Image = Gui.Resources.GetImage(Constants.ImageKeys.ShowProperties);
+            btnCompile.Image = Gui.Resources.GetImage(Constants.ImageKeys.Compile);
+            btnShowScript.Image = Gui.Resources.GetImage(Constants.ImageKeys.TemplateScript);
+            btnMoveLeft.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveLeft);
+            btnMoveRight.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveRight);
+            btnMenu.Image = Gui.Resources.GetImage(Constants.ImageKeys.GroupMenu);
             Icon = IconRepository.QikGroupIcon;
         }
 

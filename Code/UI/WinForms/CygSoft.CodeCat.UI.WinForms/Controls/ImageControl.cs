@@ -6,6 +6,7 @@ using CygSoft.CodeCat.Domain;
 using System.IO;
 using System.Diagnostics;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -32,11 +33,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.topicSection = topicSection;
             this.topicDocument = topicDocument;
 
-            lblScrollPosition.Image = Resources.GetImage(Constants.ImageKeys.ObjectPosition);
-            lblSize.Image = Resources.GetImage(Constants.ImageKeys.ObjectSize);
-            lblZoomLevel.Image = Resources.GetImage(Constants.ImageKeys.ObjectZoom);
-            this.btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
-            btnRefresh.Image = Resources.GetImage(Constants.ImageKeys.Refresh);
+            lblScrollPosition.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectPosition);
+            lblSize.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectSize);
+            lblZoomLevel.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectZoom);
+            this.btnImport.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenProject);
+            btnRefresh.Image = Gui.Resources.GetImage(Constants.ImageKeys.Refresh);
 
             this.Id = topicSection.Id;
 

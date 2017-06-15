@@ -11,6 +11,7 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using System.IO;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -38,8 +39,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.topicSection = topicSection;
             this.topicDocument = topicDocument;
 
-            btnImport.Image = Resources.GetImage(Constants.ImageKeys.OpenProject);
-            btnReload.Image = Resources.GetImage(Constants.ImageKeys.NewProject);
+            btnImport.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenProject);
+            btnReload.Image = Gui.Resources.GetImage(Constants.ImageKeys.NewProject);
             Id = topicSection.Id;
 
             ResetFieldValues();
