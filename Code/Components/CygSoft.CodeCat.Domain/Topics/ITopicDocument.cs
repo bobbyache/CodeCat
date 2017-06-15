@@ -4,6 +4,7 @@ using System;
 
 namespace CygSoft.CodeCat.Domain.Topics
 {
+    //TODO: IPersistableTarget and a TopicSection? Need to look and identifiy whether these two can't be merged.
     public interface ITopicDocument : IPersistableTarget
     {
         event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
