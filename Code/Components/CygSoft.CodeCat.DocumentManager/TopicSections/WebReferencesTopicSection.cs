@@ -177,6 +177,12 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
             webReferenceList.Remove(webReference);
         }
 
+        public void Remove(IEnumerable<IWebReference> webReferences)
+        {
+            foreach (IWebReference webReference in webReferences)
+                webReferenceList.Remove(webReference);
+        }
+
         public string GetXml(string[] ids)
         {
             XDocument indexDocument = new XDocument();

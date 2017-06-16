@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IWebReference
+    public interface IWebReference : ICategorizedItem
     {
         string Id { get; set; }
         string Title { get; set; }
-        string Category { get; set; }
         string Url { get; set; }
         string HostName { get; }
         string Description { get; set; }
@@ -23,6 +23,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string[] Categories { get; }
         void Add(IWebReference webReference);
         void Remove(IWebReference webReference);
+        void Remove(IEnumerable<IWebReference> webReferences);
         string GetXml(string[] ids);
         void AddXml(string xml);
         IWebReference CreateWebReference();

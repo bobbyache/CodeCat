@@ -31,7 +31,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             }
 
             else if (topicSection is IWebReferencesTopicSection)
-                topicSectionControl = new UrlGroupControl(application, topicDocument as ITopicDocument, topicSection as IWebReferencesTopicSection);
+                topicSectionControl = new WebReferencesTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as IWebReferencesTopicSection);
 
             else if (topicSection is IFileAttachmentsTopicSection)
                 topicSectionControl = new FileAttachmentsTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as IFileAttachmentsTopicSection);

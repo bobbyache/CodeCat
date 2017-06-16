@@ -1,0 +1,233 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+
+namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
+{
+    public partial class WebReferencesTopicSectionControl : BaseTopicSectionControl
+    {
+        private ListViewSorter listViewSorter;
+
+        private ToolStripButton btnEdit;
+        private ToolStripButton btnAdd;
+        private ToolStripButton btnDelete;
+
+        public override int ImageKey { get { return IconRepository.Get(IconRepository.Documents.FileSet).Index; } }
+        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.FileSet).Icon; } }
+        public override Image IconImage { get { return IconRepository.Get(IconRepository.Documents.FileSet).Image; } }
+
+
+        public WebReferencesTopicSectionControl()
+            : this(null, null, null)
+        {
+
+        }
+
+        public WebReferencesTopicSectionControl(AppFacade application, ITopicDocument topicDocument, IWebReferencesTopicSection topicSection)
+            : base(application, topicDocument, topicSection)
+        {
+            InitializeComponent();
+
+            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
+            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => { Add(WebReferencesTopicSection().CreateWebReference()); });
+            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
+
+            listViewSorter = new ListViewSorter(listView);
+            listView.Sorting = SortOrder.Ascending;
+
+            btnAdd.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
+            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            btnEdit.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
+
+            listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
+            listView.MouseUp += listview_MouseUp;
+            mnuCopy.Click += mnuCopy_Click;
+            mnuPaste.Click += mnuPaste_Click;
+            mnuCopyUrl.Click += mnuCopyUrl_Click;
+            mnuNavigate.Click += (s, e) => NavigateToUrl();
+
+            ReloadListview(listView, WebReferencesTopicSection().WebReferences, false);
+
+        }
+
+        private void NavigateToUrl()
+        {
+            try
+            {
+                IWebReference webReference = Gui.GroupedListView.SelectedItem<IWebReference>(listView);
+                if (webReference != null)
+                    System.Diagnostics.Process.Start(webReference.Url);
+            }
+            catch (Exception ex)
+            {
+                Gui.Dialogs.WebPageErrorNotification(this, ex);
+            }
+        }
+
+        private void listview_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                int cnt = listView.SelectedItems.Count;
+                bool onItem = false;
+
+                if (listView.FocusedItem != null)
+                    onItem = listView.FocusedItem.Bounds.Contains(e.Location);
+
+                mnuPaste.Enabled = Clipboard.ContainsText();
+                mnuCopy.Enabled = cnt > 0 && onItem;
+                mnuNavigate.Enabled = cnt == 1 && onItem;
+                mnuEdit.Enabled = cnt == 1 && onItem;
+                mnuDelete.Enabled = cnt >= 1;
+
+                contextMenu.Show(Cursor.Position);
+            }
+        }
+
+        private void mnuCopy_Click(object sender, EventArgs e)
+        {
+            string[] ids = listView.SelectedItems.Cast<ListViewItem>()
+                .Select(lv => lv.Tag).Cast<IWebReference>()
+                .Select(url => url.Id).ToArray();
+
+            string copyXml = WebReferencesTopicSection().GetXml(ids);
+            Clipboard.Clear();
+            Clipboard.SetText(copyXml);
+        }
+
+        private void mnuPaste_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Clipboard.ContainsText())
+                {
+                    string text = Clipboard.GetText().Trim();
+                    if (WebReferencesTopicSection().IsFullUrl(text))
+                    {
+                        IWebReference webReference = WebReferencesTopicSection().CreateWebReference(text, "", "");
+                        Add(webReference);
+                    }
+                    else if (WebReferencesTopicSection().IsValidWebReferenceXml(text))
+                        WebReferencesTopicSection().AddXml(text);
+                    else
+                    {
+                        string firstLine = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)[0];
+                        IWebReference webReference = WebReferencesTopicSection().CreateWebReference("", firstLine, "");
+                        Add(webReference);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Gui.Dialogs.PasteUrlErrorDialogPrompt(this, ex);
+            }
+        }
+
+        private void mnuCopyUrl_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IWebReference webReference = Gui.GroupedListView.SelectedItem<IWebReference>(listView);
+                if (webReference != null)
+                {
+                    Clipboard.Clear();
+                    Clipboard.SetText(webReference.Url);
+                }
+            }
+            catch (Exception ex)
+            {
+                Gui.Dialogs.UrlCopyErrorNotification(this, ex);
+            }
+        }
+
+        private void Add(IWebReference webReference)
+        {
+            UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, WebReferencesTopicSection().Categories);
+            DialogResult result = dialog.ShowDialog(this);
+
+            if (result == DialogResult.OK)
+            {
+                WebReferencesTopicSection().Add(webReference);
+                ReloadListview(listView, WebReferencesTopicSection().WebReferences, true);
+                Modify();
+            }
+        }
+
+        private void Edit()
+        {
+            if (listView.SelectedItems.Count == 1)
+            {
+                IWebReference webReference = Gui.GroupedListView.SelectedItem<IWebReference>(listView);
+
+                UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, WebReferencesTopicSection().Categories);
+                DialogResult result = dialog.ShowDialog(this);
+
+                if (result == DialogResult.OK)
+                {
+                    ReloadListview(listView, WebReferencesTopicSection().WebReferences, true);
+                    Modify();
+                }
+            }
+        }
+
+        private void Delete()
+        {
+            if (listView.SelectedItems.Count >= 1)
+            {
+                DialogResult result = Gui.Dialogs.DeleteMultipleItemsDialog(this, "files");
+
+                if (result == DialogResult.Yes)
+                {
+                    IEnumerable<IWebReference> webReferences = Gui.GroupedListView.SelectedItems<IWebReference>(listView);
+                    WebReferencesTopicSection().Remove(webReferences);
+                    Gui.GroupedListView.RemoveItems(listView);
+
+                    Modify();
+                }
+            }
+        }
+
+        private ListViewItem CreateListviewItem(ListView listView, IWebReference webReference, bool select = false)
+        {
+            ListViewItem listItem = new ListViewItem();
+
+            listItem.Name = webReference.Id;
+            listItem.Tag = webReference;
+            listItem.ToolTipText = webReference.Url;
+            listItem.Text = webReference.Title;
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, webReference.HostName));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, webReference.Description));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, webReference.DateCreated.ToShortDateString()));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, webReference.DateModified.ToShortDateString()));
+
+            listView.Items.Add(listItem);
+
+            return listItem;
+        }
+
+        private void ReloadListview(ListView listView, IWebReference[] webReferences, bool reloadGroups = true)
+        {
+            if (reloadGroups)
+                Gui.GroupedListView.ReloadGroups(this.listView, this.WebReferencesTopicSection().Categories);
+
+            Gui.GroupedListView.LoadAllItems<IWebReference>(this.listView, webReferences, this.CreateListviewItem);
+
+            listViewSorter.Sort(0);
+        }
+
+        private IWebReferencesTopicSection WebReferencesTopicSection()
+        {
+            return topicSection as IWebReferencesTopicSection;
+        }
+    }
+}
