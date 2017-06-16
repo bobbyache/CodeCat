@@ -14,16 +14,16 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public static class IconRepository
     {
-        public static class Documents
+        public static class TopicSections
         {
             public const string QikGroup = "Document.QikGroup";
             public const string CodeGroup = "Document.CodeGroup";
             public const string PDF = "Document.PDF";
             public const string SingleImage = "Document.IMG";
-            public const string HyperlinkSet = "Document.UrlGroup";
+            public const string WebReferences = "Document.UrlGroup";
             public const string ImageSet = "Document.PNG";
             public const string RTF = "Document.RTF";
-            public const string FileSet = "Document.HTML";
+            public const string FileAttachments = "Document.HTML";
             public const string Unknown = "Document.Unknown";
             public const string CodeFile = "Document.CodeFile";
         }
@@ -32,9 +32,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public static ImageList ImageList { get { return imageLibrary.ImageList; } }
 
-        public static Icon QikGroupIcon { get { return Get(Documents.QikGroup).Icon; } }
-        public static Icon CodeGroupIcon { get { return Get(Documents.CodeGroup).Icon; } }
-        public static Icon FileGroupIcon { get { return Get(Documents.FileSet).Icon; } }
+        public static Icon QikGroupIcon { get { return Get(TopicSections.QikGroup).Icon; } }
+        public static Icon CodeGroupIcon { get { return Get(TopicSections.CodeGroup).Icon; } }
+        public static Icon FileGroupIcon { get { return Get(TopicSections.FileAttachments).Icon; } }
 
         public static ImageOutput Get(string key, bool isFileExtensionKey = false)
         {
@@ -55,16 +55,16 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public static void AddDocuments()
         {
-            imageLibrary.Add(Documents.CodeFile, imageLibrary.IconByExtension("cpp"));
-            imageLibrary.Add(Documents.CodeGroup, Gui.Resources.GetImage(Constants.ImageKeys.CodeGroup));
-            imageLibrary.Add(Documents.QikGroup, Gui.Resources.GetImage(Constants.ImageKeys.QikGroup));
-            imageLibrary.Add(Documents.FileSet, Gui.Resources.GetImage(Constants.ImageKeys.Attachment));
-            imageLibrary.Add(Documents.HyperlinkSet, Gui.Resources.GetImage(Constants.ImageKeys.Web));
-            imageLibrary.Add(Documents.ImageSet, Gui.Resources.GetImage(Constants.ImageKeys.ImageSet));
-            imageLibrary.Add(Documents.Unknown, imageLibrary.IconByExtension("dat"));
-            imageLibrary.Add(Documents.RTF, imageLibrary.IconByExtension("rtf"));
-            imageLibrary.Add(Documents.PDF, imageLibrary.IconByExtension("pdf"));
-            imageLibrary.Add(Documents.SingleImage, imageLibrary.IconByExtension("png"));
+            imageLibrary.Add(TopicSections.CodeFile, imageLibrary.IconByExtension("cpp"));
+            imageLibrary.Add(TopicSections.CodeGroup, Gui.Resources.GetImage(Constants.ImageKeys.CodeGroup));
+            imageLibrary.Add(TopicSections.QikGroup, Gui.Resources.GetImage(Constants.ImageKeys.QikGroup));
+            imageLibrary.Add(TopicSections.FileAttachments, Gui.Resources.GetImage(Constants.ImageKeys.Attachment));
+            imageLibrary.Add(TopicSections.WebReferences, Gui.Resources.GetImage(Constants.ImageKeys.Web));
+            imageLibrary.Add(TopicSections.ImageSet, Gui.Resources.GetImage(Constants.ImageKeys.ImageSet));
+            imageLibrary.Add(TopicSections.Unknown, imageLibrary.IconByExtension("dat"));
+            imageLibrary.Add(TopicSections.RTF, imageLibrary.IconByExtension("rtf"));
+            imageLibrary.Add(TopicSections.PDF, imageLibrary.IconByExtension("pdf"));
+            imageLibrary.Add(TopicSections.SingleImage, imageLibrary.IconByExtension("png"));
         }
 
         public static void AddSyntaxes(SyntaxFile[] syntaxFiles)
@@ -73,7 +73,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 string syntax = syntaxFile.Syntax.ToUpper();
 
-                if (syntax == Documents.QikGroup)
+                if (syntax == TopicSections.QikGroup)
                     imageLibrary.Add(syntax, Gui.Resources.GetImage(Constants.ImageKeys.QikGroup));
                 else
                 {

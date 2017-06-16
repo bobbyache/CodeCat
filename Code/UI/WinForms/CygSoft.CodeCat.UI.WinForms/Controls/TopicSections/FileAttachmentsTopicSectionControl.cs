@@ -20,9 +20,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripButton btnAdd;
         private ToolStripButton btnDelete;
 
-        public override int ImageKey { get { return IconRepository.Get(IconRepository.Documents.FileSet).Index; } }
-        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.FileSet).Icon; } }
-        public override Image IconImage { get { return IconRepository.Get(IconRepository.Documents.FileSet).Image; } }
+        public override int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.FileAttachments).Index; } }
+        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.FileAttachments).Icon; } }
+        public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.FileAttachments).Image; } }
 
         public FileAttachmentsTopicSectionControl()
             : this(null, null, null)
@@ -42,10 +42,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             listView.SmallImageList = IconRepository.ImageList;
             listViewSorter = new ListViewSorter(this.listView);
             listView.Sorting = SortOrder.Ascending;
-
-            btnAdd.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
-            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnEdit.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
 
             ReloadListview(listView, FileAttachmentsTopicSection().Items, false);
 

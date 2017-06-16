@@ -103,10 +103,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 imageKey = (item as ICodeKeywordIndexItem).Syntax;
 
             else if (item is IQikTemplateKeywordIndexItem)
-                imageKey = IconRepository.Documents.QikGroup;
+                imageKey = IconRepository.TopicSections.QikGroup;
 
             else if (item is ITopicKeywordIndexItem)
-                imageKey = IconRepository.Documents.CodeGroup;
+                imageKey = IconRepository.TopicSections.CodeGroup;
 
             return imageKey;
         }

@@ -36,9 +36,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         public string Id { get; private set; }
         public string Title { get { return ""; } }
-        public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.CodeFile).Index; } }
-        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.CodeFile).Icon; } }
-        public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.CodeFile).Image; } }
+        public int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.CodeFile).Index; } }
+        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.CodeFile).Icon; } }
+        public Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.CodeFile).Image; } }
         public bool IsModified { get; private set; }
         public bool FileExists { get { return false; } }
 

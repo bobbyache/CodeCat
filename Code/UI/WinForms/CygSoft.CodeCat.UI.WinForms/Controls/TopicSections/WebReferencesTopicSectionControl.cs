@@ -22,9 +22,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripButton btnAdd;
         private ToolStripButton btnDelete;
 
-        public override int ImageKey { get { return IconRepository.Get(IconRepository.Documents.FileSet).Index; } }
-        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.FileSet).Icon; } }
-        public override Image IconImage { get { return IconRepository.Get(IconRepository.Documents.FileSet).Image; } }
+        public override int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.WebReferences).Index; } }
+        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.WebReferences).Icon; } }
+        public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.WebReferences).Image; } }
 
 
         public WebReferencesTopicSectionControl()
@@ -45,19 +45,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             listViewSorter = new ListViewSorter(listView);
             listView.Sorting = SortOrder.Ascending;
 
-            btnAdd.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
-            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnEdit.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
-
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
             listView.MouseUp += listview_MouseUp;
             mnuCopy.Click += mnuCopy_Click;
             mnuPaste.Click += mnuPaste_Click;
             mnuCopyUrl.Click += mnuCopyUrl_Click;
             mnuNavigate.Click += (s, e) => NavigateToUrl();
+            mnuDelete.Click += (s, e) => Delete();
+            mnuEdit.Click += (s, e) => Edit();
 
             ReloadListview(listView, WebReferencesTopicSection().WebReferences, false);
-
         }
 
         private void NavigateToUrl()
@@ -118,7 +115,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                         Add(webReference);
                     }
                     else if (WebReferencesTopicSection().IsValidWebReferenceXml(text))
-                        WebReferencesTopicSection().AddXml(text);
+                        AddXml(text);
                     else
                     {
                         string firstLine = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)[0];
@@ -148,6 +145,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             {
                 Gui.Dialogs.UrlCopyErrorNotification(this, ex);
             }
+        }
+
+        private void AddXml(string xml)
+        {
+            WebReferencesTopicSection().AddXml(xml);
+            Gui.GroupedListView.LoadAllItems<IWebReference>(listView, WebReferencesTopicSection().WebReferences, CreateListviewItem);
+            Modify();
         }
 
         private void Add(IWebReference webReference)
@@ -184,7 +188,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             if (listView.SelectedItems.Count >= 1)
             {
-                DialogResult result = Gui.Dialogs.DeleteMultipleItemsDialog(this, "files");
+                DialogResult result = Gui.Dialogs.DeleteMultipleItemsDialog(this, "hyperlinks");
 
                 if (result == DialogResult.Yes)
                 {

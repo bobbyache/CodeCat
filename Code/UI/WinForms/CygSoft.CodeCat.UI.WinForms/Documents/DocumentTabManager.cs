@@ -147,20 +147,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             if (topicSection is ICodeTopicSection)
                 item.Image = IconRepository.Get((topicSection as ICodeTopicSection).Syntax).Image;
             else if (topicSection is IPdfViewerTopicSection)
-                item.Image = IconRepository.Get(IconRepository.Documents.PDF).Image;
+                item.Image = IconRepository.Get(IconRepository.TopicSections.PDF).Image;
             else if (topicSection is ISingleImageTopicSection)
-                item.Image = IconRepository.Get(IconRepository.Documents.SingleImage).Image;
+                item.Image = IconRepository.Get(IconRepository.TopicSections.SingleImage).Image;
             else if (topicSection is IImagePagerTopicSection)
-                item.Image = IconRepository.Get(IconRepository.Documents.ImageSet).Image;
+                item.Image = IconRepository.Get(IconRepository.TopicSections.ImageSet).Image;
             else if (topicSection is IWebReferencesTopicSection)
-                item.Image = IconRepository.Get(IconRepository.Documents.HyperlinkSet).Image;
+                item.Image = IconRepository.Get(IconRepository.TopicSections.WebReferences).Image;
             else if (topicSection is IRichTextEditorTopicSection)
-                item.Image = IconRepository.Get(IconRepository.Documents.RTF).Image; 
+                item.Image = IconRepository.Get(IconRepository.TopicSections.RTF).Image; 
             else if (topicSection is IFileAttachmentsTopicSection)
-                item.Image = IconRepository.Get(IconRepository.Documents.FileSet).Image; 
+                item.Image = IconRepository.Get(IconRepository.TopicSections.FileAttachments).Image; 
 
             else
-                item.Image = IconRepository.Get(IconRepository.Documents.Unknown).Image;
+                item.Image = IconRepository.Get(IconRepository.TopicSections.Unknown).Image;
 
             item.Click += item_Click;
             this.tabMenuButton.DropDownItems.Add(item);

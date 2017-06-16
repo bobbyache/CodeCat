@@ -132,13 +132,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnMoveRight.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveRight);
             btnMenu.Image = Gui.Resources.GetImage(Constants.ImageKeys.GroupMenu);
 
-            btnAddPdfDocument.Image = IconRepository.Get(IconRepository.Documents.PDF).Image;
-            btnAddImage.Image = IconRepository.Get(IconRepository.Documents.SingleImage).Image;
-            btnAddHyperlinks.Image = IconRepository.Get(IconRepository.Documents.HyperlinkSet).Image;
-            btnFileGroup.Image = IconRepository.Get(IconRepository.Documents.FileSet).Image;
-            btnImageSet.Image = IconRepository.Get(IconRepository.Documents.ImageSet).Image;
-            btnRichText.Image = IconRepository.Get(IconRepository.Documents.RTF).Image;
-            btnAddCode.Image = IconRepository.Get(IconRepository.Documents.CodeFile).Image;
+            btnAddPdfDocument.Image = IconRepository.Get(IconRepository.TopicSections.PDF).Image;
+            btnAddImage.Image = IconRepository.Get(IconRepository.TopicSections.SingleImage).Image;
+            btnAddHyperlinks.Image = IconRepository.Get(IconRepository.TopicSections.WebReferences).Image;
+            btnFileGroup.Image = IconRepository.Get(IconRepository.TopicSections.FileAttachments).Image;
+            btnImageSet.Image = IconRepository.Get(IconRepository.TopicSections.ImageSet).Image;
+            btnRichText.Image = IconRepository.Get(IconRepository.TopicSections.RTF).Image;
+            btnAddCode.Image = IconRepository.Get(IconRepository.TopicSections.CodeFile).Image;
 
             this.Icon = IconRepository.CodeGroupIcon;
         }
@@ -309,7 +309,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddHyperlinks_Click(object sender, EventArgs e)
         {
-            IWebReferencesTopicSection webReferencesTopicSection = topicDocument.AddTopicSection(TopicSectionType.WebReferences) as IWebReferencesTopicSection;
+            IWebReferencesTopicSection webReferencesTopicSection = topicDocument.AddTopicSection(TopicSectionType.WebReferences, "Web References") as IWebReferencesTopicSection;
             this.IsModified = true;
         }
 

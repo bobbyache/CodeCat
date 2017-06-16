@@ -74,8 +74,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             mnuFileCreateNew.Image = Gui.Resources.GetImage(Constants.ImageKeys.NewProject);
             mnuSnippetsViewModify.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
             mnuSnippetsAdd.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
-            mnuAddCodeGroup.Image = IconRepository.Get(IconRepository.Documents.CodeGroup).Image;
-            mnuAddQikTemplate.Image = IconRepository.Get(IconRepository.Documents.QikGroup).Image;
+            mnuAddCodeGroup.Image = IconRepository.Get(IconRepository.TopicSections.CodeGroup).Image;
+            mnuAddQikTemplate.Image = IconRepository.Get(IconRepository.TopicSections.QikGroup).Image;
             mnuWindowKeywordSearch.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
         }
 

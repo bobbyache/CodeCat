@@ -22,9 +22,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public string Id { get; private set; }
         public string Title { get { return txtTitle.Text; } }
-        public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.ImageSet).Index; } }
-        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.ImageSet).Icon; } }
-        public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.ImageSet).Image; } }
+        public int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.ImageSet).Index; } }
+        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.ImageSet).Icon; } }
+        public Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.ImageSet).Image; } }
         public bool IsModified { get; private set; }
         public bool FileExists { get { return false; } }
 

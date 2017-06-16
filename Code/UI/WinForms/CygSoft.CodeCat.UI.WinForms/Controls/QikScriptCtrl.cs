@@ -36,9 +36,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             RegisterFileEvents();
         }
 
-        public int ImageKey { get { return IconRepository.Get(IconRepository.Documents.QikGroup).Index; } }
-        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.Documents.QikGroup).Icon; } }
-        public Image IconImage { get { return IconRepository.Get(IconRepository.Documents.QikGroup).Image; } }
+        public int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.QikGroup).Index; } }
+        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.QikGroup).Icon; } }
+        public Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.QikGroup).Image; } }
         public string Id { get { return this.scriptFile.Id; } }
         public string Title { get { return this.scriptFile.Title; } }
         public string ScriptText { get { return this.syntaxDocument.Text; } }
