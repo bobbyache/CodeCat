@@ -35,7 +35,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             tabControl.Alignment = TabAlignment.Left;
 
             btnTakeSnapshot = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add Snapshot", Constants.ImageKeys.AddSnapshot, CreateSnapshot);
-            btnDeleteSnapshot = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete Snapshot", Constants.ImageKeys.DeleteSnapshot);
+            btnDeleteSnapshot = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete Snapshot", Constants.ImageKeys.DeleteSnapshot, DeleteSnapshot);
 
             if (topicDocument == null)
                 return;
@@ -43,6 +43,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             //syntaxBox.Document.Text = VersionedCodeTopicSection.Text;
             syntaxDocument.Text = VersionedCodeTopicSection.Text;
             syntaxDocument.SyntaxFile = SyntaxFile;
+
+            snapshotListCtrl1.Attach(topicSection);
 
             syntaxBox.TextChanged += (s, e) =>
             {
@@ -65,7 +67,25 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void CreateSnapshot(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (this.IsModified)
+            {
+                Gui.Dialogs.TakeSnapshotInvalidInCurrentContext(this);
+                return;
+            }
+
+            // ok to continue...
+            SnapshotDescDialog frm = new SnapshotDescDialog();
+            DialogResult result = frm.ShowDialog(this);
+
+            if (result == DialogResult.OK)
+            {
+                VersionedCodeTopicSection.CreateVersion(frm.Description);
+            }
+        }
+
+        private void DeleteSnapshot(object sender, EventArgs e)
+        {
+            this.snapshotListCtrl1.DeleteSnapshot();
         }
 
         private void Base_SyntaxModified(object sender, EventArgs e)

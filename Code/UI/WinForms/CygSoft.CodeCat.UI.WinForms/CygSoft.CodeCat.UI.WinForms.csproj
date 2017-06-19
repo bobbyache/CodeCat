@@ -72,6 +72,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CodeVersionListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CodeVersionListControl.Designer.cs">
+      <DependentUpon>CodeVersionListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TopicSections\BaseCodeTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -295,6 +301,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UiResource.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\CodeVersionListControl.resx">
+      <DependentUpon>CodeVersionListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\BaseCodeTopicSectionControl.resx">
       <DependentUpon>BaseCodeTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>

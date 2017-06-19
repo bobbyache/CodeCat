@@ -32,7 +32,7 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageCode = new System.Windows.Forms.TabPage();
             this.tabPageSnapshots = new System.Windows.Forms.TabPage();
-            this.snapshotListCtrl1 = new CygSoft.CodeCat.UI.WinForms.SnapshotListCtrl();
+            this.snapshotListCtrl1 = new CygSoft.CodeCat.UI.WinForms.CodeVersionListControl();
             this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.tabControl.SuspendLayout();
@@ -139,7 +139,7 @@
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPageCode;
         private System.Windows.Forms.TabPage tabPageSnapshots;
-        private SnapshotListCtrl snapshotListCtrl1;
+        private CodeVersionListControl snapshotListCtrl1;
         private Alsing.Windows.Forms.SyntaxBoxControl syntaxBox;
         private Alsing.SourceCode.SyntaxDocument syntaxDocument;
     }
