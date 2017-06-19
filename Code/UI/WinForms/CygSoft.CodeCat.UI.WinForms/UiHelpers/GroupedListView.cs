@@ -62,14 +62,17 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
                 return items;
             }
 
-            public static void RemoveItems(ListView listView)
-            {
-                listView.Items.Cast<ListViewItem>().Where(l => l.Selected)
-                    .ToList().ForEach(l => listView.Items.RemoveByKey(l.Name));
-            }
+            //public static void RemoveItems(ListView listView)
+            //{
+            //    listView.Items.Cast<ListViewItem>().Where(l => l.Selected)
+            //        .ToList().ForEach(l => listView.Items.RemoveByKey(l.Name));
+            //}
 
-            public static void LoadAllItems<T>(ListView listView, T[] items, Func<ListView, T, bool, ListViewItem> create) where T : ICategorizedItem
+            public static void LoadAllItems<T>(ListView listView, T[] items, string[] categories, Func<ListView, T, bool, ListViewItem> create, bool reloadGroups = true) where T : ICategorizedItem
             {
+                if (reloadGroups)
+                    Gui.GroupedListView.ReloadGroups(listView, categories);
+
                 listView.Items.Clear();
 
                 foreach (T item in items)

@@ -26,6 +26,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.WebReferences).Icon; } }
         public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.WebReferences).Image; } }
 
+        private IWebReferencesTopicSection WebReferencesTopicSection
+        {
+            get { return topicSection as IWebReferencesTopicSection; }
+        }
 
         public WebReferencesTopicSectionControl()
             : this(null, null, null)
@@ -39,7 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             InitializeComponent();
 
             btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
-            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => { Add(WebReferencesTopicSection().CreateWebReference()); });
+            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => { Add(WebReferencesTopicSection.CreateWebReference()); });
             btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
 
             listViewSorter = new ListViewSorter(listView);
@@ -54,7 +58,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             mnuDelete.Click += (s, e) => Delete();
             mnuEdit.Click += (s, e) => Edit();
 
-            ReloadListview(listView, WebReferencesTopicSection().WebReferences, false);
+            ReloadListview();
         }
 
         private void NavigateToUrl()
@@ -97,7 +101,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 .Select(lv => lv.Tag).Cast<IWebReference>()
                 .Select(url => url.Id).ToArray();
 
-            string copyXml = WebReferencesTopicSection().GetXml(ids);
+            string copyXml = WebReferencesTopicSection.GetXml(ids);
             Clipboard.Clear();
             Clipboard.SetText(copyXml);
         }
@@ -109,17 +113,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 if (Clipboard.ContainsText())
                 {
                     string text = Clipboard.GetText().Trim();
-                    if (WebReferencesTopicSection().IsFullUrl(text))
+                    if (WebReferencesTopicSection.IsFullUrl(text))
                     {
-                        IWebReference webReference = WebReferencesTopicSection().CreateWebReference(text, "", "");
+                        IWebReference webReference = WebReferencesTopicSection.CreateWebReference(text, "", "");
                         Add(webReference);
                     }
-                    else if (WebReferencesTopicSection().IsValidWebReferenceXml(text))
+                    else if (WebReferencesTopicSection.IsValidWebReferenceXml(text))
                         AddXml(text);
                     else
                     {
                         string firstLine = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)[0];
-                        IWebReference webReference = WebReferencesTopicSection().CreateWebReference("", firstLine, "");
+                        IWebReference webReference = WebReferencesTopicSection.CreateWebReference("", firstLine, "");
                         Add(webReference);
                     }
                 }
@@ -149,20 +153,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void AddXml(string xml)
         {
-            WebReferencesTopicSection().AddXml(xml);
-            Gui.GroupedListView.LoadAllItems<IWebReference>(listView, WebReferencesTopicSection().WebReferences, CreateListviewItem);
+            WebReferencesTopicSection.AddXml(xml);
+            ReloadListview();
             Modify();
         }
 
         private void Add(IWebReference webReference)
         {
-            UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, WebReferencesTopicSection().Categories);
+            UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, WebReferencesTopicSection.Categories);
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
-                WebReferencesTopicSection().Add(webReference);
-                ReloadListview(listView, WebReferencesTopicSection().WebReferences, true);
+                WebReferencesTopicSection.Add(webReference);
+                ReloadListview();
                 Modify();
             }
         }
@@ -173,12 +177,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             {
                 IWebReference webReference = Gui.GroupedListView.SelectedItem<IWebReference>(listView);
 
-                UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, WebReferencesTopicSection().Categories);
+                UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, WebReferencesTopicSection.Categories);
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
-                    ReloadListview(listView, WebReferencesTopicSection().WebReferences, true);
+                    ReloadListview();
                     Modify();
                 }
             }
@@ -193,8 +197,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 if (result == DialogResult.Yes)
                 {
                     IEnumerable<IWebReference> webReferences = Gui.GroupedListView.SelectedItems<IWebReference>(listView);
-                    WebReferencesTopicSection().Remove(webReferences);
-                    Gui.GroupedListView.RemoveItems(listView);
+                    WebReferencesTopicSection.Remove(webReferences);
+                    ReloadListview();
 
                     Modify();
                 }
@@ -219,19 +223,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             return listItem;
         }
 
-        private void ReloadListview(ListView listView, IWebReference[] webReferences, bool reloadGroups = true)
+        private void ReloadListview()
         {
-            if (reloadGroups)
-                Gui.GroupedListView.ReloadGroups(this.listView, this.WebReferencesTopicSection().Categories);
-
-            Gui.GroupedListView.LoadAllItems<IWebReference>(this.listView, webReferences, this.CreateListviewItem);
+            Gui.GroupedListView.LoadAllItems<IWebReference>(this.listView, WebReferencesTopicSection.WebReferences,
+                this.WebReferencesTopicSection.Categories, this.CreateListviewItem);
 
             listViewSorter.Sort(0);
-        }
-
-        private IWebReferencesTopicSection WebReferencesTopicSection()
-        {
-            return topicSection as IWebReferencesTopicSection;
         }
     }
 }

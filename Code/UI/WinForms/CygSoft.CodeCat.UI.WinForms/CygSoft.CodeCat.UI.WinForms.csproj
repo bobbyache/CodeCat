@@ -160,10 +160,6 @@
     <Compile Include="Controls\TopicSections\WebReferencesTopicSectionControl.Designer.cs">
       <DependentUpon>WebReferencesTopicSectionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UrlGroupControl.cs" />
-    <Compile Include="Controls\UrlGroupControl.Designer.cs">
-      <DependentUpon>UrlGroupControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\CodeSearchResultsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -340,9 +336,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\WebReferencesTopicSectionControl.resx">
       <DependentUpon>WebReferencesTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UrlGroupControl.resx">
-      <DependentUpon>UrlGroupControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\VersionedCodeTopicSectionControl.resx">
       <DependentUpon>VersionedCodeTopicSectionControl.cs</DependentUpon>

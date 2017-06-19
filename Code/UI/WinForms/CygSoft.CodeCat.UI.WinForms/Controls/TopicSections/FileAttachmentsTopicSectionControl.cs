@@ -24,6 +24,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.FileAttachments).Icon; } }
         public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.FileAttachments).Image; } }
 
+        private IFileAttachmentsTopicSection FileAttachmentsTopicSection
+        {
+            get { return topicSection as IFileAttachmentsTopicSection; }
+        }
+
         public FileAttachmentsTopicSectionControl()
             : this(null, null, null)
         {
@@ -43,7 +48,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             listViewSorter = new ListViewSorter(this.listView);
             listView.Sorting = SortOrder.Ascending;
 
-            ReloadListview(listView, FileAttachmentsTopicSection().Items, false);
+            ReloadListview();
 
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
             listView.MouseUp += listView_MouseUp;
@@ -130,13 +135,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void Add()
         {
-            FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(FileAttachmentsTopicSection());
+            FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(FileAttachmentsTopicSection);
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
-                FileAttachmentsTopicSection().Add(dialog.EditedFile);
-                ReloadListview(listView, FileAttachmentsTopicSection().Items, true);
+                FileAttachmentsTopicSection.Add(dialog.EditedFile);
+                ReloadListview();
                 Modify();
             }
         }
@@ -147,12 +152,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             {
                 IFileAttachment fileAttachment = Gui.GroupedListView.SelectedItem<IFileAttachment>(listView);
 
-                FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(fileAttachment, FileAttachmentsTopicSection());
+                FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(fileAttachment, FileAttachmentsTopicSection);
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
-                    ReloadListview(listView, FileAttachmentsTopicSection().Items, true);
+                    ReloadListview();
                     Modify();
                 }
             }
@@ -167,8 +172,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 if (result == DialogResult.Yes)
                 {
                     IEnumerable<IFileAttachment> fileAttachments = Gui.GroupedListView.SelectedItems<IFileAttachment>(listView);
-                    FileAttachmentsTopicSection().Remove(fileAttachments);
-                    Gui.GroupedListView.RemoveItems(listView);
+                    FileAttachmentsTopicSection.Remove(fileAttachments);
+                    ReloadListview();
 
                     Modify();
                 }
@@ -194,21 +199,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             return listItem;
         }
 
-        private void ReloadListview(ListView listView, IFileAttachment[] fileAttachments, bool reloadGroups = true)
+        private void ReloadListview()
         {
-            if (reloadGroups)
-                Gui.GroupedListView.ReloadGroups(this.listView, this.FileAttachmentsTopicSection().Categories);
+            IconRepository.AddFileExtensions(FileAttachmentsTopicSection.Items.Select(idx => idx.FileExtension));
 
-            IconRepository.AddFileExtensions(fileAttachments.Select(idx => idx.FileExtension));
-            Gui.GroupedListView.LoadAllItems<IFileAttachment>(this.listView, fileAttachments, this.CreateListviewItem);
+            Gui.GroupedListView.LoadAllItems<IFileAttachment>(this.listView, FileAttachmentsTopicSection.Items,
+                FileAttachmentsTopicSection.Categories, this.CreateListviewItem);
 
             listViewSorter.Sort(0);
         }
-
-        private IFileAttachmentsTopicSection FileAttachmentsTopicSection()
-        {
-            return topicSection as IFileAttachmentsTopicSection;
-        }
-
     }
 }
