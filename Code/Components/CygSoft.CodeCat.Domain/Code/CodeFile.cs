@@ -118,8 +118,6 @@ namespace CygSoft.CodeCat.Domain.Code
             set { this.IndexItem.SetKeywords(value); }
         }
 
-        public int HitCount { get; private set; }
-
         public void Revert()
         {
             this.BeforeRevert?.Invoke(this, new TopicEventArgs(null));
@@ -133,7 +131,6 @@ namespace CygSoft.CodeCat.Domain.Code
             bool opened = this.ReadData();
             if (opened)
             {
-                this.IncrementHitCount();
                 this.WriteData();
                 this.loaded = true;
                 AfterOpen?.Invoke(this, new TopicEventArgs(null));
@@ -157,10 +154,6 @@ namespace CygSoft.CodeCat.Domain.Code
                 XAttribute syntaxAttribute = file.Element("Snippet").Attribute("Syntax");
                 if (syntaxAttribute != null)
                     this.Syntax = (string)syntaxAttribute.Value;
-
-                XAttribute hitCountAttribute = file.Element("Snippet").Attribute("Hits");
-                if (hitCountAttribute != null)
-                    this.HitCount = int.Parse(hitCountAttribute.Value);
 
                 this.snapshots.Clear();
 
@@ -218,11 +211,6 @@ namespace CygSoft.CodeCat.Domain.Code
             AfterDelete?.Invoke(this, new TopicEventArgs(null));
         }
 
-        private void IncrementHitCount()
-        {
-            this.HitCount++;
-        }
-
         private void WriteData()
         {
             XElement snapshotsElement = new XElement("Snapshots");
@@ -230,7 +218,6 @@ namespace CygSoft.CodeCat.Domain.Code
             XElement snippetElement = new XElement("Snippet",
                     new XAttribute("ID", IndexItem.Id),
                     new XAttribute("Syntax", this.Syntax),
-                    new XAttribute("Hits", this.HitCount),
                     new XElement("Code", new XCData(this.Text))
                  );
 

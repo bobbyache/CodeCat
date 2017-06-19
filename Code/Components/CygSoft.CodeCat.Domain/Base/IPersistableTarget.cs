@@ -6,7 +6,6 @@ namespace CygSoft.CodeCat.Domain.Base
 {
     public interface IPersistableTarget : IKeywordTarget
     {
-        int HitCount { get; }
         string Title { get; set; }
 
         event EventHandler<TopicEventArgs> BeforeDelete;
