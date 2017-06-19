@@ -315,25 +315,25 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddPdfDocument_Click(object sender, EventArgs e)
         {
-            IPdfViewerTopicSection pdfViewerTopicSection = topicDocument.AddTopicSection(TopicSectionType.PdfViewer) as IPdfViewerTopicSection;
+            IPdfViewerTopicSection pdfViewerTopicSection = topicDocument.AddTopicSection(TopicSectionType.PdfViewer, "PDF Document") as IPdfViewerTopicSection;
             this.IsModified = true;
         }
 
         private void btnImageSet_Click(object sender, EventArgs e)
         {
-            IImagePagerTopicSection imagePagerTopicSection = topicDocument.AddTopicSection(TopicSectionType.ImagePager) as IImagePagerTopicSection;
+            IImagePagerTopicSection imagePagerTopicSection = topicDocument.AddTopicSection(TopicSectionType.ImagePager, "Image Pager") as IImagePagerTopicSection;
             this.IsModified = true;
         }
 
         private void btnAddImage_Click(object sender, EventArgs e)
         {
-            ISingleImageTopicSection singleImageTopicSection = topicDocument.AddTopicSection(TopicSectionType.SingleImage, null, "png") as ISingleImageTopicSection;
+            ISingleImageTopicSection singleImageTopicSection = topicDocument.AddTopicSection(TopicSectionType.SingleImage, "Single Image", null, "png") as ISingleImageTopicSection;
             this.IsModified = true;
         }
 
         private void btnRichText_Click(object sender, EventArgs e)
         {
-            IRichTextEditorTopicSection richTextEditorTopicSection = topicDocument.AddTopicSection(TopicSectionType.RtfEditor, null, "rtf") as IRichTextEditorTopicSection;
+            IRichTextEditorTopicSection richTextEditorTopicSection = topicDocument.AddTopicSection(TopicSectionType.RtfEditor, "Notes", null, "rtf") as IRichTextEditorTopicSection;
             this.IsModified = true;
         }
 
