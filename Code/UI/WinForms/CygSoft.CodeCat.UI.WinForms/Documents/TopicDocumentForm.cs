@@ -297,13 +297,13 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void btnAddCode_Click(object sender, EventArgs e)
         {
-            ICodeTopicSection templateFile = topicDocument.AddTopicSection(TopicSectionType.Code, ConfigSettings.DefaultSyntax, "txt") as ICodeTopicSection;
+            ICodeTopicSection templateFile = topicDocument.AddTopicSection(TopicSectionType.Code, "Code Snippet", ConfigSettings.DefaultSyntax, "txt") as ICodeTopicSection;
             this.IsModified = true;
         }
 
         private void btnAddVersionedCode_Click(object sender, EventArgs e)
         {
-            IVersionedCodeTopicSection versionedCodeTopicSection = topicDocument.AddTopicSection(TopicSectionType.VersionedCode, ConfigSettings.DefaultSyntax, "txt") as IVersionedCodeTopicSection;
+            IVersionedCodeTopicSection versionedCodeTopicSection = topicDocument.AddTopicSection(TopicSectionType.VersionedCode, "Versioned Code Snippet", ConfigSettings.DefaultSyntax, "txt") as IVersionedCodeTopicSection;
             this.IsModified = true;
         }
 
