@@ -18,6 +18,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public string TemplateText { get { return this.syntaxDocument.Text; } }
         public string SyntaxFile { get { return application.GetSyntaxFile(base.Syntax); } }
 
+        private ICodeTopicSection CodeTopicSection
+        {
+            get { return base.topicSection as ICodeTopicSection; }
+        }
+
         public SimpleCodeTopicSectionControl()
             : this(null, null, null)
         {
@@ -32,7 +37,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             if (topicDocument == null)
                 return;
 
-            syntaxBox.Document.Text = CodeTopicSection().Text;
+            syntaxBox.Document.Text = CodeTopicSection.Text;
             syntaxDocument.SyntaxFile = SyntaxFile;
 
             syntaxBox.TextChanged += (s, e) =>
@@ -71,20 +76,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             syntaxBox.TextChanged -= SetModified;
         }
 
-        private ICodeTopicSection CodeTopicSection()
-        {
-            return base.topicSection as ICodeTopicSection;
-        }
-
         private void Base_Reverted(object sender, EventArgs e)
         {
-            syntaxBox.Document.Text = CodeTopicSection().Text;
+            syntaxBox.Document.Text = CodeTopicSection.Text;
         }
 
         private void Base_ContentSaved(object sender, EventArgs e)
         {
-            this.CodeTopicSection().Text = syntaxDocument.Text;
-            this.CodeTopicSection().Syntax = Syntax;
+            this.CodeTopicSection.Text = syntaxDocument.Text;
+            this.CodeTopicSection.Syntax = Syntax;
         }
     }
 }
