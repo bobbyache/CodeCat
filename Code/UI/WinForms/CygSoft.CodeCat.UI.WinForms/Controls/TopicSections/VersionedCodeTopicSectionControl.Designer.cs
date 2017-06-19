@@ -29,24 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageCode = new System.Windows.Forms.TabPage();
-            this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.tabPageSnapshots = new System.Windows.Forms.TabPage();
             this.snapshotListCtrl1 = new CygSoft.CodeCat.UI.WinForms.SnapshotListCtrl();
+            this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
+            this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.tabControl.SuspendLayout();
             this.tabPageCode.SuspendLayout();
             this.tabPageSnapshots.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // syntaxDocument
-            // 
-            this.syntaxDocument.Lines = new string[] {
-        ""};
-            this.syntaxDocument.MaxUndoBufferSize = 1000;
-            this.syntaxDocument.Modified = false;
-            this.syntaxDocument.UndoStep = 0;
             // 
             // tabControl
             // 
@@ -70,35 +62,6 @@
             this.tabPageCode.Text = "Code";
             this.tabPageCode.UseVisualStyleBackColor = true;
             // 
-            // syntaxBox
-            // 
-            this.syntaxBox.ActiveView = Alsing.Windows.Forms.ActiveView.BottomRight;
-            this.syntaxBox.AutoListPosition = null;
-            this.syntaxBox.AutoListSelectedText = "a123";
-            this.syntaxBox.AutoListVisible = false;
-            this.syntaxBox.BackColor = System.Drawing.Color.White;
-            this.syntaxBox.BorderStyle = Alsing.Windows.Forms.BorderStyle.None;
-            this.syntaxBox.CopyAsRTF = false;
-            this.syntaxBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.syntaxBox.FontName = "Courier new";
-            this.syntaxBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.syntaxBox.InfoTipCount = 1;
-            this.syntaxBox.InfoTipPosition = null;
-            this.syntaxBox.InfoTipSelectedIndex = 1;
-            this.syntaxBox.InfoTipVisible = false;
-            this.syntaxBox.Location = new System.Drawing.Point(3, 3);
-            this.syntaxBox.LockCursorUpdate = false;
-            this.syntaxBox.Name = "syntaxBox";
-            this.syntaxBox.ShowScopeIndicator = false;
-            this.syntaxBox.Size = new System.Drawing.Size(681, 451);
-            this.syntaxBox.SmoothScroll = false;
-            this.syntaxBox.SplitviewH = -4;
-            this.syntaxBox.SplitviewV = -4;
-            this.syntaxBox.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.syntaxBox.TabIndex = 2;
-            this.syntaxBox.Text = "syntaxBoxControl1";
-            this.syntaxBox.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
-            // 
             // tabPageSnapshots
             // 
             this.tabPageSnapshots.Controls.Add(this.snapshotListCtrl1);
@@ -118,6 +81,44 @@
             this.snapshotListCtrl1.Size = new System.Drawing.Size(681, 451);
             this.snapshotListCtrl1.TabIndex = 0;
             // 
+            // versionedSyntaxDocument
+            // 
+            this.syntaxDocument.Lines = new string[] {
+        ""};
+            this.syntaxDocument.MaxUndoBufferSize = 1000;
+            this.syntaxDocument.Modified = false;
+            this.syntaxDocument.UndoStep = 0;
+            // 
+            // syntaxBox
+            // 
+            this.syntaxBox.ActiveView = Alsing.Windows.Forms.ActiveView.BottomRight;
+            this.syntaxBox.AutoListPosition = null;
+            this.syntaxBox.AutoListSelectedText = "a123";
+            this.syntaxBox.AutoListVisible = false;
+            this.syntaxBox.BackColor = System.Drawing.Color.White;
+            this.syntaxBox.BorderStyle = Alsing.Windows.Forms.BorderStyle.None;
+            this.syntaxBox.CopyAsRTF = false;
+            this.syntaxBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.syntaxBox.Document = this.syntaxDocument;
+            this.syntaxBox.FontName = "Courier new";
+            this.syntaxBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.syntaxBox.InfoTipCount = 1;
+            this.syntaxBox.InfoTipPosition = null;
+            this.syntaxBox.InfoTipSelectedIndex = 1;
+            this.syntaxBox.InfoTipVisible = false;
+            this.syntaxBox.Location = new System.Drawing.Point(3, 3);
+            this.syntaxBox.LockCursorUpdate = false;
+            this.syntaxBox.Name = "syntaxBox";
+            this.syntaxBox.ShowScopeIndicator = false;
+            this.syntaxBox.Size = new System.Drawing.Size(681, 451);
+            this.syntaxBox.SmoothScroll = false;
+            this.syntaxBox.SplitviewH = -4;
+            this.syntaxBox.SplitviewV = -4;
+            this.syntaxBox.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
+            this.syntaxBox.TabIndex = 2;
+            this.syntaxBox.Text = "syntaxBoxControl1";
+            this.syntaxBox.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
+            // 
             // VersionedCodeTopicSectionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -135,12 +136,11 @@
         }
 
         #endregion
-
-        private Alsing.SourceCode.SyntaxDocument syntaxDocument;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPageCode;
-        private Alsing.Windows.Forms.SyntaxBoxControl syntaxBox;
         private System.Windows.Forms.TabPage tabPageSnapshots;
         private SnapshotListCtrl snapshotListCtrl1;
+        private Alsing.Windows.Forms.SyntaxBoxControl syntaxBox;
+        private Alsing.SourceCode.SyntaxDocument syntaxDocument;
     }
 }
