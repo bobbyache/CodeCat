@@ -25,6 +25,28 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             : base(application, topicDocument, topicSection)
         {
             InitializeComponent();
+
+            //ToolStripLabel searchLabel = new ToolStripLabel();
+            //searchLabel.Text = "Search";
+            //searchLabel.Alignment = ToolStripItemAlignment.Right;
+            //ToolStripTextBox searchTextBox = new ToolStripTextBox();
+            //searchTextBox.Width = 300;
+            //searchTextBox.Alignment = ToolStripItemAlignment.Right;
+
+            HeaderToolstrip.Items.Add(CreateButton());
+            HeaderToolstrip.Items.Add(CreateButton());
+            HeaderToolstrip.Items.Add(CreateButton());
+            //HeaderToolstrip.Items.Add(searchTextBox);
+            //HeaderToolstrip.Items.Add(searchLabel);
+            
+        }
+
+        private ToolStripButton CreateButton()
+        {
+            ToolStripButton btn = new ToolStripButton();
+            btn.Alignment = ToolStripItemAlignment.Right;
+            btn.Text = "Test";
+            return btn;
         }
     }
 }
