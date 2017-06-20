@@ -12,6 +12,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         DateTime TimeTaken { get; }
         string Description { get; }
         string Title { get; }
+        string FilePath { get; }
     }
 
     public interface IVersionableFile

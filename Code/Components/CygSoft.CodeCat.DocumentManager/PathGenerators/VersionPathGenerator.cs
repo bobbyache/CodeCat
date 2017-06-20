@@ -54,7 +54,7 @@ namespace CygSoft.CodeCat.DocumentManager.PathGenerators
 
         private string CreateFileName(string sourceFileName, DateTime timeStamp)
         {
-            string extension = Path.GetExtension(sourceFileName);
+            string extension = CleanExtension(Path.GetExtension(sourceFileName));
             string fileTitle = Path.GetFileNameWithoutExtension(sourceFileName);
             return fileTitle + "_" + TodayPart(timeStamp) + "_" + TimePart(timeStamp) + "." + extension;
         }

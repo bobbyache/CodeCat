@@ -3,6 +3,7 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,7 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.VersionedCode
             public string Id { get; private set; }
             public DateTime TimeTaken { get; private set; }
             public string Description { get; private set; }
+            public string FilePath { get; private set; }
 
             public string Title
             {
@@ -51,6 +53,15 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.VersionedCode
                 this.Id = versionPathGenerator.Id;
                 this.TimeTaken = versionPathGenerator.TimeStamp;
                 this.Description = description;
+                this.FilePath = versionPathGenerator.FilePath;
+            }
+
+            public CodeTopicSectionVersion(string id, DateTime timeTaken, string description, string filePath)
+            {
+                this.Id = id;
+                this.TimeTaken = timeTaken;
+                this.Description = description;
+                this.FilePath = filePath;
             }
         }
 
@@ -75,21 +86,48 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.VersionedCode
             this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.VersionedCode);
         }
 
+        private string GetVersionIndexPath()
+        {
+            return Path.Combine(Path.GetDirectoryName(this.FilePath), Path.GetFileNameWithoutExtension(this.FilePath) + ".xml");
+        }
+
         public IFileVersion CreateVersion(string description = "")
         {
             VersionPathGenerator versionPathGenerator = new VersionPathGenerator(this.FilePath, DateTime.Now);
             CodeTopicSectionVersion fileVersion = new CodeTopicSectionVersion(versionPathGenerator, description);
+            File.WriteAllText(fileVersion.FilePath, this.Text);
+
             this.fileVersions.Add(fileVersion);
             this.fileVersions.Sort(new VersionFileComparer());
+
+            VersionedCodeIndexXmlRepository repo = new VersionedCodeIndexXmlRepository(GetVersionIndexPath());
+            repo.WriteVersions(fileVersions);
+
             this.SnapshotTaken?.Invoke(this, new EventArgs());
             return fileVersion;
+        }
+
+        protected override void OnOpen()
+        {
+            VersionedCodeIndexXmlRepository repo = new VersionedCodeIndexXmlRepository(GetVersionIndexPath());
+
+            if (repo.HasVersionFile)
+                this.fileVersions = repo.LoadVersions();
+            base.OnOpen();
         }
 
         public void DeleteVersion(string versionId)
         {
             IFileVersion fileVersion = fileVersions.Where(s => s.Id == versionId).SingleOrDefault();
+
+            File.Delete(fileVersion.FilePath);
+
             fileVersions.Remove(fileVersion);
             fileVersions.Sort(new VersionFileComparer());
+
+            VersionedCodeIndexXmlRepository repo = new VersionedCodeIndexXmlRepository(GetVersionIndexPath());
+            repo.WriteVersions(fileVersions);
+
             this.SnapshotDeleted?.Invoke(this, new EventArgs());
         }
 
