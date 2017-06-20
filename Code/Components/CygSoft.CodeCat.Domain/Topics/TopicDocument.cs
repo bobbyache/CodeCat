@@ -123,8 +123,6 @@ namespace CygSoft.CodeCat.Domain.Topics
             set { this.IndexItem.SetKeywords(value); }
         }
 
-        public int HitCount { get; private set; }
-
         public bool TopicSectionExists(string id)
         {
             return this.documentIndex.TopicSectionExists(id);
@@ -182,11 +180,6 @@ namespace CygSoft.CodeCat.Domain.Topics
         public void RemoveTopicSection(string id)
         {
             this.documentIndex.RemoveTopicSection(id);
-        }
-
-        private void IncrementHitCount()
-        {
-            this.HitCount++;
         }
 
         private void documentIndex_AfterOpen(object sender, TopicEventArgs e)

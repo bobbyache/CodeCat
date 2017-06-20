@@ -67,98 +67,31 @@ namespace CygSoft.CodeCat.Domain.Topics
             XElement filesElement = indexDocument.Element("CodeGroup").Element("Documents");
             filesElement.RemoveNodes();
 
-            foreach (ITopicSection imagePagerTopicSection in topicSections)
+            foreach (ITopicSection topicSection in topicSections)
             {
-                if (imagePagerTopicSection is ICodeTopicSection)
+                if (topicSection is ICodeTopicSection)
                 {
-                    ICodeTopicSection codeTopicSection = imagePagerTopicSection as ICodeTopicSection;
+                    ICodeTopicSection writableTopicSection = topicSection as ICodeTopicSection;
 
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", codeTopicSection.Id),
-                        new XAttribute("Title", codeTopicSection.Title),
-                        new XAttribute("DocType", codeTopicSection.DocumentType),
-                        new XAttribute("Description", codeTopicSection.Description == null ? "" : codeTopicSection.Description),
-                        new XAttribute("Ext", codeTopicSection.FileExtension),
-                        new XAttribute("Syntax", codeTopicSection.Syntax),
-                        new XAttribute("Ordinal", codeTopicSection.Ordinal.ToString())
+                        new XAttribute("Id", writableTopicSection.Id),
+                        new XAttribute("Title", writableTopicSection.Title),
+                        new XAttribute("DocType", writableTopicSection.DocumentType),
+                        new XAttribute("Description", writableTopicSection.Description == null ? "" : writableTopicSection.Description),
+                        new XAttribute("Ext", writableTopicSection.FileExtension),
+                        new XAttribute("Syntax", writableTopicSection.Syntax),
+                        new XAttribute("Ordinal", writableTopicSection.Ordinal.ToString())
                         ));
                 }
-                else if (imagePagerTopicSection is IWebReferencesTopicSection)
+                else
                 {
-                    IWebReferencesTopicSection webReferencesTopicSection = imagePagerTopicSection as IWebReferencesTopicSection;
-
                     filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", webReferencesTopicSection.Id),
-                        new XAttribute("Title", webReferencesTopicSection.Title),
-                        new XAttribute("DocType", webReferencesTopicSection.DocumentType),
-                        new XAttribute("Description", webReferencesTopicSection.Description == null ? "" : webReferencesTopicSection.Description),
-                        new XAttribute("Ext", webReferencesTopicSection.FileExtension),
-                        new XAttribute("Ordinal", webReferencesTopicSection.Ordinal.ToString())
-                        ));
-                }
-                else if (imagePagerTopicSection is IPdfViewerTopicSection)
-                {
-                    IPdfViewerTopicSection pdfViewerTopicSection = imagePagerTopicSection as IPdfViewerTopicSection;
-
-                    filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", pdfViewerTopicSection.Id),
-                        new XAttribute("Title", pdfViewerTopicSection.Title),
-                        new XAttribute("DocType", pdfViewerTopicSection.DocumentType),
-                        new XAttribute("Description", pdfViewerTopicSection.Description == null ? "" : pdfViewerTopicSection.Description),
-                        new XAttribute("Ext", pdfViewerTopicSection.FileExtension),
-                        new XAttribute("Ordinal", pdfViewerTopicSection.Ordinal.ToString())
-                        ));
-                }
-                else if (imagePagerTopicSection is ISingleImageTopicSection)
-                {
-                    ISingleImageTopicSection singleImageTopicSection = imagePagerTopicSection as ISingleImageTopicSection;
-
-                    filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", singleImageTopicSection.Id),
-                        new XAttribute("Title", singleImageTopicSection.Title),
-                        new XAttribute("DocType", singleImageTopicSection.DocumentType),
-                        new XAttribute("Description", singleImageTopicSection.Description == null ? "" : singleImageTopicSection.Description),
-                        new XAttribute("Ext", singleImageTopicSection.FileExtension),
-                        new XAttribute("Ordinal", singleImageTopicSection.Ordinal.ToString())
-                        ));
-                }
-                else if (imagePagerTopicSection is IImagePagerTopicSection)
-                {
-                    IImagePagerTopicSection imgSetFile = imagePagerTopicSection as IImagePagerTopicSection;
-
-                    filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", imgSetFile.Id),
-                        new XAttribute("Title", imgSetFile.Title),
-                        new XAttribute("DocType", imgSetFile.DocumentType),
-                        new XAttribute("Description", imgSetFile.Description == null ? "" : imgSetFile.Description),
-                        new XAttribute("Ext", imgSetFile.FileExtension),
-                        new XAttribute("Ordinal", imgSetFile.Ordinal.ToString())
-                        ));
-                }
-                else if (imagePagerTopicSection is IRichTextEditorTopicSection)
-                {
-                    IRichTextEditorTopicSection richTextEditorTopicSection = imagePagerTopicSection as IRichTextEditorTopicSection;
-
-                    filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", richTextEditorTopicSection.Id),
-                        new XAttribute("Title", richTextEditorTopicSection.Title),
-                        new XAttribute("DocType", richTextEditorTopicSection.DocumentType),
-                        new XAttribute("Description", richTextEditorTopicSection.Description == null ? "" : richTextEditorTopicSection.Description),
-                        new XAttribute("Ext", richTextEditorTopicSection.FileExtension),
-                        new XAttribute("Ordinal", richTextEditorTopicSection.Ordinal.ToString())
-                        ));
-                }
-                else if (imagePagerTopicSection is IFileAttachmentsTopicSection)
-                {
-                    IFileAttachmentsTopicSection fileAttachmentsTopicSection = imagePagerTopicSection as IFileAttachmentsTopicSection;
-
-                    filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", fileAttachmentsTopicSection.Id),
-                        new XAttribute("Title", fileAttachmentsTopicSection.Title),
-                        new XAttribute("DocType", fileAttachmentsTopicSection.DocumentType),
-                        new XAttribute("Description", fileAttachmentsTopicSection.Description == null ? "" : fileAttachmentsTopicSection.Description),
-                        new XAttribute("Ext", fileAttachmentsTopicSection.FileExtension),
-                        new XAttribute("Ordinal", fileAttachmentsTopicSection.Ordinal.ToString())
+                        new XAttribute("Id", topicSection.Id),
+                        new XAttribute("Title", topicSection.Title),
+                        new XAttribute("DocType", topicSection.DocumentType),
+                        new XAttribute("Description", topicSection.Description == null ? "" : topicSection.Description),
+                        new XAttribute("Ext", topicSection.FileExtension),
+                        new XAttribute("Ordinal", topicSection.Ordinal.ToString())
                         ));
                 }
             }

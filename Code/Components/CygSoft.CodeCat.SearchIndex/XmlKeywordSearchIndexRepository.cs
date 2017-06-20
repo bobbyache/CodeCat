@@ -42,7 +42,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
             return Index;
         }
 
-        protected void CheckFormat(string fileText)
+        protected virtual void CheckFormat(string fileText)
         {
             if (!FileFunctions.CheckFormat(fileText))
                 throw new InvalidDataException("The file format for the target file does not match the format expected or the file is corrupt.");

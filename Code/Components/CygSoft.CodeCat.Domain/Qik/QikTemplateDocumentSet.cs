@@ -140,8 +140,6 @@ namespace CygSoft.CodeCat.Domain.Qik
             set { this.IndexItem.SetKeywords(value); }
         }
 
-        public int HitCount { get; private set; }
-
         public bool TemplateExists(string id)
         {
             return this.documentIndex.TopicSectionExists(id);
@@ -204,11 +202,6 @@ namespace CygSoft.CodeCat.Domain.Qik
         public void RemoveTemplateSection(string id)
         {
             this.documentIndex.RemoveTopicSection(id);
-        }
-
-        private void IncrementHitCount()
-        {
-            this.HitCount++;
         }
 
         private bool IsSecondLast(string id)
