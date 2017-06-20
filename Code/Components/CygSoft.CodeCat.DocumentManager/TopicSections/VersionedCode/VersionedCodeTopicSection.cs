@@ -126,13 +126,22 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.VersionedCode
             IFileVersion fileVersion = fileVersions.Where(s => s.Id == versionId).SingleOrDefault();
 
             File.Delete(fileVersion.FilePath);
-
             fileVersions.Remove(fileVersion);
-            fileVersions.Sort(new VersionFileComparer());
 
-            VersionedCodeIndexXmlRepository repo = new VersionedCodeIndexXmlRepository(GetVersionIndexPath());
-            repo.WriteVersions(fileVersions);
+            if (fileVersions.Any())
+            {
+                fileVersions.Sort(new VersionFileComparer());
 
+                VersionedCodeIndexXmlRepository repo = new VersionedCodeIndexXmlRepository(GetVersionIndexPath());
+                repo.WriteVersions(fileVersions);
+            }
+            else
+            {
+                string path = GetVersionIndexPath();
+                if (File.Exists(path))
+                    File.Delete(path);
+            }
+                
             this.SnapshotDeleted?.Invoke(this, new EventArgs());
         }
 
