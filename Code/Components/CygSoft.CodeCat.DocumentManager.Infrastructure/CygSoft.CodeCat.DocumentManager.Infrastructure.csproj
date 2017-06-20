@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISearchableSnippetTopicSection.cs" />
     <Compile Include="IVersionableFile.cs" />
     <Compile Include="IVersionedCodeTopicSection.cs" />
     <Compile Include="TopicEventArgs.cs" />

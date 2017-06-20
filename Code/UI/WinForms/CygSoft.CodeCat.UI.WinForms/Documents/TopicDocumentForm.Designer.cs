@@ -63,6 +63,8 @@
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.tabControlFile = new System.Windows.Forms.TabControl();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSearchableSnippetList = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -222,7 +224,9 @@
             this.btnAddPdfDocument,
             this.toolStripMenuItem2,
             this.btnAddImage,
-            this.btnImageSet});
+            this.btnImageSet,
+            this.toolStripMenuItem3,
+            this.btnSearchableSnippetList});
             this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
             this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddItem.Name = "btnAddItem";
@@ -346,7 +350,19 @@
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
             // 
-            // TopicDocument
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(212, 6);
+            // 
+            // btnSearchableSnippetList
+            // 
+            this.btnSearchableSnippetList.Name = "btnSearchableSnippetList";
+            this.btnSearchableSnippetList.Size = new System.Drawing.Size(215, 22);
+            this.btnSearchableSnippetList.Text = "Searchable Snippet List";
+            this.btnSearchableSnippetList.Click += new System.EventHandler(this.btnSearchableSnippetList_Click);
+            // 
+            // TopicDocumentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -404,5 +420,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem btnFileGroup;
         private System.Windows.Forms.ToolStripMenuItem btnAddVersionedCode;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem btnSearchableSnippetList;
     }
 }

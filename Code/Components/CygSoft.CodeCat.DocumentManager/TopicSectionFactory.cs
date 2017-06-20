@@ -3,6 +3,7 @@ using CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments;
 using CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.TopicSections.VersionedCode;
+using CygSoft.CodeCat.DocumentManager.TopicSections.SearchableSnippet;
 
 namespace CygSoft.CodeCat.DocumentManager
 {
@@ -17,6 +18,7 @@ namespace CygSoft.CodeCat.DocumentManager
         private const string IMAGE_PAGER_TOPIC_SECTION = "IMAGESET";
         private const string WEB_REFERENCES_TOPIC_SECTION = "URLGROUP";
         private const string FILE_ATTACHMENTS_TOPIC_SECTION = "FILEGROUP";
+        private const string SEARCHABLE_SNIPPET_TOPIC_SECTION = "SEARCHABLESNIPPET";
 
         private class TopicSectionArgs
         {
@@ -37,6 +39,9 @@ namespace CygSoft.CodeCat.DocumentManager
 
             if (topicSectionArgs.DocumentType == CODE_TOPIC_SECTION)
                 return CreateCodeTopicSection(topicSectionArgs);
+
+            if (topicSectionArgs.DocumentType == SEARCHABLE_SNIPPET_TOPIC_SECTION)
+                return CreateSearchableSnippetTopicSection(topicSectionArgs);
 
             if (topicSectionArgs.DocumentType == VERSIONED_CODE_TOPIC_SECTION)
                 return CreateVersionedCodeTopicSection(topicSectionArgs);
@@ -71,6 +76,9 @@ namespace CygSoft.CodeCat.DocumentManager
             {
                 case CODE_TOPIC_SECTION:
                     return TopicSectionType.Code;
+
+                case SEARCHABLE_SNIPPET_TOPIC_SECTION:
+                    return TopicSectionType.SearchableSnippet;
 
                 case VERSIONED_CODE_TOPIC_SECTION:
                     return TopicSectionType.VersionedCode;
@@ -111,6 +119,9 @@ namespace CygSoft.CodeCat.DocumentManager
                 case TopicSectionType.VersionedCode:
                     return VERSIONED_CODE_TOPIC_SECTION;
 
+                case TopicSectionType.SearchableSnippet:
+                    return SEARCHABLE_SNIPPET_TOPIC_SECTION;
+
                 case TopicSectionType.QikScript:
                     return QIK_SCRIPT_TOPIC_SECTION;
 
@@ -135,6 +146,14 @@ namespace CygSoft.CodeCat.DocumentManager
                 default:
                     return CODE_TOPIC_SECTION;
             }
+        }
+
+        private static ITopicSection CreateSearchableSnippetTopicSection(TopicSectionArgs topicSectionArgs)
+        {
+            if (topicSectionArgs.Id == null)
+                return new SearchableSnippetTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension);
+            else
+                return new SearchableSnippetTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description);
         }
 
         private static ITopicSection CreateVersionedCodeTopicSection(TopicSectionArgs topicSectionArgs)

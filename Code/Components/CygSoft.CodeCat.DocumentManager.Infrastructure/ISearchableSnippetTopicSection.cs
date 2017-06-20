@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IVersionedCodeTopicSection : ICodeTopicSection, IVersionableFile
+    public interface ISearchableSnippetTopicSection : ITopicSection
     {
+ 
     }
 }

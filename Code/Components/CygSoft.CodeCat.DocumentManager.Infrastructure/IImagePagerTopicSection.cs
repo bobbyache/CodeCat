@@ -2,7 +2,7 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IImagePagerTopicSection : ITopicSection, IPositionedItem
+    public interface IImagePagerTopicSection : ITopicSection
     {
         event EventHandler ImageAdded;
         event EventHandler ImageRemoved;

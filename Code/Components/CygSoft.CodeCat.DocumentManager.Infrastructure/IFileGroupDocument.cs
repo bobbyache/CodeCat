@@ -35,7 +35,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 
     }
 
-    public interface IFileAttachmentsTopicSection : ITopicSection, IPositionedItem
+    public interface IFileAttachmentsTopicSection : ITopicSection
     {
         IFileAttachment[] Items { get; }
         string[] Categories { get; }

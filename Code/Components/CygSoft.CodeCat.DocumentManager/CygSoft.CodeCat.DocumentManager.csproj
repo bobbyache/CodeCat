@@ -63,6 +63,7 @@
     <Compile Include="TopicSections\PdfViewerTopicSection.cs" />
     <Compile Include="TopicSections\QikScriptTopicSection.cs" />
     <Compile Include="TopicSections\RichTextEditorTopicSection.cs" />
+    <Compile Include="TopicSections\SearchableSnippet\SearchableSnippetTopicSection.cs" />
     <Compile Include="TopicSections\SingleImageTopicSection.cs" />
     <Compile Include="TopicSections\TextTopicSection.cs" />
     <Compile Include="TopicSections\VersionedCode\VersionedCodeIndexXmlRepository.cs" />

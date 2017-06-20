@@ -325,6 +325,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.IsModified = true;
         }
 
+        private void btnSearchableSnippetList_Click(object sender, EventArgs e)
+        {
+            ISearchableSnippetTopicSection topicSection = topicDocument.AddTopicSection(TopicSectionType.SearchableSnippet, "Searchable Snippets", null, "xml") as ISearchableSnippetTopicSection;
+            this.isModified = true;
+        }
+
         private void btnAddImage_Click(object sender, EventArgs e)
         {
             ISingleImageTopicSection singleImageTopicSection = topicDocument.AddTopicSection(TopicSectionType.SingleImage, "Single Image", null, "png") as ISingleImageTopicSection;
@@ -417,8 +423,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.persistableTarget.Delete();
         }
 
-        #endregion
 
+        #endregion
 
     }
 }

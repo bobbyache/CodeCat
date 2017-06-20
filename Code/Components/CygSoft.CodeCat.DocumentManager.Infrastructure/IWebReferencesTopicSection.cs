@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         DateTime DateCreated { get; set; }
     }
 
-    public interface IWebReferencesTopicSection : ITopicSection, IPositionedItem
+    public interface IWebReferencesTopicSection : ITopicSection
     {
         event EventHandler Paste;
         event EventHandler PasteConflict;

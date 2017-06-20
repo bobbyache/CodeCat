@@ -154,6 +154,12 @@
     <Compile Include="Controls\TopicSections\FileAttachmentsTopicSectionControl.Designer.cs">
       <DependentUpon>FileAttachmentsTopicSectionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TopicSections\SearchableSnippetTopicSectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TopicSections\SearchableSnippetTopicSectionControl.Designer.cs">
+      <DependentUpon>SearchableSnippetTopicSectionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TopicSections\SimpleCodeTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -339,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\FileAttachmentsTopicSectionControl.resx">
       <DependentUpon>FileAttachmentsTopicSectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TopicSections\SearchableSnippetTopicSectionControl.resx">
+      <DependentUpon>SearchableSnippetTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\SimpleCodeTopicSectionControl.resx">
       <DependentUpon>SimpleCodeTopicSectionControl.cs</DependentUpon>

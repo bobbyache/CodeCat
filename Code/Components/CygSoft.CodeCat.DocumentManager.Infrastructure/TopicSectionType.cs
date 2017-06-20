@@ -10,6 +10,7 @@
         SingleImage,
         ImagePager,
         RtfEditor,
-        FileAttachments
+        FileAttachments,
+        SearchableSnippet
     }
 }

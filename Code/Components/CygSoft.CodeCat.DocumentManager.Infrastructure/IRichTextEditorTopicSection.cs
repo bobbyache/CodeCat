@@ -2,7 +2,7 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IRichTextEditorTopicSection : ITopicSection, IPositionedItem
+    public interface IRichTextEditorTopicSection : ITopicSection
     {
         event EventHandler RequestSaveRtf;
     }
