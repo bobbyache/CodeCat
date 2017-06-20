@@ -238,21 +238,18 @@
             this.btnAddCode.Name = "btnAddCode";
             this.btnAddCode.Size = new System.Drawing.Size(215, 22);
             this.btnAddCode.Text = "Single Code Snippet";
-            this.btnAddCode.Click += new System.EventHandler(this.btnAddCode_Click);
             // 
             // btnAddVersionedCode
             // 
             this.btnAddVersionedCode.Name = "btnAddVersionedCode";
             this.btnAddVersionedCode.Size = new System.Drawing.Size(215, 22);
             this.btnAddVersionedCode.Text = "Versioned Code Snippet";
-            this.btnAddVersionedCode.Click += new System.EventHandler(this.btnAddVersionedCode_Click);
             // 
             // btnRichText
             // 
             this.btnRichText.Name = "btnRichText";
             this.btnRichText.Size = new System.Drawing.Size(215, 22);
             this.btnRichText.Text = "Single Rich Text Document";
-            this.btnRichText.Click += new System.EventHandler(this.btnRichText_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -264,21 +261,18 @@
             this.btnFileGroup.Name = "btnFileGroup";
             this.btnFileGroup.Size = new System.Drawing.Size(215, 22);
             this.btnFileGroup.Text = "File Group";
-            this.btnFileGroup.Click += new System.EventHandler(this.btnFileGroup_Click);
             // 
             // btnAddHyperlinks
             // 
             this.btnAddHyperlinks.Name = "btnAddHyperlinks";
             this.btnAddHyperlinks.Size = new System.Drawing.Size(215, 22);
             this.btnAddHyperlinks.Text = "Web References";
-            this.btnAddHyperlinks.Click += new System.EventHandler(this.btnAddHyperlinks_Click);
             // 
             // btnAddPdfDocument
             // 
             this.btnAddPdfDocument.Name = "btnAddPdfDocument";
             this.btnAddPdfDocument.Size = new System.Drawing.Size(215, 22);
             this.btnAddPdfDocument.Text = "Single PDF Document";
-            this.btnAddPdfDocument.Click += new System.EventHandler(this.btnAddPdfDocument_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -290,14 +284,12 @@
             this.btnAddImage.Name = "btnAddImage";
             this.btnAddImage.Size = new System.Drawing.Size(215, 22);
             this.btnAddImage.Text = "Single Image View";
-            this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
             // 
             // btnImageSet
             // 
             this.btnImageSet.Name = "btnImageSet";
             this.btnImageSet.Size = new System.Drawing.Size(215, 22);
             this.btnImageSet.Text = "Image Set View";
-            this.btnImageSet.Click += new System.EventHandler(this.btnImageSet_Click);
             // 
             // btnRemoveCodeItem
             // 
@@ -360,7 +352,6 @@
             this.btnSearchableSnippetList.Name = "btnSearchableSnippetList";
             this.btnSearchableSnippetList.Size = new System.Drawing.Size(215, 22);
             this.btnSearchableSnippetList.Text = "Searchable Snippet List";
-            this.btnSearchableSnippetList.Click += new System.EventHandler(this.btnSearchableSnippetList_Click);
             // 
             // TopicDocumentForm
             // 

@@ -81,6 +81,53 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        public void CreateTopicSection(TopicSectionType topicSectionType)
+        {
+            switch (topicSectionType)
+            {
+                case TopicSectionType.Code:
+                    topicDocument.AddTopicSection(TopicSectionType.Code, "Code Snippet", ConfigSettings.DefaultSyntax, "txt");
+                    break;
+
+                case TopicSectionType.VersionedCode:
+                    topicDocument.AddTopicSection(TopicSectionType.VersionedCode, "Versioned Code Snippet", ConfigSettings.DefaultSyntax, "txt");
+                    break;
+
+                case TopicSectionType.PdfViewer:
+                    topicDocument.AddTopicSection(TopicSectionType.PdfViewer, "PDF Document");
+                    break;
+
+                case TopicSectionType.ImagePager:
+                    topicDocument.AddTopicSection(TopicSectionType.ImagePager, "Image Pager");
+                    break;
+
+                case TopicSectionType.WebReferences:
+                    topicDocument.AddTopicSection(TopicSectionType.WebReferences, "Web References");
+                    break;
+
+                case TopicSectionType.SearchableSnippet:
+                    topicDocument.AddTopicSection(TopicSectionType.SearchableSnippet, "Searchable Snippets", null, "xml");
+                    break;
+
+                case TopicSectionType.SingleImage:
+                    topicDocument.AddTopicSection(TopicSectionType.SingleImage, "Single Image", null, "png");
+                    break;
+
+                case TopicSectionType.RtfEditor:
+                    topicDocument.AddTopicSection(TopicSectionType.RtfEditor, "Notes", null, "rtf");
+                    break;
+
+                case TopicSectionType.FileAttachments:
+                    topicDocument.AddTopicSection(TopicSectionType.FileAttachments, "File Attachments", null, null);
+                    break;
+
+                default:
+                    break;
+            }
+
+            this.IsModified = true;
+        }
+
         #endregion
 
         #region Overrides
@@ -162,6 +209,16 @@ namespace CygSoft.CodeCat.UI.WinForms
             txtKeywords.TextChanged += SetModified;
             btnDelete.Click += btnDelete_Click;
             btnDiscardChange.Click += btnDiscardChange_Click;
+
+            btnAddCode.Click += (s, e) => CreateTopicSection(TopicSectionType.Code);
+            btnAddVersionedCode.Click += (s, e) => CreateTopicSection(TopicSectionType.VersionedCode);
+            btnAddHyperlinks.Click += (s, e) => CreateTopicSection(TopicSectionType.WebReferences);
+            btnAddPdfDocument.Click += (s, e) => CreateTopicSection(TopicSectionType.PdfViewer);
+            btnImageSet.Click += (s, e) => CreateTopicSection(TopicSectionType.ImagePager);
+            btnSearchableSnippetList.Click += (s, e) => CreateTopicSection(TopicSectionType.SearchableSnippet);
+            btnAddImage.Click += (s, e) => CreateTopicSection(TopicSectionType.SingleImage);
+            btnRichText.Click += (s, e) => CreateTopicSection(TopicSectionType.RtfEditor);
+            btnFileGroup.Click += (s, e) => CreateTopicSection(TopicSectionType.FileAttachments);
         }
 
         private void InitializeControls()
@@ -293,60 +350,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void btnDiscardChange_Click(object sender, EventArgs e)
         {
             base.RevertChanges();
-        }
-
-        private void btnAddCode_Click(object sender, EventArgs e)
-        {
-            ICodeTopicSection templateFile = topicDocument.AddTopicSection(TopicSectionType.Code, "Code Snippet", ConfigSettings.DefaultSyntax, "txt") as ICodeTopicSection;
-            this.IsModified = true;
-        }
-
-        private void btnAddVersionedCode_Click(object sender, EventArgs e)
-        {
-            IVersionedCodeTopicSection versionedCodeTopicSection = topicDocument.AddTopicSection(TopicSectionType.VersionedCode, "Versioned Code Snippet", ConfigSettings.DefaultSyntax, "txt") as IVersionedCodeTopicSection;
-            this.IsModified = true;
-        }
-
-        private void btnAddHyperlinks_Click(object sender, EventArgs e)
-        {
-            IWebReferencesTopicSection webReferencesTopicSection = topicDocument.AddTopicSection(TopicSectionType.WebReferences, "Web References") as IWebReferencesTopicSection;
-            this.IsModified = true;
-        }
-
-        private void btnAddPdfDocument_Click(object sender, EventArgs e)
-        {
-            IPdfViewerTopicSection pdfViewerTopicSection = topicDocument.AddTopicSection(TopicSectionType.PdfViewer, "PDF Document") as IPdfViewerTopicSection;
-            this.IsModified = true;
-        }
-
-        private void btnImageSet_Click(object sender, EventArgs e)
-        {
-            IImagePagerTopicSection imagePagerTopicSection = topicDocument.AddTopicSection(TopicSectionType.ImagePager, "Image Pager") as IImagePagerTopicSection;
-            this.IsModified = true;
-        }
-
-        private void btnSearchableSnippetList_Click(object sender, EventArgs e)
-        {
-            ISearchableSnippetTopicSection topicSection = topicDocument.AddTopicSection(TopicSectionType.SearchableSnippet, "Searchable Snippets", null, "xml") as ISearchableSnippetTopicSection;
-            this.isModified = true;
-        }
-
-        private void btnAddImage_Click(object sender, EventArgs e)
-        {
-            ISingleImageTopicSection singleImageTopicSection = topicDocument.AddTopicSection(TopicSectionType.SingleImage, "Single Image", null, "png") as ISingleImageTopicSection;
-            this.IsModified = true;
-        }
-
-        private void btnRichText_Click(object sender, EventArgs e)
-        {
-            IRichTextEditorTopicSection richTextEditorTopicSection = topicDocument.AddTopicSection(TopicSectionType.RtfEditor, "Notes", null, "rtf") as IRichTextEditorTopicSection;
-            this.IsModified = true;
-        }
-
-        private void btnFileGroup_Click(object sender, EventArgs e)
-        {
-            IFileAttachmentsTopicSection fileAttachmentsTopicSection = topicDocument.AddTopicSection(TopicSectionType.FileAttachments, "File Attachments", null, null) as IFileAttachmentsTopicSection;
-            this.IsModified = true;
         }
 
         private void btnRemoveCodeItem_Click(object sender, EventArgs e)
