@@ -50,7 +50,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void listviewSnapshots_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (versionListview.SelectedItems.Count == 1)
-                syntaxBox.Document.Text = ((IFileVersion)versionListview.SelectedItems[0].Tag).Title;
+                syntaxBox.Document.Text = ((IFileVersion)versionListview.SelectedItems[0].Tag).Text();
             else
                 syntaxBox.Document.Text = string.Empty;
 
@@ -59,14 +59,14 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private IVersionedCodeTopicSection versionedCodeTopicSection = null;
 
-        public void Attach(IVersionedCodeTopicSection codeFile)
+        public void Attach(IVersionedCodeTopicSection topicSection)
         {
             if (this.versionedCodeTopicSection != null)
             {
                 this.versionedCodeTopicSection.SnapshotTaken -= (s, e) => { ListSnapshots(); };
                 this.versionedCodeTopicSection.SnapshotDeleted -= (s, e) => { ListSnapshots(); };
             }
-            this.versionedCodeTopicSection = codeFile;
+            this.versionedCodeTopicSection = topicSection;
             this.versionedCodeTopicSection.SnapshotTaken += (s, e) => { ListSnapshots(); };
             this.versionedCodeTopicSection.SnapshotDeleted += (s, e) => { ListSnapshots(); };
             ListSnapshots();

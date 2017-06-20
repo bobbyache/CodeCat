@@ -63,6 +63,11 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.VersionedCode
                 this.Description = description;
                 this.FilePath = filePath;
             }
+
+            public string Text()
+            {
+                return File.ReadAllText(FilePath);
+            }
         }
 
         public bool HasVersions

@@ -43,6 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             //syntaxBox.Document.Text = VersionedCodeTopicSection.Text;
             syntaxDocument.Text = VersionedCodeTopicSection.Text;
             syntaxDocument.SyntaxFile = SyntaxFile;
+            snapshotListCtrl1.SyntaxFile = SyntaxFile;
 
             snapshotListCtrl1.Attach(topicSection);
 
@@ -91,13 +92,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private void Base_SyntaxModified(object sender, EventArgs e)
         {
             if (syntaxBox.Document.SyntaxFile != SyntaxFile)
+            {
                 syntaxBox.Document.SyntaxFile = SyntaxFile;
+                snapshotListCtrl1.SyntaxFile = SyntaxFile;
+            }
         }
 
         private void Base_FontModified(object sender, EventArgs e)
         {
             if (syntaxBox.FontSize != FontSize)
+            {
                 syntaxBox.FontSize = FontSize;
+                snapshotListCtrl1.EditorFontSize = FontSize;
+            }
         }
 
         private void Base_RegisterFieldEvents(object sender, EventArgs e)

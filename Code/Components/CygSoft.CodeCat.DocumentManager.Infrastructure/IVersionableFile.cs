@@ -13,6 +13,7 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         string Description { get; }
         string Title { get; }
         string FilePath { get; }
+        string Text();
     }
 
     public interface IVersionableFile
