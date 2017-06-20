@@ -12,16 +12,16 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
         // Something to look into when you have time.
         // Perhaps you need to look at IFile which implemented by BaseFile... this contains all the events etc. And core methods and properties.
 
-        internal PdfViewerTopicSection(string folder, string title)
+        public PdfViewerTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "pdf"), title, null)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.PdfViewer);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.PdfViewer);
         }
 
-        internal PdfViewerTopicSection(string folder, string id, string title, int ordinal, string description)
+        public PdfViewerTopicSection(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "pdf", id), title, description, ordinal)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.PdfViewer);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.PdfViewer);
         }
     }
 }

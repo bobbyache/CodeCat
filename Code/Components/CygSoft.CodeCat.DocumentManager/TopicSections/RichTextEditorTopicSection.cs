@@ -14,16 +14,16 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
 
         public event EventHandler RequestSaveRtf;
 
-        internal RichTextEditorTopicSection(string folder, string title)
+        public RichTextEditorTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "rtf"), title, null)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.RtfEditor);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.RtfEditor);
         }
 
-        internal RichTextEditorTopicSection(string folder, string id, string title, int ordinal, string description)
+        public RichTextEditorTopicSection(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "rtf", id), title, description, ordinal)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.RtfEditor);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.RtfEditor);
         }
 
         protected override void OnSave()

@@ -80,15 +80,15 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.VersionedCode
             get { return fileVersions.ToArray(); }
         }
 
-        internal VersionedCodeTopicSection(string folder, string title, string extension, string syntax) : base(folder, title, extension, syntax)
+        public VersionedCodeTopicSection(string folder, string title, string extension, string syntax) : base(folder, title, extension, syntax)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.VersionedCode);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.VersionedCode);
         }
 
-        internal VersionedCodeTopicSection(string folder, string id, string title, string extension, int ordinal, string description, string syntax)
+        public VersionedCodeTopicSection(string folder, string id, string title, string extension, int ordinal, string description, string syntax)
             : base(folder, id, title, extension, ordinal, description, syntax)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.VersionedCode);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.VersionedCode);
         }
 
         private string GetVersionIndexPath()

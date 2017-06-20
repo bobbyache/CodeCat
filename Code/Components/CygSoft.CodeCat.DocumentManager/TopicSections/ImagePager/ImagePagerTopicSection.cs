@@ -26,21 +26,21 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
         }
 
 
-        internal ImagePagerTopicSection(string folder, string title)
+        public ImagePagerTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "imgset"), title, null)
         {
             imagePagerPathGenerator = new ImagePagerPathGenerator(folder, "imgset", this.Id);
             repository = new ImageSetIndexXmlRepository(imagePagerPathGenerator);
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImagePager);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.ImagePager);
             this.documentIndex = new ImagePager(repository, imagePagerPathGenerator);
         }
 
-        internal ImagePagerTopicSection(string folder, string id, string title, int ordinal, string description)
+        public ImagePagerTopicSection(string folder, string id, string title, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, "imgset", id), title, description, ordinal)
         {
             imagePagerPathGenerator = new ImagePagerPathGenerator(folder, "imgset", this.Id);
             repository = new ImageSetIndexXmlRepository(imagePagerPathGenerator);
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.ImagePager);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.ImagePager);
             this.documentIndex = new ImagePager(repository, imagePagerPathGenerator);
         }
 

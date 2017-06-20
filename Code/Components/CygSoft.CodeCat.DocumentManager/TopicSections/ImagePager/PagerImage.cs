@@ -39,14 +39,14 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
             : base(imagePathGenerator, "", null)
         {
             this.imagePathGenerator = imagePathGenerator;
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.SingleImage);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.SingleImage);
         }
 
         internal PagerImage(ImagePathGenerator imagePathGenerator, int ordinal, string description)
             : base(imagePathGenerator, "", description, ordinal)
         {
             this.imagePathGenerator = imagePathGenerator;
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.SingleImage);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.SingleImage);
         }
 
         protected override void OnSave()

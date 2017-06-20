@@ -9,15 +9,15 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
 {
     public class QikScriptTopicSection : CodeTopicSection, IQikScriptTopicSection
     {
-        internal QikScriptTopicSection(string folder, string title, string extension, string syntax) : base(folder, title, extension, syntax)
+        public QikScriptTopicSection(string folder, string title, string extension, string syntax) : base(folder, title, extension, syntax)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.QikScript);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.QikScript);
         }
 
-        internal QikScriptTopicSection(string folder, string id, string title, string extension, int ordinal, string description, string syntax)
+        public QikScriptTopicSection(string folder, string id, string title, string extension, int ordinal, string description, string syntax)
             : base(folder, id, title, extension, ordinal, description, syntax)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.QikScript);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.QikScript);
         }
     }
 }

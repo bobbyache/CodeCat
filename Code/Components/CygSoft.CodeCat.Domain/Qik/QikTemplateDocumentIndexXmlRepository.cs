@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
+using CygSoft.CodeCat.DocumentManager.TopicSections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace CygSoft.CodeCat.Domain.Qik
                 else
                     documentType = documentElement.Attribute("DocType") != null ? (string)documentElement.Attribute("DocType") : "CODESNIPPET";
 
-                ITopicSection scriptDocument = TopicSectionFactory.Create(TopicSectionFactory.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
+                ITopicSection scriptDocument = TopicSectionFactory.Create(SectionTypes.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
                 topicSections.Add(scriptDocument);
             }
 

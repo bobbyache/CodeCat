@@ -48,6 +48,7 @@
     <Compile Include="Base\BaseLibrary.cs" />
     <Compile Include="Base\IPersistableTarget.cs" />
     <Compile Include="Base\PersistableTargetFactory.cs" />
+    <Compile Include="TopicSectionFactory.cs" />
     <Compile Include="Topics\TopicDocument.cs" />
     <Compile Include="Topics\TopicIndex.cs" />
     <Compile Include="Topics\TopicIndexXmlRepository.cs" />

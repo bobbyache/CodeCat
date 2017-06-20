@@ -62,15 +62,15 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
         public event EventHandler Paste;
         public event EventHandler PasteConflict;
 
-        internal WebReferencesTopicSection(string folder, string title)
+        public WebReferencesTopicSection(string folder, string title)
             : base(new DocumentPathGenerator(folder, "urlgrp"), title, null)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.WebReferences);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.WebReferences);
         }
 
-        internal WebReferencesTopicSection(string folder, string id, string title, int ordinal, string description) : base(new DocumentPathGenerator(folder, "urlgrp", id), title, description, ordinal)
+        public WebReferencesTopicSection(string folder, string id, string title, int ordinal, string description) : base(new DocumentPathGenerator(folder, "urlgrp", id), title, description, ordinal)
         {
-            this.DocumentType = TopicSectionFactory.GetDocumentType(TopicSectionType.WebReferences);
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.WebReferences);
         }
 
         private List<IWebReference> webReferenceList = new List<IWebReference>();
