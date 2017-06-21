@@ -59,15 +59,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             ReloadListview();
 
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
-            listView.SelectedIndexChanged += (s, e) =>
-            {
-                ISearchableSnippetKeywordIndexItem item = Gui.GroupedListView.SelectedItem<ISearchableSnippetKeywordIndexItem>(listView);
-                if (item != null)
-                {
-                    syntaxDocument.SyntaxFile = application.GetSyntaxFile(item.Syntax);
-                    syntaxBox.Document.Text = item.Text;
-                }
-            };
+            listView.SelectedIndexChanged += (s, e) => DisplaySourceCode();
 
             FontModified += Base_FontModified;
             SyntaxModified += Base_SyntaxModified;
@@ -78,6 +70,24 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
             if (listView.Items.Count > 0)
                 listView.Items[0].Selected = true;
+        }
+
+        private void DisplaySourceCode()
+        {
+            if (!Gui.GroupedListView.SingleItemSelected<ISearchableSnippetKeywordIndexItem>(listView))
+            {
+                syntaxDocument.SyntaxFile = null;
+                syntaxBox.Document.Text = string.Empty;
+            }
+            else
+            {
+                ISearchableSnippetKeywordIndexItem item = Gui.GroupedListView.SelectedItem<ISearchableSnippetKeywordIndexItem>(listView);
+                if (item != null)
+                {
+                    syntaxDocument.SyntaxFile = application.GetSyntaxFile(item.Syntax);
+                    syntaxBox.Document.Text = item.Text;
+                }
+            }
         }
 
         private void Add()
