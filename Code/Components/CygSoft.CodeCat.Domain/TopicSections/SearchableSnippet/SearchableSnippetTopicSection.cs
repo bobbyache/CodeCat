@@ -11,19 +11,19 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
 {
-    public class SearchableSnippetTopicSection : TopicSection, ISearchableSnippetTopicSection
+    public class SearchableSnippetTopicSection : CodeTopicSection, ISearchableSnippetTopicSection
     {
         IKeywordSearchIndex searchIndex = null;
         private SearchableSnippetKeywordSearchIndexRepository repository = new SearchableSnippetKeywordSearchIndexRepository("Snippet_Repository");
 
-        public SearchableSnippetTopicSection(string folder, string title, string extension)
-            : base(new DocumentPathGenerator(folder, "searchsnippets"), title, null)
+        public SearchableSnippetTopicSection(string folder, string title, string extension, string syntax)
+            : base(folder, title, extension, syntax)
         {
             this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.SearchableSnippet);
         }
 
-        public SearchableSnippetTopicSection(string folder, string id, string title, string extension, int ordinal, string description)
-            : base(new DocumentPathGenerator(folder, "searchsnippets", id), title, null, ordinal)
+        public SearchableSnippetTopicSection(string folder, string id, string title, string extension, int ordinal, string description, string syntax)
+            : base(folder, id, title, extension, ordinal, null, syntax)
         {
             this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.SearchableSnippet);
         }

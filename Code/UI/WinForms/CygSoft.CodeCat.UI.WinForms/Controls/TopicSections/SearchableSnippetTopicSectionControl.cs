@@ -10,11 +10,20 @@ using System.Windows.Forms;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
-    public partial class SearchableSnippetTopicSectionControl : BaseTopicSectionControl
+    public partial class SearchableSnippetTopicSectionControl : BaseCodeTopicSectionControl
     {
+        public string SyntaxFile { get { return application.GetSyntaxFile(base.Syntax); } }
+
+        private ICodeTopicSection SearchableSnippetTopicSection
+        {
+            get { return base.topicSection as ISearchableSnippetTopicSection; }
+        }
+
         public SearchableSnippetTopicSectionControl()
             : this(null, null, null)
         {
@@ -26,19 +35,56 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             InitializeComponent();
 
-            //ToolStripLabel searchLabel = new ToolStripLabel();
-            //searchLabel.Text = "Search";
-            //searchLabel.Alignment = ToolStripItemAlignment.Right;
-            //ToolStripTextBox searchTextBox = new ToolStripTextBox();
-            //searchTextBox.Width = 300;
-            //searchTextBox.Alignment = ToolStripItemAlignment.Right;
+            if (topicDocument == null)
+                return;
+
+            btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
+
+            syntaxBox.Document.Text = SearchableSnippetTopicSection.Text;
+            syntaxDocument.SyntaxFile = SyntaxFile;
 
             HeaderToolstrip.Items.Add(CreateButton());
             HeaderToolstrip.Items.Add(CreateButton());
             HeaderToolstrip.Items.Add(CreateButton());
-            //HeaderToolstrip.Items.Add(searchTextBox);
-            //HeaderToolstrip.Items.Add(searchLabel);
-            
+            FontModified += Base_FontModified;
+            SyntaxModified += Base_SyntaxModified;
+            Reverted += Base_Reverted;
+            ContentSaved += Base_ContentSaved;
+            UnregisterFieldEvents += Base_UnregisterFieldEvents;
+            RegisterFieldEvents += Base_RegisterFieldEvents;
+        }
+
+        private void Base_SyntaxModified(object sender, EventArgs e)
+        {
+            if (syntaxBox.Document.SyntaxFile != SyntaxFile)
+                syntaxBox.Document.SyntaxFile = SyntaxFile;
+        }
+
+        private void Base_FontModified(object sender, EventArgs e)
+        {
+            if (syntaxBox.FontSize != FontSize)
+                syntaxBox.FontSize = FontSize;
+        }
+
+        private void Base_RegisterFieldEvents(object sender, EventArgs e)
+        {
+            syntaxBox.TextChanged += SetModified;
+        }
+
+        private void Base_UnregisterFieldEvents(object sender, EventArgs e)
+        {
+            syntaxBox.TextChanged -= SetModified;
+        }
+
+        private void Base_Reverted(object sender, EventArgs e)
+        {
+            syntaxBox.Document.Text = string.Empty;
+        }
+
+        private void Base_ContentSaved(object sender, EventArgs e)
+        {
+            this.SearchableSnippetTopicSection.Text = string.Empty;
+            this.SearchableSnippetTopicSection.Syntax = Syntax;
         }
 
         private ToolStripButton CreateButton()

@@ -26,12 +26,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 else if (topicSection is IVersionedCodeTopicSection)
                     topicSectionControl = new VersionedCodeTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as IVersionedCodeTopicSection);
 
+                else if (topicSection is ISearchableSnippetTopicSection)
+                    topicSectionControl = new SearchableSnippetTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as ISearchableSnippetTopicSection);
+
                 else
                     topicSectionControl = new SimpleCodeTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as ICodeTopicSection);
             }
-
-            else if (topicSection is ISearchableSnippetTopicSection)
-                topicSectionControl = new SearchableSnippetTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as ISearchableSnippetTopicSection);
 
             else if (topicSection is IWebReferencesTopicSection)
                 topicSectionControl = new WebReferencesTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as IWebReferencesTopicSection);

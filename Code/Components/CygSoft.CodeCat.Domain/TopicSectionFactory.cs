@@ -62,9 +62,9 @@ namespace CygSoft.CodeCat.Domain
         private static ITopicSection CreateSearchableSnippetTopicSection(TopicSectionArgs topicSectionArgs)
         {
             if (topicSectionArgs.Id == null)
-                return new SearchableSnippetTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension);
+                return new SearchableSnippetTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Syntax);
             else
-                return new SearchableSnippetTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description);
+                return new SearchableSnippetTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description, topicSectionArgs.Syntax);
         }
 
         private static ITopicSection CreateVersionedCodeTopicSection(TopicSectionArgs topicSectionArgs)
