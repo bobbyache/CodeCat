@@ -33,10 +33,10 @@
             this.btnFind = new System.Windows.Forms.Button();
             this.keywordsTextBox = new System.Windows.Forms.TextBox();
             this.splitter = new System.Windows.Forms.SplitContainer();
-            this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
-            this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.listView = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
+            this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.searchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitter)).BeginInit();
             this.splitter.Panel1.SuspendLayout();
@@ -97,6 +97,25 @@
             this.splitter.SplitterDistance = 226;
             this.splitter.TabIndex = 8;
             // 
+            // listView
+            // 
+            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colTitle});
+            this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView.FullRowSelect = true;
+            this.listView.HideSelection = false;
+            this.listView.Location = new System.Drawing.Point(0, 0);
+            this.listView.Name = "listView";
+            this.listView.Size = new System.Drawing.Size(680, 226);
+            this.listView.TabIndex = 0;
+            this.listView.UseCompatibleStateImageBehavior = false;
+            this.listView.View = System.Windows.Forms.View.Details;
+            // 
+            // colTitle
+            // 
+            this.colTitle.Text = "Title";
+            this.colTitle.Width = 645;
+            // 
             // syntaxBox
             // 
             this.syntaxBox.ActiveView = Alsing.Windows.Forms.ActiveView.BottomRight;
@@ -134,23 +153,6 @@
             this.syntaxDocument.MaxUndoBufferSize = 1000;
             this.syntaxDocument.Modified = false;
             this.syntaxDocument.UndoStep = 0;
-            // 
-            // listView
-            // 
-            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colTitle});
-            this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView.Location = new System.Drawing.Point(0, 0);
-            this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(680, 226);
-            this.listView.TabIndex = 0;
-            this.listView.UseCompatibleStateImageBehavior = false;
-            this.listView.View = System.Windows.Forms.View.Details;
-            // 
-            // colTitle
-            // 
-            this.colTitle.Text = "Title";
-            this.colTitle.Width = 645;
             // 
             // SearchableSnippetTopicSectionControl
             // 

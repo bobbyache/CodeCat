@@ -11,6 +11,15 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
 {
+    public interface ISearchableSnippetTopicSection : ICodeTopicSection
+    {
+        ISearchableSnippetKeywordIndexItem[] SnippetList();
+        ISearchableSnippetKeywordIndexItem NewSnippet(string title);
+        void AddSnippet(ISearchableSnippetKeywordIndexItem snippet);
+        void DeleteSnippet(string id);
+        void DeleteSnippets(IEnumerable<ISearchableSnippetKeywordIndexItem> snippets);
+    }
+
     public class SearchableSnippetTopicSection : CodeTopicSection, ISearchableSnippetTopicSection
     {
         IKeywordSearchIndex searchIndex = null;
@@ -45,6 +54,43 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
         private Version GetVersion()
         {
             return new Version(1, 0);
+        }
+
+        private List<ISearchableSnippetKeywordIndexItem> items = new List<ISearchableSnippetKeywordIndexItem>()
+        {
+            new SearchableSnippetKeywordIndexItem() { Title = "Text 1", Text = "Text 1", Syntax = "TEXT" },
+            new SearchableSnippetKeywordIndexItem() { Title = "Text 2", Text = "Text 2", Syntax = "TEXT" },
+            new SearchableSnippetKeywordIndexItem() { Title = "Text 3", Text = "Text 3", Syntax = "HTML" },
+            new SearchableSnippetKeywordIndexItem() { Title = "Text 4", Text = "Text 4", Syntax = "TEXT" }
+        };
+
+        public ISearchableSnippetKeywordIndexItem[] SnippetList()
+        {
+            return items.ToArray();
+        }
+
+        public void AddSnippet(ISearchableSnippetKeywordIndexItem snippet)
+        {
+            items.Add(snippet);
+        }
+
+        public void DeleteSnippets(IEnumerable<ISearchableSnippetKeywordIndexItem> snippets)
+        {
+            foreach (ISearchableSnippetKeywordIndexItem snippet in snippets)
+                DeleteSnippet(snippet.Id);
+        }
+
+        public void DeleteSnippet(string id)
+        {
+            var foundItem = items.Where(i => i.Id == id).SingleOrDefault();
+
+            if (foundItem != null)
+                items.Remove(foundItem);
+        }
+
+        public ISearchableSnippetKeywordIndexItem NewSnippet(string title)
+        {
+            return new SearchableSnippetKeywordIndexItem() { Title = title, Syntax = this.Syntax };
         }
     }
 }

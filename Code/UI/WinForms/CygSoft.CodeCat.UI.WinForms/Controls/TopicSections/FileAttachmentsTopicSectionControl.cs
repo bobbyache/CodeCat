@@ -98,16 +98,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            Add();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            Edit();
-        }
-
         private void listView_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)

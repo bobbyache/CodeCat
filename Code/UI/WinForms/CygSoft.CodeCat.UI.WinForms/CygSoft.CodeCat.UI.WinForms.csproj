@@ -203,6 +203,12 @@
     <Compile Include="Dialogs\ImageDescriptionDialog.Designer.cs">
       <DependentUpon>ImageDescriptionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\SearchableSnippetEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SearchableSnippetEditDialog.Designer.cs">
+      <DependentUpon>SearchableSnippetEditDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\UrlItemEditDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -372,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InvalidRemoveDialog.resx">
       <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SearchableSnippetEditDialog.resx">
+      <DependentUpon>SearchableSnippetEditDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\UrlItemEditDialog.resx">
       <DependentUpon>UrlItemEditDialog.cs</DependentUpon>

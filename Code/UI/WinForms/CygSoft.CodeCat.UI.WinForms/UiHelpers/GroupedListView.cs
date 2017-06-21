@@ -47,6 +47,21 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
                 listView.ShowGroups = listView.Groups.Count > 1;
             }
 
+            public static bool SingleItemSelected<T>(ListView listView) where T : class
+            {
+                if (listView.SelectedItems.Count != 1)
+                    return false;
+
+                T selection = listView.SelectedItems[0].Tag as T;
+
+                return selection != null ? true : false;
+            }
+
+            public static bool ItemsSelected<T>(ListView listView) where T : class
+            {
+                return SelectedItems<T>(listView).Any();
+            }
+
             public static T SelectedItem<T>(ListView listView) where T : class
             {
                 if (listView.SelectedItems.Count == 1)

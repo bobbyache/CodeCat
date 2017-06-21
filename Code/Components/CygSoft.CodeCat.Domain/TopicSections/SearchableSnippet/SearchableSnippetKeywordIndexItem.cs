@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.Search.KeywordIndex;
+﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.Search.KeywordIndex;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
 {
-    public interface ISearchableSnippetKeywordIndexItem : IKeywordIndexItem
+    public interface ISearchableSnippetKeywordIndexItem : IKeywordIndexItem, ICategorizedItem
     {
         string Syntax { get; set; }
         string Text { get; set; }
@@ -19,6 +20,8 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
     {
         public string Syntax { get; set; }
         public string Text { get; set; }
+
+        public string Category { get; set; }
 
         public SearchableSnippetKeywordIndexItem()
         {

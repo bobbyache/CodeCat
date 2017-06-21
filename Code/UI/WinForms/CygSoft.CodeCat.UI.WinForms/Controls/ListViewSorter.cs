@@ -36,6 +36,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private ListView listView;
 
         public int SortingColumn { get; set; }
+        public SortOrder SortingOrder { get; private set; } = SortOrder.Ascending;
 
         public ListViewSorter(ListView listView)
         {
@@ -43,7 +44,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.SortingColumn = -1;
         }
 
-        public void Sort(int columnIndex)
+        public void Sort(int columnIndex, SortOrder? sortingOrder = null)
         {
             if (this.SortingColumn != -1) // not the first time sorted.
             {
@@ -55,11 +56,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 }
                 else
                 {
-                    // Determine what the last sort order was and change it.
-                    if (listView.Sorting == SortOrder.Ascending)
-                        listView.Sorting = SortOrder.Descending;
+                    if (sortingOrder == null)
+                    {
+                        // Determine what the last sort order was and change it.
+                        if (listView.Sorting == SortOrder.Ascending)
+                            listView.Sorting = SortOrder.Descending;
+                        else
+                            listView.Sorting = SortOrder.Ascending;
+                    }
                     else
-                        listView.Sorting = SortOrder.Ascending;
+                        listView.Sorting = sortingOrder.Value;
                 }
 
                 // Call the sort method to manually sort.
@@ -74,6 +80,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 listView.ListViewItemSorter = new ListViewItemComparer(this.SortingColumn, listView.Sorting);
                 listView.Sort();
             }
+
+            this.SortingOrder = listView.Sorting;
         }
     }
 }
