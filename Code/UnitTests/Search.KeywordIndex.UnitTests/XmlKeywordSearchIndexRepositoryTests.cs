@@ -13,6 +13,8 @@ using Search.KeywordIndex.UnitTests.Helpers;
 namespace Search.KeywordIndex.UnitTests
 {
     [TestFixture]
+    [Category("Tests.UnitTests")]
+    [Category("KeywordIndex"), Category("KeywordIndex.XmlKeywordSearchIndexRepository")]
     class XmlKeywordSearchIndexRepositoryTests
     {
         // Replacing the ExpectedExceptionAttribute with Throws.InstanceOf

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 namespace Search.KeywordIndex.UnitTests
 {
     [TestFixture]
+    [Category("Tests.UnitTests")]
+    [Category("KeywordIndex"), Category("KeywordIndex.KeyPhrases")]
     public class KeyPhrasesTests
     {
         [Test]

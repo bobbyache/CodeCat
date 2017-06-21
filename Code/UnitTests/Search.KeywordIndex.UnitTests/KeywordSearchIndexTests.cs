@@ -21,6 +21,8 @@ using System.Threading.Tasks;
 namespace Search.KeywordIndex.UnitTests
 {
     [TestFixture]
+    [Category("Tests.UnitTests")]
+    [Category("KeywordIndex"), Category("KeywordIndex.KeywordSearchIndex")]
     class KeywordSearchIndexTests
     {
         [Test]

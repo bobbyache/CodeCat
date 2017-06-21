@@ -6,6 +6,8 @@ using System;
 namespace Search.KeywordIndex.UnitTests
 {
     [TestFixture]
+    [Category("Tests.UnitTests")]
+    [Category("KeywordIndex"), Category("KeywordIndex.KeywordIndexItem")]
     class KeywordIndexItemTests
     {
         [Test]

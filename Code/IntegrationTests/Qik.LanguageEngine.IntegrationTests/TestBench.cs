@@ -7,6 +7,8 @@ using System;
 namespace Qik.LanguageEngine.IntegrationTests
 {
     [TestFixture]
+    [Category("Qik.ScriptExamples")]
+    [Category("Tests.Integration")]
     public class TestBench
     {
         [Test]

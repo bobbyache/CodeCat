@@ -10,9 +10,12 @@ using System.Threading;
 namespace LanguageEngine.Tests.UnitTests
 {
     [TestFixture]
+    [Category("Qik")]
+    [Category("Tests.UnitTests")]
     public class TestBench
     {
         [Test]
+        [Category("Qik.BatchCompiler")]
         public void BatchCompiler_Generates_AutoInput()
         {
             BatchCompiler batchCompiler = new BatchCompiler();
@@ -32,6 +35,7 @@ namespace LanguageEngine.Tests.UnitTests
         }
 
         [Test]
+        [Category("Qik.Placeholder")]
         public void Placeholder_NotAvailable_When_IsPlaceholder_False()
         {
             GlobalTable globalTable = new GlobalTable();
@@ -55,6 +59,7 @@ namespace LanguageEngine.Tests.UnitTests
         }
 
         [Test]
+        [Category("Qik.GlobalTable")]
         public void Create_GlobalTable_TestInput()
         {
             GlobalTable globalTable = new GlobalTable();

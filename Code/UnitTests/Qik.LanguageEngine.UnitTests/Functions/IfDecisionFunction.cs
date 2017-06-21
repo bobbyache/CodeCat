@@ -7,6 +7,9 @@ using NUnit.Framework;
 namespace LanguageEngine.Tests.UnitTests.Functions
 {
     [TestFixture]
+    [Category("Qik")]
+    [Category("Qik.Functions")]
+    [Category("Tests.UnitTests")]
     class IfDecisionFunction
     {
         [Test]

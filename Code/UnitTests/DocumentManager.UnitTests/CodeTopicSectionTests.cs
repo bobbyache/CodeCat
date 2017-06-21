@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 namespace DocumentManager.UnitTests
 {
     [TestFixture]
+    [Category("TopicSection.CodeTopicSection")]
+    [Category("Tests.UnitTests")]
     public class CodeTopicSectionTests
     {
         [Test]

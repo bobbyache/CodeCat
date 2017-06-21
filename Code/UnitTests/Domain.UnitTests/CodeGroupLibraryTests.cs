@@ -9,6 +9,8 @@ using System;
 namespace Domain.UnitTests
 {
     [TestFixture]
+    [Category("TopicLibrary")]
+    [Category("Tests.UnitTests")]
     public class CodeGroupLibraryTests
     {
         [Test]

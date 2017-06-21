@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 namespace Qik.LanguageEngine.UnitTests
 {
     [TestFixture]
+    [Category("Qik")]
+    [Category("Qik.Compiler")]
+    [Category("Tests.UnitTests")]
     class CompilerTests
     {
         [Test]

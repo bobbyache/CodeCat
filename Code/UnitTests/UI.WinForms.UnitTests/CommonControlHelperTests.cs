@@ -14,6 +14,7 @@ namespace UI.WinForms.UnitTests
 {
     [TestFixture]
     [Category("UI_Tests")]
+    [Category("Tests.UnitTests")]
     public class CommonControlHelperTests
     {
         // https://sqa.stackexchange.com/questions/3136/how-to-test-the-graphical-contents-of-a-bitmap-or-a-pdf-file

@@ -9,6 +9,9 @@ using System.Collections.Generic;
 namespace LanguageEngine.Tests.UnitTests.Functions
 {
     [TestFixture]
+    [Category("Qik")]
+    [Category("Qik.Functions")]
+    [Category("Tests.UnitTests")]
     class CurrentDateFunctionTests
     {
         [Test]
