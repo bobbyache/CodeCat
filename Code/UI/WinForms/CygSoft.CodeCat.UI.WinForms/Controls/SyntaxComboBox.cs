@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,10 +23,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
             set
             {
-                string syntax = string.IsNullOrEmpty(value) ? ConfigSettings.DefaultSyntax.ToUpper() : value.ToUpper();
-                int index = this.FindStringExact(syntax);
-                if (index >= 0)
-                    this.SelectedIndex = index;
+                if (value == null)
+                    this.SelectedIndex = -1; // required else the designer fails!
+                else
+                {
+                    string syntax = string.IsNullOrEmpty(value) ? ConfigSettings.DefaultSyntax.ToUpper() : value.ToUpper();
+                    int index = this.FindStringExact(syntax);
+                    if (index >= 0)
+                        this.SelectedIndex = index;
+                }
             }
         }
 
