@@ -177,7 +177,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(639, 453);
-            this.ControlBox = false;
             this.Controls.Add(this.cboCategory);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cboSyntax);
@@ -188,6 +187,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.Controls.Add(this.txtKeywords);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(392, 39);
             this.Name = "SearchableSnippetEditDialog";
             this.Text = "Edit Code Snippet";

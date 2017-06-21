@@ -25,6 +25,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             if (application == null)
                 return;
 
+            this.Icon = IconRepository.Get(codeSnippet.Syntax).Icon;
             this.application = application;
             CodeSnippet = codeSnippet;
             txtTitle.Text = codeSnippet?.Title;
@@ -44,6 +45,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
         {
             syntaxDocument.SyntaxFile = application.GetSyntaxFile(cboSyntax.Syntax);
+            this.Icon = IconRepository.Get(cboSyntax.Syntax).Icon;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
