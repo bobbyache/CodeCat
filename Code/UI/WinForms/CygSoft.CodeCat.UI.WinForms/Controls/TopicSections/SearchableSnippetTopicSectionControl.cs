@@ -48,11 +48,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             syntaxBox.ReadOnly = true;
             listView.SmallImageList = IconRepository.ImageList;
             listViewSorter = new ListViewSorter(this.listView);
+            listView.Sorting = SortOrder.Ascending;
 
             btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
-
-            syntaxBox.Document.Text = SearchableSnippetTopicSection.Text;
-            syntaxDocument.SyntaxFile = SyntaxFile;
 
             btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
             btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
@@ -61,7 +59,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             ReloadListview();
 
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
-            listView.SelectedIndexChanged += (s, e) => syntaxDocument.Text = Gui.GroupedListView.SelectedItem<ISearchableSnippetKeywordIndexItem>(listView)?.Text;
+            listView.SelectedIndexChanged += (s, e) =>
+            {
+                ISearchableSnippetKeywordIndexItem item = Gui.GroupedListView.SelectedItem<ISearchableSnippetKeywordIndexItem>(listView);
+                if (item != null)
+                {
+                    syntaxDocument.SyntaxFile = application.GetSyntaxFile(item.Syntax);
+                    syntaxBox.Document.Text = item.Text;
+                }
+            };
 
             FontModified += Base_FontModified;
             SyntaxModified += Base_SyntaxModified;
@@ -121,8 +127,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             //Gui.GroupedListView.LoadAllItems<IFileAttachment>(this.listView, SearchableSnippetTopicSection.SnippetList(),
             //    SearchableSnippetTopicSection.Categories, this.CreateListviewItem);
-            Gui.GroupedListView.LoadAllItems<ISearchableSnippetKeywordIndexItem>(this.listView, SearchableSnippetTopicSection.SnippetList(),
-                new string[] { }, this.CreateListviewItem);
+            Gui.GroupedListView.LoadAllItems(this.listView, SearchableSnippetTopicSection.SnippetList(),
+                SearchableSnippetTopicSection.Categories, this.CreateListviewItem);
 
             listViewSorter.Sort(0, listViewSorter.SortingOrder);
         }

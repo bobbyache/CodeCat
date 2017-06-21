@@ -27,19 +27,22 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
         {
             Syntax = string.Empty;
             Text = string.Empty;
+            Category = string.Empty;
         }
 
         public override void Deserialize(XElement element)
         {
             base.Deserialize(element);
-            Syntax = (string)element.Element("Syntax");
+            Syntax = (string)element.Attribute("Syntax");
+            Category = (string)element.Attribute("Category");
             Text = (string)element.Element("Text");
         }
 
         public override XElement Serialize()
         {
             XElement element = base.Serialize();
-            element.Add(new XElement("Syntax", Syntax));
+            element.Add(new XAttribute("Syntax", Syntax));
+            element.Add(new XAttribute("Category", Category));
             element.Add(new XElement("Text", new XCData(Text)));
             return element;
         }

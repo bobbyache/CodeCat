@@ -15,6 +15,7 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
     {
         ISearchableSnippetKeywordIndexItem[] SnippetList();
         ISearchableSnippetKeywordIndexItem NewSnippet(string title);
+        string[] Categories { get; }
         void AddSnippet(ISearchableSnippetKeywordIndexItem snippet);
         void DeleteSnippet(string id);
         void DeleteSnippets(IEnumerable<ISearchableSnippetKeywordIndexItem> snippets);
@@ -56,22 +57,19 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
             return new Version(1, 0);
         }
 
-        private List<ISearchableSnippetKeywordIndexItem> items = new List<ISearchableSnippetKeywordIndexItem>()
+        public string[] Categories
         {
-            new SearchableSnippetKeywordIndexItem() { Title = "Text 1", Text = "Text 1", Syntax = "TEXT" },
-            new SearchableSnippetKeywordIndexItem() { Title = "Text 2", Text = "Text 2", Syntax = "TEXT" },
-            new SearchableSnippetKeywordIndexItem() { Title = "Text 3", Text = "Text 3", Syntax = "HTML" },
-            new SearchableSnippetKeywordIndexItem() { Title = "Text 4", Text = "Text 4", Syntax = "TEXT" }
-        };
+            get { return this.SnippetList().Select(r => r.Category).Distinct().ToArray(); }
+        }
 
         public ISearchableSnippetKeywordIndexItem[] SnippetList()
         {
-            return items.ToArray();
+            return searchIndex.All().OfType<ISearchableSnippetKeywordIndexItem>().ToArray();
         }
 
         public void AddSnippet(ISearchableSnippetKeywordIndexItem snippet)
         {
-            items.Add(snippet);
+            searchIndex.Update(snippet);
         }
 
         public void DeleteSnippets(IEnumerable<ISearchableSnippetKeywordIndexItem> snippets)
@@ -82,10 +80,7 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
 
         public void DeleteSnippet(string id)
         {
-            var foundItem = items.Where(i => i.Id == id).SingleOrDefault();
-
-            if (foundItem != null)
-                items.Remove(foundItem);
+            searchIndex.Remove(id);
         }
 
         public ISearchableSnippetKeywordIndexItem NewSnippet(string title)
