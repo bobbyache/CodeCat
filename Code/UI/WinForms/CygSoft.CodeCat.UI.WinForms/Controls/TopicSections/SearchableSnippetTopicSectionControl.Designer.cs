@@ -35,6 +35,7 @@
             this.splitter = new System.Windows.Forms.SplitContainer();
             this.listView = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colSyntax = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.searchPanel.SuspendLayout();
@@ -100,7 +101,8 @@
             // listView
             // 
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colTitle});
+            this.colTitle,
+            this.colSyntax});
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
@@ -115,6 +117,11 @@
             // 
             this.colTitle.Text = "Title";
             this.colTitle.Width = 645;
+            // 
+            // colSyntax
+            // 
+            this.colSyntax.Text = "Syntax";
+            this.colSyntax.Width = 100;
             // 
             // syntaxBox
             // 
@@ -185,5 +192,6 @@
         private Alsing.SourceCode.SyntaxDocument syntaxDocument;
         private System.Windows.Forms.ListView listView;
         private System.Windows.Forms.ColumnHeader colTitle;
+        private System.Windows.Forms.ColumnHeader colSyntax;
     }
 }

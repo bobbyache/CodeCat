@@ -76,11 +76,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             UnregisterFieldEvents += Base_UnregisterFieldEvents;
             RegisterFieldEvents += Base_RegisterFieldEvents;
 
+            if (listView.Items.Count > 0)
+                listView.Items[0].Selected = true;
         }
 
         private void Add()
         {
-            SearchableSnippetEditDialog dialog = new SearchableSnippetEditDialog(SearchableSnippetTopicSection.NewSnippet(string.Empty));
+            ISearchableSnippetKeywordIndexItem newItem = SearchableSnippetTopicSection.NewSnippet(string.Empty);
+            SearchableSnippetEditDialog dialog = new SearchableSnippetEditDialog(application, newItem, 
+                SearchableSnippetTopicSection.Categories);
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
@@ -97,7 +101,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             {
                 ISearchableSnippetKeywordIndexItem selectedItem = Gui.GroupedListView.SelectedItem<ISearchableSnippetKeywordIndexItem>(listView);
 
-                SearchableSnippetEditDialog dialog = new SearchableSnippetEditDialog(selectedItem);
+                SearchableSnippetEditDialog dialog = new SearchableSnippetEditDialog(application, selectedItem, 
+                    SearchableSnippetTopicSection.Categories);
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
@@ -125,8 +130,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void ReloadListview()
         {
-            //Gui.GroupedListView.LoadAllItems<IFileAttachment>(this.listView, SearchableSnippetTopicSection.SnippetList(),
-            //    SearchableSnippetTopicSection.Categories, this.CreateListviewItem);
             Gui.GroupedListView.LoadAllItems(this.listView, SearchableSnippetTopicSection.SnippetList(),
                 SearchableSnippetTopicSection.Categories, this.CreateListviewItem);
 
@@ -141,6 +144,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             listItem.Name = item.Id;
             listItem.Tag = item;
             listItem.Text = item.Title;
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Syntax));
             listView.Items.Add(listItem);
 
             return listItem;

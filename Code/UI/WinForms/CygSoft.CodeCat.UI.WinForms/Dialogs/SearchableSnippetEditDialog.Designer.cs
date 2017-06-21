@@ -1,4 +1,6 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms.Dialogs
+﻿using CygSoft.CodeCat.UI.WinForms.Controls;
+
+namespace CygSoft.CodeCat.UI.WinForms.Dialogs
 {
     partial class SearchableSnippetEditDialog
     {
@@ -37,12 +39,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.syntaxBox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
+            this.cboSyntax = new CygSoft.CodeCat.UI.WinForms.Controls.SyntaxComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cboCategory = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(508, 481);
+            this.btnCancel.Location = new System.Drawing.Point(508, 517);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -53,7 +58,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(589, 481);
+            this.btnOk.Location = new System.Drawing.Point(589, 517);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 3;
@@ -71,7 +76,7 @@
             this.txtKeywords.Multiline = true;
             this.txtKeywords.Name = "txtKeywords";
             this.txtKeywords.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtKeywords.Size = new System.Drawing.Size(601, 40);
+            this.txtKeywords.Size = new System.Drawing.Size(601, 50);
             this.txtKeywords.TabIndex = 5;
             // 
             // label1
@@ -115,7 +120,7 @@
             this.syntaxBox.InfoTipPosition = null;
             this.syntaxBox.InfoTipSelectedIndex = 1;
             this.syntaxBox.InfoTipVisible = false;
-            this.syntaxBox.Location = new System.Drawing.Point(8, 84);
+            this.syntaxBox.Location = new System.Drawing.Point(8, 120);
             this.syntaxBox.LockCursorUpdate = false;
             this.syntaxBox.Name = "syntaxBox";
             this.syntaxBox.ShowScopeIndicator = false;
@@ -136,11 +141,41 @@
             this.syntaxDocument.Modified = false;
             this.syntaxDocument.UndoStep = 0;
             // 
+            // cboSyntax
+            // 
+            this.cboSyntax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboSyntax.FormattingEnabled = true;
+            this.cboSyntax.Location = new System.Drawing.Point(543, 94);
+            this.cboSyntax.Name = "cboSyntax";
+            this.cboSyntax.Size = new System.Drawing.Size(121, 21);
+            this.cboSyntax.Syntax = null;
+            this.cboSyntax.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 97);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Category";
+            // 
+            // cboCategory
+            // 
+            this.cboCategory.FormattingEnabled = true;
+            this.cboCategory.Location = new System.Drawing.Point(63, 95);
+            this.cboCategory.Name = "cboCategory";
+            this.cboCategory.Size = new System.Drawing.Size(182, 21);
+            this.cboCategory.TabIndex = 12;
+            // 
             // SearchableSnippetEditDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 507);
+            this.ClientSize = new System.Drawing.Size(667, 543);
+            this.Controls.Add(this.cboCategory);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cboSyntax);
             this.Controls.Add(this.syntaxBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtTitle);
@@ -165,5 +200,8 @@
         private System.Windows.Forms.Label label2;
         private Alsing.Windows.Forms.SyntaxBoxControl syntaxBox;
         private Alsing.SourceCode.SyntaxDocument syntaxDocument;
+        private SyntaxComboBox cboSyntax;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cboCategory;
     }
 }

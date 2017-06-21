@@ -78,6 +78,9 @@
     <Compile Include="Controls\CodeVersionListControl.Designer.cs">
       <DependentUpon>CodeVersionListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SyntaxComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TopicSections\BaseCodeTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
