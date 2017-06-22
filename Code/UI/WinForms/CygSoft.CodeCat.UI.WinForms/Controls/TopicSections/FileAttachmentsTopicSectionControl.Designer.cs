@@ -48,7 +48,7 @@
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // fileListview
+            // listView
             // 
             this.listView.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -62,7 +62,7 @@
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(0, 25);
-            this.listView.Name = "fileListview";
+            this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(429, 389);
             this.listView.TabIndex = 13;
             this.listView.UseCompatibleStateImageBehavior = false;

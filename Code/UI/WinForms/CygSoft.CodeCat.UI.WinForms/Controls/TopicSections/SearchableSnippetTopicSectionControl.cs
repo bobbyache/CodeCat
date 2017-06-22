@@ -58,6 +58,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
             ReloadListview();
 
+            listView.MouseUp += listView_MouseUp;
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
             listView.SelectedIndexChanged += (s, e) => DisplaySourceCode();
 
@@ -158,6 +159,32 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             listView.Items.Add(listItem);
 
             return listItem;
+        }
+
+        private void listView_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                int cnt = listView.SelectedItems.Count;
+                bool onItem = false;
+                ISearchableSnippetKeywordIndexItem item = null;
+
+                if (listView.FocusedItem != null)
+                {
+                    onItem = listView.FocusedItem.Bounds.Contains(e.Location);
+                    item = listView.FocusedItem.Tag as ISearchableSnippetKeywordIndexItem;
+                }
+
+                mnuEdit.Enabled = cnt == 1 && onItem;
+                mnuDelete.Enabled = cnt >= 1;
+                mnuNew.Enabled = true;
+
+                mnuCopy.Enabled = cnt == 1 && onItem;
+                mnuPaste.Enabled = true;
+                mnuCopyCode.Enabled = cnt == 1 && onItem;
+
+                contextMenu.Show(Cursor.Position);
+            }
         }
 
         private void Base_SyntaxModified(object sender, EventArgs e)

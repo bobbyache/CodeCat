@@ -50,7 +50,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.btnCancel.Location = new System.Drawing.Point(471, 427);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 4;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -61,7 +61,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.btnOk.Location = new System.Drawing.Point(552, 427);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 3;
+            this.btnOk.TabIndex = 6;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -76,7 +76,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.txtKeywords.Name = "txtKeywords";
             this.txtKeywords.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtKeywords.Size = new System.Drawing.Size(573, 51);
-            this.txtKeywords.TabIndex = 5;
+            this.txtKeywords.TabIndex = 1;
             // 
             // label1
             // 
@@ -94,7 +94,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.txtTitle.Location = new System.Drawing.Point(63, 12);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(573, 20);
-            this.txtTitle.TabIndex = 7;
+            this.txtTitle.TabIndex = 0;
             // 
             // label2
             // 
@@ -133,7 +133,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.syntaxBox.SplitviewH = -4;
             this.syntaxBox.SplitviewV = -4;
             this.syntaxBox.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.syntaxBox.TabIndex = 9;
+            this.syntaxBox.TabIndex = 4;
             this.syntaxBox.Text = "syntaxBoxControl1";
             this.syntaxBox.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
             // 
@@ -160,7 +160,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.cboCategory.Location = new System.Drawing.Point(63, 95);
             this.cboCategory.Name = "cboCategory";
             this.cboCategory.Size = new System.Drawing.Size(182, 21);
-            this.cboCategory.TabIndex = 12;
+            this.cboCategory.TabIndex = 2;
             // 
             // cboSyntax
             // 
@@ -170,7 +170,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.cboSyntax.Name = "cboSyntax";
             this.cboSyntax.Size = new System.Drawing.Size(121, 21);
             this.cboSyntax.Syntax = null;
-            this.cboSyntax.TabIndex = 10;
+            this.cboSyntax.TabIndex = 3;
             // 
             // SearchableSnippetEditDialog
             // 
