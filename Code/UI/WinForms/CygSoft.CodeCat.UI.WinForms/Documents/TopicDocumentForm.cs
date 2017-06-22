@@ -106,7 +106,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                     break;
 
                 case TopicSectionType.SearchableSnippet:
-                    topicDocument.AddTopicSection(TopicSectionType.SearchableSnippet, "Searchable Snippets", null, "xml");
+                    topicDocument.AddTopicSection(TopicSectionType.SearchableSnippet, "Searchable Snippets", ConfigSettings.DefaultSyntax, "xml");
                     break;
 
                 case TopicSectionType.SingleImage:

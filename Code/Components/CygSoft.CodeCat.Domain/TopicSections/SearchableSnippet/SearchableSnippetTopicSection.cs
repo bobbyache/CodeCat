@@ -64,7 +64,10 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
 
         public ISearchableSnippetKeywordIndexItem[] SnippetList()
         {
-            return searchIndex.All().OfType<ISearchableSnippetKeywordIndexItem>().ToArray();
+            if (searchIndex != null)
+                return searchIndex.All().OfType<ISearchableSnippetKeywordIndexItem>().ToArray();
+            else
+                return new SearchableSnippetKeywordIndexItem[0];
         }
 
         public void AddSnippet(ISearchableSnippetKeywordIndexItem snippet)
