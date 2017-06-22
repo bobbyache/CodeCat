@@ -95,7 +95,8 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             {
                 OnBeforeRevert();
                 OnRevert();
-                OnOpen();
+                if (Exists)
+                    OnOpen();
                 OnAfterRevert();
                 Loaded = true;
                 
