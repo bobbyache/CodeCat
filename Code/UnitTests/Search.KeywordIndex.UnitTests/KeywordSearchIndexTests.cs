@@ -112,5 +112,24 @@ namespace Search.KeywordIndex.UnitTests
 
             Assert.That(allKeywords.Length, Is.EqualTo(3));
         }
+
+        //[Test]
+        //public void KeywordSearchIndex_UpdateIndexItem_AfterRemovingKeywords_ReturnsRemainingKeywords()
+        //{
+        //    TestKeywordIndexItem item1 = new TestKeywordIndexItem("Title 1", "orange,apple,pear");
+        //    TestKeywordIndexItem item2 = new TestKeywordIndexItem("Title 2", "ostrich,eagle");
+
+        //    List<IKeywordIndexItem> indexItems = (new List<TestKeywordIndexItem> {
+        //        item1,
+        //        item2
+        //    }).OfType<IKeywordIndexItem>().ToList();
+
+        //    var searchIndex = new KeywordSearchIndex("", new Version(2, 0), indexItems);
+        //    int noKeywordsBefore = searchIndex.AllKeywords(searchIndex.All()).Length;
+
+        //    item1.RemoveKeywords("orange");
+        //    item2.RemoveKeywords("")
+
+        //}
     }
 }

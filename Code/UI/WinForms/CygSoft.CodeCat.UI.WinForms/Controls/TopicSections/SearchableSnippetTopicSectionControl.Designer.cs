@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.searchPanel = new System.Windows.Forms.Panel();
-            this.btnFind = new System.Windows.Forms.Button();
-            this.keywordsTextBox = new System.Windows.Forms.TextBox();
             this.splitter = new System.Windows.Forms.SplitContainer();
             this.listView = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -41,52 +38,21 @@
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuCopyCode = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuNew = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPaste = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.searchPanel.SuspendLayout();
+            this.btnFind = new System.Windows.Forms.Button();
+            this.keywordsTextBox = new CygSoft.CodeCat.UI.WinForms.Controls.AutoCompleteSearch.SearchTextBox(this.components);
+            this.lstAutoComplete = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitter)).BeginInit();
             this.splitter.Panel1.SuspendLayout();
             this.splitter.Panel2.SuspendLayout();
             this.splitter.SuspendLayout();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // searchPanel
-            // 
-            this.searchPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchPanel.Controls.Add(this.btnFind);
-            this.searchPanel.Controls.Add(this.keywordsTextBox);
-            this.searchPanel.Location = new System.Drawing.Point(2, 27);
-            this.searchPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(686, 21);
-            this.searchPanel.TabIndex = 7;
-            // 
-            // btnFind
-            // 
-            this.btnFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFind.Location = new System.Drawing.Point(647, 2);
-            this.btnFind.Margin = new System.Windows.Forms.Padding(2);
-            this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(35, 18);
-            this.btnFind.TabIndex = 4;
-            this.btnFind.UseVisualStyleBackColor = true;
-            // 
-            // keywordsTextBox
-            // 
-            this.keywordsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.keywordsTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.keywordsTextBox.Location = new System.Drawing.Point(2, 1);
-            this.keywordsTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.keywordsTextBox.Name = "keywordsTextBox";
-            this.keywordsTextBox.Size = new System.Drawing.Size(643, 20);
-            this.keywordsTextBox.TabIndex = 0;
             // 
             // splitter
             // 
@@ -99,6 +65,7 @@
             // 
             // splitter.Panel1
             // 
+            this.splitter.Panel1.Controls.Add(this.lstAutoComplete);
             this.splitter.Panel1.Controls.Add(this.listView);
             // 
             // splitter.Panel2
@@ -184,66 +151,95 @@
             this.mnuCopy,
             this.mnuPaste});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(153, 170);
+            this.contextMenu.Size = new System.Drawing.Size(134, 148);
             // 
             // mnuCopyCode
             // 
             this.mnuCopyCode.Name = "mnuCopyCode";
-            this.mnuCopyCode.Size = new System.Drawing.Size(152, 22);
+            this.mnuCopyCode.Size = new System.Drawing.Size(133, 22);
             this.mnuCopyCode.Text = "Copy Code";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(130, 6);
+            // 
+            // mnuNew
+            // 
+            this.mnuNew.Name = "mnuNew";
+            this.mnuNew.Size = new System.Drawing.Size(133, 22);
+            this.mnuNew.Text = "New";
             // 
             // mnuEdit
             // 
             this.mnuEdit.Name = "mnuEdit";
-            this.mnuEdit.Size = new System.Drawing.Size(152, 22);
+            this.mnuEdit.Size = new System.Drawing.Size(133, 22);
             this.mnuEdit.Text = "Edit";
             // 
             // mnuDelete
             // 
             this.mnuDelete.Name = "mnuDelete";
-            this.mnuDelete.Size = new System.Drawing.Size(152, 22);
+            this.mnuDelete.Size = new System.Drawing.Size(133, 22);
             this.mnuDelete.Text = "Delete";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(130, 6);
             // 
             // mnuCopy
             // 
             this.mnuCopy.Name = "mnuCopy";
-            this.mnuCopy.Size = new System.Drawing.Size(152, 22);
+            this.mnuCopy.Size = new System.Drawing.Size(133, 22);
             this.mnuCopy.Text = "Copy";
             // 
             // mnuPaste
             // 
             this.mnuPaste.Name = "mnuPaste";
-            this.mnuPaste.Size = new System.Drawing.Size(152, 22);
+            this.mnuPaste.Size = new System.Drawing.Size(133, 22);
             this.mnuPaste.Text = "Paste";
             // 
-            // mnuNew
+            // btnFind
             // 
-            this.mnuNew.Name = "mnuNew";
-            this.mnuNew.Size = new System.Drawing.Size(152, 22);
-            this.mnuNew.Text = "New";
+            this.btnFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFind.Location = new System.Drawing.Point(649, 29);
+            this.btnFind.Margin = new System.Windows.Forms.Padding(2);
+            this.btnFind.Name = "btnFind";
+            this.btnFind.Size = new System.Drawing.Size(35, 18);
+            this.btnFind.TabIndex = 10;
+            this.btnFind.UseVisualStyleBackColor = true;
+            // 
+            // keywordsTextBox
+            // 
+            this.keywordsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.keywordsTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.keywordsTextBox.Location = new System.Drawing.Point(4, 28);
+            this.keywordsTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.keywordsTextBox.Name = "keywordsTextBox";
+            this.keywordsTextBox.Size = new System.Drawing.Size(643, 20);
+            this.keywordsTextBox.TabIndex = 9;
+            // 
+            // lstAutoComplete
+            // 
+            this.lstAutoComplete.FormattingEnabled = true;
+            this.lstAutoComplete.Location = new System.Drawing.Point(337, -24);
+            this.lstAutoComplete.Name = "lstAutoComplete";
+            this.lstAutoComplete.Size = new System.Drawing.Size(120, 95);
+            this.lstAutoComplete.TabIndex = 11;
             // 
             // SearchableSnippetTopicSectionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnFind);
+            this.Controls.Add(this.keywordsTextBox);
             this.Controls.Add(this.splitter);
-            this.Controls.Add(this.searchPanel);
             this.Name = "SearchableSnippetTopicSectionControl";
             this.Size = new System.Drawing.Size(688, 463);
-            this.Controls.SetChildIndex(this.searchPanel, 0);
             this.Controls.SetChildIndex(this.splitter, 0);
-            this.searchPanel.ResumeLayout(false);
-            this.searchPanel.PerformLayout();
+            this.Controls.SetChildIndex(this.keywordsTextBox, 0);
+            this.Controls.SetChildIndex(this.btnFind, 0);
             this.splitter.Panel1.ResumeLayout(false);
             this.splitter.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitter)).EndInit();
@@ -255,10 +251,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel searchPanel;
-        private System.Windows.Forms.Button btnFind;
-        private System.Windows.Forms.TextBox keywordsTextBox;
         private System.Windows.Forms.SplitContainer splitter;
         private Alsing.Windows.Forms.SyntaxBoxControl syntaxBox;
         private Alsing.SourceCode.SyntaxDocument syntaxDocument;
@@ -274,5 +266,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem mnuCopy;
         private System.Windows.Forms.ToolStripMenuItem mnuPaste;
+        private System.Windows.Forms.Button btnFind;
+        private AutoCompleteSearch.SearchTextBox keywordsTextBox;
+        private System.Windows.Forms.ListBox lstAutoComplete;
     }
 }

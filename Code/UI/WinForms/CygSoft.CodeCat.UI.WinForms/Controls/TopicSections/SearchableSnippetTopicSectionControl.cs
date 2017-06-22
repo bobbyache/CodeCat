@@ -57,6 +57,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
             btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
 
+            keywordsTextBox.CurrentTermCommitted += (s, e) => ReloadListview();
+            keywordsTextBox.DropDownList = lstAutoComplete;
+
             ReloadListview();
 
             mnuEdit.Click += (s, e) => Edit();
@@ -68,7 +71,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
             listView.SelectedIndexChanged += (s, e) => DisplaySourceCode();
 
-            keywordsTextBox.KeyUp += KeywordsTextBox_KeyUp; ;
+            //keywordsTextBox.KeyUp += KeywordsTextBox_KeyUp; ;
 
             FontModified += Base_FontModified;
             SyntaxModified += Base_SyntaxModified;
@@ -81,13 +84,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 listView.Items[0].Selected = true;
         }
 
-        private void KeywordsTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Oemcomma)
-            {
-                ReloadListview();
-            }
-        }
+        //private void KeywordsTextBox_KeyUp(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Oemcomma)
+        //    {
+        //        ReloadListview();
+        //    }
+        //}
 
         private void CopyCodeToClipboard()
         {
@@ -144,6 +147,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
                 if (result == DialogResult.OK)
                 {
+                    SearchableSnippetTopicSection.UpdateSnippet(selectedItem);
                     ReloadListview();
                     Modify();
                 }
@@ -167,9 +171,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void ReloadListview()
         {
+            string[] categories = SearchableSnippetTopicSection.Categories;
             Gui.GroupedListView.LoadAllItems(this.listView, SearchableSnippetTopicSection.Find(keywordsTextBox.Text),
-                SearchableSnippetTopicSection.Categories, this.CreateListviewItem);
+                categories, this.CreateListviewItem);
 
+            keywordsTextBox.ResetList(SearchableSnippetTopicSection.Keywords);
             listViewSorter.Sort(0, listViewSorter.SortingOrder);
         }
 

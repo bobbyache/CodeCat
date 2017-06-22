@@ -58,7 +58,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         {
             if (ValidateFields())
             {
-                CodeSnippet.AddKeywords(txtKeywords.Text);
+                CodeSnippet.SetKeywords(txtKeywords.Text);
                 CodeSnippet.Title = txtTitle.Text.Trim();
                 CodeSnippet.Text = syntaxDocument.Text;
                 CodeSnippet.Syntax = cboSyntax.Syntax;

@@ -106,6 +106,8 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
         {
             if (!Contains(item))
                 Add(item);
+            else
+                CreateKeywordIndex();
 
             IndexModified?.Invoke(this, new EventArgs());
         }

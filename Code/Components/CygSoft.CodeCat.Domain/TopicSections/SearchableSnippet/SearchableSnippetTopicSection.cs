@@ -16,7 +16,9 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
         ISearchableSnippetKeywordIndexItem[] Find(string commaDelimitedKeywordList);
         ISearchableSnippetKeywordIndexItem NewSnippet(string title);
         string[] Categories { get; }
+        string[] Keywords { get; }
         void AddSnippet(ISearchableSnippetKeywordIndexItem snippet);
+        void UpdateSnippet(ISearchableSnippetKeywordIndexItem snippet);
         void DeleteSnippet(string id);
         void DeleteSnippets(IEnumerable<ISearchableSnippetKeywordIndexItem> snippets);
     }
@@ -59,7 +61,23 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
 
         public string[] Categories
         {
-            get { return Find(string.Empty).Select(r => r.Category).Distinct().ToArray(); }
+            get { return Find(string.Empty).Select(r => r.Category).OrderBy(r => r).Distinct().ToArray(); }
+        }
+
+        public string[] Keywords
+        {
+            get
+            {
+                if (searchIndex != null)
+                    return searchIndex.Keywords;
+                else
+                    return new string[0];
+            }
+        }
+
+        public void UpdateSnippet(ISearchableSnippetKeywordIndexItem snippet)
+        {
+            searchIndex.Update(snippet);
         }
 
         public void AddSnippet(ISearchableSnippetKeywordIndexItem snippet)
