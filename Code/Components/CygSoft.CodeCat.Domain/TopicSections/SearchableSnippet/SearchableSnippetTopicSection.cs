@@ -13,7 +13,7 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
 {
     public interface ISearchableSnippetTopicSection : ICodeTopicSection
     {
-        ISearchableSnippetKeywordIndexItem[] SnippetList();
+        ISearchableSnippetKeywordIndexItem[] Find(string commaDelimitedKeywordList);
         ISearchableSnippetKeywordIndexItem NewSnippet(string title);
         string[] Categories { get; }
         void AddSnippet(ISearchableSnippetKeywordIndexItem snippet);
@@ -59,15 +59,7 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
 
         public string[] Categories
         {
-            get { return this.SnippetList().Select(r => r.Category).Distinct().ToArray(); }
-        }
-
-        public ISearchableSnippetKeywordIndexItem[] SnippetList()
-        {
-            if (searchIndex != null)
-                return searchIndex.All().OfType<ISearchableSnippetKeywordIndexItem>().ToArray();
-            else
-                return new SearchableSnippetKeywordIndexItem[0];
+            get { return Find(string.Empty).Select(r => r.Category).Distinct().ToArray(); }
         }
 
         public void AddSnippet(ISearchableSnippetKeywordIndexItem snippet)
@@ -89,6 +81,17 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
         public ISearchableSnippetKeywordIndexItem NewSnippet(string title)
         {
             return new SearchableSnippetKeywordIndexItem() { Title = title, Syntax = this.Syntax };
+        }
+
+        public ISearchableSnippetKeywordIndexItem[] Find(string commaDelimitedKeywordList)
+        {
+            if (searchIndex == null)
+                return new SearchableSnippetKeywordIndexItem[0];
+
+            if (commaDelimitedKeywordList.Trim() == string.Empty)
+                return searchIndex.All().OfType<ISearchableSnippetKeywordIndexItem>().ToArray();
+            else
+                return searchIndex.Find(commaDelimitedKeywordList).OfType<ISearchableSnippetKeywordIndexItem>().ToArray();
         }
     }
 }

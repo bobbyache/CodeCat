@@ -51,6 +51,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             listView.Sorting = SortOrder.Ascending;
 
             btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
+            btnFind.Click += (s, e) => ReloadListview();
 
             btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
             btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
@@ -62,10 +63,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             mnuDelete.Click += (s, e) => Delete();
             mnuNew.Click += (s, e) => Add();
             mnuCopyCode.Click += (s, e) => CopyCodeToClipboard();
-
+            
             listView.MouseUp += listView_MouseUp;
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
             listView.SelectedIndexChanged += (s, e) => DisplaySourceCode();
+
+            keywordsTextBox.KeyUp += KeywordsTextBox_KeyUp; ;
 
             FontModified += Base_FontModified;
             SyntaxModified += Base_SyntaxModified;
@@ -76,6 +79,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
             if (listView.Items.Count > 0)
                 listView.Items[0].Selected = true;
+        }
+
+        private void KeywordsTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Oemcomma)
+            {
+                ReloadListview();
+            }
         }
 
         private void CopyCodeToClipboard()
@@ -156,7 +167,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void ReloadListview()
         {
-            Gui.GroupedListView.LoadAllItems(this.listView, SearchableSnippetTopicSection.SnippetList(),
+            Gui.GroupedListView.LoadAllItems(this.listView, SearchableSnippetTopicSection.Find(keywordsTextBox.Text),
                 SearchableSnippetTopicSection.Categories, this.CreateListviewItem);
 
             listViewSorter.Sort(0, listViewSorter.SortingOrder);
