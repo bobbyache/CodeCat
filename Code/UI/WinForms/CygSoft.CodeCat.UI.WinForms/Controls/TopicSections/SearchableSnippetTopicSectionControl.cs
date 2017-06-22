@@ -58,6 +58,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
             ReloadListview();
 
+            mnuEdit.Click += (s, e) => Edit();
+            mnuDelete.Click += (s, e) => Delete();
+            mnuNew.Click += (s, e) => Add();
+            mnuCopyCode.Click += (s, e) => CopyCodeToClipboard();
+
             listView.MouseUp += listView_MouseUp;
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
             listView.SelectedIndexChanged += (s, e) => DisplaySourceCode();
@@ -71,6 +76,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
             if (listView.Items.Count > 0)
                 listView.Items[0].Selected = true;
+        }
+
+        private void CopyCodeToClipboard()
+        {
+            if (Gui.GroupedListView.SingleItemSelected<ISearchableSnippetKeywordIndexItem>(listView))
+            {
+                ISearchableSnippetKeywordIndexItem item = Gui.GroupedListView.SelectedItem<ISearchableSnippetKeywordIndexItem>(listView);
+                if (item != null)
+                    Clipboard.SetText(item.Text);
+            }
         }
 
         private void DisplaySourceCode()
