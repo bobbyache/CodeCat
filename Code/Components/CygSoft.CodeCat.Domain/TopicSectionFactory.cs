@@ -1,8 +1,8 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.TopicSections;
-using CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments;
 using CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager;
 using CygSoft.CodeCat.DocumentManager.TopicSections.VersionedCode;
+using CygSoft.CodeCat.Domain.TopicSections.FileAttachment;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
 
 namespace CygSoft.CodeCat.Domain

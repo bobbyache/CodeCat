@@ -4,7 +4,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace CygSoft.CodeCat.DocumentManager.TopicSections.FileAttachments
+namespace CygSoft.CodeCat.Domain.TopicSections.FileAttachment
 {
     public class FileAttachment : IFileAttachment
     {

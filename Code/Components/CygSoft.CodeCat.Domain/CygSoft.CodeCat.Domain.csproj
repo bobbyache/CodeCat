@@ -49,6 +49,8 @@
     <Compile Include="Base\IPersistableTarget.cs" />
     <Compile Include="Base\PersistableTargetFactory.cs" />
     <Compile Include="TopicSectionFactory.cs" />
+    <Compile Include="TopicSections\FileAttachment\FileAttachment.cs" />
+    <Compile Include="TopicSections\FileAttachment\FileAttachmentsTopicSection.cs" />
     <Compile Include="TopicSections\SearchableSnippet\SearchableSnippetKeywordIndexItem.cs" />
     <Compile Include="TopicSections\SearchableSnippet\SearchableSnippetKeywordSearchIndexRepository.cs" />
     <Compile Include="TopicSections\SearchableSnippet\SearchableSnippetTopicSection.cs" />
