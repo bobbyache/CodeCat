@@ -6,7 +6,7 @@ using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
 using CygSoft.CodeCat.Domain.TopicSections.VersionedCode;
 using CygSoft.CodeCat.Domain.TopicSections.WebReference;
 
-namespace CygSoft.CodeCat.Domain
+namespace CygSoft.CodeCat.Domain.TopicSections
 {
     internal class TopicSectionFactory
     {

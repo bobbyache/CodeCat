@@ -5,6 +5,7 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System.Collections.Generic;
 using System.Linq;
+using CygSoft.CodeCat.Domain.TopicSections;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {

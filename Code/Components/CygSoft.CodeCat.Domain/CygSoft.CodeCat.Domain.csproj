@@ -49,7 +49,7 @@
     <Compile Include="Base\BaseLibrary.cs" />
     <Compile Include="Base\IPersistableTarget.cs" />
     <Compile Include="Base\PersistableTargetFactory.cs" />
-    <Compile Include="TopicSectionFactory.cs" />
+    <Compile Include="TopicSections\TopicSectionFactory.cs" />
     <Compile Include="TopicSections\FileAttachment\FileAttachment.cs" />
     <Compile Include="TopicSections\FileAttachment\FileAttachmentsTopicSection.cs" />
     <Compile Include="TopicSections\ImagePager\ImagePager.cs" />

@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.Domain.Base;
+using CygSoft.CodeCat.Domain.TopicSections;
 using CygSoft.CodeCat.Qik.LanguageEngine;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
