@@ -59,8 +59,6 @@
     <Compile Include="TopicSections\SectionTypes.cs" />
     <Compile Include="TopicSections\SingleImageTopicSection.cs" />
     <Compile Include="TopicSections\TextTopicSection.cs" />
-    <Compile Include="TopicSections\VersionedCode\VersionedCodeIndexXmlRepository.cs" />
-    <Compile Include="TopicSections\VersionedCode\VersionedCodeTopicSection.cs" />
     <Compile Include="TopicSections\WebReferencesTopicSection.cs" />
   </ItemGroup>
   <ItemGroup>

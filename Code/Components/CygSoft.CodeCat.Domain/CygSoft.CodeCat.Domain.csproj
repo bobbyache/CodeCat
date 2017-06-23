@@ -59,6 +59,8 @@
     <Compile Include="TopicSections\SearchableSnippet\SearchableSnippetKeywordIndexItem.cs" />
     <Compile Include="TopicSections\SearchableSnippet\SearchableSnippetKeywordSearchIndexRepository.cs" />
     <Compile Include="TopicSections\SearchableSnippet\SearchableSnippetTopicSection.cs" />
+    <Compile Include="TopicSections\VersionedCode\VersionedCodeIndexXmlRepository.cs" />
+    <Compile Include="TopicSections\VersionedCode\VersionedCodeTopicSection.cs" />
     <Compile Include="Topics\TopicDocument.cs" />
     <Compile Include="Topics\TopicIndex.cs" />
     <Compile Include="Topics\TopicIndexXmlRepository.cs" />

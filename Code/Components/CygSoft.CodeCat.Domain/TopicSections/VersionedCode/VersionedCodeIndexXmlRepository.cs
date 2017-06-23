@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace CygSoft.CodeCat.DocumentManager.TopicSections.VersionedCode
+namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
 {
     internal class VersionedCodeIndexXmlRepository
     {
