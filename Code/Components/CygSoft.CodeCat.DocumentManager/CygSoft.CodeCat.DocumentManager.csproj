@@ -59,7 +59,6 @@
     <Compile Include="TopicSections\SectionTypes.cs" />
     <Compile Include="TopicSections\SingleImageTopicSection.cs" />
     <Compile Include="TopicSections\TextTopicSection.cs" />
-    <Compile Include="TopicSections\WebReferencesTopicSection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">

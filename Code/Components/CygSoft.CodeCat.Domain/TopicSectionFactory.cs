@@ -4,6 +4,7 @@ using CygSoft.CodeCat.Domain.TopicSections.FileAttachment;
 using CygSoft.CodeCat.Domain.TopicSections.ImagePager;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
 using CygSoft.CodeCat.Domain.TopicSections.VersionedCode;
+using CygSoft.CodeCat.Domain.TopicSections.WebReference;
 
 namespace CygSoft.CodeCat.Domain
 {
