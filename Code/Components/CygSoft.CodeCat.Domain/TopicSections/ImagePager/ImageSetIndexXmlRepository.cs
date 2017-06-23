@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
 
-namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
+namespace CygSoft.CodeCat.Domain.TopicSections.ImagePager
 {
     internal class ImageSetIndexXmlRepository : IDocumentIndexRepository
     {

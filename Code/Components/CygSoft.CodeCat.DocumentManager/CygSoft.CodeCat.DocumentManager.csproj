@@ -53,10 +53,6 @@
     <Compile Include="Services\PositionableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TopicSections\CodeTopicSection.cs" />
-    <Compile Include="TopicSections\ImagePager\PagerImage.cs" />
-    <Compile Include="TopicSections\ImagePager\ImagePagerTopicSection.cs" />
-    <Compile Include="TopicSections\ImagePager\ImagePager.cs" />
-    <Compile Include="TopicSections\ImagePager\ImageSetIndexXmlRepository.cs" />
     <Compile Include="TopicSections\PdfViewerTopicSection.cs" />
     <Compile Include="TopicSections\QikScriptTopicSection.cs" />
     <Compile Include="TopicSections\RichTextEditorTopicSection.cs" />

@@ -1,11 +1,12 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Base;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
+using CygSoft.CodeCat.DocumentManager.TopicSections;
 using System;
 using System.Drawing;
 using System.IO;
 
-namespace CygSoft.CodeCat.DocumentManager.TopicSections.ImagePager
+namespace CygSoft.CodeCat.Domain.TopicSections.ImagePager
 {
     public class PagerImage :  TopicSection, IPagerImage
     {

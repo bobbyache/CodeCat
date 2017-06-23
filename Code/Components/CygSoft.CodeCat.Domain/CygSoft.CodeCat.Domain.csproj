@@ -37,6 +37,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,10 @@
     <Compile Include="TopicSectionFactory.cs" />
     <Compile Include="TopicSections\FileAttachment\FileAttachment.cs" />
     <Compile Include="TopicSections\FileAttachment\FileAttachmentsTopicSection.cs" />
+    <Compile Include="TopicSections\ImagePager\ImagePager.cs" />
+    <Compile Include="TopicSections\ImagePager\ImagePagerTopicSection.cs" />
+    <Compile Include="TopicSections\ImagePager\ImageSetIndexXmlRepository.cs" />
+    <Compile Include="TopicSections\ImagePager\PagerImage.cs" />
     <Compile Include="TopicSections\SearchableSnippet\SearchableSnippetKeywordIndexItem.cs" />
     <Compile Include="TopicSections\SearchableSnippet\SearchableSnippetKeywordSearchIndexRepository.cs" />
     <Compile Include="TopicSections\SearchableSnippet\SearchableSnippetTopicSection.cs" />
