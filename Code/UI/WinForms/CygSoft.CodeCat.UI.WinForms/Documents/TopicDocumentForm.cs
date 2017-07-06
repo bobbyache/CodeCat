@@ -109,6 +109,10 @@ namespace CygSoft.CodeCat.UI.WinForms
                     topicDocument.AddTopicSection(TopicSectionType.SearchableSnippet, "Searchable Snippets", ConfigSettings.DefaultSyntax, "xml");
                     break;
 
+                case TopicSectionType.SearchableEvent:
+                    topicDocument.AddTopicSection(TopicSectionType.SearchableEvent, "Event Diary", null, "xml");
+                    break;
+
                 case TopicSectionType.SingleImage:
                     topicDocument.AddTopicSection(TopicSectionType.SingleImage, "Single Image", null, "png");
                     break;
@@ -219,6 +223,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnAddImage.Click += (s, e) => CreateTopicSection(TopicSectionType.SingleImage);
             btnRichText.Click += (s, e) => CreateTopicSection(TopicSectionType.RtfEditor);
             btnFileGroup.Click += (s, e) => CreateTopicSection(TopicSectionType.FileAttachments);
+            btnSearchableEventDiary.Click += (s, e) => CreateTopicSection(TopicSectionType.SearchableEvent);
         }
 
         private void InitializeControls()
@@ -428,6 +433,5 @@ namespace CygSoft.CodeCat.UI.WinForms
 
 
         #endregion
-
     }
 }

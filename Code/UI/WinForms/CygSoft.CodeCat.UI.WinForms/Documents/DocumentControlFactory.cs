@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
@@ -33,6 +34,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 else
                     topicSectionControl = new SimpleCodeTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as ICodeTopicSection);
             }
+
+            else if (topicSection is ISearchableEventTopicSection)
+                topicSectionControl = new SearchableEventTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as ISearchableEventTopicSection);
 
             else if (topicSection is IWebReferencesTopicSection)
                 topicSectionControl = new WebReferencesTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as IWebReferencesTopicSection);

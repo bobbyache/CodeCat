@@ -164,6 +164,12 @@
     <Compile Include="Controls\TopicSections\FileAttachmentsTopicSectionControl.Designer.cs">
       <DependentUpon>FileAttachmentsTopicSectionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TopicSections\SearchableEventTopicSectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TopicSections\SearchableEventTopicSectionControl.Designer.cs">
+      <DependentUpon>SearchableEventTopicSectionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TopicSections\SearchableSnippetTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -176,15 +182,11 @@
     <Compile Include="Controls\TopicSections\SimpleCodeTopicSectionControl.Designer.cs">
       <DependentUpon>SimpleCodeTopicSectionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TopicSections\BaseImageTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Controls\TopicSections\BaseImageTopicSectionControl.cs" />
     <Compile Include="Controls\TopicSections\BaseImageTopicSectionControl.Designer.cs">
       <DependentUpon>BaseImageTopicSectionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TopicSections\SingleImageTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Controls\TopicSections\SingleImageTopicSectionControl.cs" />
     <Compile Include="Controls\TopicSections\SingleImageTopicSectionControl.Designer.cs">
       <DependentUpon>SingleImageTopicSectionControl.cs</DependentUpon>
     </Compile>
@@ -224,6 +226,12 @@
     </Compile>
     <Compile Include="Dialogs\ImageDescriptionDialog.Designer.cs">
       <DependentUpon>ImageDescriptionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SearchableEventEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SearchableEventEditDialog.Designer.cs">
+      <DependentUpon>SearchableEventEditDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\SearchableSnippetEditDialog.cs">
       <SubType>Form</SubType>
@@ -377,6 +385,9 @@
     <EmbeddedResource Include="Controls\TopicSections\FileAttachmentsTopicSectionControl.resx">
       <DependentUpon>FileAttachmentsTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TopicSections\SearchableEventTopicSectionControl.resx">
+      <DependentUpon>SearchableEventTopicSectionControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\SearchableSnippetTopicSectionControl.resx">
       <DependentUpon>SearchableSnippetTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -409,6 +420,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InvalidRemoveDialog.resx">
       <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SearchableEventEditDialog.resx">
+      <DependentUpon>SearchableEventEditDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SearchableSnippetEditDialog.resx">
       <DependentUpon>SearchableSnippetEditDialog.cs</DependentUpon>

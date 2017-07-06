@@ -252,12 +252,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             this.SearchableSnippetTopicSection.Syntax = Syntax;
         }
 
-        private ToolStripButton CreateButton()
-        {
-            ToolStripButton btn = new ToolStripButton();
-            btn.Alignment = ToolStripItemAlignment.Right;
-            btn.Text = "Test";
-            return btn;
-        }
+        //private ToolStripButton CreateButton()
+        //{
+        //    ToolStripButton btn = new ToolStripButton();
+        //    btn.Alignment = ToolStripItemAlignment.Right;
+        //    btn.Text = "Test";
+        //    return btn;
+        //}
     }
 }

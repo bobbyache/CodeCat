@@ -57,14 +57,15 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAddImage = new System.Windows.Forms.ToolStripMenuItem();
             this.btnImageSet = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSearchableSnippetList = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRemoveCodeItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.tabControlFile = new System.Windows.Forms.TabControl();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSearchableSnippetList = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSearchableEventDiary = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -226,7 +227,8 @@
             this.btnAddImage,
             this.btnImageSet,
             this.toolStripMenuItem3,
-            this.btnSearchableSnippetList});
+            this.btnSearchableSnippetList,
+            this.btnSearchableEventDiary});
             this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
             this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddItem.Name = "btnAddItem";
@@ -291,6 +293,17 @@
             this.btnImageSet.Size = new System.Drawing.Size(215, 22);
             this.btnImageSet.Text = "Image Set View";
             // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(212, 6);
+            // 
+            // btnSearchableSnippetList
+            // 
+            this.btnSearchableSnippetList.Name = "btnSearchableSnippetList";
+            this.btnSearchableSnippetList.Size = new System.Drawing.Size(215, 22);
+            this.btnSearchableSnippetList.Text = "Searchable Snippet List";
+            // 
             // btnRemoveCodeItem
             // 
             this.btnRemoveCodeItem.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveCodeItem.Image")));
@@ -342,16 +355,11 @@
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
             // 
-            // toolStripMenuItem3
+            // btnSearchableEventDiary
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(212, 6);
-            // 
-            // btnSearchableSnippetList
-            // 
-            this.btnSearchableSnippetList.Name = "btnSearchableSnippetList";
-            this.btnSearchableSnippetList.Size = new System.Drawing.Size(215, 22);
-            this.btnSearchableSnippetList.Text = "Searchable Snippet List";
+            this.btnSearchableEventDiary.Name = "btnSearchableEventDiary";
+            this.btnSearchableEventDiary.Size = new System.Drawing.Size(215, 22);
+            this.btnSearchableEventDiary.Text = "Searchable Event Diary";
             // 
             // TopicDocumentForm
             // 
@@ -413,5 +421,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnAddVersionedCode;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem btnSearchableSnippetList;
+        private System.Windows.Forms.ToolStripMenuItem btnSearchableEventDiary;
     }
 }

@@ -19,6 +19,7 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
         public const string WEB_REFERENCES_TOPIC_SECTION = "URLGROUP";
         public const string FILE_ATTACHMENTS_TOPIC_SECTION = "FILEGROUP";
         public const string SEARCHABLE_SNIPPET_TOPIC_SECTION = "SEARCHABLESNIPPET";
+        public const string SEARCHABLE_EVENT_TOPIC_SECTION = "SEARCHABLEEVENT";
 
         public static TopicSectionType GetDocumentType(string documentType)
         {
@@ -29,6 +30,9 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
 
                 case SEARCHABLE_SNIPPET_TOPIC_SECTION:
                     return TopicSectionType.SearchableSnippet;
+
+                case SEARCHABLE_EVENT_TOPIC_SECTION:
+                    return TopicSectionType.SearchableEvent;
 
                 case VERSIONED_CODE_TOPIC_SECTION:
                     return TopicSectionType.VersionedCode;
@@ -71,6 +75,9 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
 
                 case TopicSectionType.SearchableSnippet:
                     return SEARCHABLE_SNIPPET_TOPIC_SECTION;
+
+                case TopicSectionType.SearchableEvent:
+                    return SEARCHABLE_EVENT_TOPIC_SECTION;
 
                 case TopicSectionType.QikScript:
                     return QIK_SCRIPT_TOPIC_SECTION;

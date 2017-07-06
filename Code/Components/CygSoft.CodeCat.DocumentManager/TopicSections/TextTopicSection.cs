@@ -11,12 +11,12 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
         public string Text { get; set; }
 
         // Only create these documents internally.
-        internal TextTopicSection(string folder, string title, string extension) : base(new DocumentPathGenerator(folder, extension), title, null)
+        public TextTopicSection(string folder, string title, string extension) : base(new DocumentPathGenerator(folder, extension), title, null)
         {
             this.Text = null;
         }
 
-        internal TextTopicSection(string folder, string id, string title, string extension, int ordinal, string description)
+        public TextTopicSection(string folder, string id, string title, string extension, int ordinal, string description)
             : base(new DocumentPathGenerator(folder, extension, id), title, description, ordinal)
         {
             this.Text = null;

@@ -11,6 +11,7 @@
         ImagePager,
         RtfEditor,
         FileAttachments,
-        SearchableSnippet
+        SearchableSnippet,
+        SearchableEvent
     }
 }

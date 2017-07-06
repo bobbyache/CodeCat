@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.DocumentManager.TopicSections;
 using CygSoft.CodeCat.Domain.TopicSections.FileAttachment;
 using CygSoft.CodeCat.Domain.TopicSections.ImagePager;
+using CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
 using CygSoft.CodeCat.Domain.TopicSections.VersionedCode;
 using CygSoft.CodeCat.Domain.TopicSections.WebReference;
@@ -32,6 +33,9 @@ namespace CygSoft.CodeCat.Domain.TopicSections
 
             if (topicSectionArgs.DocumentType == SectionTypes.SEARCHABLE_SNIPPET_TOPIC_SECTION)
                 return CreateSearchableSnippetTopicSection(topicSectionArgs);
+
+            if (topicSectionArgs.DocumentType == SectionTypes.SEARCHABLE_EVENT_TOPIC_SECTION)
+                return CreateSearchableEventTopicSection(topicSectionArgs);
 
             if (topicSectionArgs.DocumentType == SectionTypes.VERSIONED_CODE_TOPIC_SECTION)
                 return CreateVersionedCodeTopicSection(topicSectionArgs);
@@ -66,6 +70,14 @@ namespace CygSoft.CodeCat.Domain.TopicSections
                 return new SearchableSnippetTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Syntax);
             else
                 return new SearchableSnippetTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description, topicSectionArgs.Syntax);
+        }
+
+        private static ITopicSection CreateSearchableEventTopicSection(TopicSectionArgs topicSectionArgs)
+        {
+            if (topicSectionArgs.Id == null)
+                return new SearchableEventTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension);
+            else
+                return new SearchableEventTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description);
         }
 
         private static ITopicSection CreateVersionedCodeTopicSection(TopicSectionArgs topicSectionArgs)
