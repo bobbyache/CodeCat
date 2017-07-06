@@ -17,8 +17,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     public partial class SearchableEventTopicSectionControl : BaseTopicSectionControl
     {
-        private ListViewSorter listViewSorter;
-
         private ToolStripButton btnEdit;
         private ToolStripButton btnAdd;
         private ToolStripButton btnDelete;
@@ -43,9 +41,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 return;
 
             richTextBox.ReadOnly = true;
+
+            listView.HeaderStyle = ColumnHeaderStyle.None;
             listView.SmallImageList = IconRepository.ImageList;
-            listViewSorter = new ListViewSorter(this.listView);
-            listView.Sorting = SortOrder.Ascending;
+            listView.Sorting = SortOrder.Descending;
 
             btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
             btnFind.Click += (s, e) => ReloadListview();
@@ -64,7 +63,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             mnuNew.Click += (s, e) => Add();
 
             listView.MouseUp += listView_MouseUp;
-            listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
             listView.SelectedIndexChanged += (s, e) => DisplayRtf();
 
             Reverted += Base_Reverted;
@@ -141,12 +139,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void ReloadListview()
         {
-            string[] categories = new string[] { }; // SearchableEventTopicSection.Categories;
+            string[] categories = SearchableEventTopicSection.Categories;
             Gui.GroupedListView.LoadAllItems(this.listView, SearchableEventTopicSection.Find(keywordsTextBox.Text),
                 categories, this.CreateListviewItem);
 
             keywordsTextBox.ResetList(SearchableEventTopicSection.Keywords);
-            listViewSorter.Sort(0, listViewSorter.SortingOrder);
         }
 
         private ListViewItem CreateListviewItem(ListView listView, ISearchableEventKeywordIndexItem item, bool select)

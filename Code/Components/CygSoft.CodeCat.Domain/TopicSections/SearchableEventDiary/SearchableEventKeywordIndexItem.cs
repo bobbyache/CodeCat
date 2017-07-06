@@ -19,25 +19,26 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary
     {
         public string Text { get; set; }
 
-        public string Category { get; set; }
+        public string Category
+        {
+            get { return EventDateGrouper.GetGroup(DateTime.Now, this.DateCreated); }
+            set { throw new InvalidOperationException("Cannot set the category for a diary event."); }
+        }
 
         public SearchableEventKeywordIndexItem()
         {
             Text = string.Empty;
-            Category = string.Empty;
         }
 
         public override void Deserialize(XElement element)
         {
             base.Deserialize(element);
-            Category = (string)element.Attribute("Category");
             Text = (string)element.Element("Text");
         }
 
         public override XElement Serialize()
         {
             XElement element = base.Serialize();
-            element.Add(new XAttribute("Category", Category));
             element.Add(new XElement("Text", new XCData(Text)));
             return element;
         }

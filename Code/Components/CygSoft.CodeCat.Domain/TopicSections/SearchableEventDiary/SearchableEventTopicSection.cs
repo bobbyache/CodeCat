@@ -14,6 +14,8 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary
         ISearchableEventKeywordIndexItem[] Find(string commaDelimitedKeywordList);
         ISearchableEventKeywordIndexItem NewEvent(string title);
         string[] Keywords { get; }
+        string[] Categories { get; }
+
         void AddEvent(ISearchableEventKeywordIndexItem diaryEvent);
         void UpdateEvent(ISearchableEventKeywordIndexItem diaryEvent);
         void DeleteEvent(string id);
@@ -55,6 +57,8 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary
         {
             return new Version(1, 0);
         }
+
+        public string[] Categories { get { return EventDateGrouper.Groups; } }
 
         public string[] Keywords
         {
@@ -99,9 +103,9 @@ namespace CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary
                 return new SearchableEventKeywordIndexItem[0];
 
             if (commaDelimitedKeywordList.Trim() == string.Empty)
-                return searchIndex.All().OfType<ISearchableEventKeywordIndexItem>().ToArray();
+                return searchIndex.All().OfType<ISearchableEventKeywordIndexItem>().OrderByDescending(k => k.DateCreated).ToArray();
             else
-                return searchIndex.Find(commaDelimitedKeywordList).OfType<ISearchableEventKeywordIndexItem>().ToArray();
+                return searchIndex.Find(commaDelimitedKeywordList).OfType<ISearchableEventKeywordIndexItem>().OrderByDescending(k => k.DateCreated).ToArray();
         }
     }
 }

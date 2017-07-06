@@ -34,8 +34,8 @@
             this.splitter = new System.Windows.Forms.SplitContainer();
             this.lstAutoComplete = new System.Windows.Forms.ListBox();
             this.listView = new System.Windows.Forms.ListView();
+            this.colDateCreated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colSyntax = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuCopyCode = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,8 +106,8 @@
             // listView
             // 
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colTitle,
-            this.colSyntax});
+            this.colDateCreated,
+            this.colTitle});
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
@@ -118,15 +118,15 @@
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             // 
+            // colDateCreated
+            // 
+            this.colDateCreated.Text = "Created";
+            this.colDateCreated.Width = 175;
+            // 
             // colTitle
             // 
             this.colTitle.Text = "Title";
-            this.colTitle.Width = 175;
-            // 
-            // colSyntax
-            // 
-            this.colSyntax.Text = "Syntax";
-            this.colSyntax.Width = 592;
+            this.colTitle.Width = 618;
             // 
             // richTextBox
             // 
@@ -229,8 +229,8 @@
         private System.Windows.Forms.SplitContainer splitter;
         private System.Windows.Forms.ListBox lstAutoComplete;
         private System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.ColumnHeader colDateCreated;
         private System.Windows.Forms.ColumnHeader colTitle;
-        private System.Windows.Forms.ColumnHeader colSyntax;
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuCopyCode;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
