@@ -44,7 +44,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 topicSectionControl = new PdfDocumentControl(application, topicDocument as ITopicDocument, topicSection as IPdfViewerTopicSection);
 
             else if (topicSection is ISingleImageTopicSection)
-                topicSectionControl = new SingleImageTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as ISingleImageTopicSection);
+                topicSectionControl = new ImageControl(application, topicDocument as ITopicDocument, topicSection as ISingleImageTopicSection);
+                //TODO: Must replace the current "ImageControl" (you've currently commented out the code for BaseImageTopicSectionControl and SingleImageTopicSectionControl).
+                //topicSectionControl = new SingleImageTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as ISingleImageTopicSection);
 
             else if (topicSection is IImagePagerTopicSection)
                 topicSectionControl = new ImageSetControl(application, topicDocument as ITopicDocument, topicSection as IImagePagerTopicSection);
