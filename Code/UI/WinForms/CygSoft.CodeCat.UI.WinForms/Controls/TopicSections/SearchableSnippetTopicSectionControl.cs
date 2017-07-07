@@ -138,6 +138,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 SearchableSnippetTopicSection.AddSnippet(dialog.CodeSnippet);
                 ReloadListview();
                 Modify();
+                Gui.GroupedListView.Select(listView, dialog.CodeSnippet.Id);
             }
         }
 
@@ -156,6 +157,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                     SearchableSnippetTopicSection.UpdateSnippet(selectedItem);
                     ReloadListview();
                     Modify();
+                    Gui.GroupedListView.Select(listView, dialog.CodeSnippet.Id);
                 }
             }
         }

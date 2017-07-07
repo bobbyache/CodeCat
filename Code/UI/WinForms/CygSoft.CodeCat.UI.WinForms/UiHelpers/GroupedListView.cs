@@ -77,6 +77,23 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
                 return items;
             }
 
+            public static void Select(ListView listView, string itemKey)
+            {
+                if (listView.Items.Count >= 1)
+                {
+                    listView.SelectedItems.Clear();
+
+                    //var items = listView.Items.Find(itemKey, false);
+                    var item = listView.Items[itemKey];
+                    if (item != null)
+                    {
+                        item.Selected = true;
+                        item.Focused = true;
+                        item.EnsureVisible();
+                    }
+                }
+            }
+
             //public static void RemoveItems(ListView listView)
             //{
             //    listView.Items.Cast<ListViewItem>().Where(l => l.Selected)
@@ -94,6 +111,19 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
                 {
                     ListViewItem listItem = create(listView, item, false);
                     GroupedListView.GroupItem(listView, listItem, item);
+                }
+
+                if (listView.Items.Count >= 1)
+                {
+                    listView.SelectedItems.Clear();
+
+                    var lv = listView.Items[0];
+                    if (lv != null)
+                    {
+                        lv.Selected = true;
+                        lv.Focused = true;
+                        lv.EnsureVisible();
+                    }
                 }
             }
         }

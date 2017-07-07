@@ -42,7 +42,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
             richTextBox.ReadOnly = true;
 
-            listView.HeaderStyle = ColumnHeaderStyle.None;
+            listView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listView.SmallImageList = IconRepository.ImageList;
             listView.Sorting = SortOrder.Descending;
 
@@ -107,6 +107,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 SearchableEventTopicSection.AddEvent(dialog.DiaryEvent);
                 ReloadListview();
                 Modify();
+                Gui.GroupedListView.Select(listView, dialog.DiaryEvent.Id);
             }
         }
 
@@ -124,6 +125,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                     SearchableEventTopicSection.UpdateEvent(selectedItem);
                     ReloadListview();
                     Modify();
+                    Gui.GroupedListView.Select(listView, dialog.DiaryEvent.Id);
                 }
             }
         }
