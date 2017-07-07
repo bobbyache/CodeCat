@@ -66,11 +66,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
                 return false;
             }
 
-            if (rtfEditorControl.Text.Trim() == "")
-            {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "Text");
-                return false;
-            }
+            //if (rtfEditorControl.Text.Trim() == "")
+            //{
+            //    Gui.Dialogs.NoInputValueForMandatoryField(this, "Text");
+            //    return false;
+            //}
 
             return true;
         }
