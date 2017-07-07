@@ -122,6 +122,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void Add()
         {
+            if (!this.FileExists)
+            {
+                Gui.Dialogs.MustSaveGroupBeforeAction(this);
+                return;
+            }
+
             ISearchableSnippetKeywordIndexItem newItem = SearchableSnippetTopicSection.NewSnippet(string.Empty);
             SearchableSnippetEditDialog dialog = new SearchableSnippetEditDialog(application, newItem, 
                 SearchableSnippetTopicSection.Categories);
@@ -156,7 +162,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void Delete()
         {
-            if (Gui.GroupedListView.ItemsSelected< ISearchableSnippetKeywordIndexItem>(listView))
+            if (Gui.GroupedListView.ItemsSelected<ISearchableSnippetKeywordIndexItem>(listView))
             {
                 DialogResult result = Gui.Dialogs.DeleteMultipleItemsDialog(this, "snippets");
 

@@ -92,6 +92,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void Add()
         {
+            if (!this.FileExists)
+            {
+                Gui.Dialogs.MustSaveGroupBeforeAction(this);
+                return;
+            }
+
             ISearchableEventKeywordIndexItem newItem = SearchableEventTopicSection.NewEvent(string.Empty);
             SearchableEventEditDialog dialog = new SearchableEventEditDialog(application, newItem);
             DialogResult result = dialog.ShowDialog(this);
