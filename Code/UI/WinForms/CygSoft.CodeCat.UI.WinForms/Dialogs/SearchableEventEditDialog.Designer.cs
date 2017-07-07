@@ -42,7 +42,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(539, 456);
+            this.btnCancel.Location = new System.Drawing.Point(539, 454);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 5;
@@ -53,7 +53,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(620, 456);
+            this.btnOk.Location = new System.Drawing.Point(620, 454);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 6;
@@ -70,13 +70,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.txtKeywords.Multiline = true;
             this.txtKeywords.Name = "txtKeywords";
             this.txtKeywords.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtKeywords.Size = new System.Drawing.Size(641, 51);
+            this.txtKeywords.Size = new System.Drawing.Size(632, 51);
             this.txtKeywords.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 38);
+            this.label1.Location = new System.Drawing.Point(7, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 6;
@@ -88,7 +88,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTitle.Location = new System.Drawing.Point(63, 12);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(641, 20);
+            this.txtTitle.Size = new System.Drawing.Size(632, 20);
             this.txtTitle.TabIndex = 0;
             // 
             // label2
@@ -105,9 +105,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.rtfEditorControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtfEditorControl.Location = new System.Drawing.Point(7, 95);
+            this.rtfEditorControl.Location = new System.Drawing.Point(10, 95);
             this.rtfEditorControl.Name = "rtfEditorControl";
-            this.rtfEditorControl.Size = new System.Drawing.Size(697, 355);
+            this.rtfEditorControl.Size = new System.Drawing.Size(685, 355);
             this.rtfEditorControl.TabIndex = 9;
             this.rtfEditorControl.TextRtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang7177{\\fonttbl{\\f0\\fnil\\fcharset0 Microsoft S" +
     "ans Serif;}}\r\n\\viewkind4\\uc1\\pard\\f0\\fs17\\par\r\n}\r\n";

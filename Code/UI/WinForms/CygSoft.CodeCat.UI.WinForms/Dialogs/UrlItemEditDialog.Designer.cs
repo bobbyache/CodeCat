@@ -44,7 +44,7 @@
             // 
             this.txtTitle.Location = new System.Drawing.Point(110, 12);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(548, 20);
+            this.txtTitle.Size = new System.Drawing.Size(546, 20);
             this.txtTitle.TabIndex = 0;
             // 
             // label1
@@ -69,7 +69,7 @@
             // 
             this.txtUrl.Location = new System.Drawing.Point(110, 38);
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(548, 20);
+            this.txtUrl.Size = new System.Drawing.Size(546, 20);
             this.txtUrl.TabIndex = 2;
             // 
             // label3
@@ -85,12 +85,12 @@
             // 
             this.txtDescription.Location = new System.Drawing.Point(110, 64);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(548, 20);
+            this.txtDescription.Size = new System.Drawing.Size(546, 20);
             this.txtDescription.TabIndex = 4;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(583, 118);
+            this.btnOk.Location = new System.Drawing.Point(581, 118);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 6;
@@ -100,7 +100,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(502, 118);
+            this.btnCancel.Location = new System.Drawing.Point(500, 118);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;

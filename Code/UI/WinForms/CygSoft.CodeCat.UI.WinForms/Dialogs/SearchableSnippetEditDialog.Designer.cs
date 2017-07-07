@@ -42,12 +42,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.label3 = new System.Windows.Forms.Label();
             this.cboCategory = new System.Windows.Forms.ComboBox();
             this.cboSyntax = new CygSoft.CodeCat.UI.WinForms.Controls.SyntaxComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(471, 427);
+            this.btnCancel.Location = new System.Drawing.Point(471, 426);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 5;
@@ -58,7 +59,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(552, 427);
+            this.btnOk.Location = new System.Drawing.Point(552, 426);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 6;
@@ -75,13 +76,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.txtKeywords.Multiline = true;
             this.txtKeywords.Name = "txtKeywords";
             this.txtKeywords.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtKeywords.Size = new System.Drawing.Size(573, 51);
+            this.txtKeywords.Size = new System.Drawing.Size(564, 51);
             this.txtKeywords.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 38);
+            this.label1.Location = new System.Drawing.Point(7, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 6;
@@ -93,7 +94,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTitle.Location = new System.Drawing.Point(63, 12);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(573, 20);
+            this.txtTitle.Size = new System.Drawing.Size(564, 20);
             this.txtTitle.TabIndex = 0;
             // 
             // label2
@@ -124,11 +125,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.syntaxBox.InfoTipPosition = null;
             this.syntaxBox.InfoTipSelectedIndex = 1;
             this.syntaxBox.InfoTipVisible = false;
-            this.syntaxBox.Location = new System.Drawing.Point(8, 120);
+            this.syntaxBox.Location = new System.Drawing.Point(10, 120);
             this.syntaxBox.LockCursorUpdate = false;
             this.syntaxBox.Name = "syntaxBox";
             this.syntaxBox.ShowScopeIndicator = false;
-            this.syntaxBox.Size = new System.Drawing.Size(628, 301);
+            this.syntaxBox.Size = new System.Drawing.Size(617, 301);
             this.syntaxBox.SmoothScroll = false;
             this.syntaxBox.SplitviewH = -4;
             this.syntaxBox.SplitviewV = -4;
@@ -166,17 +167,28 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             // 
             this.cboSyntax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboSyntax.FormattingEnabled = true;
-            this.cboSyntax.Location = new System.Drawing.Point(515, 94);
+            this.cboSyntax.Location = new System.Drawing.Point(506, 94);
             this.cboSyntax.Name = "cboSyntax";
             this.cboSyntax.Size = new System.Drawing.Size(121, 21);
             this.cboSyntax.Syntax = null;
             this.cboSyntax.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(461, 97);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Syntax";
             // 
             // SearchableSnippetEditDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(639, 453);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.cboCategory);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cboSyntax);
@@ -210,5 +222,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         private SyntaxComboBox cboSyntax;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboCategory;
+        private System.Windows.Forms.Label label4;
     }
 }

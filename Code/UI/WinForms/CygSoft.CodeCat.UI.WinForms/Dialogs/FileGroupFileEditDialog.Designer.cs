@@ -53,10 +53,9 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(692, 231);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Location = new System.Drawing.Point(514, 188);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 28);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 17;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -65,10 +64,9 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(800, 231);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOk.Location = new System.Drawing.Point(595, 188);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(100, 28);
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 16;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -81,21 +79,18 @@
             this.groupBox1.Controls.Add(this.btnBrowse);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtFilePath);
-            this.groupBox1.Location = new System.Drawing.Point(8, 2);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(12, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(892, 59);
+            this.groupBox1.Size = new System.Drawing.Size(658, 48);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             // 
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.Location = new System.Drawing.Point(816, 18);
-            this.btnBrowse.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBrowse.Location = new System.Drawing.Point(601, 15);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(57, 28);
+            this.btnBrowse.Size = new System.Drawing.Size(43, 23);
             this.btnBrowse.TabIndex = 23;
             this.btnBrowse.Text = "...";
             this.btnBrowse.UseVisualStyleBackColor = true;
@@ -104,10 +99,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 23);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(13, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 17);
+            this.label2.Size = new System.Drawing.Size(48, 13);
             this.label2.TabIndex = 22;
             this.label2.Text = "File Path";
             // 
@@ -115,10 +109,9 @@
             // 
             this.txtFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFilePath.Location = new System.Drawing.Point(147, 22);
-            this.txtFilePath.Margin = new System.Windows.Forms.Padding(4);
+            this.txtFilePath.Location = new System.Drawing.Point(110, 18);
             this.txtFilePath.Name = "txtFilePath";
-            this.txtFilePath.Size = new System.Drawing.Size(660, 22);
+            this.txtFilePath.Size = new System.Drawing.Size(485, 20);
             this.txtFilePath.TabIndex = 21;
             // 
             // groupBox2
@@ -137,11 +130,9 @@
             this.groupBox2.Controls.Add(this.txtDescription);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.txtTitle);
-            this.groupBox2.Location = new System.Drawing.Point(8, 64);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Location = new System.Drawing.Point(12, 52);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(892, 160);
+            this.groupBox2.Size = new System.Drawing.Size(658, 130);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             // 
@@ -149,10 +140,11 @@
             // 
             this.chkAllowOpenOrExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkAllowOpenOrExecute.AutoSize = true;
-            this.chkAllowOpenOrExecute.Location = new System.Drawing.Point(701, 124);
+            this.chkAllowOpenOrExecute.Location = new System.Drawing.Point(509, 101);
+            this.chkAllowOpenOrExecute.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkAllowOpenOrExecute.Name = "chkAllowOpenOrExecute";
             this.chkAllowOpenOrExecute.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkAllowOpenOrExecute.Size = new System.Drawing.Size(172, 21);
+            this.chkAllowOpenOrExecute.Size = new System.Drawing.Size(134, 17);
             this.chkAllowOpenOrExecute.TabIndex = 33;
             this.chkAllowOpenOrExecute.Text = "Allow Open or Execute";
             this.chkAllowOpenOrExecute.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -161,10 +153,9 @@
             // btnUpdateFileName
             // 
             this.btnUpdateFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdateFileName.Location = new System.Drawing.Point(708, 54);
-            this.btnUpdateFileName.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdateFileName.Location = new System.Drawing.Point(520, 44);
             this.btnUpdateFileName.Name = "btnUpdateFileName";
-            this.btnUpdateFileName.Size = new System.Drawing.Size(168, 28);
+            this.btnUpdateFileName.Size = new System.Drawing.Size(126, 23);
             this.btnUpdateFileName.TabIndex = 32;
             this.btnUpdateFileName.Text = "Update from Path";
             this.btnUpdateFileName.UseVisualStyleBackColor = true;
@@ -174,10 +165,9 @@
             // 
             this.lblExtension.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblExtension.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExtension.Location = new System.Drawing.Point(644, 57);
-            this.lblExtension.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblExtension.Location = new System.Drawing.Point(472, 46);
             this.lblExtension.Name = "lblExtension";
-            this.lblExtension.Size = new System.Drawing.Size(68, 23);
+            this.lblExtension.Size = new System.Drawing.Size(51, 19);
             this.lblExtension.TabIndex = 31;
             this.lblExtension.Text = ".html";
             this.lblExtension.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -185,10 +175,9 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 64);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(12, 52);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 17);
+            this.label5.Size = new System.Drawing.Size(54, 13);
             this.label5.TabIndex = 30;
             this.label5.Text = "File Name";
             // 
@@ -196,19 +185,17 @@
             // 
             this.txtFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFileName.Location = new System.Drawing.Point(145, 57);
-            this.txtFileName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtFileName.Location = new System.Drawing.Point(109, 46);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(488, 22);
+            this.txtFileName.Size = new System.Drawing.Size(356, 20);
             this.txtFileName.TabIndex = 29;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 124);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(12, 101);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 17);
+            this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 28;
             this.label4.Text = "Category";
             // 
@@ -217,19 +204,17 @@
             this.cboCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboCategory.FormattingEnabled = true;
-            this.cboCategory.Location = new System.Drawing.Point(145, 121);
-            this.cboCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.cboCategory.Location = new System.Drawing.Point(109, 98);
             this.cboCategory.Name = "cboCategory";
-            this.cboCategory.Size = new System.Drawing.Size(324, 24);
+            this.cboCategory.Size = new System.Drawing.Size(233, 21);
             this.cboCategory.TabIndex = 27;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 96);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(12, 78);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 17);
+            this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 26;
             this.label3.Text = "Description";
             // 
@@ -237,19 +222,17 @@
             // 
             this.txtDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDescription.Location = new System.Drawing.Point(145, 89);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDescription.Location = new System.Drawing.Point(109, 72);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(729, 22);
+            this.txtDescription.Size = new System.Drawing.Size(537, 20);
             this.txtDescription.TabIndex = 25;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 31);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(12, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 17);
+            this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 24;
             this.label1.Text = "Title";
             // 
@@ -257,23 +240,21 @@
             // 
             this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTitle.Location = new System.Drawing.Point(145, 23);
-            this.txtTitle.Margin = new System.Windows.Forms.Padding(4);
+            this.txtTitle.Location = new System.Drawing.Point(109, 19);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(729, 22);
+            this.txtTitle.Size = new System.Drawing.Size(537, 20);
             this.txtTitle.TabIndex = 23;
             // 
             // FileGroupFileEditDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(910, 264);
+            this.ClientSize = new System.Drawing.Size(682, 214);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FileGroupFileEditDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit File";
