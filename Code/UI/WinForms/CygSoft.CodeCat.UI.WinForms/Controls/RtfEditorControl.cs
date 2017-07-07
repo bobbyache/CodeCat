@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using System.Drawing.Text;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -13,481 +14,94 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             InitializeComponent();
 
-            ctxmnuBold.Image = tbrBold.Image;
-            ctxmnuItalic.Image = tbrItalic.Image;
-            ctxmnuUnderline.Image = tbrUnderline.Image;
+            richTextBox.Font = new Font("Calibri", 12);
+
+            ctxmnuBold.Image = btnBold.Image;
+            ctxmnuItalic.Image = btnItalic.Image;
+            ctxmnuUnderline.Image = btnUnderline.Image;
             ctxmnuAlignLeft.Image = tbrLeft.Image;
             ctxmnuAlignRight.Image = tbrRight.Image;
             ctxmnuAlignCenter.Image = tbrCenter.Image;
-            ctxmnuFont.Image = tbrFont.Image;
+            ctxmnuFont.Image = btnFormat.Image;
             ctxmnuFontColor.Image = tspColor.Image;
 
-            SelectFontToolStripMenuItem.Image = tbrFont.Image;
-            FontColorToolStripMenuItem.Image = tspColor.Image;
-            BoldToolStripMenuItem.Image = tbrBold.Image;
-            ItalicToolStripMenuItem.Image = tbrItalic.Image;
-            UnderlineToolStripMenuItem.Image = tbrUnderline.Image;
-            LeftToolStripMenuItem.Image = tbrLeft.Image;
-            CenterToolStripMenuItem.Image = tbrCenter.Image;
-            RightToolStripMenuItem.Image = tbrRight.Image;
+            mnuFont.Image = btnFormat.Image;
+            mnuFontColor.Image = tspColor.Image;
+            mnuBold.Image = btnBold.Image;
+            mnuItalic.Image = btnItalic.Image;
+            mnuUnderline.Image = btnUnderline.Image;
+            mnuAlignLeft.Image = tbrLeft.Image;
+            mnuAlignCenter.Image = tbrCenter.Image;
+            mnuAlignRight.Image = tbrRight.Image;
 
-            
-            rtbDoc.SetInnerMargins(24, 24, 24, 24);
+            richTextBox.SetInnerMargins(24, 24, 24, 24);
+
+            mnuCopy.Click += (s, e) => CopySelection();
+            mnuCut.Click += (s, e) => CutSelection();
+            mnuPaste.Click += (s, e) => PasteSelection();
+            mnuFont.Click += (s, e) => FormatFont();
+            mnuItalic.Click += (s, e) => Italic();
+
+            mnuUnderline.Click += (s, e) => Underline();
+            mnuNormal.Click += (s, e) => FormatFontToNormal();
+            mnuPageColor.Click += (s, e) => SetPageColour();
+
+            mnuSelectAll.Click += (s, e) => SelectAll();
+
+            mnuIndent0.Click += (s, e) => richTextBox.SelectionIndent = 0;
+            mnuIndent5.Click += (s, e) => richTextBox.SelectionIndent = 5;
+            mnuIndent10.Click += (s, e) => richTextBox.SelectionIndent = 10;
+            mnuIndent15.Click += (s, e) => richTextBox.SelectionIndent = 15;
+            mnuIndent20.Click += (s, e) => richTextBox.SelectionIndent = 20;
+
+            mnuAlignLeft.Click += (s, e) => AlignLeft();
+            mnuAlignCenter.Click += (s, e) => AlignCenter();
+            mnuAlignRight.Click += (s, e) => AlignRight();
+
+            mnuAddBullets.Click += (s, e) => AddBullets();
+            mnuRemoveBullets.Click += (s, e) => richTextBox.SelectionBullet = false;
+
+            //FindToolStripMenuItem.Click 
+            //FindAndReplaceToolStripMenuItem.Click += (s, e) =>
+
+            mnuFontColor.Click += (s, e) => FormatToFontColor();
+            mnuBold.Click += (s, e) => Bold();
+            mnuUndo.Click += (s, e) => Undo();
+            mnuRedo.Click += (s, e) => Redo();
+
+            btnBold.Click += (s, e) => Bold();
+            btnItalic.Click += (s, e) => Italic();
+            btnUnderline.Click += (s, e) => Underline();
+            btnFormat.Click += (s, e) => FormatFont();
+
+
+            tbrLeft.Click += (s, e) => AlignLeft();
+            tbrCenter.Click += (s, e) => AlignCenter();
+            tbrRight.Click += (s, e) => AlignRight();
+
+            ctxmnuAlignLeft.Click += (s, e) => AlignLeft();
+            ctxmnuAlignCenter.Click += (s, e) => AlignCenter();
+            ctxmnuAlignRight.Click += (s, e) => AlignRight();
+
+            tspColor.Click += (s, e) => FormatToFontColor();
+
+            richTextBox.TextChanged += (s, e) => ContentChanged?.Invoke(this, new EventArgs());
+
+            ctxmnuCut.Click += (s, e) => CutSelection();
+            ctxmnuCopy.Click += (s, e) => CopySelection();
+            ctxmnuPaste.Click += (s, e) => PasteSelection();
+            ctxmnuSelectAll.Click += (s, e) => SelectAll();
+            ctxmnuFontColor.Click += (s, e) => FormatToFontColor();
+
+            ctxmnuBold.Click += (s, e) => Bold();
+            ctxmnuFont.Click += (s, e) => FormatFont();
+            ctxmnuItalic.Click += (s, e) => Italic();
+            ctxmnuUnderline.Click += (s, e) => Underline();
+
+            mnuInsertImage.Click += (s, e) => InsertImage();
         }
 
-        public void OpenFile(string filePath)
-        {
-            try
-            {
-                rtbDoc.LoadFile(filePath, RichTextBoxStreamType.RichText);
-                rtbDoc.SelectionStart = 0;
-                rtbDoc.SelectionLength = 0;
-                rtbDoc.Modified = false;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public void Save(string filePath)
-        {
-            try
-            {
-                rtbDoc.SaveFile(filePath);
-                rtbDoc.Modified = false;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public override string Text
-        {
-            get { return rtbDoc.Text; }
-            set { rtbDoc.Text = value; }
-        }
-
-        public string TextRtf
-        {
-            get { return rtbDoc.Rtf; }
-            set { rtbDoc.Rtf = value; }
-        }
-
-        public bool Modified { get { return rtbDoc.Modified; } }
-
-        private void SelectAll()
-        {
-            try
-            {
-                rtbDoc.SelectAll();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SelectAll();
-        }
-
-        private void CopySelection()
-        {
-            try
-            {
-                rtbDoc.Copy();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void CutSelection()
-        {
-            try
-            {
-                rtbDoc.Cut();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void PasteSelection()
-        {
-            try
-            {
-                rtbDoc.Paste();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CopySelection();
-        }
-
-        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CutSelection();
-        }
-
-        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PasteSelection();
-        }
-
-        private void SelectFontToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormatToFont();
-        }
-
-        private void FormatToFont()
-        {
-            try
-            {
-                if (!(rtbDoc.SelectionFont == null))
-                {
-                    FontDialog1.Font = rtbDoc.SelectionFont;
-                }
-                else
-                {
-                    FontDialog1.Font = null;
-                }
-                FontDialog1.ShowApply = true;
-                if (FontDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    rtbDoc.SelectionFont = FontDialog1.Font;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void FormatToFontColor()
-        {
-            try
-            {
-                ColorDialog1.Color = rtbDoc.ForeColor;
-                if (ColorDialog1.ShowDialog() == DialogResult.OK)
-                    rtbDoc.SelectionColor = ColorDialog1.Color;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void FontColorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormatToFontColor();
-        }
-
-        private void BoldToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormatToBold();
-        }
-
-        private void FormatToBold()
-        {
-            try
-            {
-                if (!(rtbDoc.SelectionFont == null))
-                {
-                    Font currentFont = rtbDoc.SelectionFont;
-                    FontStyle newFontStyle;
-                    newFontStyle = rtbDoc.SelectionFont.Style ^ FontStyle.Bold;
-                    rtbDoc.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void FormatToItalic()
-        {
-            try
-            {
-                if (!(rtbDoc.SelectionFont == null))
-                {
-                    Font currentFont = rtbDoc.SelectionFont;
-                    FontStyle newFontStyle;
-
-                    newFontStyle = rtbDoc.SelectionFont.Style ^ FontStyle.Italic;
-
-                    rtbDoc.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void FormatToUnderline()
-        {
-            try
-            {
-                if (!(rtbDoc.SelectionFont == null))
-                {
-                    Font currentFont = rtbDoc.SelectionFont;
-                    FontStyle newFontStyle;
-
-                    newFontStyle = rtbDoc.SelectionFont.Style ^ FontStyle.Underline;
-
-                    rtbDoc.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void ItalicToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormatToItalic();
-        }
-
-        private void UnderlineToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormatToUnderline();
-        }
-
-        private void NormalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!(rtbDoc.SelectionFont == null))
-                {
-                    Font currentFont = rtbDoc.SelectionFont;
-                    FontStyle newFontStyle;
-                    newFontStyle = FontStyle.Regular;
-                    rtbDoc.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void PageColorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ColorDialog1.Color = rtbDoc.BackColor;
-                if (ColorDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    rtbDoc.BackColor = ColorDialog1.Color;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void mnuUndo_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (rtbDoc.CanUndo)
-                {
-                    rtbDoc.Undo();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void mnuRedo_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (rtbDoc.CanRedo)
-                {
-                    rtbDoc.Redo();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void AlignLeft()
-        {
-            try
-            {
-                rtbDoc.SelectionAlignment = HorizontalAlignment.Left;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void AlignRight()
-        {
-            try
-            {
-                rtbDoc.SelectionAlignment = HorizontalAlignment.Right;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(), "Error");
-            }
-        }
-
-        private void AlignCenter()
-        {
-            try
-            {
-                rtbDoc.SelectionAlignment = HorizontalAlignment.Center;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void LeftToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            AlignLeft();
-        }
-
-        private void CenterToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            AlignCenter();
-        }
-
-        private void RightToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            AlignRight();
-        }
-
-        private void AddBulletsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                rtbDoc.BulletIndent = 10;
-                rtbDoc.SelectionBullet = true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void RemoveBulletsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                rtbDoc.SelectionBullet = false;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void mnuIndent0_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                rtbDoc.SelectionIndent = 0;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void mnuIndent5_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                rtbDoc.SelectionIndent = 5;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void mnuIndent10_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                rtbDoc.SelectionIndent = 10;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void mnuIndent15_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                rtbDoc.SelectionIndent = 15;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void mnuIndent20_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                rtbDoc.SelectionIndent = 20;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void FindToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void FindAndReplaceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void mnuPageSetup_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                PageSetupDialog1.Document = PrintDocument1;
-                PageSetupDialog1.ShowDialog();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void InsertImageToolStripMenuItem_Click(object sender, EventArgs e)
+        private void InsertImage()
         {
 
             OpenFileDialog1.Title = "RTE - Insert Image File";
@@ -509,9 +123,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                     Clipboard.SetDataObject(img);
                     DataFormats.Format df;
                     df = DataFormats.GetFormat(DataFormats.Bitmap);
-                    if (rtbDoc.CanPaste(df))
+                    if (richTextBox.CanPaste(df))
                     {
-                        rtbDoc.Paste(df);
+                        richTextBox.Paste(df);
                     }
                 }
                 catch (Exception)
@@ -521,150 +135,295 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void rtbDoc_SelectionChanged(object sender, EventArgs e)
+        private void Undo()
         {
-            if (rtbDoc.SelectionFont != null)
+            if (richTextBox.CanUndo)
             {
-                tbrBold.Checked = rtbDoc.SelectionFont.Bold;
-                tbrItalic.Checked = rtbDoc.SelectionFont.Italic;
-                tbrUnderline.Checked = rtbDoc.SelectionFont.Underline;
+                richTextBox.Undo();
             }
         }
 
-        private void tbrBold_Click(object sender, EventArgs e)
+        private void Redo()
         {
-            FormatToBold();
+            if (richTextBox.CanRedo)
+            {
+                richTextBox.Redo();
+            }
         }
 
-
-        private void tbrItalic_Click(object sender, EventArgs e)
+        private void AddBullets()
         {
-            FormatToItalic();
+            richTextBox.BulletIndent = 10;
+            richTextBox.SelectionBullet = true;
         }
 
-
-        private void tbrUnderline_Click(object sender, EventArgs e)
+        public void OpenFile(string filePath)
         {
-            FormatToUnderline();
+            try
+            {
+                richTextBox.LoadFile(filePath, RichTextBoxStreamType.RichText);
+                richTextBox.SelectionStart = 0;
+                richTextBox.SelectionLength = 0;
+                richTextBox.Modified = false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-
-        private void tbrFont_Click(object sender, EventArgs e)
+        public void Save(string filePath)
         {
-            FormatToFont();
+            try
+            {
+                richTextBox.SaveFile(filePath);
+                richTextBox.Modified = false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-
-        private void tbrLeft_Click(object sender, EventArgs e)
+        public override string Text
         {
-            AlignLeft();
+            get { return richTextBox.Text; }
+            set { richTextBox.Text = value; }
         }
 
-
-        private void tbrCenter_Click(object sender, EventArgs e)
+        public string TextRtf
         {
-            AlignCenter();
+            get { return richTextBox.Rtf; }
+            set { richTextBox.Rtf = value; }
         }
 
+        public bool Modified { get { return richTextBox.Modified; } }
 
-        private void tbrRight_Click(object sender, EventArgs e)
+        private void SelectAll()
         {
-            AlignRight();
+            try
+            {
+                richTextBox.SelectAll();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        private void tspColor_Click(object sender, EventArgs e)
+        private void CopySelection()
         {
-            FormatToFontColor();
+            try
+            {
+                richTextBox.Copy();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        private void rtbDoc_TextChanged(object sender, EventArgs e)
+        private void CutSelection()
         {
-            ContentChanged?.Invoke(this, new EventArgs());
+            try
+            {
+                richTextBox.Cut();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        private void rtbDoc_KeyDown(object sender, KeyEventArgs e)
+        private void PasteSelection()
+        {
+            try
+            {
+                richTextBox.Paste();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void FormatFont()
+        {
+            try
+            {
+                if (!(richTextBox.SelectionFont == null))
+                {
+                    FontDialog1.Font = richTextBox.SelectionFont;
+                }
+                else
+                {
+                    FontDialog1.Font = null;
+                }
+                FontDialog1.ShowApply = true;
+                if (FontDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBox.SelectionFont = FontDialog1.Font;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void FormatToFontColor()
+        {
+            try
+            {
+                ColorDialog1.Color = richTextBox.ForeColor;
+                if (ColorDialog1.ShowDialog() == DialogResult.OK)
+                    richTextBox.SelectionColor = ColorDialog1.Color;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void Bold()
+        {
+            try
+            {
+                if (!(richTextBox.SelectionFont == null))
+                {
+                    Font currentFont = richTextBox.SelectionFont;
+                    FontStyle newFontStyle;
+                    newFontStyle = richTextBox.SelectionFont.Style ^ FontStyle.Bold;
+                    richTextBox.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void Italic()
+        {
+            try
+            {
+                if (!(richTextBox.SelectionFont == null))
+                {
+                    Font currentFont = richTextBox.SelectionFont;
+                    FontStyle newFontStyle;
+
+                    newFontStyle = richTextBox.SelectionFont.Style ^ FontStyle.Italic;
+
+                    richTextBox.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void Underline()
+        {
+            try
+            {
+                if (!(richTextBox.SelectionFont == null))
+                {
+                    Font currentFont = richTextBox.SelectionFont;
+                    FontStyle newFontStyle;
+
+                    newFontStyle = richTextBox.SelectionFont.Style ^ FontStyle.Underline;
+
+                    richTextBox.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void AlignLeft()
+        {
+            try
+            {
+                richTextBox.SelectionAlignment = HorizontalAlignment.Left;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void AlignRight()
+        {
+            try
+            {
+                richTextBox.SelectionAlignment = HorizontalAlignment.Right;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error");
+            }
+        }
+
+        private void AlignCenter()
+        {
+            try
+            {
+                richTextBox.SelectionAlignment = HorizontalAlignment.Center;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void SetPageColour()
+        {
+            ColorDialog1.Color = richTextBox.BackColor;
+            if (ColorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox.BackColor = ColorDialog1.Color;
+            }
+        }
+
+        private void FormatFontToNormal()
+        {
+            if (!(richTextBox.SelectionFont == null))
+            {
+                Font currentFont = richTextBox.SelectionFont;
+                FontStyle newFontStyle;
+                newFontStyle = FontStyle.Regular;
+                richTextBox.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
+            }
+        }
+
+        private void richTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Modifiers == Keys.Control && e.KeyCode == Keys.I)
             {
-                FormatToItalic();
+                Italic();
                 e.SuppressKeyPress = true;
             }
             else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.B)
             {
-                FormatToBold();
+                Bold();
                 e.SuppressKeyPress = true;
             }
             else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.U)
             {
-                FormatToUnderline();
+                Underline();
                 e.SuppressKeyPress = true;
             }
         }
 
-        private void rtbDoc_MouseUp(object sender, MouseEventArgs e)
+        private void richTextBox_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
+            {
                 contextMenu.Show(Cursor.Position);
+            }
         }
-
-        private void ctxmnuAlignLeft_Click(object sender, EventArgs e)
-        {
-            AlignLeft();
-        }
-
-        private void ctxmnuAlignCenter_Click(object sender, EventArgs e)
-        {
-            AlignCenter();
-        }
-
-        private void ctxmnuAlignRight_Click(object sender, EventArgs e)
-        {
-            AlignRight();
-        }
-
-        private void ctxmnuCut_Click(object sender, EventArgs e)
-        {
-            CutSelection();
-        }
-
-        private void ctxmnuCopy_Click(object sender, EventArgs e)
-        {
-            CopySelection();
-        }
-
-        private void ctxmnuPaste_Click(object sender, EventArgs e)
-        {
-            PasteSelection();
-        }
-
-        private void ctxmnuSelectAll_Click(object sender, EventArgs e)
-        {
-            SelectAll();
-        }
-
-        private void ctxmnuFontColor_Click(object sender, EventArgs e)
-        {
-            FormatToFontColor();
-        }
-
-        private void ctxmnuFont_Click(object sender, EventArgs e)
-        {
-            FormatToFont();
-        }
-
-        private void ctxmnuBold_Click(object sender, EventArgs e)
-        {
-            FormatToBold();
-        }
-
-        private void ctxmnuItalic_Click(object sender, EventArgs e)
-        {
-            FormatToItalic();
-        }
-
-        private void ctxmnuUnderline_Click(object sender, EventArgs e)
-        {
-            FormatToUnderline();
-        }
-     }
+    }
 }
