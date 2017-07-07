@@ -31,43 +31,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             CenterToolStripMenuItem.Image = tbrCenter.Image;
             RightToolStripMenuItem.Image = tbrRight.Image;
 
-            FilePath = string.Empty;
+            
             rtbDoc.SetInnerMargins(24, 24, 24, 24);
         }
 
-        public string FilePath { get; private set; }
+        
         public bool Modified { get { return rtbDoc.Modified; } }
-
-        public void OpenFile(string filePath)
-        {
-            try
-            {
-                rtbDoc.LoadFile(filePath, RichTextBoxStreamType.RichText);
-                FilePath = filePath;
-                rtbDoc.SelectionStart = 0;
-                rtbDoc.SelectionLength = 0;
-                rtbDoc.Modified = false;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
-        public void Save(string filePath)
-        {
-            try
-            {
-                FilePath = filePath;
-                rtbDoc.SaveFile(FilePath);
-                rtbDoc.Modified = false;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         private void SelectAll()
         {
