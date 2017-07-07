@@ -36,7 +36,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.label1 = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtfEditorControl = new CygSoft.CodeCat.UI.WinForms.Controls.RtfEditorControl();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -100,23 +100,24 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.label2.TabIndex = 8;
             this.label2.Text = "Title";
             // 
-            // richTextBox1
+            // rtfEditorControl
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.rtfEditorControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(7, 95);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(696, 355);
-            this.richTextBox1.TabIndex = 9;
-            this.richTextBox1.Text = "";
+            this.rtfEditorControl.Location = new System.Drawing.Point(7, 95);
+            this.rtfEditorControl.Name = "rtfEditorControl";
+            this.rtfEditorControl.Size = new System.Drawing.Size(697, 355);
+            this.rtfEditorControl.TabIndex = 9;
+            this.rtfEditorControl.TextRtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang7177{\\fonttbl{\\f0\\fnil\\fcharset0 Microsoft S" +
+    "ans Serif;}}\r\n\\viewkind4\\uc1\\pard\\f0\\fs17\\par\r\n}\r\n";
             // 
             // SearchableEventEditDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(707, 482);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.rtfEditorControl);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.label1);
@@ -141,6 +142,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private RtfEditorControl rtfEditorControl;
     }
 }

@@ -79,12 +79,6 @@
       <DependentUpon>CodeVersionListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CurrentSearchTerm.cs" />
-    <Compile Include="Controls\RtfFileEditorControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\RtfFileEditorControl.Designer.cs">
-      <DependentUpon>RtfFileEditorControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\SearchTextBox.cs">
       <SubType>Component</SubType>
     </Compile>

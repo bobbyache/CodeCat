@@ -31,7 +31,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             DiaryEvent = diaryEvent;
             txtTitle.Text = diaryEvent?.Title;
             txtKeywords.Text = diaryEvent?.CommaDelimitedKeywords;
-            richTextBox1.Rtf = diaryEvent?.Text;
+            rtfEditorControl.TextRtf = diaryEvent?.Text;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             {
                 DiaryEvent.SetKeywords(txtKeywords.Text);
                 DiaryEvent.Title = txtTitle.Text.Trim();
-                DiaryEvent.Text = richTextBox1.Rtf;
+                DiaryEvent.Text = rtfEditorControl.TextRtf;
 
                 DialogResult = DialogResult.OK;
             }
@@ -66,7 +66,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
                 return false;
             }
 
-            if (richTextBox1.Text.Trim() == "")
+            if (rtfEditorControl.Text.Trim() == "")
             {
                 Gui.Dialogs.NoInputValueForMandatoryField(this, "Text");
                 return false;

@@ -35,7 +35,46 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             rtbDoc.SetInnerMargins(24, 24, 24, 24);
         }
 
-        
+        public void OpenFile(string filePath)
+        {
+            try
+            {
+                rtbDoc.LoadFile(filePath, RichTextBoxStreamType.RichText);
+                rtbDoc.SelectionStart = 0;
+                rtbDoc.SelectionLength = 0;
+                rtbDoc.Modified = false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Save(string filePath)
+        {
+            try
+            {
+                rtbDoc.SaveFile(filePath);
+                rtbDoc.Modified = false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public override string Text
+        {
+            get { return rtbDoc.Text; }
+            set { rtbDoc.Text = value; }
+        }
+
+        public string TextRtf
+        {
+            get { return rtbDoc.Rtf; }
+            set { rtbDoc.Rtf = value; }
+        }
+
         public bool Modified { get { return rtbDoc.Modified; } }
 
         private void SelectAll()

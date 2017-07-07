@@ -33,7 +33,7 @@
             this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
-            this.rtfEditor = new CygSoft.CodeCat.UI.WinForms.Controls.RtfFileEditorControl();
+            this.rtfEditor = new CygSoft.CodeCat.UI.WinForms.Controls.RtfEditorControl();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -115,6 +115,6 @@
         private ToolStripSpringTextBox txtTitle;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
-        private RtfFileEditorControl rtfEditor;
+        private RtfEditorControl rtfEditor;
     }
 }
