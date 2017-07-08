@@ -86,7 +86,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Images
                     if (iconDictionary.ContainsKey(extension))
                         icon = iconDictionary[extension];
 
-                    return new ImageOutput(icon, image, imageList.Images.IndexOfKey(extension));
+                    return new ImageOutput(icon, image, imageList.Images.IndexOfKey(extension), extension);
                 }
                 else
                 {
@@ -98,7 +98,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Images
                     if (iconDictionary.ContainsKey(upperKey))
                         icon = iconDictionary[upperKey];
 
-                    return new ImageOutput(icon, image, imageList.Images.IndexOfKey(upperKey));
+                    return new ImageOutput(icon, image, imageList.Images.IndexOfKey(upperKey), upperKey);
                 }
             }
         }

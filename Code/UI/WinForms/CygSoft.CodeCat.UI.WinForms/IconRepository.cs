@@ -26,6 +26,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string FileAttachments = "Document.HTML";
             public const string Unknown = "Document.Unknown";
             public const string CodeFile = "Document.CodeFile";
+            public const string EventDiary = "Document.EventDiary";
         }
 
         private static ImageLibrary imageLibrary = new ImageLibrary();
@@ -61,6 +62,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             imageLibrary.Add(TopicSections.FileAttachments, Gui.Resources.GetImage(Constants.ImageKeys.Attachment));
             imageLibrary.Add(TopicSections.WebReferences, Gui.Resources.GetImage(Constants.ImageKeys.Web));
             imageLibrary.Add(TopicSections.ImageSet, Gui.Resources.GetImage(Constants.ImageKeys.ImageSet));
+            imageLibrary.Add(TopicSections.EventDiary, Gui.Resources.GetImage(Constants.ImageKeys.EventDiary));
             imageLibrary.Add(TopicSections.Unknown, imageLibrary.IconByExtension("dat"));
             imageLibrary.Add(TopicSections.RTF, imageLibrary.IconByExtension("rtf"));
             imageLibrary.Add(TopicSections.PDF, imageLibrary.IconByExtension("pdf"));

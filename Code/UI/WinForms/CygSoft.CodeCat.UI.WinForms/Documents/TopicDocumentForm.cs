@@ -190,6 +190,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnImageSet.Image = IconRepository.Get(IconRepository.TopicSections.ImageSet).Image;
             btnRichText.Image = IconRepository.Get(IconRepository.TopicSections.RTF).Image;
             btnAddCode.Image = IconRepository.Get(IconRepository.TopicSections.CodeFile).Image;
+            btnSearchableEventDiary.Image = IconRepository.Get(IconRepository.TopicSections.EventDiary).Image;
 
             this.Icon = IconRepository.CodeGroupIcon;
         }
