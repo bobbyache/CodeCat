@@ -41,6 +41,7 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
                 foreach (string group in groups)
                 {
                     ListViewGroup itemGroup = new ListViewGroup(group);
+                    itemGroup.Name = group;
                     itemGroup.HeaderAlignment = HorizontalAlignment.Left;
                     listView.Groups.Add(itemGroup);
                 }
