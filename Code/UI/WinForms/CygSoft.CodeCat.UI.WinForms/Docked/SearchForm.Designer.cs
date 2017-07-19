@@ -1,4 +1,4 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms
+﻿namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
     partial class SearchForm
     {

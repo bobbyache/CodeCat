@@ -4,7 +4,7 @@ using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace CygSoft.CodeCat.UI.WinForms
+namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
     public partial class SearchForm : DockContent
     {
@@ -43,10 +43,13 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             InitializeComponent();
 
+            if (application == null)
+                throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");
+            this.application = application;
+
             codeSearchResultsControl1.Application = application;
             btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
 
-            this.application = application;
             HideOnClose = true;
             DockAreas = DockAreas.DockLeft | DockAreas.DockRight;
             btnFind.Click += (s, e) => ExecuteSearch();

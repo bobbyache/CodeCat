@@ -245,6 +245,12 @@
     <Compile Include="Dialogs\UrlItemEditDialog.Designer.cs">
       <DependentUpon>UrlItemEditDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Docked\TaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Docked\TaskForm.Designer.cs">
+      <DependentUpon>TaskForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Documents\BaseDocument.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -429,6 +435,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\UrlItemEditDialog.resx">
       <DependentUpon>UrlItemEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docked\TaskForm.resx">
+      <DependentUpon>TaskForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Documents\TopicDocumentForm.resx">
       <DependentUpon>TopicDocumentForm.cs</DependentUpon>

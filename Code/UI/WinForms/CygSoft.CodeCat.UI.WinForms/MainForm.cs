@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.Docked;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygX1.UI.WinForms.RecentFileMenu;
 using System;
@@ -22,6 +23,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private RegistrySettings registrySettings;
         private AppFacade application = null;
         private SearchForm searchForm;
+        private TaskForm taskForm;
 
         // need this because we don't want to create a new document when
         // when all documents are closing because we're either creating
@@ -47,6 +49,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeMenuClickEvents();
             InitializeRecentProjectMenu();
             InitializeSearchForm();
+            InitializeTaskForm();
 
             if (!LoadLastProject())
             {
@@ -99,6 +102,18 @@ namespace CygSoft.CodeCat.UI.WinForms
             searchForm.Show(dockPanel, DockState.DockLeft);
             //searchForm.CloseButton = false;
             //searchForm.CloseButtonVisible = false;
+        }
+
+        private void InitializeTaskForm()
+        {
+            taskForm = new TaskForm(this.application);
+            //taskForm.OpenSnippet += searchForm_OpenSnippet;
+            //taskForm.SearchExecuted += (s, e) => { this.indexCountLabel.Text = ItemCountCaption(e.MatchedItemCount); };
+            //taskForm.SelectSnippet += (s, e) => EnableControls();
+            //taskForm.KeywordsAdded += searchForm_KeywordsAdded;
+            //taskForm.KeywordsRemoved += searchForm_KeywordsRemoved;
+            //taskForm.LoadTasks();
+            taskForm.Show(dockPanel, DockState.DockLeft);
         }
 
         private void searchForm_KeywordsRemoved(object sender, SearchKeywordsModifiedEventArgs e)
