@@ -36,6 +36,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.listView = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colDateCreated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +81,7 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 347);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 460);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(382, 22);
             this.statusStrip1.TabIndex = 2;
@@ -90,11 +91,12 @@
             // 
             this.listView.CheckBoxes = true;
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colTitle});
+            this.colTitle,
+            this.colDateCreated});
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.Location = new System.Drawing.Point(0, 25);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(382, 322);
+            this.listView.Size = new System.Drawing.Size(382, 435);
             this.listView.TabIndex = 3;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
@@ -104,11 +106,16 @@
             this.colTitle.Text = "Task";
             this.colTitle.Width = 376;
             // 
+            // colDateCreated
+            // 
+            this.colDateCreated.Text = "Created";
+            this.colDateCreated.Width = 200;
+            // 
             // TaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 369);
+            this.ClientSize = new System.Drawing.Size(382, 482);
             this.Controls.Add(this.listView);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
@@ -131,5 +138,6 @@
         private System.Windows.Forms.ToolStripButton btnDeleteTask;
         private System.Windows.Forms.ToolStripButton btnEditTask;
         private System.Windows.Forms.ColumnHeader colTitle;
+        private System.Windows.Forms.ColumnHeader colDateCreated;
     }
 }

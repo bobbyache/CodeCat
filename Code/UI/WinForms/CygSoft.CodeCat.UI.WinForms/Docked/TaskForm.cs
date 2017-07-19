@@ -24,7 +24,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         public TaskForm(AppFacade application)
         {
             InitializeComponent();
-            if (application == null)
+
+            btnNewTask.Enabled = false;
+            btnEditTask.Enabled = false;
+            btnDeleteTask.Enabled = false;
+
+                if (application == null)
                 throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");
             this.application = application;
         }
@@ -33,6 +38,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             application.LoadTasks();
             LoadTaskList();
+
+            btnNewTask.Enabled = true;
+            btnEditTask.Enabled = true;
+            btnDeleteTask.Enabled = true;
         }
 
         private void ListView_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -84,6 +93,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             listItem.ToolTipText = item.Title;
             listItem.Text = item.Title;
             listItem.Group = listView.Groups[item.Category];
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToLongDateString() + ", " + item.DateCreated.ToLongTimeString()));
             listView.Items.Add(listItem);
 
             return listItem;
@@ -105,10 +115,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void btnDeleteTask_Click(object sender, EventArgs e)
         {
-            IEnumerable<ITask> tasks = Gui.GroupedListView.SelectedItems<ITask>(listView);
-            application.DeleteTasks(tasks.ToArray());
-            application.SaveTasks();
-            LoadTaskList();
+            if (Gui.GroupedListView.ItemsSelected<ITask>(listView))
+            {
+                IEnumerable<ITask> tasks = Gui.GroupedListView.SelectedItems<ITask>(listView);
+                application.DeleteTasks(tasks.ToArray());
+                application.SaveTasks();
+                LoadTaskList();
+            }
         }
 
         private void btnEditTask_Click(object sender, EventArgs e)

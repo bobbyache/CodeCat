@@ -28,6 +28,7 @@ namespace CygSoft.CodeCat.TaskListing
             this.Title = title;
             this.Completed = completed;
             this.Priority = priority;
+            this.DateCreated = dateCreated;
         }
 
         public string Category

@@ -107,13 +107,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void InitializeTaskForm()
         {
             taskForm = new TaskForm(this.application);
-            //taskForm.OpenSnippet += searchForm_OpenSnippet;
-            //taskForm.SearchExecuted += (s, e) => { this.indexCountLabel.Text = ItemCountCaption(e.MatchedItemCount); };
-            //taskForm.SelectSnippet += (s, e) => EnableControls();
-            //taskForm.KeywordsAdded += searchForm_KeywordsAdded;
-            //taskForm.KeywordsRemoved += searchForm_KeywordsRemoved;
-            //taskForm.LoadTasks();
-            taskForm.Show(dockPanel, DockState.DockLeft);
+            taskForm.Show(dockPanel, DockState.DockRight);
         }
 
         private void searchForm_KeywordsRemoved(object sender, SearchKeywordsModifiedEventArgs e)
