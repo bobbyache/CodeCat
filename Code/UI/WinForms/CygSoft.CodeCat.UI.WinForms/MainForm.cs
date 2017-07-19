@@ -37,7 +37,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             //dockPanel.SaveAsXml(
             //dockPanel.LoadFromXml(
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
-            this.application = new AppFacade(ConfigSettings.SyntaxFilePath, ConfigSettings.TasksFilePath);
+            this.application = new AppFacade(ConfigSettings.SyntaxFilePath);
 
             InitializeFileIcons();
             InitializeIconImages();
@@ -219,6 +219,8 @@ namespace CygSoft.CodeCat.UI.WinForms
                 LoadLastOpenedDocuments();
 
                 EnableControls();
+
+                taskForm.LoadTasks();
 
                 searchForm.KeywordSearchText = string.Empty;
                 searchForm.ExecuteSearch();

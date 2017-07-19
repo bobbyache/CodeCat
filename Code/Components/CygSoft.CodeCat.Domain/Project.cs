@@ -9,6 +9,13 @@ namespace CygSoft.CodeCat.Domain
         public string FilePath { get; private set; }
         public string FileTitle { get { return Path.GetFileName(this.FilePath); } }
         public string FolderPath { get { return Path.GetDirectoryName(this.FilePath); } }
+        public string TaskFilePath
+        {
+            get
+            {
+                return Path.Combine(FolderPath, "tasks.xml");
+            }
+        }
 
         public Version CurrentVersion { get; private set; }
         public string ProjectFileExtension { get { return "codecat"; } }

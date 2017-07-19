@@ -27,10 +27,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             if (application == null)
                 throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");
             this.application = application;
-            this.Shown += TaskForm_Shown;
         }
 
-        private void TaskForm_Shown(object sender, EventArgs e)
+        public void LoadTasks()
         {
             application.LoadTasks();
             LoadTaskList();

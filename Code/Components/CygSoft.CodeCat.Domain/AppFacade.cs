@@ -22,14 +22,11 @@ namespace CygSoft.CodeCat.Domain
         private TopicLibrary topicLibrary;
 
         private Project project = new Project();
-
         private TaskList taskList;
 
-        public AppFacade(string syntaxFilePath, string taskFilePath)
+        public AppFacade(string syntaxFilePath)
         {
             this.syntaxRepository = new SyntaxRepository(syntaxFilePath);
-            this.taskList = new TaskList(taskFilePath);
-
             this.codeLibrary = new CodeLibrary();
             this.qikLibrary = new QikTemplateLibrary();
             this.topicLibrary = new TopicLibrary();
@@ -48,6 +45,16 @@ namespace CygSoft.CodeCat.Domain
         public string ProjectFileTitle
         {
             get { return this.project.FileTitle; }
+        }
+
+        public string ProjectTaskFilePath
+        {
+            get
+            {
+                if (project != null)
+                    return project.TaskFilePath;
+                return null;
+            }
         }
 
         public bool Loaded
@@ -69,6 +76,7 @@ namespace CygSoft.CodeCat.Domain
         public void Open(string filePath, Version currentVersion)
         {
             project.Open(filePath, currentVersion);
+            this.taskList = new TaskList(project.TaskFilePath);
             this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
             this.qikLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
             this.topicLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
@@ -77,6 +85,7 @@ namespace CygSoft.CodeCat.Domain
         public void Create(string filePath, Version currentVersion)
         {
             project.Create(filePath, currentVersion);
+            this.taskList = new TaskList(project.TaskFilePath);
             this.codeLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
             this.qikLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
             this.topicLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
@@ -251,8 +260,6 @@ namespace CygSoft.CodeCat.Domain
         {
             return this.topicLibrary.OpenTarget(keywordIndexItem) as ITopicDocument;
         }
-
-        
 
         public ITask CreateTask()
         {

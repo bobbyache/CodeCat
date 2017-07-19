@@ -184,25 +184,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private static string tasksFilePath;
-        public static string TasksFilePath
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(tasksFilePath))
-                    tasksFilePath = ConfigurationManager.AppSettings["TasksFilePath"];
-
-                return tasksFilePath;
-            }
-            set
-            {
-                Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                configuration.AppSettings.Settings["TasksFilePath"].Value = value;
-                configuration.Save();
-                ConfigurationManager.RefreshSection("appSettings");
-            }
-        }
-
         private static string defaultSyntax;
         public static string DefaultSyntax
         {
@@ -289,7 +270,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             applicationTitle = ConfigurationManager.AppSettings["ApplicationTitle"];
             lastProject = ConfigurationManager.AppSettings["LastProject"];
             syntaxFilePath = ConfigurationManager.AppSettings["SyntaxFilePath"];
-            tasksFilePath = ConfigurationManager.AppSettings["TasksFilePath"];
             defaultSyntax = ConfigurationManager.AppSettings["DefaultSyntax"];
             qikScriptSyntaxFile = ConfigurationManager.AppSettings["QikScriptSyntaxFile"];
             qikTemplateSyntaxFile = ConfigurationManager.AppSettings["QikTemplateSyntaxFile"];
