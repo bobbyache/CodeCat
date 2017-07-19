@@ -76,6 +76,7 @@
             this.btnEditTask.Name = "btnEditTask";
             this.btnEditTask.Size = new System.Drawing.Size(73, 22);
             this.btnEditTask.Text = "Edit Task";
+            this.btnEditTask.Click += new System.EventHandler(this.btnEditTask_Click);
             // 
             // statusStrip1
             // 

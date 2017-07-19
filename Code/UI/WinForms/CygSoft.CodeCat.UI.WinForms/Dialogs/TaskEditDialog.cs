@@ -23,6 +23,18 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             cboPriority.Items.AddRange(categories);
             cboPriority.Sorted = true;
             cboPriority.SelectedItem = task.Category;
+
+
+
+            this.Shown += TaskEditDialog_Shown;
+            btnOk.Click += btnOk_Click;
+            btnCancel.Click += btnCancel_Click;
+        }
+
+        private void TaskEditDialog_Shown(object sender, EventArgs e)
+        {
+            txtTitle.SelectAll();
+            txtTitle.Focus();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

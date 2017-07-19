@@ -97,6 +97,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         public class TaskList
         {
+            public static Task CreateTask()
+            {
+                return new Task() { Title = "New Task", Priority = TaskPriority.Medium, DateCreated = DateTime.Now, Completed = false };
+            }
+
             public static string[] Categories { get { return new string[] { "High", "Medium", "Low" }; } }
 
             public static TaskPriority PriorityFromText(string text)
@@ -136,6 +141,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                 Task task = new Task() { Title = title, Priority = priority, DateCreated = DateTime.Now, Completed = false };
                 taskList.Add(task);
                 return task;
+            }
+
+            public void AddTask(Task task)
+            {
+                taskList.Add(task);
             }
 
             public void DeleteTasks(Task[] tasks)
@@ -188,12 +198,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void btnNewTask_Click(object sender, EventArgs e)
         {
-            Task task = new Task() { DateCreated = DateTime.Now, Priority = TaskPriority.Medium, Completed = false, Title = "New Task" };
+            Task task = TaskList.CreateTask();
             TaskEditDialog dialog = new TaskEditDialog(task, TaskList.Categories);
-            dialog.ShowDialog(this);
+            DialogResult result = dialog.ShowDialog(this);
 
-            //Task task = taskList.AddTask("Test Task", TaskPriority.High);
-            //ListViewItem item = CreateListviewItem(listView, task, true);
+            if (result == DialogResult.OK)
+            {
+                taskList.AddTask(task);
+                CreateListviewItem(listView, task, true);
+            }
         }
 
         private void btnDeleteTask_Click(object sender, EventArgs e)
@@ -201,6 +214,23 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             IEnumerable<Task> tasks = Gui.GroupedListView.SelectedItems<Task>(listView);
             taskList.DeleteTasks(tasks.ToArray());
             LoadTaskList();
+        }
+
+        private void btnEditTask_Click(object sender, EventArgs e)
+        {
+            Task task = Gui.GroupedListView.SelectedItem<Task>(listView);
+
+            if (task != null)
+            {
+                TaskEditDialog dialog = new TaskEditDialog(task, TaskList.Categories);
+                DialogResult result = dialog.ShowDialog(this);
+
+                if (result == DialogResult.OK)
+                {
+                    listView.SelectedItems[0].Text = task.Title;
+                    listView.SelectedItems[0].Group = listView.Groups[task.Category];
+                }
+            }
         }
     }
 }
