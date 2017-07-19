@@ -48,6 +48,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                     ITask checkedTask = item.Tag as ITask;
                     checkedTask.Completed = itemChecked;
                     FormatTaskItem(item, itemChecked);
+                    application.SaveTasks();
                 }
             }
         }
@@ -98,6 +99,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             if (result == DialogResult.OK)
             {
                 application.AddTask(task);
+                application.SaveTasks();
                 CreateListviewItem(listView, task, true);
             }
         }
@@ -106,6 +108,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             IEnumerable<ITask> tasks = Gui.GroupedListView.SelectedItems<ITask>(listView);
             application.DeleteTasks(tasks.ToArray());
+            application.SaveTasks();
             LoadTaskList();
         }
 
@@ -120,6 +123,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
                 if (result == DialogResult.OK)
                 {
+                    application.SaveTasks();
                     listView.SelectedItems[0].Text = task.Title;
                     listView.SelectedItems[0].Group = listView.Groups[task.Category];
                 }

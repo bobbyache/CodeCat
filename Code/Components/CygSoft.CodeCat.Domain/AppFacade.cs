@@ -289,5 +289,10 @@ namespace CygSoft.CodeCat.Domain
             return TaskList.PriorityFromText(text);
         }
 
+        public void SaveTasks()
+        {
+            taskList.Save();
+        }
+
     }
 }

@@ -1,9 +1,12 @@
 ﻿using CygSoft.CodeCat.TaskListing.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.TaskListing
 {
@@ -71,27 +74,69 @@ namespace CygSoft.CodeCat.TaskListing
 
         public void Load()
         {
-            taskList = new List<ITask>()
+            if (!File.Exists(filePath))
+                CreateFile();
+
+            XDocument xDocument = XDocument.Load(filePath);
+            IEnumerable<XElement> elements = xDocument.Element("TaskList").Elements("Tasks").Elements();
+
+            List<Task> tasks = ExtractFromXml(elements);
+            taskList = tasks.OfType<ITask>().ToList();
+        }
+
+        public void Save()
+        {
+            if (!File.Exists(filePath))
+                CreateFile();
+            WriteFile(taskList);
+        }
+
+        private void CreateFile()
+        {
+            XElement rootElement = new XElement("TaskList", new XElement("Tasks"));
+            XDocument xDocument = new XDocument(rootElement);
+            xDocument.Save(filePath);
+        }
+
+        private void WriteFile(List<ITask> tasks)
+        {
+            XDocument indexDocument = XDocument.Load(filePath);
+            XElement element = indexDocument.Element("TaskList").Element("Tasks");
+            element.RemoveNodes();
+
+            AppendToContainerElement(element, tasks);
+            indexDocument.Save(filePath);
+        }
+
+        private void AppendToContainerElement(XElement containerElement, List<ITask> tasks)
+        {
+            foreach (ITask task in tasks)
+            {
+                
+                containerElement.Add(new XElement("Task",
+                    new XAttribute("Title", task.Title),
+                    new XAttribute("Priority", task.Priority),
+                    new XAttribute("Completed", task.Completed.ToString())
+                ));
+            }
+        }
+
+        private List<Task> ExtractFromXml(IEnumerable<XElement> elements)
+        {
+            List<Task> tasks = new List<Task>();
+
+            foreach (XElement element in elements)
+            {
+                Task item = new Task
                 {
-                    new Task() { Title = "Check with Dylan about the timeout query and get the details.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Medium },
-                    new Task() { Title = "The view does not appear to exist in P24Master. It only exists in P24MasterTrunk.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Medium },
-                    new Task() { Title = "This is the task of the Domain layer.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "The mapping is made explicit in a configuration file that is read by the Infrastructure component", DateCreated = DateTime.Now, Completed = true, Priority = TaskPriority.High },
-                    new Task() { Title = "The Separated Interface pattern addresses the problem.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Low },
-                    new Task() { Title = "Base Repository Framework (Infrastructure)", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "Domain Aggregate-specific Repository Interfaces (Domain)", DateCreated = DateTime.Now, Completed = true, Priority = TaskPriority.Low },
-                    new Task() { Title = "You need to spin off the Portal.Tools.InstallImageServerDependencies project executable from your solution so that it will fix this problem:", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "Just delete everything under packages/Property24.Sysmon.Telemetry.2.0.82.0", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Medium },
-                    new Task() { Title = "Can you please communicate to your teams the new location if they require it.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "We’ve changed the ARR log location to P24_IISLogs so we can keep 6 months logs- please note there will be no ", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "In Domain Driven Design this can be used for the interaction", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Medium },
-                    new Task() { Title = "The mapping is made explicit in a configuration file that is read by the Infrastructure component.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "Responds to user commands. Sometimes instead of being a human the user can be another system.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Medium },
-                    new Task() { Title = "General plumbing + technical. Persistence of objects to database, sending messages.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "Each aggregate should have its own repository.", DateCreated = DateTime.Now, Completed = true, Priority = TaskPriority.High },
-                    new Task() { Title = "Follow the idea that each aggregate root should have its own repository!", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "Creating new entity objects using the layered supertype.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High }
+                    Priority = TaskList.PriorityFromText((string)element.Attribute("Priority")),
+                    Title = (string)element.Attribute("Title"),
+                    Completed = bool.Parse((string)element.Attribute("Completed"))
                 };
+
+                tasks.Add(item);
+            }
+            return tasks.ToList();
         }
     }
 }
