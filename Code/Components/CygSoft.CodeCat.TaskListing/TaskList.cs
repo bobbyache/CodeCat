@@ -9,6 +9,14 @@ namespace CygSoft.CodeCat.TaskListing
 {
     public class TaskList
     {
+        private string filePath = null;
+
+        public TaskList(string filePath)
+        {
+            if (string.IsNullOrWhiteSpace(filePath))
+                throw new ArgumentException("Must supply a valid task file path.");
+            this.filePath = filePath;
+        }
         public static Task CreateTask()
         {
             return new Task() { Title = "New Task", Priority = TaskPriority.Medium, DateCreated = DateTime.Now, Completed = false };

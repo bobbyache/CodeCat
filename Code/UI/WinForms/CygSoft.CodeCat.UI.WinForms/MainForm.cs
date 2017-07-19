@@ -37,7 +37,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             //dockPanel.SaveAsXml(
             //dockPanel.LoadFromXml(
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
-            this.application = new AppFacade(ConfigSettings.SyntaxFilePath);
+            this.application = new AppFacade(ConfigSettings.SyntaxFilePath, ConfigSettings.TasksFilePath);
 
             InitializeFileIcons();
             InitializeIconImages();

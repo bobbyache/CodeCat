@@ -23,9 +23,13 @@ namespace CygSoft.CodeCat.Domain
 
         private Project project = new Project();
 
-        public AppFacade(string syntaxFilePath)
+        private TaskList taskList;
+
+        public AppFacade(string syntaxFilePath, string taskFilePath)
         {
             this.syntaxRepository = new SyntaxRepository(syntaxFilePath);
+            this.taskList = new TaskList(taskFilePath);
+
             this.codeLibrary = new CodeLibrary();
             this.qikLibrary = new QikTemplateLibrary();
             this.topicLibrary = new TopicLibrary();
@@ -248,7 +252,7 @@ namespace CygSoft.CodeCat.Domain
             return this.topicLibrary.OpenTarget(keywordIndexItem) as ITopicDocument;
         }
 
-        private TaskList taskList = new TaskList();
+        
 
         public ITask CreateTask()
         {
