@@ -49,6 +49,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qik.LanguageEngine.WinForms
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.WinForms.UnitTests", "UnitTests\UI.WinForms.UnitTests\UI.WinForms.UnitTests.csproj", "{C538C066-2DA4-46C2-9E0B-0973B8711A1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.TaskListing", "Components\CygSoft.CodeCat.TaskListing\CygSoft.CodeCat.TaskListing.csproj", "{B89FFBD2-FBB3-40C2-BA43-CC793AC4F841}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.TaskListing.Infrastructure", "Components\CygSoft.CodeCat.TaskListing.Infrastructure\CygSoft.CodeCat.TaskListing.Infrastructure.csproj", "{399DA6B8-255D-40D4-8BE6-E96B0870C664}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +135,14 @@ Global
 		{C538C066-2DA4-46C2-9E0B-0973B8711A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C538C066-2DA4-46C2-9E0B-0973B8711A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C538C066-2DA4-46C2-9E0B-0973B8711A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B89FFBD2-FBB3-40C2-BA43-CC793AC4F841}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B89FFBD2-FBB3-40C2-BA43-CC793AC4F841}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B89FFBD2-FBB3-40C2-BA43-CC793AC4F841}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B89FFBD2-FBB3-40C2-BA43-CC793AC4F841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{399DA6B8-255D-40D4-8BE6-E96B0870C664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{399DA6B8-255D-40D4-8BE6-E96B0870C664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{399DA6B8-255D-40D4-8BE6-E96B0870C664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{399DA6B8-255D-40D4-8BE6-E96B0870C664}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

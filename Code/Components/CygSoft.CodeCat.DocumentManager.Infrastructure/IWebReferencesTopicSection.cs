@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CygSoft.CodeCat.Infrastructure;
+using System;
 using System.Collections.Generic;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure

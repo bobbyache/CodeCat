@@ -131,6 +131,14 @@
       <Project>{a75e419a-7df9-466e-8f5a-351310672ce6}</Project>
       <Name>CygSoft.CodeCat.Search.KeywordIndex</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.TaskListing.Infrastructure\CygSoft.CodeCat.TaskListing.Infrastructure.csproj">
+      <Project>{399da6b8-255d-40d4-8be6-e96b0870c664}</Project>
+      <Name>CygSoft.CodeCat.TaskListing.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.TaskListing\CygSoft.CodeCat.TaskListing.csproj">
+      <Project>{b89ffbd2-fbb3-40c2-ba43-cc793ac4f841}</Project>
+      <Name>CygSoft.CodeCat.TaskListing</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

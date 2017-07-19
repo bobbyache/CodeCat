@@ -65,7 +65,7 @@ namespace CygSoft.CodeCat.Infrastructure
 
         public void Refresh()
         {
-            
+
             XElement xElement = XElement.Load(this.FilePath);
             syntaxFiles = (from m in xElement.Elements("SyntaxMapping")
                            select new SyntaxFile

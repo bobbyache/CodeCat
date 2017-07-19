@@ -1,5 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.TaskListing.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
@@ -17,7 +19,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
     public partial class TaskForm : DockContent
     {
-        private TaskList taskList = new TaskList();
         private AppFacade application;
 
         public TaskForm(AppFacade application)
@@ -31,7 +32,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void TaskForm_Shown(object sender, EventArgs e)
         {
-            taskList.Load();
+            application.LoadTasks();
             LoadTaskList();
         }
 
@@ -44,7 +45,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                 if (item != null)
                 {
                     bool itemChecked = e.NewValue == CheckState.Checked;
-                    Task checkedTask = item.Tag as Task;
+                    ITask checkedTask = item.Tag as ITask;
                     checkedTask.Completed = itemChecked;
                     FormatTaskItem(item, itemChecked);
                 }
@@ -67,11 +68,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         private void LoadTaskList()
         {
             listView.ItemCheck -= ListView_ItemCheck;
-            Gui.GroupedListView.LoadAllItems(listView, taskList.Tasks, TaskList.Categories, CreateListviewItem, true);
+            Gui.GroupedListView.LoadAllItems(listView, application.CurrrentTasks, application.TaskPriorities, CreateListviewItem, true);
             listView.ItemCheck += ListView_ItemCheck;
         }
 
-        private ListViewItem CreateListviewItem(ListView listView, Task item, bool select = false)
+        private ListViewItem CreateListviewItem(ListView listView, ITask item, bool select = false)
         {
             ListViewItem listItem = new ListViewItem();
 
@@ -88,141 +89,33 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             return listItem;
         }
 
-        public enum TaskPriority
-        {
-            High,
-            Medium,
-            Low
-        }
-
-        public class TaskList
-        {
-            public static Task CreateTask()
-            {
-                return new Task() { Title = "New Task", Priority = TaskPriority.Medium, DateCreated = DateTime.Now, Completed = false };
-            }
-
-            public static string[] Categories { get { return new string[] { "High", "Medium", "Low" }; } }
-
-            public static TaskPriority PriorityFromText(string text)
-            {
-                switch (text)
-                {
-                    case "High":
-                        return TaskPriority.High;
-                    case "Medium":
-                        return TaskPriority.Medium;
-                    case "Low":
-                        return TaskPriority.Low;
-                    default:
-                        return TaskPriority.Medium;
-                }
-            }
-
-            public static string PriorityText(TaskPriority priority)
-            {
-                if (priority == TaskPriority.High)
-                    return "High";
-
-                if (priority == TaskPriority.Medium)
-                    return "Medium";
-
-                if (priority == TaskPriority.Low)
-                    return "Low";
-
-                return null;
-            }
-
-            private List<Task> taskList = new List<Task>();
-            public Task[] Tasks {  get { return taskList.ToArray(); } }
-
-            public Task AddTask(string title, TaskPriority priority)
-            {
-                Task task = new Task() { Title = title, Priority = priority, DateCreated = DateTime.Now, Completed = false };
-                taskList.Add(task);
-                return task;
-            }
-
-            public void AddTask(Task task)
-            {
-                taskList.Add(task);
-            }
-
-            public void DeleteTasks(Task[] tasks)
-            {
-                foreach (Task task in  tasks)
-                {
-                    taskList.Remove(task);
-                }
-            }
-
-            public void Load()
-            {
-                taskList = new List<Task>()
-                {
-                    new Task() { Title = "Check with Dylan about the timeout query and get the details.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Medium },
-                    new Task() { Title = "The view does not appear to exist in P24Master. It only exists in P24MasterTrunk.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Medium },
-                    new Task() { Title = "This is the task of the Domain layer.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "The mapping is made explicit in a configuration file that is read by the Infrastructure component", DateCreated = DateTime.Now, Completed = true, Priority = TaskPriority.High },
-                    new Task() { Title = "The Separated Interface pattern addresses the problem.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Low },
-                    new Task() { Title = "Base Repository Framework (Infrastructure)", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "Domain Aggregate-specific Repository Interfaces (Domain)", DateCreated = DateTime.Now, Completed = true, Priority = TaskPriority.Low },
-                    new Task() { Title = "You need to spin off the Portal.Tools.InstallImageServerDependencies project executable from your solution so that it will fix this problem:", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "Just delete everything under packages/Property24.Sysmon.Telemetry.2.0.82.0", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Medium },
-                    new Task() { Title = "Can you please communicate to your teams the new location if they require it.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "We’ve changed the ARR log location to P24_IISLogs so we can keep 6 months logs- please note there will be no ", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "In Domain Driven Design this can be used for the interaction", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Medium },
-                    new Task() { Title = "The mapping is made explicit in a configuration file that is read by the Infrastructure component.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "Responds to user commands. Sometimes instead of being a human the user can be another system.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.Medium },
-                    new Task() { Title = "General plumbing + technical. Persistence of objects to database, sending messages.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "Each aggregate should have its own repository.", DateCreated = DateTime.Now, Completed = true, Priority = TaskPriority.High },
-                    new Task() { Title = "Follow the idea that each aggregate root should have its own repository!", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High },
-                    new Task() { Title = "Creating new entity objects using the layered supertype.", DateCreated = DateTime.Now, Completed = false, Priority = TaskPriority.High }
-                };
-            }
-         }
-
-        public class Task : ICategorizedItem
-        {
-            public string Title { get; set; }
-            public DateTime DateCreated { get; set; }
-            public bool Completed { get; set; }
-            public TaskPriority Priority { get; set; }
-
-            public string Category
-            {
-                get { return TaskList.PriorityText(this.Priority); }
-                set { throw new InvalidOperationException("Category cannot be set for a Task. It is inferred by the current state."); }
-            }
-        }
-
         private void btnNewTask_Click(object sender, EventArgs e)
         {
-            Task task = TaskList.CreateTask();
-            TaskEditDialog dialog = new TaskEditDialog(task, TaskList.Categories);
+            ITask task = application.CreateTask();
+            TaskEditDialog dialog = new TaskEditDialog(application, task, application.TaskPriorities);
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
-                taskList.AddTask(task);
+                application.AddTask(task);
                 CreateListviewItem(listView, task, true);
             }
         }
 
         private void btnDeleteTask_Click(object sender, EventArgs e)
         {
-            IEnumerable<Task> tasks = Gui.GroupedListView.SelectedItems<Task>(listView);
-            taskList.DeleteTasks(tasks.ToArray());
+            IEnumerable<ITask> tasks = Gui.GroupedListView.SelectedItems<ITask>(listView);
+            application.DeleteTasks(tasks.ToArray());
             LoadTaskList();
         }
 
         private void btnEditTask_Click(object sender, EventArgs e)
         {
-            Task task = Gui.GroupedListView.SelectedItem<Task>(listView);
+            ITask task = Gui.GroupedListView.SelectedItem<ITask>(listView);
 
             if (task != null)
             {
-                TaskEditDialog dialog = new TaskEditDialog(task, TaskList.Categories);
+                TaskEditDialog dialog = new TaskEditDialog(application, task, application.TaskPriorities);
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)

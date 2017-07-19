@@ -1,4 +1,6 @@
-﻿using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+﻿using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.TaskListing.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +15,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
 {
     public partial class TaskEditDialog : Form
     {
-        private Task task;
+        private ITask task;
+        AppFacade application;
 
-        public TaskEditDialog(Task task, string[] categories)
+        public TaskEditDialog(AppFacade application, ITask task, string[] categories)
         {
             InitializeComponent();
+
+            if (application == null)
+                throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");
+            this.application = application;
+
             this.task = task;
             txtTitle.Text = task.Title;
             cboPriority.Items.AddRange(categories);
@@ -48,7 +56,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             if (ValidateFields())
             {
                 task.Title = txtTitle.Text;
-                task.Priority = TaskList.PriorityFromText(cboPriority.Text);
+                task.Priority = application.TaskPriorityFromText(cboPriority.Text);
                 DialogResult = DialogResult.OK;
             }
         }

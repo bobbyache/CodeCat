@@ -61,6 +61,10 @@
       <Project>{70ba46ba-7055-4e29-96a1-725a30b00b61}</Project>
       <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
+      <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
+      <Name>CygSoft.CodeCat.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="BaseDocManager.cd" />

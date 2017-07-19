@@ -9,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.TaskListing.Infrastructure;
+using CygSoft.CodeCat.TaskListing;
 
 namespace CygSoft.CodeCat.Domain
 {
@@ -29,7 +31,7 @@ namespace CygSoft.CodeCat.Domain
             this.topicLibrary = new TopicLibrary();
         }
 
-        public string CodeSyntaxFolderPath 
+        public string CodeSyntaxFolderPath
         {
             get { return this.syntaxRepository.FilePath; }
         }
@@ -217,14 +219,14 @@ namespace CygSoft.CodeCat.Domain
 
         public CodeFile CreateCodeSnippet(string syntax)
         {
-            CodeFile codeFile = this.codeLibrary.CreateTarget(new CodeKeywordIndexItem("New Snippet", syntax, 
+            CodeFile codeFile = this.codeLibrary.CreateTarget(new CodeKeywordIndexItem("New Snippet", syntax,
                 string.Empty)) as CodeFile;
             return codeFile;
         }
 
         public IQikTemplateDocumentSet CreateQikDocumentGroup(string syntax)
         {
-            IQikTemplateDocumentSet qikFile = this.qikLibrary.CreateTarget(new QikTemplateKeywordIndexItem("New Qik Template", 
+            IQikTemplateDocumentSet qikFile = this.qikLibrary.CreateTarget(new QikTemplateKeywordIndexItem("New Qik Template",
                 syntax, string.Empty)) as QikTemplateDocumentSet;
             return qikFile;
         }
@@ -236,7 +238,7 @@ namespace CygSoft.CodeCat.Domain
 
         public ITopicDocument CreateTopicDocument(string syntax)
         {
-            ITopicDocument topicDocument = this.topicLibrary.CreateTarget(new TopicKeywordIndexItem("New Group Snippet", 
+            ITopicDocument topicDocument = this.topicLibrary.CreateTarget(new TopicKeywordIndexItem("New Group Snippet",
                 syntax, string.Empty)) as ITopicDocument;
             return topicDocument;
         }
@@ -245,5 +247,43 @@ namespace CygSoft.CodeCat.Domain
         {
             return this.topicLibrary.OpenTarget(keywordIndexItem) as ITopicDocument;
         }
+
+        private TaskList taskList = new TaskList();
+
+        public ITask CreateTask()
+        {
+            return TaskList.CreateTask();
+        }
+
+        public void AddTask(ITask task)
+        {
+            taskList.AddTask(task);
+        }
+
+        public void DeleteTasks(ITask[] tasks)
+        {
+            taskList.DeleteTasks(tasks);
+        }
+
+        public void LoadTasks()
+        {
+            taskList.Load();
+        }
+
+        public ITask[] CurrrentTasks
+        {
+            get { return taskList.Tasks; }
+        }
+
+        public string[] TaskPriorities
+        {
+            get { return TaskList.Categories; }
+        }
+
+        public TaskPriority TaskPriorityFromText(string text)
+        {
+            return TaskList.PriorityFromText(text);
+        }
+
     }
 }
