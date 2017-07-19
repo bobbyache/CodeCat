@@ -22,7 +22,7 @@ namespace CygSoft.CodeCat.TaskListing
         }
         public static Task CreateTask()
         {
-            return new Task() { Title = "New Task", Priority = TaskPriority.Medium, DateCreated = DateTime.Now, Completed = false };
+            return new Task("New Task", TaskPriority.Medium);
         }
 
         public static string[] Categories { get { return new string[] { "High", "Medium", "Low" }; } }
@@ -112,11 +112,12 @@ namespace CygSoft.CodeCat.TaskListing
         {
             foreach (ITask task in tasks)
             {
-                
+
                 containerElement.Add(new XElement("Task",
                     new XAttribute("Title", task.Title),
                     new XAttribute("Priority", task.Priority),
-                    new XAttribute("Completed", task.Completed.ToString())
+                    new XAttribute("Completed", task.Completed.ToString()),
+                    new XAttribute("DateCreated", task.DateCreated.ToString())
                 ));
             }
         }
@@ -127,12 +128,12 @@ namespace CygSoft.CodeCat.TaskListing
 
             foreach (XElement element in elements)
             {
-                Task item = new Task
-                {
-                    Priority = TaskList.PriorityFromText((string)element.Attribute("Priority")),
-                    Title = (string)element.Attribute("Title"),
-                    Completed = bool.Parse((string)element.Attribute("Completed"))
-                };
+                Task item = new Task(
+                        (string)element.Attribute("Title"),
+                        TaskList.PriorityFromText((string)element.Attribute("Priority")),
+                        bool.Parse((string)element.Attribute("Completed")),
+                        DateTime.Parse((string)element.Attribute("DateCreated"))
+                    );
 
                 tasks.Add(item);
             }

@@ -13,7 +13,7 @@ namespace CygSoft.CodeCat.TaskListing.Infrastructure
     public interface ITask : ICategorizedItem
     {
         bool Completed { get; set; }
-        DateTime DateCreated { get; set; }
+        DateTime DateCreated { get; }
         TaskPriority Priority { get; set; }
         string Title { get; set; }
     }
