@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.Category.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure
 {
     public interface ITitledEntity
     {
-        string Id { get; set; }
+        string Id { get; }
         string Title { get; set; }
     }
 }

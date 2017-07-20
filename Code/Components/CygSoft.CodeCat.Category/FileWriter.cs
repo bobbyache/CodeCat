@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Category.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +24,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public void AddBlueprintHeader(string filePath, BlueprintHeader blueprintHeader, string parentCategoryId)
+        public void AddBlueprintHeader(string filePath, ITitledEntity blueprintHeader, string parentCategoryId)
         {
             if (string.IsNullOrWhiteSpace(parentCategoryId))
                 return;
@@ -46,7 +47,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public void AddBlueprintCategory(string filePath, IBlueprintCategory blueprintCategory, string parentCategoryId)
+        public void AddBlueprintCategory(string filePath, ITitledEntity blueprintCategory, string parentCategoryId)
         {
 
             XDocument doc = XDocument.Load(filePath);

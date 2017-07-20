@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Category.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;

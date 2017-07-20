@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Category.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -112,11 +113,9 @@ namespace CygSoft.CodeCat.Category
         //    //blueprintFile.DeleteBlueprintFile(blueprintHeader);
         //}
 
-        //public void AddBlueprint(BlueprintHeader blueprintHeader, string blueprintCategoryId, out Blueprint blueprint)
-        //{
-        //    //projectFile.AddBlueprintHeader(blueprintHeader, blueprintCategoryId);
-        //    //blueprintFile.SaveBlueprint(new Blueprint(blueprintHeader.Id));
-        //    //blueprintFile.LoadBlueprint(blueprintHeader, out blueprint);
-        //}
+        public void AddBlueprint(ITitledEntity blueprintHeader, string blueprintCategoryId)
+        {
+            projectFile.AddBlueprintHeader(blueprintHeader, blueprintCategoryId);
+        }
     }
 }

@@ -2,7 +2,8 @@
 
 namespace CygSoft.CodeCat.Category.Infrastructure
 {
-    public interface IBlueprintCategory : ITitledEntity
+    public interface IBlueprint : ITitledEntity
     {
+        string Id { get; set; }
     }
 }

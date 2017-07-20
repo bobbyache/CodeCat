@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Category.Infrastructure;
 using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using System;
 using System.Collections.Generic;
@@ -118,6 +119,34 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         private void CategoryTree_ItemMoved(object sender, ItemMovedEventArgs e)
         {
             application.MoveCategory(e.DisplacedItem.Id, e.NewParent.Id);
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            if (categoryTreeControl1.ItemsLoaded)
+            {
+                ITitledEntity parentEntity = null;
+                IBlueprint blueprint;
+                ITitledEntity entity = application.CreateCategoryItem("test", "Test Title");
+
+                if (categoryTreeControl1.SelectedItem is IBlueprintCategory)
+                {
+                    parentEntity = categoryTreeControl1.SelectedItem;
+                    application.AddCategoryItem(entity, parentEntity.Id);
+                    categoryTreeControl1.AddItem(entity, categoryTreeControl1.SelectedItem, true);
+                }
+                else
+                {
+                    parentEntity = categoryTreeControl1.SelectedItemParent;
+                    application.AddCategoryItem(entity, parentEntity.Id);
+                    categoryTreeControl1.AddItem(entity, categoryTreeControl1.SelectedItem, false);
+                }
+            }
+        }
+
+        private void btnRemoveItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

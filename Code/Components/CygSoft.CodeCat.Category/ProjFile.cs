@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Category.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,7 +84,7 @@ namespace CygSoft.CodeCat.Category
             fileWriter.AddBlueprintCategory(this.FileName, blueprintCategory, parentId);
         }
 
-        public void AddBlueprintHeader(BlueprintHeader blueprintHeader, string parentId)
+        public void AddBlueprintHeader(ITitledEntity blueprintHeader, string parentId)
         {
             fileWriter.AddBlueprintHeader(this.FileName, blueprintHeader, parentId);
         }

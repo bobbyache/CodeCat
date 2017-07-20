@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CygSoft.CodeCat.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Search.KeywordIndex.Infrastructure
 {
-    public interface IKeywordIndexItem
+    public interface IKeywordIndexItem : ITitledEntity
     {
-        string Id { get; }
         string FileTitle { get; }
         string[] Keywords { get; }
         string CommaDelimitedKeywords { get; }
-        string Title { get; set; }
         DateTime DateModified { get; }
         DateTime DateCreated { get; }
 

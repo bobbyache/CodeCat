@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="Blueprint.cs" />
     <Compile Include="BlueprintCategory.cs" />
-    <Compile Include="BlueprintFile.cs" />
     <Compile Include="BlueprintHeader.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="FileWriter.cs" />
@@ -54,6 +53,10 @@
     <ProjectReference Include="..\CygSoft.CodeCat.Category.Infrastructure\CygSoft.CodeCat.Category.Infrastructure.csproj">
       <Project>{87a58fdc-d07c-4cc8-b553-2214d5af00c1}</Project>
       <Name>CygSoft.CodeCat.Category.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
+      <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
+      <Name>CygSoft.CodeCat.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

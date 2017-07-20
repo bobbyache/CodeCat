@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="FileSys.cs" />
     <Compile Include="ICategorizedItem.cs" />
+    <Compile Include="ITitledEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

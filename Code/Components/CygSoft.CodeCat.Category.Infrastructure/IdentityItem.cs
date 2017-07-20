@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Category.Infrastructure
 {
-    [Serializable]
     public class IdentityItem
     {
-        [NonSerialized]
         private Guid identifyingGuid;
 
         public IdentityItem()
@@ -17,15 +15,14 @@ namespace CygSoft.CodeCat.Category.Infrastructure
             this.identifyingGuid = Guid.NewGuid();
         }
 
-        public IdentityItem(string guidString)
+        public IdentityItem(string id)
         {
-            this.identifyingGuid = new Guid(guidString);
+            this.identifyingGuid = new Guid(id);
         }
 
         public string Id
         {
             get { return this.identifyingGuid.ToString(); }
-            set { this.identifyingGuid = new Guid(value); } // if you want the GUID serialized, this must be public.
         }
     }
 }
