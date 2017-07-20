@@ -49,6 +49,7 @@
     <Compile Include="Base\BaseLibrary.cs" />
     <Compile Include="Base\IPersistableTarget.cs" />
     <Compile Include="Base\PersistableTargetFactory.cs" />
+    <Compile Include="LastCodeFileRepository.cs" />
     <Compile Include="TopicSections\PdfViewerTopicSection.cs" />
     <Compile Include="TopicSections\QikScriptTopicSection.cs" />
     <Compile Include="TopicSections\RichTextEditorTopicSection.cs" />

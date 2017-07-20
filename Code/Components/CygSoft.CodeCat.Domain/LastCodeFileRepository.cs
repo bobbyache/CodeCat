@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace CygSoft.CodeCat.Infrastructure
+namespace CygSoft.CodeCat.Domain
 {
-    public class LastCodeFileRepository
+    internal class LastCodeFileRepository
     {
         private string filePath = "";
 
