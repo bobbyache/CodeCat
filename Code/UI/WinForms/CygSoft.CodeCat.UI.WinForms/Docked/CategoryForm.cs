@@ -117,8 +117,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void CategoryTree_ItemMoved(object sender, ItemMovedEventArgs e)
         {
-            ////throw new NotImplementedException();
-            //project.MoveBlueprintOrCategory(e.DisplacedItem.Id, e.NewParent.Id);
+            application.MoveCategory(e.DisplacedItem.Id, e.NewParent.Id);
         }
     }
 }

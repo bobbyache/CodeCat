@@ -356,5 +356,10 @@ namespace CygSoft.CodeCat.Domain
         {
             return categoryHierarchy.GetBlueprintCategoryChildren(parentCategoryId);
         }
+
+        public void MoveCategory(string id, string newParentId)
+        {
+            categoryHierarchy.MoveBlueprintOrCategory(id, newParentId);
+        }
     }
 }

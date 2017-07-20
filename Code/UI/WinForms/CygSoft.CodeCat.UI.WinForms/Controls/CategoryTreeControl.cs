@@ -278,6 +278,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(e.Label))
+                return;
 
             if (string.IsNullOrWhiteSpace(e.Label))
                 e.CancelEdit = true;
@@ -325,7 +327,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void treeView1_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
-
         }
     }
 }
