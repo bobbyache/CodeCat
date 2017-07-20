@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Images
             {
                 iconDictionary.Add(upperKey, icon);
                 if (!imageList.Images.ContainsKey(upperKey))
-                    imageList.Images.Add(upperKey, ImageFromIcon(icon));
+                    imageList.Images.Add(upperKey, Gui.Drawing.ImageFromIcon(icon));
             }
         }
 
@@ -40,7 +41,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Images
             {
                 imageList.Images.Add(upperKey, image);
                 if (!iconDictionary.ContainsKey(upperKey))
-                    iconDictionary.Add(upperKey, IconFromImage(image));
+                    iconDictionary.Add(upperKey, Gui.Drawing.IconFromImage(image));
             }
         }
 
@@ -52,7 +53,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Images
             {
                 Icon icon = IconByExtension(key);
 
-                imageList.Images.Add(key, ImageFromIcon(icon));
+                imageList.Images.Add(key, Gui.Drawing.ImageFromIcon(icon));
                 if (!iconDictionary.ContainsKey(key))
                     iconDictionary.Add(key, icon);
             }
@@ -134,20 +135,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Images
                 return extension;
             else
                 return "." + extension;
-        }
-
-        private Icon IconFromImage(Image image)
-        {
-            Bitmap bitmap = new Bitmap(image);
-            IntPtr iconPtr = bitmap.GetHicon();
-            Icon icon = Icon.FromHandle(iconPtr);
-
-            return icon;
-        }
-
-        private Image ImageFromIcon(Icon icon)
-        {
-            return icon.ToBitmap();
         }
     }
 }

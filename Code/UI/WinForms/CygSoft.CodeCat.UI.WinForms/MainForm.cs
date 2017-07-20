@@ -80,14 +80,21 @@ namespace CygSoft.CodeCat.UI.WinForms
             mnuAddCodeGroup.Image = IconRepository.Get(IconRepository.TopicSections.CodeGroup).Image;
             mnuAddQikTemplate.Image = IconRepository.Get(IconRepository.TopicSections.QikGroup).Image;
             mnuWindowKeywordSearch.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
+            mnuCurrentTasks.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditText);
         }
 
         private void InitializeMenuClickEvents()
         {
             mnuFileOpen.Click += mnuFileOpen_Click;
             mnuWindowKeywordSearch.Click += mnuWindowKeywordSearch_Click;
+            mnuCurrentTasks.Click += mnuCurrentTasks_Click;
             mnuSnippetsAdd.Click += mnuSnippetsAdd_Click;
             mnuSnippetsViewModify.Click += mnuSnippetsViewModify_Click;
+        }
+
+        private void mnuCurrentTasks_Click(object sender, EventArgs e)
+        {
+            taskForm.Activate();
         }
 
         private void InitializeSearchForm()

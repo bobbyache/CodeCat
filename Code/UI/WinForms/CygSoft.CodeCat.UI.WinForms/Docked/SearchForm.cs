@@ -48,11 +48,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             this.application = application;
 
             codeSearchResultsControl1.Application = application;
-            btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
 
+            Icon = Gui.Drawing.IconFromImage(Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets));
             HideOnClose = true;
             DockAreas = DockAreas.DockLeft | DockAreas.DockRight;
+
+            btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
             btnFind.Click += (s, e) => ExecuteSearch();
+
             keywordsTextBox.TextChanged += (s, e) => ExecuteSearch();
 
             codeSearchResultsControl1.OpenSnippet += (s, e) => OpenSnippet?.Invoke(s, e);

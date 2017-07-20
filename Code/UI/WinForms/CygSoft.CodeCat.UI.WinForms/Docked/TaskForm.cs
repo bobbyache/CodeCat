@@ -25,6 +25,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             InitializeComponent();
 
+            Icon = Gui.Drawing.IconFromImage(Gui.Resources.GetImage(Constants.ImageKeys.EditText));
+            HideOnClose = true;
+            DockAreas = DockAreas.DockLeft | DockAreas.DockRight;
+
+            btnNewTask.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
+            btnEditTask.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            btnDeleteTask.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+
             taskProgressBar.Maximum = 100;
             btnNewTask.Enabled = false;
             btnEditTask.Enabled = false;
