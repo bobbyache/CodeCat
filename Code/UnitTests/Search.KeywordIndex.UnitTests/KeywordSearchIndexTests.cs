@@ -113,6 +113,25 @@ namespace Search.KeywordIndex.UnitTests
             Assert.That(allKeywords.Length, Is.EqualTo(3));
         }
 
+        [Test]
+        public void KeywordSearchIndex_FindById_ReturnsCorrectItems()
+        {
+            List<IKeywordIndexItem> indexItems = (new List<TestKeywordIndexItem> {
+                new TestKeywordIndexItem("2e77c1b2-7155-42ae-b542-e4e582318ff7", "Title 1", DateTime.Now, DateTime.Now, "one,test,testing,tested"),
+                new TestKeywordIndexItem("a995db89-5c04-422e-a9ac-9306e148a51d", "Title 2", DateTime.Now, DateTime.Now, "two,test,testing,tested"),
+                new TestKeywordIndexItem("d38db764-b52a-434b-b880-79df7c640ae3", "Title 3", DateTime.Now, DateTime.Now, "three,test,testing,tested")
+            }).OfType<IKeywordIndexItem>().ToList();
+
+            var searchIndex = new KeywordSearchIndex("", new Version(2, 0), indexItems);
+
+            IKeywordIndexItem[] items = searchIndex.FindByIds(new string[] { "2e77c1b2-7155-42ae-b542-e4e582318ff7", "d38db764-b52a-434b-b880-79df7c640ae3" });
+
+            Assert.AreEqual(2, items.Length);
+            Assert.IsTrue(items.Any(i => i.Id == "2e77c1b2-7155-42ae-b542-e4e582318ff7"));
+            Assert.IsTrue(items.Any(i => i.Id == "d38db764-b52a-434b-b880-79df7c640ae3"));
+            Assert.IsFalse(items.Any(i => i.Id == "a995db89-5c04-422e-a9ac-9306e148a51d"));
+        }
+
         //[Test]
         //public void KeywordSearchIndex_UpdateIndexItem_AfterRemovingKeywords_ReturnsRemainingKeywords()
         //{

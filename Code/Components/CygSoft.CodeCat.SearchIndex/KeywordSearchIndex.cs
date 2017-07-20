@@ -54,6 +54,15 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
 
         public string[] Keywords { get { return this.keyPhrases.Phrases; } }
 
+        public IKeywordIndexItem[] FindByIds(string[] ids)
+        {
+            var result = from ix in IndexItems
+                         join ia in ids on ix.Id equals ia
+                         select ix;
+
+            return result.ToArray();
+        }
+
         public IKeywordIndexItem FindById(string id)
         {
             if (this.IndexItems.Any(r => r.Id == id))

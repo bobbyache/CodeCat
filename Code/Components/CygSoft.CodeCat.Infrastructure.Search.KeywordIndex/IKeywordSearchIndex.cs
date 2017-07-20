@@ -20,6 +20,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex.Infrastructure
         IKeywordIndexItem[] Find(string commaDelimitedKeywords);
         bool FindAllForEmptySearch { get; set; }
         IKeywordIndexItem FindById(string id);
+        IKeywordIndexItem[] FindByIds(string[] ids);
         string FolderPath { get; }
         event EventHandler IndexModified;
         int ItemCount { get; }

@@ -72,6 +72,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CategoryTreeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CategoryTreeControl.Designer.cs">
+      <DependentUpon>CategoryTreeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CategoryTreeEventArgs.cs" />
     <Compile Include="Controls\CodeVersionListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -355,6 +362,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UiResource.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\CategoryTreeControl.resx">
+      <DependentUpon>CategoryTreeControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CodeVersionListControl.resx">
       <DependentUpon>CodeVersionListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -513,6 +523,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Category.Infrastructure\CygSoft.CodeCat.Category.Infrastructure.csproj">
+      <Project>{87a58fdc-d07c-4cc8-b553-2214d5af00c1}</Project>
+      <Name>CygSoft.CodeCat.Category.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
       <Project>{70ba46ba-7055-4e29-96a1-725a30b00b61}</Project>
       <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>
