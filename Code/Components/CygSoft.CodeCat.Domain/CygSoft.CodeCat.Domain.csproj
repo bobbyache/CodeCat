@@ -103,6 +103,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj">
+      <Project>{65f6db5b-43cd-439e-afe9-d65b1cf58ae7}</Project>
+      <Name>CygSoft.CodeCat.Syntax.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
       <Project>{70ba46ba-7055-4e29-96a1-725a30b00b61}</Project>
       <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>
@@ -130,6 +134,10 @@
     <ProjectReference Include="..\CygSoft.CodeCat.SearchIndex\CygSoft.CodeCat.Search.KeywordIndex.csproj">
       <Project>{a75e419a-7df9-466e-8f5a-351310672ce6}</Project>
       <Name>CygSoft.CodeCat.Search.KeywordIndex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Syntax\CygSoft.CodeCat.Syntax.csproj">
+      <Project>{ebe3c549-dbdd-4d42-9a59-d0e529041ace}</Project>
+      <Name>CygSoft.CodeCat.Syntax</Name>
     </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.TaskListing.Infrastructure\CygSoft.CodeCat.TaskListing.Infrastructure.csproj">
       <Project>{399da6b8-255d-40d4-8be6-e96b0870c664}</Project>

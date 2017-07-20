@@ -11,6 +11,8 @@ using System;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.TaskListing.Infrastructure;
 using CygSoft.CodeCat.TaskListing;
+using CygSoft.CodeCat.Syntax.Infrastructure;
+using CygSoft.CodeCat.Syntax;
 
 namespace CygSoft.CodeCat.Domain
 {
@@ -113,7 +115,7 @@ namespace CygSoft.CodeCat.Domain
             return this.syntaxRepository.Languages;
         }
 
-        public SyntaxFile[] GetSyntaxFileInfo()
+        public ISyntaxFile[] GetSyntaxFileInfo()
         {
             return this.syntaxRepository.SyntaxFiles;
         }

@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Syntax.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Images;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
@@ -69,9 +70,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             imageLibrary.Add(TopicSections.SingleImage, imageLibrary.IconByExtension("png"));
         }
 
-        public static void AddSyntaxes(SyntaxFile[] syntaxFiles)
+        public static void AddSyntaxes(ISyntaxFile[] syntaxFiles)
         {
-            foreach (SyntaxFile syntaxFile in syntaxFiles)
+            foreach (ISyntaxFile syntaxFile in syntaxFiles)
             {
                 string syntax = syntaxFile.Syntax.ToUpper();
 

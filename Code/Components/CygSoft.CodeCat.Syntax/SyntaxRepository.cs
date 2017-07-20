@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace CygSoft.CodeCat.Infrastructure
+namespace CygSoft.CodeCat.Syntax
 {
     public class SyntaxRepository
     {

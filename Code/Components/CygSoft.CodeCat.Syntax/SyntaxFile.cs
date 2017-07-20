@@ -1,6 +1,8 @@
-﻿namespace CygSoft.CodeCat.Infrastructure
+﻿using CygSoft.CodeCat.Syntax.Infrastructure;
+
+namespace CygSoft.CodeCat.Syntax
 {
-    public class SyntaxFile
+    public class SyntaxFile : ISyntaxFile
     {
         public string Syntax { get; private set; }
         public string FilePath { get; private set; }

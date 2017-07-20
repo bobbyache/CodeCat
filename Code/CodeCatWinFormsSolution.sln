@@ -53,6 +53,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.TaskListing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.TaskListing.Infrastructure", "Components\CygSoft.CodeCat.TaskListing.Infrastructure\CygSoft.CodeCat.TaskListing.Infrastructure.csproj", "{399DA6B8-255D-40D4-8BE6-E96B0870C664}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Syntax", "Components\CygSoft.CodeCat.Syntax\CygSoft.CodeCat.Syntax.csproj", "{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Syntax.Infrastructure", "CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj", "{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +147,14 @@ Global
 		{399DA6B8-255D-40D4-8BE6-E96B0870C664}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{399DA6B8-255D-40D4-8BE6-E96B0870C664}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{399DA6B8-255D-40D4-8BE6-E96B0870C664}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
