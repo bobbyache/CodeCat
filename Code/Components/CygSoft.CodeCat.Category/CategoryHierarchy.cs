@@ -68,11 +68,11 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public List<IBlueprintCategory> GetBlueprintCategoryChildren(string parentCategoryId)
+        public List<IItemCategory> GetBlueprintCategoryChildren(string parentCategoryId)
         {
             try
             {
-                List<IBlueprintCategory> childList;
+                List<IItemCategory> childList;
 
                 // this method retrieves categories and queries at a certain level, probably has to be renamed
                 // and possibly moved to another level of abstraction, perhaps.
@@ -87,7 +87,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public void AddBlueprintCategory(IBlueprintCategory blueprintCategory, string blueprintCategoryId)
+        public void AddBlueprintCategory(IItemCategory blueprintCategory, string blueprintCategoryId)
         {
             projectFile.AddBlueprintCategory(blueprintCategory, blueprintCategoryId);
         }
@@ -97,7 +97,7 @@ namespace CygSoft.CodeCat.Category
             projectFile.MoveBlueprintOrCategory(displacedId, newParentId);
         }
 
-        public void RemoveBlueprintCategory(BlueprintCategory blueprintCategory)
+        public void RemoveBlueprintCategory(ItemCategory blueprintCategory)
         {
             projectFile.RemoveBlueprintOrCategoryItem(blueprintCategory.Id);
         }

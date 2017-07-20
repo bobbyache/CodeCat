@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Category
 {
-    public class Blueprint : IdentityItem, IBlueprint
+    public class ItemCategory : IdentityItem, IItemCategory
     {
-        public Blueprint() { }
-        public Blueprint(string guidString) : base(guidString) { }
+        public ItemCategory() { }
+        public ItemCategory(string guidString) : base(guidString) { }
 
         public string Title { get; set; }
     }

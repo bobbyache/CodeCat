@@ -330,22 +330,22 @@ namespace CygSoft.CodeCat.Domain
             return (int)Math.Round(taskList.PercentageOfTasksCompleted);
         }
 
-        public IBlueprintCategory CreateCategory()
+        public IItemCategory CreateCategory()
         {
-            IBlueprintCategory category = new BlueprintCategory();
+            IItemCategory category = new ItemCategory();
             category.Title = "New Category";
             return category;
         }
 
         public ITitledEntity CreateCategoryItem(string id, string title)
         {
-            ITitledEntity entity = new Blueprint(id);
+            ITitledEntity entity = new CategoryItem(id);
             entity.Title = title;
 
             return entity;
         }
 
-        public void AddCategory(IBlueprintCategory category, string relativeToCategoryId)
+        public void AddCategory(IItemCategory category, string relativeToCategoryId)
         {
             categoryHierarchy.AddBlueprintCategory(category, relativeToCategoryId);
         }
@@ -360,7 +360,7 @@ namespace CygSoft.CodeCat.Domain
             categoryHierarchy.RenameBlueprintOrCategoryItem(categoryId, newTitle);
         }
 
-        public List<IBlueprintCategory> GetChildCategories(string parentCategoryId)
+        public List<IItemCategory> GetChildCategories(string parentCategoryId)
         {
             return categoryHierarchy.GetBlueprintCategoryChildren(parentCategoryId);
         }

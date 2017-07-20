@@ -33,7 +33,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private bool ItemIsBlueprintCategory(ITitledEntity entity)
         {
-            return entity is IBlueprintCategory;
+            return entity is IItemCategory;
         }
 
         public void LoadCategories()
@@ -43,7 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void btnAddCategoryAsSibling_Click(object sender, EventArgs e)
         {
-            IBlueprintCategory newSiblingCategory = application.CreateCategory();
+            IItemCategory newSiblingCategory = application.CreateCategory();
 
             if (!categoryTreeControl1.ItemsLoaded)
             {
@@ -51,7 +51,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                 categoryTreeControl1.AddItem(newSiblingCategory, null, false);
 
             }
-            else if (categoryTreeControl1.SelectedItem is IBlueprintCategory)
+            else if (categoryTreeControl1.SelectedItem is IItemCategory)
             {
                 if (categoryTreeControl1.SelectedItemParent != null)
                 {
@@ -68,7 +68,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void btnAddCategoryAsChild_Click(object sender, EventArgs e)
         {
-            IBlueprintCategory entity = application.CreateCategory();
+            IItemCategory entity = application.CreateCategory();
             entity.Title = "New Category";
 
             if (!categoryTreeControl1.ItemsLoaded)
@@ -77,7 +77,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                 categoryTreeControl1.AddItem(entity, null, false);
 
             }
-            else if (categoryTreeControl1.SelectedItem is IBlueprintCategory)
+            else if (categoryTreeControl1.SelectedItem is IItemCategory)
             {
                 if (categoryTreeControl1.SelectedItem != null)
                 {
@@ -99,7 +99,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void CategoryTree_ItemDblClicked(object sender, ItemDblClickedEventArgs e)
         {
-            if (e.Item is IBlueprintCategory)
+            if (e.Item is IItemCategory)
                 return;
 
             //// first save the existing blueprint.
@@ -126,10 +126,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             if (categoryTreeControl1.ItemsLoaded)
             {
                 ITitledEntity parentEntity = null;
-                IBlueprint blueprint;
+                ICategoryItem blueprint;
                 ITitledEntity entity = application.CreateCategoryItem("test", "Test Title");
 
-                if (categoryTreeControl1.SelectedItem is IBlueprintCategory)
+                if (categoryTreeControl1.SelectedItem is IItemCategory)
                 {
                     parentEntity = categoryTreeControl1.SelectedItem;
                     application.AddCategoryItem(entity, parentEntity.Id);

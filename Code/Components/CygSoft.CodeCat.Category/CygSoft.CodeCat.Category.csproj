@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Blueprint.cs" />
-    <Compile Include="BlueprintCategory.cs" />
+    <Compile Include="CategoryItem.cs" />
+    <Compile Include="ItemCategory.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="FileWriter.cs" />
     <Compile Include="CategoryHierarchy.cs" />
