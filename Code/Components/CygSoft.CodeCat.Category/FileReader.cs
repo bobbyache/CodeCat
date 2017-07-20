@@ -66,10 +66,10 @@ namespace CygSoft.CodeCat.Category
             return false;
         }
 
-        public bool GetChildBlueprintCategories(string parentCategoryId, out List<ItemCategory> queryCategoryList)
+        public bool GetChildBlueprintCategories(string parentCategoryId, out List<IItemCategory> queryCategoryList)
         {
             XElement rootElement;
-            queryCategoryList = new List<ItemCategory>();
+            queryCategoryList = new List<IItemCategory>();
 
             if (FetchRootElement(out rootElement))
             {
@@ -86,7 +86,7 @@ namespace CygSoft.CodeCat.Category
                                              select new ItemCategory((string)el.Attribute("ID"))
                                              {
                                                  Title = (string)el.Attribute("Title")
-                                             }).ToList();
+                                             }).OfType<IItemCategory>().ToList();
                         return true;
                     }
                 }
@@ -95,10 +95,10 @@ namespace CygSoft.CodeCat.Category
             return false;
         }
 
-        public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<IItemCategory> queryHeaderList)
+        public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<ICategoryItem> queryHeaderList)
         {
             XElement rootElement;
-            queryHeaderList = new List<IItemCategory>();
+            queryHeaderList = new List<ICategoryItem>();
 
             if (FetchRootElement(out rootElement))
             {
@@ -112,10 +112,9 @@ namespace CygSoft.CodeCat.Category
                     if (parentElement.Elements("BlueprintHeader").Any())
                     {
                         queryHeaderList = (from el in parentElement.Elements("BlueprintHeader")
-                                           select new ItemCategory((string)el.Attribute("ID"))
+                                           select new CategoryItem((string)el.Attribute("ID"))
                                            {
-                                               Title = (string)el.Attribute("Title")
-                                           }).OfType<IItemCategory>().ToList();
+                                           }).OfType<ICategoryItem>().ToList();
                         return true;
                     }
                 }

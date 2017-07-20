@@ -139,6 +139,11 @@ namespace CygSoft.CodeCat.Domain.Base
             return this.index.Find(commaDelimitedKeywords);
         }
 
+        public IKeywordIndexItem[] FindByIds(string[] ids)
+        {
+            return this.index.FindByIds(ids);
+        }
+
         public string[] AllKeywords(IKeywordIndexItem[] indeces)
         {
             return this.index.AllKeywords(indeces);

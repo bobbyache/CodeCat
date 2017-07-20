@@ -68,23 +68,14 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public List<IItemCategory> GetBlueprintCategoryChildren(string parentCategoryId)
+        public List<ICategoryItem> GetChildItems(string parentCategoryId)
         {
-            try
-            {
-                List<IItemCategory> childList;
+            return projectFile.GetChildItems(parentCategoryId);
+        }
 
-                // this method retrieves categories and queries at a certain level, probably has to be renamed
-                // and possibly moved to another level of abstraction, perhaps.
-                projectFile.GetChildItems(parentCategoryId, out childList);
-
-                return childList;
-            }
-            catch (Exception ex)
-            {
-                // you'll want to handle this by routing to a log file.
-                throw ex;
-            }
+        public List<IItemCategory> GetChildCategories(string parentCategoryId)
+        {
+            return projectFile.GetChildCategories(parentCategoryId);
         }
 
         public void AddBlueprintCategory(IItemCategory blueprintCategory, string blueprintCategoryId)

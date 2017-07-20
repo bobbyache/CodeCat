@@ -28,26 +28,31 @@ namespace CygSoft.CodeCat.Category
             fileWriter.Create(fileName);
         }
 
-        // this method retrieves categories and queries at a certain level, probably has to be renamed
-        // and possibly moved to another level of abstraction, perhaps.
-        public bool GetChildItems(string parentCategoryId, out List<IItemCategory> itemList)
+        public List<IItemCategory> GetChildCategories(string parentCategoryId)
         {
-            itemList = new List<IItemCategory>();
-            List<ItemCategory> blueprintCategories;
+            List<IItemCategory> itemList = new List<IItemCategory>();
             List<IItemCategory> blueprintHeaders;
 
-            if (GetChildBlueprintCategories(parentCategoryId, out blueprintCategories))
+            if (GetChildBlueprintCategories(parentCategoryId, out blueprintHeaders))
             {
-                itemList.AddRange(blueprintCategories.ToArray());
+                itemList.AddRange(blueprintHeaders.OfType<IItemCategory>());
             }
-            if (GetBlueprintHeadersByCategory(parentCategoryId, out blueprintHeaders))
-            {
-                itemList.AddRange(blueprintHeaders);
-            }
-            return false;
+            return itemList;
         }
 
-        public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<IItemCategory> queryHeaderList)
+        public List<ICategoryItem> GetChildItems(string parentCategoryId)
+        {
+            List<ICategoryItem> itemList = new List<ICategoryItem>();
+            List<ICategoryItem> blueprintHeaders;
+
+            if (GetBlueprintHeadersByCategory(parentCategoryId, out blueprintHeaders))
+            {
+                itemList.AddRange(blueprintHeaders.OfType<ICategoryItem>());
+            }
+            return itemList;
+        }
+
+        public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<ICategoryItem> queryHeaderList)
         {
             return blueprintFileReader.GetBlueprintHeadersByCategory(parentCategoryId, out queryHeaderList);
         }
@@ -74,7 +79,7 @@ namespace CygSoft.CodeCat.Category
             return false;
         }
 
-        public bool GetChildBlueprintCategories(string parentCategoryId, out List<ItemCategory> blueprintCategoryList)
+        public bool GetChildBlueprintCategories(string parentCategoryId, out List<IItemCategory> blueprintCategoryList)
         {
             return blueprintFileReader.GetChildBlueprintCategories(parentCategoryId, out blueprintCategoryList);
         }

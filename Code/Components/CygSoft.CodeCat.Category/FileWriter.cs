@@ -39,8 +39,7 @@ namespace CygSoft.CodeCat.Category
                                           select el).Single();
 
                 parentElement.Add(new XElement("BlueprintHeader",
-                                    new XAttribute("ID", blueprintHeader.Id),
-                                    new XAttribute("Title", blueprintHeader.Title)
+                                    new XAttribute("ID", blueprintHeader.Id)
                                 ));
 
                 doc.Save(filePath);

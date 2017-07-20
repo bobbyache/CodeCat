@@ -1,7 +1,9 @@
 ﻿using CygSoft.CodeCat.Category.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
+using CygSoft.CodeCat.UI.WinForms.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,14 +26,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             InitializeComponent();
             this.application = application;
 
-            categoryTreeControl1.ItemIsExplandableRoutine = ItemIsBlueprintCategory;
+            categoryTreeControl1.ItemIsExplandableRoutine = ItemIsCategory;
             categoryTreeControl1.ItemExpanding += CategoryTree_ItemExpanding;
             categoryTreeControl1.ItemDblClicked += CategoryTree_ItemDblClicked;
             categoryTreeControl1.ItemMoved += CategoryTree_ItemMoved;
             categoryTreeControl1.ItemRenamed += CategoryTree_ItemRenamed;
         }
 
-        private bool ItemIsBlueprintCategory(ITitledEntity entity)
+        private bool ItemIsCategory(ITitledEntity entity)
         {
             return entity is IItemCategory;
         }
@@ -113,7 +115,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void CategoryTree_ItemExpanding(object sender, ItemExpandingEventArgs e)
         {
-            categoryTreeControl1.LoadItemLevel(application.GetChildCategories(e.ExpandingItem.Id).OfType<ITitledEntity>().ToList(), e.ExpandingItem);
+            categoryTreeControl1.LoadItemLevel(application.GetChildEntities(e.ExpandingItem.Id).OfType<ITitledEntity>().ToList(), e.ExpandingItem);
         }
 
         private void CategoryTree_ItemMoved(object sender, ItemMovedEventArgs e)
@@ -125,21 +127,26 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             if (categoryTreeControl1.ItemsLoaded)
             {
-                ITitledEntity parentEntity = null;
-                ICategoryItem blueprint;
-                ITitledEntity entity = application.CreateCategoryItem("test", "Test Title");
+                SearchDialog dialog = new SearchDialog(application);
+                DialogResult result = dialog.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    ITitledEntity entity = dialog.SelectedSnippet as ITitledEntity;
 
-                if (categoryTreeControl1.SelectedItem is IItemCategory)
-                {
-                    parentEntity = categoryTreeControl1.SelectedItem;
-                    application.AddCategoryItem(entity, parentEntity.Id);
-                    categoryTreeControl1.AddItem(entity, categoryTreeControl1.SelectedItem, true);
-                }
-                else
-                {
-                    parentEntity = categoryTreeControl1.SelectedItemParent;
-                    application.AddCategoryItem(entity, parentEntity.Id);
-                    categoryTreeControl1.AddItem(entity, categoryTreeControl1.SelectedItem, false);
+                    ITitledEntity parentEntity = null;
+
+                    if (categoryTreeControl1.SelectedItem is IItemCategory)
+                    {
+                        parentEntity = categoryTreeControl1.SelectedItem;
+                        application.AddCategoryItem(entity, parentEntity.Id);
+                        categoryTreeControl1.AddItem(entity, categoryTreeControl1.SelectedItem, true);
+                    }
+                    else
+                    {
+                        parentEntity = categoryTreeControl1.SelectedItemParent;
+                        application.AddCategoryItem(entity, parentEntity.Id);
+                        categoryTreeControl1.AddItem(entity, categoryTreeControl1.SelectedItem, false);
+                    }
                 }
             }
         }

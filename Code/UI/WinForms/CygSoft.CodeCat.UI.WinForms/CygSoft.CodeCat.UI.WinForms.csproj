@@ -246,6 +246,12 @@
     <Compile Include="Dialogs\SearchableSnippetEditDialog.Designer.cs">
       <DependentUpon>SearchableSnippetEditDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\SearchDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SearchDialog.Designer.cs">
+      <DependentUpon>SearchDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\TaskEditDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -454,6 +460,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SearchableSnippetEditDialog.resx">
       <DependentUpon>SearchableSnippetEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SearchDialog.resx">
+      <DependentUpon>SearchDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\TaskEditDialog.resx">
       <DependentUpon>TaskEditDialog.cs</DependentUpon>

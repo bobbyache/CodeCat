@@ -360,9 +360,22 @@ namespace CygSoft.CodeCat.Domain
             categoryHierarchy.RenameBlueprintOrCategoryItem(categoryId, newTitle);
         }
 
-        public List<IItemCategory> GetChildCategories(string parentCategoryId)
+        public List<ITitledEntity> GetChildEntities(string parentCategoryId)
         {
-            return categoryHierarchy.GetBlueprintCategoryChildren(parentCategoryId);
+            List<ITitledEntity> children = new List<ITitledEntity>();
+
+            string[] items = categoryHierarchy.GetChildItems(parentCategoryId).Select(r => r.Id).ToArray();
+            List<IItemCategory> categories = categoryHierarchy.GetChildCategories(parentCategoryId);
+
+            List<IKeywordIndexItem> indexItems = new List<IKeywordIndexItem>();
+            indexItems.AddRange(codeLibrary.FindByIds(items));
+            indexItems.AddRange(qikLibrary.FindByIds(items));
+            indexItems.AddRange(topicLibrary.FindByIds(items));
+
+            children.AddRange(categories);
+            children.AddRange(indexItems);
+
+            return children;
         }
 
         public void MoveCategory(string id, string newParentId)
