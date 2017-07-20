@@ -34,10 +34,13 @@
             this.btnDeleteTask = new System.Windows.Forms.ToolStripButton();
             this.btnEditTask = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.taskProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.lblTaskInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.listView = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDateCreated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -81,11 +84,27 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.taskProgressBar,
+            this.lblTaskInfo});
             this.statusStrip1.Location = new System.Drawing.Point(0, 460);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(382, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // taskProgressBar
+            // 
+            this.taskProgressBar.Name = "taskProgressBar";
+            this.taskProgressBar.Size = new System.Drawing.Size(100, 16);
+            this.taskProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // lblTaskInfo
+            // 
+            this.lblTaskInfo.Name = "lblTaskInfo";
+            this.lblTaskInfo.Size = new System.Drawing.Size(234, 17);
+            this.lblTaskInfo.Spring = true;
+            this.lblTaskInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // listView
             // 
@@ -124,6 +143,8 @@
             this.Text = "Current Tasks";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,5 +160,7 @@
         private System.Windows.Forms.ToolStripButton btnEditTask;
         private System.Windows.Forms.ColumnHeader colTitle;
         private System.Windows.Forms.ColumnHeader colDateCreated;
+        private System.Windows.Forms.ToolStripProgressBar taskProgressBar;
+        private System.Windows.Forms.ToolStripStatusLabel lblTaskInfo;
     }
 }

@@ -59,6 +59,19 @@ namespace CygSoft.CodeCat.TaskListing
         private List<ITask> taskList = new List<ITask>();
         public ITask[] Tasks { get { return taskList.ToArray(); } }
 
+        public int NoOfTasks { get { return (taskList != null ?  taskList.Count : 0); } }
+        public int NoOfCompletedTasks { get { return (taskList != null ? taskList.Where(r => r.Completed == true).Count() : 0); } }
+
+        public double PercentageOfTasksCompleted
+        {
+            get
+            {
+                if (NoOfTasks <= 0)
+                    return 0;
+                return ((double)NoOfCompletedTasks / (double)NoOfTasks) * 100f;
+            }
+        }
+
         public void AddTask(ITask task)
         {
             taskList.Add(task);

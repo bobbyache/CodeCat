@@ -301,5 +301,15 @@ namespace CygSoft.CodeCat.Domain
             taskList.Save();
         }
 
+
+        public string CurrentTaskInformation()
+        {
+            return $"{taskList.NoOfCompletedTasks}/{taskList.NoOfTasks} ({Math.Round(taskList.PercentageOfTasksCompleted, 1)}%) Tasks Completed";
+        }
+
+        public int PercentageOfTasksCompleted()
+        {
+            return (int)Math.Round(taskList.PercentageOfTasksCompleted);
+        }
     }
 }

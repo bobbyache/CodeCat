@@ -25,6 +25,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             InitializeComponent();
 
+            taskProgressBar.Maximum = 100;
             btnNewTask.Enabled = false;
             btnEditTask.Enabled = false;
             btnDeleteTask.Enabled = false;
@@ -57,6 +58,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                     checkedTask.Completed = itemChecked;
                     FormatTaskItem(item, itemChecked);
                     application.SaveTasks();
+                    DisplayStatusInformation();
                 }
             }
         }
@@ -79,6 +81,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             listView.ItemCheck -= ListView_ItemCheck;
             Gui.GroupedListView.LoadAllItems(listView, application.CurrrentTasks, application.TaskPriorities, CreateListviewItem, true);
             listView.ItemCheck += ListView_ItemCheck;
+            DisplayStatusInformation();
         }
 
         private ListViewItem CreateListviewItem(ListView listView, ITask item, bool select = false)
@@ -110,6 +113,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                 application.AddTask(task);
                 application.SaveTasks();
                 CreateListviewItem(listView, task, true);
+                DisplayStatusInformation();
             }
         }
 
@@ -121,6 +125,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                 application.DeleteTasks(tasks.ToArray());
                 application.SaveTasks();
                 LoadTaskList();
+                DisplayStatusInformation();
             }
         }
 
@@ -138,8 +143,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                     application.SaveTasks();
                     listView.SelectedItems[0].Text = task.Title;
                     listView.SelectedItems[0].Group = listView.Groups[task.Category];
+                    DisplayStatusInformation();
                 }
             }
+        }
+
+        private void DisplayStatusInformation()
+        {
+            taskProgressBar.Value = application.PercentageOfTasksCompleted();
+            lblTaskInfo.Text = application.CurrentTaskInformation();
         }
     }
 }
