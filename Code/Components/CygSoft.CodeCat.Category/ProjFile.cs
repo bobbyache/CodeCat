@@ -30,11 +30,11 @@ namespace CygSoft.CodeCat.Category
 
         // this method retrieves categories and queries at a certain level, probably has to be renamed
         // and possibly moved to another level of abstraction, perhaps.
-        public bool GetChildItems(string parentCategoryId, out List<ITitledEntity> itemList)
+        public bool GetChildItems(string parentCategoryId, out List<IBlueprintCategory> itemList)
         {
-            itemList = new List<ITitledEntity>();
+            itemList = new List<IBlueprintCategory>();
             List<BlueprintCategory> blueprintCategories;
-            List<BlueprintHeader> blueprintHeaders;
+            List<IBlueprintCategory> blueprintHeaders;
 
             if (GetChildBlueprintCategories(parentCategoryId, out blueprintCategories))
             {
@@ -47,7 +47,7 @@ namespace CygSoft.CodeCat.Category
             return false;
         }
 
-        public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<BlueprintHeader> queryHeaderList)
+        public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<IBlueprintCategory> queryHeaderList)
         {
             return blueprintFileReader.GetBlueprintHeadersByCategory(parentCategoryId, out queryHeaderList);
         }

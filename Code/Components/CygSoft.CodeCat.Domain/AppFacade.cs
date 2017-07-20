@@ -339,7 +339,7 @@ namespace CygSoft.CodeCat.Domain
 
         public ITitledEntity CreateCategoryItem(string id, string title)
         {
-            ITitledEntity entity = new BlueprintHeader(id);
+            ITitledEntity entity = new Blueprint(id);
             entity.Title = title;
 
             return entity;
@@ -360,7 +360,7 @@ namespace CygSoft.CodeCat.Domain
             categoryHierarchy.RenameBlueprintOrCategoryItem(categoryId, newTitle);
         }
 
-        public List<ITitledEntity> GetChildCategories(string parentCategoryId)
+        public List<IBlueprintCategory> GetChildCategories(string parentCategoryId)
         {
             return categoryHierarchy.GetBlueprintCategoryChildren(parentCategoryId);
         }

@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="Blueprint.cs" />
     <Compile Include="BlueprintCategory.cs" />
-    <Compile Include="BlueprintHeader.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="FileWriter.cs" />
     <Compile Include="CategoryHierarchy.cs" />

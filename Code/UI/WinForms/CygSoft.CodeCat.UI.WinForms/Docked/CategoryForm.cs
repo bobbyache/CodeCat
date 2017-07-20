@@ -113,7 +113,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void CategoryTree_ItemExpanding(object sender, ItemExpandingEventArgs e)
         {
-            categoryTreeControl1.LoadItemLevel(application.GetChildCategories(e.ExpandingItem.Id), e.ExpandingItem);
+            categoryTreeControl1.LoadItemLevel(application.GetChildCategories(e.ExpandingItem.Id).OfType<ITitledEntity>().ToList(), e.ExpandingItem);
         }
 
         private void CategoryTree_ItemMoved(object sender, ItemMovedEventArgs e)

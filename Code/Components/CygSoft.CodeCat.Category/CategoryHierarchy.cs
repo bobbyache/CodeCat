@@ -68,11 +68,11 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public List<ITitledEntity> GetBlueprintCategoryChildren(string parentCategoryId)
+        public List<IBlueprintCategory> GetBlueprintCategoryChildren(string parentCategoryId)
         {
             try
             {
-                List<ITitledEntity> childList;
+                List<IBlueprintCategory> childList;
 
                 // this method retrieves categories and queries at a certain level, probably has to be renamed
                 // and possibly moved to another level of abstraction, perhaps.

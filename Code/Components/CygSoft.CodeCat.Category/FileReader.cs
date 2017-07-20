@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CygSoft.CodeCat.Category.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -93,10 +95,10 @@ namespace CygSoft.CodeCat.Category
             return false;
         }
 
-        public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<BlueprintHeader> queryHeaderList)
+        public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<IBlueprintCategory> queryHeaderList)
         {
             XElement rootElement;
-            queryHeaderList = new List<BlueprintHeader>();
+            queryHeaderList = new List<IBlueprintCategory>();
 
             if (FetchRootElement(out rootElement))
             {
@@ -110,10 +112,10 @@ namespace CygSoft.CodeCat.Category
                     if (parentElement.Elements("BlueprintHeader").Any())
                     {
                         queryHeaderList = (from el in parentElement.Elements("BlueprintHeader")
-                                           select new BlueprintHeader((string)el.Attribute("ID"))
+                                           select new BlueprintCategory((string)el.Attribute("ID"))
                                            {
                                                Title = (string)el.Attribute("Title")
-                                           }).ToList();
+                                           }).OfType<IBlueprintCategory>().ToList();
                         return true;
                     }
                 }
