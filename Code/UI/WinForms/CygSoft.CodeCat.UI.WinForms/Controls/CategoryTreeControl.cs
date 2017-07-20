@@ -21,7 +21,18 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public CategoryTreeControl()
         {
             InitializeComponent();
+            AllowDrop = true;
             ItemIsExplandableRoutine = new ItemIsExpandableDelegate(ItemIsExpandable);
+
+            treeView1.NodeMouseDoubleClick += treeView1_NodeMouseDoubleClick;
+            treeView1.BeforeExpand += treeView1_BeforeExpand;
+            treeView1.AfterExpand += treeView1_AfterExpand;
+            treeView1.AfterLabelEdit += treeView1_AfterLabelEdit;
+
+            treeView1.DragDrop += treeView1_DragDrop;
+            treeView1.DragEnter += treeView1_DragEnter;
+            treeView1.ItemDrag += treeView1_ItemDrag;
+
         }
 
         public event ItemExpandingHandler ItemExpanding;
@@ -267,6 +278,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
+
             if (string.IsNullOrWhiteSpace(e.Label))
                 e.CancelEdit = true;
 

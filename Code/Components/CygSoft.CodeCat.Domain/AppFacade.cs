@@ -13,6 +13,8 @@ using CygSoft.CodeCat.TaskListing.Infrastructure;
 using CygSoft.CodeCat.TaskListing;
 using CygSoft.CodeCat.Syntax.Infrastructure;
 using CygSoft.CodeCat.Syntax;
+using CygSoft.CodeCat.Category;
+using CygSoft.CodeCat.Category.Infrastructure;
 
 namespace CygSoft.CodeCat.Domain
 {
@@ -25,6 +27,7 @@ namespace CygSoft.CodeCat.Domain
 
         private Project project = new Project();
         private TaskList taskList;
+        private CategoryHierarchy categoryHierarchy = new CategoryHierarchy();
 
         public AppFacade(string syntaxFilePath)
         {
@@ -59,6 +62,16 @@ namespace CygSoft.CodeCat.Domain
             }
         }
 
+        public string ProjectCategoryFilePath
+        {
+            get
+            {
+                if (project != null)
+                    return project.CategoryFilePath;
+                return null;
+            }
+        }
+
         public bool Loaded
         {
             get { return this.codeLibrary.Loaded && this.qikLibrary.Loaded && this.topicLibrary.Loaded; }
@@ -79,6 +92,8 @@ namespace CygSoft.CodeCat.Domain
         {
             project.Open(filePath, currentVersion);
             this.taskList = new TaskList(project.TaskFilePath);
+            this.categoryHierarchy.LoadProject(project.CategoryFilePath);
+
             this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
             this.qikLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
             this.topicLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
@@ -88,6 +103,7 @@ namespace CygSoft.CodeCat.Domain
         {
             project.Create(filePath, currentVersion);
             this.taskList = new TaskList(project.TaskFilePath);
+            this.categoryHierarchy.CreateProject(project.CategoryFilePath);
             this.codeLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
             this.qikLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
             this.topicLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
@@ -312,6 +328,33 @@ namespace CygSoft.CodeCat.Domain
         public int PercentageOfTasksCompleted()
         {
             return (int)Math.Round(taskList.PercentageOfTasksCompleted);
+        }
+
+        public IBlueprintCategory CreateCategory()
+        {
+            IBlueprintCategory category = new BlueprintCategory();
+            category.Title = "New Category";
+            return category;
+        }
+
+        public void AddCategory(IBlueprintCategory category, string relativeToCategoryId)
+        {
+            categoryHierarchy.AddBlueprintCategory(category, relativeToCategoryId);
+        }
+
+        public List<ITitledEntity> GetRootCategories()
+        {
+            return categoryHierarchy.GetRootBlueprintCategories();
+        }
+
+        public void RenameCategory(string categoryId, string newTitle)
+        {
+            categoryHierarchy.RenameBlueprintOrCategoryItem(categoryId, newTitle);
+        }
+
+        public List<ITitledEntity> GetChildCategories(string parentCategoryId)
+        {
+            return categoryHierarchy.GetBlueprintCategoryChildren(parentCategoryId);
         }
     }
 }

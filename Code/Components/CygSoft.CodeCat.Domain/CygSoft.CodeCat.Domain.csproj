@@ -108,6 +108,14 @@
       <Project>{65f6db5b-43cd-439e-afe9-d65b1cf58ae7}</Project>
       <Name>CygSoft.CodeCat.Syntax.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Category.Infrastructure\CygSoft.CodeCat.Category.Infrastructure.csproj">
+      <Project>{87a58fdc-d07c-4cc8-b553-2214d5af00c1}</Project>
+      <Name>CygSoft.CodeCat.Category.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Category\CygSoft.CodeCat.Category.csproj">
+      <Project>{99c7dcc9-3b35-4ca5-98e7-9bbe72021634}</Project>
+      <Name>CygSoft.CodeCat.Category</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
       <Project>{70ba46ba-7055-4e29-96a1-725a30b00b61}</Project>
       <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>

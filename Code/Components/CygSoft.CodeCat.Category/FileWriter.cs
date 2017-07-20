@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CygSoft.CodeCat.Category.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public void AddBlueprintCategory(string filePath, BlueprintCategory blueprintCategory, string parentCategoryId)
+        public void AddBlueprintCategory(string filePath, IBlueprintCategory blueprintCategory, string parentCategoryId)
         {
 
             XDocument doc = XDocument.Load(filePath);

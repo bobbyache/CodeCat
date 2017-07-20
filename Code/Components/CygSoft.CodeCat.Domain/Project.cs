@@ -17,6 +17,14 @@ namespace CygSoft.CodeCat.Domain
             }
         }
 
+        public string CategoryFilePath
+        {
+            get
+            {
+                return Path.Combine(FolderPath, "categories.xml");
+            }
+        }
+
         public Version CurrentVersion { get; private set; }
         public string ProjectFileExtension { get { return "codecat"; } }
 

@@ -24,6 +24,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private AppFacade application = null;
         private SearchForm searchForm;
         private TaskForm taskForm;
+        private CategoryForm categoryForm;
 
         // need this because we don't want to create a new document when
         // when all documents are closing because we're either creating
@@ -50,6 +51,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeRecentProjectMenu();
             InitializeSearchForm();
             InitializeTaskForm();
+            InitializeCategoryForm();
 
             if (!LoadLastProject())
             {
@@ -115,6 +117,12 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             taskForm = new TaskForm(this.application);
             taskForm.Show(dockPanel, DockState.DockRight);
+        }
+
+        private void InitializeCategoryForm()
+        {
+            categoryForm = new CategoryForm(this.application);
+            categoryForm.Show(dockPanel, DockState.DockLeft);
         }
 
         private void searchForm_KeywordsRemoved(object sender, SearchKeywordsModifiedEventArgs e)
@@ -222,6 +230,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 EnableControls();
 
                 taskForm.LoadTasks();
+                categoryForm.LoadCategories();
 
                 searchForm.KeywordSearchText = string.Empty;
                 searchForm.ExecuteSearch();

@@ -46,6 +46,8 @@
     <Compile Include="BlueprintHeader.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="FileWriter.cs" />
+    <Compile Include="CategoryHierarchy.cs" />
+    <Compile Include="ProjFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,124 @@
+﻿using CygSoft.CodeCat.Category.Infrastructure;
+using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.UI.WinForms.Controls;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+
+namespace CygSoft.CodeCat.UI.WinForms.Docked
+{
+    public partial class CategoryForm : DockContent
+    {
+        private AppFacade application;
+
+        public CategoryForm(AppFacade application)
+        {
+            InitializeComponent();
+            this.application = application;
+
+            categoryTreeControl1.ItemIsExplandableRoutine = ItemIsBlueprintCategory;
+            categoryTreeControl1.ItemExpanding += CategoryTree_ItemExpanding;
+            categoryTreeControl1.ItemDblClicked += CategoryTree_ItemDblClicked;
+            categoryTreeControl1.ItemMoved += CategoryTree_ItemMoved;
+            categoryTreeControl1.ItemRenamed += CategoryTree_ItemRenamed;
+        }
+
+        private bool ItemIsBlueprintCategory(ITitledEntity entity)
+        {
+            return entity is IBlueprintCategory;
+        }
+
+        public void LoadCategories()
+        {
+            categoryTreeControl1.LoadItemLevel(application.GetRootCategories(), null);
+        }
+
+        private void btnAddCategoryAsSibling_Click(object sender, EventArgs e)
+        {
+            IBlueprintCategory newSiblingCategory = application.CreateCategory();
+
+            if (!categoryTreeControl1.ItemsLoaded)
+            {
+                application.AddCategory(newSiblingCategory, string.Empty);
+                categoryTreeControl1.AddItem(newSiblingCategory, null, false);
+
+            }
+            else if (categoryTreeControl1.SelectedItem is IBlueprintCategory)
+            {
+                if (categoryTreeControl1.SelectedItemParent != null)
+                {
+                    application.AddCategory(newSiblingCategory, categoryTreeControl1.SelectedItemParent.Id);
+                    categoryTreeControl1.AddItem(newSiblingCategory, categoryTreeControl1.SelectedItem, false);
+                }
+                else if (categoryTreeControl1.SelectedItemParent == null)
+                {
+                    application.AddCategory(newSiblingCategory, string.Empty);
+                    categoryTreeControl1.AddItem(newSiblingCategory, null, false);
+                }
+            }
+        }
+
+        private void btnAddCategoryAsChild_Click(object sender, EventArgs e)
+        {
+            IBlueprintCategory entity = application.CreateCategory();
+            entity.Title = "New Category";
+
+            if (!categoryTreeControl1.ItemsLoaded)
+            {
+                application.AddCategory(entity, string.Empty);
+                categoryTreeControl1.AddItem(entity, null, false);
+
+            }
+            else if (categoryTreeControl1.SelectedItem is IBlueprintCategory)
+            {
+                if (categoryTreeControl1.SelectedItem != null)
+                {
+                    application.AddCategory(entity, categoryTreeControl1.SelectedItem.Id);
+                    categoryTreeControl1.AddItem(entity, categoryTreeControl1.SelectedItem, true);
+                }
+                else
+                {
+                    application.AddCategory(entity, string.Empty);
+                    categoryTreeControl1.AddItem(entity, null, false);
+                }
+            }
+        }
+
+        private void CategoryTree_ItemRenamed(object sender, ItemRenamedEventArgs e)
+        {
+            application.RenameCategory(e.Item.Id, e.NewTitle);
+        }
+
+        private void CategoryTree_ItemDblClicked(object sender, ItemDblClickedEventArgs e)
+        {
+            if (e.Item is IBlueprintCategory)
+                return;
+
+            //// first save the existing blueprint.
+            //if (blueprintDetailCtrl.HasDirtyBlueprint)
+            //{
+            //    project.SaveBlueprint(blueprintDetailCtrl.CurrentBlueprint);
+            //}
+
+            //DisplayCurrentBlueprint(e.Item as BlueprintHeader);
+        }
+
+        private void CategoryTree_ItemExpanding(object sender, ItemExpandingEventArgs e)
+        {
+            categoryTreeControl1.LoadItemLevel(application.GetChildCategories(e.ExpandingItem.Id), e.ExpandingItem);
+        }
+
+        private void CategoryTree_ItemMoved(object sender, ItemMovedEventArgs e)
+        {
+            ////throw new NotImplementedException();
+            //project.MoveBlueprintOrCategory(e.DisplacedItem.Id, e.NewParent.Id);
+        }
+    }
+}
