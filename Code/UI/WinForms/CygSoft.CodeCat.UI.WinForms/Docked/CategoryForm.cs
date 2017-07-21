@@ -19,6 +19,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
     public partial class CategoryForm : DockContent
     {
+        public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
+
         private AppFacade application;
 
         public CategoryForm(AppFacade application)
@@ -104,13 +106,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             if (e.Item is IItemCategory)
                 return;
 
-            //// first save the existing blueprint.
-            //if (blueprintDetailCtrl.HasDirtyBlueprint)
-            //{
-            //    project.SaveBlueprint(blueprintDetailCtrl.CurrentBlueprint);
-            //}
-
-            //DisplayCurrentBlueprint(e.Item as BlueprintHeader);
+            if (e.Item is IKeywordIndexItem)
+                OpenSnippet?.Invoke(this, new OpenSnippetEventArgs(e.Item as IKeywordIndexItem));
         }
 
         private void CategoryTree_ItemExpanding(object sender, ItemExpandingEventArgs e)

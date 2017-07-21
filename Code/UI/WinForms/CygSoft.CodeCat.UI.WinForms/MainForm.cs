@@ -102,7 +102,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void InitializeSearchForm()
         {
             searchForm = new SearchForm(this.application);
-            searchForm.OpenSnippet += searchForm_OpenSnippet;
+            searchForm.OpenSnippet += Control_OpenSnippet;
             searchForm.SearchExecuted += (s, e) => { this.indexCountLabel.Text = ItemCountCaption(e.MatchedItemCount); };
             searchForm.SelectSnippet += (s, e) => EnableControls();
             searchForm.KeywordsAdded += searchForm_KeywordsAdded;
@@ -122,6 +122,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void InitializeCategoryForm()
         {
             categoryForm = new CategoryForm(this.application);
+            categoryForm.OpenSnippet += Control_OpenSnippet;
             categoryForm.Show(dockPanel, DockState.DockLeft);
         }
 
@@ -724,7 +725,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             snippetForm.Activate();
         }
 
-        private void searchForm_OpenSnippet(object sender, OpenSnippetEventArgs e)
+        private void Control_OpenSnippet(object sender, OpenSnippetEventArgs e)
         {
             OpenSnippetDocument(e.Item);
             // Note dockPanel.Documents handles the management of your documents. It maintains a collection.
