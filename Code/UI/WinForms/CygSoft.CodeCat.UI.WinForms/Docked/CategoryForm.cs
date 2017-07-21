@@ -162,7 +162,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void btnRemoveItem_Click(object sender, EventArgs e)
         {
+            ITitledEntity item = categoryTreeControl1.SelectedItem;
+            application.DeleteCategoryOrItem(item);
+            categoryTreeControl1.DeleteItem(item);
+        }
 
+        private void btnDeleteCategory_Click(object sender, EventArgs e)
+        {
+            ITitledEntity item = categoryTreeControl1.SelectedItem;
+            application.DeleteCategoryOrItem(item);
+            categoryTreeControl1.DeleteItem(item);
         }
     }
 }

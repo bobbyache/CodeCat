@@ -88,9 +88,9 @@ namespace CygSoft.CodeCat.Category
             projectFile.MoveCategory(displacedId, newParentId);
         }
 
-        public void RemoveBlueprintCategory(ItemCategory blueprintCategory)
+        public void RemoveItemOrCategory(string id)
         {
-            projectFile.RemoveBlueprintOrCategoryItem(blueprintCategory.Id);
+            projectFile.RemoveItemOrCategory(id);
         }
 
         public void RenameBlueprintOrCategoryItem(string itemId, string newTitle)

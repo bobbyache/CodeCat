@@ -94,12 +94,12 @@ namespace CygSoft.CodeCat.Category
 
         public void RenameBlueprintOrCategoryItem(string itemId, string newTitle)
         {
-            fileWriter.RenameTargetItemOrCategoryItem(this.FileName, itemId, newTitle);
+            fileWriter.RenameCategoryItem(this.FileName, itemId, newTitle);
         }
 
-        public void RemoveBlueprintOrCategoryItem(string itemId)
+        public void RemoveItemOrCategory(string itemId)
         {
-            fileWriter.RemoveTargetItemOrCategory(this.FileName, itemId);
+            fileWriter.RemoveItemOrCategory(this.FileName, itemId);
         }
 
     }

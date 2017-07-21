@@ -34,10 +34,10 @@
             this.btnAddCategoryAsSibling = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAddCategoryAsChild = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDeleteCategory = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.categoryTreeControl1 = new CygSoft.CodeCat.UI.WinForms.Controls.CategoryTreeControl();
             this.btnAddItem = new System.Windows.Forms.ToolStripButton();
             this.btnRemoveItem = new System.Windows.Forms.ToolStripButton();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.categoryTreeControl1 = new CygSoft.CodeCat.UI.WinForms.Controls.CategoryTreeControl();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,14 +68,14 @@
             // btnAddCategoryAsSibling
             // 
             this.btnAddCategoryAsSibling.Name = "btnAddCategoryAsSibling";
-            this.btnAddCategoryAsSibling.Size = new System.Drawing.Size(152, 22);
+            this.btnAddCategoryAsSibling.Size = new System.Drawing.Size(126, 22);
             this.btnAddCategoryAsSibling.Text = "As Sibling";
             this.btnAddCategoryAsSibling.Click += new System.EventHandler(this.btnAddCategoryAsSibling_Click);
             // 
             // btnAddCategoryAsChild
             // 
             this.btnAddCategoryAsChild.Name = "btnAddCategoryAsChild";
-            this.btnAddCategoryAsChild.Size = new System.Drawing.Size(152, 22);
+            this.btnAddCategoryAsChild.Size = new System.Drawing.Size(126, 22);
             this.btnAddCategoryAsChild.Text = "As Child";
             this.btnAddCategoryAsChild.Click += new System.EventHandler(this.btnAddCategoryAsChild_Click);
             // 
@@ -86,23 +86,7 @@
             this.btnDeleteCategory.Name = "btnDeleteCategory";
             this.btnDeleteCategory.Size = new System.Drawing.Size(111, 22);
             this.btnDeleteCategory.Text = "Delete Category";
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 239);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(455, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // categoryTreeControl1
-            // 
-            this.categoryTreeControl1.AllowDrop = true;
-            this.categoryTreeControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categoryTreeControl1.Location = new System.Drawing.Point(0, 25);
-            this.categoryTreeControl1.Name = "categoryTreeControl1";
-            this.categoryTreeControl1.Size = new System.Drawing.Size(455, 214);
-            this.categoryTreeControl1.TabIndex = 2;
+            this.btnDeleteCategory.Click += new System.EventHandler(this.btnDeleteCategory_Click);
             // 
             // btnAddItem
             // 
@@ -123,6 +107,23 @@
             this.btnRemoveItem.Size = new System.Drawing.Size(23, 22);
             this.btnRemoveItem.Text = "Remove Item";
             this.btnRemoveItem.Click += new System.EventHandler(this.btnRemoveItem_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 239);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(455, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // categoryTreeControl1
+            // 
+            this.categoryTreeControl1.AllowDrop = true;
+            this.categoryTreeControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryTreeControl1.Location = new System.Drawing.Point(0, 25);
+            this.categoryTreeControl1.Name = "categoryTreeControl1";
+            this.categoryTreeControl1.Size = new System.Drawing.Size(455, 214);
+            this.categoryTreeControl1.TabIndex = 2;
             // 
             // CategoryForm
             // 

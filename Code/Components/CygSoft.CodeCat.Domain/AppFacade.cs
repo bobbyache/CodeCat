@@ -392,5 +392,13 @@ namespace CygSoft.CodeCat.Domain
             CategorizedItem categorizedItem = new CategorizedItem(indexItem);
             categoryHierarchy.AddCategorizedItem(categorizedItem, categoryId);
         }
+
+        public void DeleteCategoryOrItem(ITitledEntity item)
+        {
+            if (item is IKeywordIndexItem)
+                categoryHierarchy.RemoveItemOrCategory(new CategorizedItem(item).InstanceId);
+            else
+                categoryHierarchy.RemoveItemOrCategory(item.Id);
+        }
     }
 }

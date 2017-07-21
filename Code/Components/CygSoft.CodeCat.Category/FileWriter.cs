@@ -107,7 +107,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public void RenameTargetItemOrCategoryItem(string filePath, string itemId, string newTitle)
+        public void RenameCategoryItem(string filePath, string itemId, string newTitle)
         {
             XDocument doc = XDocument.Load(filePath);
             XElement rootElement = doc.Root;
@@ -126,7 +126,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public void RemoveTargetItemOrCategory(string filePath, string itemId)
+        public void RemoveItemOrCategory(string filePath, string itemId)
         {
             XDocument doc = XDocument.Load(filePath);
             XElement rootElement = doc.Root;
