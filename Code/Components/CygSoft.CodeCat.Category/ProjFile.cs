@@ -91,7 +91,7 @@ namespace CygSoft.CodeCat.Category
 
         public void AddBlueprintHeader(ITitledEntity blueprintHeader, string parentId)
         {
-            fileWriter.AddBlueprintHeader(this.FileName, blueprintHeader, parentId);
+            fileWriter.AddCategoryItem(this.FileName, blueprintHeader, parentId);
         }
 
         public void MoveBlueprintOrCategory(string displacedId, string newParentId)

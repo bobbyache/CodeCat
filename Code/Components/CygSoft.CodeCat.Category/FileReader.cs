@@ -30,9 +30,9 @@ namespace CygSoft.CodeCat.Category
             XElement rootElement;
             if (FetchRootElement(out rootElement))
             {
-                if (rootElement.Element("BlueprintCategories").Descendants().Any(r => (string)r.Attribute("ID") == queryCategoryId))
+                if (rootElement.Element("Categories").Descendants().Any(r => (string)r.Attribute("ID") == queryCategoryId))
                 {
-                    queryCategory = (from el in rootElement.Element("BlueprintCategories").Descendants()
+                    queryCategory = (from el in rootElement.Element("Categories").Descendants()
                                      where (string)el.Attribute("ID") == queryCategoryId
                                      select new ItemCategory((string)el.Attribute("ID"))
                                      {
@@ -52,9 +52,9 @@ namespace CygSoft.CodeCat.Category
             XElement rootElement;
             if (FetchRootElement(out rootElement))
             {
-                if (rootElement.Element("BlueprintCategories").Elements("BlueprintCategory").Any())
+                if (rootElement.Element("Categories").Elements("Category").Any())
                 {
-                    queryCategoryList = (from el in rootElement.Element("BlueprintCategories").Elements("BlueprintCategory")
+                    queryCategoryList = (from el in rootElement.Element("Categories").Elements("Category")
                                          select new ItemCategory((string)el.Attribute("ID"))
                                          {
                                              Title = (string)el.Attribute("Title")
@@ -73,16 +73,16 @@ namespace CygSoft.CodeCat.Category
 
             if (FetchRootElement(out rootElement))
             {
-                if (rootElement.Element("BlueprintCategories").Descendants().Any(r => (string)r.Attribute("ID") == parentCategoryId))
+                if (rootElement.Element("Categories").Descendants().Any(r => (string)r.Attribute("ID") == parentCategoryId))
                 {
-                    XElement parentElement = (from el in rootElement.Element("BlueprintCategories").Descendants()
+                    XElement parentElement = (from el in rootElement.Element("Categories").Descendants()
                                               where (string)el.Attribute("ID") == parentCategoryId
                                               select el).Single();
 
 
-                    if (parentElement.Elements("BlueprintCategory").Any())
+                    if (parentElement.Elements("Category").Any())
                     {
-                        queryCategoryList = (from el in parentElement.Elements("BlueprintCategory")
+                        queryCategoryList = (from el in parentElement.Elements("Category")
                                              select new ItemCategory((string)el.Attribute("ID"))
                                              {
                                                  Title = (string)el.Attribute("Title")
@@ -102,16 +102,16 @@ namespace CygSoft.CodeCat.Category
 
             if (FetchRootElement(out rootElement))
             {
-                if (rootElement.Element("BlueprintCategories").Descendants().Any(r => (string)r.Attribute("ID") == parentCategoryId))
+                if (rootElement.Element("Categories").Descendants().Any(r => (string)r.Attribute("ID") == parentCategoryId))
                 {
-                    XElement parentElement = (from el in rootElement.Element("BlueprintCategories").Descendants()
+                    XElement parentElement = (from el in rootElement.Element("Categories").Descendants()
                                               where (string)el.Attribute("ID") == parentCategoryId
                                               select el).Single();
 
 
-                    if (parentElement.Elements("BlueprintHeader").Any())
+                    if (parentElement.Elements("TargetItem").Any())
                     {
-                        queryHeaderList = (from el in parentElement.Elements("BlueprintHeader")
+                        queryHeaderList = (from el in parentElement.Elements("TargetItem")
                                            select new CategoryItem((string)el.Attribute("ID"))
                                            {
                                            }).OfType<ICategoryItem>().ToList();

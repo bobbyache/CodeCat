@@ -16,30 +16,30 @@ namespace CygSoft.CodeCat.Category
         {
             if (!string.IsNullOrEmpty(filePath))
             {
-                XElement documentElement = new XElement("NxtGenerator",
-                    new XElement("BlueprintCategories")
+                XElement documentElement = new XElement("CategoryHierarchy",
+                    new XElement("Categories")
                 );
 
                 documentElement.Save(filePath);
             }
         }
 
-        public void AddBlueprintHeader(string filePath, ITitledEntity blueprintHeader, string parentCategoryId)
+        public void AddCategoryItem(string filePath, ITitledEntity categoryItem, string categoryId)
         {
-            if (string.IsNullOrWhiteSpace(parentCategoryId))
+            if (string.IsNullOrWhiteSpace(categoryId))
                 return;
 
             XDocument doc = XDocument.Load(filePath);
             XElement rootElement = doc.Root;
 
-            if (rootElement.Element("BlueprintCategories").Descendants().Any(r => (string)r.Attribute("ID") == parentCategoryId))
+            if (rootElement.Element("Categories").Descendants().Any(r => (string)r.Attribute("ID") == categoryId))
             {
-                XElement parentElement = (from el in rootElement.Element("BlueprintCategories").Descendants()
-                                          where (string)el.Attribute("ID") == parentCategoryId
+                XElement parentElement = (from el in rootElement.Element("Categories").Descendants()
+                                          where (string)el.Attribute("ID") == categoryId
                                           select el).Single();
 
-                parentElement.Add(new XElement("BlueprintHeader",
-                                    new XAttribute("ID", blueprintHeader.Id)
+                parentElement.Add(new XElement("TargetItem",
+                                    new XAttribute("ID", categoryItem.Id)
                                 ));
 
                 doc.Save(filePath);
@@ -54,7 +54,7 @@ namespace CygSoft.CodeCat.Category
 
             if (string.IsNullOrWhiteSpace(parentCategoryId))
             {
-                rootElement.Element("BlueprintCategories").Add(new XElement("BlueprintCategory",
+                rootElement.Element("Categories").Add(new XElement("Category",
                                     new XAttribute("ID", blueprintCategory.Id),
                                     new XAttribute("Title", blueprintCategory.Title)
                                 ));
@@ -63,13 +63,13 @@ namespace CygSoft.CodeCat.Category
             }
             else
             {
-                if (rootElement.Element("BlueprintCategories").Descendants().Any(r => (string)r.Attribute("ID") == parentCategoryId))
+                if (rootElement.Element("Categories").Descendants().Any(r => (string)r.Attribute("ID") == parentCategoryId))
                 {
-                    XElement parentElement = (from el in rootElement.Element("BlueprintCategories").Descendants()
+                    XElement parentElement = (from el in rootElement.Element("Categories").Descendants()
                                               where (string)el.Attribute("ID") == parentCategoryId
                                               select el).Single();
 
-                    parentElement.Add(new XElement("BlueprintCategory",
+                    parentElement.Add(new XElement("Category",
                                         new XAttribute("ID", blueprintCategory.Id),
                                         new XAttribute("Title", blueprintCategory.Title)
                                     ));
@@ -88,13 +88,13 @@ namespace CygSoft.CodeCat.Category
                 XElement parentElement = null;
                 XElement displacedElement = null;
 
-                if (rootElement.Element("BlueprintCategories").Descendants().Any(r => (string)r.Attribute("ID") == displacedId))
+                if (rootElement.Element("Categories").Descendants().Any(r => (string)r.Attribute("ID") == displacedId))
                 {
-                    parentElement = (from el in rootElement.Element("BlueprintCategories").Descendants()
+                    parentElement = (from el in rootElement.Element("Categories").Descendants()
                                      where (string)el.Attribute("ID") == newParentId
                                      select el).Single();
 
-                    displacedElement = (from el in rootElement.Element("BlueprintCategories").Descendants()
+                    displacedElement = (from el in rootElement.Element("Categories").Descendants()
                                         where (string)el.Attribute("ID") == displacedId
                                         select el).Single();
 
@@ -114,9 +114,9 @@ namespace CygSoft.CodeCat.Category
 
             if (!string.IsNullOrWhiteSpace(itemId))
             {
-                if (rootElement.Element("BlueprintCategories").Descendants().Any(r => (string)r.Attribute("ID") == itemId))
+                if (rootElement.Element("Categories").Descendants().Any(r => (string)r.Attribute("ID") == itemId))
                 {
-                    XElement element = (from el in rootElement.Element("BlueprintCategories").Descendants()
+                    XElement element = (from el in rootElement.Element("Categories").Descendants()
                                         where (string)el.Attribute("ID") == itemId
                                         select el).Single();
                     element.Attribute("Title").Value = newTitle;
@@ -133,9 +133,9 @@ namespace CygSoft.CodeCat.Category
 
             if (!string.IsNullOrWhiteSpace(itemId))
             {
-                if (rootElement.Element("BlueprintCategories").Descendants().Any(r => (string)r.Attribute("ID") == itemId))
+                if (rootElement.Element("Categories").Descendants().Any(r => (string)r.Attribute("ID") == itemId))
                 {
-                    XElement element = (from el in rootElement.Element("BlueprintCategories").Descendants()
+                    XElement element = (from el in rootElement.Element("Categories").Descendants()
                                         where (string)el.Attribute("ID") == itemId
                                         select el).Single();
                     element.Remove();
