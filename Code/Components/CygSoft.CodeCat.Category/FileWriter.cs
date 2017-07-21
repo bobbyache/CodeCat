@@ -39,7 +39,7 @@ namespace CygSoft.CodeCat.Category
                                           select el).Single();
 
                 parentElement.Add(new XElement("Item",
-                                    new XAttribute("ID", categorizedItem.InstanceId)
+                                    new XAttribute("ID", categorizedItem.Id)
                                 ));
 
                 doc.Save(filePath);

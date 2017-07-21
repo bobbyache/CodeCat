@@ -28,7 +28,7 @@ namespace CygSoft.CodeCat.Category
             this.ItemIdGuid = new Guid(guids[1]);
         }
 
-        public string Id { get { return IdGuid.ToString(); } }
+        public string Id { get { return this.IdGuid + "_" + this.ItemIdGuid; } }
         public string ItemId { get { return ItemIdGuid.ToString(); } }
         public string Title { get; set; }
         public string InstanceId { get { return this.IdGuid + "_" + this.ItemIdGuid; } }

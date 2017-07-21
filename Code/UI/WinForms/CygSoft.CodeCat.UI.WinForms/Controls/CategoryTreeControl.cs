@@ -192,19 +192,27 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             return dummy;
         }
 
+        private TreeNode SetTreeNode(ITitledEntity item)
+        {
+            TreeNode treeNode = new TreeNode();
+            treeNode.Name = item.Id;
+            treeNode.Text = item.Title;
+            treeNode.Tag = item;
+
+            return treeNode;
+        }
+
         private TreeNode CreateTreeNode(ITitledEntity item, TreeNode parent, bool editAfterCreate)
         {
-            TreeNode nd = null;
+            TreeNode nd = SetTreeNode(item);
 
             if (parent == null)
             {
-                nd = treeView1.Nodes.Add(item.Id, item.Title);
-                nd.Tag = item;
+                treeView1.Nodes.Add(nd);
             }
             else
             {
-                nd = parent.Nodes.Add(item.Id, item.Title);
-                nd.Tag = item;
+                parent.Nodes.Add(nd);
             }
 
             if (ItemIsExplandableRoutine(item))

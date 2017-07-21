@@ -401,4 +401,6 @@ namespace CygSoft.CodeCat.Domain
                 categoryHierarchy.RemoveItemOrCategory(item.Id);
         }
     }
+
+
 }
