@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IWebReference : ICategorizedItem
+    public interface IWebReference : ICategorizedListItem
     {
         string Id { get; set; }
         string Title { get; set; }

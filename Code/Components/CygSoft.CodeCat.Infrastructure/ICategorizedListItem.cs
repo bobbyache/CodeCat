@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Infrastructure
 {
-    public interface ICategorizedItem
+    public interface ICategorizedListItem
     {
         string Category { get; set; }
     }

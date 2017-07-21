@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.TaskListing
 {
-    public class Task : ICategorizedItem, ITask
+    public class Task : ICategorizedListItem, ITask
     {
         public string Title { get; set; }
         public DateTime DateCreated { get; private set; }

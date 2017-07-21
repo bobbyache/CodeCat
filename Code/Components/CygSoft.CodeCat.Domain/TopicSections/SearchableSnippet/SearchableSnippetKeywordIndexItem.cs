@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet
 {
-    public interface ISearchableSnippetKeywordIndexItem : IKeywordIndexItem, ICategorizedItem
+    public interface ISearchableSnippetKeywordIndexItem : IKeywordIndexItem, ICategorizedListItem
     {
         string Syntax { get; set; }
         string Text { get; set; }

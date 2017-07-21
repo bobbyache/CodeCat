@@ -11,7 +11,7 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
     {
         public static class GroupedListView
         {
-            public static void GroupItem(ListView listView, ListViewItem listItem, ICategorizedItem categorizedItem)
+            public static void GroupItem(ListView listView, ListViewItem listItem, ICategorizedListItem categorizedItem)
             {
                 bool groupExists = false;
 
@@ -102,7 +102,7 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
             //        .ToList().ForEach(l => listView.Items.RemoveByKey(l.Name));
             //}
 
-            public static void LoadAllItems<T>(ListView listView, T[] items, string[] categories, Func<ListView, T, bool, ListViewItem> create, bool reloadGroups = true) where T : ICategorizedItem
+            public static void LoadAllItems<T>(ListView listView, T[] items, string[] categories, Func<ListView, T, bool, ListViewItem> create, bool reloadGroups = true) where T : ICategorizedListItem
             {
                 if (reloadGroups)
                     Gui.GroupedListView.ReloadGroups(listView, categories);

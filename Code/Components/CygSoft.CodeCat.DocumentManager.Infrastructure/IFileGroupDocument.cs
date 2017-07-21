@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface IFileAttachment : ICategorizedItem
+    public interface IFileAttachment : ICategorizedListItem
     {
         string Id { get; }
         string Title { get; set; }

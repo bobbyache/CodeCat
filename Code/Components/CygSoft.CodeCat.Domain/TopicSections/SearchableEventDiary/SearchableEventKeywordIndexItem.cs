@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary
 {
-    public interface ISearchableEventKeywordIndexItem : IKeywordIndexItem, ICategorizedItem
+    public interface ISearchableEventKeywordIndexItem : IKeywordIndexItem, ICategorizedListItem
     {
         string Text { get; set; }
     }

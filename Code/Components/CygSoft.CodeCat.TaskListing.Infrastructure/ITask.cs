@@ -10,7 +10,7 @@ namespace CygSoft.CodeCat.TaskListing.Infrastructure
         Low
     }
 
-    public interface ITask : ICategorizedItem
+    public interface ITask : ICategorizedListItem
     {
         bool Completed { get; set; }
         DateTime DateCreated { get; }
