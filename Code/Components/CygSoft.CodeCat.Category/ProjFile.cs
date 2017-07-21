@@ -87,9 +87,9 @@ namespace CygSoft.CodeCat.Category
             fileWriter.AddCategorizedItem(this.FileName, categorizedItem, categoryId);
         }
 
-        public void MoveBlueprintOrCategory(string displacedId, string newParentId)
+        public void MoveCategory(string displacedId, string newParentId)
         {
-            fileWriter.MoveTargetItemOrCategory(this.FileName, displacedId, newParentId);
+            fileWriter.MoveCategory(this.FileName, displacedId, newParentId);
         }
 
         public void RenameBlueprintOrCategoryItem(string itemId, string newTitle)

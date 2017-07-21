@@ -29,13 +29,25 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             this.application = application;
 
             categoryTreeControl1.ItemIsExplandableRoutine = ItemIsCategory;
+            categoryTreeControl1.LabelIsEditableRoutine = LabelIsEditable;
+            categoryTreeControl1.AllowDropNonExpandableRoutine = AllowDropItem;
             categoryTreeControl1.ItemExpanding += CategoryTree_ItemExpanding;
             categoryTreeControl1.ItemDblClicked += CategoryTree_ItemDblClicked;
             categoryTreeControl1.ItemMoved += CategoryTree_ItemMoved;
             categoryTreeControl1.ItemRenamed += CategoryTree_ItemRenamed;
         }
 
+        private bool AllowDropItem(ITitledEntity entity)
+        {
+            return entity is IItemCategory;
+        }
+
         private bool ItemIsCategory(ITitledEntity entity)
+        {
+            return entity is IItemCategory;
+        }
+
+        private bool LabelIsEditable(ITitledEntity entity)
         {
             return entity is IItemCategory;
         }

@@ -15,7 +15,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     public delegate void ItemExpandingHandler(object sender, ItemExpandingEventArgs e);
     public delegate void ItemRenamedHandler(object sender, ItemRenamedEventArgs e);
     public delegate void ItemMovedHandler(object sender, ItemMovedEventArgs e);
+
     public delegate bool ItemIsExpandableDelegate(ITitledEntity item);
+    public delegate bool LabelIsEditableDelegate(ITitledEntity item);
+    public delegate bool AllowDropNonExpandableDelegate(ITitledEntity item);
 
     public partial class CategoryTreeControl : UserControl
     {
@@ -28,6 +31,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             treeView1.NodeMouseDoubleClick += treeView1_NodeMouseDoubleClick;
             treeView1.BeforeExpand += treeView1_BeforeExpand;
             treeView1.AfterExpand += treeView1_AfterExpand;
+            treeView1.BeforeLabelEdit += treeView1_BeforeLabelEdit;
             treeView1.AfterLabelEdit += treeView1_AfterLabelEdit;
 
             treeView1.DragDrop += treeView1_DragDrop;
@@ -55,6 +59,24 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ItemIsExpandableDelegate ItemIsExplandableRoutine
+        {
+            get;
+            set;
+        }
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public LabelIsEditableDelegate LabelIsEditableRoutine
+        {
+            get;
+            set;
+        }
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public LabelIsEditableDelegate AllowDropNonExpandableRoutine
         {
             get;
             set;
@@ -217,6 +239,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             return true;
         }
 
+        private bool LabelIsEditable(ITitledEntity item)
+        {
+            return true;
+        }
+
+        public bool AllowDropNonExpandable(ITitledEntity item)
+        {
+            return true;
+        }
+
         private void raiseItemMovedEvent(TreeNode displacedNode, TreeNode newParent)
         {
             if (ItemMoved != null)
@@ -239,8 +271,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
         {
             this.sourceNode = (TreeNode)e.Item;
-            string strItem = e.Item.ToString();
-            DoDragDrop(strItem, DragDropEffects.Copy | DragDropEffects.Move);
+
+            if (AllowDropNonExpandableRoutine(this.sourceNode.Tag as ITitledEntity))
+            {
+                string strItem = e.Item.ToString();
+                DoDragDrop(strItem, DragDropEffects.Copy | DragDropEffects.Move);
+            }
         }
 
         private void treeView1_DragEnter(object sender, DragEventArgs e)
@@ -280,10 +316,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(e.Label))
-                return;
-
-            if (string.IsNullOrWhiteSpace(e.Label))
+            {
                 e.CancelEdit = true;
+                return;
+            }
 
             if (ItemRenamed != null)
             {
@@ -328,6 +364,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void treeView1_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
+            if (e.Node.Tag == null || !LabelIsEditableRoutine(e.Node.Tag as ITitledEntity))
+                e.CancelEdit = true;
         }
     }
 }

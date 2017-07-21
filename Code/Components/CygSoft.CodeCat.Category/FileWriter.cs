@@ -78,7 +78,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public void MoveTargetItemOrCategory(string filePath, string displacedId, string newParentId)
+        public void MoveCategory(string filePath, string displacedId, string newParentId)
         {
             XDocument doc = XDocument.Load(filePath);
             XElement rootElement = doc.Root;

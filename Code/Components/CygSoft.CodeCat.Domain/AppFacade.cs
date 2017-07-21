@@ -384,7 +384,7 @@ namespace CygSoft.CodeCat.Domain
 
         public void MoveCategory(string id, string newParentId)
         {
-            categoryHierarchy.MoveBlueprintOrCategory(id, newParentId);
+            categoryHierarchy.MoveCategory(id, newParentId);
         }
 
         public void AddCategoryItem(IKeywordIndexItem indexItem, string categoryId)
