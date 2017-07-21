@@ -95,25 +95,26 @@ namespace CygSoft.CodeCat.Category
             return false;
         }
 
-        public bool GetTargetItemsByCategory(string parentCategoryId, out List<ICategorizedItem> targetItems)
+        public bool GetChildCategorizedItemsByCategory(string categoryId, out List<ICategorizedItem> categorizedItems)
         {
             XElement rootElement;
-            targetItems = new List<ICategorizedItem>();
+            categorizedItems = new List<ICategorizedItem>();
 
             if (FetchRootElement(out rootElement))
             {
-                if (rootElement.Element("Categories").Descendants().Any(r => (string)r.Attribute("ID") == parentCategoryId))
+                if (rootElement.Element("Categories").Descendants().Any(r => (string)r.Attribute("ID") == categoryId))
                 {
                     XElement parentElement = (from el in rootElement.Element("Categories").Descendants()
-                                              where (string)el.Attribute("ID") == parentCategoryId
+                                              where (string)el.Attribute("ID") == categoryId
                                               select el).Single();
 
 
                     if (parentElement.Elements("Item").Any())
                     {
-                        targetItems = (from el in parentElement.Elements("Item")
+                        categorizedItems = (from el in parentElement.Elements("Item")
                                            select new CategorizedItem((string)el.Attribute("ID"))
                                            {
+                                               Title = (string)el.Attribute("ID")
                                            }).OfType<ICategorizedItem>().ToList();
                         return true;
                     }

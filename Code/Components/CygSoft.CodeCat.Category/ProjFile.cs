@@ -12,13 +12,13 @@ namespace CygSoft.CodeCat.Category
     {
         public string FileName { get; private set; }
 
-        private FileReader blueprintFileReader = new FileReader();
+        private FileReader fileReader = new FileReader();
         private FileWriter fileWriter = new FileWriter();
 
         public void Load(string fileName)
         {
             this.FileName = fileName;
-            blueprintFileReader.FileName = fileName;
+            fileReader.FileName = fileName;
         }
 
         public void Create(string fileName)
@@ -40,31 +40,24 @@ namespace CygSoft.CodeCat.Category
             return itemList;
         }
 
-        public List<ICategorizedItem> GetChildItems(string parentCategoryId)
+        public List<ICategorizedItem> GetChildCategorizedItemsByCategory(string parentCategoryId)
         {
-            List<ICategorizedItem> itemList = new List<ICategorizedItem>();
-            List<ICategorizedItem> blueprintHeaders;
+            List<ICategorizedItem> categorizedItems;
 
-            if (GetBlueprintHeadersByCategory(parentCategoryId, out blueprintHeaders))
-            {
-                itemList.AddRange(blueprintHeaders.OfType<ICategorizedItem>());
-            }
-            return itemList;
+            if (fileReader.GetChildCategorizedItemsByCategory(parentCategoryId, out categorizedItems))
+                return categorizedItems;
+            return null;
         }
 
-        public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<ICategorizedItem> queryHeaderList)
-        {
-            return blueprintFileReader.GetTargetItemsByCategory(parentCategoryId, out queryHeaderList);
-        }
 
         public bool GetBlueprintCategoryById(string blueprintCategoryId, out ItemCategory blueprintCategory)
         {
-            return blueprintFileReader.GetCategoryById(blueprintCategoryId, out blueprintCategory);
+            return fileReader.GetCategoryById(blueprintCategoryId, out blueprintCategory);
         }
 
         public bool GetRootBlueprintCategories(out List<ItemCategory> blueprintCategoryList)
         {
-            return blueprintFileReader.GetRootCategories(out blueprintCategoryList);
+            return fileReader.GetRootCategories(out blueprintCategoryList);
         }
 
         public bool GetRootBlueprintCategories(out List<ITitledEntity> abstractBlueprintCategoryList)
@@ -81,7 +74,7 @@ namespace CygSoft.CodeCat.Category
 
         public bool GetChildBlueprintCategories(string parentCategoryId, out List<IItemCategory> blueprintCategoryList)
         {
-            return blueprintFileReader.GetChildCategories(parentCategoryId, out blueprintCategoryList);
+            return fileReader.GetChildCategories(parentCategoryId, out blueprintCategoryList);
         }
 
         public void AddBlueprintCategory(IItemCategory blueprintCategory, string parentId)
@@ -89,9 +82,9 @@ namespace CygSoft.CodeCat.Category
             fileWriter.AddCategory(this.FileName, blueprintCategory, parentId);
         }
 
-        public void AddBlueprintHeader(ITitledEntity blueprintHeader, string parentId)
+        public void AddCategorizedItem(ICategorizedItem categorizedItem, string categoryId)
         {
-            fileWriter.AddTargetItem(this.FileName, blueprintHeader, parentId);
+            fileWriter.AddCategorizedItem(this.FileName, categorizedItem, categoryId);
         }
 
         public void MoveBlueprintOrCategory(string displacedId, string newParentId)

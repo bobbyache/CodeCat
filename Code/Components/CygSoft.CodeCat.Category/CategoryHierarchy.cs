@@ -68,9 +68,9 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public List<ICategorizedItem> GetChildItems(string parentCategoryId)
+        public List<ICategorizedItem> GetChildCategorizedItemsByCategory(string categoryId)
         {
-            return projectFile.GetChildItems(parentCategoryId);
+            return projectFile.GetChildCategorizedItemsByCategory(categoryId);
         }
 
         public List<IItemCategory> GetChildCategories(string parentCategoryId)
@@ -104,9 +104,9 @@ namespace CygSoft.CodeCat.Category
         //    //blueprintFile.DeleteBlueprintFile(blueprintHeader);
         //}
 
-        public void AddBlueprint(ITitledEntity blueprintHeader, string blueprintCategoryId)
+        public void AddCategorizedItem(ICategorizedItem categorizedItem, string categoryId)
         {
-            projectFile.AddBlueprintHeader(blueprintHeader, blueprintCategoryId);
+            projectFile.AddCategorizedItem(categorizedItem, categoryId);
         }
     }
 }

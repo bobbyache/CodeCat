@@ -115,7 +115,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void CategoryTree_ItemExpanding(object sender, ItemExpandingEventArgs e)
         {
-            categoryTreeControl1.LoadItemLevel(application.GetChildEntities(e.ExpandingItem.Id).OfType<ITitledEntity>().ToList(), e.ExpandingItem);
+            categoryTreeControl1.LoadItemLevel(application.GetChildCategorizedItemsByCategory(e.ExpandingItem.Id).OfType<ITitledEntity>().ToList(), e.ExpandingItem);
         }
 
         private void CategoryTree_ItemMoved(object sender, ItemMovedEventArgs e)
@@ -131,21 +131,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                 DialogResult result = dialog.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
-                    ITitledEntity entity = dialog.SelectedSnippet as ITitledEntity;
+                    IKeywordIndexItem indexItem = dialog.SelectedSnippet as IKeywordIndexItem;
 
                     ITitledEntity parentEntity = null;
 
                     if (categoryTreeControl1.SelectedItem is IItemCategory)
                     {
                         parentEntity = categoryTreeControl1.SelectedItem;
-                        application.AddCategoryItem(entity, parentEntity.Id);
-                        categoryTreeControl1.AddItem(entity, categoryTreeControl1.SelectedItem, true);
+                        application.AddCategoryItem(indexItem, parentEntity.Id);
+                        categoryTreeControl1.AddItem(indexItem, categoryTreeControl1.SelectedItem, true);
                     }
                     else
                     {
                         parentEntity = categoryTreeControl1.SelectedItemParent;
-                        application.AddCategoryItem(entity, parentEntity.Id);
-                        categoryTreeControl1.AddItem(entity, categoryTreeControl1.SelectedItem, false);
+                        application.AddCategoryItem(indexItem, parentEntity.Id);
+                        categoryTreeControl1.AddItem(indexItem, categoryTreeControl1.SelectedItem, false);
                     }
                 }
             }

@@ -360,22 +360,28 @@ namespace CygSoft.CodeCat.Domain
             categoryHierarchy.RenameBlueprintOrCategoryItem(categoryId, newTitle);
         }
 
-        public List<ITitledEntity> GetChildEntities(string parentCategoryId)
+        public List<ITitledEntity> GetChildCategorizedItemsByCategory(string categoryId)
         {
-            List<ITitledEntity> children = new List<ITitledEntity>();
+            List<IItemCategory> categories = categoryHierarchy.GetChildCategories(categoryId);
+            List<ICategorizedItem> categoryItems = categoryHierarchy.GetChildCategorizedItemsByCategory(categoryId);
 
-            string[] items = categoryHierarchy.GetChildItems(parentCategoryId).Select(r => r.Id).ToArray();
-            List<IItemCategory> categories = categoryHierarchy.GetChildCategories(parentCategoryId);
+            if (categoryItems != null && categoryItems.Count() > 0)
+            {
 
-            List<IKeywordIndexItem> indexItems = new List<IKeywordIndexItem>();
-            indexItems.AddRange(codeLibrary.FindByIds(items));
-            indexItems.AddRange(qikLibrary.FindByIds(items));
-            indexItems.AddRange(topicLibrary.FindByIds(items));
+                string[] itemIds = categoryHierarchy.GetChildCategorizedItemsByCategory(categoryId).Select(r => r.ItemId).ToArray();
 
-            children.AddRange(categories);
-            children.AddRange(indexItems);
+                List<IKeywordIndexItem> indexItems = new List<IKeywordIndexItem>();
+                indexItems.AddRange(codeLibrary.FindByIds(itemIds));
+                indexItems.AddRange(qikLibrary.FindByIds(itemIds));
+                indexItems.AddRange(topicLibrary.FindByIds(itemIds));
 
-            return children;
+                List<ITitledEntity> children = new List<ITitledEntity>();
+                children.AddRange(categories);
+                children.AddRange(indexItems);
+
+                return children;
+            }
+            return new List<ITitledEntity>();
         }
 
         public void MoveCategory(string id, string newParentId)
@@ -383,9 +389,10 @@ namespace CygSoft.CodeCat.Domain
             categoryHierarchy.MoveBlueprintOrCategory(id, newParentId);
         }
 
-        public void AddCategoryItem(ITitledEntity item, string categoryId)
+        public void AddCategoryItem(IKeywordIndexItem indexItem, string categoryId)
         {
-            categoryHierarchy.AddBlueprint(item, categoryId);
+            CategorizedItem categorizedItem = new CategorizedItem(indexItem);
+            categoryHierarchy.AddCategorizedItem(categorizedItem, categoryId);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public void AddTargetItem(string filePath, ITitledEntity targetItem, string categoryId)
+        public void AddCategorizedItem(string filePath, ICategorizedItem categorizedItem, string categoryId)
         {
             if (string.IsNullOrWhiteSpace(categoryId))
                 return;
@@ -39,7 +39,7 @@ namespace CygSoft.CodeCat.Category
                                           select el).Single();
 
                 parentElement.Add(new XElement("Item",
-                                    new XAttribute("ID", targetItem.Id)
+                                    new XAttribute("ID", categorizedItem.InstanceId)
                                 ));
 
                 doc.Save(filePath);
