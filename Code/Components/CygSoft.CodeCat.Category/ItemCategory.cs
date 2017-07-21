@@ -10,7 +10,7 @@ namespace CygSoft.CodeCat.Category
     public class ItemCategory : IdentityItem, IItemCategory
     {
         public ItemCategory() { }
-        public ItemCategory(string guidString) : base(guidString) { }
+        public ItemCategory(string id) : base(id) { }
 
         public string Title { get; set; }
     }
