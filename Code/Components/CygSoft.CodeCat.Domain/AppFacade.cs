@@ -362,12 +362,14 @@ namespace CygSoft.CodeCat.Domain
 
         public List<ITitledEntity> GetChildCategorizedItemsByCategory(string categoryId)
         {
+            List<ITitledEntity> children = new List<ITitledEntity>();
             List<IItemCategory> categories = categoryHierarchy.GetChildCategories(categoryId);
             List<ICategorizedItem> categoryItems = categoryHierarchy.GetChildCategorizedItemsByCategory(categoryId);
 
+            children.AddRange(categories);
+
             if (categoryItems != null && categoryItems.Count() > 0)
             {
-
                 string[] itemIds = categoryHierarchy.GetChildCategorizedItemsByCategory(categoryId).Select(r => r.ItemId).ToArray();
 
                 List<IKeywordIndexItem> indexItems = new List<IKeywordIndexItem>();
@@ -375,13 +377,9 @@ namespace CygSoft.CodeCat.Domain
                 indexItems.AddRange(qikLibrary.FindByIds(itemIds));
                 indexItems.AddRange(topicLibrary.FindByIds(itemIds));
 
-                List<ITitledEntity> children = new List<ITitledEntity>();
-                children.AddRange(categories);
                 children.AddRange(indexItems);
-
-                return children;
             }
-            return new List<ITitledEntity>();
+            return children;
         }
 
         public void MoveCategory(string id, string newParentId)
