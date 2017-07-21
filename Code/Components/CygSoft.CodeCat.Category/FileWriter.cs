@@ -24,7 +24,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public void AddCategoryItem(string filePath, ITitledEntity categoryItem, string categoryId)
+        public void AddTargetItem(string filePath, ITitledEntity targetItem, string categoryId)
         {
             if (string.IsNullOrWhiteSpace(categoryId))
                 return;
@@ -39,14 +39,14 @@ namespace CygSoft.CodeCat.Category
                                           select el).Single();
 
                 parentElement.Add(new XElement("TargetItem",
-                                    new XAttribute("ID", categoryItem.Id)
+                                    new XAttribute("ID", targetItem.Id)
                                 ));
 
                 doc.Save(filePath);
             }
         }
 
-        public void AddBlueprintCategory(string filePath, ITitledEntity blueprintCategory, string parentCategoryId)
+        public void AddCategory(string filePath, ITitledEntity category, string parentCategoryId)
         {
 
             XDocument doc = XDocument.Load(filePath);
@@ -55,8 +55,8 @@ namespace CygSoft.CodeCat.Category
             if (string.IsNullOrWhiteSpace(parentCategoryId))
             {
                 rootElement.Element("Categories").Add(new XElement("Category",
-                                    new XAttribute("ID", blueprintCategory.Id),
-                                    new XAttribute("Title", blueprintCategory.Title)
+                                    new XAttribute("ID", category.Id),
+                                    new XAttribute("Title", category.Title)
                                 ));
 
                 doc.Save(filePath);
@@ -70,15 +70,15 @@ namespace CygSoft.CodeCat.Category
                                               select el).Single();
 
                     parentElement.Add(new XElement("Category",
-                                        new XAttribute("ID", blueprintCategory.Id),
-                                        new XAttribute("Title", blueprintCategory.Title)
+                                        new XAttribute("ID", category.Id),
+                                        new XAttribute("Title", category.Title)
                                     ));
                     doc.Save(filePath);
                 }
             }
         }
 
-        public void MoveBlueprintOrCategory(string filePath, string displacedId, string newParentId)
+        public void MoveTargetItemOrCategory(string filePath, string displacedId, string newParentId)
         {
             XDocument doc = XDocument.Load(filePath);
             XElement rootElement = doc.Root;
@@ -107,7 +107,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public void RenameBlueprintOrCategoryItem(string filePath, string itemId, string newTitle)
+        public void RenameTargetItemOrCategoryItem(string filePath, string itemId, string newTitle)
         {
             XDocument doc = XDocument.Load(filePath);
             XElement rootElement = doc.Root;
@@ -126,7 +126,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public void RemoveBlueprintOrCategoryItem(string filePath, string itemId)
+        public void RemoveTargetItemOrCategory(string filePath, string itemId)
         {
             XDocument doc = XDocument.Load(filePath);
             XElement rootElement = doc.Root;

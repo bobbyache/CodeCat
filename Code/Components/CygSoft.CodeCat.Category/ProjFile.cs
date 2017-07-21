@@ -54,17 +54,17 @@ namespace CygSoft.CodeCat.Category
 
         public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<ICategoryItem> queryHeaderList)
         {
-            return blueprintFileReader.GetBlueprintHeadersByCategory(parentCategoryId, out queryHeaderList);
+            return blueprintFileReader.GetTargetItemsByCategory(parentCategoryId, out queryHeaderList);
         }
 
         public bool GetBlueprintCategoryById(string blueprintCategoryId, out ItemCategory blueprintCategory)
         {
-            return blueprintFileReader.GetBlueprintCategoryById(blueprintCategoryId, out blueprintCategory);
+            return blueprintFileReader.GetCategoryById(blueprintCategoryId, out blueprintCategory);
         }
 
         public bool GetRootBlueprintCategories(out List<ItemCategory> blueprintCategoryList)
         {
-            return blueprintFileReader.GetRootBlueprintCategories(out blueprintCategoryList);
+            return blueprintFileReader.GetRootCategories(out blueprintCategoryList);
         }
 
         public bool GetRootBlueprintCategories(out List<ITitledEntity> abstractBlueprintCategoryList)
@@ -81,32 +81,32 @@ namespace CygSoft.CodeCat.Category
 
         public bool GetChildBlueprintCategories(string parentCategoryId, out List<IItemCategory> blueprintCategoryList)
         {
-            return blueprintFileReader.GetChildBlueprintCategories(parentCategoryId, out blueprintCategoryList);
+            return blueprintFileReader.GetChildCategories(parentCategoryId, out blueprintCategoryList);
         }
 
         public void AddBlueprintCategory(IItemCategory blueprintCategory, string parentId)
         {
-            fileWriter.AddBlueprintCategory(this.FileName, blueprintCategory, parentId);
+            fileWriter.AddCategory(this.FileName, blueprintCategory, parentId);
         }
 
         public void AddBlueprintHeader(ITitledEntity blueprintHeader, string parentId)
         {
-            fileWriter.AddCategoryItem(this.FileName, blueprintHeader, parentId);
+            fileWriter.AddTargetItem(this.FileName, blueprintHeader, parentId);
         }
 
         public void MoveBlueprintOrCategory(string displacedId, string newParentId)
         {
-            fileWriter.MoveBlueprintOrCategory(this.FileName, displacedId, newParentId);
+            fileWriter.MoveTargetItemOrCategory(this.FileName, displacedId, newParentId);
         }
 
         public void RenameBlueprintOrCategoryItem(string itemId, string newTitle)
         {
-            fileWriter.RenameBlueprintOrCategoryItem(this.FileName, itemId, newTitle);
+            fileWriter.RenameTargetItemOrCategoryItem(this.FileName, itemId, newTitle);
         }
 
         public void RemoveBlueprintOrCategoryItem(string itemId)
         {
-            fileWriter.RemoveBlueprintOrCategoryItem(this.FileName, itemId);
+            fileWriter.RemoveTargetItemOrCategory(this.FileName, itemId);
         }
 
     }
