@@ -2,7 +2,7 @@
 
 namespace CygSoft.CodeCat.Category.Infrastructure
 {
-    public interface ICategoryItem : ITitledEntity
+    public interface ICategorizedItem : ITitledEntity
     {
     }
 }

@@ -68,7 +68,7 @@ namespace CygSoft.CodeCat.Category
             }
         }
 
-        public List<ICategoryItem> GetChildItems(string parentCategoryId)
+        public List<ICategorizedItem> GetChildItems(string parentCategoryId)
         {
             return projectFile.GetChildItems(parentCategoryId);
         }

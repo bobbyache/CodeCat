@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoryItem.cs" />
+    <Compile Include="CategorizedItem.cs" />
     <Compile Include="ItemCategory.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="FileWriter.cs" />

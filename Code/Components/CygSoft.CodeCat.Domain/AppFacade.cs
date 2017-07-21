@@ -339,7 +339,7 @@ namespace CygSoft.CodeCat.Domain
 
         public ITitledEntity CreateCategoryItem(string id, string title)
         {
-            ITitledEntity entity = new CategoryItem(id);
+            ITitledEntity entity = new CategorizedItem(id);
             entity.Title = title;
 
             return entity;

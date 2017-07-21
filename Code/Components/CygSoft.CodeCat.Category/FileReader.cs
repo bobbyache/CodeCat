@@ -95,10 +95,10 @@ namespace CygSoft.CodeCat.Category
             return false;
         }
 
-        public bool GetTargetItemsByCategory(string parentCategoryId, out List<ICategoryItem> targetItems)
+        public bool GetTargetItemsByCategory(string parentCategoryId, out List<ICategorizedItem> targetItems)
         {
             XElement rootElement;
-            targetItems = new List<ICategoryItem>();
+            targetItems = new List<ICategorizedItem>();
 
             if (FetchRootElement(out rootElement))
             {
@@ -112,9 +112,9 @@ namespace CygSoft.CodeCat.Category
                     if (parentElement.Elements("TargetItem").Any())
                     {
                         targetItems = (from el in parentElement.Elements("TargetItem")
-                                           select new CategoryItem((string)el.Attribute("ID"))
+                                           select new CategorizedItem((string)el.Attribute("ID"))
                                            {
-                                           }).OfType<ICategoryItem>().ToList();
+                                           }).OfType<ICategorizedItem>().ToList();
                         return true;
                     }
                 }

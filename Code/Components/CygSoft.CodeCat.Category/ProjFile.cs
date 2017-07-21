@@ -40,19 +40,19 @@ namespace CygSoft.CodeCat.Category
             return itemList;
         }
 
-        public List<ICategoryItem> GetChildItems(string parentCategoryId)
+        public List<ICategorizedItem> GetChildItems(string parentCategoryId)
         {
-            List<ICategoryItem> itemList = new List<ICategoryItem>();
-            List<ICategoryItem> blueprintHeaders;
+            List<ICategorizedItem> itemList = new List<ICategorizedItem>();
+            List<ICategorizedItem> blueprintHeaders;
 
             if (GetBlueprintHeadersByCategory(parentCategoryId, out blueprintHeaders))
             {
-                itemList.AddRange(blueprintHeaders.OfType<ICategoryItem>());
+                itemList.AddRange(blueprintHeaders.OfType<ICategorizedItem>());
             }
             return itemList;
         }
 
-        public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<ICategoryItem> queryHeaderList)
+        public bool GetBlueprintHeadersByCategory(string parentCategoryId, out List<ICategorizedItem> queryHeaderList)
         {
             return blueprintFileReader.GetTargetItemsByCategory(parentCategoryId, out queryHeaderList);
         }

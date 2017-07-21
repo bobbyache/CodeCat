@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Category
 {
-    public class CategoryItem : IdentityItem, ICategoryItem
+    public class CategorizedItem : IdentityItem, ICategorizedItem
     {
-        public CategoryItem() { }
-        public CategoryItem(string guidString) : base(guidString) { }
+        public CategorizedItem() { }
+        public CategorizedItem(string guidString) : base(guidString) { }
 
         public string Title { get; set; }
     }
