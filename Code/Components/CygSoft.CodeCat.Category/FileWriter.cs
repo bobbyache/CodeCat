@@ -38,7 +38,7 @@ namespace CygSoft.CodeCat.Category
                                           where (string)el.Attribute("ID") == categoryId
                                           select el).Single();
 
-                parentElement.Add(new XElement("TargetItem",
+                parentElement.Add(new XElement("Item",
                                     new XAttribute("ID", targetItem.Id)
                                 ));
 

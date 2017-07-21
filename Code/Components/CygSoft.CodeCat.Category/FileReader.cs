@@ -109,9 +109,9 @@ namespace CygSoft.CodeCat.Category
                                               select el).Single();
 
 
-                    if (parentElement.Elements("TargetItem").Any())
+                    if (parentElement.Elements("Item").Any())
                     {
-                        targetItems = (from el in parentElement.Elements("TargetItem")
+                        targetItems = (from el in parentElement.Elements("Item")
                                            select new CategorizedItem((string)el.Attribute("ID"))
                                            {
                                            }).OfType<ICategorizedItem>().ToList();
