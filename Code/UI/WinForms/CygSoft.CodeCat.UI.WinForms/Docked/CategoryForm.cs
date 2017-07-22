@@ -6,13 +6,7 @@ using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -161,7 +155,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             application.MoveCategory(e.DisplacedItem.Id, e.NewParent.Id);
         }
 
-        private void btnAddItem_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            ITitledEntity item = categoryTreeControl1.SelectedItem;
+            application.DeleteCategoryOrItem(item);
+            categoryTreeControl1.DeleteItem(item);
+        }
+
+        private void btnAddCategoryItem_Click(object sender, EventArgs e)
         {
             if (categoryTreeControl1.ItemsLoaded)
             {
@@ -169,38 +170,30 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                 DialogResult result = dialog.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
-                    IKeywordIndexItem indexItem = dialog.SelectedSnippet as IKeywordIndexItem;
+                    IKeywordIndexItem[] indexItems = dialog.SelectedSnippets;
 
                     ITitledEntity parentEntity = null;
 
                     if (categoryTreeControl1.SelectedItem is IItemCategory)
                     {
                         parentEntity = categoryTreeControl1.SelectedItem;
-                        ICategorizedKeywordIndexItem newItem = application.AddCategoryItem(indexItem, parentEntity.Id);
-                        categoryTreeControl1.AddItem(newItem, categoryTreeControl1.SelectedItem, true);
+                        foreach (IKeywordIndexItem indexItem in indexItems)
+                            AddItem(indexItem, parentEntity.Id);
                     }
                     else
                     {
                         parentEntity = categoryTreeControl1.SelectedItemParent;
-                        ICategorizedKeywordIndexItem newItem = application.AddCategoryItem(indexItem, parentEntity.Id);
-                        categoryTreeControl1.AddItem(newItem, categoryTreeControl1.SelectedItem, false);
+                        foreach (IKeywordIndexItem indexItem in indexItems)
+                            AddItem(indexItem, parentEntity.Id);
                     }
                 }
             }
         }
 
-        private void btnRemoveItem_Click(object sender, EventArgs e)
+        private void AddItem(IKeywordIndexItem indexItem, string parentId)
         {
-            ITitledEntity item = categoryTreeControl1.SelectedItem;
-            application.DeleteCategoryOrItem(item);
-            categoryTreeControl1.DeleteItem(item);
-        }
-
-        private void btnDeleteCategory_Click(object sender, EventArgs e)
-        {
-            ITitledEntity item = categoryTreeControl1.SelectedItem;
-            application.DeleteCategoryOrItem(item);
-            categoryTreeControl1.DeleteItem(item);
+            ICategorizedKeywordIndexItem newItem = application.AddCategoryItem(indexItem, parentId);
+            categoryTreeControl1.AddItem(newItem, categoryTreeControl1.SelectedItem, true);
         }
     }
 }

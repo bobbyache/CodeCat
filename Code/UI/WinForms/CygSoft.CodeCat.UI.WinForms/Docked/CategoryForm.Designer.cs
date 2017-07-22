@@ -33,9 +33,9 @@
             this.btnAddCategory = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnAddCategoryAsSibling = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAddCategoryAsChild = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnDeleteCategory = new System.Windows.Forms.ToolStripButton();
-            this.btnAddItem = new System.Windows.Forms.ToolStripButton();
-            this.btnRemoveItem = new System.Windows.Forms.ToolStripButton();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnAddCategoryItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.categoryTreeControl1 = new CygSoft.CodeCat.UI.WinForms.Controls.CategoryTreeControl();
             this.toolStrip1.SuspendLayout();
@@ -45,9 +45,7 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAddCategory,
-            this.btnDeleteCategory,
-            this.btnAddItem,
-            this.btnRemoveItem});
+            this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(455, 25);
@@ -57,56 +55,50 @@
             // btnAddCategory
             // 
             this.btnAddCategory.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAddCategoryItem,
+            this.toolStripMenuItem1,
             this.btnAddCategoryAsSibling,
             this.btnAddCategoryAsChild});
             this.btnAddCategory.Image = ((System.Drawing.Image)(resources.GetObject("btnAddCategory.Image")));
             this.btnAddCategory.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(109, 22);
-            this.btnAddCategory.Text = "Add Category";
+            this.btnAddCategory.Size = new System.Drawing.Size(58, 22);
+            this.btnAddCategory.Text = "Add";
             // 
             // btnAddCategoryAsSibling
             // 
             this.btnAddCategoryAsSibling.Name = "btnAddCategoryAsSibling";
-            this.btnAddCategoryAsSibling.Size = new System.Drawing.Size(126, 22);
-            this.btnAddCategoryAsSibling.Text = "As Sibling";
+            this.btnAddCategoryAsSibling.Size = new System.Drawing.Size(161, 22);
+            this.btnAddCategoryAsSibling.Text = "Sibling Category";
             this.btnAddCategoryAsSibling.Click += new System.EventHandler(this.btnAddCategoryAsSibling_Click);
             // 
             // btnAddCategoryAsChild
             // 
             this.btnAddCategoryAsChild.Name = "btnAddCategoryAsChild";
-            this.btnAddCategoryAsChild.Size = new System.Drawing.Size(126, 22);
-            this.btnAddCategoryAsChild.Text = "As Child";
+            this.btnAddCategoryAsChild.Size = new System.Drawing.Size(161, 22);
+            this.btnAddCategoryAsChild.Text = "Child Category";
             this.btnAddCategoryAsChild.Click += new System.EventHandler(this.btnAddCategoryAsChild_Click);
             // 
-            // btnDeleteCategory
+            // toolStripMenuItem1
             // 
-            this.btnDeleteCategory.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteCategory.Image")));
-            this.btnDeleteCategory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDeleteCategory.Name = "btnDeleteCategory";
-            this.btnDeleteCategory.Size = new System.Drawing.Size(111, 22);
-            this.btnDeleteCategory.Text = "Delete Category";
-            this.btnDeleteCategory.Click += new System.EventHandler(this.btnDeleteCategory_Click);
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(158, 6);
             // 
-            // btnAddItem
+            // btnAddCategoryItem
             // 
-            this.btnAddItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
-            this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(23, 22);
-            this.btnAddItem.Text = "Add Item";
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            this.btnAddCategoryItem.Name = "btnAddCategoryItem";
+            this.btnAddCategoryItem.Size = new System.Drawing.Size(161, 22);
+            this.btnAddCategoryItem.Text = "Add Item(s)";
+            this.btnAddCategoryItem.Click += new System.EventHandler(this.btnAddCategoryItem_Click);
             // 
-            // btnRemoveItem
+            // btnDelete
             // 
-            this.btnRemoveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRemoveItem.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveItem.Image")));
-            this.btnRemoveItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRemoveItem.Name = "btnRemoveItem";
-            this.btnRemoveItem.Size = new System.Drawing.Size(23, 22);
-            this.btnRemoveItem.Text = "Remove Item";
-            this.btnRemoveItem.Click += new System.EventHandler(this.btnRemoveItem_Click);
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(60, 22);
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // statusStrip1
             // 
@@ -151,8 +143,8 @@
         private System.Windows.Forms.ToolStripDropDownButton btnAddCategory;
         private System.Windows.Forms.ToolStripMenuItem btnAddCategoryAsSibling;
         private System.Windows.Forms.ToolStripMenuItem btnAddCategoryAsChild;
-        private System.Windows.Forms.ToolStripButton btnDeleteCategory;
-        private System.Windows.Forms.ToolStripButton btnAddItem;
-        private System.Windows.Forms.ToolStripButton btnRemoveItem;
+        private System.Windows.Forms.ToolStripButton btnDelete;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem btnAddCategoryItem;
     }
 }

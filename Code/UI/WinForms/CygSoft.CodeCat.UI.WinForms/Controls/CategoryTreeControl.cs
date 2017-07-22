@@ -174,7 +174,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public void DeleteItem(ITitledEntity item)
         {
             TreeNode node = GetNodeByKey(item.Id);
-            node.Parent.Nodes.Remove(node);
+            if (node.Parent == null)
+                treeView1.Nodes.Remove(node);
+            else
+                node.Parent.Nodes.Remove(node);
         }
 
         public void LoadItemLevel(List<ITitledEntity> items, ITitledEntity parent)
