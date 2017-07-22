@@ -31,10 +31,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             categoryTreeControl1.ItemIsExplandableRoutine = ItemIsCategory;
             categoryTreeControl1.LabelIsEditableRoutine = LabelIsEditable;
             categoryTreeControl1.AllowDropNonExpandableRoutine = AllowDropItem;
+            //categoryTreeControl1.SetTreeNodeRoutine = SetTreeNode;
             categoryTreeControl1.ItemExpanding += CategoryTree_ItemExpanding;
             categoryTreeControl1.ItemDblClicked += CategoryTree_ItemDblClicked;
             categoryTreeControl1.ItemMoved += CategoryTree_ItemMoved;
             categoryTreeControl1.ItemRenamed += CategoryTree_ItemRenamed;
+        }
+
+        private TreeNode SetTreeNode(ITitledEntity item)
+        {
+            TreeNode treeNode = new TreeNode();
+            treeNode.Name = item.Id;
+            treeNode.Text = item.Title;
+            treeNode.Tag = item;
+
+            return treeNode;
         }
 
         private bool AllowDropItem(ITitledEntity entity)

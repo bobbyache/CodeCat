@@ -19,6 +19,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     public delegate bool ItemIsExpandableDelegate(ITitledEntity item);
     public delegate bool LabelIsEditableDelegate(ITitledEntity item);
     public delegate bool AllowDropNonExpandableDelegate(ITitledEntity item);
+    public delegate TreeNode SetTreeNodeDelegate(ITitledEntity item);
 
     public partial class CategoryTreeControl : UserControl
     {
@@ -27,6 +28,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             InitializeComponent();
             AllowDrop = true;
             ItemIsExplandableRoutine = new ItemIsExpandableDelegate(ItemIsExpandable);
+            SetTreeNodeRoutine = new SetTreeNodeDelegate(SetTreeNode);
 
             treeView1.NodeMouseDoubleClick += treeView1_NodeMouseDoubleClick;
             treeView1.BeforeExpand += treeView1_BeforeExpand;
@@ -77,6 +79,18 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public LabelIsEditableDelegate AllowDropNonExpandableRoutine
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Intercept the creation of a node in the tree to set the properties (tag, name, key etc.) to what you require.
+        /// </summary>
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public SetTreeNodeDelegate SetTreeNodeRoutine
         {
             get;
             set;
@@ -204,7 +218,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private TreeNode CreateTreeNode(ITitledEntity item, TreeNode parent, bool editAfterCreate)
         {
-            TreeNode nd = SetTreeNode(item);
+            TreeNode nd = SetTreeNodeRoutine(item);
 
             if (parent == null)
             {
