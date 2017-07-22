@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="AppFacade.cs" />
     <Compile Include="Base\BaseLibrary.cs" />
+    <Compile Include="Base\CategorizedKeywordIndexItem.cs" />
+    <Compile Include="Base\ICategorizedKeywordIndexItem.cs" />
     <Compile Include="Base\IPersistableTarget.cs" />
     <Compile Include="Base\PersistableTargetFactory.cs" />
     <Compile Include="LastCodeFileRepository.cs" />

@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Category.Infrastructure;
 using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
@@ -36,16 +37,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             categoryTreeControl1.ItemDblClicked += CategoryTree_ItemDblClicked;
             categoryTreeControl1.ItemMoved += CategoryTree_ItemMoved;
             categoryTreeControl1.ItemRenamed += CategoryTree_ItemRenamed;
-        }
-
-        private TreeNode SetTreeNode(ITitledEntity item)
-        {
-            TreeNode treeNode = new TreeNode();
-            treeNode.Name = item.Id;
-            treeNode.Text = item.Title;
-            treeNode.Tag = item;
-
-            return treeNode;
         }
 
         private bool AllowDropItem(ITitledEntity entity)
@@ -129,8 +120,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             if (e.Item is IItemCategory)
                 return;
 
-            if (e.Item is IKeywordIndexItem)
-                OpenSnippet?.Invoke(this, new OpenSnippetEventArgs(e.Item as IKeywordIndexItem));
+            if (e.Item is ICategorizedKeywordIndexItem)
+                OpenSnippet?.Invoke(this, new OpenSnippetEventArgs((e.Item as ICategorizedKeywordIndexItem).IndexItem));
         }
 
         private void CategoryTree_ItemExpanding(object sender, ItemExpandingEventArgs e)

@@ -15,6 +15,7 @@ using CygSoft.CodeCat.Syntax.Infrastructure;
 using CygSoft.CodeCat.Syntax;
 using CygSoft.CodeCat.Category;
 using CygSoft.CodeCat.Category.Infrastructure;
+using CygSoft.CodeCat.Domain.Base;
 
 namespace CygSoft.CodeCat.Domain
 {
@@ -363,6 +364,8 @@ namespace CygSoft.CodeCat.Domain
         public List<ITitledEntity> GetChildCategorizedItemsByCategory(string categoryId)
         {
             List<ITitledEntity> children = new List<ITitledEntity>();
+            
+            
             List<IItemCategory> categories = categoryHierarchy.GetChildCategories(categoryId);
             List<ICategorizedItem> categoryItems = categoryHierarchy.GetChildCategorizedItemsByCategory(categoryId);
 
@@ -370,14 +373,24 @@ namespace CygSoft.CodeCat.Domain
 
             if (categoryItems != null && categoryItems.Count() > 0)
             {
-                string[] itemIds = categoryHierarchy.GetChildCategorizedItemsByCategory(categoryId).Select(r => r.ItemId).ToArray();
+                var catItems = categoryHierarchy.GetChildCategorizedItemsByCategory(categoryId);
+                string[] itemIds =  catItems.Select(r => r.ItemId).ToArray();
 
                 List<IKeywordIndexItem> indexItems = new List<IKeywordIndexItem>();
                 indexItems.AddRange(codeLibrary.FindByIds(itemIds));
                 indexItems.AddRange(qikLibrary.FindByIds(itemIds));
                 indexItems.AddRange(topicLibrary.FindByIds(itemIds));
 
-                children.AddRange(indexItems);
+                List<ICategorizedKeywordIndexItem> categoryIndexItems = new List<ICategorizedKeywordIndexItem>();
+
+                
+                categoryIndexItems = (from c in catItems
+                               join p in indexItems on c.ItemId equals p.Id
+                               select new CategorizedKeywordIndexItem(c.Id, p as IKeywordIndexItem))
+                               .OfType<ICategorizedKeywordIndexItem>()
+                               .ToList();
+
+                children.AddRange(categoryIndexItems);
             }
             return children;
         }
