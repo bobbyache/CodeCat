@@ -5,6 +5,7 @@ using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -24,6 +25,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             InitializeComponent();
             this.application = application;
+            this.Text = "Categories";
+            this.Icon = IconRepository.Get(Constants.ImageKeys.OpenCategory, false).Icon;
+
+            btnAddCategory.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddTemplate);
+            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
 
             categoryTreeControl1.ImageList = IconRepository.ImageList;
             categoryTreeControl1.ItemIsExplandableRoutine = ItemIsCategory;
