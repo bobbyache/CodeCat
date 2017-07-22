@@ -69,6 +69,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             Gui.Resources.Namespace = "CygSoft.CodeCat.UI.WinForms.UiResource";
             Gui.Resources.ExecutingAssembly = Assembly.GetExecutingAssembly();
 
+            IconRepository.AddCategoryInfo();
             IconRepository.AddDocuments();
             IconRepository.AddSyntaxes(application.GetSyntaxFileInfo());
         }

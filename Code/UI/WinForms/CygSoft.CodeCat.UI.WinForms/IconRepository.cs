@@ -1,5 +1,8 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.Qik;
+using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Syntax.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Images;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -38,6 +41,23 @@ namespace CygSoft.CodeCat.UI.WinForms
         public static Icon CodeGroupIcon { get { return Get(TopicSections.CodeGroup).Icon; } }
         public static Icon FileGroupIcon { get { return Get(TopicSections.FileAttachments).Icon; } }
 
+
+        public static ImageOutput GetKeywordIndexItemImage(IKeywordIndexItem item)
+        {
+            string imageKey = null;
+
+            if (item is ICodeKeywordIndexItem)
+                imageKey = (item as ICodeKeywordIndexItem).Syntax;
+
+            else if (item is IQikTemplateKeywordIndexItem)
+                imageKey = IconRepository.TopicSections.QikGroup;
+
+            else if (item is ITopicKeywordIndexItem)
+                imageKey = IconRepository.TopicSections.CodeGroup;
+
+            return Get(imageKey, false);
+        }
+
         public static ImageOutput Get(string key, bool isFileExtensionKey = false)
         {
             //if (IsDocument(key))
@@ -54,6 +74,12 @@ namespace CygSoft.CodeCat.UI.WinForms
         //        return true;
         //    return false;
         //}
+
+        public static void AddCategoryInfo()
+        {
+            imageLibrary.Add(Constants.ImageKeys.OpenCategory, Gui.Resources.GetImage(Constants.ImageKeys.OpenCategory));
+            imageLibrary.Add(Constants.ImageKeys.ClosedCategory, Gui.Resources.GetImage(Constants.ImageKeys.ClosedCategory));
+        }
 
         public static void AddDocuments()
         {

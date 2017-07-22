@@ -622,6 +622,11 @@
     <None Include="Resources\presentation_chart.png" />
     <None Include="Resources\arrow_refresh.png" />
     <Content Include="Resources\date2.png" />
+    <None Include="Resources\wallet_closed_add.png" />
+    <None Include="Resources\wallet_closed.png" />
+    <None Include="Resources\wallet_closed_delete.png" />
+    <None Include="Resources\wallet_closed_edit.png" />
+    <None Include="Resources\wallet_open.png" />
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

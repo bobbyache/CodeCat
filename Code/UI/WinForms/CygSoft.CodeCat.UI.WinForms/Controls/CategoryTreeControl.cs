@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Category.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -40,6 +41,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             treeView1.DragEnter += treeView1_DragEnter;
             treeView1.ItemDrag += treeView1_ItemDrag;
 
+        }
+
+        public ImageList ImageList
+        {
+            set { treeView1.ImageList = value; }
         }
 
         public event ItemExpandingHandler ItemExpanding;

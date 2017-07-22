@@ -208,4 +208,19 @@
   <data name="EventDiary" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\date2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AddCategory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\wallet_closed_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ClosedCategory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\wallet_closed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DeleteCategory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\wallet_closed_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditCategory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\wallet_closed_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OpenCategory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\wallet_open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

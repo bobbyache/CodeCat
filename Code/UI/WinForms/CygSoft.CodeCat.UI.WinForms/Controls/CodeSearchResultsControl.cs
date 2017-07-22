@@ -82,7 +82,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             listItem.Name = keywordIndexItem.Id;
             listItem.Tag = keywordIndexItem;
             listItem.Text = keywordIndexItem.Title;
-            listItem.ImageKey = GetImageKey(keywordIndexItem);
+            listItem.ImageKey = IconRepository.GetKeywordIndexItemImage(keywordIndexItem).ImageKey;
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, keywordIndexItem.DateCreated.ToShortDateString()));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, keywordIndexItem.DateModified.ToShortDateString()));
             listView.Items.Add(listItem);
@@ -95,21 +95,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private string GetImageKey(IKeywordIndexItem item)
-        {
-            string imageKey = null;
+        //private string GetImageKey(IKeywordIndexItem item)
+        //{
+        //    string imageKey = null;
 
-            if (item is ICodeKeywordIndexItem)
-                imageKey = (item as ICodeKeywordIndexItem).Syntax;
+        //    if (item is ICodeKeywordIndexItem)
+        //        imageKey = (item as ICodeKeywordIndexItem).Syntax;
 
-            else if (item is IQikTemplateKeywordIndexItem)
-                imageKey = IconRepository.TopicSections.QikGroup;
+        //    else if (item is IQikTemplateKeywordIndexItem)
+        //        imageKey = IconRepository.TopicSections.QikGroup;
 
-            else if (item is ITopicKeywordIndexItem)
-                imageKey = IconRepository.TopicSections.CodeGroup;
+        //    else if (item is ITopicKeywordIndexItem)
+        //        imageKey = IconRepository.TopicSections.CodeGroup;
 
-            return imageKey;
-        }
+        //    return imageKey;
+        //}
 
         private void OpenSelectedSnippet()
         {

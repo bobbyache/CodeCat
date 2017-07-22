@@ -23,20 +23,47 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
 
         private AppFacade application;
+        private int openCategoryImageIndex = IconRepository.Get(Constants.ImageKeys.OpenCategory, false).Index;
+        private int closedCategoryImageIndex = IconRepository.Get(Constants.ImageKeys.ClosedCategory, false).Index;
 
         public CategoryForm(AppFacade application)
         {
             InitializeComponent();
             this.application = application;
 
+            categoryTreeControl1.ImageList = IconRepository.ImageList;
             categoryTreeControl1.ItemIsExplandableRoutine = ItemIsCategory;
             categoryTreeControl1.LabelIsEditableRoutine = LabelIsEditable;
             categoryTreeControl1.AllowDropNonExpandableRoutine = AllowDropItem;
-            //categoryTreeControl1.SetTreeNodeRoutine = SetTreeNode;
+            categoryTreeControl1.SetTreeNodeRoutine = SetTreeNode;
             categoryTreeControl1.ItemExpanding += CategoryTree_ItemExpanding;
             categoryTreeControl1.ItemDblClicked += CategoryTree_ItemDblClicked;
             categoryTreeControl1.ItemMoved += CategoryTree_ItemMoved;
             categoryTreeControl1.ItemRenamed += CategoryTree_ItemRenamed;
+        }
+
+        private TreeNode SetTreeNode(ITitledEntity item)
+        {
+            TreeNode treeNode = new TreeNode();
+
+            treeNode.Name = item.Id;
+            treeNode.Text = item.Title;
+            treeNode.Tag = item;
+
+            if (item is ICategorizedKeywordIndexItem)
+            {
+                ICategorizedKeywordIndexItem indexItem = item as ICategorizedKeywordIndexItem;
+                int imageIndex = IconRepository.GetKeywordIndexItemImage(indexItem.IndexItem).Index;
+                treeNode.ImageIndex = imageIndex;
+                treeNode.SelectedImageIndex = imageIndex;
+            }
+            else
+            {
+                treeNode.ImageIndex = closedCategoryImageIndex;
+                treeNode.SelectedImageIndex = openCategoryImageIndex;
+            }
+
+            return treeNode;
         }
 
         private bool AllowDropItem(ITitledEntity entity)
@@ -149,14 +176,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                     if (categoryTreeControl1.SelectedItem is IItemCategory)
                     {
                         parentEntity = categoryTreeControl1.SelectedItem;
-                        application.AddCategoryItem(indexItem, parentEntity.Id);
-                        categoryTreeControl1.AddItem(indexItem, categoryTreeControl1.SelectedItem, true);
+                        ICategorizedKeywordIndexItem newItem = application.AddCategoryItem(indexItem, parentEntity.Id);
+                        categoryTreeControl1.AddItem(newItem, categoryTreeControl1.SelectedItem, true);
                     }
                     else
                     {
                         parentEntity = categoryTreeControl1.SelectedItemParent;
-                        application.AddCategoryItem(indexItem, parentEntity.Id);
-                        categoryTreeControl1.AddItem(indexItem, categoryTreeControl1.SelectedItem, false);
+                        ICategorizedKeywordIndexItem newItem = application.AddCategoryItem(indexItem, parentEntity.Id);
+                        categoryTreeControl1.AddItem(newItem, categoryTreeControl1.SelectedItem, false);
                     }
                 }
             }

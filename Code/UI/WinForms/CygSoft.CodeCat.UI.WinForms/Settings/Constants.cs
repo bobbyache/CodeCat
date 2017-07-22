@@ -40,6 +40,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string ImageSet = "ImageSet";
             public const string Refresh = "Refresh";
             public const string EventDiary = "EventDiary";
+            public const string OpenCategory = "OpenCategory";
+            public const string ClosedCategory = "ClosedCategory";
+            public const string DeleteCategory = "DeleteCategory";
+            public const string EditCategory = "EditCategory";
+            public const string AddCategory = "AddCategory";
             //public const string SaveProject = "SaveProject";
         }
     }

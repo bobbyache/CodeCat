@@ -400,10 +400,13 @@ namespace CygSoft.CodeCat.Domain
             categoryHierarchy.MoveCategory(id, newParentId);
         }
 
-        public void AddCategoryItem(IKeywordIndexItem indexItem, string categoryId)
+        public ICategorizedKeywordIndexItem AddCategoryItem(IKeywordIndexItem indexItem, string categoryId)
         {
             CategorizedItem categorizedItem = new CategorizedItem(indexItem);
-            categoryHierarchy.AddCategorizedItem(categorizedItem, categoryId);
+            ICategorizedKeywordIndexItem categorizedIndexItem = new CategorizedKeywordIndexItem(categorizedItem.Id, indexItem);
+            
+            categoryHierarchy.AddCategorizedItem(categorizedIndexItem, categoryId);
+            return categorizedIndexItem;
         }
 
         public void DeleteCategoryOrItem(ITitledEntity item)

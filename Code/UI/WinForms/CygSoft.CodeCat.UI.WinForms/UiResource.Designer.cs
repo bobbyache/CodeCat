@@ -73,6 +73,16 @@ namespace CygSoft.CodeCat.UI.WinForms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddCategory {
+            get {
+                object obj = ResourceManager.GetObject("AddCategory", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AddSnapshot {
             get {
                 object obj = ResourceManager.GetObject("AddSnapshot", resourceCulture);
@@ -96,6 +106,16 @@ namespace CygSoft.CodeCat.UI.WinForms {
         internal static System.Drawing.Bitmap Attachment {
             get {
                 object obj = ResourceManager.GetObject("Attachment", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ClosedCategory {
+            get {
+                object obj = ResourceManager.GetObject("ClosedCategory", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,6 +153,16 @@ namespace CygSoft.CodeCat.UI.WinForms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DeleteCategory {
+            get {
+                object obj = ResourceManager.GetObject("DeleteCategory", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DeleteSnapshot {
             get {
                 object obj = ResourceManager.GetObject("DeleteSnapshot", resourceCulture);
@@ -156,6 +186,16 @@ namespace CygSoft.CodeCat.UI.WinForms {
         internal static System.Drawing.Bitmap DiscardSnippetChanges {
             get {
                 object obj = ResourceManager.GetObject("DiscardSnippetChanges", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditCategory {
+            get {
+                object obj = ResourceManager.GetObject("EditCategory", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -246,6 +286,16 @@ namespace CygSoft.CodeCat.UI.WinForms {
         internal static System.Drawing.Bitmap NewProject {
             get {
                 object obj = ResourceManager.GetObject("NewProject", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OpenCategory {
+            get {
+                object obj = ResourceManager.GetObject("OpenCategory", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
