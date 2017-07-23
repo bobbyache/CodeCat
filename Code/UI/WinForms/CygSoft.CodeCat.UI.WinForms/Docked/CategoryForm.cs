@@ -24,9 +24,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         public CategoryForm(AppFacade application)
         {
             InitializeComponent();
+
+            if (application == null)
+                throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");
             this.application = application;
-            this.Text = "Categories";
-            this.Icon = IconRepository.Get(Constants.ImageKeys.OpenCategory, false).Icon;
+
+            Text = "Categories";
+            Icon = IconRepository.Get(Constants.ImageKeys.OpenCategory, false).Icon;
+            HideOnClose = true;
 
             btnAddCategory.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddTemplate);
             btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.RemoveTemplate);

@@ -50,8 +50,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeMenuClickEvents();
             InitializeRecentProjectMenu();
             InitializeSearchForm();
-            InitializeTaskForm();
             InitializeCategoryForm();
+            InitializeTaskForm();
 
             if (!LoadLastProject())
             {
@@ -84,6 +84,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             mnuAddQikTemplate.Image = IconRepository.Get(IconRepository.TopicSections.QikGroup).Image;
             mnuWindowKeywordSearch.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
             mnuCurrentTasks.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditText);
+            mnuCategories.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenCategory);
         }
 
         private void InitializeMenuClickEvents()
@@ -109,7 +110,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             searchForm.KeywordsAdded += searchForm_KeywordsAdded;
             searchForm.KeywordsRemoved += searchForm_KeywordsRemoved;
 
-            searchForm.Show(dockPanel, DockState.DockLeft);
+            searchForm.Show(dockPanel, DockState.DockLeftAutoHide);
             //searchForm.CloseButton = false;
             //searchForm.CloseButtonVisible = false;
         }
@@ -117,14 +118,14 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void InitializeTaskForm()
         {
             taskForm = new TaskForm(this.application);
-            taskForm.Show(dockPanel, DockState.DockRight);
+            taskForm.Show(dockPanel, DockState.DockLeftAutoHide);
         }
 
         private void InitializeCategoryForm()
         {
             categoryForm = new CategoryForm(this.application);
             categoryForm.OpenSnippet += Control_OpenSnippet;
-            categoryForm.Show(dockPanel, DockState.DockLeft);
+            categoryForm.Show(dockPanel, DockState.DockLeftAutoHide);
         }
 
         private void searchForm_KeywordsRemoved(object sender, SearchKeywordsModifiedEventArgs e)
@@ -732,6 +733,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             // Note dockPanel.Documents handles the management of your documents. It maintains a collection.
             // This does not include your docked windows, just your "document" windows. This is excellent because
             // you can use this existing collection property to maintain your code snippets.
+        }
+
+        private void mnuCategories_Click(object sender, EventArgs e)
+        {
+            categoryForm.Activate();
         }
     }
 }
