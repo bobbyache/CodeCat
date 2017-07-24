@@ -31,16 +31,45 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             ItemIsExplandableRoutine = new ItemIsExpandableDelegate(ItemIsExpandable);
             SetTreeNodeRoutine = new SetTreeNodeDelegate(SetTreeNode);
 
+            treeView1.NodeMouseClick += treeView1_NodeMouseClick;
             treeView1.NodeMouseDoubleClick += treeView1_NodeMouseDoubleClick;
             treeView1.BeforeExpand += treeView1_BeforeExpand;
             treeView1.AfterExpand += treeView1_AfterExpand;
             treeView1.BeforeLabelEdit += treeView1_BeforeLabelEdit;
             treeView1.AfterLabelEdit += treeView1_AfterLabelEdit;
+            treeView1.AfterSelect += treeView1_AfterSelect;
 
             treeView1.DragDrop += treeView1_DragDrop;
             treeView1.DragEnter += treeView1_DragEnter;
             treeView1.ItemDrag += treeView1_ItemDrag;
 
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            //if (e == null)
+            //{
+            //    // called from NodeMouseClick - user selected a node that was already selected...
+            //}
+            //else
+            //{
+            //    // https://msdn.microsoft.com/en-us/library/system.windows.forms.treeview.afterselect.aspx
+            //    // see EventArgs ^^^ for more options...
+            //}
+
+            //if (ItemActivated != null)
+            //    ItemActivated(this, new ItemEventArgs(SelectedItem));
+        }
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            //if (e.Node != null && e.Button == MouseButtons.Right)
+            //{
+
+            //}
+            //// http://stackoverflow.com/questions/1671153/why-isnt-there-a-selectednodechanged-event-for-windows-forms-treeview
+            //if (e.Node == treeView1.SelectedNode)
+            //    treeView1_AfterSelect(sender, null);
         }
 
         public ImageList ImageList

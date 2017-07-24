@@ -203,6 +203,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(392, 39);
             this.Name = "SearchableSnippetEditDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Code Snippet";
             this.ResumeLayout(false);
             this.PerformLayout();
