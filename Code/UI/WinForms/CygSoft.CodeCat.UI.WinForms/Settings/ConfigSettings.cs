@@ -103,6 +103,24 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        
+
+        private static string shellExecuteMenu;
+        public static string ShellExecuteMenu
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(shellExecuteMenu))
+                    shellExecuteMenu = ConfigurationManager.AppSettings["ShellExecuteMenu"];
+
+                return shellExecuteMenu;
+            }
+            set
+            {
+                ConfigurationManager.AppSettings["ShellExecuteMenu"] = value;
+            }
+        }
+
         private static string msPaintEditorPath;
         public static string MsPaintEditorPath
         {
@@ -266,6 +284,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public static void Refresh()
         {
+            shellExecuteMenu = ConfigurationManager.AppSettings["ShellExecuteMenu"];
             registryFolder = ConfigurationManager.AppSettings["RegistryPath"];
             applicationTitle = ConfigurationManager.AppSettings["ApplicationTitle"];
             lastProject = ConfigurationManager.AppSettings["LastProject"];

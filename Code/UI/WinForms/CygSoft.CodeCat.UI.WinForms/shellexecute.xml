@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ShellExecute>
+  <Application ID="MSPaint" Title="Ms Paint" Path="C:\Windows\system32\mspaint.exe" />
+  <Application ID="SnippingTool" Title="Snipping Tool" Path="C:\Windows\sysnative\SnippingTool.exe" />
+  <Application ID="Xess1.6" Title="Xess Generator 1.6" Path="C:\CygSoft\XessGenerator\1.6\XessWinFormsGUI.exe" />
+  <Application ID="XessGenMan" Title="Xess Generator (Manual)" Path="C:\CygSoft\Xess Manual\CygSoft.Xess.UI.WinForms.exe" />
+</ShellExecute>

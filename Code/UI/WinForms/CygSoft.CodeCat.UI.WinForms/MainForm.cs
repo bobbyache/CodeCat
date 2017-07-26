@@ -42,7 +42,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             InitializeFileIcons();
             InitializeIconImages();
-            
+
+            Gui.ShellExecuteMenu.LoadMenu(mnuApplications);
 
             dockPanel.ContentAdded += dockPanel_ContentAdded;
             dockPanel.ContentRemoved += dockPanel_ContentRemoved;
@@ -738,6 +739,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void mnuCategories_Click(object sender, EventArgs e)
         {
             categoryForm.Activate();
+        }
+
+        private void mnuManageShellExecute_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

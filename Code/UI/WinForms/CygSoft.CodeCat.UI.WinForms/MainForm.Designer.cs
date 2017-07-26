@@ -61,15 +61,17 @@
             this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindowKeywordSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCurrentTasks = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCategories = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuDocuments = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuApplications = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpHelpTopics = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.indexCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.mnuCategories = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +82,7 @@
             this.mnuFile,
             this.mnuSnippets,
             this.mnuWindow,
+            this.toolsToolStripMenuItem,
             this.mnuHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -210,6 +213,13 @@
             this.mnuCurrentTasks.Size = new System.Drawing.Size(158, 22);
             this.mnuCurrentTasks.Text = "Current Tasks";
             // 
+            // mnuCategories
+            // 
+            this.mnuCategories.Name = "mnuCategories";
+            this.mnuCategories.Size = new System.Drawing.Size(158, 22);
+            this.mnuCategories.Text = "Categories";
+            this.mnuCategories.Click += new System.EventHandler(this.mnuCategories_Click);
+            // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
@@ -220,6 +230,20 @@
             this.mnuDocuments.Name = "mnuDocuments";
             this.mnuDocuments.Size = new System.Drawing.Size(158, 22);
             this.mnuDocuments.Text = "Documents";
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuApplications});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // mnuApplications
+            // 
+            this.mnuApplications.Name = "mnuApplications";
+            this.mnuApplications.Size = new System.Drawing.Size(152, 22);
+            this.mnuApplications.Text = "Applications";
             // 
             // mnuHelp
             // 
@@ -315,13 +339,6 @@
             this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 7;
             // 
-            // mnuCategories
-            // 
-            this.mnuCategories.Name = "mnuCategories";
-            this.mnuCategories.Size = new System.Drawing.Size(158, 22);
-            this.mnuCategories.Text = "Categories";
-            this.mnuCategories.Click += new System.EventHandler(this.mnuCategories_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,6 +390,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuAddCodeGroup;
         private System.Windows.Forms.ToolStripMenuItem mnuCurrentTasks;
         private System.Windows.Forms.ToolStripMenuItem mnuCategories;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuApplications;
     }
 }
 

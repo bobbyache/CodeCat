@@ -367,6 +367,7 @@
     <Compile Include="UiHelpers\Drawing.cs" />
     <Compile Include="UiHelpers\GroupedListView.cs" />
     <Compile Include="UiHelpers\Resources.cs" />
+    <Compile Include="UiHelpers\ShellExecuteMenu.cs" />
     <Compile Include="UiHelpers\Text.cs" />
     <Compile Include="UiHelpers\ToolBar.cs" />
     <Compile Include="UiResource.Designer.cs">
@@ -627,6 +628,10 @@
     <None Include="Resources\wallet_closed_delete.png" />
     <None Include="Resources\wallet_closed_edit.png" />
     <None Include="Resources\wallet_open.png" />
+    <Content Include="shellexecute.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="syntax.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
