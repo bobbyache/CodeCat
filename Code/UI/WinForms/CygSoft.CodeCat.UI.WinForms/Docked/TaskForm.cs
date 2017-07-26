@@ -38,9 +38,46 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             btnEditTask.Enabled = false;
             btnDeleteTask.Enabled = false;
 
-                if (application == null)
+            if (application == null)
                 throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");
+
             this.application = application;
+
+            listView.MouseClick += listView_MouseClick;
+            
+            btnNewTask.Click += (s,e) => NewTask();
+            btnEditTask.Click += (s, e) => EditTask();
+            btnDeleteTask.Click += (s, e) => DeleteTask();
+            mnuPriority.DropDownOpening += mnuPriority_DropDownOpening;
+            mnuDeleteTask.Click += (s, e) => DeleteTask();
+            mnuEditTask.Click += (s, e) => EditTask();
+            mnuNewTask.Click += (s, e) => NewTask();
+            mnuPriorityHigh.Click += (s, e) => ChangePriority(TaskPriority.High);
+            mnuPriorityMedium.Click += (s, e) => ChangePriority(TaskPriority.Medium);
+            mnuPriorityLow.Click += (s, e) => ChangePriority(TaskPriority.Low);
+        }
+
+        private void mnuPriority_DropDownOpening(object sender, EventArgs e)
+        {
+            ITask task = Gui.GroupedListView.SelectedItem<ITask>(listView);
+            if (task != null)
+                CheckPriorityMenuItem(task.Priority);
+        }
+
+        private void listView_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                EnableContextMenuItems(listView.FocusedItem.Bounds.Contains(e.Location));
+                contextMenu.Show(Cursor.Position);
+            }
+        }
+
+        private void EnableContextMenuItems(bool singleItemSelected)
+        {
+            mnuPriority.Enabled = singleItemSelected;
+            mnuDeleteTask.Enabled = singleItemSelected;
+            mnuEditTask.Enabled = singleItemSelected;
         }
 
         public void LoadTasks()
@@ -110,7 +147,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             return listItem;
         }
 
-        private void btnNewTask_Click(object sender, EventArgs e)
+        private void NewTask()
         {
             ITask task = application.CreateTask();
             TaskEditDialog dialog = new TaskEditDialog(application, task, application.TaskPriorities);
@@ -125,7 +162,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             }
         }
 
-        private void btnDeleteTask_Click(object sender, EventArgs e)
+        private void DeleteTask()
         {
             if (Gui.GroupedListView.ItemsSelected<ITask>(listView))
             {
@@ -137,7 +174,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             }
         }
 
-        private void btnEditTask_Click(object sender, EventArgs e)
+        private void EditTask()
         {
             ITask task = Gui.GroupedListView.SelectedItem<ITask>(listView);
 
@@ -160,6 +197,26 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             taskProgressBar.Value = application.PercentageOfTasksCompleted();
             lblTaskInfo.Text = application.CurrentTaskInformation();
+        }
+
+        private void CheckPriorityMenuItem(TaskPriority priority)
+        {
+            mnuPriorityHigh.Checked = priority == TaskPriority.High;
+            mnuPriorityMedium.Checked = priority == TaskPriority.Medium;
+            mnuPriorityLow.Checked = priority == TaskPriority.Low;
+        }
+
+        private void ChangePriority(TaskPriority priority)
+        {
+            ITask task = Gui.GroupedListView.SelectedItem<ITask>(listView);
+            if (task != null)
+            {
+                task.Priority = priority;
+                application.SaveTasks();
+                listView.SelectedItems[0].Text = task.Title;
+                listView.SelectedItems[0].Group = listView.Groups[task.Category];
+                DisplayStatusInformation();
+            }
         }
     }
 }
