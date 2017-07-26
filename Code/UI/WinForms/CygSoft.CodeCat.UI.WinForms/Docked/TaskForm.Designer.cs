@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNewTask = new System.Windows.Forms.ToolStripButton();
@@ -39,8 +40,19 @@
             this.listView = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDateCreated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuPriority = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPriorityHigh = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPriorityMedium = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPriorityLow = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuNewTask = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEditTask = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuDeleteTask = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -62,7 +74,6 @@
             this.btnNewTask.Name = "btnNewTask";
             this.btnNewTask.Size = new System.Drawing.Size(77, 22);
             this.btnNewTask.Text = "New Task";
-            this.btnNewTask.Click += new System.EventHandler(this.btnNewTask_Click);
             // 
             // btnDeleteTask
             // 
@@ -71,7 +82,6 @@
             this.btnDeleteTask.Name = "btnDeleteTask";
             this.btnDeleteTask.Size = new System.Drawing.Size(86, 22);
             this.btnDeleteTask.Text = "Delete Task";
-            this.btnDeleteTask.Click += new System.EventHandler(this.btnDeleteTask_Click);
             // 
             // btnEditTask
             // 
@@ -80,7 +90,6 @@
             this.btnEditTask.Name = "btnEditTask";
             this.btnEditTask.Size = new System.Drawing.Size(73, 22);
             this.btnEditTask.Text = "Edit Task";
-            this.btnEditTask.Click += new System.EventHandler(this.btnEditTask_Click);
             // 
             // statusStrip1
             // 
@@ -102,7 +111,7 @@
             // lblTaskInfo
             // 
             this.lblTaskInfo.Name = "lblTaskInfo";
-            this.lblTaskInfo.Size = new System.Drawing.Size(234, 17);
+            this.lblTaskInfo.Size = new System.Drawing.Size(265, 17);
             this.lblTaskInfo.Spring = true;
             this.lblTaskInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -130,6 +139,74 @@
             this.colDateCreated.Text = "Created";
             this.colDateCreated.Width = 200;
             // 
+            // contextMenu
+            // 
+            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuPriority,
+            this.toolStripMenuItem1,
+            this.mnuNewTask,
+            this.mnuEditTask,
+            this.toolStripMenuItem2,
+            this.mnuDeleteTask});
+            this.contextMenu.Name = "contextMenu";
+            this.contextMenu.Size = new System.Drawing.Size(153, 126);
+            // 
+            // mnuPriority
+            // 
+            this.mnuPriority.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuPriorityHigh,
+            this.mnuPriorityMedium,
+            this.mnuPriorityLow});
+            this.mnuPriority.Name = "mnuPriority";
+            this.mnuPriority.Size = new System.Drawing.Size(152, 22);
+            this.mnuPriority.Text = "Priority";
+            // 
+            // mnuPriorityHigh
+            // 
+            this.mnuPriorityHigh.Name = "mnuPriorityHigh";
+            this.mnuPriorityHigh.Size = new System.Drawing.Size(152, 22);
+            this.mnuPriorityHigh.Text = "High";
+            // 
+            // mnuPriorityMedium
+            // 
+            this.mnuPriorityMedium.Name = "mnuPriorityMedium";
+            this.mnuPriorityMedium.Size = new System.Drawing.Size(152, 22);
+            this.mnuPriorityMedium.Text = "Medium";
+            // 
+            // mnuPriorityLow
+            // 
+            this.mnuPriorityLow.Name = "mnuPriorityLow";
+            this.mnuPriorityLow.Size = new System.Drawing.Size(152, 22);
+            this.mnuPriorityLow.Text = "Low";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // mnuNewTask
+            // 
+            this.mnuNewTask.Name = "mnuNewTask";
+            this.mnuNewTask.Size = new System.Drawing.Size(152, 22);
+            this.mnuNewTask.Text = "New";
+            // 
+            // mnuEditTask
+            // 
+            this.mnuEditTask.Name = "mnuEditTask";
+            this.mnuEditTask.Size = new System.Drawing.Size(152, 22);
+            this.mnuEditTask.Text = "Edit";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // mnuDeleteTask
+            // 
+            this.mnuDeleteTask.Name = "mnuDeleteTask";
+            this.mnuDeleteTask.Size = new System.Drawing.Size(152, 22);
+            this.mnuDeleteTask.Text = "Delete";
+            // 
             // TaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,6 +222,7 @@
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,5 +240,15 @@
         private System.Windows.Forms.ColumnHeader colDateCreated;
         private System.Windows.Forms.ToolStripProgressBar taskProgressBar;
         private System.Windows.Forms.ToolStripStatusLabel lblTaskInfo;
+        private System.Windows.Forms.ContextMenuStrip contextMenu;
+        private System.Windows.Forms.ToolStripMenuItem mnuPriority;
+        private System.Windows.Forms.ToolStripMenuItem mnuPriorityHigh;
+        private System.Windows.Forms.ToolStripMenuItem mnuPriorityMedium;
+        private System.Windows.Forms.ToolStripMenuItem mnuPriorityLow;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem mnuNewTask;
+        private System.Windows.Forms.ToolStripMenuItem mnuEditTask;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem mnuDeleteTask;
     }
 }
