@@ -36,6 +36,7 @@ namespace CygSoft.CodeCat.Domain.Base
                 return null;
             }
         }
+
         public bool Loaded
         {
             get

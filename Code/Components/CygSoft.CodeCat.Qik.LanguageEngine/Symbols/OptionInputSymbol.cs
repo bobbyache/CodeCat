@@ -49,15 +49,7 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine.Symbols
             }
         }
 
-        public int? SelectedIndex 
-        { 
-            get 
-            {
-                if (currentOption == null)
-                    return null;
-                return currentOption.Index; 
-            } 
-        }
+        public int? SelectedIndex { get { return currentOption?.Index; } }
 
         public void AddOption(string value, string title, string description = null)
         {

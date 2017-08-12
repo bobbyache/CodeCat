@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
@@ -137,7 +138,32 @@ namespace CygSoft.CodeCat.Domain.TopicSections.FileAttachment
 
         public void Open()
         {
+            if (IsRecognisedImageFile(this.FilePath))
+
             Process.Start(this.FilePath);
+        }
+
+        private bool IsRecognisedImageFile(string fileName)
+        {
+            string targetExtension = System.IO.Path.GetExtension(fileName);
+            if (String.IsNullOrEmpty(targetExtension))
+                return false;
+            else
+                targetExtension = "*" + targetExtension.ToLowerInvariant();
+
+            List<string> recognisedImageExtensions = new List<string>();
+
+            foreach (System.Drawing.Imaging.ImageCodecInfo imageCodec in System.Drawing.Imaging.ImageCodecInfo.GetImageEncoders())
+                recognisedImageExtensions.AddRange(imageCodec.FilenameExtension.ToLowerInvariant().Split(";".ToCharArray()));
+
+            foreach (string extension in recognisedImageExtensions)
+            {
+                if (extension.Equals(targetExtension))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
