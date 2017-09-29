@@ -140,7 +140,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void InitializeGeneratorForm()
         {
             generatorForm = new GeneratorForm(this.application);
-            generatorForm.Show(dockPanel, DockState.DockLeftAutoHide);
+            generatorForm.Show(dockPanel, DockState.DockBottomAutoHide);
         }
 
         private void searchForm_KeywordsRemoved(object sender, SearchKeywordsModifiedEventArgs e)

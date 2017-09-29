@@ -666,6 +666,10 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Plugins.SqlExtraction\bin\debug\CygSoft.CodeCat.Plugins.SqlExtraction.dll $(TargetDir)Plugins
+xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Plugins.ManualXess\bin\debug\CygSoft.CodeCat.Plugins.ManualXess.dll $(TargetDir)Plugins</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
