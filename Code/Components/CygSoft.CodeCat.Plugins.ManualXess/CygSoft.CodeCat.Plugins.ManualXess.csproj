@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{092EAAD6-CDC9-4893-86F5-6D6BE2F9D3DC}</ProjectGuid>
+    <ProjectGuid>{FDB2FD77-BF50-4BDE-BAEE-1320530D8D92}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CygSoft.CodeCat.Plugins.Generators</RootNamespace>
-    <AssemblyName>CygSoft.CodeCat.Plugins.Generators</AssemblyName>
+    <RootNamespace>CygSoft.CodeCat.Plugins.ManualXess</RootNamespace>
+    <AssemblyName>CygSoft.CodeCat.Plugins.ManualXess</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,10 +42,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IGeneratorPlugin.cs" />
-    <Compile Include="GeneratorPlugins.cs" />
+    <Compile Include="ManualXessGenerator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ManualXessGenerator.Designer.cs">
+      <DependentUpon>ManualXessGenerator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ManualXessGenerator.resx">
+      <DependentUpon>ManualXessGenerator.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CygSoft.CodeCat.Plugins.Generators\CygSoft.CodeCat.Plugins.Generators.csproj">
+      <Project>{092eaad6-cdc9-4893-86f5-6d6be2f9d3dc}</Project>
+      <Name>CygSoft.CodeCat.Plugins.Generators</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
