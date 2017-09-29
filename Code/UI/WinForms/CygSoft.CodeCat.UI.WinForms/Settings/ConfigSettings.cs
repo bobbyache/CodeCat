@@ -20,6 +20,15 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
+        public static string PluginsFolder
+        {
+            get
+            {
+                string folderTitle = ConfigurationManager.AppSettings["PluginFolder"] ?? string.Empty;
+                return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), folderTitle);
+            }
+        }
+
         public static string AssemblyTitle
         {
             get

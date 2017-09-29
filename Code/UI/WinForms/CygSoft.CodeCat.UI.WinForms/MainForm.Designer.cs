@@ -61,6 +61,7 @@
             this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindowKeywordSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCurrentTasks = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCategories = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuDocuments = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.indexCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.mnuCategories = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuGenerators = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -193,7 +195,9 @@
             this.mnuCurrentTasks,
             this.mnuCategories,
             this.toolStripMenuItem3,
-            this.mnuDocuments});
+            this.mnuDocuments,
+            this.toolStripMenuItem4,
+            this.mnuGenerators});
             this.mnuWindow.Name = "mnuWindow";
             this.mnuWindow.Size = new System.Drawing.Size(63, 20);
             this.mnuWindow.Text = "Window";
@@ -209,6 +213,13 @@
             this.mnuCurrentTasks.Name = "mnuCurrentTasks";
             this.mnuCurrentTasks.Size = new System.Drawing.Size(158, 22);
             this.mnuCurrentTasks.Text = "Current Tasks";
+            // 
+            // mnuCategories
+            // 
+            this.mnuCategories.Name = "mnuCategories";
+            this.mnuCategories.Size = new System.Drawing.Size(158, 22);
+            this.mnuCategories.Text = "Categories";
+            this.mnuCategories.Click += new System.EventHandler(this.mnuCategories_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -315,12 +326,16 @@
             this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 7;
             // 
-            // mnuCategories
+            // toolStripMenuItem4
             // 
-            this.mnuCategories.Name = "mnuCategories";
-            this.mnuCategories.Size = new System.Drawing.Size(158, 22);
-            this.mnuCategories.Text = "Categories";
-            this.mnuCategories.Click += new System.EventHandler(this.mnuCategories_Click);
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(155, 6);
+            // 
+            // mnuGenerators
+            // 
+            this.mnuGenerators.Name = "mnuGenerators";
+            this.mnuGenerators.Size = new System.Drawing.Size(158, 22);
+            this.mnuGenerators.Text = "Generators";
             // 
             // MainForm
             // 
@@ -373,6 +388,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuAddCodeGroup;
         private System.Windows.Forms.ToolStripMenuItem mnuCurrentTasks;
         private System.Windows.Forms.ToolStripMenuItem mnuCategories;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem mnuGenerators;
     }
 }
 

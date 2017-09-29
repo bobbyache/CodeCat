@@ -120,6 +120,12 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
                     ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            public static void PluginFolderNotFoundNotification(IWin32Window owner, Exception exception)
+            {
+                MessageBox.Show(owner, string.Format("The plugins folder path could not be found. \n{0}", exception.Message),
+                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             public static void UrlCopyErrorNotification(IWin32Window owner, Exception exception)
             {
                 MessageBox.Show(owner, string.Format("An error occurred while trying to copyt the URL. \n{0}", exception.Message),

@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Plugins.Generators;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Docked;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -25,6 +26,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private SearchForm searchForm;
         private TaskForm taskForm;
         private CategoryForm categoryForm;
+        private GeneratorForm generatorForm;
 
         // need this because we don't want to create a new document when
         // when all documents are closing because we're either creating
@@ -51,6 +53,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeRecentProjectMenu();
             InitializeSearchForm();
             InitializeCategoryForm();
+            InitializeGeneratorForm();
             InitializeTaskForm();
 
             if (!LoadLastProject())
@@ -94,6 +97,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             mnuCurrentTasks.Click += mnuCurrentTasks_Click;
             mnuSnippetsAdd.Click += mnuSnippetsAdd_Click;
             mnuSnippetsViewModify.Click += mnuSnippetsViewModify_Click;
+            mnuGenerators.Click += MnuGenerators_Click;
+        }
+
+        private void MnuGenerators_Click(object sender, EventArgs e)
+        {
+            generatorForm.Activate();
         }
 
         private void mnuCurrentTasks_Click(object sender, EventArgs e)
@@ -126,6 +135,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             categoryForm = new CategoryForm(this.application);
             categoryForm.OpenSnippet += Control_OpenSnippet;
             categoryForm.Show(dockPanel, DockState.DockLeftAutoHide);
+        }
+
+        private void InitializeGeneratorForm()
+        {
+            generatorForm = new GeneratorForm(this.application);
+            generatorForm.Show(dockPanel, DockState.DockLeftAutoHide);
         }
 
         private void searchForm_KeywordsRemoved(object sender, SearchKeywordsModifiedEventArgs e)
