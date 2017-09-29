@@ -56,6 +56,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             uiPluginPanel.Controls.Clear();
             uiPluginPanel.Controls.Add(pluginControl);
             pluginControl.Dock = DockStyle.Fill;
+            currentGenerator.Text = item.Text;
         }
     }
 }
