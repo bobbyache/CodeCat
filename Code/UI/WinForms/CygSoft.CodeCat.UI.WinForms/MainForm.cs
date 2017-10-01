@@ -26,7 +26,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private SearchForm searchForm;
         private TaskForm taskForm;
         private CategoryForm categoryForm;
-        private GeneratorForm generatorForm;
+        private PluginsForm pluginsForm;
 
         // need this because we don't want to create a new document when
         // when all documents are closing because we're either creating
@@ -53,7 +53,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeRecentProjectMenu();
             InitializeSearchForm();
             InitializeCategoryForm();
-            InitializeGeneratorForm();
             InitializeTaskForm();
 
             if (!LoadLastProject())
@@ -102,7 +101,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void MnuGenerators_Click(object sender, EventArgs e)
         {
-            generatorForm.Activate();
+            DisplayPluginsWindow();
         }
 
         private void mnuCurrentTasks_Click(object sender, EventArgs e)
@@ -137,10 +136,20 @@ namespace CygSoft.CodeCat.UI.WinForms
             categoryForm.Show(dockPanel, DockState.DockLeftAutoHide);
         }
 
-        private void InitializeGeneratorForm()
+        private void DisplayPluginsWindow()
         {
-            generatorForm = new GeneratorForm(this.application);
-            generatorForm.Show(dockPanel, DockState.DockBottomAutoHide);
+            if (pluginsForm == null)
+            {
+                pluginsForm = new PluginsForm(this.application);
+                pluginsForm.HideOnClose = true;
+                pluginsForm.Show(dockPanel, DockState.DockBottomAutoHide);
+            }
+            else
+            {
+                pluginsForm.Show();
+                pluginsForm.Activate();
+                pluginsForm.Focus();
+            }
         }
 
         private void searchForm_KeywordsRemoved(object sender, SearchKeywordsModifiedEventArgs e)

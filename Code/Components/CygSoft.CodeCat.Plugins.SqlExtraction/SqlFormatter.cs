@@ -35,7 +35,7 @@ namespace CygSoft.CodeCat.Plugins.SqlExtraction
             var tokenizedSql = _tokenizer.TokenizeSQL(rawSql);
             var parsedSql = _parser.ParseSQL(tokenizedSql);
             var output = _formatter.FormatSQLTree(parsedSql);
-
+            
             return output;
         }
         private TSqlStandardFormatterOptions GetDefaultOptions()

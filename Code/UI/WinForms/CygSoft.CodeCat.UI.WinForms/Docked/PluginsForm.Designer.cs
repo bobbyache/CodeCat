@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
-    partial class GeneratorForm
+    partial class PluginsForm
     {
         /// <summary>
         /// Required designer variable.

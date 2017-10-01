@@ -8,12 +8,12 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
-    public partial class GeneratorForm :  DockContent
+    public partial class PluginsForm :  DockContent
     {
         private AppFacade application;
         private GeneratorPlugins generatorPlugins;
 
-        public GeneratorForm(AppFacade application)
+        public PluginsForm(AppFacade application)
         {
             if (application == null)
                 throw new ArgumentException("Application must be provided.");
