@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Plugins.Generators;
+using System.IO;
+using System.Reflection;
 
 namespace CygSoft.CodeCat.Plugins.ManualXess
 {
@@ -16,8 +18,7 @@ namespace CygSoft.CodeCat.Plugins.ManualXess
         public ManualXessGenerator()
         {
             InitializeComponent();
-
-            //this.blueprintSyntaxBox.Document.SyntaxFile = "blueprint.syn";
+            ApplySyntaxColoring();
             dataGridView.DataSource = workSet.Table;
         }
 
@@ -43,6 +44,16 @@ namespace CygSoft.CodeCat.Plugins.ManualXess
         private bool loadingData = false;
         private bool selectAllInCell = true;
 
+        private void ApplySyntaxColoring()
+        {
+            if (File.Exists(GetSyntaxFilePath("blueprint.syn")))
+                blueprintSyntaxBox.Document.SyntaxFile = GetSyntaxFilePath("blueprint.syn");
+        }
+
+        private string GetSyntaxFilePath(string syntaxFile)
+        {
+            return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), syntaxFile);
+        }
         private void GenerateText()
         {
             dataGridView.EndEdit();
