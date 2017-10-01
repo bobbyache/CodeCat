@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Plugins.Generators;
+using System.IO;
+using System.Reflection;
 
 namespace CygSoft.CodeCat.Plugins.SqlExtraction
 {
@@ -17,6 +19,20 @@ namespace CygSoft.CodeCat.Plugins.SqlExtraction
         public SqlToCSharpStringGenerator()
         {
             InitializeComponent();
+            ApplySyntaxColoring();
+        }
+
+        private void ApplySyntaxColoring()
+        {
+            if (File.Exists(GetSyntaxFilePath("SQLServer2K_SQL.syn")))
+                fromDocument.SyntaxFile = GetSyntaxFilePath("SQLServer2K_SQL.syn");
+            if (File.Exists(GetSyntaxFilePath("C#.syn")))
+                toDocument.SyntaxFile = GetSyntaxFilePath("C#.syn");
+        }
+
+        private string GetSyntaxFilePath(string syntaxFile)
+        {
+            return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), syntaxFile);
         }
 
         public string Id
@@ -52,32 +68,8 @@ namespace CygSoft.CodeCat.Plugins.SqlExtraction
 
         private void BtnPartialFormat_Click(object sender, EventArgs e)
         {
-            string text = fromTextbox.Document.Text;
-
-            text = ReplaceRegEx(text, "[\t\n\r\v\f]", "");
-            text = ReplaceRegEx(text, " +(?= )", "");
-            text = Replace(text, "FROM", "\nFROM");
-            text = Replace(text, "INNER JOIN", "\nINNER JOIN");
-            text = Replace(text, "LEFT JOIN", "\nLEFT JOIN");
-            text = Replace(text, "RIGHT JOIN", "\nRIGHT JOIN");
-            text = Replace(text, "SELECT", "\nSELECT");
-            text = Replace(text, "WHERE", "\nWHERE\n");
-            text = Replace(text, "AND", "AND\n");
-            text = Replace(text, "NOT IN", "NOT IN\n");
-            text = Replace(text, " IN ", " IN\n ");
-            text = Replace(text, "ORDER BY", "\nORDER BY\n ");
-
-            text = Replace(text, "from", "\nfrom");
-            text = Replace(text, "inner join", "\ninner join");
-            text = Replace(text, "left join", "\nleft join");
-            text = Replace(text, "right join", "\nright join");
-            text = Replace(text, "select", "\nselect");
-            text = Replace(text, "where", "\nwhere\n");
-            text = Replace(text, "and", "and\n");
-            text = Replace(text, "not in", "not in\n");
-            text = Replace(text, " in ", " in\n ");
-            text = Replace(text, "order by", "\norder by\n ");
-
+            SqlFormatter sqlFormater = new SqlFormatter();
+            string text = sqlFormater.Format(fromTextbox.Document.Text, sqlFormater.CurrentOptions);
             fromTextbox.Document.Text = text;
         }
 
@@ -100,11 +92,11 @@ namespace CygSoft.CodeCat.Plugins.SqlExtraction
             string targetText = GenerateCodeFormSql(fromTextbox.Document.Text);
             toTextbox.Document.Text = targetText;
 
-            Clipboard.Clear();
-            Clipboard.SetText(toTextbox.Document.Text);
-
             if (mnuAutoCopyResult.Checked)
+            {
+                Clipboard.Clear();
                 Clipboard.SetText(toTextbox.Document.Text);
+            }
 
             Generated?.Invoke(this, new EventArgs());
         }
@@ -115,8 +107,8 @@ namespace CygSoft.CodeCat.Plugins.SqlExtraction
             int lineCount = lines.Length;
 
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine(Indent(2) + "public static string GetSql()");
-            builder.AppendLine(Indent(2) + "{");
+            //builder.AppendLine(Indent(2) + "public static string GetSql()");
+            //builder.AppendLine(Indent(2) + "{");
 
             builder.AppendLine(Indent(3) + "return");
 
@@ -129,7 +121,7 @@ namespace CygSoft.CodeCat.Plugins.SqlExtraction
                     codeLine += ";";
                 builder.AppendLine(Indent(4) + codeLine);
             }
-            builder.AppendLine(Indent(2) + "}");
+            //builder.AppendLine(Indent(2) + "}");
             return builder.ToString();
         }
 

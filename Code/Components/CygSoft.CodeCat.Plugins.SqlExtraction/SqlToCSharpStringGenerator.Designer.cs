@@ -36,12 +36,12 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuOptions = new System.Windows.Forms.ToolStripDropDownButton();
             this.mnuAutoCopyResult = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuToggleOrientation = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.fromTextbox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.fromDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.toTextbox = new Alsing.Windows.Forms.SyntaxBoxControl();
             this.toDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
-            this.mnuToggleOrientation = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -51,6 +51,7 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnClear,
             this.btnPartialFormat,
@@ -59,7 +60,7 @@
             this.mnuOptions});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(493, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(657, 27);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -67,7 +68,7 @@
             // 
             this.btnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(38, 22);
+            this.btnClear.Size = new System.Drawing.Size(47, 24);
             this.btnClear.Text = "Clear";
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
@@ -75,7 +76,7 @@
             // 
             this.btnPartialFormat.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPartialFormat.Name = "btnPartialFormat";
-            this.btnPartialFormat.Size = new System.Drawing.Size(49, 22);
+            this.btnPartialFormat.Size = new System.Drawing.Size(60, 24);
             this.btnPartialFormat.Text = "Format";
             this.btnPartialFormat.Click += new System.EventHandler(this.BtnPartialFormat_Click);
             // 
@@ -83,14 +84,14 @@
             // 
             this.btnGenerate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(58, 22);
+            this.btnGenerate.Size = new System.Drawing.Size(73, 24);
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.Click += new System.EventHandler(this.BtnGenerate_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // mnuOptions
             // 
@@ -100,20 +101,28 @@
             this.mnuToggleOrientation});
             this.mnuOptions.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuOptions.Name = "mnuOptions";
-            this.mnuOptions.Size = new System.Drawing.Size(13, 22);
+            this.mnuOptions.Size = new System.Drawing.Size(14, 24);
             this.mnuOptions.Text = "toolStripDropDownButton1";
             // 
             // mnuAutoCopyResult
             // 
             this.mnuAutoCopyResult.CheckOnClick = true;
             this.mnuAutoCopyResult.Name = "mnuAutoCopyResult";
-            this.mnuAutoCopyResult.Size = new System.Drawing.Size(280, 22);
+            this.mnuAutoCopyResult.Size = new System.Drawing.Size(278, 26);
             this.mnuAutoCopyResult.Text = "Auto copy result to clipboard";
+            // 
+            // mnuToggleOrientation
+            // 
+            this.mnuToggleOrientation.Name = "mnuToggleOrientation";
+            this.mnuToggleOrientation.Size = new System.Drawing.Size(278, 26);
+            this.mnuToggleOrientation.Text = "Toggle Orientation";
+            this.mnuToggleOrientation.Click += new System.EventHandler(this.mnuToggleOrientation_Click);
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 27);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -124,8 +133,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.toTextbox);
-            this.splitContainer1.Size = new System.Drawing.Size(493, 406);
-            this.splitContainer1.SplitterDistance = 203;
+            this.splitContainer1.Size = new System.Drawing.Size(657, 503);
+            this.splitContainer1.SplitterDistance = 251;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 4;
             // 
             // fromTextbox
@@ -147,12 +157,13 @@
             this.fromTextbox.InfoTipVisible = false;
             this.fromTextbox.Location = new System.Drawing.Point(0, 0);
             this.fromTextbox.LockCursorUpdate = false;
+            this.fromTextbox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.fromTextbox.Name = "fromTextbox";
             this.fromTextbox.ShowScopeIndicator = false;
-            this.fromTextbox.Size = new System.Drawing.Size(493, 203);
+            this.fromTextbox.Size = new System.Drawing.Size(657, 251);
             this.fromTextbox.SmoothScroll = false;
-            this.fromTextbox.SplitviewH = -4;
-            this.fromTextbox.SplitviewV = -4;
+            this.fromTextbox.SplitviewH = -5;
+            this.fromTextbox.SplitviewV = -5;
             this.fromTextbox.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
             this.fromTextbox.TabIndex = 0;
             this.fromTextbox.Text = "syntaxBoxControl1";
@@ -185,12 +196,13 @@
             this.toTextbox.InfoTipVisible = false;
             this.toTextbox.Location = new System.Drawing.Point(0, 0);
             this.toTextbox.LockCursorUpdate = false;
+            this.toTextbox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.toTextbox.Name = "toTextbox";
             this.toTextbox.ShowScopeIndicator = false;
-            this.toTextbox.Size = new System.Drawing.Size(493, 199);
+            this.toTextbox.Size = new System.Drawing.Size(657, 247);
             this.toTextbox.SmoothScroll = false;
-            this.toTextbox.SplitviewH = -4;
-            this.toTextbox.SplitviewV = -4;
+            this.toTextbox.SplitviewH = -5;
+            this.toTextbox.SplitviewV = -5;
             this.toTextbox.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
             this.toTextbox.TabIndex = 2;
             this.toTextbox.Text = "syntaxBoxControl2";
@@ -204,21 +216,15 @@
             this.toDocument.Modified = false;
             this.toDocument.UndoStep = 0;
             // 
-            // mnuToggleOrientation
-            // 
-            this.mnuToggleOrientation.Name = "mnuToggleOrientation";
-            this.mnuToggleOrientation.Size = new System.Drawing.Size(280, 22);
-            this.mnuToggleOrientation.Text = "Toggle Right-to-Left or Top-to-Bottom";
-            this.mnuToggleOrientation.Click += new System.EventHandler(this.mnuToggleOrientation_Click);
-            // 
             // SqlToCSharpStringGenerator
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "SqlToCSharpStringGenerator";
-            this.Size = new System.Drawing.Size(493, 431);
+            this.Size = new System.Drawing.Size(657, 530);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
