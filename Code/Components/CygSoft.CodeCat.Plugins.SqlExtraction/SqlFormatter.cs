@@ -10,6 +10,9 @@ using PoorMansTSqlFormatterLib.Parsers;
 
 namespace CygSoft.CodeCat.Plugins.SqlExtraction
 {
+    // http://poorsql.com/
+    // http://architectshack.com/PoorMansTSqlFormatter.ashx
+    // https://github.com/TaoK/PoorMansTSqlFormatter
     public class SqlFormatter
     {
         private TSqlStandardFormatterOptions currentOptions;
@@ -36,7 +39,7 @@ namespace CygSoft.CodeCat.Plugins.SqlExtraction
             var parsedSql = _parser.ParseSQL(tokenizedSql);
             var output = _formatter.FormatSQLTree(parsedSql);
             
-            return output;
+            return output.Trim();
         }
         private TSqlStandardFormatterOptions GetDefaultOptions()
         {
