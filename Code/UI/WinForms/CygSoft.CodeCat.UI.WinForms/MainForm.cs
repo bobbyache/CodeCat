@@ -113,6 +113,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             searchForm = new SearchForm(this.application);
             searchForm.OpenSnippet += Control_OpenSnippet;
+            searchForm.DeleteSnippet += Control_DeleteSnippet;
             searchForm.SearchExecuted += (s, e) => { this.indexCountLabel.Text = ItemCountCaption(e.MatchedItemCount); };
             searchForm.SelectSnippet += (s, e) => EnableControls();
             searchForm.KeywordsAdded += searchForm_KeywordsAdded;
@@ -354,6 +355,34 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return ConfigSettings.ApplicationTitle;
             else
                 return ConfigSettings.ApplicationTitle + " - [" + this.application.ProjectFileTitle + "]";
+        }
+
+        private void DeleteSnippetDocument(IKeywordIndexItem snippetIndex)
+        {
+            if (snippetIndex is ICodeKeywordIndexItem)
+            {
+                CodeFile codeFile = application.OpenCodeFileTarget(snippetIndex);
+                codeFile.Delete();
+            }
+            else if (snippetIndex is IQikTemplateKeywordIndexItem)
+            {
+                IQikTemplateDocumentSet qikFile = application.OpenQikDocumentGroup(snippetIndex);
+                qikFile.Delete();
+            }
+            else if (snippetIndex is ITopicKeywordIndexItem)
+            {
+                ITopicDocument codeGroupFile = application.OpenTopicDocument(snippetIndex);
+                codeGroupFile.Delete();
+            }
+
+            if (SnippetIsOpen(snippetIndex))
+            {
+                IContentDocument snippetDoc = GetOpenDocument(snippetIndex.Id);
+                // important, otherwise snippet for will throw a messagebox.
+                // we should have already been through the IsModified check process.
+                snippetDoc.CloseWithoutPrompts = true;
+                snippetDoc.Close();
+            }
         }
 
         private void OpenSnippetDocument(IKeywordIndexItem snippetIndex)
@@ -757,6 +786,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             // Note dockPanel.Documents handles the management of your documents. It maintains a collection.
             // This does not include your docked windows, just your "document" windows. This is excellent because
             // you can use this existing collection property to maintain your code snippets.
+        }
+
+        private void Control_DeleteSnippet(object sender, DeleteSnippetEventArgs e)
+        {
+            DeleteSnippetDocument(e.Item);
         }
 
         private void mnuCategories_Click(object sender, EventArgs e)

@@ -10,6 +10,15 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
+    public class DeleteSnippetEventArgs : EventArgs
+    {
+        public IKeywordIndexItem Item { get; private set; }
+
+        public DeleteSnippetEventArgs(IKeywordIndexItem item)
+        {
+            this.Item = item;
+        }
+    }
 
     public class OpenSnippetEventArgs : EventArgs
     {

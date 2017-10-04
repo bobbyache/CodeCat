@@ -19,6 +19,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler<SearchDelimitedKeywordEventArgs> SearchExecuted;
 
         public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
+        public event EventHandler<DeleteSnippetEventArgs> DeleteSnippet;
         public event EventHandler<SelectSnippetEventArgs> SelectSnippet;
 
         public AppFacade Application { set { this.application = value; } }
@@ -95,21 +96,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        //private string GetImageKey(IKeywordIndexItem item)
-        //{
-        //    string imageKey = null;
+        private void DeleteSelectedSnippet()
+        {
+            IKeywordIndexItem codeItem = SelectedItem(listView);
 
-        //    if (item is ICodeKeywordIndexItem)
-        //        imageKey = (item as ICodeKeywordIndexItem).Syntax;
+            if (codeItem != null)
+                DeleteSnippet?.Invoke(this, new DeleteSnippetEventArgs(codeItem));
 
-        //    else if (item is IQikTemplateKeywordIndexItem)
-        //        imageKey = IconRepository.TopicSections.QikGroup;
-
-        //    else if (item is ITopicKeywordIndexItem)
-        //        imageKey = IconRepository.TopicSections.CodeGroup;
-
-        //    return imageKey;
-        //}
+            if (codeItem != null)
+                listView.Items.Remove(listView.SelectedItems[0]);
+        }
 
         private void OpenSelectedSnippet()
         {
@@ -155,7 +151,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void ctxMenuDeleteTopic_Click(object sender, EventArgs e)
         {
-
+            DeleteSelectedSnippet();
         }
 
         private void ctxMenuViewKeywords_Click(object sender, EventArgs e)

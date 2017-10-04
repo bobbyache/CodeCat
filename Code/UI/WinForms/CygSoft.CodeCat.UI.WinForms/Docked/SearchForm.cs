@@ -15,6 +15,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         public event EventHandler<SearchDelimitedKeywordEventArgs> SearchExecuted;
         public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
+        public event EventHandler<DeleteSnippetEventArgs> DeleteSnippet;
         public event EventHandler<SelectSnippetEventArgs> SelectSnippet;
 
         private bool searchEnabled;
@@ -59,6 +60,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             keywordsTextBox.TextChanged += (s, e) => ExecuteSearch();
 
             codeSearchResultsControl1.OpenSnippet += (s, e) => OpenSnippet?.Invoke(s, e);
+            codeSearchResultsControl1.DeleteSnippet += (s, e) => DeleteSnippet?.Invoke(s, e);
             codeSearchResultsControl1.SelectSnippet += (s, e) => SelectSnippet?.Invoke(s, e);
             codeSearchResultsControl1.KeywordsAdded += (s, e) => KeywordsAdded?.Invoke(s, e);
             codeSearchResultsControl1.KeywordsRemoved += (s, e) => KeywordsRemoved?.Invoke(s, e);
