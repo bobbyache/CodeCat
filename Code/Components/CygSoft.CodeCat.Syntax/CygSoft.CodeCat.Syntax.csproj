@@ -45,7 +45,7 @@
     <Compile Include="SyntaxRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj">
+    <ProjectReference Include="..\CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj">
       <Project>{65f6db5b-43cd-439e-afe9-d65b1cf58ae7}</Project>
       <Name>CygSoft.CodeCat.Syntax.Infrastructure</Name>
     </ProjectReference>

@@ -55,8 +55,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.TaskListing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Syntax", "Components\CygSoft.CodeCat.Syntax\CygSoft.CodeCat.Syntax.csproj", "{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Syntax.Infrastructure", "CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj", "{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Category", "Components\CygSoft.CodeCat.Category\CygSoft.CodeCat.Category.csproj", "{99C7DCC9-3B35-4CA5-98E7-9BBE72021634}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Category.Infrastructure", "Components\CygSoft.CodeCat.Category.Infrastructure\CygSoft.CodeCat.Category.Infrastructure.csproj", "{87A58FDC-D07C-4CC8-B553-2214D5AF00C1}"
@@ -74,6 +72,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Plugins.ManualXess", "Components\CygSoft.CodeCat.Plugins.ManualXess\CygSoft.CodeCat.Plugins.ManualXess.csproj", "{FDB2FD77-BF50-4BDE-BAEE-1320530D8D92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.PluginTests", "GuiTests\PluginTests\CygSoft.CodeCat.PluginTests.csproj", "{7E101281-FCFC-4615-854B-17314B41CAA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Syntax.Infrastructure", "Components\CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj", "{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -169,10 +169,6 @@ Global
 		{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99C7DCC9-3B35-4CA5-98E7-9BBE72021634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{99C7DCC9-3B35-4CA5-98E7-9BBE72021634}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99C7DCC9-3B35-4CA5-98E7-9BBE72021634}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -201,6 +197,10 @@ Global
 		{7E101281-FCFC-4615-854B-17314B41CAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E101281-FCFC-4615-854B-17314B41CAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E101281-FCFC-4615-854B-17314B41CAA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -578,6 +578,10 @@
       <Project>{e73234b4-5bfa-40ad-b1fd-a35226ca0bb4}</Project>
       <Name>CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj">
+      <Project>{65f6db5b-43cd-439e-afe9-d65b1cf58ae7}</Project>
+      <Name>CygSoft.CodeCat.Syntax.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.TaskListing.Infrastructure\CygSoft.CodeCat.TaskListing.Infrastructure.csproj">
       <Project>{399da6b8-255d-40d4-8be6-e96b0870c664}</Project>
       <Name>CygSoft.CodeCat.TaskListing.Infrastructure</Name>
@@ -585,10 +589,6 @@
     <ProjectReference Include="..\..\..\Components\Etier.IconHelper\Etier.IconHelper.csproj">
       <Project>{44368acc-95e7-4be0-ade4-abb8aae9b9d0}</Project>
       <Name>Etier.IconHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj">
-      <Project>{65f6db5b-43cd-439e-afe9-d65b1cf58ae7}</Project>
-      <Name>CygSoft.CodeCat.Syntax.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
