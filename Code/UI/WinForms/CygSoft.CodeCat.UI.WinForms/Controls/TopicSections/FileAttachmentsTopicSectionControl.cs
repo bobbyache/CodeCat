@@ -103,23 +103,26 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             if (e.Button == MouseButtons.Right)
             {
                 int cnt = listView.SelectedItems.Count;
-                bool onItem = false;
-                IFileAttachment item = null;
-
-                if (listView.FocusedItem != null)
+                if (cnt > 0)
                 {
-                    onItem = listView.FocusedItem.Bounds.Contains(e.Location);
-                    item = listView.FocusedItem.Tag as IFileAttachment;
+                    bool onItem = false;
+                    IFileAttachment item = null;
+
+                    if (listView.FocusedItem != null)
+                    {
+                        onItem = listView.FocusedItem.Bounds.Contains(e.Location);
+                        item = listView.FocusedItem.Tag as IFileAttachment;
+                    }
+
+                    bool fileExists = item != null && item.FileExists;
+                    mnuOpen.Enabled = cnt == 1 && onItem && item.AllowOpenOrExecute && fileExists;
+                    mnuOpenWith.Enabled = false && onItem && item.AllowOpenOrExecute && fileExists;
+                    mnuSaveAs.Enabled = cnt == 1 && onItem && fileExists;
+                    mnuEdit.Enabled = cnt == 1 && onItem;
+                    mnuDelete.Enabled = cnt >= 1;
+
+                    contextMenu.Show(Cursor.Position);
                 }
-
-                bool fileExists = item.FileExists;
-                mnuOpen.Enabled = cnt == 1 && onItem && item.AllowOpenOrExecute && fileExists;
-                mnuOpenWith.Enabled = false && onItem && item.AllowOpenOrExecute && fileExists;
-                mnuSaveAs.Enabled = cnt == 1 && onItem && fileExists;
-                mnuEdit.Enabled = cnt == 1 && onItem;
-                mnuDelete.Enabled = cnt >= 1;
-
-                contextMenu.Show(Cursor.Position);
             }
         }
 
