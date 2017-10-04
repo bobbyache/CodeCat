@@ -18,15 +18,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
         public event EventHandler<SearchDelimitedKeywordEventArgs> SearchExecuted;
 
-        public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
-        public event EventHandler<DeleteSnippetEventArgs> DeleteSnippet;
-        public event EventHandler<SelectSnippetEventArgs> SelectSnippet;
+        public event EventHandler<TopicIndexEventArgs> OpenTopic;
+        public event EventHandler<TopicIndexEventArgs> DeleteTopic;
+        public event EventHandler<TopicIndexEventArgs> SelectTopic;
 
         public AppFacade Application { set { this.application = value; } }
-        public bool SingleSnippetSelected { get { return this.listView.SelectedItems.Count == 1; } }
-        public bool MultipleSnippetsSelected { get { return this.listView.SelectedItems.Count > 1; } }
+        public bool SingleTopicSelected { get { return this.listView.SelectedItems.Count == 1; } }
+        public bool MultipleTopicsSelected { get { return this.listView.SelectedItems.Count > 1; } }
         
-        public IKeywordIndexItem[] SelectedSnippets
+        public IKeywordIndexItem[] SelectedTopics
         {
             get
             {
@@ -43,11 +43,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        public IKeywordIndexItem SelectedSnippet
+        public IKeywordIndexItem SelectedTopic
         {
             get
             {
-                if (SingleSnippetSelected)
+                if (SingleTopicSelected)
                     return SelectedItem(listView);
                 return null;
             }
@@ -96,23 +96,23 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void DeleteSelectedSnippet()
+        private void DeleteSelectedTopic()
         {
             IKeywordIndexItem codeItem = SelectedItem(listView);
 
             if (codeItem != null)
-                DeleteSnippet?.Invoke(this, new DeleteSnippetEventArgs(codeItem));
+                DeleteTopic?.Invoke(this, new TopicIndexEventArgs(codeItem));
 
             if (codeItem != null)
                 listView.Items.Remove(listView.SelectedItems[0]);
         }
 
-        private void OpenSelectedSnippet()
+        private void OpenSelectedTopic()
         {
             IKeywordIndexItem codeItem = SelectedItem(listView);
 
             if (codeItem != null)
-                OpenSnippet?.Invoke(this, new OpenSnippetEventArgs(codeItem));
+                OpenTopic?.Invoke(this, new TopicIndexEventArgs(codeItem));
         }
 
         private IKeywordIndexItem SelectedItem(ListView listView)
@@ -141,24 +141,24 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            OpenSelectedSnippet();
+            OpenSelectedTopic();
         }
 
         private void ctxMenuViewTopic_Click(object sender, EventArgs e)
         {
-            OpenSelectedSnippet();
+            OpenSelectedTopic();
         }
 
         private void ctxMenuDeleteTopic_Click(object sender, EventArgs e)
         {
-            DeleteSelectedSnippet();
+            DeleteSelectedTopic();
         }
 
         private void ctxMenuViewKeywords_Click(object sender, EventArgs e)
         {
             SelectKeywordsDialog frm = new SelectKeywordsDialog();
             frm.Text = "View Keywords";
-            IKeywordIndexItem[] IndexItems = this.SelectedSnippets;
+            IKeywordIndexItem[] IndexItems = this.SelectedTopics;
             frm.Keywords = application.AllKeywords(IndexItems);
             DialogResult result = frm.ShowDialog(this);
         }
@@ -171,7 +171,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             if (result == DialogResult.OK)
             {
                 string delimitedKeywordList = frm.Keywords;
-                IKeywordIndexItem[] indexItems = this.SelectedSnippets;
+                IKeywordIndexItem[] indexItems = this.SelectedTopics;
                 application.AddKeywords(indexItems, delimitedKeywordList);
                 KeywordsAdded?.Invoke(this, new SearchKeywordsModifiedEventArgs(delimitedKeywordList, indexItems));
             }
@@ -181,7 +181,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             SelectKeywordsDialog frm = new SelectKeywordsDialog();
             frm.Text = "Remove Keywords";
-            IKeywordIndexItem[] indexItems = this.SelectedSnippets;
+            IKeywordIndexItem[] indexItems = this.SelectedTopics;
             frm.Keywords = application.AllKeywords(indexItems);
 
             DialogResult result = frm.ShowDialog(this);
@@ -209,22 +209,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private void ctxMenuCopyKeywords_Click(object sender, EventArgs e)
         {
             Clipboard.Clear();
-            Clipboard.SetText(application.CopyAllKeywords(this.SelectedSnippets));
+            Clipboard.SetText(application.CopyAllKeywords(this.SelectedTopics));
         }
 
         private void ctxMenuCopyIdentifier_Click(object sender, EventArgs e)
         {
-            if (this.SelectedSnippet != null)
+            if (this.SelectedTopic != null)
             {
                 Clipboard.Clear();
-                Clipboard.SetText(this.SelectedSnippet.Id);
+                Clipboard.SetText(this.SelectedTopic.Id);
             }
         }
 
         private void listView_SelectedIndexChanged(object sender, EventArgs e)
         {
             IKeywordIndexItem codeItem = SelectedItem(listView);
-            SelectSnippet?.Invoke(this, new SelectSnippetEventArgs(codeItem));
+            SelectTopic?.Invoke(this, new TopicIndexEventArgs(codeItem));
         }
 
         private void listView_MouseClick(object sender, MouseEventArgs e)

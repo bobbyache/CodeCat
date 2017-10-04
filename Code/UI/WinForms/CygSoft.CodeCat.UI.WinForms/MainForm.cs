@@ -112,10 +112,10 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void InitializeSearchForm()
         {
             searchForm = new SearchForm(this.application);
-            searchForm.OpenSnippet += Control_OpenSnippet;
-            searchForm.DeleteSnippet += Control_DeleteSnippet;
+            searchForm.OpenTopic += Control_OpenTopic;
+            searchForm.DeleteTopic += Control_DeleteTopic;
             searchForm.SearchExecuted += (s, e) => { this.indexCountLabel.Text = ItemCountCaption(e.MatchedItemCount); };
-            searchForm.SelectSnippet += (s, e) => EnableControls();
+            searchForm.SelectTopic += (s, e) => EnableControls();
             searchForm.KeywordsAdded += searchForm_KeywordsAdded;
             searchForm.KeywordsRemoved += searchForm_KeywordsRemoved;
 
@@ -133,7 +133,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void InitializeCategoryForm()
         {
             categoryForm = new CategoryForm(this.application);
-            categoryForm.OpenSnippet += Control_OpenSnippet;
+            categoryForm.OpenSnippet += Control_OpenTopic;
             categoryForm.Show(dockPanel, DockState.DockLeftAutoHide);
         }
 
@@ -780,7 +780,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             snippetForm.Activate();
         }
 
-        private void Control_OpenSnippet(object sender, OpenSnippetEventArgs e)
+        private void Control_OpenTopic(object sender, TopicIndexEventArgs e)
         {
             OpenSnippetDocument(e.Item);
             // Note dockPanel.Documents handles the management of your documents. It maintains a collection.
@@ -788,7 +788,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             // you can use this existing collection property to maintain your code snippets.
         }
 
-        private void Control_DeleteSnippet(object sender, DeleteSnippetEventArgs e)
+        private void Control_DeleteTopic(object sender, TopicIndexEventArgs e)
         {
             DeleteSnippetDocument(e.Item);
         }

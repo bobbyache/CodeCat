@@ -21,8 +21,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
 
         public event EventHandler<SearchDelimitedKeywordEventArgs> SearchExecuted;
-        public event EventHandler<OpenSnippetEventArgs> OpenSnippet;
-        public event EventHandler<SelectSnippetEventArgs> SelectSnippet;
+        public event EventHandler<TopicIndexEventArgs> OpenSnippet;
+        public event EventHandler<TopicIndexEventArgs> SelectSnippet;
 
         private bool searchEnabled;
         public bool SearchEnabled
@@ -41,10 +41,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             set { keywordsTextBox.Text = value; }
         }
 
-        public bool SingleSnippetSelected { get { return codeSearchResultsControl1.SingleSnippetSelected; } }
-        public bool MultipleSnippetsSelected { get { return codeSearchResultsControl1.MultipleSnippetsSelected; } }
-        public IKeywordIndexItem SelectedSnippet { get { return codeSearchResultsControl1.SelectedSnippet; } }
-        public IKeywordIndexItem[] SelectedSnippets { get { return codeSearchResultsControl1.SelectedSnippets; } }
+        public bool SingleSnippetSelected { get { return codeSearchResultsControl1.SingleTopicSelected; } }
+        public bool MultipleSnippetsSelected { get { return codeSearchResultsControl1.MultipleTopicsSelected; } }
+        public IKeywordIndexItem SelectedSnippet { get { return codeSearchResultsControl1.SelectedTopic; } }
+        public IKeywordIndexItem[] SelectedSnippets { get { return codeSearchResultsControl1.SelectedTopics; } }
 
         public SearchDialog(AppFacade application)
         {
@@ -62,8 +62,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
 
             keywordsTextBox.TextChanged += (s, e) => ExecuteSearch();
 
-            codeSearchResultsControl1.OpenSnippet += (s, e) => OpenSnippet?.Invoke(s, e);
-            codeSearchResultsControl1.SelectSnippet += (s, e) => SelectSnippet?.Invoke(s, e);
+            codeSearchResultsControl1.OpenTopic += (s, e) => OpenSnippet?.Invoke(s, e);
+            codeSearchResultsControl1.SelectTopic += (s, e) => SelectSnippet?.Invoke(s, e);
             codeSearchResultsControl1.KeywordsAdded += (s, e) => KeywordsAdded?.Invoke(s, e);
             codeSearchResultsControl1.KeywordsRemoved += (s, e) => KeywordsRemoved?.Invoke(s, e);
             codeSearchResultsControl1.SearchExecuted += (s, e) => SearchExecuted?.Invoke(s, e);

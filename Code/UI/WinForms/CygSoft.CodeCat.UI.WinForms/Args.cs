@@ -10,31 +10,11 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public class DeleteSnippetEventArgs : EventArgs
+    public class TopicIndexEventArgs : EventArgs
     {
         public IKeywordIndexItem Item { get; private set; }
 
-        public DeleteSnippetEventArgs(IKeywordIndexItem item)
-        {
-            this.Item = item;
-        }
-    }
-
-    public class OpenSnippetEventArgs : EventArgs
-    {
-        public IKeywordIndexItem Item { get; private set; }
-
-        public OpenSnippetEventArgs(IKeywordIndexItem item)
-        {
-            this.Item = item;
-        }
-    }
-
-    public class SelectSnippetEventArgs : EventArgs
-    {
-        public IKeywordIndexItem Item { get; private set; }
-
-        public SelectSnippetEventArgs(IKeywordIndexItem item)
+        public TopicIndexEventArgs(IKeywordIndexItem item)
         {
             this.Item = item;
         }
