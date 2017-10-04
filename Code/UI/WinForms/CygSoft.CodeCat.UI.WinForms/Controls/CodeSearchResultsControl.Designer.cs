@@ -34,14 +34,16 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuContextViewSnippet = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxMenuViewTopic = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuContextViewKeywords = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuContextAddKeywords = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuContextRemoveKeywords = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxMenuDeleteTopic = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctxMenuViewKeywords = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxMenuAddKeywords = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxMenuRemoveKeywords = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuContextCopyKeywords = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuContextCopyIdentifier = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxMenuCopyKeywords = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctxMenuCopyIdentifier = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,68 +86,82 @@
             // contextMenu
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuContextViewSnippet,
+            this.ctxMenuViewTopic,
             this.toolStripMenuItem8,
-            this.menuContextViewKeywords,
-            this.menuContextAddKeywords,
-            this.menuContextRemoveKeywords,
+            this.ctxMenuDeleteTopic,
+            this.toolStripMenuItem2,
+            this.ctxMenuViewKeywords,
+            this.ctxMenuAddKeywords,
+            this.ctxMenuRemoveKeywords,
             this.toolStripMenuItem5,
-            this.menuContextCopyKeywords,
-            this.menuContextCopyIdentifier});
+            this.ctxMenuCopyKeywords,
+            this.ctxMenuCopyIdentifier});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(186, 148);
+            this.contextMenu.Size = new System.Drawing.Size(175, 176);
             // 
-            // menuContextViewSnippet
+            // ctxMenuViewTopic
             // 
-            this.menuContextViewSnippet.Name = "menuContextViewSnippet";
-            this.menuContextViewSnippet.Size = new System.Drawing.Size(185, 22);
-            this.menuContextViewSnippet.Text = "View\\Modify Snippet";
-            this.menuContextViewSnippet.Click += new System.EventHandler(this.menuContextViewSnippet_Click);
+            this.ctxMenuViewTopic.Name = "ctxMenuViewTopic";
+            this.ctxMenuViewTopic.Size = new System.Drawing.Size(174, 22);
+            this.ctxMenuViewTopic.Text = "View\\Modify Topic";
+            this.ctxMenuViewTopic.Click += new System.EventHandler(this.ctxMenuViewTopic_Click);
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(182, 6);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(171, 6);
             // 
-            // menuContextViewKeywords
+            // ctxMenuDeleteTopic
             // 
-            this.menuContextViewKeywords.Name = "menuContextViewKeywords";
-            this.menuContextViewKeywords.Size = new System.Drawing.Size(185, 22);
-            this.menuContextViewKeywords.Text = "View Keywords";
-            this.menuContextViewKeywords.Click += new System.EventHandler(this.menuContextViewKeywords_Click);
+            this.ctxMenuDeleteTopic.Name = "ctxMenuDeleteTopic";
+            this.ctxMenuDeleteTopic.Size = new System.Drawing.Size(174, 22);
+            this.ctxMenuDeleteTopic.Text = "Delete Topic";
+            this.ctxMenuDeleteTopic.Click += new System.EventHandler(this.ctxMenuDeleteTopic_Click);
             // 
-            // menuContextAddKeywords
+            // toolStripMenuItem2
             // 
-            this.menuContextAddKeywords.Name = "menuContextAddKeywords";
-            this.menuContextAddKeywords.Size = new System.Drawing.Size(185, 22);
-            this.menuContextAddKeywords.Text = "Add Keywords";
-            this.menuContextAddKeywords.Click += new System.EventHandler(this.menuContextAddKeywords_Click);
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(171, 6);
             // 
-            // menuContextRemoveKeywords
+            // ctxMenuViewKeywords
             // 
-            this.menuContextRemoveKeywords.Name = "menuContextRemoveKeywords";
-            this.menuContextRemoveKeywords.Size = new System.Drawing.Size(185, 22);
-            this.menuContextRemoveKeywords.Text = "Remove Keywords";
-            this.menuContextRemoveKeywords.Click += new System.EventHandler(this.menuContextRemoveKeywords_Click);
+            this.ctxMenuViewKeywords.Name = "ctxMenuViewKeywords";
+            this.ctxMenuViewKeywords.Size = new System.Drawing.Size(174, 22);
+            this.ctxMenuViewKeywords.Text = "View Keywords";
+            this.ctxMenuViewKeywords.Click += new System.EventHandler(this.ctxMenuViewKeywords_Click);
+            // 
+            // ctxMenuAddKeywords
+            // 
+            this.ctxMenuAddKeywords.Name = "ctxMenuAddKeywords";
+            this.ctxMenuAddKeywords.Size = new System.Drawing.Size(174, 22);
+            this.ctxMenuAddKeywords.Text = "Add Keywords";
+            this.ctxMenuAddKeywords.Click += new System.EventHandler(this.ctxMenuAddKeywords_Click);
+            // 
+            // ctxMenuRemoveKeywords
+            // 
+            this.ctxMenuRemoveKeywords.Name = "ctxMenuRemoveKeywords";
+            this.ctxMenuRemoveKeywords.Size = new System.Drawing.Size(174, 22);
+            this.ctxMenuRemoveKeywords.Text = "Remove Keywords";
+            this.ctxMenuRemoveKeywords.Click += new System.EventHandler(this.ctxMenuRemoveKeywords_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(182, 6);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(171, 6);
             // 
-            // menuContextCopyKeywords
+            // ctxMenuCopyKeywords
             // 
-            this.menuContextCopyKeywords.Name = "menuContextCopyKeywords";
-            this.menuContextCopyKeywords.Size = new System.Drawing.Size(185, 22);
-            this.menuContextCopyKeywords.Text = "Copy Keywords";
-            this.menuContextCopyKeywords.Click += new System.EventHandler(this.menuContextCopyKeywords_Click);
+            this.ctxMenuCopyKeywords.Name = "ctxMenuCopyKeywords";
+            this.ctxMenuCopyKeywords.Size = new System.Drawing.Size(174, 22);
+            this.ctxMenuCopyKeywords.Text = "Copy Keywords";
+            this.ctxMenuCopyKeywords.Click += new System.EventHandler(this.ctxMenuCopyKeywords_Click);
             // 
-            // menuContextCopyIdentifier
+            // ctxMenuCopyIdentifier
             // 
-            this.menuContextCopyIdentifier.Name = "menuContextCopyIdentifier";
-            this.menuContextCopyIdentifier.Size = new System.Drawing.Size(185, 22);
-            this.menuContextCopyIdentifier.Text = "Copy Identifier";
-            this.menuContextCopyIdentifier.Click += new System.EventHandler(this.menuContextCopyIdentifier_Click);
+            this.ctxMenuCopyIdentifier.Name = "ctxMenuCopyIdentifier";
+            this.ctxMenuCopyIdentifier.Size = new System.Drawing.Size(174, 22);
+            this.ctxMenuCopyIdentifier.Text = "Copy Identifier";
+            this.ctxMenuCopyIdentifier.Click += new System.EventHandler(this.ctxMenuCopyIdentifier_Click);
             // 
             // CodeSearchResultsControl
             // 
@@ -166,13 +182,15 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ContextMenuStrip contextMenu;
-        private System.Windows.Forms.ToolStripMenuItem menuContextViewSnippet;
+        private System.Windows.Forms.ToolStripMenuItem ctxMenuViewTopic;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
-        private System.Windows.Forms.ToolStripMenuItem menuContextViewKeywords;
-        private System.Windows.Forms.ToolStripMenuItem menuContextAddKeywords;
-        private System.Windows.Forms.ToolStripMenuItem menuContextRemoveKeywords;
+        private System.Windows.Forms.ToolStripMenuItem ctxMenuViewKeywords;
+        private System.Windows.Forms.ToolStripMenuItem ctxMenuAddKeywords;
+        private System.Windows.Forms.ToolStripMenuItem ctxMenuRemoveKeywords;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem menuContextCopyKeywords;
-        private System.Windows.Forms.ToolStripMenuItem menuContextCopyIdentifier;
+        private System.Windows.Forms.ToolStripMenuItem ctxMenuCopyKeywords;
+        private System.Windows.Forms.ToolStripMenuItem ctxMenuCopyIdentifier;
+        private System.Windows.Forms.ToolStripMenuItem ctxMenuDeleteTopic;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
     }
 }

@@ -131,11 +131,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         {
             bool singleSelection = listView.SelectedItems.Count == 1;
 
-            menuContextCopyIdentifier.Enabled = singleSelection;
-            menuContextCopyKeywords.Enabled = true;
-            menuContextViewSnippet.Enabled = singleSelection;
-            menuContextAddKeywords.Enabled = true;
-            menuContextRemoveKeywords.Enabled = true;
+            ctxMenuCopyIdentifier.Enabled = singleSelection;
+            ctxMenuCopyKeywords.Enabled = true;
+            ctxMenuViewTopic.Enabled = singleSelection;
+            ctxMenuAddKeywords.Enabled = true;
+            ctxMenuRemoveKeywords.Enabled = true;
         }
 
         private void listView_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -148,12 +148,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             OpenSelectedSnippet();
         }
 
-        private void menuContextViewSnippet_Click(object sender, EventArgs e)
+        private void ctxMenuViewTopic_Click(object sender, EventArgs e)
         {
             OpenSelectedSnippet();
         }
 
-        private void menuContextViewKeywords_Click(object sender, EventArgs e)
+        private void ctxMenuDeleteTopic_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ctxMenuViewKeywords_Click(object sender, EventArgs e)
         {
             SelectKeywordsDialog frm = new SelectKeywordsDialog();
             frm.Text = "View Keywords";
@@ -162,7 +167,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             DialogResult result = frm.ShowDialog(this);
         }
 
-        private void menuContextAddKeywords_Click(object sender, EventArgs e)
+        private void ctxMenuAddKeywords_Click(object sender, EventArgs e)
         {
             EnterKeywordsDialog frm = new EnterKeywordsDialog();
             DialogResult result = frm.ShowDialog(this);
@@ -176,7 +181,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void menuContextRemoveKeywords_Click(object sender, EventArgs e)
+        private void ctxMenuRemoveKeywords_Click(object sender, EventArgs e)
         {
             SelectKeywordsDialog frm = new SelectKeywordsDialog();
             frm.Text = "Remove Keywords";
@@ -205,13 +210,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             }
         }
 
-        private void menuContextCopyKeywords_Click(object sender, EventArgs e)
+        private void ctxMenuCopyKeywords_Click(object sender, EventArgs e)
         {
             Clipboard.Clear();
             Clipboard.SetText(application.CopyAllKeywords(this.SelectedSnippets));
         }
 
-        private void menuContextCopyIdentifier_Click(object sender, EventArgs e)
+        private void ctxMenuCopyIdentifier_Click(object sender, EventArgs e)
         {
             if (this.SelectedSnippet != null)
             {
