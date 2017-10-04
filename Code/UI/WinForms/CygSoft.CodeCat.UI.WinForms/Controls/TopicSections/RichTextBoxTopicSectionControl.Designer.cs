@@ -1,6 +1,6 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms.Controls
+﻿namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
-    partial class RtfDocumentControl
+    partial class RichTextBoxTopicSectionControl
     {
         /// <summary> 
         /// Required designer variable.

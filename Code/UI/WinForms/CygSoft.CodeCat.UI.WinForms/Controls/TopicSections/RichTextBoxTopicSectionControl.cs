@@ -6,21 +6,21 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
 
-namespace CygSoft.CodeCat.UI.WinForms.Controls
+namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
-    public partial class RtfDocumentControl : BaseTopicSectionControl
+    public partial class RichTextBoxTopicSectionControl : BaseTopicSectionControl
     {
         public override int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.RTF).Index; } }
         public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.RTF).Icon; } }
         public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.RTF).Image; } }
 
-        public RtfDocumentControl()
+        public RichTextBoxTopicSectionControl()
             : this(null, null, null)
         {
 
         }
 
-        public RtfDocumentControl(AppFacade application, ITopicDocument topicDocument, IRichTextEditorTopicSection topicSection)
+        public RichTextBoxTopicSectionControl(AppFacade application, ITopicDocument topicDocument, IRichTextEditorTopicSection topicSection)
             : base(application, topicDocument, topicSection)
         {
             InitializeComponent();

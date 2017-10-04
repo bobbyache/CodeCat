@@ -141,11 +141,11 @@
       <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\RichTextboxExtensions.cs" />
-    <Compile Include="Controls\RtfDocumentControl.cs">
+    <Compile Include="Controls\TopicSections\RichTextBoxTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\RtfDocumentControl.Designer.cs">
-      <DependentUpon>RtfDocumentControl.cs</DependentUpon>
+    <Compile Include="Controls\TopicSections\RichTextBoxTopicSectionControl.Designer.cs">
+      <DependentUpon>RichTextBoxTopicSectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\RtfEditorControl.cs">
       <SubType>UserControl</SubType>
@@ -413,8 +413,8 @@
     <EmbeddedResource Include="Controls\QikTemplateCodeCtrl.resx">
       <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\RtfDocumentControl.resx">
-      <DependentUpon>RtfDocumentControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\TopicSections\RichTextBoxTopicSectionControl.resx">
+      <DependentUpon>RichTextBoxTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RtfEditorControl.resx">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>

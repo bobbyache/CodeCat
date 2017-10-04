@@ -56,7 +56,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 topicSectionControl = new ImageSetControl(application, topicDocument as ITopicDocument, topicSection as IImagePagerTopicSection);
 
             else if (topicSection is IRichTextEditorTopicSection)
-                topicSectionControl = new RtfDocumentControl(application, topicDocument as ITopicDocument, topicSection as IRichTextEditorTopicSection);
+                topicSectionControl = new RichTextBoxTopicSectionControl(application, topicDocument as ITopicDocument, topicSection as IRichTextEditorTopicSection);
 
             else
                 return null;
