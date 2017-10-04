@@ -36,7 +36,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (versionListview.SelectedItems.Count == 1)
             {
-                DialogResult result = Gui.Dialogs.DeleteItemDialog(this, "snapshot");
+                DialogResult result = Gui.Dialogs.DeleteItemMessageBox(this, "snapshot");
 
                 if (result == DialogResult.Yes)
                 {

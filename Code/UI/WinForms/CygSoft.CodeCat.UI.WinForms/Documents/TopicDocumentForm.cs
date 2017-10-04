@@ -140,14 +140,14 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
             {
-                Gui.Dialogs.MandatoryFieldRequired(this, "Title");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Title");
                 base.HeaderFieldsVisible = true;
                 this.txtTitle.Focus();
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
             {
-                Gui.Dialogs.MandatoryFieldRequired(this, "Keywords");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Keywords");
                 base.HeaderFieldsVisible = true;
                 this.txtKeywords.Focus();
                 return false;
@@ -363,7 +363,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!tabManager.HasTabs)
                 return;
 
-            DialogResult dialogResult = Gui.Dialogs.DeleteItemDialog(this, "template");
+            DialogResult dialogResult = Gui.Dialogs.DeleteItemMessageBox(this, "template");
 
             if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {

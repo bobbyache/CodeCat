@@ -11,150 +11,132 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
     {
         public static class Dialogs
         {
-            public static void LoadLastProjectErrorNotification(IWin32Window owner, Exception exception)
+            /*************************************************************************************************
+             * Exception Messages
+             ********************************************************************************************** */
+            public static void LoadLastProjectErrorMessageBox(IWin32Window owner, Exception exception)
             {
-                MessageBox.Show(owner, string.Format("An error occured while attempting to load the last project.\n{0}", exception.Message),
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionMessageBox(owner, exception, "An error occured while attempting to load the last project.");
             }
 
-            public static void MandatoryFieldRequired(IWin32Window owner, string fieldName)
+            public static void PasteUrlErrorDialogMessageBox(IWin32Window owner, Exception exception)
             {
-                MessageBox.Show(owner, string.Format("{0} is a mandatory field and must be supplied. Please enter a valid value.", fieldName),
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ExceptionMessageBox(owner, exception, "An error occurred while attempting to paste into this document:");
             }
 
-            public static void TakeSnapshotInvalidInCurrentContext(IWin32Window owner)
+            public static void WebPageErrorMessageBox(IWin32Window owner, Exception exception)
             {
-                MessageBox.Show(owner, "Taking a snapshot is invalid in this context. You must save or discard changes before you can take a snapshot of this snippet.",
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ExceptionMessageBox(owner, exception, "An error occurred while trying to load the web page.");
             }
 
-            public static DialogResult SaveSnippetDialogPrompt(IWin32Window owner)
+            public static void PluginFolderNotFoundMessageBox(IWin32Window owner, Exception exception)
             {
-                return MessageBox.Show(owner, "Save this snippet?",
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                ExceptionMessageBox(owner, exception, "The plugins folder path could not be found.");
             }
 
-            public static DialogResult CannotRemoveTemplateScriptNotification(IWin32Window owner)
+            public static void UrlCopyErrorMessageBox(IWin32Window owner, Exception exception)
             {
-                return MessageBox.Show(owner, "A template script cannot be removed.",
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ExceptionMessageBox(owner, exception, "An error occurred while trying to copyt the URL.");
             }
 
-            public static DialogResult CannotLoadImageEditor(IWin32Window owner)
+            public static void DocumentSaveErrorMessageBox(IWin32Window owner, Exception exception)
             {
-                return MessageBox.Show(owner, "The image editor cannot be loaded. Either the editor executeable doesn't exist or the file does not exist.",
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionMessageBox(owner, exception, "An error occurred while trying to save the document:");
             }
 
-            public static DialogResult MustSaveGroupBeforeAction(IWin32Window owner)
+            public static void RecordLastOpenedDocumentsErrorMessageBox(IWin32Window owner, Exception exception)
             {
-                return MessageBox.Show(owner, "The group must be saved before you can request this action.",
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ExceptionMessageBox(owner, exception, "An error occurred while trying to record the last opened documents:");
             }
 
-            public static DialogResult RevertDocumentChangesDialogPrompt(IWin32Window owner)
+            public static void LoadLastOpenedDocumentsErrorMessageBox(IWin32Window owner, Exception exception)
             {
-                return MessageBox.Show(owner, "Sure you want to discard changes made to this document?",
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                ExceptionMessageBox(owner, exception, "An error occurred while trying to load the last opened documents:");
             }
 
-            public static DialogResult ReplaceCurrentItemPrompt(IWin32Window owner)
+            public static void ProjectFileLoadErrorMessageBox(IWin32Window owner, Exception exception)
             {
-                return MessageBox.Show(owner, "Sure you want to permanently replace this item? Changes will be permanent.",
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                ExceptionMessageBox(owner, exception, "An error occurred while trying to open the project file. The target file is likely to be incompatible with this version:");
             }
 
-            public static void PasteUrlErrorDialogPrompt(IWin32Window owner, Exception exception)
-            {
-                MessageBox.Show(owner, string.Format("An error occurred while attempting to paste into this document:\n{0}", exception.Message),
-                ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            public static DialogResult DeleteItemDialog(IWin32Window owner, string itemName)
-            {
-                return MessageBox.Show(owner, string.Format("Sure you want to delete this {0}?", itemName),
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            }
-
-            public static DialogResult DeleteMultipleItemsDialog(IWin32Window owner, string itemNames)
-            {
-                return MessageBox.Show(owner, string.Format("Sure you want to delete these {0}?", itemNames),
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            }
-
-
-            public static DialogResult NoInputValueForMandatoryField(IWin32Window owner, string fieldName)
+            /*************************************************************************************************
+             * Ok Messages
+             ********************************************************************************************** */
+            public static DialogResult MissingRequiredFieldMessageBox(IWin32Window owner, string fieldName)
             {
                 string msg = string.Format("A valid value for {0} must be entered in order to continue.", fieldName);
-
-                return MessageBox.Show(owner, msg,
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return OkInformationMessageBox(owner, msg);
             }
 
-            public static DialogResult WillConflictDialogPrompt(IWin32Window owner, string fieldName)
+            public static DialogResult ConflictingFilenameMessageBox(IWin32Window owner)
             {
-                string msg = string.Format("{0} will conflict with an existing {0}. You must rename this field before you can save this item.\n" +
-                    "Note, if you have recently deleted an item with the same file name, you must first save. Once saved you'll be able to add a new item with the specified file name.", fieldName);
-
-                return MessageBox.Show(owner, msg,
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string msg = "File name will conflict with an existing File name. You must rename this field before you can save this item.\n" +
+                    "Note, if you have recently deleted an item with the same file name, you must first save. Once saved you'll be able to add a new item with the specified file name.";
+                return OkInformationMessageBox(owner, msg);
             }
 
-            public static DialogResult SaveDocumentChangesDialogPrompt(IWin32Window owner)
+            public static DialogResult InvalidSnapshotRequestMessageBox(IWin32Window owner)
+            {
+                return OkInformationMessageBox(owner, "Taking a snapshot is invalid in this context. You must save or discard changes before you can take a snapshot of this snippet.");
+            }
+
+            public static DialogResult CannotRemoveTemplateScriptMessageBox(IWin32Window owner)
+            {
+                return OkInformationMessageBox(owner, "A template script cannot be removed.");
+            }
+
+            public static DialogResult MustSaveGroupBeforeActionMessageBox(IWin32Window owner)
+            {
+                return OkInformationMessageBox(owner, "The group must be saved before you can request this action.");
+            }
+            public static DialogResult CannotLoadImageEditorMessageBox(IWin32Window owner)
+            {
+                return OkInformationMessageBox(owner, "The image editor cannot be loaded. Either the editor executeable doesn't exist or the file does not exist.");
+            }
+
+            /*************************************************************************************************
+             * Yes/No Questions
+             ********************************************************************************************** */
+
+            public static DialogResult RevertTopicChangesQuestionMessageBox(IWin32Window owner)
+            {
+                return YesNoQuestionMessageBox(owner, "Sure you want to discard changes made to this topic?");
+            }
+
+            public static DialogResult ReplaceCurrentItemQuestionMessageBox(IWin32Window owner)
+            {
+                return YesNoQuestionMessageBox(owner, "Sure you want to permanently replace this item? Changes will be permanent.");
+            }
+
+            public static DialogResult DeleteItemMessageBox(IWin32Window owner, string itemName)
+            {
+                return YesNoQuestionMessageBox(owner, string.Format("Sure you want to delete this {0}?", itemName));
+            }
+
+            public static DialogResult DeleteMultipleItemsMessageBox(IWin32Window owner, string itemNames)
+            {
+                return YesNoQuestionMessageBox(owner, string.Format("Sure you want to delete these {0}?", itemNames));
+            }
+
+            public static DialogResult RemoveRecentMenuItemDialogMessageBox(IWin32Window owner)
+            {
+                return YesNoQuestionMessageBox(owner, "Project file does not exist, would you like to remove this from the recent menu?");
+            }
+
+            /*************************************************************************************************
+             * Yes/No/Cancel
+             ********************************************************************************************** */
+
+            public static DialogResult SaveDocumentChangesDialogMessageBox(IWin32Window owner)
             {
                 return MessageBox.Show(owner, string.Format("{0}\n You have not saved this snippet. Would you like to save it first?", (owner as IContentDocument).Text),
                     string.Format("{0}: {1}", ConfigSettings.ApplicationTitle, (owner as IContentDocument).Text),
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
             }
 
-            public static DialogResult RemoveRecentMenuItemDialogPrompt(IWin32Window owner)
-            {
-                return MessageBox.Show(owner, "Project file does not exist, would you like to remove this from the recent menu?",
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            }
-
-            public static void WebPageErrorNotification(IWin32Window owner, Exception exception)
-            {
-                MessageBox.Show(owner, string.Format("An error occurred while trying to load the web page. \n{0}", exception.Message),
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            public static void PluginFolderNotFoundNotification(IWin32Window owner, Exception exception)
-            {
-                MessageBox.Show(owner, string.Format("The plugins folder path could not be found. \n{0}", exception.Message),
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            public static void UrlCopyErrorNotification(IWin32Window owner, Exception exception)
-            {
-                MessageBox.Show(owner, string.Format("An error occurred while trying to copyt the URL. \n{0}", exception.Message),
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            public static void DocumentSaveErrorNotification(IWin32Window owner, Exception exception)
-            {
-                MessageBox.Show(owner, string.Format("An error occurred while trying to save the document:\n{0}", exception.Message),
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            public static void RecordLastOpenedDocumentsErrorNotification(IWin32Window owner, Exception exception)
-            {
-                MessageBox.Show(owner, string.Format("An error occurred while trying to record the last opened documents:\n{0}", exception.Message),
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            public static void LoadLastOpenedDocumentsErrorNotification(IWin32Window owner, Exception exception)
-            {
-                MessageBox.Show(owner, string.Format("An error occurred while trying to load the last opened documents:\n{0}", exception.Message),
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            public static void ProjectFileLoadErrorNotification(IWin32Window owner, Exception exception)
-            {
-                MessageBox.Show(owner, string.Format("An error occurred while trying to open the project file. The target file is likely to be incompatible with this version:\n{0}", exception.Message),
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            /*************************************************************************************************
+             * File Dialogs
+             ********************************************************************************************** */
 
             public static DialogResult OpenProjectFileDialog(IWin32Window owner, string projectFileExt, out string filePath)
             {
@@ -193,16 +175,21 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
                 return string.Format("Code Cat Project Files *.{0} (*.{0})|*.{0}", projectFileExt);
             }
 
-            public static void UrlsPastedSuccessfully(IWin32Window owner)
+            private static void ExceptionMessageBox(IWin32Window owner, Exception exception, string message)
             {
-                MessageBox.Show(owner, "URL set has been pasted successfully.",
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(owner, string.Format("{0}\n{1}", message, exception.Message),
+                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            public static void UrlsPasteConflictDetected(IWin32Window owner)
+            private static DialogResult OkInformationMessageBox(IWin32Window owner, string message)
             {
-                MessageBox.Show(owner, "URL set has paste has been aborted. Items with the same identifiers already exist within the document.",
-                    ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return MessageBox.Show(owner, message, ConfigSettings.ApplicationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            private static DialogResult YesNoQuestionMessageBox(IWin32Window owner, string message)
+            {
+                return MessageBox.Show(owner, message, ConfigSettings.ApplicationTitle,
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             }
         }
     }

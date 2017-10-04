@@ -84,21 +84,21 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
             {
-                Gui.Dialogs.MandatoryFieldRequired(this, "Title");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Title");
                 base.HeaderFieldsVisible = true;
                 this.txtTitle.Focus();
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.txtKeywords.Text))
             {
-                Gui.Dialogs.MandatoryFieldRequired(this, "Keywords");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Keywords");
                 base.HeaderFieldsVisible = true;
                 this.txtKeywords.Focus();
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.cboSyntax.Text))
             {
-                Gui.Dialogs.MandatoryFieldRequired(this, "Syntax");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Syntax");
                 base.HeaderFieldsVisible = true;
                 this.cboSyntax.Focus();
                 return false;
@@ -282,7 +282,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             // necessarily have to change.
             if (this.IsModified)
             {
-                Gui.Dialogs.TakeSnapshotInvalidInCurrentContext(this);
+                Gui.Dialogs.InvalidSnapshotRequestMessageBox(this);
                 return;
             }
 

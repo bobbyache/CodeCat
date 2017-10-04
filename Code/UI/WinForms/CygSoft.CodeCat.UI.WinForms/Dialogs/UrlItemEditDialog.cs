@@ -46,17 +46,17 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (txtTitle.Text.Trim() == "")
             {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "Title");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Title");
                 return false;
             }
             if (txtUrl.Text.Trim() == "")
             {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "Url (hyperlink)");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Url (hyperlink)");
                 return false;
             }
             if (txtDescription.Text.Trim() == "")
             {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "Description");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Description");
                 return false;
             }
             return true;

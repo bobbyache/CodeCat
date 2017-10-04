@@ -65,7 +65,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         {
             if (txtTitle.Text.Trim() == "")
             {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "Title");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Title");
                 return false;
             }
             return true;

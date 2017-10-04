@@ -71,7 +71,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
             catch (Exception ex)
             {
-                Gui.Dialogs.WebPageErrorNotification(this, ex);
+                Gui.Dialogs.WebPageErrorMessageBox(this, ex);
             }
         }
 
@@ -130,7 +130,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
             catch (Exception ex)
             {
-                Gui.Dialogs.PasteUrlErrorDialogPrompt(this, ex);
+                Gui.Dialogs.PasteUrlErrorDialogMessageBox(this, ex);
             }
         }
 
@@ -147,7 +147,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
             catch (Exception ex)
             {
-                Gui.Dialogs.UrlCopyErrorNotification(this, ex);
+                Gui.Dialogs.UrlCopyErrorMessageBox(this, ex);
             }
         }
 
@@ -192,7 +192,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             if (listView.SelectedItems.Count >= 1)
             {
-                DialogResult result = Gui.Dialogs.DeleteMultipleItemsDialog(this, "hyperlinks");
+                DialogResult result = Gui.Dialogs.DeleteMultipleItemsMessageBox(this, "hyperlinks");
 
                 if (result == DialogResult.Yes)
                 {

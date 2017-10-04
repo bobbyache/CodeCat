@@ -221,7 +221,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             catch (Exception exception)
             {
-                Gui.Dialogs.LoadLastProjectErrorNotification(this, exception);
+                Gui.Dialogs.LoadLastProjectErrorMessageBox(this, exception);
             }
             return false;
         }
@@ -265,7 +265,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             catch (Exception exception)
             {
-                Gui.Dialogs.ProjectFileLoadErrorNotification(this, exception);
+                Gui.Dialogs.ProjectFileLoadErrorMessageBox(this, exception);
             }
         }
 
@@ -279,7 +279,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             catch (Exception exception)
             {
-                Gui.Dialogs.LoadLastOpenedDocumentsErrorNotification(this, exception);
+                Gui.Dialogs.LoadLastOpenedDocumentsErrorMessageBox(this, exception);
             }
         }
 
@@ -298,7 +298,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             catch (Exception exception)
             {
-                Gui.Dialogs.RecordLastOpenedDocumentsErrorNotification(this, exception);
+                Gui.Dialogs.RecordLastOpenedDocumentsErrorMessageBox(this, exception);
             }
         }
 
@@ -535,7 +535,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             else
             {
-                DialogResult result = Gui.Dialogs.RemoveRecentMenuItemDialogPrompt(this);
+                DialogResult result = Gui.Dialogs.RemoveRecentMenuItemDialogMessageBox(this);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                     recentProjectMenu.Remove(e.RecentFile.FullPath);
             }
@@ -669,7 +669,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
             catch (Exception ex)
             {
-                Gui.Dialogs.WebPageErrorNotification(this, ex);
+                Gui.Dialogs.WebPageErrorMessageBox(this, ex);
             }
         }
 

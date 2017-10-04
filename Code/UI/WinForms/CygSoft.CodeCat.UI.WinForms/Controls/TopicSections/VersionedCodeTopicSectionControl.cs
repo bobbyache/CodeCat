@@ -70,7 +70,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             if (this.IsModified)
             {
-                Gui.Dialogs.TakeSnapshotInvalidInCurrentContext(this);
+                Gui.Dialogs.InvalidSnapshotRequestMessageBox(this);
                 return;
             }
 

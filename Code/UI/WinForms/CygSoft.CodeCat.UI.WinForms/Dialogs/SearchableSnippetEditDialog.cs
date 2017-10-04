@@ -72,19 +72,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         {
             if (txtTitle.Text.Trim() == "")
             {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "Title");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Title");
                 return false;
             }
 
             if (txtKeywords.Text.Trim() == "")
             {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "Keywords");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Keywords");
                 return false;
             }
 
             if (syntaxDocument.Text.Trim() == "")
             {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "Code");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Code");
                 return false;
             }
 

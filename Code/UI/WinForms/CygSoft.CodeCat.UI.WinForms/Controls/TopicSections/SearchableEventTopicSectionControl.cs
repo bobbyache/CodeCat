@@ -98,7 +98,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             if (!this.FileExists)
             {
-                Gui.Dialogs.MustSaveGroupBeforeAction(this);
+                Gui.Dialogs.MustSaveGroupBeforeActionMessageBox(this);
                 return;
             }
 
@@ -138,7 +138,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             if (Gui.GroupedListView.ItemsSelected<ISearchableEventKeywordIndexItem>(listView))
             {
-                DialogResult result = Gui.Dialogs.DeleteMultipleItemsDialog(this, "events");
+                DialogResult result = Gui.Dialogs.DeleteMultipleItemsMessageBox(this, "events");
 
                 if (result == DialogResult.Yes)
                 {

@@ -45,7 +45,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             }
             catch (DirectoryNotFoundException ex)
             {
-                Gui.Dialogs.PluginFolderNotFoundNotification(this, ex);
+                Gui.Dialogs.PluginFolderNotFoundMessageBox(this, ex);
             }
         }
 

@@ -86,7 +86,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (txtTitle.Text.Trim() == "")
             {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "Title");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Title");
                 return false;
             }
 
@@ -94,33 +94,33 @@ namespace CygSoft.CodeCat.UI.WinForms
             // so ensure the user has actually selected a file.
             if (fileAttachment == null && (string.IsNullOrEmpty(txtFilePath.Text.Trim()) || !File.Exists(txtFilePath.Text.Trim())))
             {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "File Path");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "File Path");
                 return false;
             }
 
             if (!string.IsNullOrEmpty(txtFileName.Text.Trim()) && string.IsNullOrEmpty(lblExtension.Text))
             {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "File Path");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "File Path");
                 return false;
             }
 
             if (txtFileName.Text.Trim() == "")
             {
                 
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "File Name");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "File Name");
                 return false;
             }
 
             string id = fileAttachment == null ? "" : fileAttachment.Id;
             if (!fileAttachmentsTopicSection.ValidateFileName(txtFileName.Text.Trim() + lblExtension.Text, id))
             {
-                Gui.Dialogs.WillConflictDialogPrompt(this, "File Name");
+                Gui.Dialogs.ConflictingFilenameMessageBox(this);
                 return false;
             }
 
             if (txtDescription.Text.Trim() == "")
             {
-                Gui.Dialogs.NoInputValueForMandatoryField(this, "Description");
+                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Description");
                 return false;
             }
             return true;
