@@ -51,7 +51,10 @@
     <Compile Include="Base\ICategorizedKeywordIndexItem.cs" />
     <Compile Include="Base\IWorkItem.cs" />
     <Compile Include="Base\PersistableTargetFactory.cs" />
+    <Compile Include="Code\CodeExporter.cs" />
     <Compile Include="LastCodeFileRepository.cs" />
+    <Compile Include="Management\IWorkItemExporter.cs" />
+    <Compile Include="Qik\QikTemplateExporter.cs" />
     <Compile Include="TopicSections\PdfViewerTopicSection.cs" />
     <Compile Include="TopicSections\QikScriptTopicSection.cs" />
     <Compile Include="TopicSections\RichTextEditorTopicSection.cs" />
@@ -75,6 +78,7 @@
     <Compile Include="TopicSections\WebReference\WebReference.cs" />
     <Compile Include="TopicSections\WebReference\WebReferencesTopicSection.cs" />
     <Compile Include="Topics\TopicDocument.cs" />
+    <Compile Include="Topics\TopicExporter.cs" />
     <Compile Include="Topics\TopicIndex.cs" />
     <Compile Include="Topics\TopicIndexXmlRepository.cs" />
     <Compile Include="Topics\TopicKeywordIndexItem.cs" />

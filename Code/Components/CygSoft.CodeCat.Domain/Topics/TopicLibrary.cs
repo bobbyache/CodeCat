@@ -21,15 +21,9 @@ namespace CygSoft.CodeCat.Domain.Topics
 
         public override IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems)
         {
-            List<IndexExportImportData> exportList = new List<IndexExportImportData>();
             IKeywordIndexItem[] foundItems = base.FindIndecesByIds(indexItems.Select(r => r.Id).ToArray());
-
-            foreach (TopicKeywordIndexItem indexItem in foundItems.OfType<TopicKeywordIndexItem>())
-            {
-                TopicDocument codeFile = new TopicDocument(indexItem as TopicKeywordIndexItem, this.FolderPath);
-                exportList.Add(new IndexExportImportData(indexItem.Id, codeFile.Folder, indexItem.Id, indexItem));
-            }
-            return exportList.ToArray();
+            IWorkItemExporter exporter = new TopicExporter(this.FolderPath, foundItems);
+            return exporter.GetExportData();
         }
 
         protected override IWorkItem CreateSpecializedTarget(IKeywordIndexItem indexItem)
