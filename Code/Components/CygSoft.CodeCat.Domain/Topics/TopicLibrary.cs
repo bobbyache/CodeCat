@@ -32,45 +32,45 @@ namespace CygSoft.CodeCat.Domain.Topics
             return exportList.ToArray();
         }
 
-        protected override IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem)
+        protected override IWorkItem CreateSpecializedTarget(IKeywordIndexItem indexItem)
         {
             TopicKeywordIndexItem codeGroupIndexItem = indexItem as TopicKeywordIndexItem;
             TopicDocument codeGroupFile = new TopicDocument(codeGroupIndexItem, this.FolderPath);
 
-            if (this.openFiles == null)
-                this.openFiles = new Dictionary<string, IPersistableTarget>();
+            if (this.workItems == null)
+                this.workItems = new Dictionary<string, IWorkItem>();
 
-            this.openFiles.Add(codeGroupFile.Id, codeGroupFile);
+            this.workItems.Add(codeGroupFile.Id, codeGroupFile);
 
-            return codeGroupFile as IPersistableTarget;
+            return codeGroupFile as IWorkItem;
         }
 
-        protected override IPersistableTarget OpenSpecializedTarget(IKeywordIndexItem indexItem)
+        protected override IWorkItem OpenSpecializedTarget(IKeywordIndexItem indexItem)
         {
             TopicKeywordIndexItem codeGroupIndexItem = indexItem as TopicKeywordIndexItem;
-            IPersistableTarget persistableFile;
+            IWorkItem workItem;
 
-            if (this.openFiles == null)
-                this.openFiles = new Dictionary<string, IPersistableTarget>();
+            if (this.workItems == null)
+                this.workItems = new Dictionary<string, IWorkItem>();
 
             // first check to see if the file exists..
-            if (this.openFiles.ContainsKey(codeGroupIndexItem.Id))
+            if (this.workItems.ContainsKey(codeGroupIndexItem.Id))
             {
-                persistableFile = this.openFiles[codeGroupIndexItem.Id];
+                workItem = this.workItems[codeGroupIndexItem.Id];
             }
             else
             {
                 // retrieve the file and add it to the opened code files.
-                persistableFile = PersistableTargetFactory.Create(codeGroupIndexItem, this.FolderPath);
+                workItem = PersistableTargetFactory.Create(codeGroupIndexItem, this.FolderPath);
 
-                if (this.openFiles == null)
-                    this.openFiles = new Dictionary<string, IPersistableTarget>();
-                this.openFiles.Add(persistableFile.Id, persistableFile);
+                if (this.workItems == null)
+                    this.workItems = new Dictionary<string, IWorkItem>();
+                this.workItems.Add(workItem.Id, workItem);
 
-                persistableFile.Open();
+                workItem.Open();
             }
 
-            return persistableFile;
+            return workItem;
         }
     }
 }

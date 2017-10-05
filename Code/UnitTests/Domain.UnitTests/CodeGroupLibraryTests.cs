@@ -25,9 +25,9 @@ namespace Domain.UnitTests
             TopicKeywordIndexItem keywordIndexItem = new TopicKeywordIndexItem("Code Group Index Item", "C#", "testing,tested,test");
 
             topicLibrary.Open(@"C:\parent_folder", new Version("4.0.1"));
-            IPersistableTarget persistableTarget = topicLibrary.CreateTarget(keywordIndexItem);
+            IWorkItem workItem = topicLibrary.CreateTarget(keywordIndexItem);
 
-            Assert.That(persistableTarget, Is.Not.Null);
+            Assert.That(workItem, Is.Not.Null);
         }
 
         [Test]
@@ -57,10 +57,10 @@ namespace Domain.UnitTests
             codeGroupLibrary.Open(@"C:\parent_folder", new Version("4.0.1"));
 
             // Act
-            IPersistableTarget persistableTarget = codeGroupLibrary.OpenTarget(keywordIndexItem);
+            IWorkItem workItem = codeGroupLibrary.OpenTarget(keywordIndexItem);
 
             // Assert
-            Assert.That(persistableTarget, Is.Not.Null);
+            Assert.That(workItem, Is.Not.Null);
         }
 
         [Test]

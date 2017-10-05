@@ -18,7 +18,7 @@ namespace CygSoft.CodeCat.Domain.Base
 
         protected IKeywordSearchIndex index;
         private IKeywordSearchIndexRepository indexRepository;
-        protected Dictionary<string, IPersistableTarget> openFiles;
+        protected Dictionary<string, IWorkItem> workItems;
 
         protected string FileExtension { get; set; }
 
@@ -52,8 +52,8 @@ namespace CygSoft.CodeCat.Domain.Base
             this.subFolder = subFolder;
         }
 
-        protected abstract IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem);
-        protected abstract IPersistableTarget OpenSpecializedTarget(IKeywordIndexItem indexItem);
+        protected abstract IWorkItem CreateSpecializedTarget(IKeywordIndexItem indexItem);
+        protected abstract IWorkItem OpenSpecializedTarget(IKeywordIndexItem indexItem);
         public abstract IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems);
 
         public void Import(IndexExportImportData[] importData)
@@ -73,9 +73,9 @@ namespace CygSoft.CodeCat.Domain.Base
             }
         }
 
-        public IPersistableTarget OpenTarget(IKeywordIndexItem indexItem)
+        public IWorkItem OpenTarget(IKeywordIndexItem indexItem)
         {
-            IPersistableTarget target = OpenSpecializedTarget(indexItem);
+            IWorkItem target = OpenSpecializedTarget(indexItem);
 
             target.BeforeClose += target_BeforeClose;
             target.AfterSave += target_AfterSave;
@@ -83,9 +83,9 @@ namespace CygSoft.CodeCat.Domain.Base
             return target;
         }
 
-        public IPersistableTarget CreateTarget(IKeywordIndexItem indexItem)
+        public IWorkItem CreateTarget(IKeywordIndexItem indexItem)
         {
-            IPersistableTarget target = CreateSpecializedTarget(indexItem);
+            IWorkItem target = CreateSpecializedTarget(indexItem);
 
             target.BeforeClose += target_BeforeClose;
             target.AfterSave += target_AfterSave;
@@ -222,34 +222,34 @@ namespace CygSoft.CodeCat.Domain.Base
 
         private void RemoveLibraryFileReference(string id, bool save = false)
         {
-            if (this.openFiles == null)
+            if (this.workItems == null)
                 return;
 
-            if (this.openFiles.ContainsKey(id))
+            if (this.workItems.ContainsKey(id))
             {
                 if (save)
                 {
-                    this.openFiles[id].Save();
+                    this.workItems[id].Save();
                 }
-                this.openFiles.Remove(id);
+                this.workItems.Remove(id);
             }
         }
 
-        private IPersistableTarget GetLibraryReferenceOrOpenFile(string id)
+        private IWorkItem GetLibraryReferenceOrOpenFile(string id)
         {
-            IPersistableTarget persistableFile;
+            IWorkItem workItem;
 
-            if (this.openFiles != null && this.openFiles.ContainsKey(id))
+            if (this.workItems != null && this.workItems.ContainsKey(id))
             {
-                persistableFile = this.openFiles[id];
+                workItem = this.workItems[id];
             }
             else
             {
                 IKeywordIndexItem indexItem = this.index.FindById(id);
-                persistableFile = OpenTarget(indexItem);
+                workItem = OpenTarget(indexItem);
             }
 
-            return persistableFile;
+            return workItem;
         }
 
         private void BeforeIndexLoad()
@@ -258,13 +258,13 @@ namespace CygSoft.CodeCat.Domain.Base
             if (this.index != null)
                 this.index.IndexModified -= Index_IndexModified;
 
-            if (openFiles == null)
+            if (workItems == null)
                 return;
 
-            while (openFiles.Count > 0)
+            while (workItems.Count > 0)
             {
-                KeyValuePair<string, IPersistableTarget> persistableFile = openFiles.ElementAt(0);
-                RemoveLibraryFileReference(persistableFile.Key);
+                KeyValuePair<string, IWorkItem> workItem = workItems.ElementAt(0);
+                RemoveLibraryFileReference(workItem.Key);
             }
         }
 
@@ -281,7 +281,7 @@ namespace CygSoft.CodeCat.Domain.Base
 
         private void target_AfterDelete(object sender, TopicEventArgs e)
         {
-            IPersistableTarget target = sender as IPersistableTarget;
+            IWorkItem target = sender as IWorkItem;
 
             target.BeforeClose += target_BeforeClose;
 
@@ -294,13 +294,13 @@ namespace CygSoft.CodeCat.Domain.Base
 
         private void target_AfterSave(object sender, TopicEventArgs e)
         {
-            IPersistableTarget targetFile = sender as IPersistableTarget;
+            IWorkItem targetFile = sender as IWorkItem;
             this.index.Update(targetFile.IndexItem);
         }
 
         private void target_BeforeClose(object sender, TopicEventArgs e)
         {
-            IPersistableTarget target = sender as IPersistableTarget;
+            IWorkItem target = sender as IWorkItem;
 
             target.BeforeClose -= target_BeforeClose;
             target.AfterSave -= target_AfterSave;

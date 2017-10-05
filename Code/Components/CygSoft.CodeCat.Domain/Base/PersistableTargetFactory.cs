@@ -6,7 +6,7 @@ namespace CygSoft.CodeCat.Domain.Base
     {
         private static ITopicDocument persistableTarget;
 
-        public static IPersistableTarget Create(ITopicKeywordIndexItem indexItem, string folderPath)
+        public static IWorkItem Create(ITopicKeywordIndexItem indexItem, string folderPath)
         {
             if (persistableTarget != null)
                 return persistableTarget;

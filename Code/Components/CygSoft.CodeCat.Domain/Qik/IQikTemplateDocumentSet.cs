@@ -5,7 +5,7 @@ using System;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    public interface IQikTemplateDocumentSet : IPersistableTarget
+    public interface IQikTemplateDocumentSet : IWorkItem
     {
         event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
         event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;

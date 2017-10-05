@@ -28,47 +28,47 @@ namespace CygSoft.CodeCat.Domain.Qik
             return exportList.ToArray();
         }
 
-        protected override IPersistableTarget CreateSpecializedTarget(IKeywordIndexItem indexItem)
+        protected override IWorkItem CreateSpecializedTarget(IKeywordIndexItem indexItem)
         {
             QikTemplateKeywordIndexItem qikIndexItem = indexItem as QikTemplateKeywordIndexItem;
             QikTemplateDocumentSet qikFile = new QikTemplateDocumentSet(qikIndexItem, this.FolderPath);
 
-            if (this.openFiles == null)
-                this.openFiles = new Dictionary<string, IPersistableTarget>();
+            if (this.workItems == null)
+                this.workItems = new Dictionary<string, IWorkItem>();
 
-            this.openFiles.Add(qikFile.Id, qikFile);
+            this.workItems.Add(qikFile.Id, qikFile);
 
-            return qikFile as IPersistableTarget;
+            return qikFile as IWorkItem;
         }
 
-        protected override IPersistableTarget OpenSpecializedTarget(IKeywordIndexItem indexItem)
+        protected override IWorkItem OpenSpecializedTarget(IKeywordIndexItem indexItem)
         {
             QikTemplateKeywordIndexItem qikIndexItem = indexItem as QikTemplateKeywordIndexItem;
-            IPersistableTarget persistableFile;
+            IWorkItem workItem;
 
-            if (this.openFiles == null)
-                this.openFiles = new Dictionary<string, IPersistableTarget>();
+            if (this.workItems == null)
+                this.workItems = new Dictionary<string, IWorkItem>();
 
             // first check to see if the file exists..
-            if (this.openFiles.ContainsKey(qikIndexItem.Id))
+            if (this.workItems.ContainsKey(qikIndexItem.Id))
             {
-                persistableFile = this.openFiles[qikIndexItem.Id];
+                workItem = this.workItems[qikIndexItem.Id];
             }
 
             else
             {
                 // retrieve the file and add it to the opened code files.
-                persistableFile = new QikTemplateDocumentSet(qikIndexItem, this.FolderPath);
+                workItem = new QikTemplateDocumentSet(qikIndexItem, this.FolderPath);
 
-                if (this.openFiles == null)
-                    this.openFiles = new Dictionary<string, IPersistableTarget>();
+                if (this.workItems == null)
+                    this.workItems = new Dictionary<string, IWorkItem>();
 
-                this.openFiles.Add(persistableFile.Id, persistableFile);
+                this.workItems.Add(workItem.Id, workItem);
 
-                persistableFile.Open();
+                workItem.Open();
             }
 
-            return persistableFile;
+            return workItem;
         }
     }
 }

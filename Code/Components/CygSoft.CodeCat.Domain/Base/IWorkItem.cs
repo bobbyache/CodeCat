@@ -4,7 +4,7 @@ using System;
 
 namespace CygSoft.CodeCat.Domain.Base
 {
-    public interface IPersistableTarget : IKeywordTarget
+    public interface IWorkItem : IKeywordTarget
     {
         string Title { get; set; }
 

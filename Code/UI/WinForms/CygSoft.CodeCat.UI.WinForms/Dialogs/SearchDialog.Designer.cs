@@ -108,7 +108,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage1.Size = new System.Drawing.Size(597, 350);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Code && Snippets";
+            this.tabPage1.Text = "Work Items";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // codeSearchResultsControl1

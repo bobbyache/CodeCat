@@ -36,16 +36,16 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public QikWorkItemForm(IPersistableTarget target, AppFacade application, bool isNew = false)
+        public QikWorkItemForm(IWorkItem workItem, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
-            if (!(target is IQikTemplateDocumentSet))
+            if (!(workItem is IQikTemplateDocumentSet))
                 throw new ArgumentException("Target is not the incorrect type.");
 
-            this.qikFile = target as IQikTemplateDocumentSet;
+            this.qikFile = workItem as IQikTemplateDocumentSet;
             base.application = application;
-            base.persistableTarget = qikFile;
+            base.workItem = qikFile;
 
             tabControlFile.ImageList = IconRepository.ImageList;
 
@@ -83,7 +83,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public bool SaveChanges()
         {
-            return base.Save(base.persistableTarget, this);
+            return base.Save(base.workItem, this);
         }
 
         public void AddKeywords(string keywords, bool flagModified = true)
@@ -200,10 +200,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void ResetFields()
         {
-            txtToolStripTitle.Text = base.persistableTarget.Title;
-            Text = base.persistableTarget.Title;
-            txtKeywords.Text = base.persistableTarget.CommaDelimitedKeywords;
-            txtTitle.Text = base.persistableTarget.Title;
+            txtToolStripTitle.Text = base.workItem.Title;
+            Text = base.workItem.Title;
+            txtKeywords.Text = base.workItem.CommaDelimitedKeywords;
+            txtTitle.Text = base.workItem.Title;
 
             base.IsModified = false;
         }
@@ -436,7 +436,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void QikCodeDocument_Deleting(object sender, EventArgs e)
         {
-            base.persistableTarget.Delete();
+            base.workItem.Delete();
         }
 
         #endregion

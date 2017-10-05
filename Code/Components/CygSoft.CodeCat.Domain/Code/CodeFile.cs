@@ -9,7 +9,7 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 
 namespace CygSoft.CodeCat.Domain.Code
 {
-    public class CodeFile : IPersistableTarget
+    public class CodeFile : IWorkItem
     {
         private class SnapshotDateComparer : IComparer<CodeSnapshot>
         {

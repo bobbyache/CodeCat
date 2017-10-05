@@ -378,7 +378,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!WorkItemFormIsOpen(keywordIndexItem))
             {
                 IContentDocument workItemForm = null;
-                IPersistableTarget workItem = application.OpenWorkItem(keywordIndexItem);
+                IWorkItem workItem = application.OpenWorkItem(keywordIndexItem);
 
                 if (keywordIndexItem is ICodeKeywordIndexItem)
                     workItemForm = new CodeWorkItemForm(workItem, application);
@@ -412,7 +412,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void CreateWorkItem(WorkItemType workItemType)
         {
             IContentDocument workItemForm = null;
-            IPersistableTarget workItem = application.CreateWorkItem(ConfigSettings.DefaultSyntax, workItemType);
+            IWorkItem workItem = application.CreateWorkItem(ConfigSettings.DefaultSyntax, workItemType);
 
             switch (workItemType)
             {
@@ -548,9 +548,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void workItemForm_DocumentSaved(object sender, DocumentSavedFileEventArgs e)
         {
-            searchForm.ExecuteSearch(e.Item.Id);
-            mnuDocuments.DropDownItems[e.Item.Id].Text = e.ContentDocument.Text;
-            mnuDocuments.DropDownItems[e.Item.Id].Image = e.ContentDocument.IconImage;
+            searchForm.ExecuteSearch(e.WorkItem.Id);
+            mnuDocuments.DropDownItems[e.WorkItem.Id].Text = e.ContentDocument.Text;
+            mnuDocuments.DropDownItems[e.WorkItem.Id].Image = e.ContentDocument.IconImage;
         }
 
         private void mnuFileOpen_Click(object sender, EventArgs e)

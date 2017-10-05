@@ -24,14 +24,14 @@ namespace CygSoft.CodeCat.UI.WinForms
         private bool flagForDelete = false;
 
         protected AppFacade application;
-        protected IPersistableTarget persistableTarget;
+        protected IWorkItem workItem;
 
         public string Id
         {
             get
             {
-                if (persistableTarget != null)
-                    return persistableTarget.Id;
+                if (workItem != null)
+                    return workItem.Id;
                 return null;
             }
         }
@@ -40,8 +40,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             get
             {
-                if (persistableTarget != null)
-                    return persistableTarget.CommaDelimitedKeywords;
+                if (workItem != null)
+                    return workItem.CommaDelimitedKeywords;
                 return null;
             }
         }
@@ -103,8 +103,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public IKeywordIndexItem GetKeywordIndex()
         {
-            if (persistableTarget != null)
-                return persistableTarget.IndexItem;
+            if (workItem != null)
+                return workItem.IndexItem;
             return null;
         }
 
@@ -130,12 +130,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected string AddKeywords(string keywords)
         {
-            return application.AddKeywordsToDelimitedText(persistableTarget.CommaDelimitedKeywords, keywords);
+            return application.AddKeywordsToDelimitedText(workItem.CommaDelimitedKeywords, keywords);
         }
 
         protected string RemoveKeywords(string keywords)
         {
-            return application.RemoveKeywordsFromDelimitedText(persistableTarget.CommaDelimitedKeywords, keywords);
+            return application.RemoveKeywordsFromDelimitedText(workItem.CommaDelimitedKeywords, keywords);
         }
 
         protected void RevertChanges()
@@ -148,7 +148,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        protected bool Save(IPersistableTarget target, IContentDocument contentDocument)
+        protected bool Save(IWorkItem target, IContentDocument contentDocument)
         {
             if (ValidateChanges())
             {
@@ -205,7 +205,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            persistableTarget.Close();
+            workItem.Close();
             base.OnFormClosed(e);
         }
     }

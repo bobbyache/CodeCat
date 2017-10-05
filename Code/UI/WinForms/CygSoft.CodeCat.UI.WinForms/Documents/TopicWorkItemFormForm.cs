@@ -17,22 +17,22 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public TopicWorkItemForm(IPersistableTarget target, AppFacade application, bool isNew = false)
+        public TopicWorkItemForm(IWorkItem workItem, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
-            if (!(target is ITopicDocument))
+            if (!(workItem is ITopicDocument))
                 throw new ArgumentException("Target is not the incorrect type.");
 
             this.tabControlFile.ImageList = IconRepository.ImageList;
             base.application = application;
-            this.topicDocument = target as ITopicDocument;
+            this.topicDocument = workItem as ITopicDocument;
             this.topicDocument.TopicSectionAdded += topicDocument_TopicSectionAdded;
             this.topicDocument.TopicSectionRemoved += topicDocument_TopicSectionRemoved;
             this.topicDocument.TopicSectionMovedLeft += topicDocument_TopicSectionMovedLeft;
             this.topicDocument.TopicSectionMovedRight += topicDocument_TopicSectionMovedRight;
-            base.persistableTarget = target;
-            this.Tag = target.Id;
+            base.workItem = workItem;
+            this.Tag = workItem.Id;
             this.tabManager = new DocumentTabManager(this.tabControlFile, this.btnMenu);
             this.tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   
@@ -53,7 +53,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public bool SaveChanges()
         {
-            return base.Save(base.persistableTarget, this);
+            return base.Save(base.workItem, this);
         }
 
         public void AddKeywords(string keywords, bool flagModified = true)
@@ -240,10 +240,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void ResetFields()
         {
-            this.txtToolStripTitle.Text = base.persistableTarget.Title;
-            this.Text = base.persistableTarget.Title;
-            this.txtKeywords.Text = base.persistableTarget.CommaDelimitedKeywords;
-            this.txtTitle.Text = base.persistableTarget.Title;
+            this.txtToolStripTitle.Text = base.workItem.Title;
+            this.Text = base.workItem.Title;
+            this.txtKeywords.Text = base.workItem.CommaDelimitedKeywords;
+            this.txtTitle.Text = base.workItem.Title;
 
             base.IsModified = false;
         }
@@ -433,7 +433,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void TopicDocumentDeleting(object sender, EventArgs e)
         {
-            base.persistableTarget.Delete();
+            base.workItem.Delete();
         }
 
 

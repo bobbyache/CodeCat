@@ -246,7 +246,7 @@ namespace CygSoft.CodeCat.Domain
 
 
 
-        public IPersistableTarget OpenWorkItem(IKeywordIndexItem keywordIndexItem)
+        public IWorkItem OpenWorkItem(IKeywordIndexItem keywordIndexItem)
         {
             if (keywordIndexItem is ICodeKeywordIndexItem)
                 return OpenCodeFileTarget(keywordIndexItem);
@@ -258,7 +258,7 @@ namespace CygSoft.CodeCat.Domain
                 return null;
         }
 
-        public IPersistableTarget CreateWorkItem(string syntax, WorkItemType itemType)
+        public IWorkItem CreateWorkItem(string syntax, WorkItemType itemType)
         {
             switch (itemType)
             {

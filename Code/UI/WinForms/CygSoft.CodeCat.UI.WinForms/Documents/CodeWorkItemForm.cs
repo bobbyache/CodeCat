@@ -14,16 +14,16 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public CodeWorkItemForm(IPersistableTarget target, AppFacade application, bool isNew = false)
+        public CodeWorkItemForm(IWorkItem workItem, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
-            if (!(target is CodeFile))
+            if (!(workItem is CodeFile))
                 throw new ArgumentException("Target is not the incorrect type.");
 
             base.application = application;
-            base.persistableTarget = target;
-            this.Tag = target.Id;
+            base.workItem = workItem;
+            this.Tag = workItem.Id;
 
             this.syntaxBox.AllowBreakPoints = false;
             tabControl.Alignment = TabAlignment.Left;
@@ -52,7 +52,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public bool SaveChanges()
         {
-            return base.Save(base.persistableTarget, this);
+            return base.Save(base.workItem, this);
         }
 
         public void AddKeywords(string keywords, bool flagModified = true)
@@ -113,7 +113,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected override void SaveFields()
         {
-            CodeFile codeFile = base.persistableTarget as CodeFile;
+            CodeFile codeFile = base.workItem as CodeFile;
 
             codeFile.Title = this.txtTitle.Text.Trim();
             codeFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
@@ -144,8 +144,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnDiscardChange.Image = Gui.Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
 
             this.tabControl.ImageList = IconRepository.ImageList;
-            this.tabPageCode.ImageKey = (base.persistableTarget as CodeFile).Syntax;
-            this.Icon = IconRepository.Get((base.persistableTarget as CodeFile).Syntax).Icon;
+            this.tabPageCode.ImageKey = (base.workItem as CodeFile).Syntax;
+            this.Icon = IconRepository.Get((base.workItem as CodeFile).Syntax).Icon;
             lblEditStatus.Image = this.IconImage;
         }
 
@@ -176,7 +176,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 this.snapshotListCtrl1.EditorFontSize = this.syntaxBox.FontSize;
             };
 
-            CodeFile codeFile = base.persistableTarget as CodeFile;
+            CodeFile codeFile = base.workItem as CodeFile;
 
             codeFile.SnapshotTaken += (s, e) => { UpdateSnapshotsTab(); };
             codeFile.SnapshotDeleted += (s, e) => { UpdateSnapshotsTab(); };
@@ -199,7 +199,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void ResetFields()
         {
-            CodeFile codeFile = base.persistableTarget as CodeFile;
+            CodeFile codeFile = base.workItem as CodeFile;
 
             this.txtToolStripTitle.Text = codeFile.Title;
             this.Text = codeFile.Title;
@@ -240,7 +240,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void UpdateSnapshotsTab()
         {
-            CodeFile codeFile = base.persistableTarget as CodeFile;
+            CodeFile codeFile = base.workItem as CodeFile;
 
             if (!snapshotListCtrl1.Attached)
                 snapshotListCtrl1.Attach(codeFile);
@@ -296,7 +296,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             if (result == DialogResult.OK)
             {
-                (base.persistableTarget as CodeFile).TakeSnapshot(frm.Description);
+                (base.workItem as CodeFile).TakeSnapshot(frm.Description);
             }
         }
 
@@ -336,7 +336,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void SnippetDocument_ModifyStatusChanged(object sender, EventArgs e)
         {
-            CodeFile codeFile = base.persistableTarget as CodeFile;
+            CodeFile codeFile = base.workItem as CodeFile;
             txtToolStripTitle.Text = codeFile.Title;
 
             if (base.IsNew)
@@ -356,7 +356,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void SnippetDocument_Deleting(object sender, EventArgs e)
         {
-            base.persistableTarget.Delete();
+            base.workItem.Delete();
         }
 
         #endregion
