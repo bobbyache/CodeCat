@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.Domain.Code.Base
             return exporter.GetExportData();
         }
 
-        protected override IWorkItem CreateSpecializedTarget(IKeywordIndexItem indexItem)
+        protected override IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem)
         {
             CodeKeywordIndexItem codeIndexItem = indexItem as CodeKeywordIndexItem;
             CodeFile codeFile = new CodeFile(codeIndexItem, this.FolderPath);
@@ -36,7 +36,7 @@ namespace CygSoft.CodeCat.Domain.Code.Base
             return codeFile as IWorkItem;
         }
 
-        protected override IWorkItem OpenSpecializedTarget(IKeywordIndexItem indexItem)
+        protected override IWorkItem OpenTargetWorkItem(IKeywordIndexItem indexItem)
         {
             CodeKeywordIndexItem codeIndexItem = indexItem as CodeKeywordIndexItem;
             IWorkItem workItem;

@@ -26,7 +26,7 @@ namespace CygSoft.CodeCat.Domain.Topics
             return exporter.GetExportData();
         }
 
-        protected override IWorkItem CreateSpecializedTarget(IKeywordIndexItem indexItem)
+        protected override IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem)
         {
             TopicKeywordIndexItem codeGroupIndexItem = indexItem as TopicKeywordIndexItem;
             TopicDocument codeGroupFile = new TopicDocument(codeGroupIndexItem, this.FolderPath);
@@ -39,7 +39,7 @@ namespace CygSoft.CodeCat.Domain.Topics
             return codeGroupFile as IWorkItem;
         }
 
-        protected override IWorkItem OpenSpecializedTarget(IKeywordIndexItem indexItem)
+        protected override IWorkItem OpenTargetWorkItem(IKeywordIndexItem indexItem)
         {
             TopicKeywordIndexItem codeGroupIndexItem = indexItem as TopicKeywordIndexItem;
             IWorkItem workItem;

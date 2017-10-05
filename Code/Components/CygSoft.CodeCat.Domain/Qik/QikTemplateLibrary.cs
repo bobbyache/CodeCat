@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.Domain.Qik
             return exporter.GetExportData();
         }
 
-        protected override IWorkItem CreateSpecializedTarget(IKeywordIndexItem indexItem)
+        protected override IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem)
         {
             QikTemplateKeywordIndexItem qikIndexItem = indexItem as QikTemplateKeywordIndexItem;
             QikTemplateDocumentSet qikFile = new QikTemplateDocumentSet(qikIndexItem, this.FolderPath);
@@ -34,7 +34,7 @@ namespace CygSoft.CodeCat.Domain.Qik
             return qikFile as IWorkItem;
         }
 
-        protected override IWorkItem OpenSpecializedTarget(IKeywordIndexItem indexItem)
+        protected override IWorkItem OpenTargetWorkItem(IKeywordIndexItem indexItem)
         {
             QikTemplateKeywordIndexItem qikIndexItem = indexItem as QikTemplateKeywordIndexItem;
             IWorkItem workItem;

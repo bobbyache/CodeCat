@@ -52,8 +52,8 @@ namespace CygSoft.CodeCat.Domain.Base
             this.subFolder = subFolder;
         }
 
-        protected abstract IWorkItem CreateSpecializedTarget(IKeywordIndexItem indexItem);
-        protected abstract IWorkItem OpenSpecializedTarget(IKeywordIndexItem indexItem);
+        protected abstract IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem);
+        protected abstract IWorkItem OpenTargetWorkItem(IKeywordIndexItem indexItem);
         public abstract IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems);
 
         public void Import(IndexExportImportData[] importData)
@@ -73,9 +73,9 @@ namespace CygSoft.CodeCat.Domain.Base
             }
         }
 
-        public IWorkItem OpenTarget(IKeywordIndexItem indexItem)
+        public IWorkItem OpenWorkItem(IKeywordIndexItem indexItem)
         {
-            IWorkItem target = OpenSpecializedTarget(indexItem);
+            IWorkItem target = OpenTargetWorkItem(indexItem);
 
             target.BeforeClose += target_BeforeClose;
             target.AfterSave += target_AfterSave;
@@ -83,9 +83,9 @@ namespace CygSoft.CodeCat.Domain.Base
             return target;
         }
 
-        public IWorkItem CreateTarget(IKeywordIndexItem indexItem)
+        public IWorkItem CreateWorkItem(IKeywordIndexItem indexItem)
         {
-            IWorkItem target = CreateSpecializedTarget(indexItem);
+            IWorkItem target = CreateTargetWorkItem(indexItem);
 
             target.BeforeClose += target_BeforeClose;
             target.AfterSave += target_AfterSave;
@@ -233,23 +233,6 @@ namespace CygSoft.CodeCat.Domain.Base
                 }
                 this.workItems.Remove(id);
             }
-        }
-
-        private IWorkItem GetLibraryReferenceOrOpenFile(string id)
-        {
-            IWorkItem workItem;
-
-            if (this.workItems != null && this.workItems.ContainsKey(id))
-            {
-                workItem = this.workItems[id];
-            }
-            else
-            {
-                IKeywordIndexItem indexItem = this.index.FindById(id);
-                workItem = OpenTarget(indexItem);
-            }
-
-            return workItem;
         }
 
         private void BeforeIndexLoad()

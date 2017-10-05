@@ -263,13 +263,13 @@ namespace CygSoft.CodeCat.Domain
             switch (itemType)
             {
                 case WorkItemType.CodeFile:
-                    return this.codeLibrary.CreateTarget(new CodeKeywordIndexItem("New Snippet", 
+                    return this.codeLibrary.CreateWorkItem(new CodeKeywordIndexItem("New Snippet", 
                         syntax, string.Empty));
                 case WorkItemType.QikGenerator:
-                    return this.qikLibrary.CreateTarget(new QikTemplateKeywordIndexItem("New Qik Template", 
+                    return this.qikLibrary.CreateWorkItem(new QikTemplateKeywordIndexItem("New Qik Template", 
                         syntax, string.Empty));
                 case WorkItemType.Topic:
-                    return this.topicLibrary.CreateTarget(new TopicKeywordIndexItem("New Group Snippet", 
+                    return this.topicLibrary.CreateWorkItem(new TopicKeywordIndexItem("New Group Snippet", 
                         syntax, string.Empty));
                 default:
                     return null;
@@ -434,17 +434,17 @@ namespace CygSoft.CodeCat.Domain
 
         private ITopicDocument OpenTopicDocument(IKeywordIndexItem keywordIndexItem)
         {
-            return this.topicLibrary.OpenTarget(keywordIndexItem) as ITopicDocument;
+            return this.topicLibrary.OpenWorkItem(keywordIndexItem) as ITopicDocument;
         }
 
         private IQikTemplateDocumentSet OpenQikDocumentGroup(IKeywordIndexItem keywordIndexItem)
         {
-            return this.qikLibrary.OpenTarget(keywordIndexItem) as IQikTemplateDocumentSet;
+            return this.qikLibrary.OpenWorkItem(keywordIndexItem) as IQikTemplateDocumentSet;
         }
 
         private CodeFile OpenCodeFileTarget(IKeywordIndexItem keywordIndexItem)
         {
-            return this.codeLibrary.OpenTarget(keywordIndexItem) as CodeFile;
+            return this.codeLibrary.OpenWorkItem(keywordIndexItem) as CodeFile;
         }
     }
 
