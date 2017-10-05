@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace CygSoft.CodeCat.Domain.Topics
 {
-    public class TopicDocument : IPersistableTarget, ITopicDocument
+    public class TopicDocument : ITopicDocument
     {
         public event EventHandler<TopicEventArgs> BeforeDelete;
         public event EventHandler<TopicEventArgs> AfterDelete;

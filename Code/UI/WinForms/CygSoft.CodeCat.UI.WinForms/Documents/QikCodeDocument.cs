@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
@@ -35,11 +36,14 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public QikCodeDocument(IQikTemplateDocumentSet qikFile, AppFacade application, bool isNew = false)
+        public QikCodeDocument(IPersistableTarget target, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
-            this.qikFile = qikFile;
+            if (!(target is IQikTemplateDocumentSet))
+                throw new ArgumentException("Target is not the incorrect type.");
+
+            this.qikFile = target as IQikTemplateDocumentSet;
             base.application = application;
             base.persistableTarget = qikFile;
 

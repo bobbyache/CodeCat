@@ -1,7 +1,9 @@
 ﻿using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Plugins.Generators;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Docked;
@@ -94,7 +96,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             mnuFileOpen.Click += mnuFileOpen_Click;
             mnuWindowKeywordSearch.Click += mnuWindowKeywordSearch_Click;
             mnuCurrentTasks.Click += mnuCurrentTasks_Click;
-            mnuSnippetsAdd.Click += mnuSnippetsAdd_Click;
+            mnuSnippetsAdd.Click += mnuAddCodeFile_Click;
             mnuSnippetsViewModify.Click += mnuSnippetsViewModify_Click;
             mnuGenerators.Click += MnuGenerators_Click;
         }
@@ -359,21 +361,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void DeleteSnippetDocument(IKeywordIndexItem snippetIndex)
         {
-            if (snippetIndex is ICodeKeywordIndexItem)
-            {
-                CodeFile codeFile = application.OpenCodeFileTarget(snippetIndex);
-                codeFile.Delete();
-            }
-            else if (snippetIndex is IQikTemplateKeywordIndexItem)
-            {
-                IQikTemplateDocumentSet qikFile = application.OpenQikDocumentGroup(snippetIndex);
-                qikFile.Delete();
-            }
-            else if (snippetIndex is ITopicKeywordIndexItem)
-            {
-                ITopicDocument codeGroupFile = application.OpenTopicDocument(snippetIndex);
-                codeGroupFile.Delete();
-            }
+            application.DeleteWorkItem(snippetIndex);
 
             if (SnippetIsOpen(snippetIndex))
             {
@@ -389,33 +377,25 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (!SnippetIsOpen(snippetIndex))
             {
+                IContentDocument snippetForm = null;
+                IPersistableTarget workItem = application.OpenWorkItem(snippetIndex);
+
                 if (snippetIndex is ICodeKeywordIndexItem)
-                {
-                    CodeFile codeFile = application.OpenCodeFileTarget(snippetIndex);
-                    IContentDocument snippetForm = new SnippetDocument(codeFile, application);
-                    snippetForm.HeaderFieldsVisible = false;
-                    snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
-                    snippetForm.DocumentSaved += snippetForm_DocumentSaved;
-                    snippetForm.Show(dockPanel, DockState.Document);
-                }
+                    snippetForm = new SnippetDocument(workItem, application);
+
                 else if (snippetIndex is IQikTemplateKeywordIndexItem)
-                {
-                    IQikTemplateDocumentSet qikFile = application.OpenQikDocumentGroup(snippetIndex);
-                    IContentDocument snippetForm = new QikCodeDocument(qikFile, application);
-                    snippetForm.HeaderFieldsVisible = false;
-                    snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
-                    snippetForm.DocumentSaved += snippetForm_DocumentSaved;
-                    snippetForm.Show(dockPanel, DockState.Document);
-                }
+                    snippetForm = new QikCodeDocument(workItem, application);
+
                 else if (snippetIndex is ITopicKeywordIndexItem)
-                {
-                    ITopicDocument codeGroupFile = application.OpenTopicDocument(snippetIndex);
-                    IContentDocument snippetForm = new TopicDocumentForm(codeGroupFile, application);
-                    snippetForm.HeaderFieldsVisible = false;
-                    snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
-                    snippetForm.DocumentSaved += snippetForm_DocumentSaved;
-                    snippetForm.Show(dockPanel, DockState.Document);
-                }
+                    snippetForm = new TopicDocumentForm(workItem, application);
+
+                if (snippetForm == null)
+                    throw new Exception("IContentDocument has not been defined and cannot be opened.");
+
+                snippetForm.HeaderFieldsVisible = false;
+                snippetForm.DocumentDeleted += workItemForm_DocumentDeleted;
+                snippetForm.DocumentSaved += workItemForm_DocumentSaved;
+                snippetForm.Show(dockPanel, DockState.Document);
             }
             else
             {
@@ -426,40 +406,18 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void CreateSnippetDocumentIfNone()
         {
             if (!this.dockPanel.Contents.OfType<IContentDocument>().Any())
-                CreateSnippetDocument();
+                CreateWorkItem(WorkItemType.CodeFile);
         }
 
-        private void CreateSnippetDocument()
+        private void CreateWorkItem(WorkItemType workItemType)
         {
-            CodeFile codeFile = application.CreateCodeSnippet(ConfigSettings.DefaultSyntax);
-            IContentDocument snippetForm = new SnippetDocument(codeFile, application, true);
+            IPersistableTarget workItem = application.CreateWorkItem(ConfigSettings.DefaultSyntax, workItemType);
+            IContentDocument workItemForm = new SnippetDocument(workItem, application, true);
 
-            snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
-            snippetForm.DocumentSaved += snippetForm_DocumentSaved;
-            snippetForm.HeaderFieldsVisible = true;
-            snippetForm.Show(dockPanel, DockState.Document);
-        }
-
-        private void CreateQikTemplateDocument()
-        {
-            IQikTemplateDocumentSet qikFile = application.CreateQikDocumentGroup(ConfigSettings.DefaultSyntax);
-            IContentDocument snippetForm = new QikCodeDocument(qikFile, application, true);
-
-            snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
-            snippetForm.DocumentSaved += snippetForm_DocumentSaved;
-            snippetForm.HeaderFieldsVisible = true;
-            snippetForm.Show(dockPanel, DockState.Document);
-        }
-
-        private void CreateCodeGroupDocument()
-        {
-            ITopicDocument codeGroupFile = application.CreateTopicDocument(ConfigSettings.DefaultSyntax);
-            IContentDocument snippetForm = new TopicDocumentForm(codeGroupFile, application, true);
-
-            snippetForm.DocumentDeleted += snippetForm_DocumentDeleted;
-            snippetForm.DocumentSaved += snippetForm_DocumentSaved;
-            snippetForm.HeaderFieldsVisible = true;
-            snippetForm.Show(dockPanel, DockState.Document);
+            workItemForm.DocumentDeleted += workItemForm_DocumentDeleted;
+            workItemForm.DocumentSaved += workItemForm_DocumentSaved;
+            workItemForm.HeaderFieldsVisible = true;
+            workItemForm.Show(dockPanel, DockState.Document);
         }
 
         private IContentDocument GetOpenDocument(string snippetId)
@@ -570,12 +528,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void snippetForm_DocumentDeleted(object sender, EventArgs e)
+        private void workItemForm_DocumentDeleted(object sender, EventArgs e)
         {
             searchForm.ExecuteSearch();
         }
 
-        private void snippetForm_DocumentSaved(object sender, DocumentSavedFileEventArgs e)
+        private void workItemForm_DocumentSaved(object sender, DocumentSavedFileEventArgs e)
         {
             searchForm.ExecuteSearch(e.Item.Id);
             mnuDocuments.DropDownItems[e.Item.Id].Text = e.ContentDocument.Text;
@@ -634,19 +592,19 @@ namespace CygSoft.CodeCat.UI.WinForms
             searchForm.Activate();
         }
 
-        private void mnuSnippetsAdd_Click(object sender, EventArgs e)
+        private void mnuAddCodeFile_Click(object sender, EventArgs e)
         {
-            CreateSnippetDocument();
+            CreateWorkItem(WorkItemType.CodeFile);
         }
 
-        private void mnuAddQikTemplate_Click(object sender, EventArgs e)
+        private void mnuAddQikGenerator_Click(object sender, EventArgs e)
         {
-            CreateQikTemplateDocument();
+            CreateWorkItem(WorkItemType.QikGenerator);
         }
 
-        private void mnuAddCodeGroup_Click(object sender, EventArgs e)
+        private void mnuAddTopic_Click(object sender, EventArgs e)
         {
-            CreateCodeGroupDocument();
+            CreateWorkItem(WorkItemType.Topic);
         }
 
         private void mnuSnippetsViewModify_Click(object sender, EventArgs e)

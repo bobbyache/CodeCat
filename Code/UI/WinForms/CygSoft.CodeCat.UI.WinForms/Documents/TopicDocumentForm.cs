@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Documents;
@@ -16,19 +17,22 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public TopicDocumentForm(ITopicDocument topicDocument, AppFacade application, bool isNew = false)
+        public TopicDocumentForm(IPersistableTarget target, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
+            if (!(target is ITopicDocument))
+                throw new ArgumentException("Target is not the incorrect type.");
+
             this.tabControlFile.ImageList = IconRepository.ImageList;
             base.application = application;
-            this.topicDocument = topicDocument;
+            this.topicDocument = target as ITopicDocument;
             this.topicDocument.TopicSectionAdded += topicDocument_TopicSectionAdded;
             this.topicDocument.TopicSectionRemoved += topicDocument_TopicSectionRemoved;
             this.topicDocument.TopicSectionMovedLeft += topicDocument_TopicSectionMovedLeft;
             this.topicDocument.TopicSectionMovedRight += topicDocument_TopicSectionMovedRight;
-            base.persistableTarget = topicDocument;
-            this.Tag = topicDocument.Id;
+            base.persistableTarget = target;
+            this.Tag = target.Id;
             this.tabManager = new DocumentTabManager(this.tabControlFile, this.btnMenu);
             this.tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   

@@ -181,14 +181,14 @@
             this.mnuAddQikTemplate.Name = "mnuAddQikTemplate";
             this.mnuAddQikTemplate.Size = new System.Drawing.Size(229, 26);
             this.mnuAddQikTemplate.Text = "Add Qik Template";
-            this.mnuAddQikTemplate.Click += new System.EventHandler(this.mnuAddQikTemplate_Click);
+            this.mnuAddQikTemplate.Click += new System.EventHandler(this.mnuAddQikGenerator_Click);
             // 
             // mnuAddCodeGroup
             // 
             this.mnuAddCodeGroup.Name = "mnuAddCodeGroup";
             this.mnuAddCodeGroup.Size = new System.Drawing.Size(229, 26);
             this.mnuAddCodeGroup.Text = "Add Code Group";
-            this.mnuAddCodeGroup.Click += new System.EventHandler(this.mnuAddCodeGroup_Click);
+            this.mnuAddCodeGroup.Click += new System.EventHandler(this.mnuAddTopic_Click);
             // 
             // mnuWindow
             // 

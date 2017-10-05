@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    internal class QikTemplateDocumentSet : IPersistableTarget, IQikTemplateDocumentSet
+    internal class QikTemplateDocumentSet : IQikTemplateDocumentSet
     {
         public event EventHandler<TopicEventArgs> BeforeDelete;
         public event EventHandler<TopicEventArgs> AfterDelete;

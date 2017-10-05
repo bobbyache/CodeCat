@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
@@ -13,13 +14,16 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public SnippetDocument(CodeFile codeFile, AppFacade application, bool isNew = false)
+        public SnippetDocument(IPersistableTarget target, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
+            if (!(target is CodeFile))
+                throw new ArgumentException("Target is not the incorrect type.");
+
             base.application = application;
-            base.persistableTarget = codeFile;
-            this.Tag = codeFile.Id;
+            base.persistableTarget = target;
+            this.Tag = target.Id;
 
             this.syntaxBox.AllowBreakPoints = false;
             tabControl.Alignment = TabAlignment.Left;
