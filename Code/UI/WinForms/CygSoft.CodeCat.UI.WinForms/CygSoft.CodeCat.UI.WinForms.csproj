@@ -282,27 +282,27 @@
     <Compile Include="Docked\TaskForm.Designer.cs">
       <DependentUpon>TaskForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\BaseDocument.cs">
+    <Compile Include="Documents\BaseWorkItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\BaseDocument.Designer.cs">
-      <DependentUpon>BaseDocument.cs</DependentUpon>
+    <Compile Include="Documents\BaseWorkItemForm.Designer.cs">
+      <DependentUpon>BaseWorkItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\TopicDocumentForm.cs">
+    <Compile Include="Documents\TopicWorkItemFormForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\TopicDocumentForm.Designer.cs">
-      <DependentUpon>TopicDocumentForm.cs</DependentUpon>
+    <Compile Include="Documents\TopicWorkItemFormForm.Designer.cs">
+      <DependentUpon>TopicWorkItemFormForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Documents\DocumentControlFactory.cs" />
     <Compile Include="Documents\DocumentTabEventArgs.cs" />
     <Compile Include="Documents\DocumentTabManager.cs" />
     <Compile Include="Documents\IContentDocument.cs" />
-    <Compile Include="Documents\QikCodeDocument.cs">
+    <Compile Include="Documents\QikWorkItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\QikCodeDocument.Designer.cs">
-      <DependentUpon>QikCodeDocument.cs</DependentUpon>
+    <Compile Include="Documents\QikWorkItemForm.Designer.cs">
+      <DependentUpon>QikWorkItemForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Images\ImageLibrary.cs" />
     <Compile Include="Images\ImageOutput.cs" />
@@ -330,11 +330,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\RegistrySettings.cs" />
-    <Compile Include="Dialogs\SaveSnippetDialog.cs">
+    <Compile Include="Dialogs\SaveWorkItemDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\SaveSnippetDialog.designer.cs">
-      <DependentUpon>SaveSnippetDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\SaveWorkItemDialog.designer.cs">
+      <DependentUpon>SaveWorkItemDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Docked\SearchForm.cs">
       <SubType>Form</SubType>
@@ -360,11 +360,11 @@
     <Compile Include="Controls\SnapshotListCtrl.Designer.cs">
       <DependentUpon>SnapshotListCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\SnippetDocument.cs">
+    <Compile Include="Documents\CodeWorkItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\SnippetDocument.Designer.cs">
-      <DependentUpon>SnippetDocument.cs</DependentUpon>
+    <Compile Include="Documents\CodeWorkItemForm.Designer.cs">
+      <DependentUpon>CodeWorkItemForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ToolStripSpringTextBox.cs">
       <SubType>Component</SubType>
@@ -485,11 +485,11 @@
     <EmbeddedResource Include="Docked\TaskForm.resx">
       <DependentUpon>TaskForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\TopicDocumentForm.resx">
-      <DependentUpon>TopicDocumentForm.cs</DependentUpon>
+    <EmbeddedResource Include="Documents\TopicWorkItemFormForm.resx">
+      <DependentUpon>TopicWorkItemFormForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\QikCodeDocument.resx">
-      <DependentUpon>QikCodeDocument.cs</DependentUpon>
+    <EmbeddedResource Include="Documents\QikWorkItemForm.resx">
+      <DependentUpon>QikWorkItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -504,8 +504,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Dialogs\SaveSnippetDialog.resx">
-      <DependentUpon>SaveSnippetDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\SaveWorkItemDialog.resx">
+      <DependentUpon>SaveWorkItemDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Docked\SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
@@ -519,8 +519,8 @@
     <EmbeddedResource Include="Controls\SnapshotListCtrl.resx">
       <DependentUpon>SnapshotListCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\SnippetDocument.resx">
-      <DependentUpon>SnippetDocument.cs</DependentUpon>
+    <EmbeddedResource Include="Documents\CodeWorkItemForm.resx">
+      <DependentUpon>CodeWorkItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UiResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class TopicDocumentForm : BaseDocument, IContentDocument
+    public partial class TopicWorkItemForm : BaseWorkItemForm, IContentDocument
     {
         private ITopicDocument topicDocument = null;
         private DocumentTabManager tabManager = null;
 
         #region Constructors
 
-        public TopicDocumentForm(IPersistableTarget target, AppFacade application, bool isNew = false)
+        public TopicWorkItemForm(IPersistableTarget target, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 

@@ -82,10 +82,10 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             mnuFileOpen.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenProject);
             mnuFileCreateNew.Image = Gui.Resources.GetImage(Constants.ImageKeys.NewProject);
-            mnuSnippetsViewModify.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            mnuSnippetsAdd.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
-            mnuAddCodeGroup.Image = IconRepository.Get(IconRepository.TopicSections.CodeGroup).Image;
-            mnuAddQikTemplate.Image = IconRepository.Get(IconRepository.TopicSections.QikGroup).Image;
+            mnuViewWorkItem.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
+            mnuAddCodeItem.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
+            mnuAddTopic.Image = IconRepository.Get(IconRepository.TopicSections.CodeGroup).Image;
+            mnuAddQikGenerator.Image = IconRepository.Get(IconRepository.TopicSections.QikGroup).Image;
             mnuWindowKeywordSearch.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
             mnuCurrentTasks.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditText);
             mnuCategories.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenCategory);
@@ -96,8 +96,10 @@ namespace CygSoft.CodeCat.UI.WinForms
             mnuFileOpen.Click += mnuFileOpen_Click;
             mnuWindowKeywordSearch.Click += mnuWindowKeywordSearch_Click;
             mnuCurrentTasks.Click += mnuCurrentTasks_Click;
-            mnuSnippetsAdd.Click += mnuAddCodeFile_Click;
-            mnuSnippetsViewModify.Click += mnuSnippetsViewModify_Click;
+            mnuAddCodeItem.Click += mnuAddCodeFile_Click;
+            mnuAddQikGenerator.Click += mnuAddQikGenerator_Click;
+            mnuAddTopic.Click += mnuAddTopic_Click;
+            mnuViewWorkItem.Click += mnuWorkItemView_Click;
             mnuGenerators.Click += MnuGenerators_Click;
         }
 
@@ -114,7 +116,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void InitializeSearchForm()
         {
             searchForm = new SearchForm(this.application);
-            searchForm.OpenTopic += Control_OpenTopic;
+            searchForm.OpenTopic += Control_OpenWorkItem;
             searchForm.DeleteTopic += Control_DeleteTopic;
             searchForm.SearchExecuted += (s, e) => { this.indexCountLabel.Text = ItemCountCaption(e.MatchedItemCount); };
             searchForm.SelectTopic += (s, e) => EnableControls();
@@ -135,7 +137,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void InitializeCategoryForm()
         {
             categoryForm = new CategoryForm(this.application);
-            categoryForm.OpenSnippet += Control_OpenTopic;
+            categoryForm.OpenWorkItem += Control_OpenWorkItem;
             categoryForm.Show(dockPanel, DockState.DockLeftAutoHide);
         }
 
@@ -235,7 +237,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 // first lets record any open documents of an already opened project.
                 if (this.application.Loaded)
-                    RecordOpenDocuments();
+                    RecordOpenWorkItemForms();
 
                 // important: we want to ensure that we don't create a new document
                 // because we're closing the project. Otherwise, when the project loads
@@ -243,7 +245,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 // a new one... the old one from the old project will remain open and
                 // the index item will never be created.
                 this.projectClosing = true;
-                ClearSnippetDocuments();
+                ClearWorkItemForms();
                 this.projectClosing = false;
 
                 this.application.Open(filePath, ConfigSettings.ProjectFileVersion);
@@ -254,7 +256,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 ConfigSettings.LastProject = filePath;
                 registrySettings.InitialDirectory = Path.GetDirectoryName(filePath);
 
-                CreateSnippetDocumentIfNone();
+                CreateWorkItemFormIfNone();
                 LoadLastOpenedDocuments();
 
                 EnableControls();
@@ -278,7 +280,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 IKeywordIndexItem[] indeces = application.GetLastOpenedIds();
                 foreach (IKeywordIndexItem index in indeces)
-                    OpenSnippetDocument(index);
+                    OpenWorkItemForm(index);
             }
             catch (Exception exception)
             {
@@ -286,7 +288,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private void RecordOpenDocuments()
+        private void RecordOpenWorkItemForms()
         {
             try
             {
@@ -309,14 +311,14 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             // first lets record any open documents of an already opened project.
             if (this.application.Loaded)
-                RecordOpenDocuments();
+                RecordOpenWorkItemForms();
             // important: we want to ensure that we don't create a new document
             // because we're closing the project. Otherwise, when the project loads
             // it will find that there is a new document open and will not create
             // a new one... the old one from the old project will remain open and
             // the index item will never be created.
             this.projectClosing = true;
-            ClearSnippetDocuments();
+            ClearWorkItemForms();
             this.projectClosing = false;
 
             this.application.Create(filePath, ConfigSettings.ProjectFileVersion);
@@ -329,7 +331,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             ConfigSettings.LastProject = filePath;
             registrySettings.InitialDirectory = Path.GetDirectoryName(filePath);
 
-            CreateSnippetDocumentIfNone();
+            CreateWorkItemFormIfNone();
             EnableControls();
 
             searchForm.Activate();
@@ -338,15 +340,13 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void EnableControls()
         {
             bool projectLoaded = this.application.Loaded;
-            bool itemSelected = searchForm.SingleSnippetSelected;
-            bool itemsSelected = searchForm.MultipleSnippetsSelected;
+            bool itemSelected = searchForm.SingleWorkItemSelected;
+            bool itemsSelected = searchForm.MultipleWorkItemsSelected;
 
             searchForm.SearchEnabled = projectLoaded;
 
-            mnuSnippetsViewModify.Enabled = projectLoaded && itemSelected;
-            mnuSnippetsAdd.Enabled = projectLoaded;
-            mnuAddCodeGroup.Enabled = projectLoaded;
-            mnuAddQikTemplate.Enabled = projectLoaded;
+            mnuViewWorkItem.Enabled = projectLoaded && itemSelected;
+            mnuAddWorkItem.Enabled = projectLoaded;
             mnuFileOpenProjectFolder.Enabled = projectLoaded;
             mnuDocuments.Enabled = projectLoaded;
         }
@@ -359,51 +359,51 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return ConfigSettings.ApplicationTitle + " - [" + this.application.ProjectFileTitle + "]";
         }
 
-        private void DeleteSnippetDocument(IKeywordIndexItem snippetIndex)
+        private void DeleteWorkItemForm(IKeywordIndexItem keywordIndexItem)
         {
-            application.DeleteWorkItem(snippetIndex);
+            application.DeleteWorkItem(keywordIndexItem);
 
-            if (SnippetIsOpen(snippetIndex))
+            if (WorkItemFormIsOpen(keywordIndexItem))
             {
-                IContentDocument snippetDoc = GetOpenDocument(snippetIndex.Id);
-                // important, otherwise snippet for will throw a messagebox.
+                IContentDocument workItemForm = GetOpenWorkItemForm(keywordIndexItem.Id);
+                // important, otherwise workItem for will throw a messagebox.
                 // we should have already been through the IsModified check process.
-                snippetDoc.CloseWithoutPrompts = true;
-                snippetDoc.Close();
+                workItemForm.CloseWithoutPrompts = true;
+                workItemForm.Close();
             }
         }
 
-        private void OpenSnippetDocument(IKeywordIndexItem snippetIndex)
+        private void OpenWorkItemForm(IKeywordIndexItem keywordIndexItem)
         {
-            if (!SnippetIsOpen(snippetIndex))
+            if (!WorkItemFormIsOpen(keywordIndexItem))
             {
-                IContentDocument snippetForm = null;
-                IPersistableTarget workItem = application.OpenWorkItem(snippetIndex);
+                IContentDocument workItemForm = null;
+                IPersistableTarget workItem = application.OpenWorkItem(keywordIndexItem);
 
-                if (snippetIndex is ICodeKeywordIndexItem)
-                    snippetForm = new SnippetDocument(workItem, application);
+                if (keywordIndexItem is ICodeKeywordIndexItem)
+                    workItemForm = new CodeWorkItemForm(workItem, application);
 
-                else if (snippetIndex is IQikTemplateKeywordIndexItem)
-                    snippetForm = new QikCodeDocument(workItem, application);
+                else if (keywordIndexItem is IQikTemplateKeywordIndexItem)
+                    workItemForm = new QikWorkItemForm(workItem, application);
 
-                else if (snippetIndex is ITopicKeywordIndexItem)
-                    snippetForm = new TopicDocumentForm(workItem, application);
+                else if (keywordIndexItem is ITopicKeywordIndexItem)
+                    workItemForm = new TopicWorkItemForm(workItem, application);
 
-                if (snippetForm == null)
+                if (workItemForm == null)
                     throw new Exception("IContentDocument has not been defined and cannot be opened.");
 
-                snippetForm.HeaderFieldsVisible = false;
-                snippetForm.DocumentDeleted += workItemForm_DocumentDeleted;
-                snippetForm.DocumentSaved += workItemForm_DocumentSaved;
-                snippetForm.Show(dockPanel, DockState.Document);
+                workItemForm.HeaderFieldsVisible = false;
+                workItemForm.DocumentDeleted += workItemForm_DocumentDeleted;
+                workItemForm.DocumentSaved += workItemForm_DocumentSaved;
+                workItemForm.Show(dockPanel, DockState.Document);
             }
             else
             {
-                ActivateSnippet(snippetIndex);
+                ActivateWorkItemForm(keywordIndexItem);
             }
         }
 
-        private void CreateSnippetDocumentIfNone()
+        private void CreateWorkItemFormIfNone()
         {
             if (!this.dockPanel.Contents.OfType<IContentDocument>().Any())
                 CreateWorkItem(WorkItemType.CodeFile);
@@ -411,8 +411,21 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateWorkItem(WorkItemType workItemType)
         {
+            IContentDocument workItemForm = null;
             IPersistableTarget workItem = application.CreateWorkItem(ConfigSettings.DefaultSyntax, workItemType);
-            IContentDocument workItemForm = new SnippetDocument(workItem, application, true);
+
+            switch (workItemType)
+            {
+                case WorkItemType.CodeFile:
+                    workItemForm = new CodeWorkItemForm(workItem, application, true);
+                    break;
+                case WorkItemType.Topic:
+                    workItemForm = new TopicWorkItemForm(workItem, application, true);
+                    break;
+                case WorkItemType.QikGenerator:
+                    workItemForm = new QikWorkItemForm(workItem, application, true);
+                    break;
+            }
 
             workItemForm.DocumentDeleted += workItemForm_DocumentDeleted;
             workItemForm.DocumentSaved += workItemForm_DocumentSaved;
@@ -420,25 +433,25 @@ namespace CygSoft.CodeCat.UI.WinForms
             workItemForm.Show(dockPanel, DockState.Document);
         }
 
-        private IContentDocument GetOpenDocument(string snippetId)
+        private IContentDocument GetOpenWorkItemForm(string workItemId)
         {
             IContentDocument contentDocument = dockPanel.Documents
-                .Where(doc => (doc as IContentDocument).Id == snippetId)
+                .Where(doc => (doc as IContentDocument).Id == workItemId)
                 .OfType<IContentDocument>().SingleOrDefault();
 
             return contentDocument;
         }
 
-        private void ActivateSnippet(IKeywordIndexItem snippetIndex)
+        private void ActivateWorkItemForm(IKeywordIndexItem keywordIndexItem)
         {
-            IContentDocument contentDocument = GetOpenDocument(snippetIndex.Id);
+            IContentDocument contentDocument = GetOpenWorkItemForm(keywordIndexItem.Id);
             if (contentDocument != null)
                 contentDocument.Activate();
         }
 
-        private bool SnippetIsOpen(IKeywordIndexItem snippetIndex)
+        private bool WorkItemFormIsOpen(IKeywordIndexItem keywordIndexItem)
         {
-            return dockPanel.Documents.Any(doc => (doc as IContentDocument).Id == snippetIndex.Id);
+            return dockPanel.Documents.Any(doc => (doc as IContentDocument).Id == keywordIndexItem.Id);
         }
 
         private string ItemCountCaption(int foundItems)
@@ -449,7 +462,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 return string.Format("{0} of {1} available items found.", foundItems, this.application.GetIndexCount().ToString());
         }
 
-        private bool SaveAllDocuments()
+        private bool SaveAllWorkItemForms()
         {
             IEnumerable<IContentDocument> contentDocuments = this.dockPanel.Contents.OfType<IContentDocument>().Where(doc => doc.IsModified == true);
             foreach (IContentDocument contentDocument in contentDocuments)
@@ -465,29 +478,29 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private DialogResult PromptSaveChanges()
         {
-            SaveSnippetDialog dialog = new SaveSnippetDialog(UnsavedDocuments());
+            SaveWorkItemDialog dialog = new SaveWorkItemDialog(UnsavedWorkItemForms());
             DialogResult result = dialog.ShowDialog(this);
 
             return result;
         }
 
-        private IContentDocument[] UnsavedDocuments()
+        private IContentDocument[] UnsavedWorkItemForms()
         {
             return this.dockPanel.Contents.OfType<IContentDocument>().Where(doc => doc.IsModified == true).ToArray();
         }
 
-        private void ClearSnippetDocuments()
+        private void ClearWorkItemForms()
         {
-            var snippetDocs = this.dockPanel.Contents.OfType<IContentDocument>().ToList();
+            var workItemForms = this.dockPanel.Contents.OfType<IContentDocument>().ToList();
 
-            while (snippetDocs.Count() > 0)
+            while (workItemForms.Count() > 0)
             {
-                IContentDocument snippetDoc = snippetDocs.First();
-                snippetDocs.Remove(snippetDoc);
-                // important, otherwise snippet for will throw a messagebox.
+                IContentDocument workItemForm = workItemForms.First();
+                workItemForms.Remove(workItemForm);
+                // important, otherwise workItem for will throw a messagebox.
                 // we should have already been through the IsModified check process.
-                snippetDoc.CloseWithoutPrompts = true;
-                snippetDoc.Close();
+                workItemForm.CloseWithoutPrompts = true;
+                workItemForm.Close();
             }
         }
 
@@ -506,7 +519,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
                     if (promptResult == System.Windows.Forms.DialogResult.Yes)
                     {
-                        SaveAllDocuments();
+                        SaveAllWorkItemForms();
                         OpenProject(e.RecentFile.FullPath);
                     }
                     else if (promptResult == System.Windows.Forms.DialogResult.No)
@@ -548,7 +561,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
                 if (promptResult == System.Windows.Forms.DialogResult.Yes)
                 {
-                    SaveAllDocuments();
+                    SaveAllWorkItemForms();
                     PromptOpenProject();
                 }
                 else if (promptResult == System.Windows.Forms.DialogResult.No)
@@ -571,7 +584,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
                 if (promptResult == System.Windows.Forms.DialogResult.Yes)
                 {
-                    SaveAllDocuments();
+                    SaveAllWorkItemForms();
                     PromptCreateProject();
                 }
                 else if (promptResult == System.Windows.Forms.DialogResult.No)
@@ -607,11 +620,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             CreateWorkItem(WorkItemType.Topic);
         }
 
-        private void mnuSnippetsViewModify_Click(object sender, EventArgs e)
+        private void mnuWorkItemView_Click(object sender, EventArgs e)
         {
-            if (searchForm.SingleSnippetSelected && searchForm.SelectedSnippet != null)
+            if (searchForm.SingleWorkItemSelected && searchForm.SelectedWorkItem != null)
             {
-                OpenSnippetDocument(searchForm.SelectedSnippet);
+                OpenWorkItemForm(searchForm.SelectedWorkItem);
             }
         }
 
@@ -623,16 +636,16 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 string delimitedKeywordList = frm.Keywords;
-                IKeywordIndexItem[] indexItems = searchForm.SelectedSnippets;
+                IKeywordIndexItem[] indexItems = searchForm.SelectedWorkItems;
 
                 application.AddKeywords(indexItems, delimitedKeywordList);
 
                 foreach (IKeywordIndexItem indexItem in indexItems)
                 {
-                    IContentDocument snippetForm = GetOpenDocument(indexItem.Id);
-                    if (snippetForm != null)
+                    IContentDocument workItemForm = GetOpenWorkItemForm(indexItem.Id);
+                    if (workItemForm != null)
                     {
-                        snippetForm.AddKeywords(delimitedKeywordList);
+                        workItemForm.AddKeywords(delimitedKeywordList);
                     }
                 }
             }
@@ -674,26 +687,23 @@ namespace CygSoft.CodeCat.UI.WinForms
 
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                    if (SaveAllDocuments())
-                    {
-                        RecordOpenDocuments();
-                        //ClearSnippetDocuments();
-                    }
+                    if (SaveAllWorkItemForms())
+                        RecordOpenWorkItemForms();
                     else
                         e.Cancel = true;
                 }
-                else if (result == System.Windows.Forms.DialogResult.No)
+                else if (result == DialogResult.No)
                 {
-                    RecordOpenDocuments();
+                    RecordOpenWorkItemForms();
                 }
-                else if (result == System.Windows.Forms.DialogResult.Cancel)
+                else if (result == DialogResult.Cancel)
                 {
                     e.Cancel = true;
                 }
             }
             else
             {
-                RecordOpenDocuments();
+                RecordOpenWorkItemForms();
             }
         }
 
@@ -701,17 +711,17 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (e.Content is IContentDocument)
             {
-                IContentDocument snippetForm = e.Content as IContentDocument;
-                ToolStripMenuItem menuItem = mnuDocuments.DropDownItems[snippetForm.Id] as ToolStripMenuItem;
+                IContentDocument workItemForm = e.Content as IContentDocument;
+                ToolStripMenuItem menuItem = mnuDocuments.DropDownItems[workItemForm.Id] as ToolStripMenuItem;
                 if (menuItem != null)
                 {
                     menuItem.Click -= mnuDocumentWindow_Click;
                     mnuDocuments.DropDownItems.Remove(menuItem);
-                    // don't create a new snippet document if the project is closing!
+                    // don't create a new workItem document if the project is closing!
                     // this is important as it creates a bug that means that the keyword
                     // index item 
                     if (!projectClosing)
-                        CreateSnippetDocumentIfNone();
+                        CreateWorkItemFormIfNone();
                 }
             }
 
@@ -721,11 +731,11 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (e.Content is IContentDocument)
             {
-                IContentDocument snippetForm = e.Content as IContentDocument;
-                ToolStripMenuItem menuItem = new ToolStripMenuItem(snippetForm.Text, null, mnuDocumentWindow_Click);
-                menuItem.Image = snippetForm.IconImage;
-                menuItem.Name = snippetForm.Id;
-                menuItem.Tag = snippetForm;
+                IContentDocument workItemForm = e.Content as IContentDocument;
+                ToolStripMenuItem menuItem = new ToolStripMenuItem(workItemForm.Text, null, mnuDocumentWindow_Click);
+                menuItem.Image = workItemForm.IconImage;
+                menuItem.Name = workItemForm.Id;
+                menuItem.Tag = workItemForm;
                 mnuDocuments.DropDownItems.Add(menuItem);
             }
         }
@@ -733,22 +743,21 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void mnuDocumentWindow_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
-            string snippetId = menuItem.Name;
-            IContentDocument snippetForm = menuItem.Tag as IContentDocument;
-            snippetForm.Activate();
+            IContentDocument workItemForm = menuItem.Tag as IContentDocument;
+            workItemForm.Activate();
         }
 
-        private void Control_OpenTopic(object sender, TopicIndexEventArgs e)
+        private void Control_OpenWorkItem(object sender, TopicIndexEventArgs e)
         {
-            OpenSnippetDocument(e.Item);
+            OpenWorkItemForm(e.Item);
             // Note dockPanel.Documents handles the management of your documents. It maintains a collection.
             // This does not include your docked windows, just your "document" windows. This is excellent because
-            // you can use this existing collection property to maintain your code snippets.
+            // you can use this existing collection property to maintain your code workItems.
         }
 
         private void Control_DeleteTopic(object sender, TopicIndexEventArgs e)
         {
-            DeleteSnippetDocument(e.Item);
+            DeleteWorkItemForm(e.Item);
         }
 
         private void mnuCategories_Click(object sender, EventArgs e)

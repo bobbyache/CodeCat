@@ -9,7 +9,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class BaseDocument : DockContent
+    public partial class BaseWorkItemForm : DockContent
     {
         public event EventHandler DocumentDeleted;
         public event EventHandler<DocumentSavedFileEventArgs> DocumentSaved;
@@ -92,7 +92,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         public bool CloseWithoutPrompts { get; set; }
 
-        public BaseDocument()
+        public BaseWorkItemForm()
         {
             InitializeComponent();
 

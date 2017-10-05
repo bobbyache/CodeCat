@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.UI.WinForms
 {
-    partial class TopicDocumentForm
+    partial class QikWorkItemForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopicDocumentForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QikWorkItemForm));
             this.syntaxDoc = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.chkEdit = new System.Windows.Forms.ToolStripButton();
             this.toolstripTitle = new System.Windows.Forms.ToolStrip();
@@ -46,29 +46,27 @@
             this.toolstripCommands = new System.Windows.Forms.ToolStrip();
             this.btnMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnAddItem = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnAddCode = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAddVersionedCode = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRichText = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnFileGroup = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAddHyperlinks = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAddPdfDocument = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnAddImage = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnImageSet = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSearchableSnippetList = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRemoveCodeItem = new System.Windows.Forms.ToolStripButton();
+            this.btnAddTemplate = new System.Windows.Forms.ToolStripButton();
+            this.btnRemoveTemplate = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnShowProperties = new System.Windows.Forms.ToolStripButton();
+            this.btnShowScript = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnCompile = new System.Windows.Forms.ToolStripButton();
             this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControlFile = new System.Windows.Forms.TabControl();
-            this.btnSearchableEventDiary = new System.Windows.Forms.ToolStripMenuItem();
+            this.inputPropertyGrid = new CygSoft.CodeCat.UI.WinForms.Controls.InputPropertyGrid();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // syntaxDoc
@@ -188,11 +186,16 @@
             this.btnDelete,
             this.toolStripSeparator2,
             this.chkEdit,
-            this.btnAddItem,
-            this.btnRemoveCodeItem,
+            this.btnAddTemplate,
+            this.btnRemoveTemplate,
             this.toolStripSeparator3,
+            this.btnShowProperties,
+            this.btnShowScript,
+            this.toolStripSeparator5,
             this.btnMoveLeft,
             this.btnMoveRight,
+            this.toolStripSeparator4,
+            this.btnCompile,
             this.txtToolStripTitle});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
@@ -205,7 +208,7 @@
             this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
             this.btnMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(60, 22);
+            this.btnMenu.Size = new System.Drawing.Size(61, 22);
             this.btnMenu.Text = "Tabs";
             // 
             // toolStripSeparator6
@@ -213,110 +216,59 @@
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
-            // btnAddItem
+            // btnAddTemplate
             // 
-            this.btnAddItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAddCode,
-            this.btnAddVersionedCode,
-            this.btnRichText,
-            this.toolStripMenuItem1,
-            this.btnFileGroup,
-            this.btnAddHyperlinks,
-            this.btnAddPdfDocument,
-            this.toolStripMenuItem2,
-            this.btnAddImage,
-            this.btnImageSet,
-            this.toolStripMenuItem3,
-            this.btnSearchableSnippetList,
-            this.btnSearchableEventDiary});
-            this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
-            this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(100, 22);
-            this.btnAddItem.Text = "Add Section";
+            this.btnAddTemplate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAddTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnAddTemplate.Image")));
+            this.btnAddTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddTemplate.Name = "btnAddTemplate";
+            this.btnAddTemplate.Size = new System.Drawing.Size(23, 22);
+            this.btnAddTemplate.Text = "Add Template";
+            this.btnAddTemplate.Click += new System.EventHandler(this.btnAddTemplate_Click);
             // 
-            // btnAddCode
+            // btnRemoveTemplate
             // 
-            this.btnAddCode.Name = "btnAddCode";
-            this.btnAddCode.Size = new System.Drawing.Size(215, 22);
-            this.btnAddCode.Text = "Single Code Snippet";
-            // 
-            // btnAddVersionedCode
-            // 
-            this.btnAddVersionedCode.Name = "btnAddVersionedCode";
-            this.btnAddVersionedCode.Size = new System.Drawing.Size(215, 22);
-            this.btnAddVersionedCode.Text = "Versioned Code Snippet";
-            // 
-            // btnRichText
-            // 
-            this.btnRichText.Name = "btnRichText";
-            this.btnRichText.Size = new System.Drawing.Size(215, 22);
-            this.btnRichText.Text = "Single Rich Text Document";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(212, 6);
-            // 
-            // btnFileGroup
-            // 
-            this.btnFileGroup.Name = "btnFileGroup";
-            this.btnFileGroup.Size = new System.Drawing.Size(215, 22);
-            this.btnFileGroup.Text = "File Group";
-            // 
-            // btnAddHyperlinks
-            // 
-            this.btnAddHyperlinks.Name = "btnAddHyperlinks";
-            this.btnAddHyperlinks.Size = new System.Drawing.Size(215, 22);
-            this.btnAddHyperlinks.Text = "Web References";
-            // 
-            // btnAddPdfDocument
-            // 
-            this.btnAddPdfDocument.Name = "btnAddPdfDocument";
-            this.btnAddPdfDocument.Size = new System.Drawing.Size(215, 22);
-            this.btnAddPdfDocument.Text = "Single PDF Document";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(212, 6);
-            // 
-            // btnAddImage
-            // 
-            this.btnAddImage.Name = "btnAddImage";
-            this.btnAddImage.Size = new System.Drawing.Size(215, 22);
-            this.btnAddImage.Text = "Single Image View";
-            // 
-            // btnImageSet
-            // 
-            this.btnImageSet.Name = "btnImageSet";
-            this.btnImageSet.Size = new System.Drawing.Size(215, 22);
-            this.btnImageSet.Text = "Image Set View";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(212, 6);
-            // 
-            // btnSearchableSnippetList
-            // 
-            this.btnSearchableSnippetList.Name = "btnSearchableSnippetList";
-            this.btnSearchableSnippetList.Size = new System.Drawing.Size(215, 22);
-            this.btnSearchableSnippetList.Text = "Searchable Snippet List";
-            // 
-            // btnRemoveCodeItem
-            // 
-            this.btnRemoveCodeItem.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveCodeItem.Image")));
-            this.btnRemoveCodeItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRemoveCodeItem.Name = "btnRemoveCodeItem";
-            this.btnRemoveCodeItem.Size = new System.Drawing.Size(102, 22);
-            this.btnRemoveCodeItem.Text = "Delete Section";
-            this.btnRemoveCodeItem.Click += new System.EventHandler(this.btnRemoveCodeItem_Click);
+            this.btnRemoveTemplate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRemoveTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveTemplate.Image")));
+            this.btnRemoveTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRemoveTemplate.Name = "btnRemoveTemplate";
+            this.btnRemoveTemplate.Size = new System.Drawing.Size(23, 22);
+            this.btnRemoveTemplate.Text = "Remove Template";
+            this.btnRemoveTemplate.Click += new System.EventHandler(this.btnRemoveTemplate_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnShowProperties
+            // 
+            this.btnShowProperties.Checked = true;
+            this.btnShowProperties.CheckOnClick = true;
+            this.btnShowProperties.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnShowProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnShowProperties.Image = ((System.Drawing.Image)(resources.GetObject("btnShowProperties.Image")));
+            this.btnShowProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowProperties.Name = "btnShowProperties";
+            this.btnShowProperties.Size = new System.Drawing.Size(23, 22);
+            this.btnShowProperties.Text = "Show Properties";
+            this.btnShowProperties.CheckedChanged += new System.EventHandler(this.btnShowProperties_CheckedChanged);
+            // 
+            // btnShowScript
+            // 
+            this.btnShowScript.CheckOnClick = true;
+            this.btnShowScript.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnShowScript.Image = ((System.Drawing.Image)(resources.GetObject("btnShowScript.Image")));
+            this.btnShowScript.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowScript.Name = "btnShowScript";
+            this.btnShowScript.Size = new System.Drawing.Size(23, 22);
+            this.btnShowScript.Text = "Show Qik Script";
+            this.btnShowScript.CheckedChanged += new System.EventHandler(this.btnShowScript_CheckedChanged);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // btnMoveLeft
             // 
@@ -338,47 +290,84 @@
             this.btnMoveRight.Text = "Move Right";
             this.btnMoveRight.Click += new System.EventHandler(this.btnMoveRight_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnCompile
+            // 
+            this.btnCompile.Image = ((System.Drawing.Image)(resources.GetObject("btnCompile.Image")));
+            this.btnCompile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCompile.Name = "btnCompile";
+            this.btnCompile.Size = new System.Drawing.Size(72, 22);
+            this.btnCompile.Text = "Compile";
+            this.btnCompile.Click += new System.EventHandler(this.btnCompile_Click);
+            // 
             // txtToolStripTitle
             // 
             this.txtToolStripTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtToolStripTitle.Name = "txtToolStripTitle";
             this.txtToolStripTitle.ReadOnly = true;
-            this.txtToolStripTitle.Size = new System.Drawing.Size(353, 25);
+            this.txtToolStripTitle.Size = new System.Drawing.Size(378, 25);
             this.txtToolStripTitle.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 75);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.tabControlFile);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.inputPropertyGrid);
+            this.splitContainer1.Size = new System.Drawing.Size(878, 575);
+            this.splitContainer1.SplitterDistance = 509;
+            this.splitContainer1.TabIndex = 10;
             // 
             // tabControlFile
             // 
             this.tabControlFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlFile.Location = new System.Drawing.Point(0, 75);
+            this.tabControlFile.Location = new System.Drawing.Point(0, 0);
             this.tabControlFile.Name = "tabControlFile";
             this.tabControlFile.SelectedIndex = 0;
-            this.tabControlFile.Size = new System.Drawing.Size(878, 575);
-            this.tabControlFile.TabIndex = 8;
+            this.tabControlFile.Size = new System.Drawing.Size(509, 575);
+            this.tabControlFile.TabIndex = 3;
             // 
-            // btnSearchableEventDiary
+            // inputPropertyGrid
             // 
-            this.btnSearchableEventDiary.Name = "btnSearchableEventDiary";
-            this.btnSearchableEventDiary.Size = new System.Drawing.Size(215, 22);
-            this.btnSearchableEventDiary.Text = "Searchable Event Diary";
+            this.inputPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputPropertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.inputPropertyGrid.Name = "inputPropertyGrid";
+            this.inputPropertyGrid.Size = new System.Drawing.Size(365, 575);
+            this.inputPropertyGrid.TabIndex = 0;
             // 
-            // TopicDocumentForm
+            // QikCodeDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 650);
-            this.Controls.Add(this.tabControlFile);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolstripTitle);
             this.Controls.Add(this.toolstripKeywords);
             this.Controls.Add(this.toolstripCommands);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "TopicDocumentForm";
-            this.Text = "TopicDocumentForm";
+            this.Name = "QikCodeDocument";
+            this.Text = "QikCodeDocument";
             this.toolstripTitle.ResumeLayout(false);
             this.toolstripTitle.PerformLayout();
             this.toolstripKeywords.ResumeLayout(false);
             this.toolstripKeywords.PerformLayout();
             this.toolstripCommands.ResumeLayout(false);
             this.toolstripCommands.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -400,27 +389,21 @@
         private System.Windows.Forms.ToolStripButton btnDiscardChange;
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStrip toolstripCommands;
-        private System.Windows.Forms.ToolStripButton btnRemoveCodeItem;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TabControl tabControlFile;
+        private System.Windows.Forms.ToolStripButton btnAddTemplate;
+        private System.Windows.Forms.ToolStripButton btnRemoveTemplate;
+        private System.Windows.Forms.ToolStripButton btnShowProperties;
+        private System.Windows.Forms.ToolStripButton btnCompile;
+        private Controls.InputPropertyGrid inputPropertyGrid;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton btnShowScript;
         private System.Windows.Forms.ToolStripButton btnMoveLeft;
         private System.Windows.Forms.ToolStripButton btnMoveRight;
-        private System.Windows.Forms.TabControl tabControlFile;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripDropDownButton btnMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private ToolStripSpringTextBox txtToolStripTitle;
-        private System.Windows.Forms.ToolStripDropDownButton btnAddItem;
-        private System.Windows.Forms.ToolStripMenuItem btnAddCode;
-        private System.Windows.Forms.ToolStripMenuItem btnAddHyperlinks;
-        private System.Windows.Forms.ToolStripMenuItem btnAddPdfDocument;
-        private System.Windows.Forms.ToolStripMenuItem btnAddImage;
-        private System.Windows.Forms.ToolStripMenuItem btnImageSet;
-        private System.Windows.Forms.ToolStripMenuItem btnRichText;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem btnFileGroup;
-        private System.Windows.Forms.ToolStripMenuItem btnAddVersionedCode;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem btnSearchableSnippetList;
-        private System.Windows.Forms.ToolStripMenuItem btnSearchableEventDiary;
     }
 }

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class QikCodeDocument : BaseDocument, IContentDocument
+    public partial class QikWorkItemForm : BaseWorkItemForm, IContentDocument
     {
         private ICompiler compiler = null;
         private IQikTemplateDocumentSet qikFile = null;
@@ -36,7 +36,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public QikCodeDocument(IPersistableTarget target, AppFacade application, bool isNew = false)
+        public QikWorkItemForm(IPersistableTarget target, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 

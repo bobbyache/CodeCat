@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.UI.WinForms
 {
-    partial class BaseDocument
+    partial class BaseWorkItemForm
     {
         /// <summary>
         /// Required designer variable.

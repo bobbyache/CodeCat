@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.UI.WinForms
 {
-    partial class SnippetDocument
+    partial class CodeWorkItemForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SnippetDocument));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CodeWorkItemForm));
             this.syntaxDoc = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();

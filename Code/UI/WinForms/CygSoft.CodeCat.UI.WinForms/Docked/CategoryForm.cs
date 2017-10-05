@@ -15,7 +15,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
     public partial class CategoryForm : DockContent
     {
-        public event EventHandler<TopicIndexEventArgs> OpenSnippet;
+        public event EventHandler<TopicIndexEventArgs> OpenWorkItem;
 
         private AppFacade application;
         private int openCategoryImageIndex = IconRepository.Get(Constants.ImageKeys.OpenCategory, false).Index;
@@ -153,7 +153,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                 return;
 
             if (e.Item is ICategorizedKeywordIndexItem)
-                OpenSnippet?.Invoke(this, new TopicIndexEventArgs((e.Item as ICategorizedKeywordIndexItem).IndexItem));
+                OpenWorkItem?.Invoke(this, new TopicIndexEventArgs((e.Item as ICategorizedKeywordIndexItem).IndexItem));
         }
 
         private void CategoryTree_ItemExpanding(object sender, ItemExpandingEventArgs e)

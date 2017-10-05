@@ -1,6 +1,6 @@
 ﻿namespace CygSoft.CodeCat.UI.WinForms
 {
-    partial class SaveSnippetDialog
+    partial class SaveWorkItemDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.lstUnsavedDocs = new System.Windows.Forms.ListBox();
+            this.lstUnsavedWorktItems = new System.Windows.Forms.ListBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnNo = new System.Windows.Forms.Button();
             this.btnYes = new System.Windows.Forms.Button();
@@ -46,11 +46,11 @@
             // 
             // lstUnsavedDocs
             // 
-            this.lstUnsavedDocs.FormattingEnabled = true;
-            this.lstUnsavedDocs.Location = new System.Drawing.Point(12, 43);
-            this.lstUnsavedDocs.Name = "lstUnsavedDocs";
-            this.lstUnsavedDocs.Size = new System.Drawing.Size(499, 95);
-            this.lstUnsavedDocs.TabIndex = 1;
+            this.lstUnsavedWorktItems.FormattingEnabled = true;
+            this.lstUnsavedWorktItems.Location = new System.Drawing.Point(12, 43);
+            this.lstUnsavedWorktItems.Name = "lstUnsavedDocs";
+            this.lstUnsavedWorktItems.Size = new System.Drawing.Size(499, 95);
+            this.lstUnsavedWorktItems.TabIndex = 1;
             // 
             // btnCancel
             // 
@@ -90,7 +90,7 @@
             this.Controls.Add(this.btnYes);
             this.Controls.Add(this.btnNo);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.lstUnsavedDocs);
+            this.Controls.Add(this.lstUnsavedWorktItems);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -105,7 +105,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox lstUnsavedDocs;
+        private System.Windows.Forms.ListBox lstUnsavedWorktItems;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnNo;
         private System.Windows.Forms.Button btnYes;

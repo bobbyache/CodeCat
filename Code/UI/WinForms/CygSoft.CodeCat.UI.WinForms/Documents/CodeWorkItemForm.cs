@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class SnippetDocument : BaseDocument, IContentDocument
+    public partial class CodeWorkItemForm : BaseWorkItemForm, IContentDocument
     {
         private TabPage snapshotsTab;
 
         #region Constructors
 
-        public SnippetDocument(IPersistableTarget target, AppFacade application, bool isNew = false)
+        public CodeWorkItemForm(IPersistableTarget target, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 

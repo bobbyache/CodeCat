@@ -35,10 +35,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             set { keywordsTextBox.Text = value; }
         }
 
-        public bool SingleSnippetSelected { get { return codeSearchResultsControl1.SingleTopicSelected; } }
-        public bool MultipleSnippetsSelected { get { return codeSearchResultsControl1.MultipleTopicsSelected; } }
-        public IKeywordIndexItem SelectedSnippet { get { return codeSearchResultsControl1.SelectedTopic; } }
-        public IKeywordIndexItem[] SelectedSnippets { get { return codeSearchResultsControl1.SelectedTopics; } }
+        public bool SingleWorkItemSelected { get { return codeSearchResultsControl1.SingleTopicSelected; } }
+        public bool MultipleWorkItemsSelected { get { return codeSearchResultsControl1.MultipleTopicsSelected; } }
+        public IKeywordIndexItem SelectedWorkItem { get { return codeSearchResultsControl1.SelectedTopic; } }
+        public IKeywordIndexItem[] SelectedWorkItems { get { return codeSearchResultsControl1.SelectedTopics; } }
 
         public SearchForm(AppFacade application)
         {
