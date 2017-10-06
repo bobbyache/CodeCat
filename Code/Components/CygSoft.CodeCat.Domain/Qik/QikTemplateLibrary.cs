@@ -21,45 +21,23 @@ namespace CygSoft.CodeCat.Domain.Qik
             return exporter.GetExportData();
         }
 
-        protected override IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem)
-        {
-            QikTemplateKeywordIndexItem qikIndexItem = indexItem as QikTemplateKeywordIndexItem;
-            QikTemplateDocumentSet qikFile = new QikTemplateDocumentSet(qikIndexItem, this.FolderPath);
-
-            if (this.workItems == null)
-                this.workItems = new Dictionary<string, IWorkItem>();
-
-            this.workItems.Add(qikFile.Id, qikFile);
-
-            return qikFile as IWorkItem;
-        }
-
         protected override IWorkItem OpenTargetWorkItem(IKeywordIndexItem indexItem)
         {
-            QikTemplateKeywordIndexItem qikIndexItem = indexItem as QikTemplateKeywordIndexItem;
-            IWorkItem workItem;
+            IWorkItem workItem = base.FindOpenWorkItem(indexItem.Id);
 
-            if (this.workItems == null)
-                this.workItems = new Dictionary<string, IWorkItem>();
-
-            // first check to see if the file exists..
-            if (this.workItems.ContainsKey(qikIndexItem.Id))
+            if (workItem == null)
             {
-                workItem = this.workItems[qikIndexItem.Id];
+                workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
+                base.OpenWorkItem(workItem);
             }
 
-            else
-            {
-                // retrieve the file and add it to the opened code files.
-                workItem = new QikTemplateDocumentSet(qikIndexItem, this.FolderPath);
+            return workItem;
+        }
 
-                if (this.workItems == null)
-                    this.workItems = new Dictionary<string, IWorkItem>();
-
-                this.workItems.Add(workItem.Id, workItem);
-
-                workItem.Open();
-            }
+        protected override IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem)
+        {
+            IWorkItem workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
+            base.OpenWorkItem(workItem);
 
             return workItem;
         }

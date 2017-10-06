@@ -21,46 +21,23 @@ namespace CygSoft.CodeCat.Domain.Code.Base
             return exporter.GetExportData();
         }
 
-        protected override IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem)
-        {
-            CodeKeywordIndexItem codeIndexItem = indexItem as CodeKeywordIndexItem;
-            CodeFile codeFile = new CodeFile(codeIndexItem, this.FolderPath);
-
-            if (this.workItems == null)
-                this.workItems = new Dictionary<string, IWorkItem>();
-
-            this.workItems.Add(codeFile.Id, codeFile);
-
-            codeFile.Open();
-
-            return codeFile as IWorkItem;
-        }
-
         protected override IWorkItem OpenTargetWorkItem(IKeywordIndexItem indexItem)
         {
-            CodeKeywordIndexItem codeIndexItem = indexItem as CodeKeywordIndexItem;
-            IWorkItem workItem;
+            IWorkItem workItem = base.FindOpenWorkItem(indexItem.Id);
 
-            if (this.workItems == null)
-                this.workItems = new Dictionary<string, IWorkItem>();
-
-            // first check to see if the file exists..
-            if (this.workItems.ContainsKey(codeIndexItem.Id))
+            if (workItem == null)
             {
-                workItem = this.workItems[codeIndexItem.Id];
+                workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
+                base.OpenWorkItem(workItem);
             }
 
-            else
-            {
-                // retrieve the file and add it to the opened code files.
-                workItem = new CodeFile(codeIndexItem, this.FolderPath);
+            return workItem;
+        }
 
-                if (this.workItems == null)
-                    this.workItems = new Dictionary<string, IWorkItem>();
-                this.workItems.Add(workItem.Id, workItem);
-
-                workItem.Open();
-            }
+        protected override IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem)
+        {
+            IWorkItem workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
+            base.OpenWorkItem(workItem);
 
             return workItem;
         }

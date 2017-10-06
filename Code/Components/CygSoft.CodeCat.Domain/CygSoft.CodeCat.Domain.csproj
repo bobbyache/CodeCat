@@ -50,7 +50,7 @@
     <Compile Include="Base\CategorizedKeywordIndexItem.cs" />
     <Compile Include="Base\ICategorizedKeywordIndexItem.cs" />
     <Compile Include="Base\IWorkItem.cs" />
-    <Compile Include="Base\PersistableTargetFactory.cs" />
+    <Compile Include="Base\WorkItemFactory.cs" />
     <Compile Include="Code\CodeExporter.cs" />
     <Compile Include="LastCodeFileRepository.cs" />
     <Compile Include="Management\IWorkItemExporter.cs" />

@@ -220,6 +220,31 @@ namespace CygSoft.CodeCat.Domain.Base
             return indeces.ToArray();
         }
 
+        protected void OpenWorkItem(IWorkItem workItem)
+        {
+            if (this.workItems == null)
+                this.workItems = new Dictionary<string, IWorkItem>();
+
+            workItem.Open();
+            this.workItems.Add(workItem.Id, workItem);
+        }
+
+        protected IWorkItem FindOpenWorkItem(string id)
+        {
+            IWorkItem workItem = null;
+
+            if (this.workItems == null)
+                this.workItems = new Dictionary<string, IWorkItem>();
+
+            // first check to see if the file exists..
+            if (this.workItems.ContainsKey(id))
+            {
+                workItem = this.workItems[id];
+            }
+
+            return workItem;
+        }
+
         private void RemoveLibraryFileReference(string id, bool save = false)
         {
             if (this.workItems == null)

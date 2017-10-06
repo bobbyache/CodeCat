@@ -14,7 +14,8 @@ namespace CygSoft.CodeCat.Domain.Topics
             base.FileExtension = "*.xml";
         }
 
-        internal TopicLibrary(IKeywordSearchIndexRepository keywordSearchIndexRepository, string subFolder) : base(keywordSearchIndexRepository, subFolder)
+        internal TopicLibrary(IKeywordSearchIndexRepository keywordSearchIndexRepository, string subFolder) 
+            : base(keywordSearchIndexRepository, subFolder)
         {
             base.FileExtension = "*.xml";
         }
@@ -26,43 +27,23 @@ namespace CygSoft.CodeCat.Domain.Topics
             return exporter.GetExportData();
         }
 
-        protected override IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem)
-        {
-            TopicKeywordIndexItem codeGroupIndexItem = indexItem as TopicKeywordIndexItem;
-            TopicDocument codeGroupFile = new TopicDocument(codeGroupIndexItem, this.FolderPath);
-
-            if (this.workItems == null)
-                this.workItems = new Dictionary<string, IWorkItem>();
-
-            this.workItems.Add(codeGroupFile.Id, codeGroupFile);
-
-            return codeGroupFile as IWorkItem;
-        }
-
         protected override IWorkItem OpenTargetWorkItem(IKeywordIndexItem indexItem)
         {
-            TopicKeywordIndexItem codeGroupIndexItem = indexItem as TopicKeywordIndexItem;
-            IWorkItem workItem;
+            IWorkItem workItem = base.FindOpenWorkItem(indexItem.Id);
 
-            if (this.workItems == null)
-                this.workItems = new Dictionary<string, IWorkItem>();
-
-            // first check to see if the file exists..
-            if (this.workItems.ContainsKey(codeGroupIndexItem.Id))
+            if (workItem == null)
             {
-                workItem = this.workItems[codeGroupIndexItem.Id];
+                workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
+                base.OpenWorkItem(workItem);
             }
-            else
-            {
-                // retrieve the file and add it to the opened code files.
-                workItem = PersistableTargetFactory.Create(codeGroupIndexItem, this.FolderPath);
 
-                if (this.workItems == null)
-                    this.workItems = new Dictionary<string, IWorkItem>();
-                this.workItems.Add(workItem.Id, workItem);
+            return workItem;
+        }
 
-                workItem.Open();
-            }
+        protected override IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem)
+        {
+            IWorkItem workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
+            base.OpenWorkItem(workItem);
 
             return workItem;
         }
