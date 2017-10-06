@@ -12,98 +12,38 @@ using CygSoft.CodeCat.Domain;
 using System.IO;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
-    // TODO: Rename this to PdfDocumentCtrl. Also consider moving all items controls into their own directory?
+    // Try this: https://github.com/pvginkel/PdfiumViewer
+
     // TODO: Try and understand this for when your PDF document just dies on you when changing panes.
     // https://sourceforge.net/p/dockpanelsuite/discussion/402316/thread/f29acfe2/
-    public partial class PdfDocumentControl :  UserControl, ITopicSectionBaseControl
+    public partial class PdfDocumentControl : BaseTopicSectionControl
     {
-        public event EventHandler Modified;
+        private ToolStripButton btnReload;
+        private ToolStripButton btnImport;
 
-        private IPdfViewerTopicSection topicSection;
-        private ITopicDocument topicDocument;
-
-        public string Id { get; private set; }
-        public string Title { get { return txtTitle.Text; } }
-        public int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.PDF).Index; } }
-        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.PDF).Icon; } }
-        public Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.PDF).Image; } }
-        public bool IsModified { get; private set; }
-        public bool FileExists { get { return false; } }
+        public override int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.PDF).Index; } }
+        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.PDF).Icon; } }
+        public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.PDF).Image; } }
 
         public PdfDocumentControl(AppFacade application, ITopicDocument topicDocument, IPdfViewerTopicSection topicSection)
+            : base(application, topicDocument, topicSection)
         {
             InitializeComponent();
-            this.topicSection = topicSection;
-            this.topicDocument = topicDocument;
 
-            btnImport.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenProject);
-            btnReload.Image = Gui.Resources.GetImage(Constants.ImageKeys.NewProject);
-            Id = topicSection.Id;
-
-            ResetFieldValues();
-            RegisterDataFieldEvents();
-            RegisterFileEvents();
+            btnImport = Gui.ToolBar.CreateButton(HeaderToolstrip, "Import", Constants.ImageKeys.OpenProject, btnImport_Click);
+            btnReload = Gui.ToolBar.CreateButton(HeaderToolstrip, "Reload", Constants.ImageKeys.NewProject, btnReload_Click);
+            
             LoadIfExists();
-        }
-
-        public void Revert()
-        {
         }
 
         private void LoadIfExists()
         {
-            if (topicSection.Exists)
-                //pdfControl.src = this.pdfDocument.FilePath;
-                pdfControl.LoadFile(topicSection.FilePath);
-        }
-
-        private void RegisterFileEvents()
-        {
-            topicDocument.BeforeSave += codeGroupDocumentSet_BeforeContentSaved;
-            topicDocument.AfterSave += codeGroupDocumentSet_ContentSaved;
-        }
-
-        private void ResetFieldValues()
-        {
-            txtTitle.Text = topicSection.Title;
-            IsModified = false;
-        }
-
-        private void RegisterDataFieldEvents()
-        {
-            txtTitle.TextChanged += SetModified;
-            Modified += CodeItemCtrl_Modified;
-        }
-
-        private void codeGroupDocumentSet_ContentSaved(object sender, TopicEventArgs e)
-        {
-            this.IsModified = false;
-            SetChangeStatus();
-        }
-
-        private void codeGroupDocumentSet_BeforeContentSaved(object sender, TopicEventArgs e)
-        {
-            this.topicSection.Title = txtTitle.Text;
-        }
-
-        private void CodeItemCtrl_Modified(object sender, EventArgs e)
-        {
-            SetChangeStatus();
-        }
-
-        private void SetChangeStatus()
-        {
-            lblEditStatus.Text = this.IsModified ? "Edited" : "Saved";
-            lblEditStatus.ForeColor = this.IsModified ? Color.DarkRed : Color.Black;
-        }
-
-        private void SetModified(object sender, EventArgs e)
-        {
-            IsModified = true;
-            Modified?.Invoke(this, new EventArgs());
+            //if (topicSection.Exists)
+                //pdfControl.LoadFile(topicSection.FilePath);
         }
 
         private void btnImport_Click(object sender, EventArgs e)
