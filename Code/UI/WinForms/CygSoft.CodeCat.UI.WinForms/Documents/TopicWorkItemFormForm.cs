@@ -13,7 +13,7 @@ namespace CygSoft.CodeCat.UI.WinForms
     public partial class TopicWorkItemForm : BaseWorkItemForm, IWorkItemForm
     {
         private ITopicDocument topicDocument = null;
-        private DocumentTabManager tabManager = null;
+        private WorkItemTabManager tabManager = null;
 
         #region Constructors
 
@@ -33,7 +33,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.topicDocument.TopicSectionMovedRight += topicDocument_TopicSectionMovedRight;
             base.workItem = workItem;
             this.Tag = workItem.Id;
-            this.tabManager = new DocumentTabManager(this.tabControlFile, this.btnMenu);
+            this.tabManager = new WorkItemTabManager(this.tabControlFile, this.btnMenu);
             this.tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   
             RebuildTabs();
@@ -261,7 +261,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Tab Manager Events
 
-        private void tabManager_BeforeDeleteTab(object sender, DocumentTabEventArgs e)
+        private void tabManager_BeforeDeleteTab(object sender, WorkItemTabEventArgs e)
         {
             if (e.TabUserControl is QikScriptCtrl)
             {
@@ -341,7 +341,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void AddTopicSection(ITopicSection topicSection, bool selected)
         {
             tabManager.AddTab(topicSection,
-                DocumentControlFactory.Create(topicSection, this.topicDocument, this.application, codeItemCtrl_Modified),
+                TopicSectionControlFactory.Create(topicSection, this.topicDocument, this.application, codeItemCtrl_Modified),
                 true, selected);
         }
 

@@ -15,7 +15,7 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         private ICompiler compiler = null;
         private IQikTemplateDocumentSet qikFile = null;
-        private DocumentTabManager tabManager = null;
+        private WorkItemTabManager tabManager = null;
         private QikScriptCtrl scriptControl;
 
         #region Public Properties
@@ -57,7 +57,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             
             Tag = qikFile.Id;
             compiler = qikFile.Compiler;
-            tabManager = new DocumentTabManager(tabControlFile, btnMenu);
+            tabManager = new WorkItemTabManager(tabControlFile, btnMenu);
             tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   
             RebuildTabs();
@@ -214,11 +214,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             foreach (ICodeTopicSection document in qikFile.TemplateSections)
             {
                 tabManager.AddTab(document,
-                    DocumentControlFactory.Create(document, qikFile, application, codeCtrl_Modified), true, false);
+                    TopicSectionControlFactory.Create(document, qikFile, application, codeCtrl_Modified), true, false);
             }
 
             IQikScriptTopicSection qikScriptTopicSection = qikFile.ScriptSection as IQikScriptTopicSection;
-            scriptControl = (QikScriptCtrl)DocumentControlFactory.Create(qikScriptTopicSection, qikFile, application, codeCtrl_Modified);
+            scriptControl = (QikScriptCtrl)TopicSectionControlFactory.Create(qikScriptTopicSection, qikFile, application, codeCtrl_Modified);
             tabManager.AddTab(qikScriptTopicSection, scriptControl, btnShowScript.Checked, false);
         }
 
@@ -239,7 +239,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Tab Manager Events
 
-        private void tabManager_BeforeDeleteTab(object sender, DocumentTabEventArgs e)
+        private void tabManager_BeforeDeleteTab(object sender, WorkItemTabEventArgs e)
         {
             if (e.TabUserControl is QikScriptCtrl)
             {
@@ -311,7 +311,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             Gui.Drawing.SuspendDrawing(this);
             tabManager.AddTab(e.TopicSection,
-                DocumentControlFactory.Create(e.TopicSection, qikFile, application, codeCtrl_Modified),
+                TopicSectionControlFactory.Create(e.TopicSection, qikFile, application, codeCtrl_Modified),
                 true, true);
             tabManager.OrderTabs(qikFile.TopicSections);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);

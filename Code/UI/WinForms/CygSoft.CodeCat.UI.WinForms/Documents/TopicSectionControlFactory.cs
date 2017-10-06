@@ -11,7 +11,7 @@ using System;
 
 namespace CygSoft.CodeCat.UI.WinForms.Documents
 {
-    public static class DocumentControlFactory
+    public static class TopicSectionControlFactory
     {
         public static ITopicSectionBaseControl Create(ITopicSection topicSection, IWorkItem workItem, AppFacade application, EventHandler modifiedEventHandler)
         {

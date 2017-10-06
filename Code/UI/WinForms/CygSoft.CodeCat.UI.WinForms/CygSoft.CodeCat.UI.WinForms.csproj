@@ -298,9 +298,9 @@
     <Compile Include="Documents\TopicWorkItemFormForm.Designer.cs">
       <DependentUpon>TopicWorkItemFormForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\DocumentControlFactory.cs" />
-    <Compile Include="Documents\DocumentTabEventArgs.cs" />
-    <Compile Include="Documents\DocumentTabManager.cs" />
+    <Compile Include="Documents\TopicSectionControlFactory.cs" />
+    <Compile Include="Documents\WorkItemTabEventArgs.cs" />
+    <Compile Include="Documents\WorkItemTabManager.cs" />
     <Compile Include="Documents\IWorkItemForm.cs" />
     <Compile Include="Documents\QikWorkItemForm.cs">
       <SubType>Form</SubType>

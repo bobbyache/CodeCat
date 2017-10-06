@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Documents
 {
-    public class DocumentTabManager
+    public class WorkItemTabManager
     {
-        public event EventHandler<DocumentTabEventArgs> BeforeDeleteTab;
+        public event EventHandler<WorkItemTabEventArgs> BeforeDeleteTab;
         
         private TabControl tabControl;
         private ToolStripDropDownButton tabMenuButton;
@@ -18,7 +18,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
         public TabPage SelectedTab { get { return tabControl.SelectedTab; } }
         public bool HasTabs { get { return this.tabControl.TabPages.Count > 0; } }
 
-        public DocumentTabManager(TabControl tabControl, ToolStripDropDownButton tabMenuButton)
+        public WorkItemTabManager(TabControl tabControl, ToolStripDropDownButton tabMenuButton)
         {
             this.tabControl = tabControl;
             this.tabMenuButton = tabMenuButton;
@@ -79,7 +79,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             itemControl.Modified -= tabUserControl_Modified;
 
             if (BeforeDeleteTab != null)
-                BeforeDeleteTab(this, new DocumentTabEventArgs(tabPage, tabPage.Controls[0] as UserControl));
+                BeforeDeleteTab(this, new WorkItemTabEventArgs(tabPage, tabPage.Controls[0] as UserControl));
 
             RemoveTabMenuItem(id);
             tabPageDictionary.Remove(id);
@@ -119,7 +119,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                 itemControl.Modified -= tabUserControl_Modified;
 
                 if (BeforeDeleteTab != null)
-                    BeforeDeleteTab(this, new DocumentTabEventArgs(tabPage, tabPage.Controls[0] as UserControl));
+                    BeforeDeleteTab(this, new WorkItemTabEventArgs(tabPage, tabPage.Controls[0] as UserControl));
             }
 
             tabPageDictionary.Clear();
