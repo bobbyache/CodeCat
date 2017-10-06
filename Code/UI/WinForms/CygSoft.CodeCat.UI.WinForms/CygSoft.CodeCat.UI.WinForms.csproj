@@ -301,7 +301,7 @@
     <Compile Include="Documents\DocumentControlFactory.cs" />
     <Compile Include="Documents\DocumentTabEventArgs.cs" />
     <Compile Include="Documents\DocumentTabManager.cs" />
-    <Compile Include="Documents\IContentDocument.cs" />
+    <Compile Include="Documents\IWorkItemForm.cs" />
     <Compile Include="Documents\QikWorkItemForm.cs">
       <SubType>Form</SubType>
     </Compile>

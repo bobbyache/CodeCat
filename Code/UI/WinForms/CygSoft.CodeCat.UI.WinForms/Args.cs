@@ -44,12 +44,12 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
     }
 
-    public class DocumentSavedFileEventArgs : EventArgs
+    public class WorkItemSavedFileEventArgs : EventArgs
     {
-        public IContentDocument ContentDocument { get; private set; }
+        public IWorkItemForm ContentDocument { get; private set; }
         public IWorkItem WorkItem { get; private set; }
 
-        public DocumentSavedFileEventArgs(IWorkItem WorkItem, IContentDocument contentDocument)
+        public WorkItemSavedFileEventArgs(IWorkItem WorkItem, IWorkItemForm contentDocument)
         {
             this.ContentDocument = contentDocument;
             this.WorkItem = WorkItem;

@@ -129,8 +129,8 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
 
             public static DialogResult SaveDocumentChangesDialogMessageBox(IWin32Window owner)
             {
-                return MessageBox.Show(owner, string.Format("{0}\n You have not saved this snippet. Would you like to save it first?", (owner as IContentDocument).Text),
-                    string.Format("{0}: {1}", ConfigSettings.ApplicationTitle, (owner as IContentDocument).Text),
+                return MessageBox.Show(owner, string.Format("{0}\n You have not saved this snippet. Would you like to save it first?", (owner as IWorkItemForm).Text),
+                    string.Format("{0}: {1}", ConfigSettings.ApplicationTitle, (owner as IWorkItemForm).Text),
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
             }
 

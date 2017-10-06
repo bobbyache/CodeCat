@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class QikWorkItemForm : BaseWorkItemForm, IContentDocument
+    public partial class QikWorkItemForm : BaseWorkItemForm, IWorkItemForm
     {
         private ICompiler compiler = null;
         private IQikTemplateDocumentSet qikFile = null;

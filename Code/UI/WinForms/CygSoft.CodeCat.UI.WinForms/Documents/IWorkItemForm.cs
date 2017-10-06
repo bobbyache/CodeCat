@@ -5,10 +5,10 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public interface IContentDocument
+    public interface IWorkItemForm
     {
-        event EventHandler DocumentDeleted;
-        event EventHandler<DocumentSavedFileEventArgs> DocumentSaved;
+        event EventHandler Deleted;
+        event EventHandler<WorkItemSavedFileEventArgs> Saved;
 
         string Id { get; }
 

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class TopicWorkItemForm : BaseWorkItemForm, IContentDocument
+    public partial class TopicWorkItemForm : BaseWorkItemForm, IWorkItemForm
     {
         private ITopicDocument topicDocument = null;
         private DocumentTabManager tabManager = null;

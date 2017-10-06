@@ -11,8 +11,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class BaseWorkItemForm : DockContent
     {
-        public event EventHandler DocumentDeleted;
-        public event EventHandler<DocumentSavedFileEventArgs> DocumentSaved;
+        public event EventHandler Deleted;
+        public event EventHandler<WorkItemSavedFileEventArgs> Saved;
 
         protected event EventHandler HeaderFieldsVisibilityChanged;
         protected event EventHandler ModifyStatusChanged;
@@ -119,7 +119,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 flagForDelete = true;
                 Deleting?.Invoke(this, new EventArgs());
-                DocumentDeleted?.Invoke(this, new EventArgs());
+                Deleted?.Invoke(this, new EventArgs());
 
                 Close();
             }
@@ -148,7 +148,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        protected bool Save(IWorkItem target, IContentDocument contentDocument)
+        protected bool Save(IWorkItem target, IWorkItemForm contentDocument)
         {
             if (ValidateChanges())
             {
@@ -159,7 +159,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                     IsModified = false;
                     IsNew = false;
 
-                    DocumentSaved?.Invoke(this, new DocumentSavedFileEventArgs(target, contentDocument));
+                    Saved?.Invoke(this, new WorkItemSavedFileEventArgs(target, contentDocument));
 
                     return true;
                 }

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public partial class CodeWorkItemForm : BaseWorkItemForm, IContentDocument
+    public partial class CodeWorkItemForm : BaseWorkItemForm, IWorkItemForm
     {
         private TabPage snapshotsTab;
 

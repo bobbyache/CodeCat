@@ -161,9 +161,9 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             foreach (IKeywordIndexItem item in e.Items)
             {
-                IContentDocument contentDocument = dockPanel.Documents
-                    .Where(doc => (doc as IContentDocument).Id == item.Id)
-                    .OfType<IContentDocument>().SingleOrDefault();
+                IWorkItemForm contentDocument = dockPanel.Documents
+                    .Where(doc => (doc as IWorkItemForm).Id == item.Id)
+                    .OfType<IWorkItemForm>().SingleOrDefault();
 
                 if (contentDocument != null)
                     contentDocument.RemoveKeywords(e.Keywords, false);
@@ -174,9 +174,9 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             foreach (IKeywordIndexItem item in e.Items)
             {
-                IContentDocument contentDocument = dockPanel.Documents
-                    .Where(doc => (doc as IContentDocument).Id == item.Id)
-                    .OfType<IContentDocument>().SingleOrDefault();
+                IWorkItemForm contentDocument = dockPanel.Documents
+                    .Where(doc => (doc as IWorkItemForm).Id == item.Id)
+                    .OfType<IWorkItemForm>().SingleOrDefault();
 
                 if (contentDocument != null)
                     contentDocument.AddKeywords(e.Keywords, false);
@@ -294,7 +294,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             {
                 if (application.Loaded)
                 {
-                    IKeywordIndexItem[] keywordIndexItems = this.dockPanel.Contents.OfType<IContentDocument>()
+                    IKeywordIndexItem[] keywordIndexItems = this.dockPanel.Contents.OfType<IWorkItemForm>()
                         .Where(doc => doc.IsNew == false)
                         .Select(doc => doc.GetKeywordIndex()).ToArray();
 
@@ -365,7 +365,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             if (WorkItemFormIsOpen(keywordIndexItem))
             {
-                IContentDocument workItemForm = GetOpenWorkItemForm(keywordIndexItem.Id);
+                IWorkItemForm workItemForm = GetOpenWorkItemForm(keywordIndexItem.Id);
                 // important, otherwise workItem for will throw a messagebox.
                 // we should have already been through the IsModified check process.
                 workItemForm.CloseWithoutPrompts = true;
@@ -377,7 +377,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (!WorkItemFormIsOpen(keywordIndexItem))
             {
-                IContentDocument workItemForm = null;
+                IWorkItemForm workItemForm = null;
                 IWorkItem workItem = application.OpenWorkItem(keywordIndexItem);
 
                 if (keywordIndexItem is ICodeKeywordIndexItem)
@@ -393,8 +393,8 @@ namespace CygSoft.CodeCat.UI.WinForms
                     throw new Exception("IContentDocument has not been defined and cannot be opened.");
 
                 workItemForm.HeaderFieldsVisible = false;
-                workItemForm.DocumentDeleted += workItemForm_DocumentDeleted;
-                workItemForm.DocumentSaved += workItemForm_DocumentSaved;
+                workItemForm.Deleted += workItemForm_DocumentDeleted;
+                workItemForm.Saved += workItemForm_DocumentSaved;
                 workItemForm.Show(dockPanel, DockState.Document);
             }
             else
@@ -405,13 +405,13 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateWorkItemFormIfNone()
         {
-            if (!this.dockPanel.Contents.OfType<IContentDocument>().Any())
+            if (!this.dockPanel.Contents.OfType<IWorkItemForm>().Any())
                 CreateWorkItem(WorkItemType.CodeFile);
         }
 
         private void CreateWorkItem(WorkItemType workItemType)
         {
-            IContentDocument workItemForm = null;
+            IWorkItemForm workItemForm = null;
             IWorkItem workItem = application.CreateWorkItem(ConfigSettings.DefaultSyntax, workItemType);
 
             switch (workItemType)
@@ -427,31 +427,31 @@ namespace CygSoft.CodeCat.UI.WinForms
                     break;
             }
 
-            workItemForm.DocumentDeleted += workItemForm_DocumentDeleted;
-            workItemForm.DocumentSaved += workItemForm_DocumentSaved;
+            workItemForm.Deleted += workItemForm_DocumentDeleted;
+            workItemForm.Saved += workItemForm_DocumentSaved;
             workItemForm.HeaderFieldsVisible = true;
             workItemForm.Show(dockPanel, DockState.Document);
         }
 
-        private IContentDocument GetOpenWorkItemForm(string workItemId)
+        private IWorkItemForm GetOpenWorkItemForm(string workItemId)
         {
-            IContentDocument contentDocument = dockPanel.Documents
-                .Where(doc => (doc as IContentDocument).Id == workItemId)
-                .OfType<IContentDocument>().SingleOrDefault();
+            IWorkItemForm contentDocument = dockPanel.Documents
+                .Where(doc => (doc as IWorkItemForm).Id == workItemId)
+                .OfType<IWorkItemForm>().SingleOrDefault();
 
             return contentDocument;
         }
 
         private void ActivateWorkItemForm(IKeywordIndexItem keywordIndexItem)
         {
-            IContentDocument contentDocument = GetOpenWorkItemForm(keywordIndexItem.Id);
+            IWorkItemForm contentDocument = GetOpenWorkItemForm(keywordIndexItem.Id);
             if (contentDocument != null)
                 contentDocument.Activate();
         }
 
         private bool WorkItemFormIsOpen(IKeywordIndexItem keywordIndexItem)
         {
-            return dockPanel.Documents.Any(doc => (doc as IContentDocument).Id == keywordIndexItem.Id);
+            return dockPanel.Documents.Any(doc => (doc as IWorkItemForm).Id == keywordIndexItem.Id);
         }
 
         private string ItemCountCaption(int foundItems)
@@ -464,8 +464,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private bool SaveAllWorkItemForms()
         {
-            IEnumerable<IContentDocument> contentDocuments = this.dockPanel.Contents.OfType<IContentDocument>().Where(doc => doc.IsModified == true);
-            foreach (IContentDocument contentDocument in contentDocuments)
+            IEnumerable<IWorkItemForm> contentDocuments = this.dockPanel.Contents.OfType<IWorkItemForm>().Where(doc => doc.IsModified == true);
+            foreach (IWorkItemForm contentDocument in contentDocuments)
             {
                 if (!contentDocument.SaveChanges())
                 {
@@ -484,18 +484,18 @@ namespace CygSoft.CodeCat.UI.WinForms
             return result;
         }
 
-        private IContentDocument[] UnsavedWorkItemForms()
+        private IWorkItemForm[] UnsavedWorkItemForms()
         {
-            return this.dockPanel.Contents.OfType<IContentDocument>().Where(doc => doc.IsModified == true).ToArray();
+            return this.dockPanel.Contents.OfType<IWorkItemForm>().Where(doc => doc.IsModified == true).ToArray();
         }
 
         private void ClearWorkItemForms()
         {
-            var workItemForms = this.dockPanel.Contents.OfType<IContentDocument>().ToList();
+            var workItemForms = this.dockPanel.Contents.OfType<IWorkItemForm>().ToList();
 
             while (workItemForms.Count() > 0)
             {
-                IContentDocument workItemForm = workItemForms.First();
+                IWorkItemForm workItemForm = workItemForms.First();
                 workItemForms.Remove(workItemForm);
                 // important, otherwise workItem for will throw a messagebox.
                 // we should have already been through the IsModified check process.
@@ -506,7 +506,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private bool AnyUnsavedDocuments()
         {
-            return this.dockPanel.Contents.OfType<IContentDocument>().Where(doc => doc.IsModified == true).Any();
+            return this.dockPanel.Contents.OfType<IWorkItemForm>().Where(doc => doc.IsModified == true).Any();
         }
 
         private void RecentProjectOpened(object sender, RecentProjectEventArgs e)
@@ -546,7 +546,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             searchForm.ExecuteSearch();
         }
 
-        private void workItemForm_DocumentSaved(object sender, DocumentSavedFileEventArgs e)
+        private void workItemForm_DocumentSaved(object sender, WorkItemSavedFileEventArgs e)
         {
             searchForm.ExecuteSearch(e.WorkItem.Id);
             mnuDocuments.DropDownItems[e.WorkItem.Id].Text = e.ContentDocument.Text;
@@ -642,7 +642,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
                 foreach (IKeywordIndexItem indexItem in indexItems)
                 {
-                    IContentDocument workItemForm = GetOpenWorkItemForm(indexItem.Id);
+                    IWorkItemForm workItemForm = GetOpenWorkItemForm(indexItem.Id);
                     if (workItemForm != null)
                     {
                         workItemForm.AddKeywords(delimitedKeywordList);
@@ -709,9 +709,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void dockPanel_ContentRemoved(object sender, DockContentEventArgs e)
         {
-            if (e.Content is IContentDocument)
+            if (e.Content is IWorkItemForm)
             {
-                IContentDocument workItemForm = e.Content as IContentDocument;
+                IWorkItemForm workItemForm = e.Content as IWorkItemForm;
                 ToolStripMenuItem menuItem = mnuDocuments.DropDownItems[workItemForm.Id] as ToolStripMenuItem;
                 if (menuItem != null)
                 {
@@ -729,9 +729,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void dockPanel_ContentAdded(object sender, DockContentEventArgs e)
         {
-            if (e.Content is IContentDocument)
+            if (e.Content is IWorkItemForm)
             {
-                IContentDocument workItemForm = e.Content as IContentDocument;
+                IWorkItemForm workItemForm = e.Content as IWorkItemForm;
                 ToolStripMenuItem menuItem = new ToolStripMenuItem(workItemForm.Text, null, mnuDocumentWindow_Click);
                 menuItem.Image = workItemForm.IconImage;
                 menuItem.Name = workItemForm.Id;
@@ -743,7 +743,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void mnuDocumentWindow_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
-            IContentDocument workItemForm = menuItem.Tag as IContentDocument;
+            IWorkItemForm workItemForm = menuItem.Tag as IWorkItemForm;
             workItemForm.Activate();
         }
 
