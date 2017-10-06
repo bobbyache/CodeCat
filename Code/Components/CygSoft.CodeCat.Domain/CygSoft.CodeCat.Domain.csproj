@@ -94,7 +94,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Code\ICodeKeywordIndexItem.cs" />
-    <Compile Include="Management\CodeGroupImporter.cs" />
     <Compile Include="Management\IndexExportImportData.cs" />
     <Compile Include="Management\ManageableProject.cs" />
     <Compile Include="ProjManFacade.cs" />
