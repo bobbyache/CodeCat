@@ -1,4 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain.Base;
+using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Search.KeywordIndex;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
@@ -31,36 +33,33 @@ namespace Domain.UnitTests
         }
 
         [Test]
-        public void TopicLibrary_OpenTarget_ReturnsExistingTarget()
+        public void TopicLibrary_OpenWithCodeKeywordIndex_Returns_CodeFile()
         {
-            /*
-             * Note this test is really just a test to get the structures into a testable state. You might wish to
-             * test the total "openFiles" property which is currently not exposed on the BaseLibrary but you think
-             * that you should expose some of the properties in order to test some of the state of the class!
-             */
+            IKeywordIndexItem indexItem = new CodeKeywordIndexItem();
+            IWorkItem workItem = WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
 
-            // Arrange
-            Mock<IKeywordSearchIndexRepository> stubSearchIndexRepository = new Mock<IKeywordSearchIndexRepository>();
-            IKeywordSearchIndex keywordSearchIndex = new KeywordSearchIndex(@"C:\parent_folder\_code.xml", new Version("4.0.1"));
-            stubSearchIndexRepository
-                .Setup(stub => stub.OpenIndex(It.IsAny<string>(), It.IsAny<Version>()))
-                .Returns(keywordSearchIndex);
-            TopicLibrary codeGroupLibrary = new TopicLibrary(stubSearchIndexRepository.Object, "TestFolder");
-            TopicKeywordIndexItem keywordIndexItem = new TopicKeywordIndexItem("Code Group Index Item", "C#", "testing,tested,test");
-            
-            Mock<ITopicDocument> stubCodeGroupDocumentSet = new Mock<ITopicDocument>();
-            stubCodeGroupDocumentSet.Setup(stub => stub.Open());
-            stubCodeGroupDocumentSet.Setup(stub => stub.Id).Returns("4ecac722-8ec5-441c-8e3e-00b192b30453"); // You can fake a readonly property
-
-            PersistableTargetFactory.SetIndexItem(stubCodeGroupDocumentSet.Object);
-
-            codeGroupLibrary.Open(@"C:\parent_folder", new Version("4.0.1"));
-
-            // Act
-            IWorkItem workItem = codeGroupLibrary.OpenWorkItem(keywordIndexItem);
-
-            // Assert
             Assert.That(workItem, Is.Not.Null);
+            Assert.That(workItem, Is.TypeOf(typeof(CodeFile)));
+        }
+
+        [Test]
+        public void TopicLibrary_OpenWithQikTemplateKeywordIndex_Returns_QikTemplate()
+        {
+            IKeywordIndexItem indexItem = new QikTemplateKeywordIndexItem();
+            IWorkItem workItem = WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
+
+            Assert.That(workItem, Is.Not.Null);
+            Assert.That(workItem, Is.TypeOf(typeof(QikTemplateDocumentSet)));
+        }
+
+        [Test]
+        public void TopicLibrary_OpenWithTopicKeywordIndex_Returns_Topic()
+        {
+            IKeywordIndexItem indexItem = new TopicKeywordIndexItem();
+            IWorkItem workItem = WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
+
+            Assert.That(workItem, Is.Not.Null);
+            Assert.That(workItem, Is.TypeOf(typeof(TopicDocument)));
         }
 
         [Test]

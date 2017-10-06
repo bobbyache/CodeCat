@@ -52,8 +52,6 @@ namespace CygSoft.CodeCat.Domain.Base
             this.subFolder = subFolder;
         }
 
-        protected abstract IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem);
-        protected abstract IWorkItem OpenTargetWorkItem(IKeywordIndexItem indexItem);
         public abstract IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems);
 
         public void Import(IndexExportImportData[] importData)
@@ -73,25 +71,38 @@ namespace CygSoft.CodeCat.Domain.Base
             }
         }
 
-        public IWorkItem OpenWorkItem(IKeywordIndexItem indexItem)
+        public IWorkItem GetWorkItem(IKeywordIndexItem indexItem)
         {
-            IWorkItem target = OpenTargetWorkItem(indexItem);
+            IWorkItem workItem = FindOpenWorkItem(indexItem.Id);
 
-            target.BeforeClose += target_BeforeClose;
-            target.AfterSave += target_AfterSave;
-            target.AfterDelete += target_AfterDelete;
-            return target;
+            if (workItem == null)
+                workItem = CreateWorkItem(indexItem);
+
+            return workItem;
         }
 
         public IWorkItem CreateWorkItem(IKeywordIndexItem indexItem)
         {
-            IWorkItem target = CreateTargetWorkItem(indexItem);
+            IWorkItem workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
+            OpenWorkItem(workItem);
 
-            target.BeforeClose += target_BeforeClose;
-            target.AfterSave += target_AfterSave;
-            target.AfterDelete += target_AfterDelete; ;
-            return target;
+            return workItem;
         }
+        private void OpenWorkItem(IWorkItem workItem)
+        {
+            if (this.workItems == null)
+                this.workItems = new Dictionary<string, IWorkItem>();
+
+            if (workItem.Exists)
+                workItem.Open();
+
+            workItem.BeforeClose += target_BeforeClose;
+            workItem.AfterSave += workItem_AfterSave;
+            workItem.AfterDelete += workItem_AfterDelete;
+
+            this.workItems.Add(workItem.Id, workItem);
+        }
+
 
         public void Open(string parentFolder, Version currentVersion)
         {
@@ -220,16 +231,7 @@ namespace CygSoft.CodeCat.Domain.Base
             return indeces.ToArray();
         }
 
-        protected void OpenWorkItem(IWorkItem workItem)
-        {
-            if (this.workItems == null)
-                this.workItems = new Dictionary<string, IWorkItem>();
-
-            workItem.Open();
-            this.workItems.Add(workItem.Id, workItem);
-        }
-
-        protected IWorkItem FindOpenWorkItem(string id)
+        private IWorkItem FindOpenWorkItem(string id)
         {
             IWorkItem workItem = null;
 
@@ -287,34 +289,33 @@ namespace CygSoft.CodeCat.Domain.Base
             indexRepository.SaveIndex(this.index);
         }
 
-        private void target_AfterDelete(object sender, TopicEventArgs e)
+        private void workItem_AfterDelete(object sender, TopicEventArgs e)
         {
-            IWorkItem target = sender as IWorkItem;
+            IWorkItem workItem = sender as IWorkItem;
 
-            target.BeforeClose += target_BeforeClose;
+            workItem.BeforeClose -= target_BeforeClose;
+            workItem.AfterSave -= workItem_AfterSave;
+            workItem.AfterDelete -= workItem_AfterDelete;
 
-            target.AfterSave -= target_AfterSave;
-            target.AfterDelete -= target_AfterDelete;
-
-            this.RemoveLibraryFileReference(target.Id);
-            this.index.Remove(target.Id);
+            this.RemoveLibraryFileReference(workItem.Id);
+            this.index.Remove(workItem.Id);
         }
 
-        private void target_AfterSave(object sender, TopicEventArgs e)
+        private void workItem_AfterSave(object sender, TopicEventArgs e)
         {
-            IWorkItem targetFile = sender as IWorkItem;
-            this.index.Update(targetFile.IndexItem);
+            IWorkItem workItem = sender as IWorkItem;
+            this.index.Update(workItem.IndexItem);
         }
 
         private void target_BeforeClose(object sender, TopicEventArgs e)
         {
-            IWorkItem target = sender as IWorkItem;
+            IWorkItem workItem = sender as IWorkItem;
 
-            target.BeforeClose -= target_BeforeClose;
-            target.AfterSave -= target_AfterSave;
-            target.AfterDelete -= target_AfterDelete;
+            workItem.BeforeClose -= target_BeforeClose;
+            workItem.AfterSave -= workItem_AfterSave;
+            workItem.AfterDelete -= workItem_AfterDelete;
 
-            this.RemoveLibraryFileReference(target.Id);
+            this.RemoveLibraryFileReference(workItem.Id);
         }
     }
 }

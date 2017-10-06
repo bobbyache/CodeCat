@@ -249,11 +249,11 @@ namespace CygSoft.CodeCat.Domain
         public IWorkItem OpenWorkItem(IKeywordIndexItem keywordIndexItem)
         {
             if (keywordIndexItem is ICodeKeywordIndexItem)
-                return OpenCodeFileTarget(keywordIndexItem);
+                return this.codeLibrary.GetWorkItem(keywordIndexItem);
             else if (keywordIndexItem is IQikTemplateKeywordIndexItem)
-                return OpenQikDocumentGroup(keywordIndexItem);
+                return this.qikLibrary.GetWorkItem(keywordIndexItem);
             else if (keywordIndexItem is ITopicKeywordIndexItem)
-                return OpenTopicDocument(keywordIndexItem);
+                return this.topicLibrary.GetWorkItem(keywordIndexItem);
             else
                 return null;
         }
@@ -263,13 +263,13 @@ namespace CygSoft.CodeCat.Domain
             switch (itemType)
             {
                 case WorkItemType.CodeFile:
-                    return this.codeLibrary.CreateWorkItem(new CodeKeywordIndexItem("New Snippet", 
+                    return this.codeLibrary.CreateWorkItem(new CodeKeywordIndexItem("New Code", 
                         syntax, string.Empty));
                 case WorkItemType.QikGenerator:
                     return this.qikLibrary.CreateWorkItem(new QikTemplateKeywordIndexItem("New Qik Template", 
                         syntax, string.Empty));
                 case WorkItemType.Topic:
-                    return this.topicLibrary.CreateWorkItem(new TopicKeywordIndexItem("New Group Snippet", 
+                    return this.topicLibrary.CreateWorkItem(new TopicKeywordIndexItem("New Topic", 
                         syntax, string.Empty));
                 default:
                     return null;
@@ -278,21 +278,22 @@ namespace CygSoft.CodeCat.Domain
 
         public void DeleteWorkItem(IKeywordIndexItem keywordIndexItem)
         {
+            IWorkItem workItem = null;
+
             if (keywordIndexItem is ICodeKeywordIndexItem)
             {
-                CodeFile codeFile = OpenCodeFileTarget(keywordIndexItem);
-                codeFile.Delete();
+                workItem = this.codeLibrary.GetWorkItem(keywordIndexItem);
             }
             else if (keywordIndexItem is IQikTemplateKeywordIndexItem)
             {
-                IQikTemplateDocumentSet qikFile = OpenQikDocumentGroup(keywordIndexItem);
-                qikFile.Delete();
+                workItem = this.qikLibrary.GetWorkItem(keywordIndexItem);
             }
             else if (keywordIndexItem is ITopicKeywordIndexItem)
             {
-                ITopicDocument codeGroupFile = OpenTopicDocument(keywordIndexItem);
-                codeGroupFile.Delete();
+                workItem = this.topicLibrary.GetWorkItem(keywordIndexItem);
             }
+
+            workItem.Delete();
         }
 
         public ITask CreateTask()
@@ -431,22 +432,5 @@ namespace CygSoft.CodeCat.Domain
             else
                 categoryHierarchy.RemoveItemOrCategory(item.Id);
         }
-
-        private ITopicDocument OpenTopicDocument(IKeywordIndexItem keywordIndexItem)
-        {
-            return this.topicLibrary.OpenWorkItem(keywordIndexItem) as ITopicDocument;
-        }
-
-        private IQikTemplateDocumentSet OpenQikDocumentGroup(IKeywordIndexItem keywordIndexItem)
-        {
-            return this.qikLibrary.OpenWorkItem(keywordIndexItem) as IQikTemplateDocumentSet;
-        }
-
-        private CodeFile OpenCodeFileTarget(IKeywordIndexItem keywordIndexItem)
-        {
-            return this.codeLibrary.OpenWorkItem(keywordIndexItem) as CodeFile;
-        }
     }
-
-
 }

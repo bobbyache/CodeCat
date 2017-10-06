@@ -20,26 +20,5 @@ namespace CygSoft.CodeCat.Domain.Code.Base
             IWorkItemExporter exporter = new CodeExporter(this.FolderPath, foundItems);
             return exporter.GetExportData();
         }
-
-        protected override IWorkItem OpenTargetWorkItem(IKeywordIndexItem indexItem)
-        {
-            IWorkItem workItem = base.FindOpenWorkItem(indexItem.Id);
-
-            if (workItem == null)
-            {
-                workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
-                base.OpenWorkItem(workItem);
-            }
-
-            return workItem;
-        }
-
-        protected override IWorkItem CreateTargetWorkItem(IKeywordIndexItem indexItem)
-        {
-            IWorkItem workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
-            base.OpenWorkItem(workItem);
-
-            return workItem;
-        }
     }
 }
