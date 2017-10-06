@@ -53,6 +53,10 @@
     <Reference Include="ExtendedRichTextBox">
       <HintPath>..\..\..\External\ExtendedRichTextBox.dll</HintPath>
     </Reference>
+    <Reference Include="PdfiumViewer, Version=2.12.0.0, Culture=neutral, PublicKeyToken=91e4789cfb0609e0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\PdfiumViewer.2.12.0.0\lib\net20\PdfiumViewer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -594,6 +598,7 @@
   <ItemGroup>
     <Content Include="codecat_08.ico" />
     <Content Include="codecat_09.ico" />
+    <Content Include="x86\pdfium.dll" />
     <None Include="qikscript.syn">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

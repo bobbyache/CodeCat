@@ -28,36 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PdfDocumentControl));
-            this.pdfControl = new AxAcroPDFLib.AxAcroPDF();
-            ((System.ComponentModel.ISupportInitialize)(this.pdfControl)).BeginInit();
+            this.pdfViewer1 = new PdfiumViewer.PdfViewer();
             this.SuspendLayout();
             // 
-            // pdfControl
+            // pdfViewer1
             // 
-            this.pdfControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pdfControl.Enabled = true;
-            this.pdfControl.Location = new System.Drawing.Point(0, 0);
-            this.pdfControl.Name = "pdfControl";
-            this.pdfControl.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("pdfControl.OcxState")));
-            this.pdfControl.Size = new System.Drawing.Size(626, 529);
-            this.pdfControl.TabIndex = 12;
+            this.pdfViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pdfViewer1.Location = new System.Drawing.Point(0, 25);
+            this.pdfViewer1.Name = "pdfViewer1";
+            this.pdfViewer1.Size = new System.Drawing.Size(626, 479);
+            this.pdfViewer1.TabIndex = 7;
             // 
             // PdfDocumentControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pdfControl);
+            this.Controls.Add(this.pdfViewer1);
             this.Name = "PdfDocumentControl";
             this.Size = new System.Drawing.Size(626, 529);
-            this.Controls.SetChildIndex(this.pdfControl, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.pdfControl)).EndInit();
+            this.Controls.SetChildIndex(this.pdfViewer1, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private AxAcroPDFLib.AxAcroPDF pdfControl;
+
+        private PdfiumViewer.PdfViewer pdfViewer1;
     }
 }

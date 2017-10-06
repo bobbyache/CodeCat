@@ -13,6 +13,7 @@ using System.IO;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
+using PdfiumViewer;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -42,8 +43,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadIfExists()
         {
-            //if (topicSection.Exists)
-                //pdfControl.LoadFile(topicSection.FilePath);
+
+            if (topicSection.Exists)
+                pdfViewer1.Document = PdfDocument.Load(topicSection.FilePath);
         }
 
         private void btnImport_Click(object sender, EventArgs e)
