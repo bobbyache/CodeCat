@@ -12,14 +12,16 @@ namespace CygSoft.CodeCat.TaskListing
 {
     public class TaskList
     {
-        private string filePath = null;
+        private ITaskListRepository repository;
 
-        public TaskList(string filePath)
+        public TaskList(ITaskListRepository repository)
         {
-            if (string.IsNullOrWhiteSpace(filePath))
-                throw new ArgumentException("Must supply a valid task file path.");
-            this.filePath = filePath;
+            if (repository == null)
+                throw new ArgumentNullException("Must supply an implementation for ITaskListRepository.");
+
+            this.repository = repository;
         }
+
         public static Task CreateTask()
         {
             return new Task("New Task", TaskPriority.Medium);
@@ -87,70 +89,12 @@ namespace CygSoft.CodeCat.TaskListing
 
         public void Load()
         {
-            if (!File.Exists(filePath))
-                CreateFile();
-
-            XDocument xDocument = XDocument.Load(filePath);
-            IEnumerable<XElement> elements = xDocument.Element("TaskList").Elements("Tasks").Elements();
-
-            List<Task> tasks = ExtractFromXml(elements);
-            taskList = tasks.OfType<ITask>().ToList();
+            taskList = repository.GetTaskList();
         }
 
         public void Save()
         {
-            if (!File.Exists(filePath))
-                CreateFile();
-            WriteFile(taskList);
-        }
-
-        private void CreateFile()
-        {
-            XElement rootElement = new XElement("TaskList", new XElement("Tasks"));
-            XDocument xDocument = new XDocument(rootElement);
-            xDocument.Save(filePath);
-        }
-
-        private void WriteFile(List<ITask> tasks)
-        {
-            XDocument indexDocument = XDocument.Load(filePath);
-            XElement element = indexDocument.Element("TaskList").Element("Tasks");
-            element.RemoveNodes();
-
-            AppendToContainerElement(element, tasks);
-            indexDocument.Save(filePath);
-        }
-
-        private void AppendToContainerElement(XElement containerElement, List<ITask> tasks)
-        {
-            foreach (ITask task in tasks)
-            {
-
-                containerElement.Add(new XElement("Task",
-                    new XAttribute("Title", task.Title),
-                    new XAttribute("Priority", task.Priority),
-                    new XAttribute("Completed", task.Completed.ToString()),
-                    new XAttribute("DateCreated", task.DateCreated.ToString())
-                ));
-            }
-        }
-
-        private List<Task> ExtractFromXml(IEnumerable<XElement> elements)
-        {
-            List<Task> tasks = new List<Task>();
-
-            foreach (XElement element in elements)
-            {
-                Task item = new Task(
-                        (string)element.Attribute("Title"),
-                        TaskList.PriorityFromText((string)element.Attribute("Priority")),
-                        bool.Parse((string)element.Attribute("Completed")),
-                        DateTime.Parse((string)element.Attribute("DateCreated"))
-                    );
-
-                tasks.Add(item);
-            }
-            return tasks.ToList();
+            repository.SaveTaskList(taskList);
         }
     }
 }

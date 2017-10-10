@@ -92,7 +92,7 @@ namespace CygSoft.CodeCat.Domain
         public void Open(string filePath, Version currentVersion)
         {
             project.Open(filePath, currentVersion);
-            this.taskList = new TaskList(project.TaskFilePath);
+            this.taskList = new TaskList(new TaskListRepository(project.TaskFilePath));
             this.categoryHierarchy.LoadProject(project.CategoryFilePath);
 
             this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
@@ -103,7 +103,7 @@ namespace CygSoft.CodeCat.Domain
         public void Create(string filePath, Version currentVersion)
         {
             project.Create(filePath, currentVersion);
-            this.taskList = new TaskList(project.TaskFilePath);
+            this.taskList = new TaskList(new TaskListRepository(project.TaskFilePath));
             this.categoryHierarchy.CreateProject(project.CategoryFilePath);
             this.codeLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
             this.qikLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
