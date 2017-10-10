@@ -58,11 +58,11 @@ namespace CygSoft.CodeCat.TaskListing
             return null;
         }
 
-        private List<ITask> taskList = new List<ITask>();
-        public ITask[] Tasks { get { return taskList.ToArray(); } }
+        private List<ITask> tasks = new List<ITask>();
+        public ITask[] Tasks { get { return tasks.ToArray(); } }
 
-        public int NoOfTasks { get { return (taskList != null ?  taskList.Count : 0); } }
-        public int NoOfCompletedTasks { get { return (taskList != null ? taskList.Where(r => r.Completed == true).Count() : 0); } }
+        public int NoOfTasks { get { return (tasks != null ?  tasks.Count : 0); } }
+        public int NoOfCompletedTasks { get { return (tasks != null ? tasks.Where(r => r.Completed == true).Count() : 0); } }
 
         public double PercentageOfTasksCompleted
         {
@@ -76,25 +76,25 @@ namespace CygSoft.CodeCat.TaskListing
 
         public void AddTask(ITask task)
         {
-            taskList.Add(task);
+            tasks.Add(task);
         }
 
         public void DeleteTasks(ITask[] tasks)
         {
             foreach (Task task in tasks)
             {
-                taskList.Remove(task);
+                this.tasks.Remove(task);
             }
         }
 
         public void Load()
         {
-            taskList = repository.GetTaskList();
+            tasks = repository.GetTasks();
         }
 
         public void Save()
         {
-            repository.SaveTaskList(taskList);
+            repository.SaveTasks(tasks);
         }
     }
 }

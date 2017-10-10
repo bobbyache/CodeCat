@@ -19,14 +19,14 @@ namespace CygSoft.CodeCat.TaskListing
             this.filePath = filePath;
         }
 
-        public void SaveTaskList(List<ITask> taskList)
+        public void SaveTasks(List<ITask> taskList)
         {
             if (!File.Exists(filePath))
                 CreateFile();
             WriteFile(taskList);
         }
 
-        public List<ITask> GetTaskList()
+        public List<ITask> GetTasks()
         {
             if (!File.Exists(filePath))
                 CreateFile();
@@ -34,8 +34,8 @@ namespace CygSoft.CodeCat.TaskListing
             XDocument xDocument = XDocument.Load(filePath);
             IEnumerable<XElement> elements = xDocument.Element("TaskList").Elements("Tasks").Elements();
 
-            List<ITask> taskList = ExtractFromXml(elements).OfType<ITask>().ToList();
-            return taskList;
+            List<ITask> tasks = ExtractFromXml(elements).OfType<ITask>().ToList();
+            return tasks;
         }
 
         private List<Task> ExtractFromXml(IEnumerable<XElement> elements)

@@ -44,6 +44,8 @@
     <Compile Include="Task.cs" />
     <Compile Include="TaskList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaskListManager.cs" />
+    <Compile Include="TaskListManagerRepository.cs" />
     <Compile Include="TaskListRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ namespace CygSoft.CodeCat.TaskListing.Infrastructure
     {
         string FilePath { get; }
 
-        List<ITask> GetTaskList();
-        void SaveTaskList(List<ITask> taskList);
+        List<ITask> GetTasks();
+        void SaveTasks(List<ITask> taskList);
     }
 }
