@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CygSoft.CodeCat.TaskListing.Infrastructure;
 
-namespace CygSoft.CodeCat.TaskListing
+namespace CygSoft.CodeCat.TaskListing.Infrastructure
 {
     public interface ITaskListRepository
     {
