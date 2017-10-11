@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.TaskListing
 {
-    public class TaskList
+    public class TaskList : Infrastructure.ITaskList
     {
         private ITaskListRepository repository;
 
@@ -59,6 +59,7 @@ namespace CygSoft.CodeCat.TaskListing
         }
 
         private List<ITask> tasks = new List<ITask>();
+
         public ITask[] Tasks { get { return tasks.ToArray(); } }
 
         public int NoOfTasks { get { return (tasks != null ?  tasks.Count : 0); } }

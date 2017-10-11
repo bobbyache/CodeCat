@@ -1,12 +1,15 @@
-﻿//using System;
+﻿//using CygSoft.CodeCat.TaskListing.Infrastructure;
+//using System;
 //using System.Collections.Generic;
+//using System.IO;
 //using System.Linq;
 //using System.Text;
 //using System.Threading.Tasks;
+//using System.Xml.Linq;
 
 //namespace CygSoft.CodeCat.TaskListing
 //{
-//    class TaskListManagerRepository
+//    public class TaskListManagerRepository
 //    {
 //        private readonly string filePath;
 //        public string FilePath { get { return this.filePath; } }
@@ -16,70 +19,66 @@
 //            this.filePath = filePath;
 //        }
 
-//        public void SaveTaskList(List<ITask> taskList)
+//        public void SaveTaskLists(List<ITaskList> taskLists)
 //        {
 //            if (!File.Exists(filePath))
 //                CreateFile();
-//            WriteFile(taskList);
+//            WriteFile(taskLists);
 //        }
 
-//        public List<ITask> GetTaskList()
+//        public List<ITaskList> GetTaskLists()
 //        {
 //            if (!File.Exists(filePath))
 //                CreateFile();
 
 //            XDocument xDocument = XDocument.Load(filePath);
-//            IEnumerable<XElement> elements = xDocument.Element("TaskList").Elements("Tasks").Elements();
+//            IEnumerable<XElement> elements = xDocument.Element("TaskManagement").Elements("TaskLists").Elements();
 
-//            List<ITask> taskList = ExtractFromXml(elements).OfType<ITask>().ToList();
-//            return taskList;
+//            List<ITaskList> taskLists = ExtractFromXml(elements).OfType<ITaskList>().ToList();
+//            return taskLists;
 //        }
 
-//        private List<Task> ExtractFromXml(IEnumerable<XElement> elements)
+//        private List<ITaskList> ExtractFromXml(IEnumerable<XElement> elements)
 //        {
-//            List<Task> tasks = new List<Task>();
+//            List<ITaskList> taskLists = new List<ITaskList>();
 
 //            foreach (XElement element in elements)
 //            {
-//                Task item = new Task(
+//                ITaskList item = new TaskList(
 //                        (string)element.Attribute("Title"),
-//                        TaskList.PriorityFromText((string)element.Attribute("Priority")),
-//                        bool.Parse((string)element.Attribute("Completed")),
 //                        DateTime.Parse((string)element.Attribute("DateCreated"))
 //                    );
 
-//                tasks.Add(item);
+//                taskLists.Add(item);
 //            }
-//            return tasks.ToList();
+//            return taskLists.ToList();
 //        }
 
 //        private void CreateFile()
 //        {
-//            XElement rootElement = new XElement("TaskList", new XElement("Tasks"));
+//            XElement rootElement = new XElement("TaskManagement", new XElement("TaskLists"));
 //            XDocument xDocument = new XDocument(rootElement);
 //            xDocument.Save(filePath);
 //        }
 
-//        private void WriteFile(List<ITask> tasks)
+//        private void WriteFile(List<ITaskList> taskLists)
 //        {
 //            XDocument indexDocument = XDocument.Load(filePath);
-//            XElement element = indexDocument.Element("TaskList").Element("Tasks");
+//            XElement element = indexDocument.Element("TaskManagement").Element("TaskLists");
 //            element.RemoveNodes();
 
-//            AppendToContainerElement(element, tasks);
+//            AppendToContainerElement(element, taskLists);
 //            indexDocument.Save(filePath);
 //        }
 
-//        private void AppendToContainerElement(XElement containerElement, List<ITask> tasks)
+//        private void AppendToContainerElement(XElement containerElement, List<ITaskList> taskLists)
 //        {
-//            foreach (ITask task in tasks)
+//            foreach (Task taskList in taskLists)
 //            {
 
-//                containerElement.Add(new XElement("Task",
-//                    new XAttribute("Title", task.Title),
-//                    new XAttribute("Priority", task.Priority),
-//                    new XAttribute("Completed", task.Completed.ToString()),
-//                    new XAttribute("DateCreated", task.DateCreated.ToString())
+//                containerElement.Add(new XElement("TaskList",
+//                    new XAttribute("Title", taskList.Title),
+//                    new XAttribute("DateCreated", taskList.DateCreated.ToString())
 //                ));
 //            }
 //        }
