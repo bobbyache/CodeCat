@@ -13,6 +13,7 @@ namespace CygSoft.CodeCat.TaskListing
     public class Task : ICategorizedListItem, INotifyPropertyChanged, ITask
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler FilterChanged;
 
         private string filter;
         public string Filter
@@ -20,8 +21,12 @@ namespace CygSoft.CodeCat.TaskListing
             get { return filter; }
             set
             {
-                filter = value ?? string.Empty;
-                Notify();
+                if (filter != (value ?? string.Empty))
+                {
+                    filter = value ?? string.Empty;
+                    Notify();
+                    FilterChanged?.Invoke(this, new EventArgs());
+                }
             }
         }
 
@@ -32,8 +37,11 @@ namespace CygSoft.CodeCat.TaskListing
             get { return this.title; }
             set
             {
-                title = value;
-                Notify();
+                if (title != value)
+                {
+                    title = value;
+                    Notify();
+                }
             }
         }
 
@@ -44,8 +52,11 @@ namespace CygSoft.CodeCat.TaskListing
             get { return completed; }
             set
             {
-                completed = value;
-                Notify();
+                if (completed != value)
+                {
+                    completed = value;
+                    Notify();
+                }
             }
         }
 
@@ -56,8 +67,11 @@ namespace CygSoft.CodeCat.TaskListing
             get { return priority; }
             set
             {
-                priority = value;
-                Notify();
+                if (priority != value)
+                {
+                    priority = value;
+                    Notify();
+                }
             }
         }
 

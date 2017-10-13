@@ -14,8 +14,10 @@ namespace CygSoft.CodeCat.TaskListing
 {
     public class TaskList : Infrastructure.ITaskList
     {
+        public event EventHandler FiltersChanged;
+
+        private TaskCollection<ITask> tasks = new TaskCollection<ITask>();
         private ITaskListRepository repository;
-        public event EventHandler Modified;
 
         public TaskList(ITaskListRepository repository)
         {
@@ -36,48 +38,26 @@ namespace CygSoft.CodeCat.TaskListing
         }
 
         public static string[] Categories { get { return Enum.GetNames(typeof(TaskPriority)); } }
-        //public static string[] Categories { get { return new string[] { "Today", "High", "Medium", "Low" }; } }
 
-        public string[] Filters { get { return tasks.Select(t => t.Filter).Distinct().OrderBy(t => t).ToArray(); } }
+        public string[] Filters
+        {
+            get
+            {
+                List<string> filters = new List<string>();
+                filters.Add(string.Empty);
+                return filters.Union(tasks.Select(t => t.Filter)).Distinct().OrderBy(t => t).ToArray();
+            }
+        }
 
         public static TaskPriority PriorityFromText(string text)
         {
             return (TaskPriority)Enum.Parse(typeof(TaskPriority), text);
-            //switch (text)
-            //{
-            //    case "Today":
-            //        return TaskPriority.Today;
-            //    case "High":
-            //        return TaskPriority.High;
-            //    case "Medium":
-            //        return TaskPriority.Medium;
-            //    case "Low":
-            //        return TaskPriority.Low;
-            //    default:
-            //        return TaskPriority.Medium;
-            //}
         }
 
         public static string PriorityText(TaskPriority priority)
         {
             return priority.ToString();
-
-            //if (priority == TaskPriority.Today)
-            //    return "Today";
-
-            //if (priority == TaskPriority.High)
-            //    return "High";
-
-            //if (priority == TaskPriority.Medium)
-            //    return "Medium";
-
-            //if (priority == TaskPriority.Low)
-            //    return "Low";
-
-            //return null;
-        }
-
-        private TrulyObservableCollection<ITask> tasks = new TrulyObservableCollection<ITask>();
+        }        
 
         public ITask[] GetTasks(string filter = null)
         {
@@ -103,6 +83,7 @@ namespace CygSoft.CodeCat.TaskListing
         public void AddTask(ITask task)
         {
             tasks.Add(task);
+            Tasks_FilterChanged(task, new EventArgs());
         }
 
         public void DeleteTasks(ITask[] tasks)
@@ -115,8 +96,15 @@ namespace CygSoft.CodeCat.TaskListing
 
         public void Load()
         {
-            tasks = new TrulyObservableCollection<ITask>(repository.GetTasks());
-            tasks.CollectionChanged += (s, e) => Modified?.Invoke(this, new EventArgs());
+            if (tasks != null)
+                tasks.FilterChanged -= Tasks_FilterChanged;
+            tasks = new TaskCollection<ITask>(repository.GetTasks());
+            tasks.FilterChanged += Tasks_FilterChanged;
+        }
+
+        private void Tasks_FilterChanged(object sender, EventArgs e)
+        {
+            FiltersChanged?.Invoke(sender, new EventArgs());
         }
 
         public void Save()

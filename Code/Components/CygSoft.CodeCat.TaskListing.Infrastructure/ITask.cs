@@ -19,5 +19,7 @@ namespace CygSoft.CodeCat.TaskListing.Infrastructure
         TaskPriority Priority { get; set; }
         string Title { get; set; }
         string Filter { get; set; }
+
+        event EventHandler FilterChanged;
     }
 }

@@ -42,8 +42,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                 throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");
 
             this.application = application;
-
-            this.application.TasksChanged += (s, e) => RefreshTaskFilters();
+            this.application.TaskFiltersChanged += (s, e) => RefreshTaskFilters();
 
             listView.MouseClick += listView_MouseClick;
             
@@ -61,12 +60,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private void RefreshTaskFilters()
         {
+            System.Diagnostics.Debug.WriteLine("Task Filters Refreshed");
             string selected = cboFilter.Text ?? string.Empty;
             cboFilter.Items.Clear();
 
             cboFilter.Items.AddRange(application.GetTaskFilters());
-            cboFilter.Text = selected;
-            cboFilter.SelectedIndex = 0;
+            int index = cboFilter.FindStringExact(selected);
+
+            if (index >= 0)
+                cboFilter.SelectedIndex = index;
+            else
+                cboFilter.SelectedIndex = 0;
         }
 
         private void mnuPriority_DropDownOpening(object sender, EventArgs e)
@@ -119,7 +123,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             }
         }
 
-
         private void FormatTaskItem(ListViewItem item)
         {
             bool isCompleted = item.Checked;
@@ -144,8 +147,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             ListViewItem listItem = new ListViewItem();
 
-            //listItem.Name = item.Id;
-            //listItem.ImageKey = item.FileExtension;
             listItem.Checked = item.Completed ? true : false;
             FormatTaskItem(listItem);
             listItem.Tag = item;
@@ -168,8 +169,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             {
                 application.AddTask(task);
                 application.SaveTasks();
-                //if (task.Filter == cboFilter.Text || cboFilter.Text == string.Empty)
-                //    CreateListviewItem(listView, task, true);
                 DisplayStatusInformation();
             }
         }

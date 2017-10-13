@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.Domain
 {
     public class AppFacade
     {
-        public event EventHandler TasksChanged;
+        public event EventHandler TaskFiltersChanged;
 
         private SyntaxRepository syntaxRepository;
         private CodeLibrary codeLibrary;
@@ -94,12 +94,25 @@ namespace CygSoft.CodeCat.Domain
         public void Open(string filePath, Version currentVersion)
         {
             project.Open(filePath, currentVersion);
-            this.taskList = new TaskList(new TaskListRepository(project.TaskFilePath));
+            InitializeTasks();
             this.categoryHierarchy.LoadProject(project.CategoryFilePath);
 
             this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
             this.qikLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
             this.topicLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
+        }
+
+        private void InitializeTasks()
+        {
+            if (this.taskList != null)
+                this.taskList.FiltersChanged -= TaskList_FiltersChanged;
+            this.taskList = new TaskList(new TaskListRepository(project.TaskFilePath));
+            this.taskList.FiltersChanged += TaskList_FiltersChanged;
+        }
+
+        private void TaskList_FiltersChanged(object sender, EventArgs e)
+        {
+            TaskFiltersChanged?.Invoke(sender, new EventArgs());
         }
 
         public void Create(string filePath, Version currentVersion)
@@ -316,16 +329,12 @@ namespace CygSoft.CodeCat.Domain
         public void LoadTasks()
         {
             taskList.Load();
-            taskList.Modified += (s, e) => { TasksChanged?.Invoke(this, new EventArgs()); };
         }
 
 
         
         public string[] GetTaskFilters()
         {
-            //if (taskList.Filters.Length > 0 )
-            //    return taskList.Filters;
-            //return null;
             return taskList.Filters;
         }
 

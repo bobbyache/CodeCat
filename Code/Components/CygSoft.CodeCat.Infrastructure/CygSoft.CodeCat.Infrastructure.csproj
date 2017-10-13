@@ -44,7 +44,6 @@
     <Compile Include="ICategorizedListItem.cs" />
     <Compile Include="ITitledEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrulyObservableCollection.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
