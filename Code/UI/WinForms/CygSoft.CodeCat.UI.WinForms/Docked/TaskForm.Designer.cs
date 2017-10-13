@@ -50,6 +50,8 @@
             this.mnuEditTask = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuDeleteTask = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cboFilter = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.contextMenu.SuspendLayout();
@@ -58,9 +60,11 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1,
             this.btnNewTask,
+            this.btnEditTask,
             this.btnDeleteTask,
-            this.btnEditTask});
+            this.cboFilter});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(382, 25);
@@ -77,18 +81,20 @@
             // 
             // btnDeleteTask
             // 
+            this.btnDeleteTask.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnDeleteTask.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteTask.Image")));
             this.btnDeleteTask.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDeleteTask.Name = "btnDeleteTask";
-            this.btnDeleteTask.Size = new System.Drawing.Size(86, 22);
+            this.btnDeleteTask.Size = new System.Drawing.Size(23, 22);
             this.btnDeleteTask.Text = "Delete Task";
             // 
             // btnEditTask
             // 
+            this.btnEditTask.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnEditTask.Image = ((System.Drawing.Image)(resources.GetObject("btnEditTask.Image")));
             this.btnEditTask.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditTask.Name = "btnEditTask";
-            this.btnEditTask.Size = new System.Drawing.Size(73, 22);
+            this.btnEditTask.Size = new System.Drawing.Size(23, 22);
             this.btnEditTask.Text = "Edit Task";
             // 
             // statusStrip1
@@ -149,7 +155,7 @@
             this.toolStripMenuItem2,
             this.mnuDeleteTask});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(153, 126);
+            this.contextMenu.Size = new System.Drawing.Size(113, 104);
             // 
             // mnuPriority
             // 
@@ -158,54 +164,64 @@
             this.mnuPriorityMedium,
             this.mnuPriorityLow});
             this.mnuPriority.Name = "mnuPriority";
-            this.mnuPriority.Size = new System.Drawing.Size(152, 22);
+            this.mnuPriority.Size = new System.Drawing.Size(112, 22);
             this.mnuPriority.Text = "Priority";
             // 
             // mnuPriorityHigh
             // 
             this.mnuPriorityHigh.Name = "mnuPriorityHigh";
-            this.mnuPriorityHigh.Size = new System.Drawing.Size(152, 22);
+            this.mnuPriorityHigh.Size = new System.Drawing.Size(119, 22);
             this.mnuPriorityHigh.Text = "High";
             // 
             // mnuPriorityMedium
             // 
             this.mnuPriorityMedium.Name = "mnuPriorityMedium";
-            this.mnuPriorityMedium.Size = new System.Drawing.Size(152, 22);
+            this.mnuPriorityMedium.Size = new System.Drawing.Size(119, 22);
             this.mnuPriorityMedium.Text = "Medium";
             // 
             // mnuPriorityLow
             // 
             this.mnuPriorityLow.Name = "mnuPriorityLow";
-            this.mnuPriorityLow.Size = new System.Drawing.Size(152, 22);
+            this.mnuPriorityLow.Size = new System.Drawing.Size(119, 22);
             this.mnuPriorityLow.Text = "Low";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 6);
             // 
             // mnuNewTask
             // 
             this.mnuNewTask.Name = "mnuNewTask";
-            this.mnuNewTask.Size = new System.Drawing.Size(152, 22);
+            this.mnuNewTask.Size = new System.Drawing.Size(112, 22);
             this.mnuNewTask.Text = "New";
             // 
             // mnuEditTask
             // 
             this.mnuEditTask.Name = "mnuEditTask";
-            this.mnuEditTask.Size = new System.Drawing.Size(152, 22);
+            this.mnuEditTask.Size = new System.Drawing.Size(112, 22);
             this.mnuEditTask.Text = "Edit";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(109, 6);
             // 
             // mnuDeleteTask
             // 
             this.mnuDeleteTask.Name = "mnuDeleteTask";
-            this.mnuDeleteTask.Size = new System.Drawing.Size(152, 22);
+            this.mnuDeleteTask.Size = new System.Drawing.Size(112, 22);
             this.mnuDeleteTask.Text = "Delete";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // cboFilter
+            // 
+            this.cboFilter.Name = "cboFilter";
+            this.cboFilter.Size = new System.Drawing.Size(121, 25);
             // 
             // TaskForm
             // 
@@ -250,5 +266,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuEditTask;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem mnuDeleteTask;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripComboBox cboFilter;
     }
 }

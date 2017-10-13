@@ -27,12 +27,14 @@ namespace CygSoft.CodeCat.TaskListing
             return new Task("New Task", TaskPriority.Medium);
         }
 
-        public static string[] Categories { get { return new string[] { "High", "Medium", "Low" }; } }
+        public static string[] Categories { get { return new string[] { "Today", "High", "Medium", "Low" }; } }
 
         public static TaskPriority PriorityFromText(string text)
         {
             switch (text)
             {
+                case "Today":
+                    return TaskPriority.Today;
                 case "High":
                     return TaskPriority.High;
                 case "Medium":
