@@ -21,8 +21,9 @@ namespace CygSoft.CodeCat.PluginTests
         {
             InitializeComponent();
 
-            mnuSqlToCsString.Click += PluginMenu_Click;
-            mnuXessManual.Click += PluginMenu_Click;
+            foreach (ToolStripMenuItem item in mnuPlugins.DropDownItems)
+                item.Click += PluginMenu_Click;
+
         }
 
         private void PluginMenu_Click(object sender, EventArgs e)
@@ -34,15 +35,19 @@ namespace CygSoft.CodeCat.PluginTests
             switch (menuName)
             {
                 case "mnuXessManual":
-                    if (!pluginsDictionary.ContainsKey(menuName))
-                        pluginsDictionary.Add(menuName, new ManualXessGenerator());
-                    userControl = pluginsDictionary[menuName];
+                    userControl = CreatePluginControl<ManualXessGenerator>(menuName);
                     break;
 
                 case "mnuSqlToCsString":
-                    if (!pluginsDictionary.ContainsKey(menuName))
-                        pluginsDictionary.Add(menuName, new SqlToCSharpStringGenerator());
-                    userControl = pluginsDictionary[menuName];
+                    userControl = CreatePluginControl<SqlToCSharpStringGenerator>(menuName);
+                    break;
+
+                case "mnuXmlFormatter":
+                    userControl = CreatePluginControl<Plugins.XmlFormatter.Formatter>(menuName);
+                    break;
+
+                case "mnuTSqlFormatter":
+                    userControl = CreatePluginControl<Plugins.TSqlFormatter.Formatter>(menuName);
                     break;
             }
 
@@ -52,6 +57,16 @@ namespace CygSoft.CodeCat.PluginTests
                 UncheckMenus();
                 CheckMenu(menuItem);
             }
+        }
+
+        private UserControl CreatePluginControl<T>(string id) where T : IGeneratorPlugin, new()
+        {
+            UserControl userControl;
+            if (!pluginsDictionary.ContainsKey(id))
+                pluginsDictionary.Add(id, (new T()) as UserControl);
+            userControl = pluginsDictionary[id];
+
+            return userControl;
         }
 
         private void UncheckMenus()

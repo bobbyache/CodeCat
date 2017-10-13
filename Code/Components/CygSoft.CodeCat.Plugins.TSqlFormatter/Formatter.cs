@@ -11,7 +11,7 @@ using CygSoft.CodeCat.Plugins.Generators;
 using System.IO;
 using System.Reflection;
 
-namespace CygSoft.CodeCat.Plugins.XmlFormatter
+namespace CygSoft.CodeCat.Plugins.TSqlFormatter
 {
     public partial class Formatter: UserControl, IGeneratorPlugin
     {
@@ -26,7 +26,7 @@ namespace CygSoft.CodeCat.Plugins.XmlFormatter
                 {
                     try
                     {
-                        fromTextbox.Document.Text = System.Xml.Linq.XElement.Parse(Clipboard.GetText()).ToString();
+                        fromTextbox.Document.Text = FormatText(Clipboard.GetText());
                         if (mnuAutoCopyResult.Checked)
                         {
                             Clipboard.Clear();
@@ -42,10 +42,16 @@ namespace CygSoft.CodeCat.Plugins.XmlFormatter
             };
         }
 
+        private string FormatText(string unformattedSql)
+        {
+            SqlFormatter sqlFormater = new SqlFormatter();
+            return sqlFormater.Format(unformattedSql, sqlFormater.CurrentOptions);
+        }
+
         private void ApplySyntaxColoring()
         {
-            if (File.Exists(GetSyntaxFilePath("XML.syn")))
-                fromDocument.SyntaxFile = GetSyntaxFilePath("XML.syn");
+            if (File.Exists(GetSyntaxFilePath("SQLServer2K_SQL.syn")))
+                fromDocument.SyntaxFile = GetSyntaxFilePath("SQLServer2K_SQL.syn");
         }
 
         private string GetSyntaxFilePath(string syntaxFile)
@@ -57,7 +63,7 @@ namespace CygSoft.CodeCat.Plugins.XmlFormatter
         {
             get
             {
-                return "XmlFormatter";
+                return "SqlFormatter";
             }
         }
 
@@ -65,7 +71,7 @@ namespace CygSoft.CodeCat.Plugins.XmlFormatter
         {
             get
             {
-                return "Format Xml";
+                return "Format T-SQL";
             }
         }
 
