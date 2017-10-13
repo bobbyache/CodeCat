@@ -46,6 +46,7 @@ namespace CygSoft.CodeCat.TaskListing
             {
                 Task item = new Task(
                         (string)element.Attribute("Title"),
+                        (string)element?.Attribute("Filter"),
                         TaskList.PriorityFromText((string)element.Attribute("Priority")),
                         bool.Parse((string)element.Attribute("Completed")),
                         DateTime.Parse((string)element.Attribute("DateCreated"))
@@ -80,6 +81,7 @@ namespace CygSoft.CodeCat.TaskListing
 
                 containerElement.Add(new XElement("Task",
                     new XAttribute("Title", task.Title),
+                    new XAttribute("Filter", task.Filter ?? ""),
                     new XAttribute("Priority", task.Priority),
                     new XAttribute("Completed", task.Completed.ToString()),
                     new XAttribute("DateCreated", task.DateCreated.ToString())

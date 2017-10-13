@@ -5,6 +5,7 @@ namespace CygSoft.CodeCat.TaskListing.Infrastructure
 {
     public enum TaskPriority
     {
+        Today,
         High,
         Medium,
         Low
@@ -16,5 +17,6 @@ namespace CygSoft.CodeCat.TaskListing.Infrastructure
         DateTime DateCreated { get; }
         TaskPriority Priority { get; set; }
         string Title { get; set; }
+        string Filter { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace CygSoft.CodeCat.TaskListing
 {
     public class Task : ICategorizedListItem, ITask
     {
+        public string Filter { get; set; }
         public string Title { get; set; }
         public DateTime DateCreated { get; private set; }
         public bool Completed { get; set; }
@@ -23,9 +24,10 @@ namespace CygSoft.CodeCat.TaskListing
             this.DateCreated = DateTime.Now;
         }
 
-        public Task(string title, TaskPriority priority, bool completed, DateTime dateCreated)
+        public Task(string title, string filter, TaskPriority priority, bool completed, DateTime dateCreated)
         {
             this.Title = title;
+            this.Filter = filter;
             this.Completed = completed;
             this.Priority = priority;
             this.DateCreated = dateCreated;
