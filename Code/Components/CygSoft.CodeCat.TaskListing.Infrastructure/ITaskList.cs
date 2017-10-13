@@ -7,7 +7,8 @@ namespace CygSoft.CodeCat.TaskListing.Infrastructure
         int NoOfCompletedTasks { get; }
         int NoOfTasks { get; }
         double PercentageOfTasksCompleted { get; }
-        ITask[] Tasks { get; }
+
+        ITask[] GetTasks(string filter = null);
 
         void AddTask(ITask task);
         void DeleteTasks(ITask[] tasks);

@@ -32,7 +32,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             cboPriority.Sorted = true;
             cboPriority.SelectedItem = task.Category;
 
-
+            InitializeFilterCombo(application.GetTaskFilters());
 
             this.Shown += TaskEditDialog_Shown;
             btnOk.Click += btnOk_Click;
@@ -57,6 +57,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             {
                 task.Title = txtTitle.Text;
                 task.Priority = application.TaskPriorityFromText(cboPriority.Text);
+                task.Filter = string.IsNullOrEmpty(cboFilter.Text) ? null : cboFilter.Text.ToString();
                 DialogResult = DialogResult.OK;
             }
         }
@@ -69,6 +70,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
                 return false;
             }
             return true;
+        }
+
+        private void InitializeFilterCombo(string[] filters)
+        {
+            cboFilter.Items.AddRange(filters);
+            cboFilter.Sorted = true;
+            cboFilter.SelectedItem = string.IsNullOrEmpty(task.Filter) ? "Unknown" : task.Filter;
         }
     }
 }

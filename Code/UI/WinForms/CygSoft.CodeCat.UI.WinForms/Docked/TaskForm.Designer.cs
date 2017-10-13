@@ -60,11 +60,11 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cboFilter,
             this.toolStripSeparator1,
             this.btnNewTask,
             this.btnEditTask,
-            this.btnDeleteTask,
-            this.cboFilter});
+            this.btnDeleteTask});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(382, 25);
@@ -128,6 +128,7 @@
             this.colTitle,
             this.colDateCreated});
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(0, 25);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(382, 435);
@@ -220,8 +221,10 @@
             // 
             // cboFilter
             // 
+            this.cboFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFilter.Name = "cboFilter";
-            this.cboFilter.Size = new System.Drawing.Size(121, 25);
+            this.cboFilter.Size = new System.Drawing.Size(200, 25);
+            this.cboFilter.SelectedIndexChanged += new System.EventHandler(this.cboFilter_SelectedIndexChanged);
             // 
             // TaskForm
             // 

@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Infrastructure;
 using System;
+using System.ComponentModel;
 
 namespace CygSoft.CodeCat.TaskListing.Infrastructure
 {
@@ -11,7 +12,7 @@ namespace CygSoft.CodeCat.TaskListing.Infrastructure
         Low
     }
 
-    public interface ITask : ICategorizedListItem
+    public interface ITask : ICategorizedListItem, INotifyPropertyChanged
     {
         bool Completed { get; set; }
         DateTime DateCreated { get; }

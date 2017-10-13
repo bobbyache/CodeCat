@@ -21,6 +21,8 @@ namespace CygSoft.CodeCat.Domain
 {
     public class AppFacade
     {
+        public event EventHandler TasksChanged;
+
         private SyntaxRepository syntaxRepository;
         private CodeLibrary codeLibrary;
         private QikTemplateLibrary qikLibrary;
@@ -314,11 +316,22 @@ namespace CygSoft.CodeCat.Domain
         public void LoadTasks()
         {
             taskList.Load();
+            taskList.Modified += (s, e) => { TasksChanged?.Invoke(this, new EventArgs()); };
         }
 
-        public ITask[] CurrrentTasks
+
+        
+        public string[] GetTaskFilters()
         {
-            get { return taskList.Tasks; }
+            //if (taskList.Filters.Length > 0 )
+            //    return taskList.Filters;
+            //return null;
+            return taskList.Filters;
+        }
+
+        public ITask[] GetTasks(string filter = null)
+        {
+            return taskList.GetTasks(filter);
         }
 
         public string[] TaskPriorities

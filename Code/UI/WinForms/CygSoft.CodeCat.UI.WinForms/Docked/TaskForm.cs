@@ -43,6 +43,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
             this.application = application;
 
+            this.application.TasksChanged += (s, e) => RefreshTaskFilters();
+
             listView.MouseClick += listView_MouseClick;
             
             btnNewTask.Click += (s,e) => NewTask();
@@ -57,11 +59,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             mnuPriorityLow.Click += (s, e) => ChangePriority(TaskPriority.Low);
         }
 
+        private void RefreshTaskFilters()
+        {
+            string selected = cboFilter.Text ?? string.Empty;
+            cboFilter.Items.Clear();
+
+            cboFilter.Items.AddRange(application.GetTaskFilters());
+            cboFilter.Text = selected;
+            cboFilter.SelectedIndex = 0;
+        }
+
         private void mnuPriority_DropDownOpening(object sender, EventArgs e)
         {
-            ITask task = Gui.GroupedListView.SelectedItem<ITask>(listView);
-            if (task != null)
-                CheckPriorityMenuItem(task.Priority);
+
         }
 
         private void listView_MouseClick(object sender, MouseEventArgs e)
@@ -83,6 +93,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         public void LoadTasks()
         {
             application.LoadTasks();
+            RefreshTaskFilters();
             LoadTaskList();
 
             btnNewTask.Enabled = true;
@@ -124,7 +135,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         private void LoadTaskList()
         {
             listView.ItemCheck -= ListView_ItemCheck;
-            Gui.GroupedListView.LoadAllItems(listView, application.CurrrentTasks, application.TaskPriorities, CreateListviewItem, true);
+            Gui.GroupedListView.LoadAllItems(listView, application.GetTasks(cboFilter.Text), application.TaskPriorities, CreateListviewItem, true);
             listView.ItemCheck += ListView_ItemCheck;
             DisplayStatusInformation();
         }
@@ -157,7 +168,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             {
                 application.AddTask(task);
                 application.SaveTasks();
-                CreateListviewItem(listView, task, true);
+                //if (task.Filter == cboFilter.Text || cboFilter.Text == string.Empty)
+                //    CreateListviewItem(listView, task, true);
                 DisplayStatusInformation();
             }
         }
@@ -217,6 +229,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
                 listView.SelectedItems[0].Group = listView.Groups[task.Category];
                 DisplayStatusInformation();
             }
+        }
+
+        private void cboFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadTaskList();
         }
     }
 }
