@@ -33,9 +33,10 @@
             this.mnuXessManual = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSqlToCsString = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuXmlFormatter = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTSqlFormatter = new System.Windows.Forms.ToolStripMenuItem();
             this.txtCurrentPlugin = new System.Windows.Forms.ToolStripTextBox();
             this.pluginPanel = new System.Windows.Forms.Panel();
-            this.mnuTSqlFormatter = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuToSingleLine = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,8 +48,7 @@
             this.txtCurrentPlugin});
             this.pluginMenu.Location = new System.Drawing.Point(0, 0);
             this.pluginMenu.Name = "pluginMenu";
-            this.pluginMenu.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.pluginMenu.Size = new System.Drawing.Size(853, 31);
+            this.pluginMenu.Size = new System.Drawing.Size(640, 27);
             this.pluginMenu.TabIndex = 0;
             this.pluginMenu.Text = "menuStrip1";
             // 
@@ -58,61 +58,66 @@
             this.mnuXessManual,
             this.mnuSqlToCsString,
             this.mnuXmlFormatter,
-            this.mnuTSqlFormatter});
+            this.mnuTSqlFormatter,
+            this.mnuToSingleLine});
             this.mnuPlugins.Name = "mnuPlugins";
-            this.mnuPlugins.Size = new System.Drawing.Size(68, 27);
+            this.mnuPlugins.Size = new System.Drawing.Size(58, 23);
             this.mnuPlugins.Text = "Plugins";
             // 
             // mnuXessManual
             // 
             this.mnuXessManual.Name = "mnuXessManual";
-            this.mnuXessManual.Size = new System.Drawing.Size(277, 26);
+            this.mnuXessManual.Size = new System.Drawing.Size(227, 22);
             this.mnuXessManual.Text = "Xess Manual Generator";
             // 
             // mnuSqlToCsString
             // 
             this.mnuSqlToCsString.Name = "mnuSqlToCsString";
-            this.mnuSqlToCsString.Size = new System.Drawing.Size(277, 26);
+            this.mnuSqlToCsString.Size = new System.Drawing.Size(227, 22);
             this.mnuSqlToCsString.Text = "Unformatted Sql to C# String";
             // 
             // mnuXmlFormatter
             // 
             this.mnuXmlFormatter.Name = "mnuXmlFormatter";
-            this.mnuXmlFormatter.Size = new System.Drawing.Size(277, 26);
+            this.mnuXmlFormatter.Size = new System.Drawing.Size(227, 22);
             this.mnuXmlFormatter.Text = "Xml Formatter";
+            // 
+            // mnuTSqlFormatter
+            // 
+            this.mnuTSqlFormatter.Name = "mnuTSqlFormatter";
+            this.mnuTSqlFormatter.Size = new System.Drawing.Size(227, 22);
+            this.mnuTSqlFormatter.Text = "T-SQL Formatter";
             // 
             // txtCurrentPlugin
             // 
             this.txtCurrentPlugin.Enabled = false;
             this.txtCurrentPlugin.Name = "txtCurrentPlugin";
-            this.txtCurrentPlugin.Size = new System.Drawing.Size(532, 27);
+            this.txtCurrentPlugin.Size = new System.Drawing.Size(400, 23);
             // 
             // pluginPanel
             // 
             this.pluginPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pluginPanel.Location = new System.Drawing.Point(16, 33);
-            this.pluginPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.pluginPanel.Location = new System.Drawing.Point(12, 27);
             this.pluginPanel.Name = "pluginPanel";
-            this.pluginPanel.Size = new System.Drawing.Size(821, 410);
+            this.pluginPanel.Size = new System.Drawing.Size(616, 333);
             this.pluginPanel.TabIndex = 1;
             // 
-            // mnuTSqlFormatter
+            // mnuToSingleLine
             // 
-            this.mnuTSqlFormatter.Name = "mnuTSqlFormatter";
-            this.mnuTSqlFormatter.Size = new System.Drawing.Size(277, 26);
-            this.mnuTSqlFormatter.Text = "T-SQL Formatter";
+            this.mnuToSingleLine.Name = "mnuToSingleLine";
+            this.mnuToSingleLine.Size = new System.Drawing.Size(227, 22);
+            this.mnuToSingleLine.Text = "To Single Line";
             // 
             // TestBench
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(853, 458);
+            this.ClientSize = new System.Drawing.Size(640, 372);
             this.Controls.Add(this.pluginPanel);
             this.Controls.Add(this.pluginMenu);
             this.MainMenuStrip = this.pluginMenu;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TestBench";
             this.Text = "Plugins Test Bench";
             this.pluginMenu.ResumeLayout(false);
@@ -132,6 +137,7 @@
         private System.Windows.Forms.ToolStripTextBox txtCurrentPlugin;
         private System.Windows.Forms.ToolStripMenuItem mnuXmlFormatter;
         private System.Windows.Forms.ToolStripMenuItem mnuTSqlFormatter;
+        private System.Windows.Forms.ToolStripMenuItem mnuToSingleLine;
     }
 }
 

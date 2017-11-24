@@ -49,6 +49,10 @@ namespace CygSoft.CodeCat.PluginTests
                 case "mnuTSqlFormatter":
                     userControl = CreatePluginControl<Plugins.TSqlFormatter.Formatter>(menuName);
                     break;
+
+                case "mnuToSingleLine":
+                    userControl = CreatePluginControl<Plugins.ToSingleLine.ToSingleLineGenerator>(menuName);
+                    break;
             }
 
             if (userControl != null)
