@@ -61,7 +61,7 @@
                 <ProgressBar Value="50" Width="90" Height="16" />
             </StatusBarItem>
         </StatusBar>
-        <xcad:DockingManager Grid.Row="1" 
+        <xcad:DockingManager x:Name="DockManager" Grid.Row="1" 
                              AllowMixedOrientation="True"
                              BorderBrush="Black"
                              BorderThickness="1">

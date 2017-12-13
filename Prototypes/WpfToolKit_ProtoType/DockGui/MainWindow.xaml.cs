@@ -24,9 +24,27 @@ namespace DockGui
         public MainWindow()
         {
             InitializeComponent();
+            layoutRoot.ElementAdded += LayoutRoot_ElementAdded;
+            layoutRoot.ElementRemoved += LayoutRoot_ElementRemoved;
 
-            layoutRoot.ElementAdded += (s, e) => { AddEvent($"{(e.Element as LayoutDocument).Title} added"); };
-            layoutRoot.ElementRemoved += (s, e) => { AddEvent($"{(e.Element as LayoutDocument).Title} removed"); };
+            DockManager.DocumentClosing += (s, e) => AddEvent($"{e.Document.Title} closing");
+            DockManager.DocumentClosed += (s, e) => { };
+        }
+
+        private void LayoutRoot_ElementRemoved(object sender, LayoutElementEventArgs e)
+        {
+            if (e.Element is LayoutDocument)
+                AddEvent($"{(e.Element as LayoutDocument).Title} removed");
+        }
+
+        private void LayoutRoot_ElementAdded(object sender, LayoutElementEventArgs e)
+        {
+            if (e.Element is LayoutDocumentFloatingWindow)
+            {
+                //AddEvent($"{(e.Element as LayoutDocumentFloatingWindow).RootDocument.Title} added");
+            }
+            else if (e.Element is LayoutDocument)
+                AddEvent($"{(e.Element as LayoutDocument).Title} added");
         }
 
         private void AddEvent(string eventText)
