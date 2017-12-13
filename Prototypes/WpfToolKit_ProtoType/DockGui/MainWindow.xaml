@@ -19,6 +19,9 @@
                 <Separator />
                 <MenuItem Header="_Exit" />
             </MenuItem>
+            <MenuItem Header="_Document">
+                <MenuItem Header="_NewDocument" Click="MenuItem_Click" />
+            </MenuItem>
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
@@ -66,7 +69,7 @@
             <xcad:LayoutRoot x:Name="layoutRoot">
                 <xcad:LayoutPanel Orientation="Horizontal">
                     <xcad:LayoutDocumentPaneGroup>
-                        <xcad:LayoutDocumentPane>
+                        <xcad:LayoutDocumentPane x:Name="DocumentArea">
                             <xcad:LayoutDocument ContentId="document1" Title="Document 1">
                                 <local:TopicLayoutDocument />
                             </xcad:LayoutDocument>
@@ -74,11 +77,20 @@
                     </xcad:LayoutDocumentPaneGroup>
 
                     <xcad:LayoutAnchorablePane DockWidth="200">
+
+                        <xcad:LayoutAnchorable ContentId="events" Title="Events" CanHide="False" CanClose="False"
+                                            AutoHideWidth="240"
+                                         >
+                            <ListBox x:Name="EventsListBox">
+                            </ListBox>
+                        </xcad:LayoutAnchorable>
                         <xcad:LayoutAnchorable ContentId="properties" Title="Properties" CanHide="False" CanClose="False"
                                             AutoHideWidth="240"
                                          >
                             <xctk:PropertyGrid NameColumnWidth="110"></xctk:PropertyGrid>
                         </xcad:LayoutAnchorable>
+
+
                     </xcad:LayoutAnchorablePane>
                 </xcad:LayoutPanel>
 
