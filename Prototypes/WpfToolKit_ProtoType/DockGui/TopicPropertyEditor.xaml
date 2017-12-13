@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="DockGui.TopicPropertyEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DockGui"
+             mc:Ignorable="d" 
+             d:DesignHeight="26" d:DesignWidth="800">
+    <DockPanel LastChildFill="True">
+        <Label DockPanel.Dock="Left">Keywords</Label>
+        
+        <Button DockPanel.Dock="Right">Test</Button>
+        <Button DockPanel.Dock="Right">Test</Button>
+        <Button DockPanel.Dock="Right">Test</Button>
+        <ComboBox DockPanel.Dock="Right" MinWidth="200"></ComboBox>
+        <Label DockPanel.Dock="Right">Syntax</Label>
+
+        <Button DockPanel.Dock="Right">Test</Button>
+        <Button DockPanel.Dock="Right">Test</Button>
+        <Button DockPanel.Dock="Right">Test</Button>
+        <TextBox MinWidth="50"></TextBox>
+    </DockPanel>
+</UserControl>
