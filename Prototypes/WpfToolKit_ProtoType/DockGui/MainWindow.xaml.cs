@@ -27,14 +27,14 @@ namespace DockGui
             layoutRoot.ElementAdded += LayoutRoot_ElementAdded;
             layoutRoot.ElementRemoved += LayoutRoot_ElementRemoved;
 
-            DockManager.DocumentClosing += (s, e) => AddEvent($"{e.Document.Title} closing");
+            DockManager.DocumentClosing += (s, e) => AddEvent($"{e.Document.ContentId} closing");
             DockManager.DocumentClosed += (s, e) => { };
         }
 
         private void LayoutRoot_ElementRemoved(object sender, LayoutElementEventArgs e)
         {
             if (e.Element is LayoutDocument)
-                AddEvent($"{(e.Element as LayoutDocument).Title} removed");
+                AddEvent($"{(e.Element as LayoutDocument).ContentId} removed");
         }
 
         private void LayoutRoot_ElementAdded(object sender, LayoutElementEventArgs e)
@@ -45,8 +45,7 @@ namespace DockGui
             }
             else if (e.Element is LayoutDocument)
             {
-                AddEvent($"{(e.Element as LayoutDocument).Title} added");
-                (e.Element as LayoutDocument).IsSelected = true;
+                AddEvent($"{(e.Element as LayoutDocument).ContentId} added");
             }
         }
 
@@ -62,7 +61,9 @@ namespace DockGui
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            LayoutDocument document = new LayoutDocument() { Title = Guid.NewGuid().ToString() };
+            string id = Guid.NewGuid().ToString();
+
+            LayoutDocument document = new LayoutDocument() { ContentId = id, Title = $"Document: [{id}]", IsSelected = true };
             document.IsSelectedChanged += Document_IsSelectedChanged;
             document.IsActiveChanged += Document_IsActiveChanged;
             DocumentArea.Children.Add(document);
@@ -75,7 +76,7 @@ namespace DockGui
             LayoutDocument document = sender as LayoutDocument;
             if (document.IsActive)
             {
-                AddEvent($"{ document.Title} activated");
+                AddEvent($"{ document.ContentId} activated");
                 ActiveDocumentStatus.Text = layoutRoot.LastFocusedDocument.Title;
             }
         }
@@ -85,7 +86,7 @@ namespace DockGui
             LayoutDocument document = sender as LayoutDocument;
             if (document.IsSelected)
             {
-                AddEvent($"{ document.Title} selected");
+                AddEvent($"{ document.ContentId} selected");
                 ActiveDocumentStatus.Text = layoutRoot.LastFocusedDocument.Title;
             }
         }
