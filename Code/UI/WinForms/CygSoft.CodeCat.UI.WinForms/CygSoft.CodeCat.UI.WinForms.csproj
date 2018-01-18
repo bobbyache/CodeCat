@@ -675,6 +675,7 @@
   <PropertyGroup>
     <PreBuildEvent>xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Plugins.SqlExtraction\bin\debug\CygSoft.CodeCat.Plugins.SqlExtraction.dll $(TargetDir)Plugins
 xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Plugins.ManualXess\bin\debug\CygSoft.CodeCat.Plugins.ManualXess.dll $(TargetDir)Plugins
+xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Plugins.XmlFormatter\bin\debug\CygSoft.CodeCat.Plugins.XmlFormatter.dll $(TargetDir)Plugins
  xcopy /y $(SolutionDir)External\LinqBridge.dll $(TargetDir)Plugins
  xcopy /y $(SolutionDir)External\PoorMansTSqlFormatterLib.dll $(TargetDir)Plugins</PreBuildEvent>
   </PropertyGroup>
