@@ -23,7 +23,8 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine.Funcs
             string result = null;
             try
             {
-                result = Guid.NewGuid().ToString();
+                string txt = functionArguments[0].Execute(errorReport);
+                result = txt == "u" ? Guid.NewGuid().ToString().ToUpper() : Guid.NewGuid().ToString();
             }
             catch (Exception)
             {
