@@ -146,6 +146,16 @@ namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
             this.SnapshotDeleted?.Invoke(this, new EventArgs());
         }
 
+        protected override void OnDelete()
+        {
+            base.OnDelete();
+
+            var filePaths = fileVersions.Select(f => f.FilePath);
+            foreach (var filePath in filePaths)
+                File.Delete(filePath);
+            File.Delete(this.FilePath);
+        }
+
         public IFileVersion GetVersion(string versionId)
         {
             IFileVersion fileVersion = fileVersions.Where(s => s.Id == versionId).SingleOrDefault();

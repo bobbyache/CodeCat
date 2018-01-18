@@ -677,7 +677,9 @@
 xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Plugins.ManualXess\bin\debug\CygSoft.CodeCat.Plugins.ManualXess.dll $(TargetDir)Plugins
 xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Plugins.XmlFormatter\bin\debug\CygSoft.CodeCat.Plugins.XmlFormatter.dll $(TargetDir)Plugins
  xcopy /y $(SolutionDir)External\LinqBridge.dll $(TargetDir)Plugins
- xcopy /y $(SolutionDir)External\PoorMansTSqlFormatterLib.dll $(TargetDir)Plugins</PreBuildEvent>
+ xcopy /y $(SolutionDir)External\PoorMansTSqlFormatterLib.dll $(TargetDir)Plugins
+xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Qik.LanguageEngine\bin\Debug\Antlr4.Runtime.net45.dll $(TargetDir)
+xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Qik.LanguageEngine\bin\Debug\Antlr4.Runtime.net45.xml $(TargetDir)</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

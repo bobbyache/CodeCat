@@ -322,19 +322,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.projectClosing = false;
 
             this.application.Create(filePath, ConfigSettings.ProjectFileVersion);
-            this.Text = WindowCaption();
-            searchForm.KeywordSearchText = string.Empty;
-            searchForm.ExecuteSearch();
-            recentProjectMenu.Notify(filePath);
-            recentProjectMenu.CurrentlyOpenedFile = filePath;
 
-            ConfigSettings.LastProject = filePath;
-            registrySettings.InitialDirectory = Path.GetDirectoryName(filePath);
-
-            CreateWorkItemFormIfNone();
-            EnableControls();
-
-            searchForm.Activate();
+            OpenProject(filePath);
         }
 
         private void EnableControls()
