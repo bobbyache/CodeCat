@@ -145,6 +145,10 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine.Antlr
                         HtmlDecodeFunction htmlDecodeFunction = new HtmlDecodeFunction(funcInfo, scopeTable, functionArguments);
                         func = htmlDecodeFunction;
                         break;
+                    case "guid":
+                        GuidFunction guidFunction = new GuidFunction(funcInfo, scopeTable, functionArguments);
+                        func = guidFunction;
+                        break;
 
                     default:
                         throw new NotSupportedException(string.Format("Function \"{0}\" is not supported in this context.", funcIdentifier));

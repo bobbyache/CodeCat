@@ -66,6 +66,7 @@
     <Compile Include="Funcs\DoubleQuoteFunction.cs" />
     <Compile Include="Funcs\FloatFunction.cs" />
     <Compile Include="Funcs\FuncInfo.cs" />
+    <Compile Include="Funcs\GuidFunction.cs" />
     <Compile Include="Funcs\HtmlDecodeFunction.cs" />
     <Compile Include="Funcs\HtmlEncodeFunction.cs" />
     <Compile Include="Funcs\IfDecissionFunction.cs" />
