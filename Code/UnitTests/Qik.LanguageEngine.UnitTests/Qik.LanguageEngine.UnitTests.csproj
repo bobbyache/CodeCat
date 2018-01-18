@@ -57,6 +57,7 @@
     <Compile Include="Functions\ConcatenateFunctionTests.cs" />
     <Compile Include="Functions\CurrentDateFunctionTests.cs" />
     <Compile Include="Functions\DoubleQuotedFunctionTests.cs" />
+    <Compile Include="Functions\GuidFunctionTests.cs" />
     <Compile Include="Functions\IfDecisionFunction.cs" />
     <Compile Include="Functions\LowerCaseFunctionTests.cs" />
     <Compile Include="Functions\ProperCaseFunctionTests.cs" />
