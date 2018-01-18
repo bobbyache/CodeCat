@@ -30,15 +30,19 @@
         {
             this.pluginMenu = new System.Windows.Forms.MenuStrip();
             this.mnuPlugins = new System.Windows.Forms.ToolStripMenuItem();
-            this.pluginPanel = new System.Windows.Forms.Panel();
             this.mnuXessManual = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSqlToCsString = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuXmlFormatter = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTSqlFormatter = new System.Windows.Forms.ToolStripMenuItem();
             this.txtCurrentPlugin = new System.Windows.Forms.ToolStripTextBox();
+            this.pluginPanel = new System.Windows.Forms.Panel();
+            this.mnuToSingleLine = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // pluginMenu
             // 
+            this.pluginMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.pluginMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuPlugins,
             this.txtCurrentPlugin});
@@ -52,20 +56,13 @@
             // 
             this.mnuPlugins.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuXessManual,
-            this.mnuSqlToCsString});
+            this.mnuSqlToCsString,
+            this.mnuXmlFormatter,
+            this.mnuTSqlFormatter,
+            this.mnuToSingleLine});
             this.mnuPlugins.Name = "mnuPlugins";
             this.mnuPlugins.Size = new System.Drawing.Size(58, 23);
             this.mnuPlugins.Text = "Plugins";
-            // 
-            // pluginPanel
-            // 
-            this.pluginPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pluginPanel.Location = new System.Drawing.Point(12, 27);
-            this.pluginPanel.Name = "pluginPanel";
-            this.pluginPanel.Size = new System.Drawing.Size(616, 333);
-            this.pluginPanel.TabIndex = 1;
             // 
             // mnuXessManual
             // 
@@ -79,11 +76,39 @@
             this.mnuSqlToCsString.Size = new System.Drawing.Size(227, 22);
             this.mnuSqlToCsString.Text = "Unformatted Sql to C# String";
             // 
+            // mnuXmlFormatter
+            // 
+            this.mnuXmlFormatter.Name = "mnuXmlFormatter";
+            this.mnuXmlFormatter.Size = new System.Drawing.Size(227, 22);
+            this.mnuXmlFormatter.Text = "Xml Formatter";
+            // 
+            // mnuTSqlFormatter
+            // 
+            this.mnuTSqlFormatter.Name = "mnuTSqlFormatter";
+            this.mnuTSqlFormatter.Size = new System.Drawing.Size(227, 22);
+            this.mnuTSqlFormatter.Text = "T-SQL Formatter";
+            // 
             // txtCurrentPlugin
             // 
             this.txtCurrentPlugin.Enabled = false;
             this.txtCurrentPlugin.Name = "txtCurrentPlugin";
             this.txtCurrentPlugin.Size = new System.Drawing.Size(400, 23);
+            // 
+            // pluginPanel
+            // 
+            this.pluginPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pluginPanel.Location = new System.Drawing.Point(12, 27);
+            this.pluginPanel.Name = "pluginPanel";
+            this.pluginPanel.Size = new System.Drawing.Size(616, 333);
+            this.pluginPanel.TabIndex = 1;
+            // 
+            // mnuToSingleLine
+            // 
+            this.mnuToSingleLine.Name = "mnuToSingleLine";
+            this.mnuToSingleLine.Size = new System.Drawing.Size(227, 22);
+            this.mnuToSingleLine.Text = "To Single Line";
             // 
             // TestBench
             // 
@@ -110,6 +135,9 @@
         private System.Windows.Forms.ToolStripMenuItem mnuXessManual;
         private System.Windows.Forms.ToolStripMenuItem mnuSqlToCsString;
         private System.Windows.Forms.ToolStripTextBox txtCurrentPlugin;
+        private System.Windows.Forms.ToolStripMenuItem mnuXmlFormatter;
+        private System.Windows.Forms.ToolStripMenuItem mnuTSqlFormatter;
+        private System.Windows.Forms.ToolStripMenuItem mnuToSingleLine;
     }
 }
 
