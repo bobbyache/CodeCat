@@ -1,4 +1,4 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms.Controls
+﻿namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     partial class PdfDocumentControl
     {

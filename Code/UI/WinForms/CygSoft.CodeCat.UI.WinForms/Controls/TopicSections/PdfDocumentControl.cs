@@ -15,7 +15,7 @@ using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
 using PdfiumViewer;
 
-namespace CygSoft.CodeCat.UI.WinForms.Controls
+namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     // Try this: https://github.com/pvginkel/PdfiumViewer
 
@@ -43,9 +43,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void LoadIfExists()
         {
-
             if (topicSection.Exists)
+            {
                 pdfViewer1.Document = PdfDocument.Load(topicSection.FilePath);
+                ((IPdfViewerTopicSection)topicSection).Document = pdfViewer1.Document;
+            }
         }
 
         private void btnImport_Click(object sender, EventArgs e)
@@ -79,5 +81,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             // hack to reload the control when it loses itself when changing panes.
             LoadIfExists();
         }
+
+        
     }
 }

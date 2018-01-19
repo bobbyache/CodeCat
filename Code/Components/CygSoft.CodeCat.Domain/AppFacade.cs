@@ -85,8 +85,7 @@ namespace CygSoft.CodeCat.Domain
 
         public void OpenContextFolder()
         {
-            // rather make open project folder.
-            this.codeLibrary.OpenProjectFolder();
+            FileSys.OpenFolder(this.project.FolderPath);
         }
 
         public void Open(string filePath, Version currentVersion)

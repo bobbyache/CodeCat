@@ -74,6 +74,8 @@
     <Compile Include="Funcs\IntegerFunction.cs" />
     <Compile Include="Funcs\LowerCaseFunction.cs" />
     <Compile Include="Funcs\NewlineFunction.cs" />
+    <Compile Include="Funcs\PadLeftFunction.cs" />
+    <Compile Include="Funcs\PadRightFunction.cs" />
     <Compile Include="Funcs\ProperCaseFunction.cs" />
     <Compile Include="Funcs\RemovePunctuationFunction.cs" />
     <Compile Include="Funcs\RemoveSpacesFunction.cs" />

@@ -59,13 +59,14 @@
             this.btnImageSet = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSearchableSnippetList = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSearchableEventDiary = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRemoveCodeItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
             this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
             this.tabControlFile = new System.Windows.Forms.TabControl();
-            this.btnSearchableEventDiary = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnOpenFolder = new System.Windows.Forms.ToolStripButton();
             this.toolstripTitle.SuspendLayout();
             this.toolstripKeywords.SuspendLayout();
             this.toolstripCommands.SuspendLayout();
@@ -193,7 +194,8 @@
             this.toolStripSeparator3,
             this.btnMoveLeft,
             this.btnMoveRight,
-            this.txtToolStripTitle});
+            this.txtToolStripTitle,
+            this.btnOpenFolder});
             this.toolstripCommands.Location = new System.Drawing.Point(0, 0);
             this.toolstripCommands.Name = "toolstripCommands";
             this.toolstripCommands.Size = new System.Drawing.Size(878, 25);
@@ -304,6 +306,12 @@
             this.btnSearchableSnippetList.Size = new System.Drawing.Size(215, 22);
             this.btnSearchableSnippetList.Text = "Searchable Snippet List";
             // 
+            // btnSearchableEventDiary
+            // 
+            this.btnSearchableEventDiary.Name = "btnSearchableEventDiary";
+            this.btnSearchableEventDiary.Size = new System.Drawing.Size(215, 22);
+            this.btnSearchableEventDiary.Text = "Searchable Event Diary";
+            // 
             // btnRemoveCodeItem
             // 
             this.btnRemoveCodeItem.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveCodeItem.Image")));
@@ -343,7 +351,7 @@
             this.txtToolStripTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtToolStripTitle.Name = "txtToolStripTitle";
             this.txtToolStripTitle.ReadOnly = true;
-            this.txtToolStripTitle.Size = new System.Drawing.Size(353, 25);
+            this.txtToolStripTitle.Size = new System.Drawing.Size(330, 25);
             this.txtToolStripTitle.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tabControlFile
@@ -355,13 +363,16 @@
             this.tabControlFile.Size = new System.Drawing.Size(878, 575);
             this.tabControlFile.TabIndex = 8;
             // 
-            // btnSearchableEventDiary
+            // btnOpenFolder
             // 
-            this.btnSearchableEventDiary.Name = "btnSearchableEventDiary";
-            this.btnSearchableEventDiary.Size = new System.Drawing.Size(215, 22);
-            this.btnSearchableEventDiary.Text = "Searchable Event Diary";
+            this.btnOpenFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnOpenFolder.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenFolder.Image")));
+            this.btnOpenFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOpenFolder.Name = "btnOpenFolder";
+            this.btnOpenFolder.Size = new System.Drawing.Size(23, 22);
+            this.btnOpenFolder.Text = "Open Folder";
             // 
-            // TopicDocumentForm
+            // TopicWorkItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -371,7 +382,7 @@
             this.Controls.Add(this.toolstripKeywords);
             this.Controls.Add(this.toolstripCommands);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "TopicDocumentForm";
+            this.Name = "TopicWorkItemForm";
             this.Text = "TopicDocumentForm";
             this.toolstripTitle.ResumeLayout(false);
             this.toolstripTitle.PerformLayout();
@@ -422,5 +433,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem btnSearchableSnippetList;
         private System.Windows.Forms.ToolStripMenuItem btnSearchableEventDiary;
+        private System.Windows.Forms.ToolStripButton btnOpenFolder;
     }
 }

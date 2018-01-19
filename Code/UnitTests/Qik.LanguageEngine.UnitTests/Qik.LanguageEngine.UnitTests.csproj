@@ -60,6 +60,7 @@
     <Compile Include="Functions\GuidFunctionTests.cs" />
     <Compile Include="Functions\IfDecisionFunction.cs" />
     <Compile Include="Functions\LowerCaseFunctionTests.cs" />
+    <Compile Include="Functions\PadFunctionTests.cs" />
     <Compile Include="Functions\ProperCaseFunctionTests.cs" />
     <Compile Include="Functions\RemovePunctuationTests.cs" />
     <Compile Include="Functions\RemoveSpacesFunctionTests.cs" />
