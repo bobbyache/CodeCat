@@ -149,6 +149,14 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine.Antlr
                         GuidFunction guidFunction = new GuidFunction(funcInfo, scopeTable, functionArguments);
                         func = guidFunction;
                         break;
+                    case "padLeft":
+                        PadLeftFunction padLeftFunction = new PadLeftFunction(funcInfo, scopeTable, functionArguments);
+                        func = padLeftFunction;
+                        break;
+                    case "padRight":
+                        PadRightFunction padRightFunction = new PadRightFunction(funcInfo, scopeTable, functionArguments);
+                        func = padRightFunction;
+                        break;
 
                     default:
                         throw new NotSupportedException(string.Format("Function \"{0}\" is not supported in this context.", funcIdentifier));

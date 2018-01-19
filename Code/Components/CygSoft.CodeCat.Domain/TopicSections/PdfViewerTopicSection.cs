@@ -24,5 +24,17 @@ namespace CygSoft.CodeCat.Domain.TopicSections
         {
             this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.PdfViewer);
         }
+
+
+        public IDisposable Document { get; set; }
+
+        protected override void OnBeforeDelete()
+        {
+            // *** Important fix: Need to have the file handled of the viewer on the UI closed 
+            //pdfViewer1.Disposed += (s, e) => ((PdfViewer)pdfViewer1).Document.Dispose();
+            //topicDocument.BeforeDelete += (s, e) => pdfViewer1.Dispose();
+            Document.Dispose();
+            base.OnBeforeDelete();
+        }
     }
 }

@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Documents;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -195,12 +196,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnRichText.Image = IconRepository.Get(IconRepository.TopicSections.RTF).Image;
             btnAddCode.Image = IconRepository.Get(IconRepository.TopicSections.CodeFile).Image;
             btnSearchableEventDiary.Image = IconRepository.Get(IconRepository.TopicSections.EventDiary).Image;
+            btnOpenFolder.Image = Gui.Resources.GetImage(Constants.ImageKeys.Folder);
 
             this.Icon = IconRepository.CodeGroupIcon;
         }
 
         private void RegisterEvents()
-        {            
+        {
             topicDocument.AfterRevert += topicDocument_ContentReverted;
             topicDocument.BeforeSave += topicDocument_BeforeContentSaved;
             topicDocument.AfterSave += topicDocument_ContentSaved;
@@ -229,6 +231,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnRichText.Click += (s, e) => CreateTopicSection(TopicSectionType.RtfEditor);
             btnFileGroup.Click += (s, e) => CreateTopicSection(TopicSectionType.FileAttachments);
             btnSearchableEventDiary.Click += (s, e) => CreateTopicSection(TopicSectionType.SearchableEvent);
+            btnOpenFolder.Click += (s, e) => FileSys.OpenFolder(topicDocument.Folder);
         }
 
         private void InitializeControls()
@@ -277,7 +280,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #endregion
 
-        #region QikFile Events
+        #region Work Item Events
 
         private void topicDocument_ContentReverted(object sender, TopicEventArgs e)
         {

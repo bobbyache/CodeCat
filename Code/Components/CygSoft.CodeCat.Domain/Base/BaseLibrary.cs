@@ -135,16 +135,6 @@ namespace CygSoft.CodeCat.Domain.Base
             AfterIndexLoad();
         }
 
-        public void OpenProjectFolder()
-        {
-            if (!string.IsNullOrEmpty(this.FilePath) && File.Exists(this.FilePath))
-            {
-                System.Diagnostics.Process prc = new System.Diagnostics.Process();
-                prc.StartInfo.FileName = this.FolderPath;
-                prc.Start();
-            }
-        }
-
         public IKeywordIndexItem[] FindIndeces(string commaDelimitedKeywords)
         {
             return this.index.Find(commaDelimitedKeywords);

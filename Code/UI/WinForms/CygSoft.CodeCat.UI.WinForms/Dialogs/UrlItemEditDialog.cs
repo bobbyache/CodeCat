@@ -54,11 +54,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Url (hyperlink)");
                 return false;
             }
-            if (txtDescription.Text.Trim() == "")
-            {
-                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Description");
-                return false;
-            }
             return true;
         }
     }
