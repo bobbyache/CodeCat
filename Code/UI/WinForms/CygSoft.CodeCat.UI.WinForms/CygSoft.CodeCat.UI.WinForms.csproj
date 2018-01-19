@@ -292,11 +292,11 @@
     <Compile Include="Documents\BaseWorkItemForm.Designer.cs">
       <DependentUpon>BaseWorkItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\TopicWorkItemFormForm.cs">
+    <Compile Include="Documents\TopicWorkItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Documents\TopicWorkItemFormForm.Designer.cs">
-      <DependentUpon>TopicWorkItemFormForm.cs</DependentUpon>
+    <Compile Include="Documents\TopicWorkItemForm.Designer.cs">
+      <DependentUpon>TopicWorkItemForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Documents\TopicSectionControlFactory.cs" />
     <Compile Include="Documents\WorkItemTabEventArgs.cs" />
@@ -489,8 +489,8 @@
     <EmbeddedResource Include="Docked\TaskForm.resx">
       <DependentUpon>TaskForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Documents\TopicWorkItemFormForm.resx">
-      <DependentUpon>TopicWorkItemFormForm.cs</DependentUpon>
+    <EmbeddedResource Include="Documents\TopicWorkItemForm.resx">
+      <DependentUpon>TopicWorkItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Documents\QikWorkItemForm.resx">
       <DependentUpon>QikWorkItemForm.cs</DependentUpon>
