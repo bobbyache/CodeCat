@@ -598,6 +598,7 @@
   <ItemGroup>
     <Content Include="codecat_08.ico" />
     <Content Include="codecat_09.ico" />
+    <None Include="Resources\orange-11.png" />
     <Content Include="x64\pdfium.dll" />
     <Content Include="x86\pdfium.dll" />
     <None Include="qikscript.syn">

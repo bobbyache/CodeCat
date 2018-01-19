@@ -4,6 +4,15 @@ namespace CygSoft.CodeCat.Infrastructure
 {
     public class FileSys
     {
+        public static void OpenFolder(string folderPath)
+        {
+            if (!string.IsNullOrEmpty(folderPath) && Directory.Exists(folderPath))
+            {
+                System.Diagnostics.Process prc = new System.Diagnostics.Process();
+                prc.StartInfo.FileName = folderPath;
+                prc.Start();
+            }
+        }
         public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
         {
             // Get the subdirectories for the specified directory.

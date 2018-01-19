@@ -45,6 +45,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string DeleteCategory = "DeleteCategory";
             public const string EditCategory = "EditCategory";
             public const string AddCategory = "AddCategory";
+            public const string Folder = "Folder";
             //public const string SaveProject = "SaveProject";
         }
     }
