@@ -43,9 +43,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void LoadIfExists()
         {
-
             if (topicSection.Exists)
+            {
                 pdfViewer1.Document = PdfDocument.Load(topicSection.FilePath);
+                ((IPdfViewerTopicSection)topicSection).Document = pdfViewer1.Document;
+            }
         }
 
         private void btnImport_Click(object sender, EventArgs e)
@@ -79,5 +81,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             // hack to reload the control when it loses itself when changing panes.
             LoadIfExists();
         }
+
+        
     }
 }
