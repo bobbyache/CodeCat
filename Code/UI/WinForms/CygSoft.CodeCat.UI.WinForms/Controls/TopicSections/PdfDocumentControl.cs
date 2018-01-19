@@ -15,7 +15,7 @@ using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
 using PdfiumViewer;
 
-namespace CygSoft.CodeCat.UI.WinForms.Controls
+namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     // Try this: https://github.com/pvginkel/PdfiumViewer
 

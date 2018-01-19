@@ -125,10 +125,10 @@
       <DependentUpon>InputPropertyGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListViewSorter.cs" />
-    <Compile Include="Controls\PdfDocumentControl.cs">
+    <Compile Include="Controls\TopicSections\PdfDocumentControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\PdfDocumentControl.Designer.cs">
+    <Compile Include="Controls\TopicSections\PdfDocumentControl.Designer.cs">
       <DependentUpon>PdfDocumentControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\PropertyControlAttribute.cs" />
@@ -408,7 +408,7 @@
     <EmbeddedResource Include="Controls\InputPropertyGrid.resx">
       <DependentUpon>InputPropertyGrid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\PdfDocumentControl.resx">
+    <EmbeddedResource Include="Controls\TopicSections\PdfDocumentControl.resx">
       <DependentUpon>PdfDocumentControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\QikScriptCtrl.resx">
