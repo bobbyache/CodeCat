@@ -48,6 +48,7 @@
     <Compile Include="AppFacade.cs" />
     <Compile Include="Base\BaseLibrary.cs" />
     <Compile Include="Base\CategorizedKeywordIndexItem.cs" />
+    <Compile Include="Base\CDATAConflictDetectionException.cs" />
     <Compile Include="Base\ICategorizedKeywordIndexItem.cs" />
     <Compile Include="Base\IWorkItem.cs" />
     <Compile Include="Base\WorkItemFactory.cs" />

@@ -211,8 +211,20 @@ namespace CygSoft.CodeCat.Domain.Code
             AfterDelete?.Invoke(this, new TopicEventArgs(null));
         }
 
+        private bool CDATATagConflictDetected(string text)
+        {
+            if (text.Contains("<![CDATA["))
+                return true;
+            if (text.Contains("]]>"))
+                return true;
+            return false;
+        }
+
         private void WriteData()
         {
+            if (CDATATagConflictDetected(this.Text))
+                throw new CDATAConflictDetectionException();
+
             XElement snapshotsElement = new XElement("Snapshots");
 
             XElement snippetElement = new XElement("Snippet",
