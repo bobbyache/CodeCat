@@ -18,7 +18,7 @@ namespace CygSoft.CodeCat.FileManagement
 
         public string Path { get { return filePath; } }
 
-        public abstract bool IsOpen { get; }
+        public bool IsOpen { get; private set; }
 
         protected abstract void OnDelete();
         protected abstract void OnOpen();
@@ -35,6 +35,7 @@ namespace CygSoft.CodeCat.FileManagement
             if (!this.IsOpen)
             {
                 OnOpen();
+                IsOpen = true;
             }
         }
 
@@ -43,6 +44,7 @@ namespace CygSoft.CodeCat.FileManagement
             if (this.IsOpen)
             {
                 OnClose();
+                IsOpen = false;
                 Closed?.Invoke(this, new EventArgs());
             }
         } 

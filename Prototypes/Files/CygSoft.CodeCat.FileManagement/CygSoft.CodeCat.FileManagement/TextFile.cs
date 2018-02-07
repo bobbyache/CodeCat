@@ -15,19 +15,11 @@ namespace CygSoft.CodeCat.FileManagement
         {
             get
             {
-                using (StreamReader reader = new StreamReader(fileStream, System.Text.Encoding.Unicode, true,
+                using (StreamReader reader = new StreamReader(fileStream, System.Text.Encoding.UTF8, false,
                     (int)fileStream.Length, true))
                 {
                     return reader.ReadToEnd();
                 }
-            }
-        }
-
-        public override bool IsOpen
-        {
-            get
-            {
-                return (fileStream != null && fileStream.SafeFileHandle != null);
             }
         }
 
@@ -43,8 +35,8 @@ namespace CygSoft.CodeCat.FileManagement
 
         public void Dispose()
         {
-            base.Close();
-            this.fileStream.Dispose();
+            if (this.fileStream != null)
+                this.fileStream.Dispose();
         }
 
         protected override void OnClose()
@@ -54,7 +46,8 @@ namespace CygSoft.CodeCat.FileManagement
 
         protected override void OnDelete()
         {
-            this.Dispose();
+            this.fileStream.Close();
+            this.fileStream.Dispose();
         }
     }
 }
