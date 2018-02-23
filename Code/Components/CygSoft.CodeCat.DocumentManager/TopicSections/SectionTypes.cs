@@ -1,9 +1,4 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.TopicSections
 {
@@ -20,6 +15,7 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
         public const string FILE_ATTACHMENTS_TOPIC_SECTION = "FILEGROUP";
         public const string SEARCHABLE_SNIPPET_TOPIC_SECTION = "SEARCHABLESNIPPET";
         public const string SEARCHABLE_EVENT_TOPIC_SECTION = "SEARCHABLEEVENT";
+        public const string CODE_TEMPLATE_SECTION = "CODETEMPLATE";
 
         public static TopicSectionType GetDocumentType(string documentType)
         {
@@ -57,6 +53,9 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
 
                 case FILE_ATTACHMENTS_TOPIC_SECTION:
                     return TopicSectionType.FileAttachments;
+
+                case CODE_TEMPLATE_SECTION:
+                    return TopicSectionType.CodeTemplate;
 
                 default:
                     return TopicSectionType.Code;
@@ -99,6 +98,9 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
 
                 case TopicSectionType.FileAttachments:
                     return FILE_ATTACHMENTS_TOPIC_SECTION;
+
+                case TopicSectionType.CodeTemplate:
+                    return CODE_TEMPLATE_SECTION;
 
                 default:
                     return CODE_TOPIC_SECTION;

@@ -130,6 +130,10 @@ namespace CygSoft.CodeCat.UI.WinForms
                     topicDocument.AddTopicSection(TopicSectionType.FileAttachments, "File Attachments", null, null);
                     break;
 
+                case TopicSectionType.CodeTemplate:
+                    topicDocument.AddTopicSection(TopicSectionType.CodeTemplate, "Code Template", null);
+                    break;
+
                 default:
                     break;
             }
@@ -231,6 +235,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnRichText.Click += (s, e) => CreateTopicSection(TopicSectionType.RtfEditor);
             btnFileGroup.Click += (s, e) => CreateTopicSection(TopicSectionType.FileAttachments);
             btnSearchableEventDiary.Click += (s, e) => CreateTopicSection(TopicSectionType.SearchableEvent);
+            btnCodeTemplate.Click += (s, e) => CreateTopicSection(TopicSectionType.CodeTemplate);
             btnOpenFolder.Click += (s, e) => FileSys.OpenFolder(topicDocument.Folder);
         }
 
