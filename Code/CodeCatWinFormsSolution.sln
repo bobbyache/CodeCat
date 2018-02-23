@@ -81,6 +81,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Plugins.TSq
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Plugins.ToSingleLine", "Components\CygSoft.CodeCat.Plugins.ToSingleLine\CygSoft.CodeCat.Plugins.ToSingleLine.csproj", "{E9761572-E46C-40C4-9C6C-387433B2668B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.TopicSections.CodeTemplate.UnitTests", "UnitTests\Domain.TopicSections.CodeTemplate.UnitTests\Domain.TopicSections.CodeTemplate.UnitTests.csproj", "{E698F06F-71FC-4184-8EBD-D3524697EB4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -219,6 +221,10 @@ Global
 		{E9761572-E46C-40C4-9C6C-387433B2668B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9761572-E46C-40C4-9C6C-387433B2668B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9761572-E46C-40C4-9C6C-387433B2668B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E698F06F-71FC-4184-8EBD-D3524697EB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E698F06F-71FC-4184-8EBD-D3524697EB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E698F06F-71FC-4184-8EBD-D3524697EB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E698F06F-71FC-4184-8EBD-D3524697EB4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -239,5 +245,6 @@ Global
 		{45071AFC-E70C-4FB2-84C4-47AE332222AF} = {8C7396E9-AD41-446D-81DE-565D6D3A669D}
 		{D60471A8-6FAA-4A0F-A681-A7E779F0C060} = {8C7396E9-AD41-446D-81DE-565D6D3A669D}
 		{E9761572-E46C-40C4-9C6C-387433B2668B} = {8C7396E9-AD41-446D-81DE-565D6D3A669D}
+		{E698F06F-71FC-4184-8EBD-D3524697EB4E} = {A78E1C5A-3EC8-40B0-9CAA-ADFE337FF541}
 	EndGlobalSection
 EndGlobal
