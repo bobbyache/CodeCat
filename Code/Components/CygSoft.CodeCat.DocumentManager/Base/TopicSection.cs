@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         public string Id {  get { return filePathGenerator.Id; } }
         public string FilePath {  get { return filePathGenerator.FilePath; } }
-        public string FileName {  get { return filePathGenerator.FilePath; } }
+        public string FileName {  get { return filePathGenerator.FileName; } }
         public string FileExtension {  get { return filePathGenerator.FileExtension; } }
         public int Ordinal { get; set; }
         public string Title { get; set; }
