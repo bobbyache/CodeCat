@@ -55,8 +55,17 @@
     <Compile Include="CodeGroupLibraryTests.cs" />
     <Compile Include="EventDateGrouperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TopicDocumentTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Components\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
+      <Project>{70ba46ba-7055-4e29-96a1-725a30b00b61}</Project>
+      <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\CygSoft.CodeCat.DocumentManager\CygSoft.CodeCat.DocumentManager.csproj">
+      <Project>{d3c89aa0-fd50-4d0e-9492-15efd952958a}</Project>
+      <Name>CygSoft.CodeCat.DocumentManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Components\CygSoft.CodeCat.Domain\CygSoft.CodeCat.Domain.csproj">
       <Project>{7a97514d-bb47-49aa-8785-260f355d6f96}</Project>
       <Name>CygSoft.CodeCat.Domain</Name>

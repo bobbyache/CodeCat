@@ -31,14 +31,13 @@ namespace CygSoft.CodeCat.Domain.Topics
         private IKeywordIndexItem indexItem;
         private TopicIndex documentIndex = null;
 
-        public TopicDocument(ITopicKeywordIndexItem indexItem, string folderPath)
+        public TopicDocument(DocumentIndexPathGenerator filePathGenerator, ITopicKeywordIndexItem indexItem)
         {
             this.indexItem = indexItem;
 
-            DocumentIndexPathGenerator indexPathGenerator = new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id);
-            IDocumentIndexRepository repository = new TopicIndexXmlRepository(indexPathGenerator);
+            IDocumentIndexRepository repository = new TopicIndexXmlRepository(filePathGenerator);
 
-            this.documentIndex = new TopicIndex(repository, indexPathGenerator);
+            this.documentIndex = new TopicIndex(repository, filePathGenerator);
 
             this.documentIndex.BeforeSave += documentIndex_BeforeSave;
             this.documentIndex.AfterSave += documentIndex_AfterSave;
