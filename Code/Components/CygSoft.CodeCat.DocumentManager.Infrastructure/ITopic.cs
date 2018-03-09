@@ -11,12 +11,6 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 
         string Id { get; }
 
-        void Open();
-        void Delete();
-        void Save();
-        void Close();
-        void Revert();
-
         // files within the document group
         ITopicSection[] TopicSections { get; }
 
