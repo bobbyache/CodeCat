@@ -148,12 +148,11 @@ namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
 
         protected override void OnDelete()
         {
-            base.OnDelete();
-
             var filePaths = fileVersions.Select(f => f.FilePath);
             foreach (var filePath in filePaths)
                 File.Delete(filePath);
-            File.Delete(this.FilePath);
+
+            base.OnDelete();
         }
 
         public IFileVersion GetVersion(string versionId)

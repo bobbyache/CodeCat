@@ -54,21 +54,31 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         protected virtual void OnBeforeSave() { }
         protected virtual void OnAfterSave() { }
         protected virtual void OnClose() { }
-        protected virtual void OpenFile() { }
-
+        protected virtual void OnOpen() { }
+        protected virtual void OnSave() { }
         protected virtual void OnBeforeRevert() { }
-
         protected virtual void OnAfterRevert() { }
-
         protected virtual void OnAfterDelete() { }
 
+        protected virtual void OnRevert()
+        {
+            if (File.Exists(this.FilePath))
+                OnOpen();
+        }
+
         protected virtual void SaveFile() { }
+
+        protected virtual void OnDelete()
+        {
+            if (File.Exists(this.FilePath))
+                File.Delete(this.FilePath);
+        }
 
         public void Open()
         {
             BeforeOpen?.Invoke(this, new FileEventArgs(this));
             OnBeforeOpen();
-            OpenFile();
+            OnOpen();
             OnAfterOpen();
             this.Loaded = true;
             AfterOpen?.Invoke(this, new FileEventArgs(this));
@@ -79,9 +89,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             BeforeDelete?.Invoke(this, new FileEventArgs(this));
             OnBeforeDelete();
 
-            if (File.Exists(this.FilePath))
-                File.Delete(this.FilePath);
-
+            OnDelete();
             OnAfterDelete();
 
             this.Loaded = false;
@@ -93,6 +101,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             BeforeSave?.Invoke(this, new FileEventArgs(this));
             OnBeforeSave();
             SaveFile();
+            OnSave();
             OnAfterSave();
             this.Loaded = true;
             AfterSave?.Invoke(this, new FileEventArgs(this));
@@ -105,15 +114,11 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             AfterClose?.Invoke(this, new FileEventArgs(this));
         }
 
-        
-
         public void Revert()
         {
             BeforeRevert?.Invoke(this, new FileEventArgs(this));
             OnBeforeRevert();
-
-            if (File.Exists(this.FilePath))
-                OpenFile();
+            OnRevert();
             OnAfterRevert();
 
             this.Loaded = true;

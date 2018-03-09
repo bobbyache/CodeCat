@@ -44,7 +44,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             this.Id = filePathGenerator.Id;
         }
 
-        protected override void OpenFile()
+        protected override void OnOpen()
         {
             this.OpenTopicSections();
         }
