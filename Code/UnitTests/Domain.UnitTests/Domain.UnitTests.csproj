@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeFileTests.cs" />
     <Compile Include="CodeGroupLibraryTests.cs" />
     <Compile Include="EventDateGrouperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

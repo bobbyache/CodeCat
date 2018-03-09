@@ -53,6 +53,7 @@
     <Compile Include="Base\IWorkItem.cs" />
     <Compile Include="Base\WorkItemFactory.cs" />
     <Compile Include="Code\CodeExporter.cs" />
+    <Compile Include="Code\ICodeFile.cs" />
     <Compile Include="LastCodeFileRepository.cs" />
     <Compile Include="Management\IWorkItemExporter.cs" />
     <Compile Include="Qik\QikTemplateExporter.cs" />

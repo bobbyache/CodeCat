@@ -6,10 +6,11 @@ using System.IO;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.DocumentManager.Base;
 
 namespace CygSoft.CodeCat.Domain.Code
 {
-    public class CodeFile : IWorkItem
+    public class CodeFile : BaseFile, IWorkItem, ICodeFile
     {
         private class SnapshotDateComparer : IComparer<CodeSnapshot>
         {
@@ -24,24 +25,12 @@ namespace CygSoft.CodeCat.Domain.Code
             }
         }
 
-        public event EventHandler<FileEventArgs> BeforeDelete;
-        public event EventHandler<FileEventArgs> AfterDelete;
-        public event EventHandler<FileEventArgs> BeforeOpen;
-        public event EventHandler<FileEventArgs> AfterOpen;
-        public event EventHandler<FileEventArgs> BeforeSave;
-        public event EventHandler<FileEventArgs> AfterSave;
-        public event EventHandler<FileEventArgs> BeforeClose;
-        public event EventHandler<FileEventArgs> AfterClose;
-        public event EventHandler<FileEventArgs> BeforeRevert;
-        public event EventHandler<FileEventArgs> AfterRevert;
-
         public event EventHandler SnapshotTaken;
         public event EventHandler SnapshotDeleted;
 
         private IKeywordIndexItem indexItem;
 
         private List<CodeSnapshot> snapshots;
-        private bool loaded;
 
         public CodeSnapshot[] Snapshots 
         { 
@@ -61,40 +50,20 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public string Text { get; set; }
 
-        public CodeFile(CodeKeywordIndexItem indexItem, string folderPath)
+        public CodeFile(BaseFilePathGenerator filePathGenerator, ICodeKeywordIndexItem indexItem)
+            :base(filePathGenerator)
         {
             this.snapshots = new List<CodeSnapshot>();
             this.indexItem = indexItem;
-            this.Folder = folderPath;
         }
 
         public string Id { get { return this.IndexItem.Id; } }
-        public string FilePath { get { return GetFilePath(); } }
-        public string FileName { get { return this.IndexItem.FileTitle; } }
-        public string Folder { get; private set; }
-
-        public virtual bool FolderExists
-        {
-            get { return Directory.Exists(Path.GetDirectoryName(this.FilePath)); }
-        }
-        public bool Exists { get { return File.Exists(GetFilePath()); } }
 
         public string Title
         {
             get { return this.IndexItem.Title; }
             set { this.IndexItem.Title = value; }
         }
-
-        public string FileExtension
-        {
-            get { return Path.GetExtension(GetFilePath()); }
-        }
-
-        public bool Loaded
-        {
-            get { return this.loaded; }
-        }
-
 
         public string Syntax
         {
@@ -118,30 +87,13 @@ namespace CygSoft.CodeCat.Domain.Code
             set { this.IndexItem.SetKeywords(value); }
         }
 
-        public void Revert()
+        protected override void OnOpen()
         {
-            this.BeforeRevert?.Invoke(this, new FileEventArgs(null));
-            bool opened = this.ReadData();
-            this.AfterRevert?.Invoke(this, new FileEventArgs(null));
-        }
-
-        public void Open()
-        {
-            BeforeOpen?.Invoke(this, new FileEventArgs(null));
             bool opened = this.ReadData();
             if (opened)
             {
                 this.WriteData();
-                this.loaded = true;
-                AfterOpen?.Invoke(this, new FileEventArgs(null));
             }
-        }
-
-        public void Close()
-        {
-            BeforeClose?.Invoke(this, new FileEventArgs(null));
-            this.loaded = false;
-            AfterClose?.Invoke(this, new FileEventArgs(null));
         }
 
         private bool ReadData()
@@ -176,11 +128,9 @@ namespace CygSoft.CodeCat.Domain.Code
             return false;
         }
 
-        public void Save()
+        protected override void OnSave()
         {
-            BeforeSave?.Invoke(this, new FileEventArgs(null));
             this.WriteData();
-            AfterSave?.Invoke(this, new FileEventArgs(null));
         }
 
         public void TakeSnapshot(string description = "")
@@ -201,14 +151,6 @@ namespace CygSoft.CodeCat.Domain.Code
 
             this.WriteData();
             SnapshotDeleted?.Invoke(this, new EventArgs());
-        }
-
-        public void Delete()
-        {
-            BeforeDelete?.Invoke(this, new FileEventArgs(null));
-            File.Delete(this.FilePath);
-            this.loaded = false;
-            AfterDelete?.Invoke(this, new FileEventArgs(null));
         }
 
         private bool CDATATagConflictDetected(string text)

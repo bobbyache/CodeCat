@@ -18,7 +18,8 @@ namespace CygSoft.CodeCat.Domain.Base
             IWorkItem workItem = null;
             
             if (indexItem is CodeKeywordIndexItem)
-                workItem = new CodeFile(indexItem as CodeKeywordIndexItem, folderPath);
+                workItem = new CodeFile(new DocumentPathGenerator(folderPath, "xml", indexItem.Id), 
+                    indexItem as CodeKeywordIndexItem);
 
             else if (indexItem is QikTemplateKeywordIndexItem)
                 workItem = new QikTemplateDocumentSet(new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id), 

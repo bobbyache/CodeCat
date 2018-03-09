@@ -113,7 +113,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected override void SaveFields()
         {
-            CodeFile codeFile = base.workItem as CodeFile;
+            ICodeFile codeFile = base.workItem as ICodeFile;
 
             codeFile.Title = this.txtTitle.Text.Trim();
             codeFile.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
@@ -240,7 +240,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void UpdateSnapshotsTab()
         {
-            CodeFile codeFile = base.workItem as CodeFile;
+            ICodeFile codeFile = base.workItem as ICodeFile;
 
             if (!snapshotListCtrl1.Attached)
                 snapshotListCtrl1.Attach(codeFile);
@@ -296,7 +296,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             if (result == DialogResult.OK)
             {
-                (base.workItem as CodeFile).TakeSnapshot(frm.Description);
+                (base.workItem as ICodeFile).TakeSnapshot(frm.Description);
             }
         }
 
