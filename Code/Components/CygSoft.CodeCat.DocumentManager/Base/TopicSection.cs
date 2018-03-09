@@ -1,6 +1,4 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using System;
-using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {

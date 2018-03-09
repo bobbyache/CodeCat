@@ -1,10 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {
@@ -20,12 +16,12 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             get { return Directory.Exists(Path.GetDirectoryName(this.FilePath)); }
         }
 
-        public bool Exists { get { return File.Exists(this.FilePath); } }
-        public bool Loaded { get; private set; }
+        public virtual bool Exists { get { return File.Exists(this.FilePath); } }
+        public virtual bool Loaded { get; private set; }
 
-        public string FilePath { get; protected set; }
-        public string FileName { get; private set; }
-        public string FileExtension { get; private set; }
+        public virtual string FilePath { get; protected set; }
+        public virtual string FileName { get; private set; }
+        public virtual string FileExtension { get; private set; }
 
         public event EventHandler<FileEventArgs> AfterClose;
         public event EventHandler<FileEventArgs> AfterDelete;

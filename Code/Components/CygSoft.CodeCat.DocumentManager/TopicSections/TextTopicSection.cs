@@ -1,7 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Base;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
-using System;
 using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.TopicSections
