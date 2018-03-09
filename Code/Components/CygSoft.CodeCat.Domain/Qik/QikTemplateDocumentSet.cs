@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager;
+using CygSoft.CodeCat.DocumentManager.Base;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.Domain.Base;
@@ -13,19 +14,8 @@ using System.Linq;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    internal class QikTemplateDocumentSet : IQikTemplateDocumentSet
+    internal class QikTemplateDocumentSet : BaseFile, IQikTemplateDocumentSet
     {
-        public event EventHandler<FileEventArgs> BeforeDelete;
-        public event EventHandler<FileEventArgs> AfterDelete;
-        public event EventHandler<FileEventArgs> BeforeOpen;
-        public event EventHandler<FileEventArgs> AfterOpen;
-        public event EventHandler<FileEventArgs> BeforeSave;
-        public event EventHandler<FileEventArgs> AfterSave;
-        public event EventHandler<FileEventArgs> BeforeClose;
-        public event EventHandler<FileEventArgs> AfterClose;
-        public event EventHandler<FileEventArgs> BeforeRevert;
-        public event EventHandler<FileEventArgs> AfterRevert;
-
         public event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
         public event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;
         public event EventHandler<TopicSectionEventArgs> TopicSectionMovedLeft;
@@ -34,26 +24,15 @@ namespace CygSoft.CodeCat.Domain.Qik
         private IKeywordIndexItem indexItem;
         private QikTemplateDocumentIndex documentIndex = null;
 
-        public QikTemplateDocumentSet(QikTemplateKeywordIndexItem indexItem, string folderPath)
+        public QikTemplateDocumentSet(DocumentIndexPathGenerator filePathGenerator, IQikTemplateKeywordIndexItem indexItem)
+            : base(filePathGenerator)
         {
             this.indexItem = indexItem;
             this.Compiler = new Compiler();
 
-            DocumentIndexPathGenerator indexPathGenerator = new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id);
-            IDocumentIndexRepository repository = new QikTemplateDocumentIndexXmlRepository(indexPathGenerator);
+            IDocumentIndexRepository repository = new QikTemplateDocumentIndexXmlRepository(filePathGenerator);
 
-            this.documentIndex = new QikTemplateDocumentIndex(repository, indexPathGenerator);
-
-            this.documentIndex.BeforeSave += documentIndex_BeforeSave;
-            this.documentIndex.AfterSave += documentIndex_AfterSave;
-            this.documentIndex.BeforeClose += documentIndex_BeforeClose;
-            this.documentIndex.AfterClose += documentIndex_AfterClose;
-            this.documentIndex.BeforeDelete += documentIndex_BeforeDelete;
-            this.documentIndex.AfterDelete += documentIndex_AfterDelete;
-            this.documentIndex.BeforeRevert += documentIndex_BeforeRevert;
-            this.documentIndex.AfterRevert += documentIndex_AfterRevert;
-            this.documentIndex.BeforeOpen += documentIndex_BeforeOpen;
-            this.documentIndex.AfterOpen += documentIndex_AfterOpen;
+            this.documentIndex = new QikTemplateDocumentIndex(repository, filePathGenerator);
             
             this.documentIndex.TopicSectionAdded += documentIndex_TopicSectionAdded;
             this.documentIndex.TopicSectionRemoved += documentIndex_TopicSectionRemoved;
@@ -85,33 +64,6 @@ namespace CygSoft.CodeCat.Domain.Qik
         }
 
         public string Id { get { return this.IndexItem.Id; } }
-        public string FilePath { get { return this.documentIndex.FilePath; } }
-        public bool Exists { get { return this.documentIndex.Exists; } }
-
-        public string FileName
-        {
-            get { return this.documentIndex.FileName; }
-        }
-
-        public string FileExtension
-        {
-            get { return this.documentIndex.FileExtension; }
-        }
-
-        public string Folder
-        {
-            get { return this.documentIndex.Folder; }
-        }
-
-        public virtual bool FolderExists
-        {
-            get { return Directory.Exists(Path.GetDirectoryName(this.FilePath)); }
-        }
-
-        public bool Loaded
-        {
-            get { return this.documentIndex.Loaded; }
-        }
 
         public string Title
         {
@@ -153,27 +105,27 @@ namespace CygSoft.CodeCat.Domain.Qik
 
         public ICodeTopicSection ScriptSection { get { return this.documentIndex.QikScriptSection; } }
 
-        public void Revert()
+        protected override void OnRevert()
         {
             this.documentIndex.Revert();
         }
 
-        public void Open()
+        protected override void OnOpen()
         {
             this.documentIndex.Open();
         }
 
-        public void Close()
+        protected override void OnClose()
         {
             this.documentIndex.Close();
         }
 
-        public void Save()
+        protected override void OnSave()
         {
             this.documentIndex.Save();
         }
 
-        public void Delete()
+        protected override void OnDelete()
         {
             this.documentIndex.Delete();
         }
@@ -216,56 +168,6 @@ namespace CygSoft.CodeCat.Domain.Qik
                 return true;
             
             return false;
-        }
-
-        private void documentIndex_AfterOpen(object sender, FileEventArgs e)
-        {
-            AfterOpen?.Invoke(this, e);
-        }
-
-        private void documentIndex_BeforeOpen(object sender, FileEventArgs e)
-        {
-            BeforeOpen?.Invoke(this, e);
-        }
-
-        private void documentIndex_BeforeRevert(object sender, FileEventArgs e)
-        {
-            BeforeRevert?.Invoke(this, e);
-        }
-
-        private void documentIndex_AfterRevert(object sender, FileEventArgs e)
-        {
-            AfterRevert?.Invoke(this, e);
-        }
-
-        private void documentIndex_AfterDelete(object sender, FileEventArgs e)
-        {
-            AfterDelete?.Invoke(this, e);
-        }
-
-        private void documentIndex_BeforeDelete(object sender, FileEventArgs e)
-        {
-            BeforeDelete?.Invoke(this, e);
-        }
-
-        private void documentIndex_AfterClose(object sender, FileEventArgs e)
-        {
-            AfterClose?.Invoke(this, e);
-        }
-
-        private void documentIndex_BeforeClose(object sender, FileEventArgs e)
-        {
-            BeforeClose?.Invoke(this, e);
-        }
-
-        private void documentIndex_AfterSave(object sender, FileEventArgs e)
-        {
-            AfterSave?.Invoke(this, e);
-        }
-
-        private void documentIndex_BeforeSave(object sender, FileEventArgs e)
-        {
-            BeforeSave?.Invoke(this, e);
         }
 
         private void documentIndex_TopicSectionMovedRight(object sender, TopicSectionEventArgs e)

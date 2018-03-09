@@ -16,13 +16,17 @@ namespace CygSoft.CodeCat.Domain.Base
         public static IWorkItem Create(IKeywordIndexItem indexItem, string folderPath)
         {
             IWorkItem workItem = null;
-
+            
             if (indexItem is CodeKeywordIndexItem)
                 workItem = new CodeFile(indexItem as CodeKeywordIndexItem, folderPath);
+
             else if (indexItem is QikTemplateKeywordIndexItem)
-                workItem = new QikTemplateDocumentSet(indexItem as QikTemplateKeywordIndexItem, folderPath);
+                workItem = new QikTemplateDocumentSet(new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id), 
+                    indexItem as QikTemplateKeywordIndexItem);
+
             else if (indexItem is TopicKeywordIndexItem)
-                workItem = new TopicDocument(new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id),  indexItem as TopicKeywordIndexItem);
+                workItem = new TopicDocument(new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id),  
+                    indexItem as TopicKeywordIndexItem);
 
             return workItem;
         }
