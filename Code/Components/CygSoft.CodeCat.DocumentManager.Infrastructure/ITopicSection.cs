@@ -2,19 +2,8 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface ITopicSection  : IPositionedItem
+    public interface ITopicSection  : IPositionedItem, IFile
     {
-        event EventHandler<TopicSectionEventArgs> BeforeDelete;
-        event EventHandler<TopicSectionEventArgs> AfterDelete;
-        event EventHandler<TopicSectionEventArgs> BeforeOpen;
-        event EventHandler<TopicSectionEventArgs> AfterOpen;
-        event EventHandler<TopicSectionEventArgs> BeforeSave;
-        event EventHandler<TopicSectionEventArgs> AfterSave;
-        event EventHandler<TopicSectionEventArgs> BeforeClose;
-        event EventHandler<TopicSectionEventArgs> AfterClose;
-        event EventHandler<TopicSectionEventArgs> BeforeRevert;
-        event EventHandler<TopicSectionEventArgs> AfterRevert;
-
         string Id { get; }
         string FilePath { get; }
         string FileName { get; }

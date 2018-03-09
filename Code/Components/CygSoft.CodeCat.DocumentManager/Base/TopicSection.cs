@@ -6,16 +6,16 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 {
     public abstract class TopicSection : ITopicSection
     {
-        public event EventHandler<TopicSectionEventArgs> BeforeDelete;
-        public event EventHandler<TopicSectionEventArgs> AfterDelete;
-        public event EventHandler<TopicSectionEventArgs> BeforeOpen;
-        public event EventHandler<TopicSectionEventArgs> AfterOpen;
-        public event EventHandler<TopicSectionEventArgs> BeforeSave;
-        public event EventHandler<TopicSectionEventArgs> AfterSave;
-        public event EventHandler<TopicSectionEventArgs> BeforeClose;
-        public event EventHandler<TopicSectionEventArgs> AfterClose;
-        public event EventHandler<TopicSectionEventArgs> BeforeRevert;
-        public event EventHandler<TopicSectionEventArgs> AfterRevert;
+        public event EventHandler<FileEventArgs> BeforeDelete;
+        public event EventHandler<FileEventArgs> AfterDelete;
+        public event EventHandler<FileEventArgs> BeforeOpen;
+        public event EventHandler<FileEventArgs> AfterOpen;
+        public event EventHandler<FileEventArgs> BeforeSave;
+        public event EventHandler<FileEventArgs> AfterSave;
+        public event EventHandler<FileEventArgs> BeforeClose;
+        public event EventHandler<FileEventArgs> AfterClose;
+        public event EventHandler<FileEventArgs> BeforeRevert;
+        public event EventHandler<FileEventArgs> AfterRevert;
 
         protected BaseFilePathGenerator filePathGenerator;
 
@@ -50,23 +50,23 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         protected virtual void OnOpen() { }
         protected virtual void OnSave() { }
-        protected virtual void OnBeforeDelete() { BeforeDelete?.Invoke(this, new TopicSectionEventArgs(this)); }
+        protected virtual void OnBeforeDelete() { BeforeDelete?.Invoke(this, new FileEventArgs(this)); }
 
         protected virtual void OnAfterDelete()
         {
             Ordinal = -1;
-            AfterDelete?.Invoke(this, new TopicSectionEventArgs(this));
+            AfterDelete?.Invoke(this, new FileEventArgs(this));
         }
 
-        protected virtual void OnBeforeOpen() { BeforeOpen?.Invoke(this, new TopicSectionEventArgs(this)); }
-        protected virtual void OnAfterOpen() { AfterOpen?.Invoke(this, new TopicSectionEventArgs(this)); }
-        protected virtual void OnBeforeRevert() { BeforeRevert?.Invoke(this, new TopicSectionEventArgs(this)); }
-        protected virtual void OnAfterRevert() { AfterRevert?.Invoke(this, new TopicSectionEventArgs(this));  }
-        protected virtual void OnBeforeSave() { BeforeSave?.Invoke(this, new TopicSectionEventArgs(this)); }
-        protected virtual void OnAfterSave() { AfterSave?.Invoke(this, new TopicSectionEventArgs(this)); }
+        protected virtual void OnBeforeOpen() { BeforeOpen?.Invoke(this, new FileEventArgs(this)); }
+        protected virtual void OnAfterOpen() { AfterOpen?.Invoke(this, new FileEventArgs(this)); }
+        protected virtual void OnBeforeRevert() { BeforeRevert?.Invoke(this, new FileEventArgs(this)); }
+        protected virtual void OnAfterRevert() { AfterRevert?.Invoke(this, new FileEventArgs(this));  }
+        protected virtual void OnBeforeSave() { BeforeSave?.Invoke(this, new FileEventArgs(this)); }
+        protected virtual void OnAfterSave() { AfterSave?.Invoke(this, new FileEventArgs(this)); }
         protected virtual void OnClose() { }
-        protected virtual void OnBeforeClose() { BeforeClose?.Invoke(this, new TopicSectionEventArgs(this)); }
-        protected virtual void OnAfterClose() { AfterClose?.Invoke(this, new TopicSectionEventArgs(this)); }
+        protected virtual void OnBeforeClose() { BeforeClose?.Invoke(this, new FileEventArgs(this)); }
+        protected virtual void OnAfterClose() { AfterClose?.Invoke(this, new FileEventArgs(this)); }
 
         /// <summary>
         /// Any extra logic that needs to be implemented during a revert should be handled by overriding this method.
