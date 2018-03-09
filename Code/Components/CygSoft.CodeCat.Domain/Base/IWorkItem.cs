@@ -4,20 +4,9 @@ using System;
 
 namespace CygSoft.CodeCat.Domain.Base
 {
-    public interface IWorkItem : IKeywordTarget
+    public interface IWorkItem : IKeywordTarget, IFile
     {
         string Title { get; set; }
-
-        event EventHandler<TopicEventArgs> BeforeDelete;
-        event EventHandler<TopicEventArgs> AfterDelete;
-        event EventHandler<TopicEventArgs> BeforeOpen;
-        event EventHandler<TopicEventArgs> AfterOpen;
-        event EventHandler<TopicEventArgs> BeforeSave;
-        event EventHandler<TopicEventArgs> AfterSave;
-        event EventHandler<TopicEventArgs> BeforeClose;
-        event EventHandler<TopicEventArgs> AfterClose;
-        event EventHandler<TopicEventArgs> BeforeRevert;
-        event EventHandler<TopicEventArgs> AfterRevert;
 
         // do not set file content here, this is the job of specialized file classes.
 

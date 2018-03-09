@@ -24,16 +24,16 @@ namespace CygSoft.CodeCat.Domain.Code
             }
         }
 
-        public event EventHandler<TopicEventArgs> BeforeDelete;
-        public event EventHandler<TopicEventArgs> AfterDelete;
-        public event EventHandler<TopicEventArgs> BeforeOpen;
-        public event EventHandler<TopicEventArgs> AfterOpen;
-        public event EventHandler<TopicEventArgs> BeforeSave;
-        public event EventHandler<TopicEventArgs> AfterSave;
-        public event EventHandler<TopicEventArgs> BeforeClose;
-        public event EventHandler<TopicEventArgs> AfterClose;
-        public event EventHandler<TopicEventArgs> BeforeRevert;
-        public event EventHandler<TopicEventArgs> AfterRevert;
+        public event EventHandler<FileEventArgs> BeforeDelete;
+        public event EventHandler<FileEventArgs> AfterDelete;
+        public event EventHandler<FileEventArgs> BeforeOpen;
+        public event EventHandler<FileEventArgs> AfterOpen;
+        public event EventHandler<FileEventArgs> BeforeSave;
+        public event EventHandler<FileEventArgs> AfterSave;
+        public event EventHandler<FileEventArgs> BeforeClose;
+        public event EventHandler<FileEventArgs> AfterClose;
+        public event EventHandler<FileEventArgs> BeforeRevert;
+        public event EventHandler<FileEventArgs> AfterRevert;
 
         public event EventHandler SnapshotTaken;
         public event EventHandler SnapshotDeleted;
@@ -120,28 +120,28 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Revert()
         {
-            this.BeforeRevert?.Invoke(this, new TopicEventArgs(null));
+            this.BeforeRevert?.Invoke(this, new FileEventArgs(null));
             bool opened = this.ReadData();
-            this.AfterRevert?.Invoke(this, new TopicEventArgs(null));
+            this.AfterRevert?.Invoke(this, new FileEventArgs(null));
         }
 
         public void Open()
         {
-            BeforeOpen?.Invoke(this, new TopicEventArgs(null));
+            BeforeOpen?.Invoke(this, new FileEventArgs(null));
             bool opened = this.ReadData();
             if (opened)
             {
                 this.WriteData();
                 this.loaded = true;
-                AfterOpen?.Invoke(this, new TopicEventArgs(null));
+                AfterOpen?.Invoke(this, new FileEventArgs(null));
             }
         }
 
         public void Close()
         {
-            BeforeClose?.Invoke(this, new TopicEventArgs(null));
+            BeforeClose?.Invoke(this, new FileEventArgs(null));
             this.loaded = false;
-            AfterClose?.Invoke(this, new TopicEventArgs(null));
+            AfterClose?.Invoke(this, new FileEventArgs(null));
         }
 
         private bool ReadData()
@@ -178,9 +178,9 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Save()
         {
-            BeforeSave?.Invoke(this, new TopicEventArgs(null));
+            BeforeSave?.Invoke(this, new FileEventArgs(null));
             this.WriteData();
-            AfterSave?.Invoke(this, new TopicEventArgs(null));
+            AfterSave?.Invoke(this, new FileEventArgs(null));
         }
 
         public void TakeSnapshot(string description = "")
@@ -205,10 +205,10 @@ namespace CygSoft.CodeCat.Domain.Code
 
         public void Delete()
         {
-            BeforeDelete?.Invoke(this, new TopicEventArgs(null));
+            BeforeDelete?.Invoke(this, new FileEventArgs(null));
             File.Delete(this.FilePath);
             this.loaded = false;
-            AfterDelete?.Invoke(this, new TopicEventArgs(null));
+            AfterDelete?.Invoke(this, new FileEventArgs(null));
         }
 
         private bool CDATATagConflictDetected(string text)

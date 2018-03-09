@@ -14,16 +14,16 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public event EventHandler<TopicSectionEventArgs> TopicSectionMovedUp;
         public event EventHandler<TopicSectionEventArgs> TopicSectionMovedDown;
 
-        public event EventHandler<TopicEventArgs> BeforeDelete;
-        public event EventHandler<TopicEventArgs> AfterDelete;
-        public event EventHandler<TopicEventArgs> BeforeOpen;
-        public event EventHandler<TopicEventArgs> AfterOpen;
-        public event EventHandler<TopicEventArgs> BeforeSave;
-        public event EventHandler<TopicEventArgs> AfterSave;
-        public event EventHandler<TopicEventArgs> BeforeClose;
-        public event EventHandler<TopicEventArgs> AfterClose;
-        public event EventHandler<TopicEventArgs> BeforeRevert;
-        public event EventHandler<TopicEventArgs> AfterRevert;
+        public event EventHandler<FileEventArgs> BeforeDelete;
+        public event EventHandler<FileEventArgs> AfterDelete;
+        public event EventHandler<FileEventArgs> BeforeOpen;
+        public event EventHandler<FileEventArgs> AfterOpen;
+        public event EventHandler<FileEventArgs> BeforeSave;
+        public event EventHandler<FileEventArgs> AfterSave;
+        public event EventHandler<FileEventArgs> BeforeClose;
+        public event EventHandler<FileEventArgs> AfterClose;
+        public event EventHandler<FileEventArgs> BeforeRevert;
+        public event EventHandler<FileEventArgs> AfterRevert;
 
         public string Id { get; private set; }
         public string FilePath { get; protected set; }
@@ -231,13 +231,13 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                BeforeOpen?.Invoke(this, new TopicEventArgs(this));
+                BeforeOpen?.Invoke(this, new FileEventArgs(this));
                 OnBeforeOpen();
                 OpenFile();
                 OnAfterOpen();
 
                 this.Loaded = true;
-                AfterOpen?.Invoke(this, new TopicEventArgs(this));
+                AfterOpen?.Invoke(this, new FileEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -249,7 +249,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         {
             try
             {
-                BeforeRevert?.Invoke(this, new TopicEventArgs(this));
+                BeforeRevert?.Invoke(this, new FileEventArgs(this));
                 OnBeforeRevert();
 
                 if (File.Exists(this.FilePath))
@@ -257,7 +257,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
                 OnAfterRevert();
 
                 this.Loaded = true;
-                AfterRevert?.Invoke(this, new TopicEventArgs(this));
+                AfterRevert?.Invoke(this, new FileEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -267,7 +267,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         public void Delete()
         {
-            BeforeDelete?.Invoke(this, new TopicEventArgs(this));
+            BeforeDelete?.Invoke(this, new FileEventArgs(this));
             OnBeforeDelete();
 
             if (File.Exists(this.FilePath))
@@ -276,19 +276,19 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             OnAfterDelete();
 
             this.Loaded = false;
-            AfterDelete?.Invoke(this, new TopicEventArgs(this));
+            AfterDelete?.Invoke(this, new FileEventArgs(this));
         }
 
         public void Save()
         {
             try
             {
-                BeforeSave?.Invoke(this, new TopicEventArgs(this));
+                BeforeSave?.Invoke(this, new FileEventArgs(this));
                 OnBeforeSave();
                 SaveFile();
                 OnAfterSave();
                 this.Loaded = true;
-                AfterSave?.Invoke(this, new TopicEventArgs(this));
+                AfterSave?.Invoke(this, new FileEventArgs(this));
             }
             catch (Exception exception)
             {
@@ -297,10 +297,10 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         }
         public void Close()
         {
-            BeforeClose?.Invoke(this, new TopicEventArgs(this));
+            BeforeClose?.Invoke(this, new FileEventArgs(this));
             this.OnClose();
             this.Loaded = false;
-            AfterClose?.Invoke(this, new TopicEventArgs(this));
+            AfterClose?.Invoke(this, new FileEventArgs(this));
         }
 
         private void OpenTopicSections()

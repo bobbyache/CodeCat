@@ -287,7 +287,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Work Item Events
 
-        private void topicDocument_ContentReverted(object sender, TopicEventArgs e)
+        private void topicDocument_ContentReverted(object sender, FileEventArgs e)
         {
             Gui.Drawing.SuspendDrawing(this);
             ResetFields();
@@ -295,12 +295,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             Gui.Drawing.ResumeDrawing(this);
         }
 
-        private void topicDocument_ContentSaved(object sender, TopicEventArgs e)
+        private void topicDocument_ContentSaved(object sender, FileEventArgs e)
         {
             ResetFields();
         }
 
-        private void topicDocument_BeforeContentSaved(object sender, TopicEventArgs e)
+        private void topicDocument_BeforeContentSaved(object sender, FileEventArgs e)
         {
             topicDocument.Title = this.txtTitle.Text.Trim();
             topicDocument.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();

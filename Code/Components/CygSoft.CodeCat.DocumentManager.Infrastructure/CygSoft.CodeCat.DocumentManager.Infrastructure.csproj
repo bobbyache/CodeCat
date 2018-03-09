@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileEventArgs.cs" />
     <Compile Include="ICodeTemplateTopicSection.cs" />
     <Compile Include="IVersionableFile.cs" />
     <Compile Include="IVersionedCodeTopicSection.cs" />
-    <Compile Include="TopicEventArgs.cs" />
     <Compile Include="TopicSectionType.cs" />
     <Compile Include="ICodeTopicSection.cs" />
     <Compile Include="ITopicSection.cs" />

@@ -12,16 +12,16 @@ namespace CygSoft.CodeCat.Domain.Topics
 {
     public class TopicDocument : ITopicDocument
     {
-        public event EventHandler<TopicEventArgs> BeforeDelete;
-        public event EventHandler<TopicEventArgs> AfterDelete;
-        public event EventHandler<TopicEventArgs> BeforeOpen;
-        public event EventHandler<TopicEventArgs> AfterOpen;
-        public event EventHandler<TopicEventArgs> BeforeSave;
-        public event EventHandler<TopicEventArgs> AfterSave;
-        public event EventHandler<TopicEventArgs> BeforeClose;
-        public event EventHandler<TopicEventArgs> AfterClose;
-        public event EventHandler<TopicEventArgs> BeforeRevert;
-        public event EventHandler<TopicEventArgs> AfterRevert;
+        public event EventHandler<FileEventArgs> BeforeDelete;
+        public event EventHandler<FileEventArgs> AfterDelete;
+        public event EventHandler<FileEventArgs> BeforeOpen;
+        public event EventHandler<FileEventArgs> AfterOpen;
+        public event EventHandler<FileEventArgs> BeforeSave;
+        public event EventHandler<FileEventArgs> AfterSave;
+        public event EventHandler<FileEventArgs> BeforeClose;
+        public event EventHandler<FileEventArgs> AfterClose;
+        public event EventHandler<FileEventArgs> BeforeRevert;
+        public event EventHandler<FileEventArgs> AfterRevert;
 
         public event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
         public event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;
@@ -183,52 +183,52 @@ namespace CygSoft.CodeCat.Domain.Topics
             this.documentIndex.RemoveTopicSection(id);
         }
 
-        private void documentIndex_AfterOpen(object sender, TopicEventArgs e)
+        private void documentIndex_AfterOpen(object sender, FileEventArgs e)
         {
             AfterOpen?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeOpen(object sender, TopicEventArgs e)
+        private void documentIndex_BeforeOpen(object sender, FileEventArgs e)
         {
             BeforeOpen?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeRevert(object sender, TopicEventArgs e)
+        private void documentIndex_BeforeRevert(object sender, FileEventArgs e)
         {
             BeforeRevert?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterRevert(object sender, TopicEventArgs e)
+        private void documentIndex_AfterRevert(object sender, FileEventArgs e)
         {
             AfterRevert?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterDelete(object sender, TopicEventArgs e)
+        private void documentIndex_AfterDelete(object sender, FileEventArgs e)
         {
             AfterDelete?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeDelete(object sender, TopicEventArgs e)
+        private void documentIndex_BeforeDelete(object sender, FileEventArgs e)
         {
             BeforeDelete?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterClose(object sender, TopicEventArgs e)
+        private void documentIndex_AfterClose(object sender, FileEventArgs e)
         {
             AfterClose?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeClose(object sender, TopicEventArgs e)
+        private void documentIndex_BeforeClose(object sender, FileEventArgs e)
         {
             BeforeClose?.Invoke(this, e);
         }
 
-        private void documentIndex_AfterSave(object sender, TopicEventArgs e)
+        private void documentIndex_AfterSave(object sender, FileEventArgs e)
         {
             AfterSave?.Invoke(this, e);
         }
 
-        private void documentIndex_BeforeSave(object sender, TopicEventArgs e)
+        private void documentIndex_BeforeSave(object sender, FileEventArgs e)
         {
             BeforeSave?.Invoke(this, e);
         }
