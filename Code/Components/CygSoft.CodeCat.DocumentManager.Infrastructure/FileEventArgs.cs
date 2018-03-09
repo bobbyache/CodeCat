@@ -29,5 +29,19 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         event EventHandler<FileEventArgs> AfterClose;
         event EventHandler<FileEventArgs> BeforeRevert;
         event EventHandler<FileEventArgs> AfterRevert;
+
+        string FilePath { get; }
+        string FileName { get; }
+        string FileExtension { get; }
+        string Folder { get; }
+        bool FolderExists { get; }
+        bool Exists { get; }
+        bool Loaded { get; }
+
+        void Open();
+        void Delete();
+        void Save();
+        void Close();
+        void Revert();
     }
 }

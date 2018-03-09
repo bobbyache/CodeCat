@@ -10,13 +10,6 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
         event EventHandler<TopicSectionEventArgs> TopicSectionMovedDown;
 
         string Id { get; }
-        string FilePath { get; }
-        string FileName { get; }
-        string FileExtension { get; }
-        string Folder { get; }
-        bool FolderExists { get; }
-        bool Exists { get; }
-        bool Loaded { get; }
 
         void Open();
         void Delete();
