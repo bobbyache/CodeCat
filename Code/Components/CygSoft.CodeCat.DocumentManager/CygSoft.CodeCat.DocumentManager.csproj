@@ -51,7 +51,6 @@
     <Compile Include="PathGenerators\ImagePathGenerator.cs" />
     <Compile Include="PathGenerators\ImagePagerPathGenerator.cs" />
     <Compile Include="PathGenerators\VersionPathGenerator.cs" />
-    <Compile Include="Services\FileVersioner.cs" />
     <Compile Include="Services\PositionableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TopicSections\CodeTopicSection.cs" />
