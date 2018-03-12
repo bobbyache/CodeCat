@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
 
-namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
+namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
     public interface IVersionedFileRepository
     {

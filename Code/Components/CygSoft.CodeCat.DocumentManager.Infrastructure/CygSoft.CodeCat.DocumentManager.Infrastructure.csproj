@@ -44,6 +44,7 @@
     <Compile Include="ICodeTemplateTopicSection.cs" />
     <Compile Include="IVersionableFile.cs" />
     <Compile Include="IVersionedCodeTopicSection.cs" />
+    <Compile Include="IVersionedFileRepository.cs" />
     <Compile Include="TopicSectionType.cs" />
     <Compile Include="ICodeTopicSection.cs" />
     <Compile Include="ITopicSection.cs" />
