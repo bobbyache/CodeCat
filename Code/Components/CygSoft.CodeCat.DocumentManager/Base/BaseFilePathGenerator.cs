@@ -9,7 +9,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public abstract string FilePath { get; }
         public abstract string FileExtension { get; }
 
-        public string FolderPath
+        public virtual string FolderPath
         {
             get
             {
@@ -20,7 +20,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             }
         }
 
-        public bool FileExists { get { return File.Exists(this.FilePath); } }
+        public virtual bool FileExists { get { return File.Exists(this.FilePath); } }
 
         protected string CleanExtension(string ext)
         {

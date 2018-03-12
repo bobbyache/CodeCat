@@ -58,6 +58,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QikTemplateDocumentSetTests.cs" />
     <Compile Include="TopicDocumentTests.cs" />
+    <Compile Include="VersionedCodeTopicSectionTests.cs" />
+    <Compile Include="VersionPathGeneratorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Components\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">

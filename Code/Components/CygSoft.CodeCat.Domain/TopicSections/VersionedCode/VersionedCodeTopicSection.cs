@@ -14,6 +14,7 @@ namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
     public class VersionedCodeTopicSection : CodeTopicSection, IVersionedCodeTopicSection
     {
         private List<IFileVersion> fileVersions = new List<IFileVersion>();
+        private IVersionedFileRepository versionedFileRepository;
 
         public event EventHandler SnapshotTaken;
         public event EventHandler SnapshotDeleted;
@@ -83,12 +84,31 @@ namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
 
         public VersionedCodeTopicSection(string folder, string title, string extension, string syntax) : base(folder, title, extension, syntax)
         {
+            this.versionedFileRepository = new VersionedCodeIndexXmlRepository(GetVersionIndexPath());
+            this.versionedFileRepository.FilePath = GetVersionIndexPath();
             this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.VersionedCode);
         }
 
         public VersionedCodeTopicSection(string folder, string id, string title, string extension, int ordinal, string description, string syntax)
             : base(folder, id, title, extension, ordinal, description, syntax)
         {
+            this.versionedFileRepository = new VersionedCodeIndexXmlRepository(GetVersionIndexPath());
+            this.versionedFileRepository.FilePath = GetVersionIndexPath();
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.VersionedCode);
+        }
+
+        public VersionedCodeTopicSection(IVersionedFileRepository versionedFileRepository, string folder, string title, string extension, string syntax) : base(folder, title, extension, syntax)
+        {
+            this.versionedFileRepository = versionedFileRepository;
+            this.versionedFileRepository.FilePath = GetVersionIndexPath();
+            this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.VersionedCode);
+        }
+
+        public VersionedCodeTopicSection(IVersionedFileRepository versionedFileRepository, string folder, string id, string title, string extension, int ordinal, string description, string syntax)
+            : base(folder, id, title, extension, ordinal, description, syntax)
+        {
+            this.versionedFileRepository = versionedFileRepository;
+            this.versionedFileRepository.FilePath = GetVersionIndexPath();
             this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.VersionedCode);
         }
 
@@ -99,26 +119,38 @@ namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
 
         public IFileVersion CreateVersion(string description = "")
         {
-            VersionPathGenerator versionPathGenerator = new VersionPathGenerator(this.FilePath, DateTime.Now);
+            return CreateVersion(DateTime.Now, this.FilePath);
+        }
+
+        public IFileVersion CreateVersion(DateTime timeStamp, string description = "")
+        {
+            VersionPathGenerator versionPathGenerator = new VersionPathGenerator(this.FilePath, timeStamp);
             CodeTopicSectionVersion fileVersion = new CodeTopicSectionVersion(versionPathGenerator, description);
-            File.WriteAllText(fileVersion.FilePath, this.Text);
+            CreateVersionFile(fileVersion);
 
             this.fileVersions.Add(fileVersion);
             this.fileVersions.Sort(new VersionFileComparer());
 
-            VersionedCodeIndexXmlRepository repo = new VersionedCodeIndexXmlRepository(GetVersionIndexPath());
-            repo.WriteVersions(fileVersions);
+            versionedFileRepository.WriteVersions(fileVersions);
 
             this.SnapshotTaken?.Invoke(this, new EventArgs());
             return fileVersion;
         }
 
+        protected virtual void CreateVersionFile(IFileVersion fileVersion)
+        {
+            File.WriteAllText(fileVersion.FilePath, this.Text);
+        }
+
+        protected virtual void DeleteVersionFile(IFileVersion fileVersion)
+        {
+            File.Delete(fileVersion.FilePath);
+        }
+
         protected override void OnOpen()
         {
-            VersionedCodeIndexXmlRepository repo = new VersionedCodeIndexXmlRepository(GetVersionIndexPath());
-
-            if (repo.HasVersionFile)
-                this.fileVersions = repo.LoadVersions();
+            if (versionedFileRepository.HasVersionFile)
+                this.fileVersions = versionedFileRepository.LoadVersions();
             base.OnOpen();
         }
 
@@ -126,15 +158,13 @@ namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
         {
             IFileVersion fileVersion = fileVersions.Where(s => s.Id == versionId).SingleOrDefault();
 
-            File.Delete(fileVersion.FilePath);
+            DeleteVersionFile(fileVersion);
             fileVersions.Remove(fileVersion);
 
             if (fileVersions.Any())
             {
                 fileVersions.Sort(new VersionFileComparer());
-
-                VersionedCodeIndexXmlRepository repo = new VersionedCodeIndexXmlRepository(GetVersionIndexPath());
-                repo.WriteVersions(fileVersions);
+                versionedFileRepository.WriteVersions(fileVersions);
             }
             else
             {
@@ -169,7 +199,7 @@ namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
         public IFileVersion LatestVersion()
         {
             fileVersions.Sort(new VersionFileComparer());
-            return fileVersions.Last();
+            return fileVersions.First();
         }
     }
 }
