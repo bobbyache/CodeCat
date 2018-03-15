@@ -140,5 +140,152 @@ namespace DocumentManager.UnitTests
 
             Assert.AreEqual(1, item1.Ordinal);
         }
+
+        [Test]
+        public void PositionableList_Insert4_Move_ToSpecific_Position_Successful()
+        {
+            TestPositionedItem item1 = new TestPositionedItem { Identifier = "Item 1" };
+            TestPositionedItem item2 = new TestPositionedItem { Identifier = "Item 2" };
+            TestPositionedItem item3 = new TestPositionedItem { Identifier = "Item 3" };
+            TestPositionedItem item4 = new TestPositionedItem { Identifier = "Item 4" };
+
+            List<TestPositionedItem> items = new List<TestPositionedItem>
+            {
+                item1,
+                item2,
+                item3,
+                item4,
+            };
+
+            PositionableList<TestPositionedItem> positionableList = new PositionableList<TestPositionedItem>(items);
+            positionableList.MoveTo(item4, 2);
+
+            Assert.AreEqual(1, item1.Ordinal);
+            Assert.AreEqual(3, item2.Ordinal);
+            Assert.AreEqual(4, item3.Ordinal);
+            Assert.AreEqual(2, item4.Ordinal);
+        }
+
+        [Test]
+        public void PositionableList_Insert4_Remove_Successful()
+        {
+            TestPositionedItem item1 = new TestPositionedItem { Identifier = "Item 1" };
+            TestPositionedItem item2 = new TestPositionedItem { Identifier = "Item 2" };
+            TestPositionedItem item3 = new TestPositionedItem { Identifier = "Item 3" };
+            TestPositionedItem item4 = new TestPositionedItem { Identifier = "Item 4" };
+
+            List<TestPositionedItem> items = new List<TestPositionedItem>
+            {
+                item1,
+                item2,
+                item3,
+                item4,
+            };
+
+            PositionableList<TestPositionedItem> positionableList = new PositionableList<TestPositionedItem>(items);
+            positionableList.Remove(item2);
+
+            Assert.AreEqual(3, positionableList.Count);
+            Assert.AreEqual(1, item1.Ordinal);
+            Assert.AreEqual(2, item3.Ordinal);
+            Assert.AreEqual(3, item4.Ordinal);
+        }
+
+        [Test]
+        public void PositionableList_CanMove_Last_Item_Behaves_Correctly()
+        {
+            TestPositionedItem item1 = new TestPositionedItem { Identifier = "Item 1" };
+            TestPositionedItem item2 = new TestPositionedItem { Identifier = "Item 2" };
+            TestPositionedItem item3 = new TestPositionedItem { Identifier = "Item 3" };
+
+            List<TestPositionedItem> items = new List<TestPositionedItem>
+            {
+                item1,
+                item2,
+                item3,
+            };
+
+            PositionableList<TestPositionedItem> positionableList = new PositionableList<TestPositionedItem>(items);
+
+            Assert.IsTrue(positionableList.CanMoveUp(item3));
+            Assert.IsFalse(positionableList.CanMoveDown(item3));
+        }
+
+        [Test]
+        public void PositionableList_CanMove_First_Item_Behaves_Correctly()
+        {
+            TestPositionedItem item1 = new TestPositionedItem { Identifier = "Item 1" };
+            TestPositionedItem item2 = new TestPositionedItem { Identifier = "Item 2" };
+            TestPositionedItem item3 = new TestPositionedItem { Identifier = "Item 3" };
+
+            List<TestPositionedItem> items = new List<TestPositionedItem>
+            {
+                item1,
+                item2,
+                item3,
+            };
+
+            PositionableList<TestPositionedItem> positionableList = new PositionableList<TestPositionedItem>(items);
+
+            Assert.IsFalse(positionableList.CanMoveUp(item1));
+            Assert.IsTrue(positionableList.CanMoveDown(item1));
+        }
+
+        [Test]
+        public void PositionableList_CanMove_Middle_Item_Behaves_Correctly()
+        {
+            TestPositionedItem item1 = new TestPositionedItem { Identifier = "Item 1" };
+            TestPositionedItem item2 = new TestPositionedItem { Identifier = "Item 2" };
+            TestPositionedItem item3 = new TestPositionedItem { Identifier = "Item 3" };
+
+            List<TestPositionedItem> items = new List<TestPositionedItem>
+            {
+                item1,
+                item2,
+                item3,
+            };
+
+            PositionableList<TestPositionedItem> positionableList = new PositionableList<TestPositionedItem>(items);
+
+            Assert.IsTrue(positionableList.CanMoveUp(item2));
+            Assert.IsTrue(positionableList.CanMoveDown(item2));
+        }
+
+        [Test]
+        public void PositionableList_ExistsInList_Finds_ExistingItem()
+        {
+            TestPositionedItem item1 = new TestPositionedItem { Identifier = "Item 1" };
+            TestPositionedItem item2 = new TestPositionedItem { Identifier = "Item 2" };
+            TestPositionedItem item3 = new TestPositionedItem { Identifier = "Item 3" };
+
+            List<TestPositionedItem> items = new List<TestPositionedItem>
+            {
+                item1,
+                item2,
+                item3,
+            };
+
+            PositionableList<TestPositionedItem> positionableList = new PositionableList<TestPositionedItem>(items);
+
+            Assert.IsTrue(positionableList.ExistsInList(item2));
+        }
+
+        [Test]
+        public void PositionableList_ExistsInList_DoesNotFind_Item()
+        {
+            TestPositionedItem item1 = new TestPositionedItem { Identifier = "Item 1" };
+            TestPositionedItem item2 = new TestPositionedItem { Identifier = "Item 2" };
+            TestPositionedItem item3 = new TestPositionedItem { Identifier = "Item 3" };
+
+            List<TestPositionedItem> items = new List<TestPositionedItem>
+            {
+                item1,
+                item2,
+            };
+
+            PositionableList<TestPositionedItem> positionableList = new PositionableList<TestPositionedItem>(items);
+
+            Assert.IsFalse(positionableList.ExistsInList(item3));
+        }
     }
 }
