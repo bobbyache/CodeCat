@@ -1,7 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Base;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
-using System;
 using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.TopicSections
@@ -9,6 +8,17 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
     public abstract class TextTopicSection : TopicSection, ITextTopicSection
     {
         public string Text { get; set; }
+
+        public TextTopicSection(BaseFilePathGenerator filePathGenerator, string title) : base(filePathGenerator, title, null)
+        {
+            this.Text = null;
+        }
+
+        public TextTopicSection(BaseFilePathGenerator filePathGenerator, string title, int ordinal, string description)
+            : base(filePathGenerator, title, description, ordinal)
+        {
+            this.Text = null;
+        }
 
         // Only create these documents internally.
         public TextTopicSection(string folder, string title, string extension) : base(new DocumentPathGenerator(folder, extension), title, null)

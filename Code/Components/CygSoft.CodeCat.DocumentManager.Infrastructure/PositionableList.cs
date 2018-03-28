@@ -1,14 +1,21 @@
-﻿using CygSoft.CodeCat.DocumentManager.Exceptions;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.DocumentManager.Services
+namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
     public class PositionableList<T> where T : class, IPositionedItem
     {
         private const string ItemDoesNotExistMessage = "Position item does not exist within the position list.";
         private List<T> positionedItemList = new List<T>();
+
+        public PositionableList() { }
+        public PositionableList(IEnumerable<T> items)
+        {
+            InitializeList(items.ToList());
+        }
 
         public List<T> ItemsList
         {
@@ -21,23 +28,32 @@ namespace CygSoft.CodeCat.DocumentManager.Services
 
         public T LastItem
         {
-            get 
+            get
             {
                 AutoFixPositioning();
-                return positionedItemList[positionedItemList.Count - 1]; 
+                return positionedItemList[positionedItemList.Count - 1];
             }
         }
 
         public T FirstItem
         {
-            get 
+            get
             {
                 AutoFixPositioning();
-                return positionedItemList[0]; 
+                return positionedItemList[0];
             }
         }
 
         public int Count { get { return positionedItemList.Count; } }
+
+        public T this[int index]
+        {
+            get
+            {
+                return positionedItemList.Where(i => i.Ordinal == index + 1).Single();
+            }
+        }
+
 
         public void Insert(T item)
         {

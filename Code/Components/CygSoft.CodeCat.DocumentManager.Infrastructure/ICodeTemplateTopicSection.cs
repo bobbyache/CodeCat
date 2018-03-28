@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public class TopicEventArgs : EventArgs
+    public interface ICodeTemplateTopicSection : ITopicSection
     {
-        public ITopic Topic { get; private set; }
-
-        public TopicEventArgs(ITopic topic)
-        {
-            this.Topic = topic;
-        }
     }
 }

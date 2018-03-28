@@ -130,6 +130,10 @@ namespace CygSoft.CodeCat.UI.WinForms
                     topicDocument.AddTopicSection(TopicSectionType.FileAttachments, "File Attachments", null, null);
                     break;
 
+                case TopicSectionType.CodeTemplate:
+                    topicDocument.AddTopicSection(TopicSectionType.CodeTemplate, "Code Template", null);
+                    break;
+
                 default:
                     break;
             }
@@ -231,6 +235,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnRichText.Click += (s, e) => CreateTopicSection(TopicSectionType.RtfEditor);
             btnFileGroup.Click += (s, e) => CreateTopicSection(TopicSectionType.FileAttachments);
             btnSearchableEventDiary.Click += (s, e) => CreateTopicSection(TopicSectionType.SearchableEvent);
+            btnCodeTemplate.Click += (s, e) => CreateTopicSection(TopicSectionType.CodeTemplate);
             btnOpenFolder.Click += (s, e) => FileSys.OpenFolder(topicDocument.Folder);
         }
 
@@ -282,7 +287,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Work Item Events
 
-        private void topicDocument_ContentReverted(object sender, TopicEventArgs e)
+        private void topicDocument_ContentReverted(object sender, FileEventArgs e)
         {
             Gui.Drawing.SuspendDrawing(this);
             ResetFields();
@@ -290,12 +295,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             Gui.Drawing.ResumeDrawing(this);
         }
 
-        private void topicDocument_ContentSaved(object sender, TopicEventArgs e)
+        private void topicDocument_ContentSaved(object sender, FileEventArgs e)
         {
             ResetFields();
         }
 
-        private void topicDocument_BeforeContentSaved(object sender, TopicEventArgs e)
+        private void topicDocument_BeforeContentSaved(object sender, FileEventArgs e)
         {
             topicDocument.Title = this.txtTitle.Text.Trim();
             topicDocument.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
