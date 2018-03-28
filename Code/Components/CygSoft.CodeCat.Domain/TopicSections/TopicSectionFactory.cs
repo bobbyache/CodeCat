@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.TopicSections;
+using CygSoft.CodeCat.Domain.TopicSections.CodeTemplate;
 using CygSoft.CodeCat.Domain.TopicSections.FileAttachment;
 using CygSoft.CodeCat.Domain.TopicSections.ImagePager;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary;
@@ -61,7 +62,18 @@ namespace CygSoft.CodeCat.Domain.TopicSections
             if (topicSectionArgs.DocumentType == SectionTypes.FILE_ATTACHMENTS_TOPIC_SECTION)
                 return CreateFileAttachmentsTopicSection(topicSectionArgs);
 
+            if (topicSectionArgs.DocumentType == SectionTypes.CODE_TEMPLATE_SECTION)
+                return CreateCodeTemplateTopicSection(topicSectionArgs);
+
             return null;
+        }
+
+        private static ITopicSection CreateCodeTemplateTopicSection(TopicSectionArgs topicSectionArgs)
+        {
+            if (topicSectionArgs.Id == null)
+                return new CodeTemplateTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title);
+            else
+                return new CodeTemplateTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Ordinal, topicSectionArgs.Description);
         }
 
         private static ITopicSection CreateSearchableSnippetTopicSection(TopicSectionArgs topicSectionArgs)

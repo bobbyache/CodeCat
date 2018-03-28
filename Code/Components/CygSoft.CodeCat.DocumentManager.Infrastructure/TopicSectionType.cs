@@ -12,6 +12,7 @@
         RtfEditor,
         FileAttachments,
         SearchableSnippet,
-        SearchableEvent
+        SearchableEvent,
+        CodeTemplate
     }
 }

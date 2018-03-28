@@ -279,7 +279,7 @@ namespace CygSoft.CodeCat.Domain.Base
             indexRepository.SaveIndex(this.index);
         }
 
-        private void workItem_AfterDelete(object sender, TopicEventArgs e)
+        private void workItem_AfterDelete(object sender, FileEventArgs e)
         {
             IWorkItem workItem = sender as IWorkItem;
 
@@ -291,13 +291,13 @@ namespace CygSoft.CodeCat.Domain.Base
             this.index.Remove(workItem.Id);
         }
 
-        private void workItem_AfterSave(object sender, TopicEventArgs e)
+        private void workItem_AfterSave(object sender, FileEventArgs e)
         {
             IWorkItem workItem = sender as IWorkItem;
             this.index.Update(workItem.IndexItem);
         }
 
-        private void target_BeforeClose(object sender, TopicEventArgs e)
+        private void target_BeforeClose(object sender, FileEventArgs e)
         {
             IWorkItem workItem = sender as IWorkItem;
 

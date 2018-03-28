@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.Domain.Code;
+﻿using CygSoft.CodeCat.DocumentManager.PathGenerators;
+using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
@@ -15,13 +16,18 @@ namespace CygSoft.CodeCat.Domain.Base
         public static IWorkItem Create(IKeywordIndexItem indexItem, string folderPath)
         {
             IWorkItem workItem = null;
-
+            
             if (indexItem is CodeKeywordIndexItem)
-                workItem = new CodeFile(indexItem as CodeKeywordIndexItem, folderPath);
+                workItem = new CodeFile(new DocumentPathGenerator(folderPath, "xml", indexItem.Id), 
+                    indexItem as CodeKeywordIndexItem);
+
             else if (indexItem is QikTemplateKeywordIndexItem)
-                workItem = new QikTemplateDocumentSet(indexItem as QikTemplateKeywordIndexItem, folderPath);
+                workItem = new QikTemplateDocumentSet(new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id), 
+                    indexItem as QikTemplateKeywordIndexItem);
+
             else if (indexItem is TopicKeywordIndexItem)
-                workItem = new TopicDocument(indexItem as TopicKeywordIndexItem, folderPath);
+                workItem = new TopicDocument(new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id),  
+                    indexItem as TopicKeywordIndexItem);
 
             return workItem;
         }

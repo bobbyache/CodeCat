@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
 {
-    internal class VersionedCodeIndexXmlRepository
+    internal class VersionedCodeIndexXmlRepository : IVersionedFileRepository
     {
         private readonly string filePath;
         private readonly string folder;
@@ -19,6 +19,8 @@ namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
             this.filePath = filePath;
             this.folder = Path.GetDirectoryName(filePath);
         }
+
+        public string FilePath { get; set; }
 
         public bool HasVersionFile
         {

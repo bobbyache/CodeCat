@@ -11,10 +11,8 @@ namespace CygSoft.CodeCat.DocumentManager.PathGenerators
         private string id;
 
         public DocumentIndexPathGenerator(string folder, string extension)
+            : this(folder, extension, Guid.NewGuid().ToString())
         {
-            this.id = Guid.NewGuid().ToString();
-            this.folder = folder;
-            this.extension = extension;
         }
 
         public DocumentIndexPathGenerator(string folder, string extension, string id)

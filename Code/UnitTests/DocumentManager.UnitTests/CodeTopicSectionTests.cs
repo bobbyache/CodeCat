@@ -204,7 +204,8 @@ namespace DocumentManager.UnitTests
 
             Assert.That(beforeDeleteCalled, Is.True);
             Assert.That(afterDeleteCalled, Is.True);
-            Assert.That(codeTopicSection.OnDeleteCalled, Is.True);
+            Assert.That(codeTopicSection.OnBeforeDeleteCalled, Is.True);
+            Assert.That(codeTopicSection.OnAfterDeleteCalled, Is.True);
         }
 
         [Test]
@@ -236,12 +237,15 @@ namespace DocumentManager.UnitTests
             public bool OpenFileCalled = false;
             public bool OnRevertCalled = false;
             public bool OnSaveCalled = false;
-            public bool OnDeleteCalled = false;
+            public bool OnAfterDeleteCalled = false;
+            public bool OnBeforeDeleteCalled = false;
             public bool OnCloseCalled = false;
 
             public TestCodeTopicSection() : base(@"C:\TestFolder", "Test Code Section", "cs", "C#") { }
 
-            protected override void OnDelete() { OnDeleteCalled = true; }
+            protected override void OnAfterDelete() { OnAfterDeleteCalled = true; }
+            protected override void OnBeforeDelete() { OnBeforeDeleteCalled = true; }
+            
             protected override void OnSave() { OnSaveCalled = true; }
             protected override void OnOpen() { OpenFileCalled = true; }
             protected override void OnRevert() { OnRevertCalled = true; }
