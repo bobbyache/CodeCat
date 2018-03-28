@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.Domain.Management;
+﻿using CygSoft.CodeCat.DocumentManager.PathGenerators;
+using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace CygSoft.CodeCat.Domain.Topics
 
             foreach (TopicKeywordIndexItem indexItem in indexItems.OfType<TopicKeywordIndexItem>())
             {
-                TopicDocument codeFile = new TopicDocument(indexItem as TopicKeywordIndexItem, folderPath);
+                TopicDocument codeFile = new TopicDocument(new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id), indexItem as TopicKeywordIndexItem);
                 exportList.Add(new IndexExportImportData(indexItem.Id, codeFile.Folder, indexItem.Id, indexItem));
             }
             return exportList.ToArray();

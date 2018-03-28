@@ -96,13 +96,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             lblEditStatus.ForeColor = this.IsModified ? Color.DarkRed : Color.Black;
         }
 
-        private void topicDocument_AfterSave(object sender, TopicEventArgs e)
+        private void topicDocument_AfterSave(object sender, FileEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void topicDocument_BeforeContentSaved(object sender, TopicEventArgs e)
+        private void topicDocument_BeforeContentSaved(object sender, FileEventArgs e)
         {
             this.topicSection.Title = Title;
             ContentSaved?.Invoke(this, new EventArgs());

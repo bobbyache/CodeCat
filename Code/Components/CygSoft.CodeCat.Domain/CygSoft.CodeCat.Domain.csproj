@@ -53,9 +53,11 @@
     <Compile Include="Base\IWorkItem.cs" />
     <Compile Include="Base\WorkItemFactory.cs" />
     <Compile Include="Code\CodeExporter.cs" />
+    <Compile Include="Code\ICodeFile.cs" />
     <Compile Include="LastCodeFileRepository.cs" />
     <Compile Include="Management\IWorkItemExporter.cs" />
     <Compile Include="Qik\QikTemplateExporter.cs" />
+    <Compile Include="TopicSections\CodeTemplate\CodeTemplateTopicSection.cs" />
     <Compile Include="TopicSections\PdfViewerTopicSection.cs" />
     <Compile Include="TopicSections\QikScriptTopicSection.cs" />
     <Compile Include="TopicSections\RichTextEditorTopicSection.cs" />

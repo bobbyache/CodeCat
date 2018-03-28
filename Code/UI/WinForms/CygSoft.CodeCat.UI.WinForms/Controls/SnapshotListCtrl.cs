@@ -56,9 +56,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             SnapshotSelectionChanged?.Invoke(this, new EventArgs());
         }
 
-        private CodeFile codeFile = null;
+        private ICodeFile codeFile = null;
 
-        public void Attach(CodeFile codeFile)
+        public void Attach(ICodeFile codeFile)
         {
             if (this.codeFile != null)
             {

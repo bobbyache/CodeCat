@@ -2,38 +2,14 @@
 
 namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
-    public interface ITopic
+    public interface ITopic : IFile
     {
-        event EventHandler<TopicEventArgs> BeforeDelete;
-        event EventHandler<TopicEventArgs> AfterDelete;
-        event EventHandler<TopicEventArgs> BeforeOpen;
-        event EventHandler<TopicEventArgs> AfterOpen;
-        event EventHandler<TopicEventArgs> BeforeSave;
-        event EventHandler<TopicEventArgs> AfterSave;
-        event EventHandler<TopicEventArgs> BeforeClose;
-        event EventHandler<TopicEventArgs> AfterClose;
-        event EventHandler<TopicEventArgs> BeforeRevert;
-        event EventHandler<TopicEventArgs> AfterRevert;
-
         event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
         event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;
         event EventHandler<TopicSectionEventArgs> TopicSectionMovedUp;
         event EventHandler<TopicSectionEventArgs> TopicSectionMovedDown;
 
         string Id { get; }
-        string FilePath { get; }
-        string FileName { get; }
-        string FileExtension { get; }
-        string Folder { get; }
-        bool FolderExists { get; }
-        bool Exists { get; }
-        bool Loaded { get; }
-
-        void Open();
-        void Delete();
-        void Save();
-        void Close();
-        void Revert();
 
         // files within the document group
         ITopicSection[] TopicSections { get; }

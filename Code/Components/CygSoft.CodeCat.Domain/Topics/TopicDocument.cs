@@ -1,28 +1,15 @@
-﻿using CygSoft.CodeCat.DocumentManager;
+﻿using CygSoft.CodeCat.DocumentManager.Base;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
-using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.TopicSections;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
-using System.IO;
 using System.Linq;
 
 namespace CygSoft.CodeCat.Domain.Topics
 {
-    public class TopicDocument : ITopicDocument
+    public class TopicDocument : BaseFile, ITopicDocument
     {
-        public event EventHandler<TopicEventArgs> BeforeDelete;
-        public event EventHandler<TopicEventArgs> AfterDelete;
-        public event EventHandler<TopicEventArgs> BeforeOpen;
-        public event EventHandler<TopicEventArgs> AfterOpen;
-        public event EventHandler<TopicEventArgs> BeforeSave;
-        public event EventHandler<TopicEventArgs> AfterSave;
-        public event EventHandler<TopicEventArgs> BeforeClose;
-        public event EventHandler<TopicEventArgs> AfterClose;
-        public event EventHandler<TopicEventArgs> BeforeRevert;
-        public event EventHandler<TopicEventArgs> AfterRevert;
-
         public event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
         public event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;
         public event EventHandler<TopicSectionEventArgs> TopicSectionMovedLeft;
@@ -31,25 +18,13 @@ namespace CygSoft.CodeCat.Domain.Topics
         private IKeywordIndexItem indexItem;
         private TopicIndex documentIndex = null;
 
-        public TopicDocument(ITopicKeywordIndexItem indexItem, string folderPath)
+        public TopicDocument(DocumentIndexPathGenerator filePathGenerator, ITopicKeywordIndexItem indexItem) : base(filePathGenerator)
         {
             this.indexItem = indexItem;
 
-            DocumentIndexPathGenerator indexPathGenerator = new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id);
-            IDocumentIndexRepository repository = new TopicIndexXmlRepository(indexPathGenerator);
+            IDocumentIndexRepository repository = new TopicIndexXmlRepository(filePathGenerator);
 
-            this.documentIndex = new TopicIndex(repository, indexPathGenerator);
-
-            this.documentIndex.BeforeSave += documentIndex_BeforeSave;
-            this.documentIndex.AfterSave += documentIndex_AfterSave;
-            this.documentIndex.BeforeClose += documentIndex_BeforeClose;
-            this.documentIndex.AfterClose += documentIndex_AfterClose;
-            this.documentIndex.BeforeDelete += documentIndex_BeforeDelete;
-            this.documentIndex.AfterDelete += documentIndex_AfterDelete;
-            this.documentIndex.BeforeRevert += documentIndex_BeforeRevert;
-            this.documentIndex.AfterRevert += documentIndex_AfterRevert;
-            this.documentIndex.BeforeOpen += documentIndex_BeforeOpen;
-            this.documentIndex.AfterOpen += documentIndex_AfterOpen;
+            this.documentIndex = new TopicIndex(repository, filePathGenerator);
             
             this.documentIndex.TopicSectionAdded += documentIndex_TopicSectionAdded;
             this.documentIndex.TopicSectionRemoved += documentIndex_TopicSectionRemoved;
@@ -68,33 +43,6 @@ namespace CygSoft.CodeCat.Domain.Topics
         public ITopicSection[] TopicSections { get { return this.documentIndex.TopicSections.ToArray(); } }
 
         public string Id { get { return this.IndexItem.Id; } }
-        public string FilePath { get { return this.documentIndex.FilePath; } }
-        public bool Exists { get { return this.documentIndex.Exists; } }
-
-        public string FileName
-        {
-            get { return this.documentIndex.FileName; }
-        }
-
-        public string FileExtension
-        {
-            get { return this.documentIndex.FileExtension; }
-        }
-
-        public string Folder
-        {
-            get { return this.documentIndex.Folder; }
-        }
-
-        public virtual bool FolderExists
-        {
-            get { return Directory.Exists(Path.GetDirectoryName(this.FilePath)); }
-        }
-
-        public bool Loaded
-        {
-            get { return this.documentIndex.Loaded; }
-        }
 
         public string Title
         {
@@ -135,27 +83,27 @@ namespace CygSoft.CodeCat.Domain.Topics
         }
 
 
-        public void Revert()
+        protected override void OnRevert()
         {
             this.documentIndex.Revert();
         }
 
-        public virtual void Open()
+        protected override void OnOpen()
         {
             this.documentIndex.Open();
         }
 
-        public void Close()
+        protected override void OnClose()
         {
             this.documentIndex.Close();
         }
 
-        public void Save()
+        protected override void OnSave()
         {
             this.documentIndex.Save();
         }
 
-        public void Delete()
+        protected override void OnDelete()
         {
             this.documentIndex.Delete();
         }
@@ -181,56 +129,6 @@ namespace CygSoft.CodeCat.Domain.Topics
         public void RemoveTopicSection(string id)
         {
             this.documentIndex.RemoveTopicSection(id);
-        }
-
-        private void documentIndex_AfterOpen(object sender, TopicEventArgs e)
-        {
-            AfterOpen?.Invoke(this, e);
-        }
-
-        private void documentIndex_BeforeOpen(object sender, TopicEventArgs e)
-        {
-            BeforeOpen?.Invoke(this, e);
-        }
-
-        private void documentIndex_BeforeRevert(object sender, TopicEventArgs e)
-        {
-            BeforeRevert?.Invoke(this, e);
-        }
-
-        private void documentIndex_AfterRevert(object sender, TopicEventArgs e)
-        {
-            AfterRevert?.Invoke(this, e);
-        }
-
-        private void documentIndex_AfterDelete(object sender, TopicEventArgs e)
-        {
-            AfterDelete?.Invoke(this, e);
-        }
-
-        private void documentIndex_BeforeDelete(object sender, TopicEventArgs e)
-        {
-            BeforeDelete?.Invoke(this, e);
-        }
-
-        private void documentIndex_AfterClose(object sender, TopicEventArgs e)
-        {
-            AfterClose?.Invoke(this, e);
-        }
-
-        private void documentIndex_BeforeClose(object sender, TopicEventArgs e)
-        {
-            BeforeClose?.Invoke(this, e);
-        }
-
-        private void documentIndex_AfterSave(object sender, TopicEventArgs e)
-        {
-            AfterSave?.Invoke(this, e);
-        }
-
-        private void documentIndex_BeforeSave(object sender, TopicEventArgs e)
-        {
-            BeforeSave?.Invoke(this, e);
         }
 
         private void documentIndex_TopicSectionMovedRight(object sender, TopicSectionEventArgs e)

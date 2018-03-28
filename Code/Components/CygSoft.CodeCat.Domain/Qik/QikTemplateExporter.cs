@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.Domain.Management;
+﻿using CygSoft.CodeCat.DocumentManager.PathGenerators;
+using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,8 @@ namespace CygSoft.CodeCat.Domain.Qik
 
             foreach (QikTemplateKeywordIndexItem indexItem in indexItems.OfType<QikTemplateKeywordIndexItem>())
             {
-                QikTemplateDocumentSet codeFile = new QikTemplateDocumentSet(indexItem as QikTemplateKeywordIndexItem, folderPath);
+                QikTemplateDocumentSet codeFile = new QikTemplateDocumentSet(new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id), 
+                    indexItem as QikTemplateKeywordIndexItem);
                 exportList.Add(new IndexExportImportData(indexItem.Id, codeFile.Folder, indexItem.Id, indexItem));
             }
             return exportList.ToArray();

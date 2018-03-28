@@ -125,6 +125,12 @@
       <DependentUpon>InputPropertyGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListViewSorter.cs" />
+    <Compile Include="Controls\TopicSections\CodeTemplateTopicSectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TopicSections\CodeTemplateTopicSectionControl.Designer.cs">
+      <DependentUpon>CodeTemplateTopicSectionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TopicSections\PdfDocumentControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -407,6 +413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InputPropertyGrid.resx">
       <DependentUpon>InputPropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TopicSections\CodeTemplateTopicSectionControl.resx">
+      <DependentUpon>CodeTemplateTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\PdfDocumentControl.resx">
       <DependentUpon>PdfDocumentControl.cs</DependentUpon>

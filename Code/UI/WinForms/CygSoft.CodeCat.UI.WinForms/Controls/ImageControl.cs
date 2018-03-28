@@ -120,13 +120,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             this.Modified += CodeItemCtrl_Modified;
         }
 
-        private void codeGroupDocumentSet_ContentSaved(object sender, TopicEventArgs e)
+        private void codeGroupDocumentSet_ContentSaved(object sender, FileEventArgs e)
         {
             IsModified = false;
             SetChangeStatus();
         }
 
-        private void codeGroupDocumentSet_BeforeContentSaved(object sender, TopicEventArgs e)
+        private void codeGroupDocumentSet_BeforeContentSaved(object sender, FileEventArgs e)
         {
             this.topicSection.Title = txtTitle.Text;
         }
