@@ -12,19 +12,19 @@ namespace DocumentManager.UnitTests
     [TestFixture]
     public class DocumentIndexPathGeneratorTests
     {
-        //[Test]
-        //public void RelativeDocumentIndexPathGenerator_Instantiate_WithRelativeFolder_No_Id_Returns_Correct_FolderPath()
-        //{
-        //    RelativeDocumentIndexPathGenerator generator = new RelativeDocumentIndexPathGenerator(@"C:\basefolder", @"relative\folder", "txt");
-        //    Assert.AreEqual(@"C:\basefolder\relative\folder", generator.FolderPath);
-        //}
+        [Test]
+        public void RelativeDocumentIndexPathGenerator_Instantiate_WithRelativeFolder_No_Id_Returns_Correct_FolderPath()
+        {
+            RelativeDocumentIndexPathGenerator generator = new RelativeDocumentIndexPathGenerator(@"C:\basefolder", @"relative\folder", "txt");
+            Assert.AreEqual(@"C:\basefolder\relative\folder", generator.FolderPath);
+        }
 
-        //[Test]
-        //public void RelativeDocumentIndexPathGenerator_Instantiate_WithRelativeFolder_With_Id_Returns_Correct_FilePath()
-        //{
-        //    RelativeDocumentIndexPathGenerator generator = new RelativeDocumentIndexPathGenerator(@"C:\basefolder", @"relative\folder", "txt", "0001-0001");
-        //    Assert.AreEqual(@"C:\basefolder\relative\folder\0001-0001.txt", generator.FolderPath);
-        //}
+        [Test]
+        public void RelativeDocumentIndexPathGenerator_Instantiate_WithRelativeFolder_With_Id_Returns_Correct_FilePath()
+        {
+            RelativeDocumentIndexPathGenerator generator = new RelativeDocumentIndexPathGenerator(@"C:\basefolder", @"relative\folder", "txt", "0001-0001");
+            Assert.AreEqual(@"C:\basefolder\relative\folder\0001-0001.txt", generator.FolderPath);
+        }
     }
 
     public class RelativeDocumentIndexPathGenerator : DocumentIndexPathGenerator
