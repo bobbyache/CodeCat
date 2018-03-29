@@ -66,6 +66,7 @@
     <Compile Include="TopicSections\SearchableEventDiary\SearchableEventKeywordSearchIndexRepository.cs" />
     <Compile Include="TopicSections\SearchableEventDiary\SearchableEventTopicSection.cs" />
     <Compile Include="TopicSections\SingleImageTopicSection.cs" />
+    <Compile Include="TopicSections\Tasks\TaskListTopicSection.cs" />
     <Compile Include="TopicSections\TopicSectionFactory.cs" />
     <Compile Include="TopicSections\FileAttachment\FileAttachment.cs" />
     <Compile Include="TopicSections\FileAttachment\FileAttachmentsTopicSection.cs" />

@@ -13,6 +13,7 @@
         FileAttachments,
         SearchableSnippet,
         SearchableEvent,
-        CodeTemplate
+        CodeTemplate,
+        TaskList
     }
 }

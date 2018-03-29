@@ -5,6 +5,7 @@ using CygSoft.CodeCat.Domain.TopicSections.FileAttachment;
 using CygSoft.CodeCat.Domain.TopicSections.ImagePager;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
+using CygSoft.CodeCat.Domain.TopicSections.Tasks;
 using CygSoft.CodeCat.Domain.TopicSections.VersionedCode;
 using CygSoft.CodeCat.Domain.TopicSections.WebReference;
 
@@ -65,7 +66,18 @@ namespace CygSoft.CodeCat.Domain.TopicSections
             if (topicSectionArgs.DocumentType == SectionTypes.CODE_TEMPLATE_SECTION)
                 return CreateCodeTemplateTopicSection(topicSectionArgs);
 
+            if (topicSectionArgs.DocumentType == SectionTypes.TASKLIST_SECTION)
+                return CreateTaskListTopicSection(topicSectionArgs);
+
             return null;
+        }
+
+        private static ITopicSection CreateTaskListTopicSection(TopicSectionArgs topicSectionArgs)
+        {
+            if (topicSectionArgs.Id == null)
+                return new TaskListTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title);
+            else
+                return new TaskListTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Ordinal);
         }
 
         private static ITopicSection CreateCodeTemplateTopicSection(TopicSectionArgs topicSectionArgs)
