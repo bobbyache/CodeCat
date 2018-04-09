@@ -16,6 +16,7 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
         public const string SEARCHABLE_SNIPPET_TOPIC_SECTION = "SEARCHABLESNIPPET";
         public const string SEARCHABLE_EVENT_TOPIC_SECTION = "SEARCHABLEEVENT";
         public const string CODE_TEMPLATE_SECTION = "CODETEMPLATE";
+        public const string TASKLIST_SECTION = "TASKLIST";
 
         public static TopicSectionType GetDocumentType(string documentType)
         {
@@ -56,6 +57,9 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
 
                 case CODE_TEMPLATE_SECTION:
                     return TopicSectionType.CodeTemplate;
+
+                case TASKLIST_SECTION:
+                    return TopicSectionType.TaskList;
 
                 default:
                     return TopicSectionType.Code;
@@ -101,6 +105,9 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
 
                 case TopicSectionType.CodeTemplate:
                     return CODE_TEMPLATE_SECTION;
+
+                case TopicSectionType.TaskList:
+                    return TASKLIST_SECTION;
 
                 default:
                     return CODE_TOPIC_SECTION;

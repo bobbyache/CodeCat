@@ -99,6 +99,12 @@
     <Compile Include="Controls\SyntaxComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\TaskListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TaskListControl.Designer.cs">
+      <DependentUpon>TaskListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TopicSections\BaseCodeTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -206,6 +212,12 @@
     <Compile Include="Controls\TopicSections\SingleImageTopicSectionControl.cs" />
     <Compile Include="Controls\TopicSections\SingleImageTopicSectionControl.Designer.cs">
       <DependentUpon>SingleImageTopicSectionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TopicSections\TaskListTopicSectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TopicSections\TaskListTopicSectionControl.Designer.cs">
+      <DependentUpon>TaskListTopicSectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TopicSections\WebReferencesTopicSectionControl.cs">
       <SubType>UserControl</SubType>
@@ -399,6 +411,9 @@
     <EmbeddedResource Include="Controls\SearchTextBox.resx">
       <DependentUpon>SearchTextBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TaskListControl.resx">
+      <DependentUpon>TaskListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\BaseCodeTopicSectionControl.resx">
       <DependentUpon>BaseCodeTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -452,6 +467,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\SingleImageTopicSectionControl.resx">
       <DependentUpon>SingleImageTopicSectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TopicSections\TaskListTopicSectionControl.resx">
+      <DependentUpon>TaskListTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\WebReferencesTopicSectionControl.resx">
       <DependentUpon>WebReferencesTopicSectionControl.cs</DependentUpon>

@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
+﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
-using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using System;
+using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
@@ -71,8 +63,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
             listView.SelectedIndexChanged += (s, e) => DisplaySourceCode();
 
-            //keywordsTextBox.KeyUp += KeywordsTextBox_KeyUp; ;
-
             FontModified += Base_FontModified;
             SyntaxModified += Base_SyntaxModified;
             Reverted += Base_Reverted;
@@ -83,14 +73,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             if (listView.Items.Count > 0)
                 listView.Items[0].Selected = true;
         }
-
-        //private void KeywordsTextBox_KeyUp(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Oemcomma)
-        //    {
-        //        ReloadListview();
-        //    }
-        //}
 
         private void CopyCodeToClipboard()
         {
@@ -259,13 +241,5 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             this.SearchableSnippetTopicSection.Text = string.Empty;
             this.SearchableSnippetTopicSection.Syntax = Syntax;
         }
-
-        //private ToolStripButton CreateButton()
-        //{
-        //    ToolStripButton btn = new ToolStripButton();
-        //    btn.Alignment = ToolStripItemAlignment.Right;
-        //    btn.Text = "Test";
-        //    return btn;
-        //}
     }
 }

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="FileEventArgs.cs" />
     <Compile Include="ICodeTemplateTopicSection.cs" />
+    <Compile Include="ITasksTopicSection.cs" />
     <Compile Include="IVersionableFile.cs" />
     <Compile Include="IVersionedCodeTopicSection.cs" />
     <Compile Include="IVersionedFileRepository.cs" />
@@ -73,6 +74,10 @@
     <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.TaskListing.Infrastructure\CygSoft.CodeCat.TaskListing.Infrastructure.csproj">
+      <Project>{399da6b8-255d-40d4-8be6-e96b0870c664}</Project>
+      <Name>CygSoft.CodeCat.TaskListing.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

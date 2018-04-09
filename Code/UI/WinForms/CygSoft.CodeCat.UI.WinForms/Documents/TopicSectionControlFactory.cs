@@ -61,6 +61,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             else if (topicSection is IRichTextEditorTopicSection)
                 topicSectionControl = new RichTextBoxTopicSectionControl(application, workItem as ITopicDocument, topicSection as IRichTextEditorTopicSection);
 
+            else if (topicSection is ITasksTopicSection)
+                topicSectionControl = new TaskListTopicSectionControl(application, workItem as ITopicDocument, topicSection as ITasksTopicSection);
+
             else
                 return null;
 

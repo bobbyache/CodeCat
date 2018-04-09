@@ -134,6 +134,10 @@ namespace CygSoft.CodeCat.UI.WinForms
                     topicDocument.AddTopicSection(TopicSectionType.CodeTemplate, "Code Template", null);
                     break;
 
+                case TopicSectionType.TaskList:
+                    topicDocument.AddTopicSection(TopicSectionType.TaskList, "Task List");
+                    break;
+
                 default:
                     break;
             }
@@ -236,6 +240,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnFileGroup.Click += (s, e) => CreateTopicSection(TopicSectionType.FileAttachments);
             btnSearchableEventDiary.Click += (s, e) => CreateTopicSection(TopicSectionType.SearchableEvent);
             btnCodeTemplate.Click += (s, e) => CreateTopicSection(TopicSectionType.CodeTemplate);
+            btnTaskList.Click += (s, e) => CreateTopicSection(TopicSectionType.TaskList);
+
             btnOpenFolder.Click += (s, e) => FileSys.OpenFolder(topicDocument.Folder);
         }
 
