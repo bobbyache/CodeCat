@@ -44,18 +44,34 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
             btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
 
+            listView.AllowDrop = true;
             listView.SmallImageList = IconRepository.ImageList;
             listViewSorter = new ListViewSorter(this.listView);
             listView.Sorting = SortOrder.Ascending;
 
             ReloadListview();
 
+            listView.DragEnter += ListView_DragEnter;
+            listView.DragDrop += ListView_DragDrop;
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
             listView.MouseUp += listView_MouseUp;
             mnuEdit.Click += (s, e) => Edit();
             mnuDelete.Click += (s, e) => Delete();
             mnuSaveAs.Click += (s, e) => SaveAs();
             mnuOpen.Click += (s, e) => OpenFile();
+        }
+
+        private void ListView_DragDrop(object sender, DragEventArgs e)
+        {
+            string test = e.Data.GetData(DataFormats.Text).ToString();
+        }
+
+        private void ListView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Text))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
         }
 
         private void OpenFile()
