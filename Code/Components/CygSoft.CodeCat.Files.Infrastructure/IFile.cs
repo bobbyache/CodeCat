@@ -4,18 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.DocumentManager.Infrastructure
+namespace CygSoft.CodeCat.Files.Infrastructure
 {
-    public class FileEventArgs : EventArgs
-    {
-        public IFile File { get; private set; }
-
-        public FileEventArgs(IFile file)
-        {
-            this.File = file;
-        }
-    }
-
     public interface IFile
     {
         event EventHandler<FileEventArgs> BeforeDelete;

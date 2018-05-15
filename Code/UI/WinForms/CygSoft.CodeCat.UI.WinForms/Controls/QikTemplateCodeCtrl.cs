@@ -8,6 +8,7 @@ using Alsing.SourceCode;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using CygSoft.CodeCat.Files.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

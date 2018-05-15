@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CygSoft.CodeCat.Files.Infrastructure;
+using System;
 
 namespace CygSoft.CodeCat.Plugins.TopicSection.Infrastructure
 {

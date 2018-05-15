@@ -7,6 +7,7 @@ using System.IO;
 using System.Diagnostics;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using CygSoft.CodeCat.Files.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

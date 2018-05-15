@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.Plugins.TopicSection.Infrastructure;
+﻿using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.Plugins.TopicSection.Infrastructure;
 using System;
 using System.Drawing;
 using System.Windows.Forms;

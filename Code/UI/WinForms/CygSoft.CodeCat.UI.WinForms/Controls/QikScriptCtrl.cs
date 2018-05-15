@@ -6,6 +6,7 @@ using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using Alsing.SourceCode;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
+using CygSoft.CodeCat.Files.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

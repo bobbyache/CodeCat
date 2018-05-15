@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Files.Infrastructure;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
