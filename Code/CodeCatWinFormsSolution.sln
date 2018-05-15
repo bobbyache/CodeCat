@@ -83,6 +83,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Plugins.ToS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.TopicSections.CodeTemplate.UnitTests", "UnitTests\Domain.TopicSections.CodeTemplate.UnitTests\Domain.TopicSections.CodeTemplate.UnitTests.csproj", "{E698F06F-71FC-4184-8EBD-D3524697EB4E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{98AE06D4-8BE5-4F1A-B8B8-7C2D2A9620BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{4E831D6E-9C12-46E7-8F7C-B9B3E442A87B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Plugins.UI.Infrastructure.TopicSection", "Components\CygSoft.CodeCat.Plugins.UI.Infrastructure.TopicSection\CygSoft.CodeCat.Plugins.UI.Infrastructure.TopicSection.csproj", "{DCC0303D-704A-43C6-8A1A-CDB583FBCA18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -225,6 +231,10 @@ Global
 		{E698F06F-71FC-4184-8EBD-D3524697EB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E698F06F-71FC-4184-8EBD-D3524697EB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E698F06F-71FC-4184-8EBD-D3524697EB4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC0303D-704A-43C6-8A1A-CDB583FBCA18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC0303D-704A-43C6-8A1A-CDB583FBCA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC0303D-704A-43C6-8A1A-CDB583FBCA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC0303D-704A-43C6-8A1A-CDB583FBCA18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -246,5 +256,8 @@ Global
 		{D60471A8-6FAA-4A0F-A681-A7E779F0C060} = {8C7396E9-AD41-446D-81DE-565D6D3A669D}
 		{E9761572-E46C-40C4-9C6C-387433B2668B} = {8C7396E9-AD41-446D-81DE-565D6D3A669D}
 		{E698F06F-71FC-4184-8EBD-D3524697EB4E} = {A78E1C5A-3EC8-40B0-9CAA-ADFE337FF541}
+		{98AE06D4-8BE5-4F1A-B8B8-7C2D2A9620BB} = {DFD4AD2C-CC62-4538-92D9-262CD58BABCE}
+		{4E831D6E-9C12-46E7-8F7C-B9B3E442A87B} = {98AE06D4-8BE5-4F1A-B8B8-7C2D2A9620BB}
+		{DCC0303D-704A-43C6-8A1A-CDB583FBCA18} = {4E831D6E-9C12-46E7-8F7C-B9B3E442A87B}
 	EndGlobalSection
 EndGlobal
