@@ -1,4 +1,4 @@
-﻿namespace CygSoft.CodeCat.Plugins.UI.Infrastructure.TopicSection
+﻿namespace CygSoft.CodeCat.Plugins.TopicSection.UI.WinForms
 {
     partial class BaseTopicSectionControl
     {

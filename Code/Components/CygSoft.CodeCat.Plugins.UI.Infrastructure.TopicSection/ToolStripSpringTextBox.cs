@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace CygSoft.CodeCat.Plugins.UI.Infrastructure.TopicSection
+namespace CygSoft.CodeCat.Plugins.TopicSection.UI.WinForms
 {
     public class ToolStripSpringTextBox : ToolStripTextBox
     {

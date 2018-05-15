@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CygSoft.CodeCat.Plugins.TopicSection.Infrastructure;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace CygSoft.CodeCat.Plugins.UI.Infrastructure.TopicSection
+namespace CygSoft.CodeCat.Plugins.TopicSection.UI.WinForms
 {
     public partial class BaseCodeTopicSectionControl : BaseTopicSectionControl
     {

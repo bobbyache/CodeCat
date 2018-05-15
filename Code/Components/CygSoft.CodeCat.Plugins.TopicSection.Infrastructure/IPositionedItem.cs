@@ -1,4 +1,4 @@
-﻿namespace CygSoft.CodeCat.Plugins.UI.Infrastructure.TopicSection
+﻿namespace CygSoft.CodeCat.Plugins.TopicSection.Infrastructure
 {
     public interface IPositionedItem
     {

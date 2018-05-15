@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CygSoft.CodeCat.Plugins.UI.Infrastructure.TopicSection
+namespace CygSoft.CodeCat.Plugins.TopicSection.Infrastructure
 {
     //TODO: IPersistableTarget and a TopicSection? Need to look and identifiy whether these two can't be merged.
     public interface ITopicDocument : IWorkItem

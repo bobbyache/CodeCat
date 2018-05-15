@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CygSoft.CodeCat.Plugins.UI.Infrastructure.TopicSection
+namespace CygSoft.CodeCat.Plugins.TopicSection.Infrastructure
 {
     public interface ITopicSection  : IPositionedItem, IFile
     {

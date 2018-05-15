@@ -1,4 +1,6 @@
-﻿namespace CygSoft.CodeCat.Plugins.UI.Infrastructure.TopicSection
+﻿using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+
+namespace CygSoft.CodeCat.Plugins.TopicSection.Infrastructure
 {
     public interface IWorkItem : IKeywordTarget, IFile
     {

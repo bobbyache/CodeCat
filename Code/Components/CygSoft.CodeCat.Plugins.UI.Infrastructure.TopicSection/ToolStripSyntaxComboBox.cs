@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CygSoft.CodeCat.Plugins.UI.Infrastructure.TopicSection
+namespace CygSoft.CodeCat.Plugins.TopicSection.UI.WinForms
 {
     // https://www.codeproject.com/Articles/10670/Image-ComboBox-Control
     // https://social.msdn.microsoft.com/Forums/vstudio/en-US/ff2fa457-ebdb-46eb-840f-fb29e036b474/image-for-toolstripcombobox-toolstriptextbox-or-other-toolstripcontrolhost?forum=csharpgeneral
