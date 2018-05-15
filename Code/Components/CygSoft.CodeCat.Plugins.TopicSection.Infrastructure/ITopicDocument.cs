@@ -1,9 +1,12 @@
-﻿using System;
+﻿using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using System;
 
 namespace CygSoft.CodeCat.Plugins.TopicSection.Infrastructure
 {
     //TODO: IPersistableTarget and a TopicSection? Need to look and identifiy whether these two can't be merged.
-    public interface ITopicDocument : IWorkItem
+    public interface ITopicDocument : IKeywordTarget, IFile, ITitledEntity
     {
         event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
         event EventHandler<TopicSectionEventArgs> TopicSectionMovedLeft;

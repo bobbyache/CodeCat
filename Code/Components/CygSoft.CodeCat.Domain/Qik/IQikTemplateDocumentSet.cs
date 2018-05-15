@@ -1,11 +1,14 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.Base;
+using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {
-    public interface IQikTemplateDocumentSet : IWorkItem
+    public interface IQikTemplateDocumentSet : IKeywordTarget, IFile, ITitledEntity
     {
         event EventHandler<TopicSectionEventArgs> TopicSectionAdded;
         event EventHandler<TopicSectionEventArgs> TopicSectionRemoved;

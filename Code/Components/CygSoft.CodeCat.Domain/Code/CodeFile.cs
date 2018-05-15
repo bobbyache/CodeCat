@@ -7,10 +7,12 @@ using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.Base;
+using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 
 namespace CygSoft.CodeCat.Domain.Code
 {
-    public class CodeFile : BaseFile, IWorkItem, ICodeFile
+    public class CodeFile : BaseFile, IKeywordTarget, IFile, ITitledEntity, ICodeFile
     {
         private class SnapshotDateComparer : IComparer<CodeSnapshot>
         {

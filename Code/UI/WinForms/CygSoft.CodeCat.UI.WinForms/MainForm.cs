@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Plugins.Generators;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
@@ -367,7 +368,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!WorkItemFormIsOpen(keywordIndexItem))
             {
                 IWorkItemForm workItemForm = null;
-                IWorkItem workItem = application.OpenWorkItem(keywordIndexItem);
+                IFile workItem = application.OpenWorkItem(keywordIndexItem);
 
                 if (keywordIndexItem is ICodeKeywordIndexItem)
                     workItemForm = new CodeWorkItemForm(workItem, application);
@@ -401,7 +402,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void CreateWorkItem(WorkItemType workItemType)
         {
             IWorkItemForm workItemForm = null;
-            IWorkItem workItem = application.CreateWorkItem(ConfigSettings.DefaultSyntax, workItemType);
+            IFile workItem = application.CreateWorkItem(ConfigSettings.DefaultSyntax, workItemType);
 
             switch (workItemType)
             {
@@ -537,9 +538,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void workItemForm_DocumentSaved(object sender, WorkItemSavedFileEventArgs e)
         {
-            searchForm.ExecuteSearch(e.WorkItem.Id);
-            mnuDocuments.DropDownItems[e.WorkItem.Id].Text = e.ContentDocument.Text;
-            mnuDocuments.DropDownItems[e.WorkItem.Id].Image = e.ContentDocument.IconImage;
+            searchForm.ExecuteSearch(((ITitledEntity)e.WorkItem).Id);
+            mnuDocuments.DropDownItems[((ITitledEntity)e.WorkItem).Id].Text = e.ContentDocument.Text;
+            mnuDocuments.DropDownItems[((ITitledEntity)e.WorkItem).Id].Image = e.ContentDocument.IconImage;
         }
 
         private void mnuFileOpen_Click(object sender, EventArgs e)

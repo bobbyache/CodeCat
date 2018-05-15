@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
@@ -47,9 +48,9 @@ namespace CygSoft.CodeCat.UI.WinForms
     public class WorkItemSavedFileEventArgs : EventArgs
     {
         public IWorkItemForm ContentDocument { get; private set; }
-        public IWorkItem WorkItem { get; private set; }
+        public IFile WorkItem { get; private set; }
 
-        public WorkItemSavedFileEventArgs(IWorkItem WorkItem, IWorkItemForm contentDocument)
+        public WorkItemSavedFileEventArgs(IFile WorkItem, IWorkItemForm contentDocument)
         {
             this.ContentDocument = contentDocument;
             this.WorkItem = WorkItem;

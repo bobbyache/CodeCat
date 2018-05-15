@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace CygSoft.CodeCat.Domain.Base
 {
     internal static class WorkItemFactory
     {
-        public static IWorkItem Create(IKeywordIndexItem indexItem, string folderPath)
+        public static IFile Create(IKeywordIndexItem indexItem, string folderPath)
         {
-            IWorkItem workItem = null;
+            IFile workItem = null;
             
             if (indexItem is CodeKeywordIndexItem)
                 workItem = new CodeFile(new DocumentPathGenerator(folderPath, "xml", indexItem.Id), 

@@ -4,6 +4,7 @@ using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Documents;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -19,7 +20,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public TopicWorkItemForm(IWorkItem workItem, AppFacade application, bool isNew = false)
+        public TopicWorkItemForm(IFile workItem, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
@@ -34,7 +35,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.topicDocument.TopicSectionMovedLeft += topicDocument_TopicSectionMovedLeft;
             this.topicDocument.TopicSectionMovedRight += topicDocument_TopicSectionMovedRight;
             base.workItem = workItem;
-            this.Tag = workItem.Id;
+            this.Tag = ((ITitledEntity)workItem).Id;
             this.tabManager = new WorkItemTabManager(this.tabControlFile, this.btnMenu);
             this.tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   
@@ -255,10 +256,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void ResetFields()
         {
-            this.txtToolStripTitle.Text = base.workItem.Title;
-            this.Text = base.workItem.Title;
-            this.txtKeywords.Text = base.workItem.CommaDelimitedKeywords;
-            this.txtTitle.Text = base.workItem.Title;
+            this.txtToolStripTitle.Text = ((ITitledEntity)workItem).Title;
+            this.Text = ((ITitledEntity)workItem).Title;
+            this.txtKeywords.Text = ((IKeywordTarget)workItem).CommaDelimitedKeywords;
+            this.txtTitle.Text = ((ITitledEntity)workItem).Title;
 
             base.IsModified = false;
         }

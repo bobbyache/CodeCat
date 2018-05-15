@@ -50,7 +50,6 @@
     <Compile Include="Base\CategorizedKeywordIndexItem.cs" />
     <Compile Include="Base\CDATAConflictDetectionException.cs" />
     <Compile Include="Base\ICategorizedKeywordIndexItem.cs" />
-    <Compile Include="Base\IWorkItem.cs" />
     <Compile Include="Base\WorkItemFactory.cs" />
     <Compile Include="Code\CodeExporter.cs" />
     <Compile Include="Code\ICodeFile.cs" />

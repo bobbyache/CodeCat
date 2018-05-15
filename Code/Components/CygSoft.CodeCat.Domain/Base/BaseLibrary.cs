@@ -19,7 +19,7 @@ namespace CygSoft.CodeCat.Domain.Base
 
         protected IKeywordSearchIndex index;
         private IKeywordSearchIndexRepository indexRepository;
-        protected Dictionary<string, IWorkItem> workItems;
+        protected Dictionary<string, IFile> workItems;
 
         protected string FileExtension { get; set; }
 
@@ -72,9 +72,9 @@ namespace CygSoft.CodeCat.Domain.Base
             }
         }
 
-        public IWorkItem GetWorkItem(IKeywordIndexItem indexItem)
+        public IFile GetWorkItem(IKeywordIndexItem indexItem)
         {
-            IWorkItem workItem = FindOpenWorkItem(indexItem.Id);
+            IFile workItem = FindOpenWorkItem(indexItem.Id);
 
             if (workItem == null)
                 workItem = CreateWorkItem(indexItem);
@@ -82,17 +82,17 @@ namespace CygSoft.CodeCat.Domain.Base
             return workItem;
         }
 
-        public IWorkItem CreateWorkItem(IKeywordIndexItem indexItem)
+        public IFile CreateWorkItem(IKeywordIndexItem indexItem)
         {
-            IWorkItem workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
+            IFile workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
             OpenWorkItem(workItem);
 
             return workItem;
         }
-        private void OpenWorkItem(IWorkItem workItem)
+        private void OpenWorkItem(IFile workItem)
         {
             if (this.workItems == null)
-                this.workItems = new Dictionary<string, IWorkItem>();
+                this.workItems = new Dictionary<string, IFile>();
 
             if (workItem.Exists)
                 workItem.Open();
@@ -101,7 +101,7 @@ namespace CygSoft.CodeCat.Domain.Base
             workItem.AfterSave += workItem_AfterSave;
             workItem.AfterDelete += workItem_AfterDelete;
 
-            this.workItems.Add(workItem.Id, workItem);
+            this.workItems.Add(((ITitledEntity)workItem).Id, workItem);
         }
 
 
@@ -222,12 +222,12 @@ namespace CygSoft.CodeCat.Domain.Base
             return indeces.ToArray();
         }
 
-        private IWorkItem FindOpenWorkItem(string id)
+        private IFile FindOpenWorkItem(string id)
         {
-            IWorkItem workItem = null;
+            IFile workItem = null;
 
             if (this.workItems == null)
-                this.workItems = new Dictionary<string, IWorkItem>();
+                this.workItems = new Dictionary<string, IFile>();
 
             // first check to see if the file exists..
             if (this.workItems.ContainsKey(id))
@@ -264,7 +264,7 @@ namespace CygSoft.CodeCat.Domain.Base
 
             while (workItems.Count > 0)
             {
-                KeyValuePair<string, IWorkItem> workItem = workItems.ElementAt(0);
+                KeyValuePair<string, IFile> workItem = workItems.ElementAt(0);
                 RemoveLibraryFileReference(workItem.Key);
             }
         }
@@ -282,31 +282,30 @@ namespace CygSoft.CodeCat.Domain.Base
 
         private void workItem_AfterDelete(object sender, FileEventArgs e)
         {
-            IWorkItem workItem = sender as IWorkItem;
+            IFile workItem = sender as IFile;
 
             workItem.BeforeClose -= target_BeforeClose;
             workItem.AfterSave -= workItem_AfterSave;
             workItem.AfterDelete -= workItem_AfterDelete;
 
-            this.RemoveLibraryFileReference(workItem.Id);
-            this.index.Remove(workItem.Id);
+            this.RemoveLibraryFileReference(((ITitledEntity)workItem).Id);
+            this.index.Remove(((ITitledEntity)workItem).Id);
         }
 
         private void workItem_AfterSave(object sender, FileEventArgs e)
         {
-            IWorkItem workItem = sender as IWorkItem;
-            this.index.Update(workItem.IndexItem);
+            IKeywordTarget keywordTarget = sender as IKeywordTarget;
+            this.index.Update(keywordTarget.IndexItem);
         }
 
         private void target_BeforeClose(object sender, FileEventArgs e)
         {
-            IWorkItem workItem = sender as IWorkItem;
+            IFile file = sender as IFile;
+            file.BeforeClose -= target_BeforeClose;
+            file.AfterSave -= workItem_AfterSave;
+            file.AfterDelete -= workItem_AfterDelete;
 
-            workItem.BeforeClose -= target_BeforeClose;
-            workItem.AfterSave -= workItem_AfterSave;
-            workItem.AfterDelete -= workItem_AfterDelete;
-
-            this.RemoveLibraryFileReference(workItem.Id);
+            this.RemoveLibraryFileReference(((IKeywordTarget)file).IndexItem.Id);
         }
     }
 }

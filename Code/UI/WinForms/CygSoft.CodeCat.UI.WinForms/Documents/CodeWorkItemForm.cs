@@ -1,6 +1,9 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Drawing;
@@ -14,7 +17,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public CodeWorkItemForm(IWorkItem workItem, AppFacade application, bool isNew = false)
+        public CodeWorkItemForm(IFile workItem, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
@@ -23,7 +26,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             base.application = application;
             base.workItem = workItem;
-            this.Tag = workItem.Id;
+            this.Tag = ((ITitledEntity)workItem).Id;
 
             this.syntaxBox.AllowBreakPoints = false;
             tabControl.Alignment = TabAlignment.Left;

@@ -16,6 +16,7 @@ using CygSoft.CodeCat.Syntax;
 using CygSoft.CodeCat.Category;
 using CygSoft.CodeCat.Category.Infrastructure;
 using CygSoft.CodeCat.Domain.Base;
+using CygSoft.CodeCat.Files.Infrastructure;
 
 namespace CygSoft.CodeCat.Domain
 {
@@ -245,7 +246,7 @@ namespace CygSoft.CodeCat.Domain
 
 
 
-        public IWorkItem OpenWorkItem(IKeywordIndexItem keywordIndexItem)
+        public IFile OpenWorkItem(IKeywordIndexItem keywordIndexItem)
         {
             if (keywordIndexItem is ICodeKeywordIndexItem)
                 return this.codeLibrary.GetWorkItem(keywordIndexItem);
@@ -257,7 +258,7 @@ namespace CygSoft.CodeCat.Domain
                 return null;
         }
 
-        public IWorkItem CreateWorkItem(string syntax, WorkItemType itemType)
+        public IFile CreateWorkItem(string syntax, WorkItemType itemType)
         {
             switch (itemType)
             {
@@ -277,7 +278,7 @@ namespace CygSoft.CodeCat.Domain
 
         public void DeleteWorkItem(IKeywordIndexItem keywordIndexItem)
         {
-            IWorkItem workItem = null;
+            IFile workItem = null;
 
             if (keywordIndexItem is ICodeKeywordIndexItem)
             {

@@ -5,6 +5,7 @@ using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
+using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
 using System;
@@ -13,7 +14,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 {
     public static class TopicSectionControlFactory
     {
-        public static ITopicSectionBaseControl Create(ITopicSection topicSection, IWorkItem workItem, AppFacade application, EventHandler modifiedEventHandler)
+        public static ITopicSectionBaseControl Create(ITopicSection topicSection, IFile workItem, AppFacade application, EventHandler modifiedEventHandler)
         {
             ITopicSectionBaseControl topicSectionControl = null;
 

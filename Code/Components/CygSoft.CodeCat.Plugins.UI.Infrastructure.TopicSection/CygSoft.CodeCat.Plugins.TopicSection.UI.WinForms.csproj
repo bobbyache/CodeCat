@@ -83,6 +83,10 @@
       <Project>{9d7e248a-e4ef-42de-a624-9f18d827ba42}</Project>
       <Name>CygSoft.CodeCat.Search.KeywordIndex.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
+      <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
+      <Name>CygSoft.CodeCat.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.Plugins.TopicSection.Infrastructure\CygSoft.CodeCat.Plugins.TopicSection.Infrastructure.csproj">
       <Project>{096399b3-1b12-44a9-9675-02f5e68e9117}</Project>
       <Name>CygSoft.CodeCat.Plugins.TopicSection.Infrastructure</Name>

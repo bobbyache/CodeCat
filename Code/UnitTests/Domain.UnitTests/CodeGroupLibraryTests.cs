@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using Moq;
@@ -27,7 +28,7 @@ namespace Domain.UnitTests
             TopicKeywordIndexItem keywordIndexItem = new TopicKeywordIndexItem("Code Group Index Item", "C#", "testing,tested,test");
 
             topicLibrary.Open(@"C:\parent_folder", new Version("4.0.1"));
-            IWorkItem workItem = topicLibrary.CreateWorkItem(keywordIndexItem);
+            IFile workItem = topicLibrary.CreateWorkItem(keywordIndexItem);
 
             Assert.That(workItem, Is.Not.Null);
         }
@@ -36,7 +37,7 @@ namespace Domain.UnitTests
         public void TopicLibrary_OpenWithCodeKeywordIndex_Returns_CodeFile()
         {
             IKeywordIndexItem indexItem = new CodeKeywordIndexItem();
-            IWorkItem workItem = WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
+            IFile workItem = WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
 
             Assert.That(workItem, Is.Not.Null);
             Assert.That(workItem, Is.TypeOf(typeof(CodeFile)));
@@ -46,7 +47,7 @@ namespace Domain.UnitTests
         public void TopicLibrary_OpenWithQikTemplateKeywordIndex_Returns_QikTemplate()
         {
             IKeywordIndexItem indexItem = new QikTemplateKeywordIndexItem();
-            IWorkItem workItem = WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
+            IFile workItem = WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
 
             Assert.That(workItem, Is.Not.Null);
             Assert.That(workItem, Is.TypeOf(typeof(QikTemplateDocumentSet)));
@@ -56,7 +57,7 @@ namespace Domain.UnitTests
         public void TopicLibrary_OpenWithTopicKeywordIndex_Returns_Topic()
         {
             IKeywordIndexItem indexItem = new TopicKeywordIndexItem();
-            IWorkItem workItem = WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
+            IFile workItem = WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
 
             Assert.That(workItem, Is.Not.Null);
             Assert.That(workItem, Is.TypeOf(typeof(TopicDocument)));

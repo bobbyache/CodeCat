@@ -3,7 +3,9 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Documents;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -37,7 +39,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public QikWorkItemForm(IWorkItem workItem, AppFacade application, bool isNew = false)
+        public QikWorkItemForm(IFile workItem, AppFacade application, bool isNew = false)
         {
             InitializeComponent();
 
@@ -201,10 +203,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void ResetFields()
         {
-            txtToolStripTitle.Text = base.workItem.Title;
-            Text = base.workItem.Title;
-            txtKeywords.Text = base.workItem.CommaDelimitedKeywords;
-            txtTitle.Text = base.workItem.Title;
+            txtToolStripTitle.Text = ((ITitledEntity)workItem).Title;
+            Text = ((ITitledEntity)workItem).Title;
+            txtKeywords.Text = ((IKeywordTarget)workItem).CommaDelimitedKeywords;
+            txtTitle.Text = ((ITitledEntity)workItem).Title;
 
             base.IsModified = false;
         }

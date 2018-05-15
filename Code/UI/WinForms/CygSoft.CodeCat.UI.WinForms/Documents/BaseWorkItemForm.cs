@@ -1,5 +1,7 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Base;
+using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
@@ -24,14 +26,14 @@ namespace CygSoft.CodeCat.UI.WinForms
         private bool flagForDelete = false;
 
         protected AppFacade application;
-        protected IWorkItem workItem;
+        protected IFile workItem;
 
         public string Id
         {
             get
             {
                 if (workItem != null)
-                    return workItem.Id;
+                    return ((ITitledEntity)workItem).Id;
                 return null;
             }
         }
@@ -41,7 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             get
             {
                 if (workItem != null)
-                    return workItem.CommaDelimitedKeywords;
+                    return ((IKeywordTarget)workItem).CommaDelimitedKeywords;
                 return null;
             }
         }
@@ -104,7 +106,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         public IKeywordIndexItem GetKeywordIndex()
         {
             if (workItem != null)
-                return workItem.IndexItem;
+                return ((IKeywordTarget)workItem).IndexItem;
             return null;
         }
 
@@ -130,12 +132,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected string AddKeywords(string keywords)
         {
-            return application.AddKeywordsToDelimitedText(workItem.CommaDelimitedKeywords, keywords);
+            return application.AddKeywordsToDelimitedText(((IKeywordTarget)workItem).CommaDelimitedKeywords, keywords);
         }
 
         protected string RemoveKeywords(string keywords)
         {
-            return application.RemoveKeywordsFromDelimitedText(workItem.CommaDelimitedKeywords, keywords);
+            return application.RemoveKeywordsFromDelimitedText(((IKeywordTarget)workItem).CommaDelimitedKeywords, keywords);
         }
 
         protected void RevertChanges()
@@ -148,7 +150,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        protected bool Save(IWorkItem target, IWorkItemForm contentDocument)
+        protected bool Save(IFile target, IWorkItemForm contentDocument)
         {
             if (ValidateChanges())
             {
