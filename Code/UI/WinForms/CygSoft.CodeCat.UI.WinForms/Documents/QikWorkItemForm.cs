@@ -205,7 +205,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             txtToolStripTitle.Text = ((ITitledEntity)workItem).Title;
             Text = ((ITitledEntity)workItem).Title;
-            txtKeywords.Text = ((IKeywordTarget)workItem).CommaDelimitedKeywords;
+            txtKeywords.Text = ((IKeywordTarget)workItem).IndexItem.CommaDelimitedKeywords;
             txtTitle.Text = ((ITitledEntity)workItem).Title;
 
             base.IsModified = false;
@@ -277,7 +277,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void qikFile_BeforeContentSaved(object sender, FileEventArgs e)
         {
             qikFile.Title = txtTitle.Text.Trim();
-            qikFile.CommaDelimitedKeywords = txtKeywords.Text.Trim();
+            qikFile.IndexItem.SetKeywords(txtKeywords.Text.Trim());
             qikFile.Syntax = string.Empty;
         }
 

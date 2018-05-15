@@ -258,7 +258,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             this.txtToolStripTitle.Text = ((ITitledEntity)workItem).Title;
             this.Text = ((ITitledEntity)workItem).Title;
-            this.txtKeywords.Text = ((IKeywordTarget)workItem).CommaDelimitedKeywords;
+            this.txtKeywords.Text = ((IKeywordTarget)workItem).IndexItem.CommaDelimitedKeywords;
             this.txtTitle.Text = ((ITitledEntity)workItem).Title;
 
             base.IsModified = false;
@@ -311,7 +311,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void topicDocument_BeforeContentSaved(object sender, FileEventArgs e)
         {
             topicDocument.Title = this.txtTitle.Text.Trim();
-            topicDocument.CommaDelimitedKeywords = this.txtKeywords.Text.Trim();
+            topicDocument.IndexItem.SetKeywords(this.txtKeywords.Text.Trim());
             topicDocument.Syntax = string.Empty;
         }
 

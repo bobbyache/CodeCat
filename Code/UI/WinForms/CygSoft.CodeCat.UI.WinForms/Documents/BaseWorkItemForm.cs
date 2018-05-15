@@ -43,7 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             get
             {
                 if (workItem != null)
-                    return ((IKeywordTarget)workItem).CommaDelimitedKeywords;
+                    return ((IKeywordTarget)workItem).IndexItem.CommaDelimitedKeywords;
                 return null;
             }
         }
@@ -132,12 +132,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         protected string AddKeywords(string keywords)
         {
-            return application.AddKeywordsToDelimitedText(((IKeywordTarget)workItem).CommaDelimitedKeywords, keywords);
+            return application.AddKeywordsToDelimitedText(((IKeywordTarget)workItem).IndexItem.CommaDelimitedKeywords, keywords);
         }
 
         protected string RemoveKeywords(string keywords)
         {
-            return application.RemoveKeywordsFromDelimitedText(((IKeywordTarget)workItem).CommaDelimitedKeywords, keywords);
+            return application.RemoveKeywordsFromDelimitedText(((IKeywordTarget)workItem).IndexItem.CommaDelimitedKeywords, keywords);
         }
 
         protected void RevertChanges()
