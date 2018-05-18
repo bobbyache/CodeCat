@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Plugins.TopicSection.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ namespace CygSoft.CodeCat.Plugins.TopicSection.UI.WinForms
         public event EventHandler UnregisterFieldEvents;
         public event EventHandler RegisterFieldEvents;
 
+        protected IImageResources imageResources;
         protected ITopicSection topicSection;
         protected /* AppFacade */ object application;
         protected ITopicDocument topicDocument;
@@ -29,12 +31,12 @@ namespace CygSoft.CodeCat.Plugins.TopicSection.UI.WinForms
         public bool FileExists { get { return topicSection.Exists; } }
 
         public BaseTopicSectionControl()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public BaseTopicSectionControl(object application, ITopicDocument topicDocument, ITopicSection topicSection)
+        public BaseTopicSectionControl(object application, IImageResources imageResources, ITopicDocument topicDocument, ITopicSection topicSection)
         {
             InitializeComponent();
 
@@ -43,6 +45,7 @@ namespace CygSoft.CodeCat.Plugins.TopicSection.UI.WinForms
 
             this.Id = topicSection.Id;
 
+            this.imageResources = imageResources;
             this.application = application;
             this.topicSection = topicSection;
             this.topicDocument = topicDocument;

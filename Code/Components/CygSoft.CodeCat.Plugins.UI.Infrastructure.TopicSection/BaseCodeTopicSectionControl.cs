@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Plugins.TopicSection.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -29,13 +30,13 @@ namespace CygSoft.CodeCat.Plugins.TopicSection.UI.WinForms
         
 
         public BaseCodeTopicSectionControl()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public BaseCodeTopicSectionControl(/* AppFacade */ object application, ITopicDocument topicDocument, ICodeTopicSection topicSection)
-            : base(application, topicDocument, topicSection)
+        public BaseCodeTopicSectionControl(/* AppFacade */ object application, IImageResources imageResources, ITopicDocument topicDocument, ICodeTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 
