@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Drawing;
@@ -22,20 +23,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public VersionedCodeTopicSectionControl()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public VersionedCodeTopicSectionControl(AppFacade application, ITopicDocument topicDocument, IVersionedCodeTopicSection topicSection)
-            : base(application, topicDocument, topicSection)
+        public VersionedCodeTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IVersionedCodeTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 
             tabControl.Alignment = TabAlignment.Left;
 
-            btnTakeSnapshot = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add Snapshot", Constants.ImageKeys.AddSnapshot, CreateSnapshot);
-            btnDeleteSnapshot = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete Snapshot", Constants.ImageKeys.DeleteSnapshot, DeleteSnapshot);
+            btnTakeSnapshot = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add Snapshot", imageResources.GetImage(ImageKeys.AddSnapshot), CreateSnapshot);
+            btnDeleteSnapshot = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete Snapshot", imageResources.GetImage(ImageKeys.DeleteSnapshot), DeleteSnapshot);
 
             if (topicDocument == null)
                 return;

@@ -14,6 +14,7 @@ using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
 using PdfiumViewer;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
@@ -30,13 +31,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.PDF).Icon; } }
         public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.PDF).Image; } }
 
-        public PdfDocumentControl(AppFacade application, ITopicDocument topicDocument, IPdfViewerTopicSection topicSection)
-            : base(application, topicDocument, topicSection)
+        public PdfDocumentControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IPdfViewerTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 
-            btnImport = Gui.ToolBar.CreateButton(HeaderToolstrip, "Import", Constants.ImageKeys.OpenProject, btnImport_Click);
-            btnReload = Gui.ToolBar.CreateButton(HeaderToolstrip, "Reload", Constants.ImageKeys.NewProject, btnReload_Click);
+            btnImport = Gui.ToolBar.CreateButton(HeaderToolstrip, "Import", imageResources.GetImage(ImageKeys.OpenProject), btnImport_Click);
+            btnReload = Gui.ToolBar.CreateButton(HeaderToolstrip, "Reload", imageResources.GetImage(ImageKeys.NewProject), btnReload_Click);
             
             LoadIfExists();
         }

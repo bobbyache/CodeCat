@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.TaskListing.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
@@ -16,14 +17,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             InitializeComponent();
         }
 
-        public TaskListTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ITasksTopicSection topicSection) 
-            : base(application, topicDocument, topicSection)
+        public TaskListTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITasksTopicSection topicSection) 
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 
-            taskListControl1.NewTaskImage = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
-            taskListControl1.EditTaskImage = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            taskListControl1.DeleteTaskImage = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            taskListControl1.NewTaskImage = imageResources.GetImage(ImageKeys.AddSnippet);
+            taskListControl1.EditTaskImage = imageResources.GetImage(ImageKeys.EditSnippet);
+            taskListControl1.DeleteTaskImage = imageResources.GetImage(ImageKeys.DeleteSnippet);
 
             taskListControl1.UpdateStatus = () => TaskTopicSection.TaskListStatus;
             taskListControl1.LoadTaskList(topicSection.Tasks, topicSection.Categories);

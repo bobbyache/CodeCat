@@ -8,6 +8,7 @@ using System.Diagnostics;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -17,6 +18,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private ISingleImageTopicSection topicSection;
         private ITopicDocument topicDocument;
+        private IImageResources imageResources;
 
         public string Id { get; private set; }
         public string Title { get { return txtTitle.Text; } }
@@ -26,19 +28,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public bool IsModified { get; private set; }
         public bool FileExists { get { return false; } }
 
-        public ImageControl(AppFacade application, ITopicDocument topicDocument, ISingleImageTopicSection topicSection)
+        public ImageControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ISingleImageTopicSection topicSection)
         {
             InitializeComponent();
+
+            this.imageResources = imageResources;
 
             imageBox.GridScale = Cyotek.Windows.Forms.ImageBoxGridScale.None;
             this.topicSection = topicSection;
             this.topicDocument = topicDocument;
 
-            lblScrollPosition.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectPosition);
-            lblSize.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectSize);
-            lblZoomLevel.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectZoom);
-            this.btnImport.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenProject);
-            btnRefresh.Image = Gui.Resources.GetImage(Constants.ImageKeys.Refresh);
+            lblScrollPosition.Image = imageResources.GetImage(ImageKeys.ObjectPosition);
+            lblSize.Image = imageResources.GetImage(ImageKeys.ObjectSize);
+            lblZoomLevel.Image = imageResources.GetImage(ImageKeys.ObjectZoom);
+            this.btnImport.Image = imageResources.GetImage(ImageKeys.OpenProject);
+            btnRefresh.Image = imageResources.GetImage(ImageKeys.Refresh);
 
             this.Id = topicSection.Id;
 

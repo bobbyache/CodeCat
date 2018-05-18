@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.TaskListing.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
@@ -14,23 +15,29 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
     public partial class TaskForm : DockContent
     {
         private AppFacade application;
+        private IImageResources imageResources;
 
-        public TaskForm(AppFacade application)
+        public TaskForm(AppFacade application, IImageResources imageResources)
         {
             InitializeComponent();
 
-            Icon = Gui.Drawing.IconFromImage(Gui.Resources.GetImage(Constants.ImageKeys.EditText));
+            Icon = Gui.Drawing.IconFromImage(imageResources.GetImage(ImageKeys.EditText));
             HideOnClose = true;
             DockAreas = DockAreas.DockLeft | DockAreas.DockRight;
 
-            btnNewTask.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
-            btnEditTask.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            btnDeleteTask.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
+            btnNewTask.Image = imageResources.GetImage(ImageKeys.AddSnippet);
+            btnEditTask.Image = imageResources.GetImage(ImageKeys.EditSnippet);
+            btnDeleteTask.Image = imageResources.GetImage(ImageKeys.DeleteSnippet);
 
             taskProgressBar.Maximum = 100;
             btnNewTask.Enabled = false;
             btnEditTask.Enabled = false;
             btnDeleteTask.Enabled = false;
+
+            if (imageResources == null)
+                throw new ArgumentNullException("Image Resources is a required constructor parameter and cannot be null");
+
+            this.imageResources = imageResources;
 
             if (application == null)
                 throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");

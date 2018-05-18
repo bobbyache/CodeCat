@@ -8,6 +8,7 @@ using System.Diagnostics;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -15,6 +16,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
+        private IImageResources imageResources;
         private IImagePagerTopicSection topicSection;
         private ITopicDocument topicDocument;
         private IPagerImage pageImage;
@@ -33,9 +35,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         #region Constructors
 
-        public ImageSetControl(AppFacade application, ITopicDocument topicDocument, IImagePagerTopicSection topicSection)
+        public ImageSetControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IImagePagerTopicSection topicSection)
         {
             InitializeComponent();
+
+            this.imageResources = imageResources;
 
             Id = topicSection.Id;
 
@@ -79,17 +83,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private void CreateControlGraphics()
         {
-            btnAddImage.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
-            btnDeleteImage.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnImport.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenProject);
-            btnMoveLeft.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveLeft);
-            btnMoveRight.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveRight);
-            lblScrollPosition.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectPosition);
-            lblSize.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectSize);
-            lblZoomLevel.Image = Gui.Resources.GetImage(Constants.ImageKeys.ObjectZoom);
-            btnDisplayText.Image = Gui.Resources.GetImage(Constants.ImageKeys.ShowText);
-            btnEditImageText.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditText);
-            btnRefresh.Image = Gui.Resources.GetImage(Constants.ImageKeys.Refresh);
+            btnAddImage.Image = imageResources.GetImage(ImageKeys.AddSnippet);
+            btnDeleteImage.Image = imageResources.GetImage(ImageKeys.DeleteSnippet);
+            btnImport.Image = imageResources.GetImage(ImageKeys.OpenProject);
+            btnMoveLeft.Image = imageResources.GetImage(ImageKeys.MoveLeft);
+            btnMoveRight.Image = imageResources.GetImage(ImageKeys.MoveRight);
+            lblScrollPosition.Image = imageResources.GetImage(ImageKeys.ObjectPosition);
+            lblSize.Image = imageResources.GetImage(ImageKeys.ObjectSize);
+            lblZoomLevel.Image = imageResources.GetImage(ImageKeys.ObjectZoom);
+            btnDisplayText.Image = imageResources.GetImage(ImageKeys.ShowText);
+            btnEditImageText.Image = imageResources.GetImage(ImageKeys.EditText);
+            btnRefresh.Image = imageResources.GetImage(ImageKeys.Refresh);
         }
 
         private void LoadInitialImage()

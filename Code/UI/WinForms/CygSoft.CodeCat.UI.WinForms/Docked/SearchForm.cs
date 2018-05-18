@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using WeifenLuo.WinFormsUI.Docking;
@@ -9,6 +10,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
     public partial class SearchForm : DockContent
     {
         private AppFacade application;
+        private IImageResources imageResources;
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
@@ -40,21 +42,27 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         public IKeywordIndexItem SelectedWorkItem { get { return codeSearchResultsControl1.SelectedTopic; } }
         public IKeywordIndexItem[] SelectedWorkItems { get { return codeSearchResultsControl1.SelectedTopics; } }
 
-        public SearchForm(AppFacade application)
+        public SearchForm(AppFacade application, IImageResources imageResources)
         {
             InitializeComponent();
 
+            if (imageResources == null)
+                throw new ArgumentNullException("Image Resources is a required constructor parameter and cannot be null");
+
+            this.imageResources = imageResources;
+
             if (application == null)
                 throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");
+
             this.application = application;
 
             codeSearchResultsControl1.Application = application;
 
-            Icon = Gui.Drawing.IconFromImage(Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets));
+            Icon = Gui.Drawing.IconFromImage(imageResources.GetImage(ImageKeys.FindSnippets));
             HideOnClose = true;
             DockAreas = DockAreas.DockLeft | DockAreas.DockRight;
 
-            btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
+            btnFind.Image = imageResources.GetImage(ImageKeys.FindSnippets);
             btnFind.Click += (s, e) => ExecuteSearch();
 
             keywordsTextBox.TextChanged += (s, e) => ExecuteSearch();

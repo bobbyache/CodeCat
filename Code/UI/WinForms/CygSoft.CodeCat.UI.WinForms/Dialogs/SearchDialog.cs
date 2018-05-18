@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
     public partial class SearchDialog : Form
     {
         private AppFacade application;
+        private IImageResources imageResources;
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
@@ -46,18 +48,25 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         public IKeywordIndexItem SelectedSnippet { get { return codeSearchResultsControl1.SelectedTopic; } }
         public IKeywordIndexItem[] SelectedSnippets { get { return codeSearchResultsControl1.SelectedTopics; } }
 
-        public SearchDialog(AppFacade application)
+        public SearchDialog(AppFacade application, IImageResources imageResources)
         {
             InitializeComponent();
 
+            if (imageResources == null)
+                throw new ArgumentNullException("Image Resources is a required constructor parameter and cannot be null");
+
+            this.imageResources = imageResources;
+
             if (application == null)
                 throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");
+
             this.application = application;
+
             this.SearchEnabled = true;
 
             codeSearchResultsControl1.Application = application;
 
-            btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
+            btnFind.Image = imageResources.GetImage(ImageKeys.FindSnippets);
             btnFind.Click += (s, e) => ExecuteSearch();
 
             keywordsTextBox.TextChanged += (s, e) => ExecuteSearch();

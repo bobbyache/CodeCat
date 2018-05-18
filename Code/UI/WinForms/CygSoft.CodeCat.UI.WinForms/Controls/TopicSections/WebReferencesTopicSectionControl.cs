@@ -11,6 +11,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
@@ -32,19 +33,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public WebReferencesTopicSectionControl()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public WebReferencesTopicSectionControl(AppFacade application, ITopicDocument topicDocument, IWebReferencesTopicSection topicSection)
-            : base(application, topicDocument, topicSection)
+        public WebReferencesTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IWebReferencesTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 
-            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
-            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => { Add(WebReferencesTopicSection.CreateWebReference()); });
-            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
+            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", imageResources.GetImage(ImageKeys.DeleteSnippet), (s, e) => Delete());
+            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", imageResources.GetImage(ImageKeys.AddSnippet), (s, e) => { Add(WebReferencesTopicSection.CreateWebReference()); });
+            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", imageResources.GetImage(ImageKeys.EditSnippet), (s, e) => Edit());
 
             listViewSorter = new ListViewSorter(listView);
             listView.Sorting = SortOrder.Ascending;

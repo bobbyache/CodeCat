@@ -89,6 +89,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Plugins.Top
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Files.Infrastructure", "Components\CygSoft.CodeCat.Files.Infrastructure\CygSoft.CodeCat.Files.Infrastructure.csproj", "{88F11F5A-E063-4F8B-9F68-9963780F241A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.UI.Resources", "Components\CygSoft.CodeCat.UI.Resources\CygSoft.CodeCat.UI.Resources.csproj", "{8EB07193-2FB6-4056-8F9F-F38F28F4077D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.UI.Resources.Infrastructure", "Components\CygSoft.CodeCat.UI.Resources.Infrastructure\CygSoft.CodeCat.UI.Resources.Infrastructure.csproj", "{0FE663AF-5176-4A36-BF6D-11F717F229EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -243,6 +247,14 @@ Global
 		{88F11F5A-E063-4F8B-9F68-9963780F241A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88F11F5A-E063-4F8B-9F68-9963780F241A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88F11F5A-E063-4F8B-9F68-9963780F241A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EB07193-2FB6-4056-8F9F-F38F28F4077D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EB07193-2FB6-4056-8F9F-F38F28F4077D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EB07193-2FB6-4056-8F9F-F38F28F4077D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EB07193-2FB6-4056-8F9F-F38F28F4077D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FE663AF-5176-4A36-BF6D-11F717F229EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE663AF-5176-4A36-BF6D-11F717F229EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE663AF-5176-4A36-BF6D-11F717F229EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE663AF-5176-4A36-BF6D-11F717F229EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

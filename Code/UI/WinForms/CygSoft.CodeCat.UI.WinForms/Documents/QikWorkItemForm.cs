@@ -6,6 +6,7 @@ using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Documents;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -20,7 +21,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private IQikTemplateDocumentSet qikFile = null;
         private WorkItemTabManager tabManager = null;
         private QikScriptCtrl scriptControl;
-
+        
         #region Public Properties
 
         public bool ShowScript
@@ -39,13 +40,14 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public QikWorkItemForm(IFile workItem, AppFacade application, bool isNew = false)
+        public QikWorkItemForm(IFile workItem, AppFacade application, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
-
+            
             if (!(workItem is IQikTemplateDocumentSet))
                 throw new ArgumentException("Target is not the incorrect type.");
 
+            base.imageResources = imageResources;
             this.qikFile = workItem as IQikTemplateDocumentSet;
             base.application = application;
             base.workItem = qikFile;
@@ -158,18 +160,18 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
         private void InitializeImages()
         {
-            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnSave.Image = Gui.Resources.GetImage(Constants.ImageKeys.SaveSnippet);
-            chkEdit.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            btnDiscardChange.Image = Gui.Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
-            btnAddTemplate.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddTemplate);
-            btnRemoveTemplate.Image = Gui.Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
-            btnShowProperties.Image = Gui.Resources.GetImage(Constants.ImageKeys.ShowProperties);
-            btnCompile.Image = Gui.Resources.GetImage(Constants.ImageKeys.Compile);
-            btnShowScript.Image = Gui.Resources.GetImage(Constants.ImageKeys.TemplateScript);
-            btnMoveLeft.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveLeft);
-            btnMoveRight.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveRight);
-            btnMenu.Image = Gui.Resources.GetImage(Constants.ImageKeys.GroupMenu);
+            btnDelete.Image = imageResources.GetImage(ImageKeys.DeleteSnippet);
+            btnSave.Image = imageResources.GetImage(ImageKeys.SaveSnippet);
+            chkEdit.Image = imageResources.GetImage(ImageKeys.EditSnippet);
+            btnDiscardChange.Image = imageResources.GetImage(ImageKeys.DiscardSnippetChanges);
+            btnAddTemplate.Image = imageResources.GetImage(ImageKeys.AddTemplate);
+            btnRemoveTemplate.Image = imageResources.GetImage(ImageKeys.RemoveTemplate);
+            btnShowProperties.Image = imageResources.GetImage(ImageKeys.ShowProperties);
+            btnCompile.Image = imageResources.GetImage(ImageKeys.Compile);
+            btnShowScript.Image = imageResources.GetImage(ImageKeys.TemplateScript);
+            btnMoveLeft.Image = imageResources.GetImage(ImageKeys.MoveLeft);
+            btnMoveRight.Image = imageResources.GetImage(ImageKeys.MoveRight);
+            btnMenu.Image = imageResources.GetImage(ImageKeys.GroupMenu);
             Icon = IconRepository.QikGroupIcon;
         }
 
@@ -217,11 +219,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             foreach (ICodeTopicSection document in qikFile.TemplateSections)
             {
                 tabManager.AddTab(document,
-                    TopicSectionControlFactory.Create(document, qikFile, application, codeCtrl_Modified), true, false);
+                    TopicSectionControlFactory.Create(document, imageResources, qikFile, application, codeCtrl_Modified), true, false);
             }
 
             IQikScriptTopicSection qikScriptTopicSection = qikFile.ScriptSection as IQikScriptTopicSection;
-            scriptControl = (QikScriptCtrl)TopicSectionControlFactory.Create(qikScriptTopicSection, qikFile, application, codeCtrl_Modified);
+            scriptControl = (QikScriptCtrl)TopicSectionControlFactory.Create(qikScriptTopicSection, imageResources, qikFile, application, codeCtrl_Modified);
             tabManager.AddTab(qikScriptTopicSection, scriptControl, btnShowScript.Checked, false);
         }
 
@@ -314,7 +316,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             Gui.Drawing.SuspendDrawing(this);
             tabManager.AddTab(e.TopicSection,
-                TopicSectionControlFactory.Create(e.TopicSection, qikFile, application, codeCtrl_Modified),
+                TopicSectionControlFactory.Create(e.TopicSection, imageResources, qikFile, application, codeCtrl_Modified),
                 true, true);
             tabManager.OrderTabs(qikFile.TopicSections);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);

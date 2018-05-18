@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -19,6 +20,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         protected ITopicSection topicSection;
         protected AppFacade application;
         protected ITopicDocument topicDocument;
+        protected IImageResources imageResources;
 
         public string Id { get; private set; }
         public string Title { get { return this.txtTitle.Text; } }
@@ -31,12 +33,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public bool FileExists { get { return topicSection.Exists; } }
 
         public BaseTopicSectionControl()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public BaseTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ITopicSection topicSection)
+        public BaseTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITopicSection topicSection)
         {
             InitializeComponent();
 
@@ -45,6 +47,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
             this.Id = topicSection.Id;
 
+            this.imageResources = imageResources;
             this.application = application;
             this.topicSection = topicSection;
             this.topicDocument = topicDocument;

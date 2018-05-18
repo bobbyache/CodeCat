@@ -4,6 +4,7 @@ using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Drawing;
@@ -17,13 +18,14 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public CodeWorkItemForm(IFile workItem, AppFacade application, bool isNew = false)
+        public CodeWorkItemForm(IFile workItem, AppFacade application, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
 
             if (!(workItem is CodeFile))
                 throw new ArgumentException("Target is not the incorrect type.");
 
+            base.imageResources = imageResources;
             base.application = application;
             base.workItem = workItem;
             this.Tag = ((ITitledEntity)workItem).Id;
@@ -139,12 +141,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeImages()
         {
-            btnTakeSnapshot.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnapshot);
-            btnDeleteSnapshot.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnapshot);
-            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnSave.Image = Gui.Resources.GetImage(Constants.ImageKeys.SaveSnippet);
-            chkEdit.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            btnDiscardChange.Image = Gui.Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
+            btnTakeSnapshot.Image = imageResources.GetImage(ImageKeys.AddSnapshot);
+            btnDeleteSnapshot.Image = imageResources.GetImage(ImageKeys.DeleteSnapshot);
+            btnDelete.Image = imageResources.GetImage(ImageKeys.DeleteSnippet);
+            btnSave.Image = imageResources.GetImage(ImageKeys.SaveSnippet);
+            chkEdit.Image = imageResources.GetImage(ImageKeys.EditSnippet);
+            btnDiscardChange.Image = imageResources.GetImage(ImageKeys.DiscardSnippetChanges);
 
             this.tabControl.ImageList = IconRepository.ImageList;
             this.tabPageCode.ImageKey = (base.workItem as CodeFile).Syntax;

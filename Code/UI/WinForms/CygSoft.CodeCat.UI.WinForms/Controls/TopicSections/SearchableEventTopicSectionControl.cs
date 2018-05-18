@@ -12,6 +12,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
@@ -31,13 +32,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public SearchableEventTopicSectionControl()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public SearchableEventTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ISearchableEventTopicSection topicSection)
-            : base(application, topicDocument, topicSection)
+        public SearchableEventTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ISearchableEventTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 
@@ -50,12 +51,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             listView.SmallImageList = IconRepository.ImageList;
             listView.Sorting = SortOrder.Descending;
 
-            btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
+            btnFind.Image = imageResources.GetImage(ImageKeys.FindSnippets);
             btnFind.Click += (s, e) => ReloadListview();
 
-            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
-            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
-            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
+            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", imageResources.GetImage(ImageKeys.DeleteSnippet), (s, e) => Delete());
+            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", imageResources.GetImage(ImageKeys.AddSnippet), (s, e) => Add());
+            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", imageResources.GetImage(ImageKeys.EditSnippet), (s, e) => Edit());
 
             keywordsTextBox.CurrentTermCommitted += (s, e) => ReloadListview();
             keywordsTextBox.DropDownList = lstAutoComplete;

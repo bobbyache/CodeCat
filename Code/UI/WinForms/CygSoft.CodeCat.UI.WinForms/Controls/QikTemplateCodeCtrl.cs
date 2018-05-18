@@ -9,6 +9,7 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -16,15 +17,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
+        private IImageResources imageResources;
         private ICodeTopicSection templateFile;
         private AppFacade application;
         private IQikTemplateDocumentSet qikTemplateDocumentSet;
         private ICompiler compiler;
 
-        public QikTemplateCodeCtrl(AppFacade application, IQikTemplateDocumentSet qikTemplateDocumentSet, ICodeTopicSection templateFile)
+        public QikTemplateCodeCtrl(AppFacade application, IImageResources imageResources, IQikTemplateDocumentSet qikTemplateDocumentSet, ICodeTopicSection templateFile)
         {
             InitializeComponent();
-            
+
+            this.imageResources = imageResources;
             this.application = application;
             this.qikTemplateDocumentSet = qikTemplateDocumentSet;
             this.templateFile = templateFile;

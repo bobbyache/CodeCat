@@ -333,7 +333,6 @@
     <Compile Include="Images\ImageLibrary.cs" />
     <Compile Include="Images\ImageOutput.cs" />
     <Compile Include="Settings\ConfigSettings.cs" />
-    <Compile Include="Settings\Constants.cs" />
     <Compile Include="Dialogs\EnterKeywordsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -398,14 +397,8 @@
     <Compile Include="UiHelpers\Dialogs.cs" />
     <Compile Include="UiHelpers\Drawing.cs" />
     <Compile Include="UiHelpers\GroupedListView.cs" />
-    <Compile Include="UiHelpers\Resources.cs" />
     <Compile Include="UiHelpers\Text.cs" />
     <Compile Include="UiHelpers\ToolBar.cs" />
-    <Compile Include="UiResource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UiResource.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Controls\CategoryTreeControl.resx">
       <DependentUpon>CategoryTreeControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -557,10 +550,6 @@
     <EmbeddedResource Include="Documents\CodeWorkItemForm.resx">
       <DependentUpon>CodeWorkItemForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UiResource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>UiResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="..\..\..\..\LICENSE">
       <Link>LICENSE</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -624,6 +613,14 @@
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.TaskListing.Infrastructure\CygSoft.CodeCat.TaskListing.Infrastructure.csproj">
       <Project>{399da6b8-255d-40d4-8be6-e96b0870c664}</Project>
       <Name>CygSoft.CodeCat.TaskListing.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.UI.Resources.Infrastructure\CygSoft.CodeCat.UI.Resources.Infrastructure.csproj">
+      <Project>{0fe663af-5176-4a36-bf6d-11f717f229ee}</Project>
+      <Name>CygSoft.CodeCat.UI.Resources.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.UI.Resources\CygSoft.CodeCat.UI.Resources.csproj">
+      <Project>{8eb07193-2fb6-4056-8f9f-f38f28f4077d}</Project>
+      <Name>CygSoft.CodeCat.UI.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Components\Etier.IconHelper\Etier.IconHelper.csproj">
       <Project>{44368acc-95e7-4be0-ade4-abb8aae9b9d0}</Project>

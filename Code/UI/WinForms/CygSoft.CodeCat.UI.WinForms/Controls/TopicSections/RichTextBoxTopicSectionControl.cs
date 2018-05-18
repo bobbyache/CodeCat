@@ -5,6 +5,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
@@ -15,13 +16,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.RTF).Image; } }
 
         public RichTextBoxTopicSectionControl()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public RichTextBoxTopicSectionControl(AppFacade application, ITopicDocument topicDocument, IRichTextEditorTopicSection topicSection)
-            : base(application, topicDocument, topicSection)
+        public RichTextBoxTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IRichTextEditorTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 

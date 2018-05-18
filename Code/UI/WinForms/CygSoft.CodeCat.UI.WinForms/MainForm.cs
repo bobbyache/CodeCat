@@ -1,12 +1,12 @@
 ﻿using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Plugins.Generators;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.UI.Resources;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Docked;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygX1.UI.WinForms.RecentFileMenu;
@@ -30,6 +30,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private TaskForm taskForm;
         private CategoryForm categoryForm;
         private PluginsForm pluginsForm;
+        private IImageResources imageResources;
 
         // need this because we don't want to create a new document when
         // when all documents are closing because we're either creating
@@ -42,12 +43,12 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             //dockPanel.SaveAsXml(
             //dockPanel.LoadFromXml(
+            imageResources = new ImageResources();
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
             this.application = new AppFacade(ConfigSettings.SyntaxFilePath);
 
             InitializeFileIcons();
             InitializeIconImages();
-            
 
             dockPanel.ContentAdded += dockPanel_ContentAdded;
             dockPanel.ContentRemoved += dockPanel_ContentRemoved;
@@ -71,9 +72,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeFileIcons()
         {
-            Gui.Resources.Namespace = "CygSoft.CodeCat.UI.WinForms.UiResource";
-            Gui.Resources.ExecutingAssembly = Assembly.GetExecutingAssembly();
-
             IconRepository.AddCategoryInfo();
             IconRepository.AddDocuments();
             IconRepository.AddSyntaxes(application.GetSyntaxFileInfo());
@@ -81,15 +79,15 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeIconImages()
         {
-            mnuFileOpen.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenProject);
-            mnuFileCreateNew.Image = Gui.Resources.GetImage(Constants.ImageKeys.NewProject);
-            mnuViewWorkItem.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            mnuAddCodeItem.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddSnippet);
+            mnuFileOpen.Image = imageResources.GetImage(ImageKeys.OpenProject); // Gui.Resources.GetImage( Constants.ImageKeys.OpenProject);
+            mnuFileCreateNew.Image = imageResources.GetImage(ImageKeys.NewProject);
+            mnuViewWorkItem.Image = imageResources.GetImage(ImageKeys.EditSnippet);
+            mnuAddCodeItem.Image = imageResources.GetImage(ImageKeys.AddSnippet);
             mnuAddTopic.Image = IconRepository.Get(IconRepository.TopicSections.CodeGroup).Image;
             mnuAddQikGenerator.Image = IconRepository.Get(IconRepository.TopicSections.QikGroup).Image;
-            mnuWindowKeywordSearch.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
-            mnuCurrentTasks.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditText);
-            mnuCategories.Image = Gui.Resources.GetImage(Constants.ImageKeys.OpenCategory);
+            mnuWindowKeywordSearch.Image = imageResources.GetImage(ImageKeys.FindSnippets);
+            mnuCurrentTasks.Image = imageResources.GetImage(ImageKeys.EditText);
+            mnuCategories.Image = imageResources.GetImage(ImageKeys.OpenCategory);
         }
 
         private void InitializeMenuClickEvents()
@@ -116,7 +114,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeSearchForm()
         {
-            searchForm = new SearchForm(this.application);
+            searchForm = new SearchForm(this.application, imageResources);
             searchForm.OpenTopic += Control_OpenWorkItem;
             searchForm.DeleteTopic += Control_DeleteTopic;
             searchForm.SearchExecuted += (s, e) => { this.indexCountLabel.Text = ItemCountCaption(e.MatchedItemCount); };
@@ -131,13 +129,13 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeTaskForm()
         {
-            taskForm = new TaskForm(this.application);
+            taskForm = new TaskForm(this.application, this.imageResources);
             taskForm.Show(dockPanel, DockState.DockLeftAutoHide);
         }
 
         private void InitializeCategoryForm()
         {
-            categoryForm = new CategoryForm(this.application);
+            categoryForm = new CategoryForm(this.application, this.imageResources);
             categoryForm.OpenWorkItem += Control_OpenWorkItem;
             categoryForm.Show(dockPanel, DockState.DockLeftAutoHide);
         }
@@ -371,13 +369,13 @@ namespace CygSoft.CodeCat.UI.WinForms
                 IFile workItem = application.OpenWorkItem(keywordIndexItem);
 
                 if (keywordIndexItem is ICodeKeywordIndexItem)
-                    workItemForm = new CodeWorkItemForm(workItem, application);
+                    workItemForm = new CodeWorkItemForm(workItem, application, imageResources);
 
                 else if (keywordIndexItem is IQikTemplateKeywordIndexItem)
-                    workItemForm = new QikWorkItemForm(workItem, application);
+                    workItemForm = new QikWorkItemForm(workItem, application, imageResources);
 
                 else if (keywordIndexItem is ITopicKeywordIndexItem)
-                    workItemForm = new TopicWorkItemForm(workItem, application);
+                    workItemForm = new TopicWorkItemForm(workItem, application, imageResources);
 
                 if (workItemForm == null)
                     throw new Exception("IContentDocument has not been defined and cannot be opened.");
@@ -407,13 +405,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             switch (workItemType)
             {
                 case WorkItemType.CodeFile:
-                    workItemForm = new CodeWorkItemForm(workItem, application, true);
+                    workItemForm = new CodeWorkItemForm(workItem, application, imageResources, true);
                     break;
                 case WorkItemType.Topic:
-                    workItemForm = new TopicWorkItemForm(workItem, application, true);
+                    workItemForm = new TopicWorkItemForm(workItem, application, imageResources, true);
                     break;
                 case WorkItemType.QikGenerator:
-                    workItemForm = new QikWorkItemForm(workItem, application, true);
+                    workItemForm = new QikWorkItemForm(workItem, application, imageResources, true);
                     break;
             }
 

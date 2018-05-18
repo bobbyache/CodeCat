@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
@@ -24,13 +25,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public SimpleCodeTopicSectionControl()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public SimpleCodeTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ICodeTopicSection topicSection)
-            : base(application, topicDocument, topicSection)
+        public SimpleCodeTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ICodeTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 

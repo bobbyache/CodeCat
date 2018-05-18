@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Collections.Generic;
@@ -30,19 +31,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public FileAttachmentsTopicSectionControl()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public FileAttachmentsTopicSectionControl(AppFacade application, ITopicDocument topicDocument, IFileAttachmentsTopicSection topicSection)
-            : base(application, topicDocument, topicSection)
+        public FileAttachmentsTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IFileAttachmentsTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
             
-            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
-            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
-            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
+            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", imageResources.GetImage(ImageKeys.DeleteSnippet), (s, e) => Delete());
+            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", imageResources.GetImage(ImageKeys.AddSnippet), (s, e) => Add());
+            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", imageResources.GetImage(ImageKeys.EditSnippet), (s, e) => Edit());
 
             listView.SmallImageList = IconRepository.ImageList;
             listViewSorter = new ListViewSorter(this.listView);

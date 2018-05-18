@@ -5,6 +5,7 @@ using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Documents;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -20,7 +21,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public TopicWorkItemForm(IFile workItem, AppFacade application, bool isNew = false)
+        public TopicWorkItemForm(IFile workItem, AppFacade application, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
 
@@ -28,6 +29,7 @@ namespace CygSoft.CodeCat.UI.WinForms
                 throw new ArgumentException("Target is not the incorrect type.");
 
             this.tabControlFile.ImageList = IconRepository.ImageList;
+            base.imageResources = imageResources;
             base.application = application;
             this.topicDocument = workItem as ITopicDocument;
             this.topicDocument.TopicSectionAdded += topicDocument_TopicSectionAdded;
@@ -187,16 +189,16 @@ namespace CygSoft.CodeCat.UI.WinForms
         }
         private void InitializeImages()
         {
-            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.DeleteSnippet);
-            btnSave.Image = Gui.Resources.GetImage(Constants.ImageKeys.SaveSnippet);
-            chkEdit.Image = Gui.Resources.GetImage(Constants.ImageKeys.EditSnippet);
-            btnDiscardChange.Image = Gui.Resources.GetImage(Constants.ImageKeys.DiscardSnippetChanges);
-            
-            btnAddItem.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddTemplate);
-            btnRemoveCodeItem.Image = Gui.Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
-            btnMoveLeft.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveLeft);
-            btnMoveRight.Image = Gui.Resources.GetImage(Constants.ImageKeys.MoveRight);
-            btnMenu.Image = Gui.Resources.GetImage(Constants.ImageKeys.GroupMenu);
+            btnDelete.Image = imageResources.GetImage(ImageKeys.DeleteSnippet);
+            btnSave.Image = imageResources.GetImage(ImageKeys.SaveSnippet);
+            chkEdit.Image = imageResources.GetImage(ImageKeys.EditSnippet);
+            btnDiscardChange.Image = imageResources.GetImage(ImageKeys.DiscardSnippetChanges);
+
+            btnAddItem.Image = imageResources.GetImage(ImageKeys.AddTemplate);
+            btnRemoveCodeItem.Image = imageResources.GetImage(ImageKeys.RemoveTemplate);
+            btnMoveLeft.Image = imageResources.GetImage(ImageKeys.MoveLeft);
+            btnMoveRight.Image = imageResources.GetImage(ImageKeys.MoveRight);
+            btnMenu.Image = imageResources.GetImage(ImageKeys.GroupMenu);
 
             btnAddPdfDocument.Image = IconRepository.Get(IconRepository.TopicSections.PDF).Image;
             btnAddImage.Image = IconRepository.Get(IconRepository.TopicSections.SingleImage).Image;
@@ -206,7 +208,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnRichText.Image = IconRepository.Get(IconRepository.TopicSections.RTF).Image;
             btnAddCode.Image = IconRepository.Get(IconRepository.TopicSections.CodeFile).Image;
             btnSearchableEventDiary.Image = IconRepository.Get(IconRepository.TopicSections.EventDiary).Image;
-            btnOpenFolder.Image = Gui.Resources.GetImage(Constants.ImageKeys.Folder);
+            btnOpenFolder.Image = imageResources.GetImage(ImageKeys.Folder);
 
             this.Icon = IconRepository.CodeGroupIcon;
         }
@@ -357,7 +359,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void AddTopicSection(ITopicSection topicSection, bool selected)
         {
             tabManager.AddTab(topicSection,
-                TopicSectionControlFactory.Create(topicSection, this.topicDocument, this.application, codeItemCtrl_Modified),
+                TopicSectionControlFactory.Create(topicSection, imageResources, this.topicDocument, this.application, codeItemCtrl_Modified),
                 true, selected);
         }
 

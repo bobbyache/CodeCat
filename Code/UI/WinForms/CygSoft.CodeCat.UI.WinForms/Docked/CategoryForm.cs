@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -18,23 +19,29 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         public event EventHandler<TopicIndexEventArgs> OpenWorkItem;
 
         private AppFacade application;
-        private int openCategoryImageIndex = IconRepository.Get(Constants.ImageKeys.OpenCategory, false).Index;
-        private int closedCategoryImageIndex = IconRepository.Get(Constants.ImageKeys.ClosedCategory, false).Index;
+        private IImageResources imageResources;
+        private int openCategoryImageIndex = IconRepository.Get(ImageKeys.OpenCategory, false).Index;
+        private int closedCategoryImageIndex = IconRepository.Get(ImageKeys.ClosedCategory, false).Index;
 
-        public CategoryForm(AppFacade application)
+        public CategoryForm(AppFacade application, IImageResources imageResources)
         {
             InitializeComponent();
+
+            if (imageResources == null)
+                throw new ArgumentNullException("Image Resources is a required constructor parameter and cannot be null");
+
+            this.imageResources = imageResources;
 
             if (application == null)
                 throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");
             this.application = application;
 
             Text = "Categories";
-            Icon = IconRepository.Get(Constants.ImageKeys.OpenCategory, false).Icon;
+            Icon = IconRepository.Get(ImageKeys.OpenCategory, false).Icon;
             HideOnClose = true;
 
-            btnAddCategory.Image = Gui.Resources.GetImage(Constants.ImageKeys.AddTemplate);
-            btnDelete.Image = Gui.Resources.GetImage(Constants.ImageKeys.RemoveTemplate);
+            btnAddCategory.Image = imageResources.GetImage(ImageKeys.AddTemplate);
+            btnDelete.Image = imageResources.GetImage(ImageKeys.RemoveTemplate);
 
             categoryTreeControl1.ImageList = IconRepository.ImageList;
             categoryTreeControl1.ItemIsExplandableRoutine = ItemIsCategory;
@@ -177,7 +184,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             if (categoryTreeControl1.ItemsLoaded)
             {
-                SearchDialog dialog = new SearchDialog(application);
+                SearchDialog dialog = new SearchDialog(application, imageResources);
                 DialogResult result = dialog.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
