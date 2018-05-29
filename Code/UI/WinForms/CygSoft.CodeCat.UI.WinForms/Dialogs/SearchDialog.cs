@@ -16,7 +16,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
 {
     public partial class SearchDialog : Form
     {
-        private AppFacade application;
+        private IAppFacade application;
         private IImageResources imageResources;
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
@@ -48,7 +48,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         public IKeywordIndexItem SelectedSnippet { get { return codeSearchResultsControl1.SelectedTopic; } }
         public IKeywordIndexItem[] SelectedSnippets { get { return codeSearchResultsControl1.SelectedTopics; } }
 
-        public SearchDialog(AppFacade application, IImageResources imageResources)
+        public SearchDialog(IAppFacade application, IImageResources imageResources)
         {
             InitializeComponent();
 

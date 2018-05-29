@@ -17,7 +17,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             InitializeComponent();
         }
 
-        public TaskListTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITasksTopicSection topicSection) 
+        public TaskListTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITasksTopicSection topicSection) 
             : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();

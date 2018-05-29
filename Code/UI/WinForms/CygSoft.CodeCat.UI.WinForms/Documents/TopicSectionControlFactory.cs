@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 {
     public static class TopicSectionControlFactory
     {
-        public static ITopicSectionBaseControl Create(ITopicSection topicSection, IImageResources imageResources, IFile workItem, AppFacade application, EventHandler modifiedEventHandler)
+        public static ITopicSectionBaseControl Create(ITopicSection topicSection, IImageResources imageResources, IFile workItem, IAppFacade application, EventHandler modifiedEventHandler)
         {
             ITopicSectionBaseControl topicSectionControl = null;
 

@@ -39,7 +39,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public QikWorkItemForm(IFile workItem, AppFacade application, IImageResources imageResources, bool isNew = false)
+        public QikWorkItemForm(IFile workItem, IAppFacade application, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
             

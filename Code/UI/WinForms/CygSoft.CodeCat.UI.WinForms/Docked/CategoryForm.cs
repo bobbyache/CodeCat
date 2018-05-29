@@ -18,12 +18,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
     {
         public event EventHandler<TopicIndexEventArgs> OpenWorkItem;
 
-        private AppFacade application;
+        private IAppFacade application;
         private IImageResources imageResources;
         private int openCategoryImageIndex = IconRepository.Get(ImageKeys.OpenCategory, false).Index;
         private int closedCategoryImageIndex = IconRepository.Get(ImageKeys.ClosedCategory, false).Index;
 
-        public CategoryForm(AppFacade application, IImageResources imageResources)
+        public CategoryForm(IAppFacade application, IImageResources imageResources)
         {
             InitializeComponent();
 

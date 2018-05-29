@@ -20,7 +20,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         }
 
-        public RichTextBoxTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IRichTextEditorTopicSection topicSection)
+        public RichTextBoxTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IRichTextEditorTopicSection topicSection)
             : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();

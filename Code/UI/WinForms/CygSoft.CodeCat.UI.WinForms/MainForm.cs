@@ -24,7 +24,7 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         private RecentProjectMenu recentProjectMenu;
         private RegistrySettings registrySettings;
-        private AppFacade application = null;
+        private IAppFacade application = null;
         private SearchForm searchForm;
         private TaskForm taskForm;
         private CategoryForm categoryForm;

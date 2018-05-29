@@ -29,7 +29,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public bool IsModified { get; private set; }
         public bool FileExists { get { return false; } }
 
-        public ImageControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ISingleImageTopicSection topicSection)
+        public ImageControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ISingleImageTopicSection topicSection)
         {
             InitializeComponent();
 

@@ -20,7 +20,7 @@ using CygSoft.CodeCat.Files.Infrastructure;
 
 namespace CygSoft.CodeCat.Domain
 {
-    public class AppFacade: IAppFacade
+    public class AppFacade : IAppFacade
     {
         private SyntaxRepository syntaxRepository;
         private CodeLibrary codeLibrary;
@@ -263,13 +263,13 @@ namespace CygSoft.CodeCat.Domain
             switch (itemType)
             {
                 case WorkItemType.CodeFile:
-                    return this.codeLibrary.CreateWorkItem(new CodeKeywordIndexItem("New Code", 
+                    return this.codeLibrary.CreateWorkItem(new CodeKeywordIndexItem("New Code",
                         syntax, string.Empty));
                 case WorkItemType.QikGenerator:
-                    return this.qikLibrary.CreateWorkItem(new QikTemplateKeywordIndexItem("New Qik Template", 
+                    return this.qikLibrary.CreateWorkItem(new QikTemplateKeywordIndexItem("New Qik Template",
                         syntax, string.Empty));
                 case WorkItemType.Topic:
-                    return this.topicLibrary.CreateWorkItem(new TopicKeywordIndexItem("New Topic", 
+                    return this.topicLibrary.CreateWorkItem(new TopicKeywordIndexItem("New Topic",
                         syntax, string.Empty));
                 default:
                     return null;
@@ -380,8 +380,8 @@ namespace CygSoft.CodeCat.Domain
         public List<ITitledEntity> GetChildCategorizedItemsByCategory(string categoryId)
         {
             List<ITitledEntity> children = new List<ITitledEntity>();
-            
-            
+
+
             List<IItemCategory> categories = categoryHierarchy.GetChildCategories(categoryId);
             List<ICategorizedItem> categoryItems = categoryHierarchy.GetChildCategorizedItemsByCategory(categoryId);
 
@@ -390,7 +390,7 @@ namespace CygSoft.CodeCat.Domain
             if (categoryItems != null && categoryItems.Count() > 0)
             {
                 var catItems = categoryHierarchy.GetChildCategorizedItemsByCategory(categoryId);
-                string[] itemIds =  catItems.Select(r => r.ItemId).ToArray();
+                string[] itemIds = catItems.Select(r => r.ItemId).ToArray();
 
                 List<IKeywordIndexItem> indexItems = new List<IKeywordIndexItem>();
                 indexItems.AddRange(codeLibrary.FindByIds(itemIds));
@@ -399,10 +399,10 @@ namespace CygSoft.CodeCat.Domain
 
                 List<ICategorizedKeywordIndexItem> categoryIndexItems = new List<ICategorizedKeywordIndexItem>();
 
-                
+
                 categoryIndexItems = (from c in catItems
-                               join p in indexItems on c.ItemId equals p.Id
-                               select new CategorizedKeywordIndexItem(c.Id, p as IKeywordIndexItem))
+                                      join p in indexItems on c.ItemId equals p.Id
+                                      select new CategorizedKeywordIndexItem(c.Id, p as IKeywordIndexItem))
                                .OfType<ICategorizedKeywordIndexItem>()
                                .ToList();
 
@@ -420,7 +420,7 @@ namespace CygSoft.CodeCat.Domain
         {
             CategorizedItem categorizedItem = new CategorizedItem(indexItem);
             ICategorizedKeywordIndexItem categorizedIndexItem = new CategorizedKeywordIndexItem(categorizedItem.Id, indexItem);
-            
+
             categoryHierarchy.AddCategorizedItem(categorizedIndexItem, categoryId);
             return categorizedIndexItem;
         }

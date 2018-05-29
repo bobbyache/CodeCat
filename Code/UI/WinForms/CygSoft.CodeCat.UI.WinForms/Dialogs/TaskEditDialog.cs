@@ -16,9 +16,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
     public partial class TaskEditDialog : Form
     {
         private ITask task;
-        AppFacade application;
+        IAppFacade application;
 
-        public TaskEditDialog(AppFacade application, ITask task, string[] categories)
+        public TaskEditDialog(IAppFacade application, ITask task, string[] categories)
         {
             InitializeComponent();
 

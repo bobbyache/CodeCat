@@ -19,7 +19,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public event EventHandler RegisterFieldEvents;
 
         protected ITopicSection topicSection;
-        protected AppFacade application;
+        protected IAppFacade application;
         protected ITopicDocument topicDocument;
         protected IImageResources imageResources;
 
@@ -39,7 +39,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         }
 
-        public BaseTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITopicSection topicSection)
+        public BaseTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITopicSection topicSection)
         {
             InitializeComponent();
 

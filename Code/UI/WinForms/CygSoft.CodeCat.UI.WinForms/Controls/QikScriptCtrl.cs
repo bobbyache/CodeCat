@@ -15,13 +15,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         public event EventHandler Modified;
 
-        private AppFacade application;
+        private IAppFacade application;
         private IQikTemplateDocumentSet qikTemplateDocumentSet;
         private ICodeTopicSection scriptFile;
         private ICompiler compiler;
         private Row selectedRow;
 
-        public QikScriptCtrl(AppFacade application, IQikTemplateDocumentSet qikTemplateDocumentSet)
+        public QikScriptCtrl(IAppFacade application, IQikTemplateDocumentSet qikTemplateDocumentSet)
         {
             InitializeComponent();
 

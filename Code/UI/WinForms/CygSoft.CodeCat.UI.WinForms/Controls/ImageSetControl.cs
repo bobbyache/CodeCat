@@ -36,7 +36,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         #region Constructors
 
-        public ImageSetControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IImagePagerTopicSection topicSection)
+        public ImageSetControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IImagePagerTopicSection topicSection)
         {
             InitializeComponent();
 

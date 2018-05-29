@@ -20,11 +20,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private IImageResources imageResources;
         private ICodeTopicSection templateFile;
-        private AppFacade application;
+        private IAppFacade application;
         private IQikTemplateDocumentSet qikTemplateDocumentSet;
         private ICompiler compiler;
 
-        public QikTemplateCodeCtrl(AppFacade application, IImageResources imageResources, IQikTemplateDocumentSet qikTemplateDocumentSet, ICodeTopicSection templateFile)
+        public QikTemplateCodeCtrl(IAppFacade application, IImageResources imageResources, IQikTemplateDocumentSet qikTemplateDocumentSet, ICodeTopicSection templateFile)
         {
             InitializeComponent();
 

@@ -22,7 +22,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public TopicWorkItemForm(IFile workItem, AppFacade application, IImageResources imageResources, bool isNew = false)
+        public TopicWorkItemForm(IFile workItem, IAppFacade application, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
 

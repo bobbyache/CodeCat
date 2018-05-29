@@ -36,7 +36,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         }
 
-        public WebReferencesTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IWebReferencesTopicSection topicSection)
+        public WebReferencesTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IWebReferencesTopicSection topicSection)
             : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();

@@ -10,10 +10,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
     public partial class PluginsForm :  DockContent
     {
-        private AppFacade application;
+        private IAppFacade application;
         private GeneratorPlugins generatorPlugins;
 
-        public PluginsForm(AppFacade application)
+        public PluginsForm(IAppFacade application)
         {
             if (application == null)
                 throw new ArgumentException("Application must be provided.");

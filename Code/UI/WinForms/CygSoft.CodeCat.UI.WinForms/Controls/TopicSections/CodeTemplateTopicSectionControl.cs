@@ -13,7 +13,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             InitializeComponent();
         }
 
-        public CodeTemplateTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ICodeTemplateTopicSection topicSection) 
+        public CodeTemplateTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ICodeTemplateTopicSection topicSection) 
             : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();

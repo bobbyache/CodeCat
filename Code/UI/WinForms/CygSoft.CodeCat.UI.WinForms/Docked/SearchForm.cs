@@ -9,7 +9,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
     public partial class SearchForm : DockContent
     {
-        private AppFacade application;
+        private IAppFacade application;
         private IImageResources imageResources;
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
@@ -42,7 +42,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         public IKeywordIndexItem SelectedWorkItem { get { return codeSearchResultsControl1.SelectedTopic; } }
         public IKeywordIndexItem[] SelectedWorkItems { get { return codeSearchResultsControl1.SelectedTopics; } }
 
-        public SearchForm(AppFacade application, IImageResources imageResources)
+        public SearchForm(IAppFacade application, IImageResources imageResources)
         {
             InitializeComponent();
 

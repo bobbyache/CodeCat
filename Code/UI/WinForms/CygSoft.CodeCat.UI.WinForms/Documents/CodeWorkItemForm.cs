@@ -16,7 +16,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public CodeWorkItemForm(IFile workItem, AppFacade application, IImageResources imageResources, bool isNew = false)
+        public CodeWorkItemForm(IFile workItem, IAppFacade application, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
 

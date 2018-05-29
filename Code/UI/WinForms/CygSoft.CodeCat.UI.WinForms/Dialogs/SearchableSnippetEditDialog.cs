@@ -15,10 +15,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
 {
     public partial class SearchableSnippetEditDialog : Form
     {
-        private AppFacade application;
+        private IAppFacade application;
         public ISearchableSnippetKeywordIndexItem CodeSnippet { get; private set; }
 
-        public SearchableSnippetEditDialog(AppFacade application, ISearchableSnippetKeywordIndexItem codeSnippet, string[] categories)
+        public SearchableSnippetEditDialog(IAppFacade application, ISearchableSnippetKeywordIndexItem codeSnippet, string[] categories)
         {
             InitializeComponent();
 

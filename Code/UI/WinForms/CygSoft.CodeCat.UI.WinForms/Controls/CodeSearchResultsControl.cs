@@ -12,7 +12,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     public partial class CodeSearchResultsControl : UserControl
     {
         private ListViewSorter listViewSorter;
-        private AppFacade application;
+        private IAppFacade application;
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
@@ -22,7 +22,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler<TopicIndexEventArgs> DeleteTopic;
         public event EventHandler<TopicIndexEventArgs> SelectTopic;
 
-        public AppFacade Application { set { this.application = value; } }
+        public IAppFacade Application { set { this.application = value; } }
         public bool SingleTopicSelected { get { return this.listView.SelectedItems.Count == 1; } }
         public bool MultipleTopicsSelected { get { return this.listView.SelectedItems.Count > 1; } }
         

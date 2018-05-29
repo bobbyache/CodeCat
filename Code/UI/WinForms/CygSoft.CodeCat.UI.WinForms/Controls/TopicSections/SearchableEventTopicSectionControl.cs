@@ -37,7 +37,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         }
 
-        public SearchableEventTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ISearchableEventTopicSection topicSection)
+        public SearchableEventTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ISearchableEventTopicSection topicSection)
             : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();

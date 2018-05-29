@@ -16,10 +16,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
 {
     public partial class SearchableEventEditDialog : Form
     {
-        private AppFacade application;
+        private IAppFacade application;
         public ISearchableEventKeywordIndexItem DiaryEvent { get; private set; }
 
-        public SearchableEventEditDialog(AppFacade application, ISearchableEventKeywordIndexItem diaryEvent)
+        public SearchableEventEditDialog(IAppFacade application, ISearchableEventKeywordIndexItem diaryEvent)
         {
             InitializeComponent();
 

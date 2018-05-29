@@ -14,10 +14,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
     public partial class TaskForm : DockContent
     {
-        private AppFacade application;
+        private IAppFacade application;
         private IImageResources imageResources;
 
-        public TaskForm(AppFacade application, IImageResources imageResources)
+        public TaskForm(IAppFacade application, IImageResources imageResources)
         {
             InitializeComponent();
 

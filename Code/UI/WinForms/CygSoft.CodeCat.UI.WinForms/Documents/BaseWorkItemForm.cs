@@ -26,7 +26,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private bool flagForDelete = false;
 
         protected IImageResources imageResources;
-        protected AppFacade application;
+        protected IAppFacade application;
         protected IFile workItem;
 
         public string Id

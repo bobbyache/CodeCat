@@ -37,7 +37,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         }
 
-        public FileAttachmentsTopicSectionControl(AppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IFileAttachmentsTopicSection topicSection)
+        public FileAttachmentsTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IFileAttachmentsTopicSection topicSection)
             : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
