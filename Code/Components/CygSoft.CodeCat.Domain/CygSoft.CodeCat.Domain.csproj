@@ -49,7 +49,6 @@
     <Compile Include="Base\BaseLibrary.cs" />
     <Compile Include="Base\CategorizedKeywordIndexItem.cs" />
     <Compile Include="Base\CDATAConflictDetectionException.cs" />
-    <Compile Include="Base\ICategorizedKeywordIndexItem.cs" />
     <Compile Include="Base\WorkItemFactory.cs" />
     <Compile Include="Code\CodeExporter.cs" />
     <Compile Include="Code\ICodeFile.cs" />
@@ -119,10 +118,6 @@
     <ProjectReference Include="..\CygSoft.CodeCat.DocumentManager\CygSoft.CodeCat.DocumentManager.csproj">
       <Project>{d3c89aa0-fd50-4d0e-9492-15efd952958a}</Project>
       <Name>CygSoft.CodeCat.DocumentManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Search.KeywordIndex.Infrastructure.csproj">
-      <Project>{9d7e248a-e4ef-42de-a624-9f18d827ba42}</Project>
-      <Name>CygSoft.CodeCat.Search.KeywordIndex.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>

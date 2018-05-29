@@ -52,10 +52,6 @@
     <Compile Include="TopicSectionType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Search.KeywordIndex.Infrastructure.csproj">
-      <Project>{9D7E248A-E4EF-42DE-A624-9F18D827BA42}</Project>
-      <Name>CygSoft.CodeCat.Search.KeywordIndex.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
       <Project>{8C992A57-BCBF-4B78-9F69-C88A30E39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>

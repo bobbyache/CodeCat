@@ -20,7 +20,7 @@ using CygSoft.CodeCat.Files.Infrastructure;
 
 namespace CygSoft.CodeCat.Domain
 {
-    public class AppFacade
+    public class AppFacade: IAppFacade
     {
         private SyntaxRepository syntaxRepository;
         private CodeLibrary codeLibrary;

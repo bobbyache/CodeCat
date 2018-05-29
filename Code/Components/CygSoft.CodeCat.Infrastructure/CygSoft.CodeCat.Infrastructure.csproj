@@ -43,7 +43,9 @@
     <Compile Include="Enums.cs" />
     <Compile Include="FileEventArgs.cs" />
     <Compile Include="FileSys.cs" />
+    <Compile Include="IAppFacade.cs" />
     <Compile Include="ICategorizedItem.cs" />
+    <Compile Include="ICategorizedKeywordIndexItem.cs" />
     <Compile Include="ICategorizedListItem.cs" />
     <Compile Include="ICodeTemplateTopicSection.cs" />
     <Compile Include="ICodeTopicSection.cs" />
@@ -72,6 +74,11 @@
     <Compile Include="IVersionedCodeTopicSection.cs" />
     <Compile Include="IVersionedFileRepository.cs" />
     <Compile Include="IWebReferencesTopicSection.cs" />
+    <Compile Include="Keywords\IKeywordIndexItem.cs" />
+    <Compile Include="Keywords\IKeywordSearchIndex.cs" />
+    <Compile Include="Keywords\IKeywordSearchIndexRepository.cs" />
+    <Compile Include="Keywords\IKeywordTarget.cs" />
+    <Compile Include="Keywords\PersistableObject.cs" />
     <Compile Include="NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="PositionableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
