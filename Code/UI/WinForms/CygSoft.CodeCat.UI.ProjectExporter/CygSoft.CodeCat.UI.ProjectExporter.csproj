@@ -82,10 +82,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
-      <Project>{70ba46ba-7055-4e29-96a1-725a30b00b61}</Project>
-      <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Domain\CygSoft.CodeCat.Domain.csproj">
       <Project>{7a97514d-bb47-49aa-8785-260f355d6f96}</Project>
       <Name>CygSoft.CodeCat.Domain</Name>

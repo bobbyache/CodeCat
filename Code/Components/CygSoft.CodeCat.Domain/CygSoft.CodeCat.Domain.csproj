@@ -120,17 +120,9 @@
       <Project>{99c7dcc9-3b35-4ca5-98e7-9bbe72021634}</Project>
       <Name>CygSoft.CodeCat.Category</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
-      <Project>{70ba46ba-7055-4e29-96a1-725a30b00b61}</Project>
-      <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.DocumentManager\CygSoft.CodeCat.DocumentManager.csproj">
       <Project>{d3c89aa0-fd50-4d0e-9492-15efd952958a}</Project>
       <Name>CygSoft.CodeCat.DocumentManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CygSoft.CodeCat.Files.Infrastructure\CygSoft.CodeCat.Files.Infrastructure.csproj">
-      <Project>{88f11f5a-e063-4f8b-9f68-9963780f241a}</Project>
-      <Name>CygSoft.CodeCat.Files.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Search.KeywordIndex.Infrastructure.csproj">
       <Project>{9d7e248a-e4ef-42de-a624-9f18d827ba42}</Project>
@@ -159,10 +151,6 @@
     <ProjectReference Include="..\CygSoft.CodeCat.Syntax\CygSoft.CodeCat.Syntax.csproj">
       <Project>{ebe3c549-dbdd-4d42-9a59-d0e529041ace}</Project>
       <Name>CygSoft.CodeCat.Syntax</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CygSoft.CodeCat.TaskListing.Infrastructure\CygSoft.CodeCat.TaskListing.Infrastructure.csproj">
-      <Project>{399da6b8-255d-40d4-8be6-e96b0870c664}</Project>
-      <Name>CygSoft.CodeCat.TaskListing.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.TaskListing\CygSoft.CodeCat.TaskListing.csproj">
       <Project>{b89ffbd2-fbb3-40c2-ba43-cc793ac4f841}</Project>

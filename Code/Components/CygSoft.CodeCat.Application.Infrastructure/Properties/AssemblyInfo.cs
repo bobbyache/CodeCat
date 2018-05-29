@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CygSoft.Code.Files.Infrastructure")]
+[assembly: AssemblyTitle("CygSoft.CodeCat.Application.Infrastructure")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CygSoft.Code.Files.Infrastructure")]
+[assembly: AssemblyProduct("CygSoft.CodeCat.Application.Infrastructure")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("88f11f5a-e063-4f8b-9f68-9963780f241a")]
+[assembly: Guid("14d2882b-2a53-454c-bd6e-eb6568951e81")]
 
 // Version information for an assembly consists of the following four values:
 //

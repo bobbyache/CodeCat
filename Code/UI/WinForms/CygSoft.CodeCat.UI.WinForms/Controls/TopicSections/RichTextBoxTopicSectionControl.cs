@@ -1,11 +1,9 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain.Topics;
-using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
 using CygSoft.CodeCat.UI.Resources.Infrastructure;
+using System;
+using System.Drawing;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {

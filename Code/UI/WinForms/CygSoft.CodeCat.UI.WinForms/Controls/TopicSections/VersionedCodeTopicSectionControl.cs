@@ -4,7 +4,6 @@ using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections

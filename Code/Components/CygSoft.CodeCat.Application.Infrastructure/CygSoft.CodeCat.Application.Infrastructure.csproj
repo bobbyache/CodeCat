@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{399DA6B8-255D-40D4-8BE6-E96B0870C664}</ProjectGuid>
+    <ProjectGuid>{14D2882B-2A53-454C-BD6E-EB6568951E81}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CygSoft.CodeCat.TaskListing.Infrastructure</RootNamespace>
-    <AssemblyName>CygSoft.CodeCat.TaskListing.Infrastructure</AssemblyName>
+    <RootNamespace>CygSoft.CodeCat.Application.Infrastructure</RootNamespace>
+    <AssemblyName>CygSoft.CodeCat.Application.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,14 +40,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITask.cs" />
-    <Compile Include="ITaskListStatus.cs" />
+    <Compile Include="IApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CygSoft.CodeCat.Category.Infrastructure\CygSoft.CodeCat.Category.Infrastructure.csproj">
+      <Project>{87A58FDC-D07C-4CC8-B553-2214D5AF00C1}</Project>
+      <Name>CygSoft.CodeCat.Category.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Files.Infrastructure\CygSoft.CodeCat.Files.Infrastructure.csproj">
+      <Project>{88F11F5A-E063-4F8B-9F68-9963780F241A}</Project>
+      <Name>CygSoft.CodeCat.Files.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Search.KeywordIndex.Infrastructure.csproj">
+      <Project>{9D7E248A-E4EF-42DE-A624-9F18D827BA42}</Project>
+      <Name>CygSoft.CodeCat.Search.KeywordIndex.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
-      <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
+      <Project>{8C992A57-BCBF-4B78-9F69-C88A30E39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj">
+      <Project>{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}</Project>
+      <Name>CygSoft.CodeCat.Syntax.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.TaskListing.Infrastructure\CygSoft.CodeCat.TaskListing.Infrastructure.csproj">
+      <Project>{399DA6B8-255D-40D4-8BE6-E96B0870C664}</Project>
+      <Name>CygSoft.CodeCat.TaskListing.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

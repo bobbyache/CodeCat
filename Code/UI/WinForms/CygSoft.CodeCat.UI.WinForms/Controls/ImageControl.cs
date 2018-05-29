@@ -1,14 +1,14 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
+﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using System.IO;
-using System.Diagnostics;
 using CygSoft.CodeCat.Domain.Topics;
-using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.UI.Resources.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

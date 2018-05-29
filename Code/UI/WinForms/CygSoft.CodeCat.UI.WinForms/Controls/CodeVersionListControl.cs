@@ -1,8 +1,7 @@
-﻿using System;
-using System.Windows.Forms;
-using CygSoft.CodeCat.Domain.Code;
+﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using System;
+using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {

@@ -578,17 +578,9 @@
       <Project>{87a58fdc-d07c-4cc8-b553-2214d5af00c1}</Project>
       <Name>CygSoft.CodeCat.Category.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
-      <Project>{70ba46ba-7055-4e29-96a1-725a30b00b61}</Project>
-      <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Domain\CygSoft.CodeCat.Domain.csproj">
       <Project>{7a97514d-bb47-49aa-8785-260f355d6f96}</Project>
       <Name>CygSoft.CodeCat.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Files.Infrastructure\CygSoft.CodeCat.Files.Infrastructure.csproj">
-      <Project>{88f11f5a-e063-4f8b-9f68-9963780f241a}</Project>
-      <Name>CygSoft.CodeCat.Files.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Infrastructure.Search.KeywordIndex\CygSoft.CodeCat.Search.KeywordIndex.Infrastructure.csproj">
       <Project>{9d7e248a-e4ef-42de-a624-9f18d827ba42}</Project>
@@ -609,10 +601,6 @@
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj">
       <Project>{65f6db5b-43cd-439e-afe9-d65b1cf58ae7}</Project>
       <Name>CygSoft.CodeCat.Syntax.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.TaskListing.Infrastructure\CygSoft.CodeCat.TaskListing.Infrastructure.csproj">
-      <Project>{399da6b8-255d-40d4-8be6-e96b0870c664}</Project>
-      <Name>CygSoft.CodeCat.TaskListing.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.UI.Resources.Infrastructure\CygSoft.CodeCat.UI.Resources.Infrastructure.csproj">
       <Project>{0fe663af-5176-4a36-bf6d-11f717f229ee}</Project>

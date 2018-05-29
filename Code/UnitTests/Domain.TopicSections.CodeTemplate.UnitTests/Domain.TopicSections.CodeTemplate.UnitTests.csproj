@@ -72,10 +72,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Components\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
-      <Project>{70BA46BA-7055-4E29-96A1-725A30B00B61}</Project>
-      <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Components\CygSoft.CodeCat.DocumentManager\CygSoft.CodeCat.DocumentManager.csproj">
       <Project>{D3C89AA0-FD50-4D0E-9492-15EFD952958A}</Project>
       <Name>CygSoft.CodeCat.DocumentManager</Name>

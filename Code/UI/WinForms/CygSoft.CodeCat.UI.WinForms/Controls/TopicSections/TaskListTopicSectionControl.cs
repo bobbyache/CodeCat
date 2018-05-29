@@ -4,7 +4,6 @@ using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.TaskListing.Infrastructure;
 using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
-using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Windows.Forms;
 

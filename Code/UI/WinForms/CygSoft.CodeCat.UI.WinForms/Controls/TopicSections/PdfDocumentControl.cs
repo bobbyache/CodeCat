@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
+﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using System.IO;
 using CygSoft.CodeCat.Domain.Topics;
-using CygSoft.CodeCat.UI.WinForms.UiHelpers;
-using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
-using PdfiumViewer;
 using CygSoft.CodeCat.UI.Resources.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using PdfiumViewer;
+using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {

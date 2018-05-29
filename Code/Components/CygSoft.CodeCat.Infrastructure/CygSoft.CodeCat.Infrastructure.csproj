@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,10 +41,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.cs" />
+    <Compile Include="FileEventArgs.cs" />
     <Compile Include="FileSys.cs" />
     <Compile Include="ICategorizedListItem.cs" />
+    <Compile Include="ICodeTemplateTopicSection.cs" />
+    <Compile Include="ICodeTopicSection.cs" />
+    <Compile Include="IDocumentIndexRepository.cs" />
+    <Compile Include="IFile.cs" />
+    <Compile Include="IFileGroupDocument.cs" />
+    <Compile Include="IImageItem.cs" />
+    <Compile Include="IImagePagerTopicSection.cs" />
+    <Compile Include="IPagerImage.cs" />
+    <Compile Include="IPdfViewerTopicSection.cs" />
+    <Compile Include="IPositionedItem.cs" />
+    <Compile Include="IQikScriptTopicSection.cs" />
+    <Compile Include="IRichTextEditorTopicSection.cs" />
+    <Compile Include="ISingleImageTopicSection.cs" />
+    <Compile Include="ITask.cs" />
+    <Compile Include="ITaskListStatus.cs" />
+    <Compile Include="ITasksTopicSection.cs" />
+    <Compile Include="ITextTopicSection.cs" />
     <Compile Include="ITitledEntity.cs" />
+    <Compile Include="ITopic.cs" />
+    <Compile Include="ITopicSection.cs" />
+    <Compile Include="IVersionableFile.cs" />
+    <Compile Include="IVersionedCodeTopicSection.cs" />
+    <Compile Include="IVersionedFileRepository.cs" />
+    <Compile Include="IWebReferencesTopicSection.cs" />
+    <Compile Include="NonMatchingOrdinalReferenceException.cs" />
+    <Compile Include="PositionableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TopicSectionEventArgs.cs" />
+    <Compile Include="TopicSectionType.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
