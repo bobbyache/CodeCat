@@ -43,20 +43,24 @@
     <Compile Include="Enums.cs" />
     <Compile Include="FileEventArgs.cs" />
     <Compile Include="FileSys.cs" />
+    <Compile Include="ICategorizedItem.cs" />
     <Compile Include="ICategorizedListItem.cs" />
     <Compile Include="ICodeTemplateTopicSection.cs" />
     <Compile Include="ICodeTopicSection.cs" />
+    <Compile Include="IdentityItem.cs" />
     <Compile Include="IDocumentIndexRepository.cs" />
     <Compile Include="IFile.cs" />
     <Compile Include="IFileGroupDocument.cs" />
     <Compile Include="IImageItem.cs" />
     <Compile Include="IImagePagerTopicSection.cs" />
+    <Compile Include="IItemCategory.cs" />
     <Compile Include="IPagerImage.cs" />
     <Compile Include="IPdfViewerTopicSection.cs" />
     <Compile Include="IPositionedItem.cs" />
     <Compile Include="IQikScriptTopicSection.cs" />
     <Compile Include="IRichTextEditorTopicSection.cs" />
     <Compile Include="ISingleImageTopicSection.cs" />
+    <Compile Include="ISyntaxFile.cs" />
     <Compile Include="ITask.cs" />
     <Compile Include="ITaskListStatus.cs" />
     <Compile Include="ITasksTopicSection.cs" />
@@ -74,7 +78,6 @@
     <Compile Include="TopicSectionEventArgs.cs" />
     <Compile Include="TopicSectionType.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

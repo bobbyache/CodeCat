@@ -95,17 +95,17 @@
     <Compile Include="SyntaxValidator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure.csproj">
-      <Project>{e73234b4-5bfa-40ad-b1fd-a35226ca0bb4}</Project>
-      <Name>CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Antlr4 Include="Antlr\QikTemplate.g4">
       <Generator>MSBuild:Compile</Generator>
       <CustomToolNamespace>CygSoft.CodeCat.Qik.LanguageEngine.Antlr</CustomToolNamespace>
     </Antlr4>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure.csproj">
+      <Project>{e73234b4-5bfa-40ad-b1fd-a35226ca0bb4}</Project>
+      <Name>CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

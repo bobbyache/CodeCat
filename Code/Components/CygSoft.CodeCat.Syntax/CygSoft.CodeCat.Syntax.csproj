@@ -45,9 +45,9 @@
     <Compile Include="SyntaxRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj">
-      <Project>{65f6db5b-43cd-439e-afe9-d65b1cf58ae7}</Project>
-      <Name>CygSoft.CodeCat.Syntax.Infrastructure</Name>
+    <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
+      <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
+      <Name>CygSoft.CodeCat.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

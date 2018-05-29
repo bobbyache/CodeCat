@@ -112,10 +112,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CygSoft.CodeCat.Category.Infrastructure\CygSoft.CodeCat.Category.Infrastructure.csproj">
-      <Project>{87a58fdc-d07c-4cc8-b553-2214d5af00c1}</Project>
-      <Name>CygSoft.CodeCat.Category.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.Category\CygSoft.CodeCat.Category.csproj">
       <Project>{99c7dcc9-3b35-4ca5-98e7-9bbe72021634}</Project>
       <Name>CygSoft.CodeCat.Category</Name>
@@ -143,10 +139,6 @@
     <ProjectReference Include="..\CygSoft.CodeCat.SearchIndex\CygSoft.CodeCat.Search.KeywordIndex.csproj">
       <Project>{a75e419a-7df9-466e-8f5a-351310672ce6}</Project>
       <Name>CygSoft.CodeCat.Search.KeywordIndex</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj">
-      <Project>{65f6db5b-43cd-439e-afe9-d65b1cf58ae7}</Project>
-      <Name>CygSoft.CodeCat.Syntax.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.Syntax\CygSoft.CodeCat.Syntax.csproj">
       <Project>{ebe3c549-dbdd-4d42-9a59-d0e529041ace}</Project>

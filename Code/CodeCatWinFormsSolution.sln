@@ -33,8 +33,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.UnitTests", "UnitTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Qik.LanguageEngine", "Components\CygSoft.CodeCat.Qik.LanguageEngine\CygSoft.CodeCat.Qik.LanguageEngine.csproj", "{FADE2BF1-6916-457C-9B0C-442227C59E62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure", "Components\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure.csproj", "{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{7668CAC5-9C55-4AD7-B9B7-13959A294089}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qik.LanguageEngine.IntegrationTests", "IntegrationTests\Qik.LanguageEngine.IntegrationTests\Qik.LanguageEngine.IntegrationTests.csproj", "{9FFC7814-DCEF-4723-9E4B-6B1154488E1B}"
@@ -53,8 +51,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Syntax", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Category", "Components\CygSoft.CodeCat.Category\CygSoft.CodeCat.Category.csproj", "{99C7DCC9-3B35-4CA5-98E7-9BBE72021634}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Category.Infrastructure", "Components\CygSoft.CodeCat.Category.Infrastructure\CygSoft.CodeCat.Category.Infrastructure.csproj", "{87A58FDC-D07C-4CC8-B553-2214D5AF00C1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Category.UnitTests", "UnitTests\Category.UnitTests\Category.UnitTests.csproj", "{12F77F75-AD62-4D5B-8577-7A1AE7136827}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{DFD4AD2C-CC62-4538-92D9-262CD58BABCE}"
@@ -68,8 +64,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Plugins.ManualXess", "Components\CygSoft.CodeCat.Plugins.ManualXess\CygSoft.CodeCat.Plugins.ManualXess.csproj", "{FDB2FD77-BF50-4BDE-BAEE-1320530D8D92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.PluginTests", "GuiTests\PluginTests\CygSoft.CodeCat.PluginTests.csproj", "{7E101281-FCFC-4615-854B-17314B41CAA4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Syntax.Infrastructure", "Components\CygSoft.CodeCat.Syntax.Infrastructure\CygSoft.CodeCat.Syntax.Infrastructure.csproj", "{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Plugins.XmlFormatter", "Components\CygSoft.CodeCat.Plugins.XmlFormatter\CygSoft.CodeCat.Plugins.XmlFormatter.csproj", "{45071AFC-E70C-4FB2-84C4-47AE332222AF}"
 EndProject
@@ -86,6 +80,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.UI.Resources", "Components\CygSoft.CodeCat.UI.Resources\CygSoft.CodeCat.UI.Resources.csproj", "{8EB07193-2FB6-4056-8F9F-F38F28F4077D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.UI.Resources.Infrastructure", "Components\CygSoft.CodeCat.UI.Resources.Infrastructure\CygSoft.CodeCat.UI.Resources.Infrastructure.csproj", "{0FE663AF-5176-4A36-BF6D-11F717F229EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure", "Components\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure.csproj", "{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,10 +141,6 @@ Global
 		{FADE2BF1-6916-457C-9B0C-442227C59E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FADE2BF1-6916-457C-9B0C-442227C59E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FADE2BF1-6916-457C-9B0C-442227C59E62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9FFC7814-DCEF-4723-9E4B-6B1154488E1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9FFC7814-DCEF-4723-9E4B-6B1154488E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FFC7814-DCEF-4723-9E4B-6B1154488E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -177,10 +169,6 @@ Global
 		{99C7DCC9-3B35-4CA5-98E7-9BBE72021634}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99C7DCC9-3B35-4CA5-98E7-9BBE72021634}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99C7DCC9-3B35-4CA5-98E7-9BBE72021634}.Release|Any CPU.Build.0 = Release|Any CPU
-		{87A58FDC-D07C-4CC8-B553-2214D5AF00C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87A58FDC-D07C-4CC8-B553-2214D5AF00C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87A58FDC-D07C-4CC8-B553-2214D5AF00C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87A58FDC-D07C-4CC8-B553-2214D5AF00C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12F77F75-AD62-4D5B-8577-7A1AE7136827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12F77F75-AD62-4D5B-8577-7A1AE7136827}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12F77F75-AD62-4D5B-8577-7A1AE7136827}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -201,10 +189,6 @@ Global
 		{7E101281-FCFC-4615-854B-17314B41CAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E101281-FCFC-4615-854B-17314B41CAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E101281-FCFC-4615-854B-17314B41CAA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65F6DB5B-43CD-439E-AFE9-D65B1CF58AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{45071AFC-E70C-4FB2-84C4-47AE332222AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{45071AFC-E70C-4FB2-84C4-47AE332222AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45071AFC-E70C-4FB2-84C4-47AE332222AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -237,6 +221,10 @@ Global
 		{0FE663AF-5176-4A36-BF6D-11F717F229EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FE663AF-5176-4A36-BF6D-11F717F229EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FE663AF-5176-4A36-BF6D-11F717F229EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

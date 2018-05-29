@@ -54,10 +54,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Components\CygSoft.CodeCat.Category.Infrastructure\CygSoft.CodeCat.Category.Infrastructure.csproj">
-      <Project>{87a58fdc-d07c-4cc8-b553-2214d5af00c1}</Project>
-      <Name>CygSoft.CodeCat.Category.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Components\CygSoft.CodeCat.Category\CygSoft.CodeCat.Category.csproj">
       <Project>{99c7dcc9-3b35-4ca5-98e7-9bbe72021634}</Project>
       <Name>CygSoft.CodeCat.Category</Name>
