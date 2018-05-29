@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.DocumentManager.TopicSections;
 using CygSoft.CodeCat.Domain.TopicSections;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

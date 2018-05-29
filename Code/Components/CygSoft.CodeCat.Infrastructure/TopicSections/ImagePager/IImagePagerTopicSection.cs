@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CygSoft.CodeCat.DocumentManager.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure.TopicSections
 {
     public interface IImagePagerTopicSection : ITopicSection
     {

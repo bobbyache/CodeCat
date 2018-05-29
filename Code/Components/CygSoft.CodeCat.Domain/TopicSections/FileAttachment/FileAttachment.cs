@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System;
 using System.Diagnostics;
 using System.IO;

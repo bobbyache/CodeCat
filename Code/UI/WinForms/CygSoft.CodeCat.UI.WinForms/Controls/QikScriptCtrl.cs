@@ -7,6 +7,7 @@ using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using Alsing.SourceCode;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.IO;

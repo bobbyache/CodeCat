@@ -1,6 +1,6 @@
 ﻿using CygSoft.CodeCat.TaskListing.Infrastructure;
 
-namespace CygSoft.CodeCat.DocumentManager.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure.TopicSections
 {
     public interface ITasksTopicSection : ITopicSection
     {

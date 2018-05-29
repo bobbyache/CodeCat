@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.Domain.TopicSections;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 using System.Linq;

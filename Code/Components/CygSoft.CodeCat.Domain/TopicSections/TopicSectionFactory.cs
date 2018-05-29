@@ -8,6 +8,7 @@ using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
 using CygSoft.CodeCat.Domain.TopicSections.Tasks;
 using CygSoft.CodeCat.Domain.TopicSections.VersionedCode;
 using CygSoft.CodeCat.Domain.TopicSections.WebReference;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 
 namespace CygSoft.CodeCat.Domain.TopicSections
 {

@@ -1,7 +1,8 @@
-﻿using CygSoft.CodeCat.Files.Infrastructure;
+﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.Files.Infrastructure;
 using System;
 
-namespace CygSoft.CodeCat.DocumentManager.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure.TopicSections
 {
     public interface ITopicSection  : IPositionedItem, IFile
     {

@@ -9,6 +9,7 @@ using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.UI.Resources.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

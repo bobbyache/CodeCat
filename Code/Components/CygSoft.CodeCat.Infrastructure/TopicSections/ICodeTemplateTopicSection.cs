@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.DocumentManager.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure.TopicSections
 {
     public interface ICodeTemplateTopicSection : ITopicSection
     {

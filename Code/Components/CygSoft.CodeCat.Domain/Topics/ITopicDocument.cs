@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 
