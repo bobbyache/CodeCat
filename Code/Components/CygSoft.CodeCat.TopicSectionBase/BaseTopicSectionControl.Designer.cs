@@ -1,4 +1,6 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
+﻿using CygSoft.CodeCat.UI.WinForms.CustomControls;
+
+namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
 {
     partial class BaseTopicSectionControl
     {
@@ -30,7 +32,7 @@
         {
             this.HeaderToolstrip = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.txtTitle = new ToolStripSpringTextBox();
             this.FooterToolstrip = new System.Windows.Forms.ToolStrip();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
             this.HeaderToolstrip.SuspendLayout();

@@ -1,4 +1,6 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms.Docked
+﻿using CygSoft.CodeCat.UI.WinForms.CustomControls;
+
+namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
     partial class PluginsForm
     {
@@ -30,7 +32,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuGenerators = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentGenerator = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.currentGenerator = new ToolStripSpringTextBox();
             this.uiPluginPanel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();

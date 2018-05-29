@@ -13,6 +13,8 @@ using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
 using CygSoft.CodeCat.UI.Resources.Infrastructure;
+using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {

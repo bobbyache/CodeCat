@@ -6,7 +6,7 @@ using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 
-namespace CygSoft.CodeCat.Domain.Topics
+namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
     //TODO: IPersistableTarget and a TopicSection? Need to look and identifiy whether these two can't be merged.
     public interface ITopicDocument : IKeywordTarget, IFile, ITitledEntity

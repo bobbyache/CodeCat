@@ -47,6 +47,7 @@
     <Compile Include="ICategorizedItem.cs" />
     <Compile Include="ICategorizedKeywordIndexItem.cs" />
     <Compile Include="ICategorizedListItem.cs" />
+    <Compile Include="ITopicDocument.cs" />
     <Compile Include="TopicSections\ICodeTemplateTopicSection.cs" />
     <Compile Include="TopicSections\ICodeTopicSection.cs" />
     <Compile Include="IdentityItem.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="ITopic.cs" />
     <Compile Include="TopicSections\ITopicSection.cs" />
     <Compile Include="IVersionableFile.cs" />
+    <Compile Include="TopicSections\ITopicSectionBaseControl.cs" />
     <Compile Include="TopicSections\IVersionedCodeTopicSection.cs" />
     <Compile Include="IVersionedFileRepository.cs" />
     <Compile Include="TopicSections\IWebReferencesTopicSection.cs" />

@@ -1,4 +1,6 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms.Controls
+﻿using CygSoft.CodeCat.UI.WinForms.CustomControls;
+
+namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     partial class ImageSetControl
     {
@@ -38,7 +40,7 @@
             this.lblImagePosition = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.txtTitle = new ToolStripSpringTextBox();
             this.btnImport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();

@@ -1,4 +1,6 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms
+﻿using CygSoft.CodeCat.UI.WinForms.CustomControls;
+
+namespace CygSoft.CodeCat.UI.WinForms
 {
     partial class CodeWorkItemForm
     {
@@ -34,15 +36,15 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.cboFontSize = new System.Windows.Forms.ToolStripComboBox();
             this.lblEditStatus = new System.Windows.Forms.ToolStripLabel();
-            this.txtIdentifier = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.txtIdentifier = new ToolStripSpringTextBox();
             this.toolstripTitle = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.txtTitle = new ToolStripSpringTextBox();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.cboSyntax = new System.Windows.Forms.ToolStripComboBox();
             this.toolstripKeywords = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.txtKeywords = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.txtKeywords = new ToolStripSpringTextBox();
             this.toolstripCommands = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnDiscardChange = new System.Windows.Forms.ToolStripButton();
@@ -386,14 +388,14 @@
         private System.Windows.Forms.ToolStripComboBox cboFontSize;
         private System.Windows.Forms.ToolStrip toolstripTitle;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox txtTitle;
+        private ToolStripSpringTextBox txtTitle;
         private System.Windows.Forms.ToolStrip toolstripKeywords;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
-        private CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox txtKeywords;
+        private ToolStripSpringTextBox txtKeywords;
         private System.Windows.Forms.ToolStrip toolstripCommands;
         private System.Windows.Forms.ToolStripButton btnTakeSnapshot;
         private System.Windows.Forms.ToolStripLabel lblEditStatus;
-        private CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox txtIdentifier;
+        private ToolStripSpringTextBox txtIdentifier;
         private System.Windows.Forms.ToolStripButton btnDeleteSnapshot;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
         private System.Windows.Forms.ToolStripComboBox cboSyntax;

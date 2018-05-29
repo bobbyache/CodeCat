@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.Domain;
+﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
 using CygSoft.CodeCat.UI.Resources.Infrastructure;

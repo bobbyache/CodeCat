@@ -5,6 +5,7 @@ using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.TaskListing.Infrastructure;
 using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
+using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using System;
 using System.Windows.Forms;
 

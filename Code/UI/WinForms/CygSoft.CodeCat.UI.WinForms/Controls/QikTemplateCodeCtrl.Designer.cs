@@ -1,4 +1,6 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms.Controls
+﻿using CygSoft.CodeCat.UI.WinForms.CustomControls;
+
+namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     partial class QikTemplateCodeCtrl
     {
@@ -31,7 +33,7 @@
             this.components = new System.ComponentModel.Container();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.txtTitle = new ToolStripSpringTextBox();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.cboSyntax = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();

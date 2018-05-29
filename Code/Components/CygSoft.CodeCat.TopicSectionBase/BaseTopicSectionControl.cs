@@ -1,6 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.UI.Resources.Infrastructure;
@@ -8,7 +7,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
+namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
 {
     public partial class BaseTopicSectionControl : UserControl, ITopicSectionBaseControl
     {
@@ -26,9 +25,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public string Id { get; private set; }
         public string Title { get { return this.txtTitle.Text; } }
 
-        public virtual int ImageKey {  get { return IconRepository.Get("TEXT").Index; } }
-        public virtual Icon ImageIcon {  get { return IconRepository.Get("TEXT").Icon; } }
-        public virtual Image IconImage { get { return IconRepository.Get("TEXT").Image; } }
+        public virtual int ImageKey { get { return -1; } }
+        public virtual Icon ImageIcon { get { return null; } }
+        public virtual Image IconImage { get { return null; } }
+
+        //public virtual int ImageKey {  get { return IconRepository.Get("TEXT").Index; } }
+        //public virtual Icon ImageIcon {  get { return IconRepository.Get("TEXT").Icon; } }
+        //public virtual Image IconImage { get { return IconRepository.Get("TEXT").Image; } }
 
         public bool IsModified { get; protected set; }
         public bool FileExists { get { return topicSection.Exists; } }

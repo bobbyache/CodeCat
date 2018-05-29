@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.UI.Resources.Infrastructure;
+using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using PdfiumViewer;
 using System;

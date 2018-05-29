@@ -1,4 +1,6 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms
+﻿using CygSoft.CodeCat.UI.WinForms.CustomControls;
+
+namespace CygSoft.CodeCat.UI.WinForms
 {
     partial class TopicWorkItemForm
     {
@@ -34,12 +36,12 @@
             this.chkEdit = new System.Windows.Forms.ToolStripButton();
             this.toolstripTitle = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.txtTitle = new ToolStripSpringTextBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolstripKeywords = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.txtKeywords = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.txtKeywords = new ToolStripSpringTextBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDiscardChange = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
@@ -66,7 +68,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
             this.btnMoveRight = new System.Windows.Forms.ToolStripButton();
-            this.txtToolStripTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.txtToolStripTitle = new ToolStripSpringTextBox();
             this.btnOpenFolder = new System.Windows.Forms.ToolStripButton();
             this.tabControlFile = new System.Windows.Forms.TabControl();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace CygSoft.CodeCat.UI.WinForms.Controls
+namespace CygSoft.CodeCat.Infrastructure.TopicSections
 {
     public interface ITopicSectionBaseControl
     {

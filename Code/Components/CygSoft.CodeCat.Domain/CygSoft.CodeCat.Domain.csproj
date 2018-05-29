@@ -86,7 +86,6 @@
     <Compile Include="Topics\TopicKeywordIndexItem.cs" />
     <Compile Include="Topics\TopicKeywordSearchIndexRepository.cs" />
     <Compile Include="Topics\TopicLibrary.cs" />
-    <Compile Include="Topics\ITopicDocument.cs" />
     <Compile Include="Topics\ITopicKeywordIndexItem.cs" />
     <Compile Include="Code\CodeKeywordIndexItem.cs" />
     <Compile Include="Code\CodeKeywordSearchIndexRepository.cs" />

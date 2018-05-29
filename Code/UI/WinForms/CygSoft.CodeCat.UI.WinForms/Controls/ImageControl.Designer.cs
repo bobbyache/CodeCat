@@ -1,4 +1,6 @@
-﻿namespace CygSoft.CodeCat.UI.WinForms.Controls
+﻿using CygSoft.CodeCat.UI.WinForms.CustomControls;
+
+namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
     partial class ImageControl
     {
@@ -33,7 +35,7 @@
             this.syntaxDocument = new Alsing.SourceCode.SyntaxDocument(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.txtTitle = new CygSoft.CodeCat.UI.WinForms.ToolStripSpringTextBox();
+            this.txtTitle = new ToolStripSpringTextBox();
             this.btnImport = new System.Windows.Forms.ToolStripButton();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();

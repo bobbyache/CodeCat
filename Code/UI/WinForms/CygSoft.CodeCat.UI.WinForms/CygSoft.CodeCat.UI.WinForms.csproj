@@ -121,7 +121,6 @@
     <Compile Include="Controls\ImageControl.Designer.cs">
       <DependentUpon>ImageControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ITopicSectionBaseControl.cs" />
     <Compile Include="Controls\ImageSetControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -178,12 +177,6 @@
     </Compile>
     <Compile Include="Controls\ToolStripSyntaxComboBox.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\BaseTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\BaseTopicSectionControl.Designer.cs">
-      <DependentUpon>BaseTopicSectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TopicSections\FileAttachmentsTopicSectionControl.cs">
       <SubType>UserControl</SubType>
@@ -391,9 +384,6 @@
     <Compile Include="Documents\CodeWorkItemForm.Designer.cs">
       <DependentUpon>CodeWorkItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolStripSpringTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="UiHelpers\Dialogs.cs" />
     <Compile Include="UiHelpers\Drawing.cs" />
     <Compile Include="UiHelpers\GroupedListView.cs" />
@@ -443,9 +433,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RtfEditorControl.resx">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\BaseTopicSectionControl.resx">
-      <DependentUpon>BaseTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\FileAttachmentsTopicSectionControl.resx">
       <DependentUpon>FileAttachmentsTopicSectionControl.cs</DependentUpon>
@@ -590,6 +577,10 @@
       <Project>{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}</Project>
       <Name>CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.TopicSectionBase\CygSoft.CodeCat.UI.WinForms.TopicSectionBase.csproj">
+      <Project>{3638D6A4-8FCE-4DF2-8D31-DD3AA1DCA126}</Project>
+      <Name>CygSoft.CodeCat.UI.WinForms.TopicSectionBase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.UI.Resources.Infrastructure\CygSoft.CodeCat.UI.Resources.Infrastructure.csproj">
       <Project>{0fe663af-5176-4a36-bf6d-11f717f229ee}</Project>
       <Name>CygSoft.CodeCat.UI.Resources.Infrastructure</Name>
@@ -597,6 +588,10 @@
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.UI.Resources\CygSoft.CodeCat.UI.Resources.csproj">
       <Project>{8eb07193-2fb6-4056-8f9f-f38f28f4077d}</Project>
       <Name>CygSoft.CodeCat.UI.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.UI.WinForms.CustomControls\CygSoft.CodeCat.UI.WinForms.CustomControls.csproj">
+      <Project>{9C4CD292-113E-40F3-B32E-F8F14A7DA29E}</Project>
+      <Name>CygSoft.CodeCat.UI.WinForms.CustomControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Components\Etier.IconHelper\Etier.IconHelper.csproj">
       <Project>{44368acc-95e7-4be0-ade4-abb8aae9b9d0}</Project>
