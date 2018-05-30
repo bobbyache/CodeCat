@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.UI.Resources;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Diagnostics;
@@ -26,9 +27,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public string Id { get; private set; }
         public string Title { get { return txtTitle.Text; } }
-        public int ImageKey { get { return iconRepository.Get(IconRepository.TopicSections.ImageSet).Index; } }
-        public Icon ImageIcon { get { return iconRepository.Get(IconRepository.TopicSections.ImageSet).Icon; } }
-        public Image IconImage { get { return iconRepository.Get(IconRepository.TopicSections.ImageSet).Image; } }
+        public int ImageKey { get { return iconRepository.Get(ImageResources.TopicSections.ImageSet).Index; } }
+        public Icon ImageIcon { get { return iconRepository.Get(ImageResources.TopicSections.ImageSet).Icon; } }
+        public Image IconImage { get { return iconRepository.Get(ImageResources.TopicSections.ImageSet).Image; } }
         public bool IsModified { get; private set; }
         public bool FileExists { get { return false; } }
 

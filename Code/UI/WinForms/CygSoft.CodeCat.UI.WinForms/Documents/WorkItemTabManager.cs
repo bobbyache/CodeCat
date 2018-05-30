@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.UI.Resources;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using System;
 using System.Collections.Generic;
@@ -155,20 +156,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             if (topicSection is ICodeTopicSection)
                 item.Image = iconRepository.Get((topicSection as ICodeTopicSection).Syntax).Image;
             else if (topicSection is IPdfViewerTopicSection)
-                item.Image = iconRepository.Get(IconRepository.TopicSections.PDF).Image;
+                item.Image = iconRepository.Get(ImageResources.TopicSections.PDF).Image;
             else if (topicSection is ISingleImageTopicSection)
-                item.Image = iconRepository.Get(IconRepository.TopicSections.SingleImage).Image;
+                item.Image = iconRepository.Get(ImageResources.TopicSections.SingleImage).Image;
             else if (topicSection is IImagePagerTopicSection)
-                item.Image = iconRepository.Get(IconRepository.TopicSections.ImageSet).Image;
+                item.Image = iconRepository.Get(ImageResources.TopicSections.ImageSet).Image;
             else if (topicSection is IWebReferencesTopicSection)
-                item.Image = iconRepository.Get(IconRepository.TopicSections.WebReferences).Image;
+                item.Image = iconRepository.Get(ImageResources.TopicSections.WebReferences).Image;
             else if (topicSection is IRichTextEditorTopicSection)
-                item.Image = iconRepository.Get(IconRepository.TopicSections.RTF).Image; 
+                item.Image = iconRepository.Get(ImageResources.TopicSections.RTF).Image; 
             else if (topicSection is IFileAttachmentsTopicSection)
-                item.Image = iconRepository.Get(IconRepository.TopicSections.FileAttachments).Image; 
+                item.Image = iconRepository.Get(ImageResources.TopicSections.FileAttachments).Image; 
 
             else
-                item.Image = iconRepository.Get(IconRepository.TopicSections.Unknown).Image;
+                item.Image = iconRepository.Get(ImageResources.TopicSections.Unknown).Image;
 
             item.Click += item_Click;
             this.tabMenuButton.DropDownItems.Add(item);

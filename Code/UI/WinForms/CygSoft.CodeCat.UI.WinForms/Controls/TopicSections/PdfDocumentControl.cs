@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.UI.Resources;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using PdfiumViewer;
@@ -21,9 +22,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripButton btnReload;
         private ToolStripButton btnImport;
 
-        public override int ImageKey { get { return iconRepository.Get(IconRepository.TopicSections.PDF).Index; } }
-        public override Icon ImageIcon { get { return iconRepository.Get(IconRepository.TopicSections.PDF).Icon; } }
-        public override Image IconImage { get { return iconRepository.Get(IconRepository.TopicSections.PDF).Image; } }
+        public override int ImageKey { get { return iconRepository.Get(ImageResources.TopicSections.PDF).Index; } }
+        public override Icon ImageIcon { get { return iconRepository.Get(ImageResources.TopicSections.PDF).Icon; } }
+        public override Image IconImage { get { return iconRepository.Get(ImageResources.TopicSections.PDF).Image; } }
 
         public PdfDocumentControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, IPdfViewerTopicSection topicSection)
             : base(application, imageResources, iconRepository, topicDocument, topicSection)

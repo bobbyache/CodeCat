@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.UI.Resources;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
@@ -21,9 +22,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripButton btnAdd;
         private ToolStripButton btnDelete;
 
-        public override int ImageKey { get { return iconRepository.Get(IconRepository.TopicSections.WebReferences).Index; } }
-        public override Icon ImageIcon { get { return iconRepository.Get(IconRepository.TopicSections.WebReferences).Icon; } }
-        public override Image IconImage { get { return iconRepository.Get(IconRepository.TopicSections.WebReferences).Image; } }
+        public override int ImageKey { get { return iconRepository.Get(ImageResources.TopicSections.WebReferences).Index; } }
+        public override Icon ImageIcon { get { return iconRepository.Get(ImageResources.TopicSections.WebReferences).Icon; } }
+        public override Image IconImage { get { return iconRepository.Get(ImageResources.TopicSections.WebReferences).Image; } }
 
         private IWebReferencesTopicSection WebReferencesTopicSection
         {

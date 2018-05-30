@@ -9,26 +9,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using static CygSoft.CodeCat.UI.Resources.ImageResources;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
     public class IconRepository : IIconRepository
     {
-        public static class TopicSections
-        {
-            public const string QikGroup = "Document.QikGroup";
-            public const string CodeGroup = "Document.CodeGroup";
-            public const string PDF = "Document.PDF";
-            public const string SingleImage = "Document.IMG";
-            public const string WebReferences = "Document.UrlGroup";
-            public const string ImageSet = "Document.PNG";
-            public const string RTF = "Document.RTF";
-            public const string FileAttachments = "Document.HTML";
-            public const string Unknown = "Document.Unknown";
-            public const string CodeFile = "Document.CodeFile";
-            public const string EventDiary = "Document.EventDiary";
-        }
-
         private IImageResources imageResources;
         public IImageResources ImageResources
         {
@@ -57,10 +43,10 @@ namespace CygSoft.CodeCat.UI.WinForms
                 imageKey = (item as ICodeKeywordIndexItem).Syntax;
 
             else if (item is IQikTemplateKeywordIndexItem)
-                imageKey = IconRepository.TopicSections.QikGroup;
+                imageKey = TopicSections.QikGroup;
 
             else if (item is ITopicKeywordIndexItem)
-                imageKey = IconRepository.TopicSections.CodeGroup;
+                imageKey = TopicSections.CodeGroup;
 
             return Get(imageKey, false);
         }

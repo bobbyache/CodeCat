@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary;
 using CygSoft.CodeCat.Infrastructure.Graphics;
+using CygSoft.CodeCat.UI.Resources;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -17,9 +18,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripButton btnAdd;
         private ToolStripButton btnDelete;
 
-        public override int ImageKey { get { return iconRepository.Get(IconRepository.TopicSections.EventDiary).Index; } }
-        public override Icon ImageIcon { get { return iconRepository.Get(IconRepository.TopicSections.EventDiary).Icon; } }
-        public override Image IconImage { get { return iconRepository.Get(IconRepository.TopicSections.EventDiary).Image; } }
+        public override int ImageKey { get { return iconRepository.Get(ImageResources.TopicSections.EventDiary).Index; } }
+        public override Icon ImageIcon { get { return iconRepository.Get(ImageResources.TopicSections.EventDiary).Icon; } }
+        public override Image IconImage { get { return iconRepository.Get(ImageResources.TopicSections.EventDiary).Image; } }
 
         private ISearchableEventTopicSection SearchableEventTopicSection
         {

@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.UI.Resources;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using System;
 using System.Drawing;
@@ -10,9 +11,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     public partial class RichTextBoxTopicSectionControl : BaseTopicSectionControl
     {
-        public override int ImageKey { get { return iconRepository.Get(IconRepository.TopicSections.RTF).Index; } }
-        public override Icon ImageIcon { get { return iconRepository.Get(IconRepository.TopicSections.RTF).Icon; } }
-        public override Image IconImage { get { return iconRepository.Get(IconRepository.TopicSections.RTF).Image; } }
+        public override int ImageKey { get { return iconRepository.Get(ImageResources.TopicSections.RTF).Index; } }
+        public override Icon ImageIcon { get { return iconRepository.Get(ImageResources.TopicSections.RTF).Icon; } }
+        public override Image IconImage { get { return iconRepository.Get(ImageResources.TopicSections.RTF).Image; } }
 
         public RichTextBoxTopicSectionControl()
             : this(null, null, null, null, null)
