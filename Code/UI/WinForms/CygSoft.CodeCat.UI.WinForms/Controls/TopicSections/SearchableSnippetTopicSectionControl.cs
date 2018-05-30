@@ -3,6 +3,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
+using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Windows.Forms;
@@ -25,13 +26,16 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public SearchableSnippetTopicSectionControl()
-            : this(null, null, null, null)
+            : this(null, null, null, null, null, -1)
         {
 
         }
 
-        public SearchableSnippetTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ISearchableSnippetTopicSection topicSection)
-            : base(application, imageResources, topicDocument, topicSection)
+        public SearchableSnippetTopicSectionControl(IAppFacade application, IImageResources imageResources, 
+            ITopicDocument topicDocument, ISearchableSnippetTopicSection topicSection,
+                string defaultSyntax, int defaultFontSize
+            )
+            : base(application, imageResources, topicDocument, topicSection, defaultSyntax, defaultFontSize)
         {
             InitializeComponent();
 

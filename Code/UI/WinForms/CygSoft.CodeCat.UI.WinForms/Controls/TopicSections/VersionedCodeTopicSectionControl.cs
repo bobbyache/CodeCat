@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Windows.Forms;
@@ -22,13 +23,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public VersionedCodeTopicSectionControl()
-            : this(null, null, null, null)
+            : this(null, null, null, null, null, -1)
         {
 
         }
 
-        public VersionedCodeTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IVersionedCodeTopicSection topicSection)
-            : base(application, imageResources, topicDocument, topicSection)
+        public VersionedCodeTopicSectionControl(IAppFacade application, IImageResources imageResources, 
+            ITopicDocument topicDocument, IVersionedCodeTopicSection topicSection, string defaultSyntax, int defaultFontSize)
+            : base(application, imageResources, topicDocument, topicSection, defaultSyntax, defaultFontSize)
         {
             InitializeComponent();
 

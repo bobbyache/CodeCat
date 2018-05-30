@@ -2,12 +2,13 @@
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.UI.WinForms.CustomControls;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
+namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
 {
     public partial class BaseCodeTopicSectionControl : BaseTopicSectionControl
     {
@@ -35,12 +36,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         
 
         public BaseCodeTopicSectionControl()
-            : this(null, null, null, null)
+            : this(null, null, null, null, null, -1)
         {
 
         }
 
-        public BaseCodeTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ICodeTopicSection topicSection)
+        public BaseCodeTopicSectionControl(IAppFacade application, IImageResources imageResources, 
+            ITopicDocument topicDocument, ICodeTopicSection topicSection, string defaultSyntax, int defaultFontSize)
             : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
@@ -54,8 +56,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             HeaderToolstrip.Items.Add(cboSyntax);
             FooterToolstrip.Items.Insert(0, cboFontSize);
 
-            cboFontSize.SetFont(ConfigSettings.DefaultFontSize);
+            cboFontSize.SetFont(defaultFontSize);
 
+            cboSyntax.DefaultSyntax = defaultSyntax;
             cboSyntax.LoadSyntaxes(application.GetSyntaxes());
             cboSyntax.Syntax = CodeTopicSection().Syntax;
             base.SetStateImage(imageResources.Get(Syntax).Image);

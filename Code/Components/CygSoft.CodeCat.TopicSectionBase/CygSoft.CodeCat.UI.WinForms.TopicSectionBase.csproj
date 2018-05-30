@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseCodeTopicSectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BaseCodeTopicSectionControl.Designer.cs">
+      <DependentUpon>BaseCodeTopicSectionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="BaseTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -52,6 +58,9 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BaseCodeTopicSectionControl.resx">
+      <DependentUpon>BaseCodeTopicSectionControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BaseTopicSectionControl.resx">
       <DependentUpon>BaseTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>

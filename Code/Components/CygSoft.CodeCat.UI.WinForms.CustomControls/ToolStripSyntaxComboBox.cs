@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CygSoft.CodeCat.UI.WinForms.Controls
+namespace CygSoft.CodeCat.UI.WinForms.CustomControls
 {
     // https://www.codeproject.com/Articles/10670/Image-ComboBox-Control
     // https://social.msdn.microsoft.com/Forums/vstudio/en-US/ff2fa457-ebdb-46eb-840f-fb29e036b474/image-for-toolstripcombobox-toolstriptextbox-or-other-toolstripcontrolhost?forum=csharpgeneral
 
     public class ToolStripSyntaxComboBox : ToolStripComboBox
     {
+        public string DefaultSyntax { get; set; }
+
         public string Syntax
         {
             get
@@ -20,12 +22,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                     return null;
 
                 string currentSyntax = this.SelectedItem.ToString();
-                string syntax = string.IsNullOrEmpty(currentSyntax) ? ConfigSettings.DefaultSyntax.ToUpper() : currentSyntax.ToUpper();
+                string syntax = string.IsNullOrEmpty(currentSyntax) ? DefaultSyntax.ToUpper() : currentSyntax.ToUpper();
                 return syntax;
             }
             set
             {
-                string syntax = string.IsNullOrEmpty(value) ? ConfigSettings.DefaultSyntax.ToUpper() : value.ToUpper();
+                string syntax = string.IsNullOrEmpty(value) ? DefaultSyntax.ToUpper() : value.ToUpper();
                 int index = this.FindStringExact(syntax);
                 if (index >= 0)
                     this.SelectedIndex = index;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CygSoft.CodeCat.UI.WinForms.Controls
+namespace CygSoft.CodeCat.UI.WinForms.CustomControls
 {
     public class ToolStripFontSizeComboBox : ToolStripComboBox
     {

@@ -14,7 +14,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 {
     public static class TopicSectionControlFactory
     {
-        public static ITopicSectionBaseControl Create(ITopicSection topicSection, IImageResources imageResources, IFile workItem, IAppFacade application, EventHandler modifiedEventHandler)
+        public static ITopicSectionBaseControl Create(ITopicSection topicSection, IImageResources imageResources, IFile workItem, 
+            IAppFacade application, EventHandler modifiedEventHandler)
         {
             ITopicSectionBaseControl topicSectionControl = null;
 
@@ -27,13 +28,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
                     topicSectionControl = new QikTemplateCodeCtrl(application, imageResources, workItem as IQikTemplateDocumentSet, topicSection as ICodeTopicSection);
 
                 else if (topicSection is IVersionedCodeTopicSection)
-                    topicSectionControl = new VersionedCodeTopicSectionControl(application, imageResources, workItem as ITopicDocument, topicSection as IVersionedCodeTopicSection);
+                    topicSectionControl = new VersionedCodeTopicSectionControl(application, imageResources, workItem as ITopicDocument, topicSection as IVersionedCodeTopicSection, ConfigSettings.DefaultSyntax, ConfigSettings.DefaultFontSize);
 
                 else if (topicSection is ISearchableSnippetTopicSection)
-                    topicSectionControl = new SearchableSnippetTopicSectionControl(application, imageResources, workItem as ITopicDocument, topicSection as ISearchableSnippetTopicSection);
+                    topicSectionControl = new SearchableSnippetTopicSectionControl(application, imageResources, workItem as ITopicDocument, topicSection as ISearchableSnippetTopicSection, ConfigSettings.DefaultSyntax, ConfigSettings.DefaultFontSize);
 
                 else
-                    topicSectionControl = new SimpleCodeTopicSectionControl(application, imageResources, workItem as ITopicDocument, topicSection as ICodeTopicSection);
+                    topicSectionControl = new SimpleCodeTopicSectionControl(application, imageResources, workItem as ITopicDocument, topicSection as ICodeTopicSection, ConfigSettings.DefaultSyntax, ConfigSettings.DefaultFontSize);
             }
 
             else if (topicSection is ICodeTemplateTopicSection)
