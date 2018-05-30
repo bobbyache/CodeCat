@@ -60,10 +60,6 @@
       <Project>{8C992A57-BCBF-4B78-9F69-C88A30E39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Components\CygSoft.CodeCat.UI.Resources.Infrastructure\CygSoft.CodeCat.UI.Resources.Infrastructure.csproj">
-      <Project>{0FE663AF-5176-4A36-BF6D-11F717F229EE}</Project>
-      <Name>CygSoft.CodeCat.UI.Resources.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Components\CygSoft.CodeCat.UI.Resources\CygSoft.CodeCat.UI.Resources.csproj">
       <Project>{8EB07193-2FB6-4056-8F9F-F38F28F4077D}</Project>
       <Name>CygSoft.CodeCat.UI.Resources</Name>

@@ -44,7 +44,6 @@
     <Compile Include="Enums.cs" />
     <Compile Include="FileEventArgs.cs" />
     <Compile Include="FileSys.cs" />
-    <Compile Include="Graphics\IIconRepository.cs" />
     <Compile Include="Graphics\IImageOutput.cs" />
     <Compile Include="Graphics\IImageResources.cs" />
     <Compile Include="Graphics\ImageKeys.cs" />

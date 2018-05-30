@@ -57,10 +57,6 @@
       <Project>{8C992A57-BCBF-4B78-9F69-C88A30E39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CygSoft.CodeCat.UI.Resources.Infrastructure\CygSoft.CodeCat.UI.Resources.Infrastructure.csproj">
-      <Project>{0fe663af-5176-4a36-bf6d-11f717f229ee}</Project>
-      <Name>CygSoft.CodeCat.UI.Resources.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Etier.IconHelper\Etier.IconHelper.csproj">
       <Project>{44368acc-95e7-4be0-ade4-abb8aae9b9d0}</Project>
       <Name>Etier.IconHelper</Name>

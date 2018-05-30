@@ -28,7 +28,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         protected IAppFacade application;
         protected IFile workItem;
         protected IImageResources imageResources;
-        protected IIconRepository iconRepository;
 
         public string Id
         {

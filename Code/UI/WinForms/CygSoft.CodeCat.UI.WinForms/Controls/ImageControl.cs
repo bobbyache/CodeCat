@@ -20,7 +20,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         private ISingleImageTopicSection topicSection;
         private ITopicDocument topicDocument;
         private IImageResources imageResources;
-        private IIconRepository iconRepository;
 
         public string Id { get; private set; }
         public string Title { get { return txtTitle.Text; } }
@@ -30,14 +29,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public bool IsModified { get; private set; }
         public bool FileExists { get { return false; } }
 
-        public ImageControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, ISingleImageTopicSection topicSection)
+        public ImageControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ISingleImageTopicSection topicSection)
         {
             InitializeComponent();
-
-            if (iconRepository == null)
-                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
-
-            this.iconRepository = iconRepository;
 
             if (imageResources == null)
                 throw new ArgumentNullException("Image Resources is a required constructor parameter and cannot be null");

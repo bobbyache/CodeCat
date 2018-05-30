@@ -30,7 +30,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private CategoryForm categoryForm;
         private PluginsForm pluginsForm;
         private IImageResources imageResources;
-        private IconRepository iconRepository;
 
         // need this because we don't want to create a new document when
         // when all documents are closing because we're either creating
@@ -44,7 +43,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             //dockPanel.SaveAsXml(
             //dockPanel.LoadFromXml(
             imageResources = new ImageResources();
-            this.iconRepository = new IconRepository();
 
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
             this.application = new AppFacade(ConfigSettings.SyntaxFilePath);
@@ -117,7 +115,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeSearchForm()
         {
-            searchForm = new SearchForm(this.application, imageResources, iconRepository);
+            searchForm = new SearchForm(this.application, imageResources);
             searchForm.OpenTopic += Control_OpenWorkItem;
             searchForm.DeleteTopic += Control_DeleteTopic;
             searchForm.SearchExecuted += (s, e) => { this.indexCountLabel.Text = ItemCountCaption(e.MatchedItemCount); };
@@ -138,7 +136,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeCategoryForm()
         {
-            categoryForm = new CategoryForm(this.application, this.imageResources, this.iconRepository);
+            categoryForm = new CategoryForm(this.application, this.imageResources);
             categoryForm.OpenWorkItem += Control_OpenWorkItem;
             categoryForm.Show(dockPanel, DockState.DockLeftAutoHide);
         }
@@ -372,13 +370,13 @@ namespace CygSoft.CodeCat.UI.WinForms
                 IFile workItem = application.OpenWorkItem(keywordIndexItem);
 
                 if (keywordIndexItem is ICodeKeywordIndexItem)
-                    workItemForm = new CodeWorkItemForm(workItem, application, iconRepository, imageResources);
+                    workItemForm = new CodeWorkItemForm(workItem, application, imageResources);
 
                 else if (keywordIndexItem is IQikTemplateKeywordIndexItem)
-                    workItemForm = new QikWorkItemForm(workItem, application, iconRepository, imageResources);
+                    workItemForm = new QikWorkItemForm(workItem, application, imageResources);
 
                 else if (keywordIndexItem is ITopicKeywordIndexItem)
-                    workItemForm = new TopicWorkItemForm(workItem, application, iconRepository, imageResources);
+                    workItemForm = new TopicWorkItemForm(workItem, application, imageResources);
 
                 if (workItemForm == null)
                     throw new Exception("IContentDocument has not been defined and cannot be opened.");
@@ -408,13 +406,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             switch (workItemType)
             {
                 case WorkItemType.CodeFile:
-                    workItemForm = new CodeWorkItemForm(workItem, application, iconRepository, imageResources, true);
+                    workItemForm = new CodeWorkItemForm(workItem, application, imageResources, true);
                     break;
                 case WorkItemType.Topic:
-                    workItemForm = new TopicWorkItemForm(workItem, application, iconRepository, imageResources, true);
+                    workItemForm = new TopicWorkItemForm(workItem, application, imageResources, true);
                     break;
                 case WorkItemType.QikGenerator:
-                    workItemForm = new QikWorkItemForm(workItem, application, iconRepository, imageResources, true);
+                    workItemForm = new QikWorkItemForm(workItem, application, imageResources, true);
                     break;
             }
 

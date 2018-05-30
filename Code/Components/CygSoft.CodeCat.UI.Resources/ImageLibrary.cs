@@ -1,12 +1,11 @@
-﻿using CygSoft.CodeCat.UI.Resources;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.Resources
 {
-    public class ImageLibrary
+    internal class ImageLibrary
     {
         private static ImageList imageList = new ImageList();
         private static Dictionary<string, Icon> iconDictionary = new Dictionary<string, Icon>();

@@ -11,7 +11,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
     {
         private IAppFacade application;
         private IImageResources imageResources;
-        private IIconRepository iconRepository;
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
@@ -43,14 +42,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         public IKeywordIndexItem SelectedWorkItem { get { return codeSearchResultsControl1.SelectedTopic; } }
         public IKeywordIndexItem[] SelectedWorkItems { get { return codeSearchResultsControl1.SelectedTopics; } }
 
-        public SearchForm(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository)
+        public SearchForm(IAppFacade application, IImageResources imageResources)
         {
             InitializeComponent();
-
-            if (iconRepository == null)
-                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
-
-            this.iconRepository = iconRepository;
 
             if (imageResources == null)
                 throw new ArgumentNullException("Image Resources is a required constructor parameter and cannot be null");

@@ -26,8 +26,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public override Icon ImageIcon { get { return imageResources.Get(ImageResources.TopicSections.PDF).Icon; } }
         public override Image IconImage { get { return imageResources.Get(ImageResources.TopicSections.PDF).Image; } }
 
-        public PdfDocumentControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, IPdfViewerTopicSection topicSection)
-            : base(application, imageResources, iconRepository, topicDocument, topicSection)
+        public PdfDocumentControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IPdfViewerTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 

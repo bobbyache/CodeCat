@@ -330,7 +330,6 @@
     <Compile Include="Dialogs\EnterKeywordsDialog.Designer.cs">
       <DependentUpon>EnterKeywordsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="IconRepository.cs" />
     <Compile Include="Dialogs\InvalidRemoveDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -578,10 +577,6 @@
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.TopicSectionBase\CygSoft.CodeCat.UI.WinForms.TopicSectionBase.csproj">
       <Project>{3638D6A4-8FCE-4DF2-8D31-DD3AA1DCA126}</Project>
       <Name>CygSoft.CodeCat.UI.WinForms.TopicSectionBase</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.UI.Resources.Infrastructure\CygSoft.CodeCat.UI.Resources.Infrastructure.csproj">
-      <Project>{0fe663af-5176-4a36-bf6d-11f717f229ee}</Project>
-      <Name>CygSoft.CodeCat.UI.Resources.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.UI.Resources\CygSoft.CodeCat.UI.Resources.csproj">
       <Project>{8eb07193-2fb6-4056-8f9f-f38f28f4077d}</Project>

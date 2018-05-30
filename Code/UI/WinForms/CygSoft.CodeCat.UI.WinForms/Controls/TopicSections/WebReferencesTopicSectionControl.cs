@@ -32,13 +32,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public WebReferencesTopicSectionControl()
-            : this(null, null, null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public WebReferencesTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, IWebReferencesTopicSection topicSection)
-            : base(application, imageResources, iconRepository, topicDocument, topicSection)
+        public WebReferencesTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IWebReferencesTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 

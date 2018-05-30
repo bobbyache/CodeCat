@@ -25,13 +25,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public SearchableSnippetTopicSectionControl()
-            : this(null, null, null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public SearchableSnippetTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, ISearchableSnippetTopicSection topicSection)
-            : base(application, imageResources, iconRepository, topicDocument, topicSection)
+        public SearchableSnippetTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ISearchableSnippetTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 

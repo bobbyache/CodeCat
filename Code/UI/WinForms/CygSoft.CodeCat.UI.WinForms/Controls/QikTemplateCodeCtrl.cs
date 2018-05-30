@@ -18,21 +18,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler Modified;
 
         private IImageResources imageResources;
-        private IIconRepository iconRepository;
         private ICodeTopicSection templateFile;
         private IAppFacade application;
         private IQikTemplateDocumentSet qikTemplateDocumentSet;
         private ICompiler compiler;
 
-        public QikTemplateCodeCtrl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, IQikTemplateDocumentSet qikTemplateDocumentSet, 
+        public QikTemplateCodeCtrl(IAppFacade application, IImageResources imageResources, IQikTemplateDocumentSet qikTemplateDocumentSet, 
             ICodeTopicSection templateFile)
         {
             InitializeComponent();
-
-            if (iconRepository == null)
-                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
-
-            this.iconRepository = iconRepository;
 
             this.imageResources = imageResources;
             this.application = application;

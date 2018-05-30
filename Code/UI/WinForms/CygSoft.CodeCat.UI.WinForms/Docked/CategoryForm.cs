@@ -23,26 +23,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private IAppFacade application;
         private IImageResources imageResources;
-        private IconRepository iconRepository;
         private int openCategoryImageIndex;
         private int closedCategoryImageIndex;
 
-        public CategoryForm(IAppFacade application, IImageResources imageResources, IconRepository iconRepository)
+        public CategoryForm(IAppFacade application, IImageResources imageResources)
         {
             InitializeComponent();
-
-            if (iconRepository == null)
-                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
-
-            openCategoryImageIndex = imageResources.Get(ImageKeys.OpenCategory, false).Index;
-            closedCategoryImageIndex = imageResources.Get(ImageKeys.ClosedCategory, false).Index;
-
-            this.iconRepository = iconRepository;
 
             if (imageResources == null)
                 throw new ArgumentNullException("Image Resources is a required constructor parameter and cannot be null");
 
             this.imageResources = imageResources;
+
+            openCategoryImageIndex = imageResources.Get(ImageKeys.OpenCategory, false).Index;
+            closedCategoryImageIndex = imageResources.Get(ImageKeys.ClosedCategory, false).Index;
 
             if (application == null)
                 throw new ArgumentNullException("Application is a required constructor parameter and cannot be null");
@@ -212,7 +206,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             if (categoryTreeControl1.ItemsLoaded)
             {
-                SearchDialog dialog = new SearchDialog(application, imageResources, iconRepository);
+                SearchDialog dialog = new SearchDialog(application, imageResources);
                 DialogResult result = dialog.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {

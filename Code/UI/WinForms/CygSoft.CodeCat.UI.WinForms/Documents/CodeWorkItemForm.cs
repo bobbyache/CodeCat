@@ -16,14 +16,9 @@ namespace CygSoft.CodeCat.UI.WinForms
         
         #region Constructors
 
-        public CodeWorkItemForm(IFile workItem, IAppFacade application, IIconRepository iconRepository, IImageResources imageResources, bool isNew = false)
+        public CodeWorkItemForm(IFile workItem, IAppFacade application, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
-
-            if (iconRepository == null)
-                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
-
-            base.iconRepository = iconRepository;
 
             if (!(workItem is CodeFile))
                 throw new ArgumentException("Target is not the incorrect type.");

@@ -40,7 +40,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         public IKeywordIndexItem SelectedSnippet { get { return codeSearchResultsControl1.SelectedTopic; } }
         public IKeywordIndexItem[] SelectedSnippets { get { return codeSearchResultsControl1.SelectedTopics; } }
 
-        public SearchDialog(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository)
+        public SearchDialog(IAppFacade application, IImageResources imageResources)
         {
             InitializeComponent();
 

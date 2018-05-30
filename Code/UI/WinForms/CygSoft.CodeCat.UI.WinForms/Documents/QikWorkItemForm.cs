@@ -39,22 +39,21 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public QikWorkItemForm(IFile workItem, IAppFacade application, IconRepository iconRepository, IImageResources imageResources, bool isNew = false)
+        public QikWorkItemForm(IFile workItem, IAppFacade application, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
             
             if (!(workItem is IQikTemplateDocumentSet))
                 throw new ArgumentException("Target is not the incorrect type.");
 
-            base.imageResources = imageResources;
             this.qikFile = workItem as IQikTemplateDocumentSet;
             base.application = application;
             base.workItem = qikFile;
 
-            if (iconRepository == null)
+            if (imageResources == null)
                 throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
 
-            this.iconRepository = iconRepository;
+            this.imageResources = imageResources;
 
             tabControlFile.ImageList = imageResources.ImageList;
 
@@ -223,11 +222,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             foreach (ICodeTopicSection document in qikFile.TemplateSections)
             {
                 tabManager.AddTab(document,
-                    TopicSectionControlFactory.Create(document, imageResources, iconRepository, qikFile, application, codeCtrl_Modified), true, false);
+                    TopicSectionControlFactory.Create(document, imageResources, qikFile, application, codeCtrl_Modified), true, false);
             }
 
             IQikScriptTopicSection qikScriptTopicSection = qikFile.ScriptSection as IQikScriptTopicSection;
-            scriptControl = (QikScriptCtrl)TopicSectionControlFactory.Create(qikScriptTopicSection, imageResources, iconRepository, qikFile, application, codeCtrl_Modified);
+            scriptControl = (QikScriptCtrl)TopicSectionControlFactory.Create(qikScriptTopicSection, imageResources, qikFile, application, codeCtrl_Modified);
             tabManager.AddTab(qikScriptTopicSection, scriptControl, btnShowScript.Checked, false);
         }
 
@@ -320,7 +319,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             Gui.Drawing.SuspendDrawing(this);
             tabManager.AddTab(e.TopicSection,
-                TopicSectionControlFactory.Create(e.TopicSection, imageResources, iconRepository, qikFile, application, codeCtrl_Modified),
+                TopicSectionControlFactory.Create(e.TopicSection, imageResources, qikFile, application, codeCtrl_Modified),
                 true, true);
             tabManager.OrderTabs(qikFile.TopicSections);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);

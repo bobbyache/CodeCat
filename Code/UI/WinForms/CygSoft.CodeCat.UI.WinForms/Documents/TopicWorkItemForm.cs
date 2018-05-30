@@ -18,23 +18,22 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         private ITopicDocument topicDocument = null;
         private WorkItemTabManager tabManager = null;
-        private IIconRepository iconRepository;
 
         #region Constructors
 
-        public TopicWorkItemForm(IFile workItem, IAppFacade application, IIconRepository iconRepository, IImageResources imageResources, bool isNew = false)
+        public TopicWorkItemForm(IFile workItem, IAppFacade application, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
 
-            if (iconRepository == null)
+            if (imageResources == null)
                 throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
-            this.iconRepository = iconRepository;
+            this.imageResources = imageResources;
 
             if (!(workItem is ITopicDocument))
                 throw new ArgumentException("Target is not the incorrect type.");
 
             this.tabControlFile.ImageList = imageResources.ImageList;
-            base.imageResources = imageResources;
+
             base.application = application;
             this.topicDocument = workItem as ITopicDocument;
             this.topicDocument.TopicSectionAdded += topicDocument_TopicSectionAdded;
@@ -364,7 +363,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void AddTopicSection(ITopicSection topicSection, bool selected)
         {
             tabManager.AddTab(topicSection,
-                TopicSectionControlFactory.Create(topicSection, imageResources, iconRepository, this.topicDocument, this.application, codeItemCtrl_Modified),
+                TopicSectionControlFactory.Create(topicSection, imageResources, this.topicDocument, this.application, codeItemCtrl_Modified),
                 true, selected);
         }
 

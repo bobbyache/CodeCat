@@ -21,7 +21,6 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
         protected IAppFacade application;
         protected ITopicDocument topicDocument;
         protected IImageResources imageResources;
-        protected IIconRepository iconRepository;
 
         public string Id { get; private set; }
         public string Title { get { return this.txtTitle.Text; } }
@@ -34,26 +33,25 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
         public bool FileExists { get { return topicSection.Exists; } }
 
         public BaseTopicSectionControl()
-            : this(null, null, null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public BaseTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, ITopicSection topicSection)
+        public BaseTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITopicSection topicSection)
         {
             InitializeComponent();
 
-            if (iconRepository == null)
+            if (imageResources == null)
                 throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
 
-            this.iconRepository = iconRepository;
+            this.imageResources = imageResources;
 
             if (topicSection == null)
                 return;
 
             this.Id = topicSection.Id;
 
-            this.imageResources = imageResources;
             this.application = application;
             this.topicSection = topicSection;
             this.topicDocument = topicDocument;

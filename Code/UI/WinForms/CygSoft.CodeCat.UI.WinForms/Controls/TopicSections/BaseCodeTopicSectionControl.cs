@@ -35,13 +35,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         
 
         public BaseCodeTopicSectionControl()
-            : this(null, null, null, null, null)
+            : this(null, null, null, null)
         {
 
         }
 
-        public BaseCodeTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, ICodeTopicSection topicSection)
-            : base(application, imageResources, iconRepository, topicDocument, topicSection)
+        public BaseCodeTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ICodeTopicSection topicSection)
+            : base(application, imageResources, topicDocument, topicSection)
         {
             InitializeComponent();
 

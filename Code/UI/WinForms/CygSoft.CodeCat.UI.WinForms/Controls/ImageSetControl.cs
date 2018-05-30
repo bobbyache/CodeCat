@@ -18,7 +18,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler Modified;
 
         private IImageResources imageResources;
-        private IIconRepository iconRepository;
         private IImagePagerTopicSection topicSection;
         private ITopicDocument topicDocument;
         private IPagerImage pageImage;
@@ -37,14 +36,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         #region Constructors
 
-        public ImageSetControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, IImagePagerTopicSection topicSection)
+        public ImageSetControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IImagePagerTopicSection topicSection)
         {
             InitializeComponent();
-
-            if (iconRepository == null)
-                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
-
-            this.iconRepository = iconRepository;
 
             this.imageResources = imageResources;
 

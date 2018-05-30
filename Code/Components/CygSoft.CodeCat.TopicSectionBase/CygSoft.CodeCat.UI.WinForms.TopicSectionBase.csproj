@@ -61,10 +61,6 @@
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CygSoft.CodeCat.UI.Resources.Infrastructure\CygSoft.CodeCat.UI.Resources.Infrastructure.csproj">
-      <Project>{0FE663AF-5176-4A36-BF6D-11F717F229EE}</Project>
-      <Name>CygSoft.CodeCat.UI.Resources.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.UI.WinForms.CustomControls\CygSoft.CodeCat.UI.WinForms.CustomControls.csproj">
       <Project>{9c4cd292-113e-40f3-b32e-f8f14a7da29e}</Project>
       <Name>CygSoft.CodeCat.UI.WinForms.CustomControls</Name>
