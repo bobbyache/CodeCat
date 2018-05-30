@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Runtime.InteropServices;
 
-namespace Etier.IconHelper
+namespace CygSoft.CodeCat.UI.Resources.IconHelper
 {
 	/// <summary>
 	/// Provides static methods to read system icons for both folders and files.

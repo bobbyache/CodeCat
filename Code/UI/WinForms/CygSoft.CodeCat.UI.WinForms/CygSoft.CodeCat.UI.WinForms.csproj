@@ -571,10 +571,6 @@
       <Project>{9C4CD292-113E-40F3-B32E-F8F14A7DA29E}</Project>
       <Name>CygSoft.CodeCat.UI.WinForms.CustomControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Components\Etier.IconHelper\Etier.IconHelper.csproj">
-      <Project>{44368acc-95e7-4be0-ade4-abb8aae9b9d0}</Project>
-      <Name>Etier.IconHelper</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="codecat_08.ico" />

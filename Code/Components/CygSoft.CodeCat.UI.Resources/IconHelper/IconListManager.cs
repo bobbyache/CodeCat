@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Windows.Forms;
 
-namespace Etier.IconHelper
+namespace CygSoft.CodeCat.UI.Resources.IconHelper
 {
 	/// <summary>
 	/// Maintains a list of currently added file extensions

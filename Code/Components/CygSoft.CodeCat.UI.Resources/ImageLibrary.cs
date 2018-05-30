@@ -109,8 +109,8 @@ namespace CygSoft.CodeCat.UI.Resources
 
         private Image ImageByExtension(string extension)
         {
-            Icon icon = Etier.IconHelper.IconReader.GetFileIcon(DotExtension(extension),
-            Etier.IconHelper.IconReader.IconSize.Small,
+            Icon icon = IconHelper.IconReader.GetFileIcon(DotExtension(extension),
+            IconHelper.IconReader.IconSize.Small,
             false);
 
             return icon.ToBitmap();
@@ -118,8 +118,8 @@ namespace CygSoft.CodeCat.UI.Resources
 
         public Icon IconByExtension(string extension)
         {
-            Icon icon = Etier.IconHelper.IconReader.GetFileIcon(DotExtension(extension),
-            Etier.IconHelper.IconReader.IconSize.Small,
+            Icon icon = IconHelper.IconReader.GetFileIcon(DotExtension(extension),
+            IconHelper.IconReader.IconSize.Small,
             false);
 
             return icon;
