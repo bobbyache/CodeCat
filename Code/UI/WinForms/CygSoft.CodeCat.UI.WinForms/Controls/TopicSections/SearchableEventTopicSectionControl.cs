@@ -18,9 +18,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripButton btnAdd;
         private ToolStripButton btnDelete;
 
-        public override int ImageKey { get { return iconRepository.Get(ImageResources.TopicSections.EventDiary).Index; } }
-        public override Icon ImageIcon { get { return iconRepository.Get(ImageResources.TopicSections.EventDiary).Icon; } }
-        public override Image IconImage { get { return iconRepository.Get(ImageResources.TopicSections.EventDiary).Image; } }
+        public override int ImageKey { get { return imageResources.Get(ImageResources.TopicSections.EventDiary).Index; } }
+        public override Icon ImageIcon { get { return imageResources.Get(ImageResources.TopicSections.EventDiary).Icon; } }
+        public override Image IconImage { get { return imageResources.Get(ImageResources.TopicSections.EventDiary).Image; } }
 
         private ISearchableEventTopicSection SearchableEventTopicSection
         {

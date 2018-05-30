@@ -43,7 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.topicDocument.TopicSectionMovedRight += topicDocument_TopicSectionMovedRight;
             base.workItem = workItem;
             this.Tag = ((ITitledEntity)workItem).Id;
-            this.tabManager = new WorkItemTabManager(this.tabControlFile, this.btnMenu, iconRepository);
+            this.tabManager = new WorkItemTabManager(this.tabControlFile, this.btnMenu, imageResources);
             this.tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   
             RebuildTabs();
@@ -205,14 +205,14 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnMoveRight.Image = imageResources.GetImage(ImageKeys.MoveRight);
             btnMenu.Image = imageResources.GetImage(ImageKeys.GroupMenu);
 
-            btnAddPdfDocument.Image = iconRepository.Get(ImageResources.TopicSections.PDF).Image;
-            btnAddImage.Image = iconRepository.Get(ImageResources.TopicSections.SingleImage).Image;
-            btnAddHyperlinks.Image = iconRepository.Get(ImageResources.TopicSections.WebReferences).Image;
-            btnFileGroup.Image = iconRepository.Get(ImageResources.TopicSections.FileAttachments).Image;
-            btnImageSet.Image = iconRepository.Get(ImageResources.TopicSections.ImageSet).Image;
-            btnRichText.Image = iconRepository.Get(ImageResources.TopicSections.RTF).Image;
-            btnAddCode.Image = iconRepository.Get(ImageResources.TopicSections.CodeFile).Image;
-            btnSearchableEventDiary.Image = iconRepository.Get(ImageResources.TopicSections.EventDiary).Image;
+            btnAddPdfDocument.Image = imageResources.Get(ImageResources.TopicSections.PDF).Image;
+            btnAddImage.Image = imageResources.Get(ImageResources.TopicSections.SingleImage).Image;
+            btnAddHyperlinks.Image = imageResources.Get(ImageResources.TopicSections.WebReferences).Image;
+            btnFileGroup.Image = imageResources.Get(ImageResources.TopicSections.FileAttachments).Image;
+            btnImageSet.Image = imageResources.Get(ImageResources.TopicSections.ImageSet).Image;
+            btnRichText.Image = imageResources.Get(ImageResources.TopicSections.RTF).Image;
+            btnAddCode.Image = imageResources.Get(ImageResources.TopicSections.CodeFile).Image;
+            btnSearchableEventDiary.Image = imageResources.Get(ImageResources.TopicSections.EventDiary).Image;
             btnOpenFolder.Image = imageResources.GetImage(ImageKeys.Folder);
 
             this.Icon = imageResources.CodeGroupIcon;

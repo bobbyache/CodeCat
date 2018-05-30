@@ -24,9 +24,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public string Id { get; private set; }
         public string Title { get { return txtTitle.Text; } }
-        public int ImageKey { get { return iconRepository.Get(ImageResources.TopicSections.SingleImage).Index; } }
-        public Icon ImageIcon { get { return iconRepository.Get(ImageResources.TopicSections.SingleImage).Icon; } }
-        public Image IconImage { get { return iconRepository.Get(ImageResources.TopicSections.SingleImage).Image; } }
+        public int ImageKey { get { return imageResources.Get(ImageResources.TopicSections.SingleImage).Index; } }
+        public Icon ImageIcon { get { return imageResources.Get(ImageResources.TopicSections.SingleImage).Icon; } }
+        public Image IconImage { get { return imageResources.Get(ImageResources.TopicSections.SingleImage).Image; } }
         public bool IsModified { get; private set; }
         public bool FileExists { get { return false; } }
 

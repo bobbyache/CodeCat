@@ -18,19 +18,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler Modified;
 
         private IAppFacade application;
-        private IIconRepository iconRepository;
+        private IImageResources imageResources;
         private IQikTemplateDocumentSet qikTemplateDocumentSet;
         private ICodeTopicSection scriptFile;
         private ICompiler compiler;
         private Row selectedRow;
 
-        public QikScriptCtrl(IAppFacade application, IIconRepository iconRepository, IQikTemplateDocumentSet qikTemplateDocumentSet)
+        public QikScriptCtrl(IAppFacade application, IImageResources imageResources, IQikTemplateDocumentSet qikTemplateDocumentSet)
         {
             InitializeComponent();
 
-            if (iconRepository == null)
+            if (imageResources == null)
                 throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
-            this.iconRepository = iconRepository;
+            this.imageResources = imageResources;
 
             this.application = application;
             this.qikTemplateDocumentSet = qikTemplateDocumentSet;
@@ -45,9 +45,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             RegisterFileEvents();
         }
 
-        public int ImageKey { get { return iconRepository.Get(ImageResources.TopicSections.QikGroup).Index; } }
-        public Icon ImageIcon { get { return iconRepository.Get(ImageResources.TopicSections.QikGroup).Icon; } }
-        public Image IconImage { get { return iconRepository.Get(ImageResources.TopicSections.QikGroup).Image; } }
+        public int ImageKey { get { return imageResources.Get(ImageResources.TopicSections.QikGroup).Index; } }
+        public Icon ImageIcon { get { return imageResources.Get(ImageResources.TopicSections.QikGroup).Icon; } }
+        public Image IconImage { get { return imageResources.Get(ImageResources.TopicSections.QikGroup).Image; } }
         public string Id { get { return this.scriptFile.Id; } }
         public string Title { get { return this.scriptFile.Title; } }
         public string ScriptText { get { return this.syntaxDocument.Text; } }

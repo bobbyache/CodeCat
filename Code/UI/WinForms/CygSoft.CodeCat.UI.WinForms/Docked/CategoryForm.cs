@@ -34,8 +34,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             if (iconRepository == null)
                 throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
 
-            openCategoryImageIndex = iconRepository.Get(ImageKeys.OpenCategory, false).Index;
-            closedCategoryImageIndex = iconRepository.Get(ImageKeys.ClosedCategory, false).Index;
+            openCategoryImageIndex = imageResources.Get(ImageKeys.OpenCategory, false).Index;
+            closedCategoryImageIndex = imageResources.Get(ImageKeys.ClosedCategory, false).Index;
 
             this.iconRepository = iconRepository;
 
@@ -49,7 +49,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             this.application = application;
 
             Text = "Categories";
-            Icon = iconRepository.Get(ImageKeys.OpenCategory, false).Icon;
+            Icon = imageResources.Get(ImageKeys.OpenCategory, false).Icon;
             HideOnClose = true;
 
             btnAddCategory.Image = imageResources.GetImage(ImageKeys.AddTemplate);

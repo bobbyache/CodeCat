@@ -22,10 +22,5 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             imageResources = new ImageResources();
         }
-
-        public IImageOutput Get(string key, bool isFileExtensionKey = false)
-        {
-            return imageResources.Get(key, isFileExtensionKey);
-        }
     }
 }

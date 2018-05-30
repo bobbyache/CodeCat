@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             if (topicSection is ICodeTopicSection)
             {
                 if (topicSection is IQikScriptTopicSection)
-                    topicSectionControl = new QikScriptCtrl(application, iconRepository, workItem as IQikTemplateDocumentSet);
+                    topicSectionControl = new QikScriptCtrl(application, imageResources, workItem as IQikTemplateDocumentSet);
 
                 else if (topicSection.FileExtension == "tpl")
                     topicSectionControl = new QikTemplateCodeCtrl(application, imageResources, iconRepository, workItem as IQikTemplateDocumentSet, topicSection as ICodeTopicSection);

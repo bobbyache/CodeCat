@@ -17,20 +17,20 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
     public partial class SearchableSnippetEditDialog : Form
     {
         private IAppFacade application;
-        private IIconRepository iconRepository;
+        private IImageResources imageResources;
         public ISearchableSnippetKeywordIndexItem CodeSnippet { get; private set; }
 
-        public SearchableSnippetEditDialog(IAppFacade application, IIconRepository iconRepository, ISearchableSnippetKeywordIndexItem codeSnippet, string[] categories)
+        public SearchableSnippetEditDialog(IAppFacade application, IImageResources imageResources, ISearchableSnippetKeywordIndexItem codeSnippet, string[] categories)
         {
             InitializeComponent();
 
-            if (iconRepository == null)
+            if (imageResources == null)
                 throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
 
             if (application == null)
                 return;
 
-            this.Icon = iconRepository.Get(codeSnippet.Syntax).Icon;
+            this.Icon = this.imageResources.Get(codeSnippet.Syntax).Icon;
             this.application = application;
             CodeSnippet = codeSnippet;
             txtTitle.Text = codeSnippet?.Title;
@@ -50,7 +50,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
         {
             syntaxDocument.SyntaxFile = application.GetSyntaxFile(cboSyntax.Syntax);
-            this.Icon = iconRepository.Get(cboSyntax.Syntax).Icon;
+            this.Icon = imageResources.Get(cboSyntax.Syntax).Icon;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

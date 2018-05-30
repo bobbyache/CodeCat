@@ -26,7 +26,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             if (application == null)
                 return;
 
-            this.Icon = null; // IconRepository.Get(codeSnippet.Syntax).Icon;
+            this.Icon = null; // imageResources.Get(codeSnippet.Syntax).Icon;
             this.application = application;
             DiaryEvent = diaryEvent;
             txtTitle.Text = diaryEvent?.Title;

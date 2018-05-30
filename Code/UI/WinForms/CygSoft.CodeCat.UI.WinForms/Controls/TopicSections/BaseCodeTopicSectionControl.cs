@@ -18,9 +18,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripSyntaxComboBox cboSyntax = new ToolStripSyntaxComboBox();
         private ToolStripFontSizeComboBox cboFontSize = new ToolStripFontSizeComboBox();
 
-        public override int ImageKey { get { return iconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
-        public override Icon ImageIcon { get { return iconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
-        public override Image IconImage { get { return iconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
+        public override int ImageKey { get { return imageResources.Get(cboSyntax.SelectedItem.ToString()).Index; } }
+        public override Icon ImageIcon { get { return imageResources.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
+        public override Image IconImage { get { return imageResources.Get(cboSyntax.SelectedItem.ToString()).Image; } }
 
         
 
@@ -58,7 +58,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
             cboSyntax.LoadSyntaxes(application.GetSyntaxes());
             cboSyntax.Syntax = CodeTopicSection().Syntax;
-            base.SetStateImage(iconRepository.Get(Syntax).Image);
+            base.SetStateImage(imageResources.Get(Syntax).Image);
 
             cboFontSize.SelectedIndexChanged += (s, e) => { FontModified?.Invoke(this, new EventArgs()); };
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
@@ -72,7 +72,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
         {
             SyntaxModified?.Invoke(this, new EventArgs());
-            base.SetStateImage(iconRepository.Get(Syntax).Image);
+            base.SetStateImage(imageResources.Get(Syntax).Image);
             base.Modify();
         }
     }

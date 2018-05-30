@@ -1,10 +1,6 @@
 ﻿using CygSoft.CodeCat.Syntax.Infrastructure;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.Infrastructure.Graphics
@@ -17,7 +13,6 @@ namespace CygSoft.CodeCat.Infrastructure.Graphics
         ImageList ImageList { get; }
         Icon QikGroupIcon { get; }
         Icon CodeGroupIcon { get; }
-        //Icon FileGroupIcon { get; }
         IImageOutput Get(string key, bool isFileExtensionKey = false);
         void AddCategoryInfo();
         void AddDocuments();

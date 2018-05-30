@@ -20,7 +20,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private IQikTemplateDocumentSet qikFile = null;
         private WorkItemTabManager tabManager = null;
         private QikScriptCtrl scriptControl;
-        private IconRepository iconRepository;
 
         #region Public Properties
 
@@ -67,7 +66,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             
             Tag = qikFile.Id;
             compiler = qikFile.Compiler;
-            tabManager = new WorkItemTabManager(tabControlFile, btnMenu, iconRepository);
+            tabManager = new WorkItemTabManager(tabControlFile, btnMenu, imageResources);
             tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   
             RebuildTabs();

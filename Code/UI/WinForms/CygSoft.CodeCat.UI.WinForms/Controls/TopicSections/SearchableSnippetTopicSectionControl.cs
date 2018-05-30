@@ -112,7 +112,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
 
             ISearchableSnippetKeywordIndexItem newItem = SearchableSnippetTopicSection.NewSnippet(string.Empty);
-            SearchableSnippetEditDialog dialog = new SearchableSnippetEditDialog(application, iconRepository, newItem, 
+            SearchableSnippetEditDialog dialog = new SearchableSnippetEditDialog(application, imageResources, newItem, 
                 SearchableSnippetTopicSection.Categories);
             DialogResult result = dialog.ShowDialog(this);
 
@@ -131,7 +131,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             {
                 ISearchableSnippetKeywordIndexItem selectedItem = Gui.GroupedListView.SelectedItem<ISearchableSnippetKeywordIndexItem>(listView);
 
-                SearchableSnippetEditDialog dialog = new SearchableSnippetEditDialog(application, iconRepository, selectedItem, 
+                SearchableSnippetEditDialog dialog = new SearchableSnippetEditDialog(application, imageResources, selectedItem, 
                     SearchableSnippetTopicSection.Categories);
                 DialogResult result = dialog.ShowDialog(this);
 
