@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         private ListViewSorter listViewSorter;
         private IAppFacade application;
-        private IIconRepository iconRepository;
+        private IImageResources imageResources;
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
@@ -28,15 +28,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public bool SingleTopicSelected { get { return this.listView.SelectedItems.Count == 1; } }
         public bool MultipleTopicsSelected { get { return this.listView.SelectedItems.Count > 1; } }
 
-        public IIconRepository IconRepository
+        public IImageResources ImageResources
         {
             set
             {
                 if (value == null)
                     throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
 
-                this.iconRepository = value;
-                this.listView.SmallImageList = iconRepository.ImageList;
+                this.imageResources = value;
+                this.listView.SmallImageList = imageResources.ImageList;
             }
         }
         
@@ -96,7 +96,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             listItem.Name = keywordIndexItem.Id;
             listItem.Tag = keywordIndexItem;
             listItem.Text = keywordIndexItem.Title;
-            listItem.ImageKey = iconRepository.GetKeywordIndexItemImage(keywordIndexItem).ImageKey;
+            listItem.ImageKey = GetKeywordIndexItemImage(keywordIndexItem).ImageKey;
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, keywordIndexItem.DateCreated.ToShortDateString()));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, keywordIndexItem.DateModified.ToShortDateString()));
             listView.Items.Add(listItem);
@@ -107,6 +107,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
                 listItem.Focused = true;
                 listItem.EnsureVisible();
             }
+        }
+
+        private IImageOutput GetKeywordIndexItemImage(IKeywordIndexItem item)
+        {
+            string imageKey = null;
+
+            if (item is ICodeKeywordIndexItem)
+                imageKey = (item as ICodeKeywordIndexItem).Syntax;
+
+            else if (item is IQikTemplateKeywordIndexItem)
+                imageKey = Resources.ImageResources.TopicSections.QikGroup;
+
+            else if (item is ITopicKeywordIndexItem)
+                imageKey = Resources.ImageResources.TopicSections.CodeGroup;
+
+            return imageResources.GetKeywordIndexItemImage(imageKey);
         }
 
         private void DeleteSelectedTopic()

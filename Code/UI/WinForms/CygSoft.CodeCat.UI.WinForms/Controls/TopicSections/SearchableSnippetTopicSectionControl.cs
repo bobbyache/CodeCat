@@ -39,7 +39,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 return;
 
             syntaxBox.ReadOnly = true;
-            listView.SmallImageList = iconRepository.ImageList;
+            listView.SmallImageList = imageResources.ImageList;
             listViewSorter = new ListViewSorter(this.listView);
             listView.Sorting = SortOrder.Ascending;
 

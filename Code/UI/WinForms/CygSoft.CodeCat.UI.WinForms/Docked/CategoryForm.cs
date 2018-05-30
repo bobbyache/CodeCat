@@ -1,6 +1,9 @@
 ﻿using CygSoft.CodeCat.Category.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Base;
+using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.Qik;
+using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
@@ -10,6 +13,7 @@ using System;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using static CygSoft.CodeCat.UI.Resources.ImageResources;
 
 namespace CygSoft.CodeCat.UI.WinForms.Docked
 {
@@ -51,7 +55,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             btnAddCategory.Image = imageResources.GetImage(ImageKeys.AddTemplate);
             btnDelete.Image = imageResources.GetImage(ImageKeys.RemoveTemplate);
 
-            categoryTreeControl1.ImageList = iconRepository.ImageList;
+            categoryTreeControl1.ImageList = imageResources.ImageList;
             categoryTreeControl1.ItemIsExplandableRoutine = ItemIsCategory;
             categoryTreeControl1.LabelIsEditableRoutine = LabelIsEditable;
             categoryTreeControl1.AllowDropNonExpandableRoutine = AllowDropItem;
@@ -73,7 +77,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             if (item is ICategorizedKeywordIndexItem)
             {
                 ICategorizedKeywordIndexItem indexItem = item as ICategorizedKeywordIndexItem;
-                int imageIndex = iconRepository.GetKeywordIndexItemImage(indexItem.IndexItem).Index;
+                int imageIndex = GetKeywordIndexItemImage(indexItem.IndexItem).Index;
                 treeNode.ImageIndex = imageIndex;
                 treeNode.SelectedImageIndex = imageIndex;
             }
@@ -84,6 +88,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             }
 
             return treeNode;
+        }
+
+        private IImageOutput GetKeywordIndexItemImage(IKeywordIndexItem item)
+        {
+            string imageKey = null;
+
+            if (item is ICodeKeywordIndexItem)
+                imageKey = (item as ICodeKeywordIndexItem).Syntax;
+
+            else if (item is IQikTemplateKeywordIndexItem)
+                imageKey = TopicSections.QikGroup;
+
+            else if (item is ITopicKeywordIndexItem)
+                imageKey = TopicSections.CodeGroup;
+
+            return imageResources.GetKeywordIndexItemImage(imageKey);
         }
 
         private bool AllowDropItem(ITitledEntity entity)

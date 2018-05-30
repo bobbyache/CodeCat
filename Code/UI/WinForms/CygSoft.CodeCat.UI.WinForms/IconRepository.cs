@@ -26,8 +26,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        public ImageList ImageList { get { return imageResources.ImageList; } }
-
         public Icon QikGroupIcon { get { return imageResources.QikGroupIcon; } }
         public Icon CodeGroupIcon { get { return imageResources.CodeGroupIcon; } }
         public Icon FileGroupIcon { get { return imageResources.FileGroupIcon; } }
@@ -35,22 +33,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         public IconRepository()
         {
             imageResources = new ImageResources();
-        }
-
-        public IImageOutput GetKeywordIndexItemImage(IKeywordIndexItem item)
-        {
-            string imageKey = null;
-
-            if (item is ICodeKeywordIndexItem)
-                imageKey = (item as ICodeKeywordIndexItem).Syntax;
-
-            else if (item is IQikTemplateKeywordIndexItem)
-                imageKey = TopicSections.QikGroup;
-
-            else if (item is ITopicKeywordIndexItem)
-                imageKey = TopicSections.CodeGroup;
-
-            return imageResources.GetKeywordIndexItemImage(imageKey);
         }
 
         public IImageOutput Get(string key, bool isFileExtensionKey = false)

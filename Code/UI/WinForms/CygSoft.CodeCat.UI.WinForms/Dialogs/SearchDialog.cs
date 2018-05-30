@@ -57,7 +57,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.SearchEnabled = true;
 
             codeSearchResultsControl1.Application = application;
-            codeSearchResultsControl1.IconRepository = iconRepository;
+            codeSearchResultsControl1.ImageResources = imageResources;
 
             btnFind.Image = imageResources.GetImage(ImageKeys.FindSnippets);
             btnFind.Click += (s, e) => ExecuteSearch();

@@ -57,7 +57,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             this.iconRepository = iconRepository;
 
-            tabControlFile.ImageList = iconRepository.ImageList;
+            tabControlFile.ImageList = imageResources.ImageList;
 
             qikFile.TopicSectionAdded += qikFile_TopicSectionAdded;
             qikFile.TopicSectionRemoved += qikFile_TopicSectionRemoved;

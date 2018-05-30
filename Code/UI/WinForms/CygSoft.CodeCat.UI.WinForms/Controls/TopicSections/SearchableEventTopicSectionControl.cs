@@ -44,7 +44,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             richTextBox.ReadOnly = true;
 
             listView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            listView.SmallImageList = iconRepository.ImageList;
+            listView.SmallImageList = imageResources.ImageList;
             listView.Sorting = SortOrder.Descending;
 
             btnFind.Image = imageResources.GetImage(ImageKeys.FindSnippets);

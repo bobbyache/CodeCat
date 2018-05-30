@@ -33,7 +33,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!(workItem is ITopicDocument))
                 throw new ArgumentException("Target is not the incorrect type.");
 
-            this.tabControlFile.ImageList = iconRepository.ImageList;
+            this.tabControlFile.ImageList = imageResources.ImageList;
             base.imageResources = imageResources;
             base.application = application;
             this.topicDocument = workItem as ITopicDocument;

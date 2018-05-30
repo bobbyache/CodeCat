@@ -63,7 +63,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             this.application = application;
 
             codeSearchResultsControl1.Application = application;
-            codeSearchResultsControl1.IconRepository = iconRepository;
+            codeSearchResultsControl1.ImageResources = imageResources;
 
             Icon = imageResources.GetIcon(ImageKeys.FindSnippets);
             HideOnClose = true;

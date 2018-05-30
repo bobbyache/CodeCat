@@ -10,7 +10,6 @@ namespace CygSoft.CodeCat.Infrastructure.Graphics
     {
         Icon CodeGroupIcon { get; }
         Icon FileGroupIcon { get; }
-        ImageList ImageList { get; }
         IImageResources ImageResources { get; }
         Icon QikGroupIcon { get; }
 
@@ -19,6 +18,5 @@ namespace CygSoft.CodeCat.Infrastructure.Graphics
         void AddFileExtensions(IEnumerable<string> fileExtensions);
         void AddSyntaxes(ISyntaxFile[] syntaxFiles);
         IImageOutput Get(string key, bool isFileExtensionKey = false);
-        IImageOutput GetKeywordIndexItemImage(IKeywordIndexItem item);
     }
 }

@@ -47,7 +47,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", imageResources.GetImage(ImageKeys.AddSnippet), (s, e) => Add());
             btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", imageResources.GetImage(ImageKeys.EditSnippet), (s, e) => Edit());
 
-            listView.SmallImageList = iconRepository.ImageList;
+            listView.SmallImageList = imageResources.ImageList;
             listViewSorter = new ListViewSorter(this.listView);
             listView.Sorting = SortOrder.Ascending;
 
