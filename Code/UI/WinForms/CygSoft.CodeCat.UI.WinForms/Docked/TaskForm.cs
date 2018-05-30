@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             InitializeComponent();
 
-            Icon = Gui.Drawing.IconFromImage(imageResources.GetImage(ImageKeys.EditText));
+            Icon = imageResources.GetIcon(ImageKeys.EditText);
             HideOnClose = true;
             DockAreas = DockAreas.DockLeft | DockAreas.DockRight;
 

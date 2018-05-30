@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImageLibrary.cs" />
+    <Compile Include="ImageOutput.cs" />
     <Compile Include="ImageResources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UiResource.Designer.cs">
@@ -57,6 +60,10 @@
     <ProjectReference Include="..\CygSoft.CodeCat.UI.Resources.Infrastructure\CygSoft.CodeCat.UI.Resources.Infrastructure.csproj">
       <Project>{0fe663af-5176-4a36-bf6d-11f717f229ee}</Project>
       <Name>CygSoft.CodeCat.UI.Resources.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Etier.IconHelper\Etier.IconHelper.csproj">
+      <Project>{44368acc-95e7-4be0-ade4-abb8aae9b9d0}</Project>
+      <Name>Etier.IconHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

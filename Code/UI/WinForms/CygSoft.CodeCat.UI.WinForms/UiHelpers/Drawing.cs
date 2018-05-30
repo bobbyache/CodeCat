@@ -37,19 +37,19 @@ namespace CygSoft.CodeCat.UI.WinForms.UiHelpers
 
             #endregion
 
-            public static Image ImageFromIcon(Icon icon)
-            {
-                return icon.ToBitmap();
-            }
+            //public static Image ImageFromIcon(Icon icon)
+            //{
+            //    return icon.ToBitmap();
+            //}
 
-            public static Icon IconFromImage(Image image)
-            {
-                Bitmap bitmap = new Bitmap(image);
-                IntPtr iconPtr = bitmap.GetHicon();
-                Icon icon = Icon.FromHandle(iconPtr);
+            //public static Icon IconFromImage(Image image)
+            //{
+            //    Bitmap bitmap = new Bitmap(image);
+            //    IntPtr iconPtr = bitmap.GetHicon();
+            //    Icon icon = Icon.FromHandle(iconPtr);
 
-                return icon;
-            }
+            //    return icon;
+            //}
         }
     }
 }

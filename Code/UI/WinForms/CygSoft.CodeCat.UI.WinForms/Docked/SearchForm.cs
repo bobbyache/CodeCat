@@ -65,7 +65,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             codeSearchResultsControl1.Application = application;
             codeSearchResultsControl1.IconRepository = iconRepository;
 
-            Icon = Gui.Drawing.IconFromImage(imageResources.GetImage(ImageKeys.FindSnippets));
+            Icon = imageResources.GetIcon(ImageKeys.FindSnippets);
             HideOnClose = true;
             DockAreas = DockAreas.DockLeft | DockAreas.DockRight;
 

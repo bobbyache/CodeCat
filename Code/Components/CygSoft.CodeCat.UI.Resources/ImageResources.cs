@@ -18,5 +18,11 @@ namespace CygSoft.CodeCat.UI.Resources
         {
             return (Image)resourceManager.GetObject(key);
         }
+
+        public Icon GetIcon(string key)
+        {
+            Image image = GetImage(key);
+            return ImageLibrary.IconFromImage(image);
+        }
     }
 }

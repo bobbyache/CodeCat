@@ -5,7 +5,6 @@ using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Syntax.Infrastructure;
 using CygSoft.CodeCat.UI.Resources;
-using CygSoft.CodeCat.UI.WinForms.Images;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;

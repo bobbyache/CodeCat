@@ -323,8 +323,6 @@
     <Compile Include="Documents\QikWorkItemForm.Designer.cs">
       <DependentUpon>QikWorkItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Images\ImageLibrary.cs" />
-    <Compile Include="Images\ImageOutput.cs" />
     <Compile Include="Settings\ConfigSettings.cs" />
     <Compile Include="Dialogs\EnterKeywordsDialog.cs">
       <SubType>Form</SubType>
@@ -674,7 +672,9 @@
       <Isolated>False</Isolated>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Plugins.SqlExtraction\bin\debug\CygSoft.CodeCat.Plugins.SqlExtraction.dll $(TargetDir)Plugins

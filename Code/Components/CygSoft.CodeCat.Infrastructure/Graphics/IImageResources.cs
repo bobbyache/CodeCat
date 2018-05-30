@@ -10,5 +10,6 @@ namespace CygSoft.CodeCat.Infrastructure.Graphics
     public interface IImageResources
     {
         Image GetImage(string key);
+        Icon GetIcon(string key);
     }
 }

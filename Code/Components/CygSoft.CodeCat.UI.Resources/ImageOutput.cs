@@ -1,7 +1,7 @@
 ﻿using CygSoft.CodeCat.Infrastructure.Graphics;
 using System.Drawing;
 
-namespace CygSoft.CodeCat.UI.WinForms.Images
+namespace CygSoft.CodeCat.UI.Resources
 {
     public class ImageOutput : IImageOutput
     {
