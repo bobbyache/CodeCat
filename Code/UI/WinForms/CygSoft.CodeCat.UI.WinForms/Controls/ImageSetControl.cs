@@ -1,15 +1,14 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using System.IO;
-using System.Diagnostics;
-using CygSoft.CodeCat.Domain.Topics;
-using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygSoft.CodeCat.Files.Infrastructure;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -18,6 +17,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler Modified;
 
         private IImageResources imageResources;
+        private IIconRepository iconRepository;
         private IImagePagerTopicSection topicSection;
         private ITopicDocument topicDocument;
         private IPagerImage pageImage;
@@ -26,9 +26,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         public string Id { get; private set; }
         public string Title { get { return txtTitle.Text; } }
-        public int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.ImageSet).Index; } }
-        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.ImageSet).Icon; } }
-        public Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.ImageSet).Image; } }
+        public int ImageKey { get { return iconRepository.Get(IconRepository.TopicSections.ImageSet).Index; } }
+        public Icon ImageIcon { get { return iconRepository.Get(IconRepository.TopicSections.ImageSet).Icon; } }
+        public Image IconImage { get { return iconRepository.Get(IconRepository.TopicSections.ImageSet).Image; } }
         public bool IsModified { get; private set; }
         public bool FileExists { get { return false; } }
 
@@ -36,9 +36,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         #region Constructors
 
-        public ImageSetControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IImagePagerTopicSection topicSection)
+        public ImageSetControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, IImagePagerTopicSection topicSection)
         {
             InitializeComponent();
+
+            if (iconRepository == null)
+                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
+
+            this.iconRepository = iconRepository;
 
             this.imageResources = imageResources;
 

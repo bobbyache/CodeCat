@@ -1,15 +1,8 @@
-﻿using CygSoft.CodeCat.UI.Resources;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
-using CygSoft.CodeCat.UI.WinForms;
+﻿using CygSoft.CodeCat.Infrastructure.Graphics;
+using CygSoft.CodeCat.UI.Resources;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UI.WinForms.UnitTests

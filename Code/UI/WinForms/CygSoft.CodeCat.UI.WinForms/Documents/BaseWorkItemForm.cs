@@ -1,8 +1,8 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Drawing;
@@ -25,9 +25,10 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private bool flagForDelete = false;
 
-        protected IImageResources imageResources;
         protected IAppFacade application;
         protected IFile workItem;
+        protected IImageResources imageResources;
+        protected IIconRepository iconRepository;
 
         public string Id
         {

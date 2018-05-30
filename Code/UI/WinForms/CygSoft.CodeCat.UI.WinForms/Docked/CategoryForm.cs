@@ -2,11 +2,10 @@
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
-using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -20,12 +19,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
 
         private IAppFacade application;
         private IImageResources imageResources;
-        private int openCategoryImageIndex = IconRepository.Get(ImageKeys.OpenCategory, false).Index;
-        private int closedCategoryImageIndex = IconRepository.Get(ImageKeys.ClosedCategory, false).Index;
+        private IconRepository iconRepository;
+        private int openCategoryImageIndex;
+        private int closedCategoryImageIndex;
 
-        public CategoryForm(IAppFacade application, IImageResources imageResources)
+        public CategoryForm(IAppFacade application, IImageResources imageResources, IconRepository iconRepository)
         {
             InitializeComponent();
+
+            if (iconRepository == null)
+                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
+
+            openCategoryImageIndex = iconRepository.Get(ImageKeys.OpenCategory, false).Index;
+            closedCategoryImageIndex = iconRepository.Get(ImageKeys.ClosedCategory, false).Index;
+
+            this.iconRepository = iconRepository;
 
             if (imageResources == null)
                 throw new ArgumentNullException("Image Resources is a required constructor parameter and cannot be null");
@@ -37,13 +45,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             this.application = application;
 
             Text = "Categories";
-            Icon = IconRepository.Get(ImageKeys.OpenCategory, false).Icon;
+            Icon = iconRepository.Get(ImageKeys.OpenCategory, false).Icon;
             HideOnClose = true;
 
             btnAddCategory.Image = imageResources.GetImage(ImageKeys.AddTemplate);
             btnDelete.Image = imageResources.GetImage(ImageKeys.RemoveTemplate);
 
-            categoryTreeControl1.ImageList = IconRepository.ImageList;
+            categoryTreeControl1.ImageList = iconRepository.ImageList;
             categoryTreeControl1.ItemIsExplandableRoutine = ItemIsCategory;
             categoryTreeControl1.LabelIsEditableRoutine = LabelIsEditable;
             categoryTreeControl1.AllowDropNonExpandableRoutine = AllowDropItem;
@@ -65,7 +73,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             if (item is ICategorizedKeywordIndexItem)
             {
                 ICategorizedKeywordIndexItem indexItem = item as ICategorizedKeywordIndexItem;
-                int imageIndex = IconRepository.GetKeywordIndexItemImage(indexItem.IndexItem).Index;
+                int imageIndex = iconRepository.GetKeywordIndexItemImage(indexItem.IndexItem).Index;
                 treeNode.ImageIndex = imageIndex;
                 treeNode.SelectedImageIndex = imageIndex;
             }
@@ -184,7 +192,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         {
             if (categoryTreeControl1.ItemsLoaded)
             {
-                SearchDialog dialog = new SearchDialog(application, imageResources);
+                SearchDialog dialog = new SearchDialog(application, imageResources, iconRepository);
                 DialogResult result = dialog.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {

@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using System;
@@ -14,13 +15,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
         private TabControl tabControl;
         private ToolStripDropDownButton tabMenuButton;
         private Dictionary<string, TabPage> tabPageDictionary = new Dictionary<string, TabPage>();
+        private IIconRepository iconRepository;
 
         public string SelectedTabId { get { return tabControl.SelectedTab.Name; } }
         public TabPage SelectedTab { get { return tabControl.SelectedTab; } }
         public bool HasTabs { get { return this.tabControl.TabPages.Count > 0; } }
 
-        public WorkItemTabManager(TabControl tabControl, ToolStripDropDownButton tabMenuButton)
+        public WorkItemTabManager(TabControl tabControl, ToolStripDropDownButton tabMenuButton, IIconRepository iconRepository)
         {
+            if (iconRepository == null)
+                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
+
+            this.iconRepository = iconRepository;
+
             this.tabControl = tabControl;
             this.tabMenuButton = tabMenuButton;
         }
@@ -146,22 +153,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             item.Text = topicSection.Title;
 
             if (topicSection is ICodeTopicSection)
-                item.Image = IconRepository.Get((topicSection as ICodeTopicSection).Syntax).Image;
+                item.Image = iconRepository.Get((topicSection as ICodeTopicSection).Syntax).Image;
             else if (topicSection is IPdfViewerTopicSection)
-                item.Image = IconRepository.Get(IconRepository.TopicSections.PDF).Image;
+                item.Image = iconRepository.Get(IconRepository.TopicSections.PDF).Image;
             else if (topicSection is ISingleImageTopicSection)
-                item.Image = IconRepository.Get(IconRepository.TopicSections.SingleImage).Image;
+                item.Image = iconRepository.Get(IconRepository.TopicSections.SingleImage).Image;
             else if (topicSection is IImagePagerTopicSection)
-                item.Image = IconRepository.Get(IconRepository.TopicSections.ImageSet).Image;
+                item.Image = iconRepository.Get(IconRepository.TopicSections.ImageSet).Image;
             else if (topicSection is IWebReferencesTopicSection)
-                item.Image = IconRepository.Get(IconRepository.TopicSections.WebReferences).Image;
+                item.Image = iconRepository.Get(IconRepository.TopicSections.WebReferences).Image;
             else if (topicSection is IRichTextEditorTopicSection)
-                item.Image = IconRepository.Get(IconRepository.TopicSections.RTF).Image; 
+                item.Image = iconRepository.Get(IconRepository.TopicSections.RTF).Image; 
             else if (topicSection is IFileAttachmentsTopicSection)
-                item.Image = IconRepository.Get(IconRepository.TopicSections.FileAttachments).Image; 
+                item.Image = iconRepository.Get(IconRepository.TopicSections.FileAttachments).Image; 
 
             else
-                item.Image = IconRepository.Get(IconRepository.TopicSections.Unknown).Image;
+                item.Image = iconRepository.Get(IconRepository.TopicSections.Unknown).Image;
 
             item.Click += item_Click;
             this.tabMenuButton.DropDownItems.Add(item);

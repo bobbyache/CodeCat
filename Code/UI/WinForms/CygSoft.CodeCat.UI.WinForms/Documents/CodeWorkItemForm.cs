@@ -2,7 +2,7 @@
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Drawing;
@@ -13,12 +13,17 @@ namespace CygSoft.CodeCat.UI.WinForms
     public partial class CodeWorkItemForm : BaseWorkItemForm, IWorkItemForm
     {
         private TabPage snapshotsTab;
-
+        
         #region Constructors
 
-        public CodeWorkItemForm(IFile workItem, IAppFacade application, IImageResources imageResources, bool isNew = false)
+        public CodeWorkItemForm(IFile workItem, IAppFacade application, IIconRepository iconRepository, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
+
+            if (iconRepository == null)
+                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
+
+            base.iconRepository = iconRepository;
 
             if (!(workItem is CodeFile))
                 throw new ArgumentException("Target is not the incorrect type.");
@@ -146,9 +151,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             chkEdit.Image = imageResources.GetImage(ImageKeys.EditSnippet);
             btnDiscardChange.Image = imageResources.GetImage(ImageKeys.DiscardSnippetChanges);
 
-            this.tabControl.ImageList = IconRepository.ImageList;
+            this.tabControl.ImageList = iconRepository.ImageList;
             this.tabPageCode.ImageKey = (base.workItem as CodeFile).Syntax;
-            this.Icon = IconRepository.Get((base.workItem as CodeFile).Syntax).Icon;
+            this.Icon = iconRepository.Get((base.workItem as CodeFile).Syntax).Icon;
             lblEditStatus.Image = this.IconImage;
         }
 
@@ -236,9 +241,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.syntaxBox.Document.SyntaxFile = syntaxFile;
             this.snapshotListCtrl1.SyntaxFile = syntaxFile;
 
-            this.Icon = IconRepository.Get(syntax).Icon;
+            this.Icon = iconRepository.Get(syntax).Icon;
             this.tabPageCode.ImageKey = syntax;
-            this.lblEditStatus.Image = IconRepository.Get(syntax).Image;
+            this.lblEditStatus.Image = iconRepository.Get(syntax).Image;
         }
 
         private void UpdateSnapshotsTab()

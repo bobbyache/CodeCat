@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.UI.Resources.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure.Graphics
 {
     public class ImageKeys
     {

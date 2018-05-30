@@ -6,6 +6,7 @@ using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -13,6 +14,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
     {
         private ListViewSorter listViewSorter;
         private IAppFacade application;
+        private IIconRepository iconRepository;
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
@@ -25,6 +27,18 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public IAppFacade Application { set { this.application = value; } }
         public bool SingleTopicSelected { get { return this.listView.SelectedItems.Count == 1; } }
         public bool MultipleTopicsSelected { get { return this.listView.SelectedItems.Count > 1; } }
+
+        public IIconRepository IconRepository
+        {
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
+
+                this.iconRepository = value;
+                this.listView.SmallImageList = iconRepository.ImageList;
+            }
+        }
         
         public IKeywordIndexItem[] SelectedTopics
         {
@@ -56,7 +70,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public CodeSearchResultsControl()
         {
             InitializeComponent();
-            listView.SmallImageList = IconRepository.ImageList;
             listViewSorter = new ListViewSorter(this.listView);
         }
 
@@ -83,7 +96,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             listItem.Name = keywordIndexItem.Id;
             listItem.Tag = keywordIndexItem;
             listItem.Text = keywordIndexItem.Title;
-            listItem.ImageKey = IconRepository.GetKeywordIndexItemImage(keywordIndexItem).ImageKey;
+            listItem.ImageKey = iconRepository.GetKeywordIndexItemImage(keywordIndexItem).ImageKey;
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, keywordIndexItem.DateCreated.ToShortDateString()));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, keywordIndexItem.DateModified.ToShortDateString()));
             listView.Items.Add(listItem);

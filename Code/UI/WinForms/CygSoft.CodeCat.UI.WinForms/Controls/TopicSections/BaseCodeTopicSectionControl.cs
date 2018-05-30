@@ -1,8 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using System;
 using System.Drawing;
@@ -19,9 +18,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripSyntaxComboBox cboSyntax = new ToolStripSyntaxComboBox();
         private ToolStripFontSizeComboBox cboFontSize = new ToolStripFontSizeComboBox();
 
-        public override int ImageKey { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
-        public override Icon ImageIcon { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
-        public override Image IconImage { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
+        public override int ImageKey { get { return iconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
+        public override Icon ImageIcon { get { return iconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
+        public override Image IconImage { get { return iconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
 
         
 
@@ -36,13 +35,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         
 
         public BaseCodeTopicSectionControl()
-            : this(null, null, null, null)
+            : this(null, null, null, null, null)
         {
 
         }
 
-        public BaseCodeTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ICodeTopicSection topicSection)
-            : base(application, imageResources, topicDocument, topicSection)
+        public BaseCodeTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, ICodeTopicSection topicSection)
+            : base(application, imageResources, iconRepository, topicDocument, topicSection)
         {
             InitializeComponent();
 
@@ -59,7 +58,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
             cboSyntax.LoadSyntaxes(application.GetSyntaxes());
             cboSyntax.Syntax = CodeTopicSection().Syntax;
-            base.SetStateImage(IconRepository.Get(Syntax).Image);
+            base.SetStateImage(iconRepository.Get(Syntax).Image);
 
             cboFontSize.SelectedIndexChanged += (s, e) => { FontModified?.Invoke(this, new EventArgs()); };
             cboSyntax.SelectedIndexChanged += cboSyntax_SelectedIndexChanged;
@@ -73,7 +72,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private void cboSyntax_SelectedIndexChanged(object sender, EventArgs e)
         {
             SyntaxModified?.Invoke(this, new EventArgs());
-            base.SetStateImage(IconRepository.Get(Syntax).Image);
+            base.SetStateImage(iconRepository.Get(Syntax).Image);
             base.Modify();
         }
     }

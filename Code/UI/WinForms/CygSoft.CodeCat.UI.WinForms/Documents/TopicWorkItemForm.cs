@@ -1,12 +1,10 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Base;
-using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Documents;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -19,17 +17,22 @@ namespace CygSoft.CodeCat.UI.WinForms
     {
         private ITopicDocument topicDocument = null;
         private WorkItemTabManager tabManager = null;
+        private IIconRepository iconRepository;
 
         #region Constructors
 
-        public TopicWorkItemForm(IFile workItem, IAppFacade application, IImageResources imageResources, bool isNew = false)
+        public TopicWorkItemForm(IFile workItem, IAppFacade application, IIconRepository iconRepository, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
+
+            if (iconRepository == null)
+                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
+            this.iconRepository = iconRepository;
 
             if (!(workItem is ITopicDocument))
                 throw new ArgumentException("Target is not the incorrect type.");
 
-            this.tabControlFile.ImageList = IconRepository.ImageList;
+            this.tabControlFile.ImageList = iconRepository.ImageList;
             base.imageResources = imageResources;
             base.application = application;
             this.topicDocument = workItem as ITopicDocument;
@@ -39,7 +42,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.topicDocument.TopicSectionMovedRight += topicDocument_TopicSectionMovedRight;
             base.workItem = workItem;
             this.Tag = ((ITitledEntity)workItem).Id;
-            this.tabManager = new WorkItemTabManager(this.tabControlFile, this.btnMenu);
+            this.tabManager = new WorkItemTabManager(this.tabControlFile, this.btnMenu, iconRepository);
             this.tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   
             RebuildTabs();
@@ -201,17 +204,17 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnMoveRight.Image = imageResources.GetImage(ImageKeys.MoveRight);
             btnMenu.Image = imageResources.GetImage(ImageKeys.GroupMenu);
 
-            btnAddPdfDocument.Image = IconRepository.Get(IconRepository.TopicSections.PDF).Image;
-            btnAddImage.Image = IconRepository.Get(IconRepository.TopicSections.SingleImage).Image;
-            btnAddHyperlinks.Image = IconRepository.Get(IconRepository.TopicSections.WebReferences).Image;
-            btnFileGroup.Image = IconRepository.Get(IconRepository.TopicSections.FileAttachments).Image;
-            btnImageSet.Image = IconRepository.Get(IconRepository.TopicSections.ImageSet).Image;
-            btnRichText.Image = IconRepository.Get(IconRepository.TopicSections.RTF).Image;
-            btnAddCode.Image = IconRepository.Get(IconRepository.TopicSections.CodeFile).Image;
-            btnSearchableEventDiary.Image = IconRepository.Get(IconRepository.TopicSections.EventDiary).Image;
+            btnAddPdfDocument.Image = iconRepository.Get(IconRepository.TopicSections.PDF).Image;
+            btnAddImage.Image = iconRepository.Get(IconRepository.TopicSections.SingleImage).Image;
+            btnAddHyperlinks.Image = iconRepository.Get(IconRepository.TopicSections.WebReferences).Image;
+            btnFileGroup.Image = iconRepository.Get(IconRepository.TopicSections.FileAttachments).Image;
+            btnImageSet.Image = iconRepository.Get(IconRepository.TopicSections.ImageSet).Image;
+            btnRichText.Image = iconRepository.Get(IconRepository.TopicSections.RTF).Image;
+            btnAddCode.Image = iconRepository.Get(IconRepository.TopicSections.CodeFile).Image;
+            btnSearchableEventDiary.Image = iconRepository.Get(IconRepository.TopicSections.EventDiary).Image;
             btnOpenFolder.Image = imageResources.GetImage(ImageKeys.Folder);
 
-            this.Icon = IconRepository.CodeGroupIcon;
+            this.Icon = iconRepository.CodeGroupIcon;
         }
 
         private void RegisterEvents()
@@ -360,7 +363,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void AddTopicSection(ITopicSection topicSection, bool selected)
         {
             tabManager.AddTab(topicSection,
-                TopicSectionControlFactory.Create(topicSection, imageResources, this.topicDocument, this.application, codeItemCtrl_Modified),
+                TopicSectionControlFactory.Create(topicSection, imageResources, iconRepository, this.topicDocument, this.application, codeItemCtrl_Modified),
                 true, selected);
         }
 

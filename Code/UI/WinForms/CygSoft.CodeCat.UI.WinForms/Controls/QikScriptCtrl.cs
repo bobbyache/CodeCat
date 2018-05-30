@@ -8,6 +8,7 @@ using Alsing.SourceCode;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
@@ -16,14 +17,19 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler Modified;
 
         private IAppFacade application;
+        private IIconRepository iconRepository;
         private IQikTemplateDocumentSet qikTemplateDocumentSet;
         private ICodeTopicSection scriptFile;
         private ICompiler compiler;
         private Row selectedRow;
 
-        public QikScriptCtrl(IAppFacade application, IQikTemplateDocumentSet qikTemplateDocumentSet)
+        public QikScriptCtrl(IAppFacade application, IIconRepository iconRepository, IQikTemplateDocumentSet qikTemplateDocumentSet)
         {
             InitializeComponent();
+
+            if (iconRepository == null)
+                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
+            this.iconRepository = iconRepository;
 
             this.application = application;
             this.qikTemplateDocumentSet = qikTemplateDocumentSet;
@@ -38,9 +44,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             RegisterFileEvents();
         }
 
-        public int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.QikGroup).Index; } }
-        public Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.QikGroup).Icon; } }
-        public Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.QikGroup).Image; } }
+        public int ImageKey { get { return iconRepository.Get(IconRepository.TopicSections.QikGroup).Index; } }
+        public Icon ImageIcon { get { return iconRepository.Get(IconRepository.TopicSections.QikGroup).Icon; } }
+        public Image IconImage { get { return iconRepository.Get(IconRepository.TopicSections.QikGroup).Image; } }
         public string Id { get { return this.scriptFile.Id; } }
         public string Title { get { return this.scriptFile.Title; } }
         public string ScriptText { get { return this.syntaxDocument.Text; } }

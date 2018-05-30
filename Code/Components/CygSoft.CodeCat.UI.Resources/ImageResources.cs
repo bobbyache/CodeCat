@@ -1,4 +1,4 @@
-﻿using CygSoft.CodeCat.UI.Resources.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure.Graphics;
 using System.Drawing;
 using System.Reflection;
 using System.Resources;

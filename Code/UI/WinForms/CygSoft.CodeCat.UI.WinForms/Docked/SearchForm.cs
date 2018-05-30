@@ -1,6 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using WeifenLuo.WinFormsUI.Docking;
@@ -11,6 +11,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
     {
         private IAppFacade application;
         private IImageResources imageResources;
+        private IIconRepository iconRepository;
 
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsAdded;
         public event EventHandler<SearchKeywordsModifiedEventArgs> KeywordsRemoved;
@@ -42,9 +43,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
         public IKeywordIndexItem SelectedWorkItem { get { return codeSearchResultsControl1.SelectedTopic; } }
         public IKeywordIndexItem[] SelectedWorkItems { get { return codeSearchResultsControl1.SelectedTopics; } }
 
-        public SearchForm(IAppFacade application, IImageResources imageResources)
+        public SearchForm(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository)
         {
             InitializeComponent();
+
+            if (iconRepository == null)
+                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
+
+            this.iconRepository = iconRepository;
 
             if (imageResources == null)
                 throw new ArgumentNullException("Image Resources is a required constructor parameter and cannot be null");
@@ -57,6 +63,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Docked
             this.application = application;
 
             codeSearchResultsControl1.Application = application;
+            codeSearchResultsControl1.IconRepository = iconRepository;
 
             Icon = Gui.Drawing.IconFromImage(imageResources.GetImage(ImageKeys.FindSnippets));
             HideOnClose = true;

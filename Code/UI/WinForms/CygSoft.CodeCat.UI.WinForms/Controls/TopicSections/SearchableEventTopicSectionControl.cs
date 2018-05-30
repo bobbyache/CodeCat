@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary;
+﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Topics;
-using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
+using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
@@ -24,9 +17,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripButton btnAdd;
         private ToolStripButton btnDelete;
 
-        public override int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.EventDiary).Index; } }
-        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.EventDiary).Icon; } }
-        public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.EventDiary).Image; } }
+        public override int ImageKey { get { return iconRepository.Get(IconRepository.TopicSections.EventDiary).Index; } }
+        public override Icon ImageIcon { get { return iconRepository.Get(IconRepository.TopicSections.EventDiary).Icon; } }
+        public override Image IconImage { get { return iconRepository.Get(IconRepository.TopicSections.EventDiary).Image; } }
 
         private ISearchableEventTopicSection SearchableEventTopicSection
         {
@@ -34,13 +27,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public SearchableEventTopicSectionControl()
-            : this(null, null, null, null)
+            : this(null, null, null, null, null)
         {
 
         }
 
-        public SearchableEventTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ISearchableEventTopicSection topicSection)
-            : base(application, imageResources, topicDocument, topicSection)
+        public SearchableEventTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, ISearchableEventTopicSection topicSection)
+            : base(application, imageResources, iconRepository, topicDocument, topicSection)
         {
             InitializeComponent();
 
@@ -50,7 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             richTextBox.ReadOnly = true;
 
             listView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            listView.SmallImageList = IconRepository.ImageList;
+            listView.SmallImageList = iconRepository.ImageList;
             listView.Sorting = SortOrder.Descending;
 
             btnFind.Image = imageResources.GetImage(ImageKeys.FindSnippets);

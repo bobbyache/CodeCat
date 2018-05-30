@@ -1,8 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
@@ -14,8 +13,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             InitializeComponent();
         }
 
-        public CodeTemplateTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ICodeTemplateTopicSection topicSection) 
-            : base(application, imageResources, topicDocument, topicSection)
+        public CodeTemplateTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, ICodeTemplateTopicSection topicSection) 
+            : base(application, imageResources, iconRepository, topicDocument, topicSection)
         {
             InitializeComponent();
         }

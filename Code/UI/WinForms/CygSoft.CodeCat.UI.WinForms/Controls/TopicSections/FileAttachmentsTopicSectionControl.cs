@@ -1,8 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
@@ -23,9 +22,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripButton btnAdd;
         private ToolStripButton btnDelete;
 
-        public override int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.FileAttachments).Index; } }
-        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.FileAttachments).Icon; } }
-        public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.FileAttachments).Image; } }
+        public override int ImageKey { get { return iconRepository.Get(IconRepository.TopicSections.FileAttachments).Index; } }
+        public override Icon ImageIcon { get { return iconRepository.Get(IconRepository.TopicSections.FileAttachments).Icon; } }
+        public override Image IconImage { get { return iconRepository.Get(IconRepository.TopicSections.FileAttachments).Image; } }
 
         private IFileAttachmentsTopicSection FileAttachmentsTopicSection
         {
@@ -33,13 +32,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public FileAttachmentsTopicSectionControl()
-            : this(null, null, null, null)
+            : this(null, null, null, null, null)
         {
 
         }
 
-        public FileAttachmentsTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IFileAttachmentsTopicSection topicSection)
-            : base(application, imageResources, topicDocument, topicSection)
+        public FileAttachmentsTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, IFileAttachmentsTopicSection topicSection)
+            : base(application, imageResources, iconRepository, topicDocument, topicSection)
         {
             InitializeComponent();
             
@@ -47,7 +46,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", imageResources.GetImage(ImageKeys.AddSnippet), (s, e) => Add());
             btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", imageResources.GetImage(ImageKeys.EditSnippet), (s, e) => Edit());
 
-            listView.SmallImageList = IconRepository.ImageList;
+            listView.SmallImageList = iconRepository.ImageList;
             listViewSorter = new ListViewSorter(this.listView);
             listView.Sorting = SortOrder.Ascending;
 
@@ -197,7 +196,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void ReloadListview()
         {
-            IconRepository.AddFileExtensions(FileAttachmentsTopicSection.Items.Select(idx => idx.FileExtension));
+            iconRepository.AddFileExtensions(FileAttachmentsTopicSection.Items.Select(idx => idx.FileExtension));
 
             Gui.GroupedListView.LoadAllItems<IFileAttachment>(this.listView, FileAttachmentsTopicSection.Items,
                 FileAttachmentsTopicSection.Categories, this.CreateListviewItem);

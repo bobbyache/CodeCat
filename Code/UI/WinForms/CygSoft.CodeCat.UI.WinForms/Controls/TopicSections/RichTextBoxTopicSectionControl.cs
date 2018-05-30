@@ -1,8 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using System;
 using System.Drawing;
@@ -11,18 +10,18 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     public partial class RichTextBoxTopicSectionControl : BaseTopicSectionControl
     {
-        public override int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.RTF).Index; } }
-        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.RTF).Icon; } }
-        public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.RTF).Image; } }
+        public override int ImageKey { get { return iconRepository.Get(IconRepository.TopicSections.RTF).Index; } }
+        public override Icon ImageIcon { get { return iconRepository.Get(IconRepository.TopicSections.RTF).Icon; } }
+        public override Image IconImage { get { return iconRepository.Get(IconRepository.TopicSections.RTF).Image; } }
 
         public RichTextBoxTopicSectionControl()
-            : this(null, null, null, null)
+            : this(null, null, null, null, null)
         {
 
         }
 
-        public RichTextBoxTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IRichTextEditorTopicSection topicSection)
-            : base(application, imageResources, topicDocument, topicSection)
+        public RichTextBoxTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, IRichTextEditorTopicSection topicSection)
+            : base(application, imageResources, iconRepository, topicDocument, topicSection)
         {
             InitializeComponent();
 

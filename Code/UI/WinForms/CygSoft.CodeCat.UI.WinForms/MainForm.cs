@@ -4,9 +4,9 @@ using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.UI.Resources;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Docked;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using CygX1.UI.WinForms.RecentFileMenu;
@@ -30,6 +30,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private CategoryForm categoryForm;
         private PluginsForm pluginsForm;
         private IImageResources imageResources;
+        private IconRepository iconRepository;
 
         // need this because we don't want to create a new document when
         // when all documents are closing because we're either creating
@@ -43,8 +44,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             //dockPanel.SaveAsXml(
             //dockPanel.LoadFromXml(
             imageResources = new ImageResources();
+            this.iconRepository = new IconRepository();
+
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
             this.application = new AppFacade(ConfigSettings.SyntaxFilePath);
+            
 
             InitializeFileIcons();
             InitializeIconImages();
@@ -71,19 +75,19 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeFileIcons()
         {
-            IconRepository.AddCategoryInfo();
-            IconRepository.AddDocuments();
-            IconRepository.AddSyntaxes(application.GetSyntaxFileInfo());
+            iconRepository.AddCategoryInfo();
+            iconRepository.AddDocuments();
+            iconRepository.AddSyntaxes(application.GetSyntaxFileInfo());
         }
 
         private void InitializeIconImages()
         {
-            mnuFileOpen.Image = imageResources.GetImage(ImageKeys.OpenProject); // Gui.Resources.GetImage( Constants.ImageKeys.OpenProject);
+            mnuFileOpen.Image = imageResources.GetImage(ImageKeys.OpenProject);
             mnuFileCreateNew.Image = imageResources.GetImage(ImageKeys.NewProject);
             mnuViewWorkItem.Image = imageResources.GetImage(ImageKeys.EditSnippet);
             mnuAddCodeItem.Image = imageResources.GetImage(ImageKeys.AddSnippet);
-            mnuAddTopic.Image = IconRepository.Get(IconRepository.TopicSections.CodeGroup).Image;
-            mnuAddQikGenerator.Image = IconRepository.Get(IconRepository.TopicSections.QikGroup).Image;
+            mnuAddTopic.Image = iconRepository.Get(IconRepository.TopicSections.CodeGroup).Image;
+            mnuAddQikGenerator.Image = iconRepository.Get(IconRepository.TopicSections.QikGroup).Image;
             mnuWindowKeywordSearch.Image = imageResources.GetImage(ImageKeys.FindSnippets);
             mnuCurrentTasks.Image = imageResources.GetImage(ImageKeys.EditText);
             mnuCategories.Image = imageResources.GetImage(ImageKeys.OpenCategory);
@@ -113,7 +117,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeSearchForm()
         {
-            searchForm = new SearchForm(this.application, imageResources);
+            searchForm = new SearchForm(this.application, imageResources, iconRepository);
             searchForm.OpenTopic += Control_OpenWorkItem;
             searchForm.DeleteTopic += Control_DeleteTopic;
             searchForm.SearchExecuted += (s, e) => { this.indexCountLabel.Text = ItemCountCaption(e.MatchedItemCount); };
@@ -134,7 +138,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeCategoryForm()
         {
-            categoryForm = new CategoryForm(this.application, this.imageResources);
+            categoryForm = new CategoryForm(this.application, this.imageResources, this.iconRepository);
             categoryForm.OpenWorkItem += Control_OpenWorkItem;
             categoryForm.Show(dockPanel, DockState.DockLeftAutoHide);
         }
@@ -368,13 +372,13 @@ namespace CygSoft.CodeCat.UI.WinForms
                 IFile workItem = application.OpenWorkItem(keywordIndexItem);
 
                 if (keywordIndexItem is ICodeKeywordIndexItem)
-                    workItemForm = new CodeWorkItemForm(workItem, application, imageResources);
+                    workItemForm = new CodeWorkItemForm(workItem, application, iconRepository, imageResources);
 
                 else if (keywordIndexItem is IQikTemplateKeywordIndexItem)
-                    workItemForm = new QikWorkItemForm(workItem, application, imageResources);
+                    workItemForm = new QikWorkItemForm(workItem, application, iconRepository, imageResources);
 
                 else if (keywordIndexItem is ITopicKeywordIndexItem)
-                    workItemForm = new TopicWorkItemForm(workItem, application, imageResources);
+                    workItemForm = new TopicWorkItemForm(workItem, application, iconRepository, imageResources);
 
                 if (workItemForm == null)
                     throw new Exception("IContentDocument has not been defined and cannot be opened.");
@@ -404,13 +408,13 @@ namespace CygSoft.CodeCat.UI.WinForms
             switch (workItemType)
             {
                 case WorkItemType.CodeFile:
-                    workItemForm = new CodeWorkItemForm(workItem, application, imageResources, true);
+                    workItemForm = new CodeWorkItemForm(workItem, application, iconRepository, imageResources, true);
                     break;
                 case WorkItemType.Topic:
-                    workItemForm = new TopicWorkItemForm(workItem, application, imageResources, true);
+                    workItemForm = new TopicWorkItemForm(workItem, application, iconRepository, imageResources, true);
                     break;
                 case WorkItemType.QikGenerator:
-                    workItemForm = new QikWorkItemForm(workItem, application, imageResources, true);
+                    workItemForm = new QikWorkItemForm(workItem, application, iconRepository, imageResources, true);
                     break;
             }
 

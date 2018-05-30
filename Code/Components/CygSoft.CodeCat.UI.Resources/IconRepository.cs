@@ -1,19 +1,14 @@
-﻿using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.Qik;
-using CygSoft.CodeCat.Domain.Topics;
-using CygSoft.CodeCat.Infrastructure.Graphics;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Syntax.Infrastructure;
 using CygSoft.CodeCat.UI.Resources;
-using CygSoft.CodeCat.UI.WinForms.Images;
+using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms
 {
-    public class IconRepository : IIconRepository
+    public static class IconRepository
     {
         public static class TopicSections
         {
@@ -30,8 +25,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             public const string EventDiary = "Document.EventDiary";
         }
 
-        private IImageResources imageResources;
-        public IImageResources ImageResources
+        private static IImageResources imageResources;
+        public static IImageResources ImageResources
         {
             get
             {
@@ -41,16 +36,16 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        private ImageLibrary imageLibrary = new ImageLibrary();
+        private static ImageLibrary imageLibrary = new ImageLibrary();
 
-        public ImageList ImageList { get { return imageLibrary.ImageList; } }
+        public static ImageList ImageList { get { return imageLibrary.ImageList; } }
 
-        public Icon QikGroupIcon { get { return Get(TopicSections.QikGroup).Icon; } }
-        public Icon CodeGroupIcon { get { return Get(TopicSections.CodeGroup).Icon; } }
-        public Icon FileGroupIcon { get { return Get(TopicSections.FileAttachments).Icon; } }
+        public static Icon QikGroupIcon { get { return Get(TopicSections.QikGroup).Icon; } }
+        public static Icon CodeGroupIcon { get { return Get(TopicSections.CodeGroup).Icon; } }
+        public static Icon FileGroupIcon { get { return Get(TopicSections.FileAttachments).Icon; } }
 
 
-        public IImageOutput GetKeywordIndexItemImage(IKeywordIndexItem item)
+        public static ImageOutput GetKeywordIndexItemImage(IKeywordIndexItem item)
         {
             string imageKey = null;
 
@@ -66,21 +61,30 @@ namespace CygSoft.CodeCat.UI.WinForms
             return Get(imageKey, false);
         }
 
-        public IImageOutput Get(string key, bool isFileExtensionKey = false)
+        public static ImageOutput Get(string key, bool isFileExtensionKey = false)
         {
+            //if (IsDocument(key))
+            //    Console.WriteLine("here we are");
             if (isFileExtensionKey)
                 return imageLibrary[key.ToUpper(), true];
 
             return imageLibrary[key.ToUpper()];
         }
 
-        public void AddCategoryInfo()
+        //private static bool IsDocument(string key)
+        //{
+        //    if (key.StartsWith("Document."))
+        //        return true;
+        //    return false;
+        //}
+
+        public static void AddCategoryInfo()
         {
             imageLibrary.Add(ImageKeys.OpenCategory, ImageResources.GetImage(ImageKeys.OpenCategory));
             imageLibrary.Add(ImageKeys.ClosedCategory, ImageResources.GetImage(ImageKeys.ClosedCategory));
         }
 
-        public void AddDocuments()
+        public static void AddDocuments()
         {
             imageLibrary.Add(TopicSections.CodeFile, imageLibrary.IconByExtension("cpp"));
             imageLibrary.Add(TopicSections.CodeGroup, ImageResources.GetImage(ImageKeys.CodeGroup));
@@ -95,7 +99,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             imageLibrary.Add(TopicSections.SingleImage, imageLibrary.IconByExtension("png"));
         }
 
-        public void AddSyntaxes(ISyntaxFile[] syntaxFiles)
+        public static void AddSyntaxes(ISyntaxFile[] syntaxFiles)
         {
             foreach (ISyntaxFile syntaxFile in syntaxFiles)
             {
@@ -111,7 +115,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        public void AddFileExtensions(IEnumerable<string> fileExtensions)
+        public static void AddFileExtensions(IEnumerable<string> fileExtensions)
         {
             imageLibrary.AddExtensions(fileExtensions.ToArray());
         }

@@ -1,8 +1,8 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -21,6 +21,7 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
         protected IAppFacade application;
         protected ITopicDocument topicDocument;
         protected IImageResources imageResources;
+        protected IIconRepository iconRepository;
 
         public string Id { get; private set; }
         public string Title { get { return this.txtTitle.Text; } }
@@ -29,22 +30,23 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
         public virtual Icon ImageIcon { get { return null; } }
         public virtual Image IconImage { get { return null; } }
 
-        //public virtual int ImageKey {  get { return IconRepository.Get("TEXT").Index; } }
-        //public virtual Icon ImageIcon {  get { return IconRepository.Get("TEXT").Icon; } }
-        //public virtual Image IconImage { get { return IconRepository.Get("TEXT").Image; } }
-
         public bool IsModified { get; protected set; }
         public bool FileExists { get { return topicSection.Exists; } }
 
         public BaseTopicSectionControl()
-            : this(null, null, null, null)
+            : this(null, null, null, null, null)
         {
 
         }
 
-        public BaseTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITopicSection topicSection)
+        public BaseTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, ITopicSection topicSection)
         {
             InitializeComponent();
+
+            if (iconRepository == null)
+                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
+
+            this.iconRepository = iconRepository;
 
             if (topicSection == null)
                 return;

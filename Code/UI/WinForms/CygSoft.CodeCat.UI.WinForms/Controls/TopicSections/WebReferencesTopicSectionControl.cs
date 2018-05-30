@@ -1,8 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
@@ -22,9 +21,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         private ToolStripButton btnAdd;
         private ToolStripButton btnDelete;
 
-        public override int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.WebReferences).Index; } }
-        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.WebReferences).Icon; } }
-        public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.WebReferences).Image; } }
+        public override int ImageKey { get { return iconRepository.Get(IconRepository.TopicSections.WebReferences).Index; } }
+        public override Icon ImageIcon { get { return iconRepository.Get(IconRepository.TopicSections.WebReferences).Icon; } }
+        public override Image IconImage { get { return iconRepository.Get(IconRepository.TopicSections.WebReferences).Image; } }
 
         private IWebReferencesTopicSection WebReferencesTopicSection
         {
@@ -32,13 +31,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         }
 
         public WebReferencesTopicSectionControl()
-            : this(null, null, null, null)
+            : this(null, null, null, null, null)
         {
 
         }
 
-        public WebReferencesTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IWebReferencesTopicSection topicSection)
-            : base(application, imageResources, topicDocument, topicSection)
+        public WebReferencesTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, IWebReferencesTopicSection topicSection)
+            : base(application, imageResources, iconRepository, topicDocument, topicSection)
         {
             InitializeComponent();
 

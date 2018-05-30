@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CygSoft.CodeCat.Infrastructure.Graphics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.UI.WinForms.Images
 {
-    public class ImageOutput
+    public class ImageOutput : IImageOutput
     {
         private readonly Icon icon;
         private readonly Image image;

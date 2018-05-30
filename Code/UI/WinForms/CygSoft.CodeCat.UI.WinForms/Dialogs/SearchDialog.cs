@@ -1,15 +1,7 @@
 ﻿using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
-using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Dialogs
@@ -48,7 +40,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
         public IKeywordIndexItem SelectedSnippet { get { return codeSearchResultsControl1.SelectedTopic; } }
         public IKeywordIndexItem[] SelectedSnippets { get { return codeSearchResultsControl1.SelectedTopics; } }
 
-        public SearchDialog(IAppFacade application, IImageResources imageResources)
+        public SearchDialog(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository)
         {
             InitializeComponent();
 
@@ -65,6 +57,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Dialogs
             this.SearchEnabled = true;
 
             codeSearchResultsControl1.Application = application;
+            codeSearchResultsControl1.IconRepository = iconRepository;
 
             btnFind.Image = imageResources.GetImage(ImageKeys.FindSnippets);
             btnFind.Click += (s, e) => ExecuteSearch();

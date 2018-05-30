@@ -1,11 +1,10 @@
 ﻿using Alsing.SourceCode;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Drawing;
@@ -19,14 +18,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
         public event EventHandler Modified;
 
         private IImageResources imageResources;
+        private IIconRepository iconRepository;
         private ICodeTopicSection templateFile;
         private IAppFacade application;
         private IQikTemplateDocumentSet qikTemplateDocumentSet;
         private ICompiler compiler;
 
-        public QikTemplateCodeCtrl(IAppFacade application, IImageResources imageResources, IQikTemplateDocumentSet qikTemplateDocumentSet, ICodeTopicSection templateFile)
+        public QikTemplateCodeCtrl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, IQikTemplateDocumentSet qikTemplateDocumentSet, 
+            ICodeTopicSection templateFile)
         {
             InitializeComponent();
+
+            if (iconRepository == null)
+                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
+
+            this.iconRepository = iconRepository;
 
             this.imageResources = imageResources;
             this.application = application;
@@ -49,9 +55,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             UpdateAutoList();
         }
 
-        public int ImageKey { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
-        public Icon ImageIcon { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
-        public Image IconImage { get { return IconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
+        public int ImageKey { get { return iconRepository.Get(cboSyntax.SelectedItem.ToString()).Index; } }
+        public Icon ImageIcon { get { return iconRepository.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
+        public Image IconImage { get { return iconRepository.Get(cboSyntax.SelectedItem.ToString()).Image; } }
         public string Id { get; private set; }
         public string Title { get { return txtTitle.Text; } }
         public string TemplateText { get { return templateSyntaxDocument.Text; } }
@@ -219,7 +225,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
             string syntaxFile = application.GetSyntaxFile(syn);
             outputSyntaxBox.Document.SyntaxFile = syntaxFile;
 
-            lblEditStatus.Image = IconRepository.Get(syn).Image;
+            lblEditStatus.Image = iconRepository.Get(syn).Image;
         }
 
         private void SetDefaultFont()

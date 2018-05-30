@@ -2,10 +2,10 @@
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Documents;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -20,7 +20,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         private IQikTemplateDocumentSet qikFile = null;
         private WorkItemTabManager tabManager = null;
         private QikScriptCtrl scriptControl;
-        
+        private IconRepository iconRepository;
+
         #region Public Properties
 
         public bool ShowScript
@@ -39,7 +40,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #region Constructors
 
-        public QikWorkItemForm(IFile workItem, IAppFacade application, IImageResources imageResources, bool isNew = false)
+        public QikWorkItemForm(IFile workItem, IAppFacade application, IconRepository iconRepository, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
             
@@ -51,7 +52,12 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.application = application;
             base.workItem = qikFile;
 
-            tabControlFile.ImageList = IconRepository.ImageList;
+            if (iconRepository == null)
+                throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
+
+            this.iconRepository = iconRepository;
+
+            tabControlFile.ImageList = iconRepository.ImageList;
 
             qikFile.TopicSectionAdded += qikFile_TopicSectionAdded;
             qikFile.TopicSectionRemoved += qikFile_TopicSectionRemoved;
@@ -61,7 +67,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             
             Tag = qikFile.Id;
             compiler = qikFile.Compiler;
-            tabManager = new WorkItemTabManager(tabControlFile, btnMenu);
+            tabManager = new WorkItemTabManager(tabControlFile, btnMenu, iconRepository);
             tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   
             RebuildTabs();
@@ -171,7 +177,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnMoveLeft.Image = imageResources.GetImage(ImageKeys.MoveLeft);
             btnMoveRight.Image = imageResources.GetImage(ImageKeys.MoveRight);
             btnMenu.Image = imageResources.GetImage(ImageKeys.GroupMenu);
-            Icon = IconRepository.QikGroupIcon;
+            Icon = iconRepository.QikGroupIcon;
         }
 
         private void RegisterEvents()
@@ -218,11 +224,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             foreach (ICodeTopicSection document in qikFile.TemplateSections)
             {
                 tabManager.AddTab(document,
-                    TopicSectionControlFactory.Create(document, imageResources, qikFile, application, codeCtrl_Modified), true, false);
+                    TopicSectionControlFactory.Create(document, imageResources, iconRepository, qikFile, application, codeCtrl_Modified), true, false);
             }
 
             IQikScriptTopicSection qikScriptTopicSection = qikFile.ScriptSection as IQikScriptTopicSection;
-            scriptControl = (QikScriptCtrl)TopicSectionControlFactory.Create(qikScriptTopicSection, imageResources, qikFile, application, codeCtrl_Modified);
+            scriptControl = (QikScriptCtrl)TopicSectionControlFactory.Create(qikScriptTopicSection, imageResources, iconRepository, qikFile, application, codeCtrl_Modified);
             tabManager.AddTab(qikScriptTopicSection, scriptControl, btnShowScript.Checked, false);
         }
 
@@ -315,7 +321,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             Gui.Drawing.SuspendDrawing(this);
             tabManager.AddTab(e.TopicSection,
-                TopicSectionControlFactory.Create(e.TopicSection, imageResources, qikFile, application, codeCtrl_Modified),
+                TopicSectionControlFactory.Create(e.TopicSection, imageResources, iconRepository, qikFile, application, codeCtrl_Modified),
                 true, true);
             tabManager.OrderTabs(qikFile.TopicSections);
             tabManager.DisplayTab(scriptControl.Id, btnShowScript.Checked);

@@ -1,9 +1,8 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.TaskListing.Infrastructure;
-using CygSoft.CodeCat.UI.Resources.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.Dialogs;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using System;
@@ -18,8 +17,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             InitializeComponent();
         }
 
-        public TaskListTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITasksTopicSection topicSection) 
-            : base(application, imageResources, topicDocument, topicSection)
+        public TaskListTopicSectionControl(IAppFacade application, IImageResources imageResources, IIconRepository iconRepository, ITopicDocument topicDocument, ITasksTopicSection topicSection) 
+            : base(application, imageResources, iconRepository, topicDocument, topicSection)
         {
             InitializeComponent();
 
