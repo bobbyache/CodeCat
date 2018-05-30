@@ -8,10 +8,7 @@ namespace CygSoft.CodeCat.Infrastructure.Graphics
 {
     public interface IIconRepository
     {
-        Icon CodeGroupIcon { get; }
-        Icon FileGroupIcon { get; }
         IImageResources ImageResources { get; }
-        Icon QikGroupIcon { get; }
 
         void AddCategoryInfo();
         void AddDocuments();

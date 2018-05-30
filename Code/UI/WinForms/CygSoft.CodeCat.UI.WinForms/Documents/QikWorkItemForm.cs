@@ -177,7 +177,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnMoveLeft.Image = imageResources.GetImage(ImageKeys.MoveLeft);
             btnMoveRight.Image = imageResources.GetImage(ImageKeys.MoveRight);
             btnMenu.Image = imageResources.GetImage(ImageKeys.GroupMenu);
-            Icon = iconRepository.QikGroupIcon;
+            Icon = imageResources.QikGroupIcon;
         }
 
         private void RegisterEvents()

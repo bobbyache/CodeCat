@@ -47,47 +47,10 @@ namespace CygSoft.CodeCat.UI.Resources
             return ImageLibrary.IconFromImage(image);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public ImageList ImageList { get { return imageLibrary.ImageList; } }
 
         public Icon QikGroupIcon { get { return Get(TopicSections.QikGroup).Icon; } }
         public Icon CodeGroupIcon { get { return Get(TopicSections.CodeGroup).Icon; } }
-        public Icon FileGroupIcon { get { return Get(TopicSections.FileAttachments).Icon; } }
-
-
-        //public IImageOutput GetKeywordIndexItemImage(IKeywordIndexItem item)
-        //{
-        //    string imageKey = null;
-
-        //    if (item is ICodeKeywordIndexItem)
-        //        imageKey = (item as ICodeKeywordIndexItem).Syntax;
-
-        //    else if (item is IQikTemplateKeywordIndexItem)
-        //        imageKey = TopicSections.QikGroup;
-
-        //    else if (item is ITopicKeywordIndexItem)
-        //        imageKey = TopicSections.CodeGroup;
-
-        //    return Get(imageKey, false);
-        //}
 
         public IImageOutput GetKeywordIndexItemImage(string syntaxImageKey)
         {

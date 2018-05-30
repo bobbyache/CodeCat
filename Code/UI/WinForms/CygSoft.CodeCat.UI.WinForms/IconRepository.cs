@@ -26,10 +26,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        public Icon QikGroupIcon { get { return imageResources.QikGroupIcon; } }
-        public Icon CodeGroupIcon { get { return imageResources.CodeGroupIcon; } }
-        public Icon FileGroupIcon { get { return imageResources.FileGroupIcon; } }
-
         public IconRepository()
         {
             imageResources = new ImageResources();

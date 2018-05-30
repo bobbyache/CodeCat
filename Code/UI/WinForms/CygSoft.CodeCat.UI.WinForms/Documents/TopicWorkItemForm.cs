@@ -215,7 +215,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnSearchableEventDiary.Image = iconRepository.Get(ImageResources.TopicSections.EventDiary).Image;
             btnOpenFolder.Image = imageResources.GetImage(ImageKeys.Folder);
 
-            this.Icon = iconRepository.CodeGroupIcon;
+            this.Icon = imageResources.CodeGroupIcon;
         }
 
         private void RegisterEvents()

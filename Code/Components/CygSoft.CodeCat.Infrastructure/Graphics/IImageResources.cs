@@ -17,7 +17,7 @@ namespace CygSoft.CodeCat.Infrastructure.Graphics
         ImageList ImageList { get; }
         Icon QikGroupIcon { get; }
         Icon CodeGroupIcon { get; }
-        Icon FileGroupIcon { get; }
+        //Icon FileGroupIcon { get; }
         IImageOutput Get(string key, bool isFileExtensionKey = false);
         void AddCategoryInfo();
         void AddDocuments();
