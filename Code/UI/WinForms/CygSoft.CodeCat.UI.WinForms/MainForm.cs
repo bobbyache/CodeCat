@@ -75,9 +75,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializeFileIcons()
         {
-            iconRepository.AddCategoryInfo();
-            iconRepository.AddDocuments();
-            iconRepository.AddSyntaxes(application.GetSyntaxFileInfo());
+            imageResources.AddCategoryInfo();
+            imageResources.AddDocuments();
+            imageResources.AddSyntaxes(application.GetSyntaxFileInfo());
         }
 
         private void InitializeIconImages()

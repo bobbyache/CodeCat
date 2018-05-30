@@ -197,7 +197,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void ReloadListview()
         {
-            iconRepository.AddFileExtensions(FileAttachmentsTopicSection.Items.Select(idx => idx.FileExtension));
+            imageResources.AddFileExtensions(FileAttachmentsTopicSection.Items.Select(idx => idx.FileExtension));
 
             Gui.GroupedListView.LoadAllItems<IFileAttachment>(this.listView, FileAttachmentsTopicSection.Items,
                 FileAttachmentsTopicSection.Categories, this.CreateListviewItem);
