@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3638D6A4-8FCE-4DF2-8D31-DD3AA1DCA126}</ProjectGuid>
+    <ProjectGuid>{BA132BB0-EB4D-4310-AA1F-0C3CDD9A5A32}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CygSoft.CodeCat.UI.WinForms.TopicSectionBase</RootNamespace>
-    <AssemblyName>CygSoft.CodeCat.UI.WinForms.TopicSectionBase</AssemblyName>
+    <RootNamespace>WebReferencesTopicSectionPlugin</RootNamespace>
+    <AssemblyName>WebReferencesTopicSectionPlugin</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,40 +42,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseCodeTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="BaseCodeTopicSectionControl.Designer.cs">
-      <DependentUpon>BaseCodeTopicSectionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="BaseTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="BaseTopicSectionControl.Designer.cs">
-      <DependentUpon>BaseTopicSectionControl.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Gui.cs" />
     <Compile Include="ListviewSorter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResourceRepository.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UrlItemEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UrlItemEditDialog.Designer.cs">
+      <DependentUpon>UrlItemEditDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebReferencesTopicSectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WebReferencesTopicSectionControl.Designer.cs">
+      <DependentUpon>WebReferencesTopicSectionControl.cs</DependentUpon>
+    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BaseCodeTopicSectionControl.resx">
-      <DependentUpon>BaseCodeTopicSectionControl.cs</DependentUpon>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="BaseTopicSectionControl.resx">
-      <DependentUpon>BaseTopicSectionControl.cs</DependentUpon>
+    <EmbeddedResource Include="UrlItemEditDialog.resx">
+      <DependentUpon>UrlItemEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WebReferencesTopicSectionControl.resx">
+      <DependentUpon>WebReferencesTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj">
-      <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
+      <Project>{8C992A57-BCBF-4B78-9F69-C88A30E39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CygSoft.CodeCat.UI.WinForms.CustomControls\CygSoft.CodeCat.UI.WinForms.CustomControls.csproj">
-      <Project>{9c4cd292-113e-40f3-b32e-f8f14a7da29e}</Project>
-      <Name>CygSoft.CodeCat.UI.WinForms.CustomControls</Name>
+    <ProjectReference Include="..\CygSoft.CodeCat.TopicSectionBase\CygSoft.CodeCat.UI.WinForms.TopicSectionBase.csproj">
+      <Project>{3638D6A4-8FCE-4DF2-8D31-DD3AA1DCA126}</Project>
+      <Name>CygSoft.CodeCat.UI.WinForms.TopicSectionBase</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\world.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;

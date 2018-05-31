@@ -10,6 +10,7 @@ using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.UI.Resources;
+using CygSoft.CodeCat.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

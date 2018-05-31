@@ -8,7 +8,7 @@ using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Syntax.Infrastructure;
 using CygSoft.CodeCat.TaskListing.Infrastructure;
 
-namespace CygSoft.CodeCat.Domain
+namespace CygSoft.CodeCat.Infrastructure
 {
     public interface IAppFacade
     {

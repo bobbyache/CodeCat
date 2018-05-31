@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Plugins.Generators;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;

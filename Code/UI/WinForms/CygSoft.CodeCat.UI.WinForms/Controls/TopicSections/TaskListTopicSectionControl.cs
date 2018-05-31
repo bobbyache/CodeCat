@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.TaskListing.Infrastructure;

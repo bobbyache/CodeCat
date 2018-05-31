@@ -1,11 +1,8 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
-using CygSoft.CodeCat.UI.Resources;
 using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
-using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,19 +10,15 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
+namespace WebReferencesTopicSectionPlugin
 {
     public partial class WebReferencesTopicSectionControl : BaseTopicSectionControl
     {
-        private ListViewSorter listViewSorter;
+        private ListviewSorter listViewSorter;
 
         private ToolStripButton btnEdit;
         private ToolStripButton btnAdd;
         private ToolStripButton btnDelete;
-
-        public override int ImageKey { get { return imageResources.Get(ImageResources.TopicSections.WebReferences).Index; } }
-        public override Icon ImageIcon { get { return imageResources.Get(ImageResources.TopicSections.WebReferences).Icon; } }
-        public override Image IconImage { get { return imageResources.Get(ImageResources.TopicSections.WebReferences).Image; } }
 
         private IWebReferencesTopicSection WebReferencesTopicSection
         {
@@ -47,7 +40,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", imageResources.GetImage(ImageKeys.AddSnippet), (s, e) => { Add(WebReferencesTopicSection.CreateWebReference()); });
             btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", imageResources.GetImage(ImageKeys.EditSnippet), (s, e) => Edit());
 
-            listViewSorter = new ListViewSorter(listView);
+            listViewSorter = new ListviewSorter(listView);
             listView.Sorting = SortOrder.Ascending;
 
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
@@ -72,7 +65,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
             catch (Exception ex)
             {
-                Gui.Dialogs.WebPageErrorMessageBox(this, ex);
+                Gui.Dialogs.ExceptionMessageBox(this.ParentForm, ex, "An error occurred while trying to load the web page.");
             }
         }
 
@@ -131,7 +124,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
             catch (Exception ex)
             {
-                Gui.Dialogs.PasteUrlErrorDialogMessageBox(this, ex);
+                Gui.Dialogs.ExceptionMessageBox(this.ParentForm, ex, "An error occurred while attempting to paste into this document.");
             }
         }
 
@@ -148,7 +141,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
             catch (Exception ex)
             {
-                Gui.Dialogs.UrlCopyErrorMessageBox(this, ex);
+                Gui.Dialogs.ExceptionMessageBox(this.ParentForm, ex, "An error occurred while trying to copy the URL.");
             }
         }
 
@@ -193,7 +186,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             if (listView.SelectedItems.Count >= 1)
             {
-                DialogResult result = Gui.Dialogs.DeleteMultipleItemsMessageBox(this, "hyperlinks");
+                DialogResult result = Gui.Dialogs.YesNoQuestionMessageBox(this.ParentForm, 
+                    $"Sure you want to delete these hyperlinks?");
 
                 if (result == DialogResult.Yes)
                 {

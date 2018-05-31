@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableSnippet;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
 using System.Collections.Generic;

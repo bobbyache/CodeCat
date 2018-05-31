@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.UI.WinForms.CustomControls;
@@ -23,7 +24,7 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
         public override Icon ImageIcon { get { return imageResources.Get(cboSyntax.SelectedItem.ToString()).Icon; } }
         public override Image IconImage { get { return imageResources.Get(cboSyntax.SelectedItem.ToString()).Image; } }
 
-        
+
 
         public string Syntax
         {

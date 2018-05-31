@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Files.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System;
@@ -11,6 +12,8 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
 {
     public partial class BaseTopicSectionControl : UserControl, ITopicSectionBaseControl
     {
+        private ResourceRepository resourceRepository;
+
         public event EventHandler Modified;
         public event EventHandler ContentSaved;
         public event EventHandler Reverted;
@@ -26,8 +29,8 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
         public string Title { get { return this.txtTitle.Text; } }
 
         public virtual int ImageKey { get { return -1; } }
-        public virtual Icon ImageIcon { get { return null; } }
-        public virtual Image IconImage { get { return null; } }
+        public virtual Icon ImageIcon { get { return resourceRepository.GetIcon("icon"); } }
+        public virtual Image IconImage { get { return resourceRepository.GetImage("icon"); } }
 
         public bool IsModified { get; protected set; }
         public bool FileExists { get { return topicSection.Exists; } }
@@ -41,6 +44,8 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
         public BaseTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITopicSection topicSection)
         {
             InitializeComponent();
+
+            resourceRepository = new ResourceRepository(this.GetType());
 
             if (imageResources == null)
                 throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
@@ -115,5 +120,7 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
             this.topicSection.Title = Title;
             ContentSaved?.Invoke(this, new EventArgs());
         }
+
+
     }
 }

@@ -77,6 +77,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.UI.WinForms
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.UI.WinForms.CustomControls", "Components\CygSoft.CodeCat.UI.WinForms.CustomControls\CygSoft.CodeCat.UI.WinForms.CustomControls.csproj", "{9C4CD292-113E-40F3-B32E-F8F14A7DA29E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TopicSections", "TopicSections", "{D09E8236-C31D-4899-B53D-27C79F6F7356}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebReferencesTopicSectionPlugin", "Components\WebReferencesTopicSectionPlugin\WebReferencesTopicSectionPlugin.csproj", "{BA132BB0-EB4D-4310-AA1F-0C3CDD9A5A32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -207,6 +211,10 @@ Global
 		{9C4CD292-113E-40F3-B32E-F8F14A7DA29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C4CD292-113E-40F3-B32E-F8F14A7DA29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C4CD292-113E-40F3-B32E-F8F14A7DA29E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA132BB0-EB4D-4310-AA1F-0C3CDD9A5A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA132BB0-EB4D-4310-AA1F-0C3CDD9A5A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA132BB0-EB4D-4310-AA1F-0C3CDD9A5A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA132BB0-EB4D-4310-AA1F-0C3CDD9A5A32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -228,5 +236,7 @@ Global
 		{D60471A8-6FAA-4A0F-A681-A7E779F0C060} = {8C7396E9-AD41-446D-81DE-565D6D3A669D}
 		{E9761572-E46C-40C4-9C6C-387433B2668B} = {8C7396E9-AD41-446D-81DE-565D6D3A669D}
 		{E698F06F-71FC-4184-8EBD-D3524697EB4E} = {A78E1C5A-3EC8-40B0-9CAA-ADFE337FF541}
+		{D09E8236-C31D-4899-B53D-27C79F6F7356} = {DFD4AD2C-CC62-4538-92D9-262CD58BABCE}
+		{BA132BB0-EB4D-4310-AA1F-0C3CDD9A5A32} = {D09E8236-C31D-4899-B53D-27C79F6F7356}
 	EndGlobalSection
 EndGlobal

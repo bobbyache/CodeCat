@@ -7,6 +7,7 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure.Graphics;
+using CygSoft.CodeCat.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {
