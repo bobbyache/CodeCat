@@ -15,6 +15,9 @@ namespace WebReferencesTopicSectionPlugin
     public partial class WebReferencesTopicSectionControl : BaseTopicSectionControl
     {
         private ListviewSorter listViewSorter;
+        private ToolBarFunctions toolbarFunctions;
+        private GroupListviewFunctions groupedListviewFunctions;
+        private Dialogs dialogs;
 
         private ToolStripButton btnEdit;
         private ToolStripButton btnAdd;
@@ -36,9 +39,13 @@ namespace WebReferencesTopicSectionPlugin
         {
             InitializeComponent();
 
-            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", imageResources.GetImage(ImageKeys.DeleteSnippet), (s, e) => Delete());
-            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", imageResources.GetImage(ImageKeys.AddSnippet), (s, e) => { Add(WebReferencesTopicSection.CreateWebReference()); });
-            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", imageResources.GetImage(ImageKeys.EditSnippet), (s, e) => Edit());
+            toolbarFunctions = new ToolBarFunctions();
+            dialogs = new Dialogs("Application Title");
+            groupedListviewFunctions = new GroupListviewFunctions();
+
+        btnDelete = toolbarFunctions.CreateButton(HeaderToolstrip, "Delete", imageResources.GetImage(ImageKeys.DeleteSnippet), (s, e) => Delete());
+            btnAdd = toolbarFunctions.CreateButton(HeaderToolstrip, "Add", imageResources.GetImage(ImageKeys.AddSnippet), (s, e) => { Add(WebReferencesTopicSection.CreateWebReference()); });
+            btnEdit = toolbarFunctions.CreateButton(HeaderToolstrip, "Edit", imageResources.GetImage(ImageKeys.EditSnippet), (s, e) => Edit());
 
             listViewSorter = new ListviewSorter(listView);
             listView.Sorting = SortOrder.Ascending;
@@ -59,13 +66,13 @@ namespace WebReferencesTopicSectionPlugin
         {
             try
             {
-                IWebReference webReference = Gui.GroupedListView.SelectedItem<IWebReference>(listView);
+                IWebReference webReference = groupedListviewFunctions.SelectedItem<IWebReference>(listView);
                 if (webReference != null)
                     System.Diagnostics.Process.Start(webReference.Url);
             }
             catch (Exception ex)
             {
-                Gui.Dialogs.ExceptionMessageBox(this.ParentForm, ex, "An error occurred while trying to load the web page.");
+                dialogs.ExceptionMessageBox(this.ParentForm, ex, "An error occurred while trying to load the web page.");
             }
         }
 
@@ -124,7 +131,7 @@ namespace WebReferencesTopicSectionPlugin
             }
             catch (Exception ex)
             {
-                Gui.Dialogs.ExceptionMessageBox(this.ParentForm, ex, "An error occurred while attempting to paste into this document.");
+                dialogs.ExceptionMessageBox(this.ParentForm, ex, "An error occurred while attempting to paste into this document.");
             }
         }
 
@@ -132,7 +139,7 @@ namespace WebReferencesTopicSectionPlugin
         {
             try
             {
-                IWebReference webReference = Gui.GroupedListView.SelectedItem<IWebReference>(listView);
+                IWebReference webReference = groupedListviewFunctions.SelectedItem<IWebReference>(listView);
                 if (webReference != null)
                 {
                     Clipboard.Clear();
@@ -141,7 +148,7 @@ namespace WebReferencesTopicSectionPlugin
             }
             catch (Exception ex)
             {
-                Gui.Dialogs.ExceptionMessageBox(this.ParentForm, ex, "An error occurred while trying to copy the URL.");
+                dialogs.ExceptionMessageBox(this.ParentForm, ex, "An error occurred while trying to copy the URL.");
             }
         }
 
@@ -154,7 +161,7 @@ namespace WebReferencesTopicSectionPlugin
 
         private void Add(IWebReference webReference)
         {
-            UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, WebReferencesTopicSection.Categories);
+            UrlItemEditDialog dialog = new UrlItemEditDialog(dialogs, webReference, WebReferencesTopicSection.Categories);
             DialogResult result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
@@ -169,9 +176,9 @@ namespace WebReferencesTopicSectionPlugin
         {
             if (listView.SelectedItems.Count == 1)
             {
-                IWebReference webReference = Gui.GroupedListView.SelectedItem<IWebReference>(listView);
+                IWebReference webReference = groupedListviewFunctions.SelectedItem<IWebReference>(listView);
 
-                UrlItemEditDialog dialog = new UrlItemEditDialog(webReference, WebReferencesTopicSection.Categories);
+                UrlItemEditDialog dialog = new UrlItemEditDialog(dialogs, webReference, WebReferencesTopicSection.Categories);
                 DialogResult result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
@@ -186,12 +193,12 @@ namespace WebReferencesTopicSectionPlugin
         {
             if (listView.SelectedItems.Count >= 1)
             {
-                DialogResult result = Gui.Dialogs.YesNoQuestionMessageBox(this.ParentForm, 
+                DialogResult result = dialogs.YesNoQuestionMessageBox(this.ParentForm, 
                     $"Sure you want to delete these hyperlinks?");
 
                 if (result == DialogResult.Yes)
                 {
-                    IEnumerable<IWebReference> webReferences = Gui.GroupedListView.SelectedItems<IWebReference>(listView);
+                    IEnumerable<IWebReference> webReferences = groupedListviewFunctions.SelectedItems<IWebReference>(listView);
                     WebReferencesTopicSection.Remove(webReferences);
                     ReloadListview();
 
@@ -220,7 +227,7 @@ namespace WebReferencesTopicSectionPlugin
 
         private void ReloadListview()
         {
-            Gui.GroupedListView.LoadAllItems<IWebReference>(this.listView, WebReferencesTopicSection.WebReferences,
+            groupedListviewFunctions.LoadAllItems<IWebReference>(this.listView, WebReferencesTopicSection.WebReferences,
                 this.WebReferencesTopicSection.Categories, this.CreateListviewItem);
 
             listViewSorter.Sort(0);

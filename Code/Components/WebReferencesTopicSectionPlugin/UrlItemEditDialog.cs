@@ -9,10 +9,12 @@ namespace WebReferencesTopicSectionPlugin
     public partial class UrlItemEditDialog : Form
     {
         private IWebReference webReference;
+        private Dialogs dialogs;
 
-        public UrlItemEditDialog(IWebReference webReference, string[] categories)
+        public UrlItemEditDialog(Dialogs dialogs, IWebReference webReference, string[] categories)
         {
             InitializeComponent();
+            this.dialogs = dialogs;
             this.webReference = webReference;
             txtUrl.Text = webReference.Url;
             txtTitle.Text = webReference.Title;
@@ -45,12 +47,12 @@ namespace WebReferencesTopicSectionPlugin
         {
             if (txtTitle.Text.Trim() == "")
             {
-                Gui.Dialogs.MissingRequiredFieldMessageBox(this.ParentForm, "Title");
+                dialogs.MissingRequiredFieldMessageBox(this.ParentForm, "Title");
                 return false;
             }
             if (txtUrl.Text.Trim() == "")
             {
-                Gui.Dialogs.MissingRequiredFieldMessageBox(this, "Url (hyperlink)");
+                dialogs.MissingRequiredFieldMessageBox(this, "Url (hyperlink)");
                 return false;
             }
             return true;
