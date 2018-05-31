@@ -10,6 +10,7 @@ using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
 using System;
+using WebReferencesTopicSectionPlugin;
 
 namespace CygSoft.CodeCat.UI.WinForms.Documents
 {

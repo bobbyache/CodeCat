@@ -204,12 +204,6 @@
     <Compile Include="Controls\TopicSections\TaskListTopicSectionControl.Designer.cs">
       <DependentUpon>TaskListTopicSectionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TopicSections\WebReferencesTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\WebReferencesTopicSectionControl.Designer.cs">
-      <DependentUpon>WebReferencesTopicSectionControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\CodeSearchResultsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -437,9 +431,6 @@
     <EmbeddedResource Include="Controls\TopicSections\TaskListTopicSectionControl.resx">
       <DependentUpon>TaskListTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\WebReferencesTopicSectionControl.resx">
-      <DependentUpon>WebReferencesTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\VersionedCodeTopicSectionControl.resx">
       <DependentUpon>VersionedCodeTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -570,6 +561,10 @@
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.UI.WinForms.CustomControls\CygSoft.CodeCat.UI.WinForms.CustomControls.csproj">
       <Project>{9C4CD292-113E-40F3-B32E-F8F14A7DA29E}</Project>
       <Name>CygSoft.CodeCat.UI.WinForms.CustomControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\WebReferencesTopicSectionPlugin\WebReferencesTopicSectionPlugin.csproj">
+      <Project>{BA132BB0-EB4D-4310-AA1F-0C3CDD9A5A32}</Project>
+      <Name>WebReferencesTopicSectionPlugin</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
