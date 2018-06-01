@@ -68,9 +68,9 @@
     <Compile Include="TopicSections\IRichTextEditorTopicSection.cs" />
     <Compile Include="TopicSections\ISingleImageTopicSection.cs" />
     <Compile Include="ISyntaxFile.cs" />
-    <Compile Include="ITask.cs" />
-    <Compile Include="ITaskListStatus.cs" />
-    <Compile Include="TopicSections\ITasksTopicSection.cs" />
+    <Compile Include="TopicSections\TaskListing\ITask.cs" />
+    <Compile Include="TopicSections\TaskListing\ITaskListStatus.cs" />
+    <Compile Include="TopicSections\TaskListing\ITasksTopicSection.cs" />
     <Compile Include="TopicSections\ITextTopicSection.cs" />
     <Compile Include="ITitledEntity.cs" />
     <Compile Include="ITopic.cs" />

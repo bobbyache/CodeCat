@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using CygSoft.CodeCat.Category.Infrastructure;
+﻿using CygSoft.CodeCat.Category.Infrastructure;
 using CygSoft.CodeCat.Domain.Base;
-using CygSoft.CodeCat.Files.Infrastructure;
-using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using CygSoft.CodeCat.Syntax.Infrastructure;
-using CygSoft.CodeCat.TaskListing.Infrastructure;
+using System;
+using System.Collections.Generic;
 
 namespace CygSoft.CodeCat.Infrastructure
 {

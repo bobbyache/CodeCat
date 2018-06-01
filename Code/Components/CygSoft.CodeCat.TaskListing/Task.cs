@@ -1,10 +1,6 @@
 ﻿using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.TaskListing.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.TaskListing
 {

@@ -1,14 +1,12 @@
-﻿using System;
+﻿using CygSoft.CodeCat.DocumentManager.Base;
+using CygSoft.CodeCat.Domain.Base;
+using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using System.IO;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.Domain.Base;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.DocumentManager.Base;
-using CygSoft.CodeCat.Files.Infrastructure;
-using CygSoft.CodeCat.Infrastructure;
 
 namespace CygSoft.CodeCat.Domain.Code
 {

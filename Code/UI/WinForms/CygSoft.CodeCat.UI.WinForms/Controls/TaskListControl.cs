@@ -1,9 +1,10 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using CygSoft.CodeCat.TaskListing.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
+using System;
+using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

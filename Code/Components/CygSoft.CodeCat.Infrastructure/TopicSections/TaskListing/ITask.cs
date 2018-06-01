@@ -1,7 +1,7 @@
 ﻿using CygSoft.CodeCat.Infrastructure;
 using System;
 
-namespace CygSoft.CodeCat.TaskListing.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure.TopicSections
 {
     public enum TaskPriority
     {

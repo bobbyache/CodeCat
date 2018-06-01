@@ -1,11 +1,8 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Domain.TopicSections.VersionedCode;
+﻿using CygSoft.CodeCat.Domain.TopicSections.VersionedCode;
+using CygSoft.CodeCat.Infrastructure;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.UnitTests
 {

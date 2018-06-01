@@ -1,4 +1,4 @@
-﻿namespace CygSoft.CodeCat.DocumentManager.Infrastructure
+﻿namespace CygSoft.CodeCat.Infrastructure
 {
     public interface IPositionedItem
     {

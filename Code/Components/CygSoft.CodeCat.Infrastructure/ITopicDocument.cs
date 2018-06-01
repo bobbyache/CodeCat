@@ -1,12 +1,8 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Domain.Base;
-using CygSoft.CodeCat.Files.Infrastructure;
-using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Infrastructure.TopicSections;
+﻿using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 
-namespace CygSoft.CodeCat.DocumentManager.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure
 {
     //TODO: IPersistableTarget and a TopicSection? Need to look and identifiy whether these two can't be merged.
     public interface ITopicDocument : IKeywordTarget, IFile, ITitledEntity

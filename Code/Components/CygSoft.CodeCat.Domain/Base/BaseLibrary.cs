@@ -1,6 +1,4 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Domain.Management;
-using CygSoft.CodeCat.Files.Infrastructure;
+﻿using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;

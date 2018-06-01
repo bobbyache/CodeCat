@@ -1,4 +1,5 @@
-﻿using CygSoft.CodeCat.TaskListing.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System;
 using System.Collections.Generic;
 using System.IO;

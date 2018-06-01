@@ -1,5 +1,4 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Infrastructure.TopicSections;
+﻿using CygSoft.CodeCat.Infrastructure.TopicSections;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {

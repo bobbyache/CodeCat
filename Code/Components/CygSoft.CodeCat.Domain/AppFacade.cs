@@ -1,22 +1,21 @@
-﻿using CygSoft.CodeCat.Domain.Code;
+﻿using CygSoft.CodeCat.Category;
+using CygSoft.CodeCat.Category.Infrastructure;
+using CygSoft.CodeCat.Domain.Base;
+using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Code.Base;
 using CygSoft.CodeCat.Domain.Qik;
+using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Search.KeywordIndex;
+using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.Syntax;
+using CygSoft.CodeCat.Syntax.Infrastructure;
+using CygSoft.CodeCat.TaskListing;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System;
-using CygSoft.CodeCat.Domain.Topics;
-using CygSoft.CodeCat.TaskListing.Infrastructure;
-using CygSoft.CodeCat.TaskListing;
-using CygSoft.CodeCat.Syntax.Infrastructure;
-using CygSoft.CodeCat.Syntax;
-using CygSoft.CodeCat.Category;
-using CygSoft.CodeCat.Category.Infrastructure;
-using CygSoft.CodeCat.Domain.Base;
-using CygSoft.CodeCat.Files.Infrastructure;
 
 namespace CygSoft.CodeCat.Domain
 {

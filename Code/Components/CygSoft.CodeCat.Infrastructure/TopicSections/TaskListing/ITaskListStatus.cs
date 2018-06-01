@@ -1,4 +1,4 @@
-﻿namespace CygSoft.CodeCat.TaskListing.Infrastructure
+﻿namespace CygSoft.CodeCat.Infrastructure.TopicSections
 {
     public interface ITaskListStatus
     {

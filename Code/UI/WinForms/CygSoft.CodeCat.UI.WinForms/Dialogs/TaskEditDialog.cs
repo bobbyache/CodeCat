@@ -1,16 +1,8 @@
-﻿using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.TaskListing.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using static CygSoft.CodeCat.UI.WinForms.Docked.TaskForm;
 
 namespace CygSoft.CodeCat.UI.WinForms.Dialogs
 {

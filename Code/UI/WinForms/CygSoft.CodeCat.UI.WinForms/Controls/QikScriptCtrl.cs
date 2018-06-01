@@ -1,16 +1,13 @@
-﻿using System;
+﻿using Alsing.SourceCode;
+using CygSoft.CodeCat.Domain.Qik;
+using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
+using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
+using CygSoft.CodeCat.UI.Resources;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Qik;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using Alsing.SourceCode;
-using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
-using CygSoft.CodeCat.Files.Infrastructure;
-using CygSoft.CodeCat.Infrastructure.TopicSections;
-using CygSoft.CodeCat.Infrastructure.Graphics;
-using CygSoft.CodeCat.UI.Resources;
-using CygSoft.CodeCat.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

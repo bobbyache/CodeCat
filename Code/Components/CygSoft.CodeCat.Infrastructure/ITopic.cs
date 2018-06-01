@@ -1,8 +1,7 @@
-﻿using CygSoft.CodeCat.Files.Infrastructure;
-using CygSoft.CodeCat.Infrastructure.TopicSections;
+﻿using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System;
 
-namespace CygSoft.CodeCat.DocumentManager.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure
 {
     public interface ITopic : IFile
     {

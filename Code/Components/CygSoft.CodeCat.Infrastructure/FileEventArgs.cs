@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CygSoft.CodeCat.Files.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure
 {
     public class FileEventArgs : EventArgs
     {

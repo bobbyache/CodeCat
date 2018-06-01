@@ -1,7 +1,5 @@
 ﻿using Alsing.SourceCode;
-using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Qik;
-using CygSoft.CodeCat.Files.Infrastructure;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
