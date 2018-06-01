@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="UiHelpers\Dialogs.cs" />
     <Compile Include="UiHelpers\GroupListviewFunctions.cs" />
-    <Compile Include="UiHelpers\ListviewSorter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -10,6 +10,7 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
     public partial class BaseTopicSectionControl : UserControl, ITopicSectionBaseControl
     {
         private ResourceRepository resourceRepository;
+        protected IControlFunctionFactory controlFunctionFactory;
 
         public event EventHandler Modified;
         public event EventHandler ContentSaved;
@@ -42,6 +43,7 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
         {
             InitializeComponent();
 
+            controlFunctionFactory = new ControlFunctionFactory();
             resourceRepository = new ResourceRepository(this.GetType());
 
             if (imageResources == null)

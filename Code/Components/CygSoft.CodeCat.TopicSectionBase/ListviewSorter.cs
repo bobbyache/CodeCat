@@ -1,10 +1,11 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
 {
-    internal class ListviewSorter
+    public class ListviewSorter : IListviewSorter
     {
         private class ListViewItemComparer : IComparer
         {

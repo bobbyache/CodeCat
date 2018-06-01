@@ -12,7 +12,7 @@ namespace WebReferencesTopicSectionPlugin
 {
     public partial class WebReferencesTopicSectionControl : BaseTopicSectionControl
     {
-        private ListviewSorter listViewSorter;
+        private IListviewSorter listViewSorter;
         private ToolBarFunctions toolbarFunctions;
         private GroupListviewFunctions groupedListviewFunctions;
         private Dialogs dialogs;
@@ -45,7 +45,7 @@ namespace WebReferencesTopicSectionPlugin
             btnAdd = toolbarFunctions.CreateButton(HeaderToolstrip, "Add", imageResources.GetImage(ImageKeys.AddSnippet), (s, e) => { Add(WebReferencesTopicSection.CreateWebReference()); });
             btnEdit = toolbarFunctions.CreateButton(HeaderToolstrip, "Edit", imageResources.GetImage(ImageKeys.EditSnippet), (s, e) => Edit());
 
-            listViewSorter = new ListviewSorter(listView);
+            listViewSorter = controlFunctionFactory.CreateListviewSorter(listView);
             listView.Sorting = SortOrder.Ascending;
 
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
