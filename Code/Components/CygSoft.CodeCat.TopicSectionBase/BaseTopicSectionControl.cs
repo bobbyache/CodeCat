@@ -33,12 +33,6 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
         public bool IsModified { get; protected set; }
         public bool FileExists { get { return topicSection.Exists; } }
 
-        public BaseTopicSectionControl()
-            : this(null, null, null, null)
-        {
-
-        }
-
         public BaseTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITopicSection topicSection)
         {
             InitializeComponent();

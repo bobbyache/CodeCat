@@ -31,12 +31,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             get { return topicSection as IFileAttachmentsTopicSection; }
         }
 
-        public FileAttachmentsTopicSectionControl()
-            : this(null, null, null, null)
-        {
-
-        }
-
         public FileAttachmentsTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IFileAttachmentsTopicSection topicSection)
             : base(application, imageResources, topicDocument, topicSection)
         {

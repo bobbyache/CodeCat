@@ -10,11 +10,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     public partial class TaskListTopicSectionControl : BaseTopicSectionControl
     {
-        public TaskListTopicSectionControl()
-        {
-            InitializeComponent();
-        }
-
         public TaskListTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ITasksTopicSection topicSection) 
             : base(application, imageResources, topicDocument, topicSection)
         {

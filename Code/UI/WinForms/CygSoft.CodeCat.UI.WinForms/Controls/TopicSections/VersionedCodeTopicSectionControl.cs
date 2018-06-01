@@ -21,12 +21,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             get { return base.topicSection as IVersionedCodeTopicSection; }
         }
 
-        public VersionedCodeTopicSectionControl()
-            : this(null, null, null, null, null, -1)
-        {
-
-        }
-
         public VersionedCodeTopicSectionControl(IAppFacade application, IImageResources imageResources, 
             ITopicDocument topicDocument, IVersionedCodeTopicSection topicSection, string defaultSyntax, int defaultFontSize)
             : base(application, imageResources, topicDocument, topicSection, defaultSyntax, defaultFontSize)

@@ -31,14 +31,6 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
 
         public Single FontSize { get { return Convert.ToSingle(cboFontSize.SelectedItem); } }
 
-        
-
-        public BaseCodeTopicSectionControl()
-            : this(null, null, null, null, null, -1)
-        {
-
-        }
-
         public BaseCodeTopicSectionControl(IAppFacade application, IImageResources imageResources, 
             ITopicDocument topicDocument, ICodeTopicSection topicSection, string defaultSyntax, int defaultFontSize)
             : base(application, imageResources, topicDocument, topicSection)

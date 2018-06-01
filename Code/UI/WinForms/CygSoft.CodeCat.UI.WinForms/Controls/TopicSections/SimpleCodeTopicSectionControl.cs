@@ -16,12 +16,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             get { return base.topicSection as ICodeTopicSection; }
         }
 
-        public SimpleCodeTopicSectionControl()
-            : this(null, null, null, null, null, -1)
-        {
-
-        }
-
         public SimpleCodeTopicSectionControl(IAppFacade application, IImageResources imageResources, 
             ITopicDocument topicDocument, ICodeTopicSection topicSection,
             string defaultSyntax, int defaultFontSize)

@@ -26,12 +26,6 @@ namespace WebReferencesTopicSectionPlugin
             get { return topicSection as IWebReferencesTopicSection; }
         }
 
-        public WebReferencesTopicSectionControl()
-            : this(null, null, null, null)
-        {
-
-        }
-
         public WebReferencesTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IWebReferencesTopicSection topicSection)
             : base(application, imageResources, topicDocument, topicSection)
         {

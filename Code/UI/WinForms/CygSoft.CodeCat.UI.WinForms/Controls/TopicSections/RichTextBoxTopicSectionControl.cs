@@ -14,12 +14,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         public override Icon ImageIcon { get { return imageResources.Get(ImageResources.TopicSections.RTF).Icon; } }
         public override Image IconImage { get { return imageResources.Get(ImageResources.TopicSections.RTF).Image; } }
 
-        public RichTextBoxTopicSectionControl()
-            : this(null, null, null, null)
-        {
-
-        }
-
         public RichTextBoxTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, IRichTextEditorTopicSection topicSection)
             : base(application, imageResources, topicDocument, topicSection)
         {

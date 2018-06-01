@@ -24,12 +24,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             get { return base.topicSection as ISearchableSnippetTopicSection; }
         }
 
-        public SearchableSnippetTopicSectionControl()
-            : this(null, null, null, null, null, -1)
-        {
-
-        }
-
         public SearchableSnippetTopicSectionControl(IAppFacade application, IImageResources imageResources, 
             ITopicDocument topicDocument, ISearchableSnippetTopicSection topicSection,
                 string defaultSyntax, int defaultFontSize

@@ -26,12 +26,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             get { return base.topicSection as ISearchableEventTopicSection; }
         }
 
-        public SearchableEventTopicSectionControl()
-            : this(null, null, null, null)
-        {
-
-        }
-
         public SearchableEventTopicSectionControl(IAppFacade application, IImageResources imageResources, ITopicDocument topicDocument, ISearchableEventTopicSection topicSection)
             : base(application, imageResources, topicDocument, topicSection)
         {
