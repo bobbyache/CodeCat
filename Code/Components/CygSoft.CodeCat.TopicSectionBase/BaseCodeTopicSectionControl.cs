@@ -1,10 +1,7 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.UI.WinForms.CustomControls;
-using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using System;
 using System.Drawing;
 using System.Windows.Forms;

@@ -3,7 +3,7 @@ using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

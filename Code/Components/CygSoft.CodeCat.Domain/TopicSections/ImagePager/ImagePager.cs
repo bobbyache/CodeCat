@@ -1,6 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Base;
-using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
+using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System.Collections.Generic;
 using System.Linq;

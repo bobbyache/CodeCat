@@ -1,4 +1,4 @@
-﻿using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
 using System;
 
 namespace CygSoft.CodeCat.Domain.Code

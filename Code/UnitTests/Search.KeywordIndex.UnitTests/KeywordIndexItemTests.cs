@@ -1,4 +1,4 @@
-﻿using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
 using NUnit.Framework;
 using Search.KeywordIndex.UnitTests.Helpers;
 using System;

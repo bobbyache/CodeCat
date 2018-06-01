@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CygSoft.CodeCat.Search.KeywordIndex.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure
 {
     public interface IKeywordSearchIndex
     {

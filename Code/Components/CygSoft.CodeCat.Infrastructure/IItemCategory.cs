@@ -1,6 +1,4 @@
-﻿using CygSoft.CodeCat.Infrastructure;
-
-namespace CygSoft.CodeCat.Category.Infrastructure
+﻿namespace CygSoft.CodeCat.Infrastructure
 {
     public interface IItemCategory : ITitledEntity
     {

@@ -1,13 +1,10 @@
-﻿using CygSoft.CodeCat.Search.KeywordIndex;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using Moq;
+﻿using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Search.KeywordIndex;
 using NUnit.Framework;
 using Search.KeywordIndex.UnitTests.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 /*
  * 4ecac722-8ec5-441c-8e3e-00b192b30453

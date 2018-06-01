@@ -1,5 +1,4 @@
 ﻿using CygSoft.CodeCat.Infrastructure.TopicSections;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 
 namespace CygSoft.CodeCat.Infrastructure

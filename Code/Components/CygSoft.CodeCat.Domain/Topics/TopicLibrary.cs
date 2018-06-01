@@ -1,7 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Management;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using System.Collections.Generic;
+using CygSoft.CodeCat.Infrastructure;
 using System.Linq;
 
 namespace CygSoft.CodeCat.Domain.Topics

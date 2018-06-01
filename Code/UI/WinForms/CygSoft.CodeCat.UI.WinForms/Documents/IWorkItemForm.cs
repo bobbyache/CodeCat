@@ -1,4 +1,4 @@
-﻿using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Drawing;
 using WeifenLuo.WinFormsUI.Docking;

@@ -1,11 +1,9 @@
 ﻿using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.Domain.Management;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CygSoft.CodeCat.Domain.Topics
 {

@@ -1,4 +1,4 @@
-﻿using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
 
 namespace CygSoft.CodeCat.Domain.Qik
 {

@@ -1,5 +1,4 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Infrastructure.TopicSections;
+﻿using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System;
 
 namespace CygSoft.CodeCat.Domain.TopicSections.WebReference

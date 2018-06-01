@@ -1,7 +1,6 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Base;
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;

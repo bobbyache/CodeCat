@@ -1,11 +1,6 @@
-﻿using CygSoft.CodeCat.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
-namespace CygSoft.CodeCat.Search.KeywordIndex.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure
 {
     public interface IKeywordIndexItem : ITitledEntity
     {

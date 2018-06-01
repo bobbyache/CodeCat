@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace CygSoft.CodeCat.Search.KeywordIndex.Infrastructure
+namespace CygSoft.CodeCat.Infrastructure
 {
     public abstract class PersistableObject
     {

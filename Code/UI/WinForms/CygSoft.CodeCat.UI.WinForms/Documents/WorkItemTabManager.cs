@@ -1,8 +1,6 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Infrastructure.Graphics;
+﻿using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.UI.Resources;
-using CygSoft.CodeCat.UI.WinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

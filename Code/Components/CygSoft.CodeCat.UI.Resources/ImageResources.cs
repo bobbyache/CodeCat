@@ -1,6 +1,5 @@
-﻿using CygSoft.CodeCat.Infrastructure.Graphics;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.Syntax.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;

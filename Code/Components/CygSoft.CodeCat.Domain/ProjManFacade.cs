@@ -1,5 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain.Management;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
+using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Linq;
 

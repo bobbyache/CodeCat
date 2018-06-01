@@ -1,15 +1,9 @@
-﻿using System;
+﻿using CygSoft.CodeCat.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CygSoft.CodeCat.Category.Infrastructure;
-using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

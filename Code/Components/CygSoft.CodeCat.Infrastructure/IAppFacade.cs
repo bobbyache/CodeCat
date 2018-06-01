@@ -1,8 +1,4 @@
-﻿using CygSoft.CodeCat.Category.Infrastructure;
-using CygSoft.CodeCat.Domain.Base;
-using CygSoft.CodeCat.Infrastructure.TopicSections;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.Syntax.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System;
 using System.Collections.Generic;
 

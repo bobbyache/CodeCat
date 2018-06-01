@@ -1,14 +1,12 @@
-﻿using CygSoft.CodeCat.Search.KeywordIndex;
+﻿using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Search.KeywordIndex;
+using Moq;
 using NUnit.Framework;
+using Search.KeywordIndex.UnitTests.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
 using System.IO;
-using Moq;
-using Search.KeywordIndex.UnitTests.Helpers;
+using System.Linq;
 
 namespace Search.KeywordIndex.UnitTests
 {

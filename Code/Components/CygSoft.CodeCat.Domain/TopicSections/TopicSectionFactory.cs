@@ -1,5 +1,4 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.DocumentManager.TopicSections;
+﻿using CygSoft.CodeCat.DocumentManager.TopicSections;
 using CygSoft.CodeCat.Domain.TopicSections.CodeTemplate;
 using CygSoft.CodeCat.Domain.TopicSections.FileAttachment;
 using CygSoft.CodeCat.Domain.TopicSections.ImagePager;

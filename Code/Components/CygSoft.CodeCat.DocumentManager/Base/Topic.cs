@@ -1,5 +1,4 @@
-﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
-using CygSoft.CodeCat.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System;
 using System.Collections.Generic;

@@ -1,13 +1,11 @@
-﻿using System;
+﻿using CygSoft.CodeCat.Domain.Code;
+using CygSoft.CodeCat.Domain.Qik;
+using CygSoft.CodeCat.Domain.Topics;
+using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Infrastructure.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using CygSoft.CodeCat.Domain.Qik;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.Topics;
-using CygSoft.CodeCat.Infrastructure.Graphics;
-using CygSoft.CodeCat.Infrastructure;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls
 {

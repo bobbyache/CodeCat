@@ -1,7 +1,4 @@
-﻿using CygSoft.CodeCat.Category.Infrastructure;
-using CygSoft.CodeCat.Search.KeywordIndex.Infrastructure;
-
-namespace CygSoft.CodeCat.Domain.Base
+﻿namespace CygSoft.CodeCat.Infrastructure
 {
     public interface ICategorizedKeywordIndexItem : ICategorizedItem
     {

@@ -1,4 +1,4 @@
-﻿namespace CygSoft.CodeCat.Syntax.Infrastructure
+﻿namespace CygSoft.CodeCat.Infrastructure
 {
     public interface ISyntaxFile
     {

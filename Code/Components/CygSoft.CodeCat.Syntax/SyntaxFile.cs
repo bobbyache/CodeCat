@@ -1,4 +1,4 @@
-﻿using CygSoft.CodeCat.Syntax.Infrastructure;
+﻿using CygSoft.CodeCat.Infrastructure;
 
 namespace CygSoft.CodeCat.Syntax
 {
