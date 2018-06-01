@@ -42,15 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UiHelpers\Dialogs.cs" />
-    <Compile Include="UiHelpers\GroupListviewFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UiHelpers\ToolBarFunctions.cs" />
     <Compile Include="UrlItemEditDialog.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace WebReferencesTopicSectionPlugin
+namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
 {
-    public class ToolBarFunctions
+    public class ToolBarFunctions : IToolBarFunctions
     {
         public ToolStripButton CreateButton(ToolStrip toolstrip, string buttonText, Image image, bool showTextAndImage = false)
         {

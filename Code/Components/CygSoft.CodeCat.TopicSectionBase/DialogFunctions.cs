@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WebReferencesTopicSectionPlugin
+namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
 {
-    public class Dialogs
+    public class DialogFunctions : IDialogFunctions
     {
         private string applicationTitle;
 
-        public Dialogs(string applicationTitle)
+        public DialogFunctions(string applicationTitle)
         {
             this.applicationTitle = applicationTitle;
         }

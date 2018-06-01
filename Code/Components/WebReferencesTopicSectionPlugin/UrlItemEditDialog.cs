@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.UI.WinForms.TopicSectionBase;
 using System;
 using System.Windows.Forms;
 
@@ -9,12 +10,12 @@ namespace WebReferencesTopicSectionPlugin
     public partial class UrlItemEditDialog : Form
     {
         private IWebReference webReference;
-        private Dialogs dialogs;
+        private IDialogFunctions dialogFunctions;
 
-        public UrlItemEditDialog(Dialogs dialogs, IWebReference webReference, string[] categories)
+        public UrlItemEditDialog(IDialogFunctions dialogFunctions, IWebReference webReference, string[] categories)
         {
             InitializeComponent();
-            this.dialogs = dialogs;
+            this.dialogFunctions = dialogFunctions;
             this.webReference = webReference;
             txtUrl.Text = webReference.Url;
             txtTitle.Text = webReference.Title;
@@ -47,12 +48,12 @@ namespace WebReferencesTopicSectionPlugin
         {
             if (txtTitle.Text.Trim() == "")
             {
-                dialogs.MissingRequiredFieldMessageBox(this.ParentForm, "Title");
+                dialogFunctions.MissingRequiredFieldMessageBox(this.ParentForm, "Title");
                 return false;
             }
             if (txtUrl.Text.Trim() == "")
             {
-                dialogs.MissingRequiredFieldMessageBox(this, "Url (hyperlink)");
+                dialogFunctions.MissingRequiredFieldMessageBox(this, "Url (hyperlink)");
                 return false;
             }
             return true;

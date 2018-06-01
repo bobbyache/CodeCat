@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WebReferencesTopicSectionPlugin
+namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
 {
-    public class GroupListviewFunctions
+    public class ListviewGrouper : IListviewGrouper
     {
         public void GroupItem(ListView listView, ListViewItem listItem, ICategorizedListItem categorizedItem)
         {
