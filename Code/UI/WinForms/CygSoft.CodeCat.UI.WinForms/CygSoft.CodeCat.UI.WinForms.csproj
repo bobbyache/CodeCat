@@ -87,12 +87,6 @@
       <DependentUpon>CategoryTreeControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CategoryTreeEventArgs.cs" />
-    <Compile Include="Controls\CodeVersionListControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\CodeVersionListControl.Designer.cs">
-      <DependentUpon>CodeVersionListControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\CurrentSearchTerm.cs" />
     <Compile Include="Controls\SearchTextBox.cs">
       <SubType>Component</SubType>
@@ -103,24 +97,6 @@
     <Compile Include="Controls\SyntaxComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\TaskListControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TaskListControl.Designer.cs">
-      <DependentUpon>TaskListControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ImageControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ImageControl.Designer.cs">
-      <DependentUpon>ImageControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ImageSetControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ImageSetControl.Designer.cs">
-      <DependentUpon>ImageSetControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\InputPropertyGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -128,18 +104,6 @@
       <DependentUpon>InputPropertyGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListViewSorter.cs" />
-    <Compile Include="Controls\TopicSections\CodeTemplateTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\CodeTemplateTopicSectionControl.Designer.cs">
-      <DependentUpon>CodeTemplateTopicSectionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TopicSections\PdfDocumentControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\PdfDocumentControl.Designer.cs">
-      <DependentUpon>PdfDocumentControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\PropertyControlAttribute.cs" />
     <Compile Include="Controls\QikScriptCtrl.cs">
       <SubType>UserControl</SubType>
@@ -154,35 +118,11 @@
       <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\RichTextboxExtensions.cs" />
-    <Compile Include="Controls\TopicSections\RichTextBoxTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\RichTextBoxTopicSectionControl.Designer.cs">
-      <DependentUpon>RichTextBoxTopicSectionControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\RtfEditorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\RtfEditorControl.designer.cs">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TopicSections\FileAttachmentsTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\FileAttachmentsTopicSectionControl.Designer.cs">
-      <DependentUpon>FileAttachmentsTopicSectionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TopicSections\SearchableEventTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\SearchableEventTopicSectionControl.Designer.cs">
-      <DependentUpon>SearchableEventTopicSectionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TopicSections\SearchableSnippetTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\SearchableSnippetTopicSectionControl.Designer.cs">
-      <DependentUpon>SearchableSnippetTopicSectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TopicSections\SimpleCodeTopicSectionControl.cs">
       <SubType>UserControl</SubType>
@@ -190,31 +130,11 @@
     <Compile Include="Controls\TopicSections\SimpleCodeTopicSectionControl.Designer.cs">
       <DependentUpon>SimpleCodeTopicSectionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TopicSections\BaseImageTopicSectionControl.cs" />
-    <Compile Include="Controls\TopicSections\BaseImageTopicSectionControl.Designer.cs">
-      <DependentUpon>BaseImageTopicSectionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TopicSections\SingleImageTopicSectionControl.cs" />
-    <Compile Include="Controls\TopicSections\SingleImageTopicSectionControl.Designer.cs">
-      <DependentUpon>SingleImageTopicSectionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TopicSections\TaskListTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\TaskListTopicSectionControl.Designer.cs">
-      <DependentUpon>TaskListTopicSectionControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\CodeSearchResultsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CodeSearchResultsControl.Designer.cs">
       <DependentUpon>CodeSearchResultsControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TopicSections\VersionedCodeTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\VersionedCodeTopicSectionControl.Designer.cs">
-      <DependentUpon>VersionedCodeTopicSectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\AboutBoxDialog.cs">
       <SubType>Form</SubType>
@@ -223,41 +143,17 @@
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Args.cs" />
-    <Compile Include="Dialogs\FileGroupFileEditDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\FileGroupFileEditDialog.Designer.cs">
-      <DependentUpon>FileGroupFileEditDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\ImageDescriptionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\ImageDescriptionDialog.Designer.cs">
       <DependentUpon>ImageDescriptionDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\SearchableEventEditDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\SearchableEventEditDialog.Designer.cs">
-      <DependentUpon>SearchableEventEditDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\SearchableSnippetEditDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\SearchableSnippetEditDialog.Designer.cs">
-      <DependentUpon>SearchableSnippetEditDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\SearchDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\SearchDialog.Designer.cs">
       <DependentUpon>SearchDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\TaskEditDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\TaskEditDialog.Designer.cs">
-      <DependentUpon>TaskEditDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\UrlItemEditDialog.cs">
       <SubType>Form</SubType>
@@ -276,12 +172,6 @@
     </Compile>
     <Compile Include="Docked\PluginsForm.Designer.cs">
       <DependentUpon>PluginsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Docked\TaskForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Docked\TaskForm.Designer.cs">
-      <DependentUpon>TaskForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Documents\BaseWorkItemForm.cs">
       <SubType>Form</SubType>
@@ -371,32 +261,14 @@
     <EmbeddedResource Include="Controls\CategoryTreeControl.resx">
       <DependentUpon>CategoryTreeControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CodeVersionListControl.resx">
-      <DependentUpon>CodeVersionListControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\SearchTextBox.resx">
       <DependentUpon>SearchTextBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TaskListControl.resx">
-      <DependentUpon>TaskListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CodeSearchResultsControl.resx">
       <DependentUpon>CodeSearchResultsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ImageControl.resx">
-      <DependentUpon>ImageControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ImageSetControl.resx">
-      <DependentUpon>ImageSetControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\InputPropertyGrid.resx">
       <DependentUpon>InputPropertyGrid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\CodeTemplateTopicSectionControl.resx">
-      <DependentUpon>CodeTemplateTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\PdfDocumentControl.resx">
-      <DependentUpon>PdfDocumentControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\QikScriptCtrl.resx">
       <DependentUpon>QikScriptCtrl.cs</DependentUpon>
@@ -404,35 +276,11 @@
     <EmbeddedResource Include="Controls\QikTemplateCodeCtrl.resx">
       <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\RichTextBoxTopicSectionControl.resx">
-      <DependentUpon>RichTextBoxTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\RtfEditorControl.resx">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\FileAttachmentsTopicSectionControl.resx">
-      <DependentUpon>FileAttachmentsTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\SearchableEventTopicSectionControl.resx">
-      <DependentUpon>SearchableEventTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\SearchableSnippetTopicSectionControl.resx">
-      <DependentUpon>SearchableSnippetTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\SimpleCodeTopicSectionControl.resx">
       <DependentUpon>SimpleCodeTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\BaseImageTopicSectionControl.resx">
-      <DependentUpon>BaseImageTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\SingleImageTopicSectionControl.resx">
-      <DependentUpon>SingleImageTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\TaskListTopicSectionControl.resx">
-      <DependentUpon>TaskListTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\VersionedCodeTopicSectionControl.resx">
-      <DependentUpon>VersionedCodeTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AboutBoxDialog.resx">
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>
@@ -440,26 +288,14 @@
     <EmbeddedResource Include="Dialogs\EnterKeywordsDialog.resx">
       <DependentUpon>EnterKeywordsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\FileGroupFileEditDialog.resx">
-      <DependentUpon>FileGroupFileEditDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ImageDescriptionDialog.resx">
       <DependentUpon>ImageDescriptionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InvalidRemoveDialog.resx">
       <DependentUpon>InvalidRemoveDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\SearchableEventEditDialog.resx">
-      <DependentUpon>SearchableEventEditDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\SearchableSnippetEditDialog.resx">
-      <DependentUpon>SearchableSnippetEditDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SearchDialog.resx">
       <DependentUpon>SearchDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\TaskEditDialog.resx">
-      <DependentUpon>TaskEditDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\UrlItemEditDialog.resx">
       <DependentUpon>UrlItemEditDialog.cs</DependentUpon>
@@ -469,9 +305,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Docked\PluginsForm.resx">
       <DependentUpon>PluginsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Docked\TaskForm.resx">
-      <DependentUpon>TaskForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Documents\TopicWorkItemForm.resx">
       <DependentUpon>TopicWorkItemForm.cs</DependentUpon>

@@ -5,10 +5,8 @@ using CygSoft.CodeCat.Domain.Code.Base;
 using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Search.KeywordIndex;
 using CygSoft.CodeCat.Syntax;
-using CygSoft.CodeCat.TaskListing;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +22,6 @@ namespace CygSoft.CodeCat.Domain
         private TopicLibrary topicLibrary;
 
         private Project project = new Project();
-        private TaskList taskList;
         private CategoryHierarchy categoryHierarchy = new CategoryHierarchy();
 
         public AppFacade(string syntaxFilePath)
@@ -88,7 +85,6 @@ namespace CygSoft.CodeCat.Domain
         public void Open(string filePath, Version currentVersion)
         {
             project.Open(filePath, currentVersion);
-            this.taskList = new TaskList(project.TaskFilePath);
             this.categoryHierarchy.LoadProject(project.CategoryFilePath);
 
             this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
@@ -99,7 +95,6 @@ namespace CygSoft.CodeCat.Domain
         public void Create(string filePath, Version currentVersion)
         {
             project.Create(filePath, currentVersion);
-            this.taskList = new TaskList(project.TaskFilePath);
             this.categoryHierarchy.CreateProject(project.CategoryFilePath);
             this.codeLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
             this.qikLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
@@ -290,57 +285,6 @@ namespace CygSoft.CodeCat.Domain
             }
 
             workItem.Delete();
-        }
-
-        public ITask CreateTask()
-        {
-            return TaskList.CreateTask();
-        }
-
-        public void AddTask(ITask task)
-        {
-            taskList.AddTask(task);
-        }
-
-        public void DeleteTasks(ITask[] tasks)
-        {
-            taskList.DeleteTasks(tasks);
-        }
-
-        public void LoadTasks()
-        {
-            taskList.Load();
-        }
-
-        public ITask[] CurrrentTasks
-        {
-            get { return taskList.Tasks; }
-        }
-
-        public string[] TaskPriorities
-        {
-            get { return TaskList.Categories; }
-        }
-
-        public TaskPriority TaskPriorityFromText(string text)
-        {
-            return TaskList.PriorityFromText(text);
-        }
-
-        public void SaveTasks()
-        {
-            taskList.Save();
-        }
-
-
-        public string CurrentTaskInformation()
-        {
-            return $"{taskList.NoOfCompletedTasks}/{taskList.NoOfTasks} ({Math.Round(taskList.PercentageOfTasksCompleted, 1)}%) Tasks Completed";
-        }
-
-        public int PercentageOfTasksCompleted()
-        {
-            return (int)Math.Round(taskList.PercentageOfTasksCompleted);
         }
 
         public IItemCategory CreateCategory()

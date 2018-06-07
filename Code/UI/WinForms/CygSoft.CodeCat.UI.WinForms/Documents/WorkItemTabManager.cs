@@ -154,18 +154,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
 
             if (topicSection is ICodeTopicSection)
                 item.Image = imageResources.Get((topicSection as ICodeTopicSection).Syntax).Image;
-            else if (topicSection is IPdfViewerTopicSection)
-                item.Image = imageResources.Get(ImageResources.TopicSections.PDF).Image;
-            else if (topicSection is ISingleImageTopicSection)
-                item.Image = imageResources.Get(ImageResources.TopicSections.SingleImage).Image;
-            else if (topicSection is IImagePagerTopicSection)
-                item.Image = imageResources.Get(ImageResources.TopicSections.ImageSet).Image;
             else if (topicSection is IWebReferencesTopicSection)
                 item.Image = imageResources.Get(ImageResources.TopicSections.WebReferences).Image;
-            else if (topicSection is IRichTextEditorTopicSection)
-                item.Image = imageResources.Get(ImageResources.TopicSections.RTF).Image; 
-            else if (topicSection is IFileAttachmentsTopicSection)
-                item.Image = imageResources.Get(ImageResources.TopicSections.FileAttachments).Image; 
 
             else
                 item.Image = imageResources.Get(ImageResources.TopicSections.Unknown).Image;

@@ -98,48 +98,8 @@ namespace CygSoft.CodeCat.UI.WinForms
                     topicDocument.AddTopicSection(TopicSectionType.Code, "Code Snippet", ConfigSettings.DefaultSyntax, "txt");
                     break;
 
-                case TopicSectionType.VersionedCode:
-                    topicDocument.AddTopicSection(TopicSectionType.VersionedCode, "Versioned Code Snippet", ConfigSettings.DefaultSyntax, "txt");
-                    break;
-
-                case TopicSectionType.PdfViewer:
-                    topicDocument.AddTopicSection(TopicSectionType.PdfViewer, "PDF Document");
-                    break;
-
-                case TopicSectionType.ImagePager:
-                    topicDocument.AddTopicSection(TopicSectionType.ImagePager, "Image Pager");
-                    break;
-
                 case TopicSectionType.WebReferences:
                     topicDocument.AddTopicSection(TopicSectionType.WebReferences, "Web References");
-                    break;
-
-                case TopicSectionType.SearchableSnippet:
-                    topicDocument.AddTopicSection(TopicSectionType.SearchableSnippet, "Searchable Snippets", ConfigSettings.DefaultSyntax, "xml");
-                    break;
-
-                case TopicSectionType.SearchableEvent:
-                    topicDocument.AddTopicSection(TopicSectionType.SearchableEvent, "Event Diary", null, "xml");
-                    break;
-
-                case TopicSectionType.SingleImage:
-                    topicDocument.AddTopicSection(TopicSectionType.SingleImage, "Single Image", null, "png");
-                    break;
-
-                case TopicSectionType.RtfEditor:
-                    topicDocument.AddTopicSection(TopicSectionType.RtfEditor, "Notes", null, "rtf");
-                    break;
-
-                case TopicSectionType.FileAttachments:
-                    topicDocument.AddTopicSection(TopicSectionType.FileAttachments, "File Attachments", null, null);
-                    break;
-
-                case TopicSectionType.CodeTemplate:
-                    topicDocument.AddTopicSection(TopicSectionType.CodeTemplate, "Code Template", null);
-                    break;
-
-                case TopicSectionType.TaskList:
-                    topicDocument.AddTopicSection(TopicSectionType.TaskList, "Task List");
                     break;
 
                 default:
@@ -200,14 +160,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnMoveRight.Image = imageResources.GetImage(ImageKeys.MoveRight);
             btnMenu.Image = imageResources.GetImage(ImageKeys.GroupMenu);
 
-            btnAddPdfDocument.Image = imageResources.Get(ImageResources.TopicSections.PDF).Image;
-            btnAddImage.Image = imageResources.Get(ImageResources.TopicSections.SingleImage).Image;
             btnAddHyperlinks.Image = imageResources.Get(ImageResources.TopicSections.WebReferences).Image;
-            btnFileGroup.Image = imageResources.Get(ImageResources.TopicSections.FileAttachments).Image;
-            btnImageSet.Image = imageResources.Get(ImageResources.TopicSections.ImageSet).Image;
-            btnRichText.Image = imageResources.Get(ImageResources.TopicSections.RTF).Image;
             btnAddCode.Image = imageResources.Get(ImageResources.TopicSections.CodeFile).Image;
-            btnSearchableEventDiary.Image = imageResources.Get(ImageResources.TopicSections.EventDiary).Image;
             btnOpenFolder.Image = imageResources.GetImage(ImageKeys.Folder);
 
             this.Icon = imageResources.CodeGroupIcon;
@@ -234,17 +188,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnDiscardChange.Click += btnDiscardChange_Click;
 
             btnAddCode.Click += (s, e) => CreateTopicSection(TopicSectionType.Code);
-            btnAddVersionedCode.Click += (s, e) => CreateTopicSection(TopicSectionType.VersionedCode);
             btnAddHyperlinks.Click += (s, e) => CreateTopicSection(TopicSectionType.WebReferences);
-            btnAddPdfDocument.Click += (s, e) => CreateTopicSection(TopicSectionType.PdfViewer);
-            btnImageSet.Click += (s, e) => CreateTopicSection(TopicSectionType.ImagePager);
-            btnSearchableSnippetList.Click += (s, e) => CreateTopicSection(TopicSectionType.SearchableSnippet);
-            btnAddImage.Click += (s, e) => CreateTopicSection(TopicSectionType.SingleImage);
-            btnRichText.Click += (s, e) => CreateTopicSection(TopicSectionType.RtfEditor);
-            btnFileGroup.Click += (s, e) => CreateTopicSection(TopicSectionType.FileAttachments);
-            btnSearchableEventDiary.Click += (s, e) => CreateTopicSection(TopicSectionType.SearchableEvent);
-            btnCodeTemplate.Click += (s, e) => CreateTopicSection(TopicSectionType.CodeTemplate);
-            btnTaskList.Click += (s, e) => CreateTopicSection(TopicSectionType.TaskList);
 
             btnOpenFolder.Click += (s, e) => FileSys.OpenFolder(topicDocument.Folder);
         }

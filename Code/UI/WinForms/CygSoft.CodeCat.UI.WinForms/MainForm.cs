@@ -24,7 +24,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private RegistrySettings registrySettings;
         private IAppFacade application = null;
         private SearchForm searchForm;
-        private TaskForm taskForm;
         private CategoryForm categoryForm;
         private PluginsForm pluginsForm;
         private IImageResources imageResources;
@@ -56,7 +55,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             InitializeRecentProjectMenu();
             InitializeSearchForm();
             InitializeCategoryForm();
-            InitializeTaskForm();
 
             if (!LoadLastProject())
             {
@@ -108,7 +106,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void mnuCurrentTasks_Click(object sender, EventArgs e)
         {
-            taskForm.Activate();
         }
 
         private void InitializeSearchForm()
@@ -124,12 +121,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             searchForm.Show(dockPanel, DockState.DockLeftAutoHide);
             //searchForm.CloseButton = false;
             //searchForm.CloseButtonVisible = false;
-        }
-
-        private void InitializeTaskForm()
-        {
-            taskForm = new TaskForm(this.application, this.imageResources);
-            taskForm.Show(dockPanel, DockState.DockLeftAutoHide);
         }
 
         private void InitializeCategoryForm()
@@ -259,7 +250,6 @@ namespace CygSoft.CodeCat.UI.WinForms
 
                 EnableControls();
 
-                taskForm.LoadTasks();
                 categoryForm.LoadCategories();
 
                 searchForm.KeywordSearchText = string.Empty;

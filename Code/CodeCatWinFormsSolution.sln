@@ -41,8 +41,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qik.LanguageEngine.WinForms
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.WinForms.UnitTests", "UnitTests\UI.WinForms.UnitTests\UI.WinForms.UnitTests.csproj", "{C538C066-2DA4-46C2-9E0B-0973B8711A1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.TaskListing", "Components\CygSoft.CodeCat.TaskListing\CygSoft.CodeCat.TaskListing.csproj", "{B89FFBD2-FBB3-40C2-BA43-CC793AC4F841}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Syntax", "Components\CygSoft.CodeCat.Syntax\CygSoft.CodeCat.Syntax.csproj", "{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Category", "Components\CygSoft.CodeCat.Category\CygSoft.CodeCat.Category.csproj", "{99C7DCC9-3B35-4CA5-98E7-9BBE72021634}"
@@ -149,10 +147,6 @@ Global
 		{C538C066-2DA4-46C2-9E0B-0973B8711A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C538C066-2DA4-46C2-9E0B-0973B8711A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C538C066-2DA4-46C2-9E0B-0973B8711A1B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B89FFBD2-FBB3-40C2-BA43-CC793AC4F841}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B89FFBD2-FBB3-40C2-BA43-CC793AC4F841}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B89FFBD2-FBB3-40C2-BA43-CC793AC4F841}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B89FFBD2-FBB3-40C2-BA43-CC793AC4F841}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBE3C549-DBDD-4D42-9A59-D0E529041ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
