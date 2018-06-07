@@ -81,6 +81,10 @@
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Plugins.TopicSections.Infrastructure\CygSoft.CodeCat.Plugins.TopicSections.Infrastructure.csproj">
+      <Project>{AFEBA5FA-637C-4680-9D19-39B5DDC3843B}</Project>
+      <Name>CygSoft.CodeCat.Plugins.TopicSections.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.UI.WinForms.CustomControls\CygSoft.CodeCat.UI.WinForms.CustomControls.csproj">
       <Project>{9c4cd292-113e-40f3-b32e-f8f14a7da29e}</Project>
       <Name>CygSoft.CodeCat.UI.WinForms.CustomControls</Name>

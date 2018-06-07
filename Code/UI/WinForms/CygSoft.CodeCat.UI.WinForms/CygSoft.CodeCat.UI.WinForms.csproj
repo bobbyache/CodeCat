@@ -546,6 +546,10 @@
       <Project>{092eaad6-cdc9-4893-86f5-6d6be2f9d3dc}</Project>
       <Name>CygSoft.CodeCat.Plugins.Generators</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Plugins.TopicSections.Infrastructure\CygSoft.CodeCat.Plugins.TopicSections.Infrastructure.csproj">
+      <Project>{AFEBA5FA-637C-4680-9D19-39B5DDC3843B}</Project>
+      <Name>CygSoft.CodeCat.Plugins.TopicSections.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure.csproj">
       <Project>{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}</Project>
       <Name>CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure</Name>

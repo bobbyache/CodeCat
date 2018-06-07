@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.Plugins.TopicSections.Infrastructure;
 using CygSoft.CodeCat.UI.Resources;
 using System;
 using System.Collections.Generic;

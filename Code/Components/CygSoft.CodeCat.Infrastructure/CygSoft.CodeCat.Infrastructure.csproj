@@ -76,7 +76,6 @@
     <Compile Include="ITopic.cs" />
     <Compile Include="TopicSections\ITopicSection.cs" />
     <Compile Include="IVersionableFile.cs" />
-    <Compile Include="TopicSections\ITopicSectionBaseControl.cs" />
     <Compile Include="TopicSections\IVersionedCodeTopicSection.cs" />
     <Compile Include="IVersionedFileRepository.cs" />
     <Compile Include="TopicSections\IWebReferencesTopicSection.cs" />
