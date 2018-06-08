@@ -217,18 +217,6 @@
     <Compile Include="Dialogs\SnapshotDescDialog.Designer.cs">
       <DependentUpon>SnapshotDescDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SnapshotListCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SnapshotListCtrl.Designer.cs">
-      <DependentUpon>SnapshotListCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Documents\CodeWorkItemForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Documents\CodeWorkItemForm.Designer.cs">
-      <DependentUpon>CodeWorkItemForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="UiHelpers\Dialogs.cs" />
     <Compile Include="UiHelpers\Drawing.cs" />
     <Compile Include="UiHelpers\GroupedListView.cs" />
@@ -300,12 +288,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SnapshotDescDialog.resx">
       <DependentUpon>SnapshotDescDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SnapshotListCtrl.resx">
-      <DependentUpon>SnapshotListCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Documents\CodeWorkItemForm.resx">
-      <DependentUpon>CodeWorkItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="..\..\..\..\LICENSE">
       <Link>LICENSE</Link>

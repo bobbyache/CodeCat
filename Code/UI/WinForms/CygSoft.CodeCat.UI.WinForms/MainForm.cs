@@ -1,5 +1,4 @@
 ﻿using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
@@ -351,14 +350,8 @@ namespace CygSoft.CodeCat.UI.WinForms
         {
             if (!WorkItemFormIsOpen(keywordIndexItem))
             {
-                IWorkItemForm workItemForm = null;
                 IFile workItem = application.OpenWorkItem(keywordIndexItem);
-
-                if (keywordIndexItem is ICodeKeywordIndexItem)
-                    workItemForm = new CodeWorkItemForm(workItem, application, imageResources);
-
-                else if (keywordIndexItem is ITopicKeywordIndexItem)
-                    workItemForm = new TopicWorkItemForm(workItem, application, imageResources);
+                IWorkItemForm workItemForm = new TopicWorkItemForm(workItem, application, imageResources);
 
                 if (workItemForm == null)
                     throw new Exception("IContentDocument has not been defined and cannot be opened.");
@@ -382,18 +375,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void CreateWorkItem(WorkItemType workItemType)
         {
-            IWorkItemForm workItemForm = null;
             IFile workItem = application.CreateWorkItem(ConfigSettings.DefaultSyntax, workItemType);
-
-            switch (workItemType)
-            {
-                case WorkItemType.CodeFile:
-                    workItemForm = new CodeWorkItemForm(workItem, application, imageResources, true);
-                    break;
-                case WorkItemType.Topic:
-                    workItemForm = new TopicWorkItemForm(workItem, application, imageResources, true);
-                    break;
-            }
+            IWorkItemForm workItemForm = new TopicWorkItemForm(workItem, application, imageResources, true);
 
             workItemForm.Deleted += workItemForm_DocumentDeleted;
             workItemForm.Saved += workItemForm_DocumentSaved;

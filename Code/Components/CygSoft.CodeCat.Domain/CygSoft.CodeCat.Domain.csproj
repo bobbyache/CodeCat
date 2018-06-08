@@ -46,8 +46,6 @@
     <Compile Include="Base\CategorizedKeywordIndexItem.cs" />
     <Compile Include="Base\CDATAConflictDetectionException.cs" />
     <Compile Include="Base\WorkItemFactory.cs" />
-    <Compile Include="Code\CodeExporter.cs" />
-    <Compile Include="Code\ICodeFile.cs" />
     <Compile Include="LastCodeFileRepository.cs" />
     <Compile Include="Management\IWorkItemExporter.cs" />
     <Compile Include="TopicSections\TopicSectionFactory.cs" />
@@ -61,14 +59,6 @@
     <Compile Include="Topics\TopicKeywordSearchIndexRepository.cs" />
     <Compile Include="Topics\TopicLibrary.cs" />
     <Compile Include="Topics\ITopicKeywordIndexItem.cs" />
-    <Compile Include="Code\CodeKeywordIndexItem.cs" />
-    <Compile Include="Code\CodeKeywordSearchIndexRepository.cs" />
-    <Compile Include="Code\CodeLibrary.cs" />
-    <Compile Include="Code\CodeFile.cs" />
-    <Compile Include="Code\CodeSnapshot.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Code\ICodeKeywordIndexItem.cs" />
     <Compile Include="Management\IndexExportImportData.cs" />
     <Compile Include="Management\ManageableProject.cs" />
     <Compile Include="ProjManFacade.cs" />

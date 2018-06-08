@@ -1,6 +1,4 @@
-﻿using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.Code.Base;
-using CygSoft.CodeCat.Domain.Topics;
+﻿using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -11,13 +9,12 @@ namespace CygSoft.CodeCat.Domain.Management
 {
     public class ManageableProject
     {
-        private CodeLibrary codeLibrary;
         private TopicLibrary codeGroupLibrary;
         private Project project = new Project();
 
         public bool Loaded
         {
-            get { return this.codeLibrary.Loaded && this.codeGroupLibrary.Loaded; }
+            get { return this.codeGroupLibrary.Loaded; }
         }
 
         public string RootFilePath
@@ -27,14 +24,12 @@ namespace CygSoft.CodeCat.Domain.Management
 
         public ManageableProject()
         {
-            this.codeLibrary = new CodeLibrary();
             this.codeGroupLibrary = new TopicLibrary();
         }
 
         public void Open(string filePath, Version currentVersion)
         {
             project.Open(filePath, currentVersion);
-            this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
             this.codeGroupLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
         }
 
@@ -42,7 +37,6 @@ namespace CygSoft.CodeCat.Domain.Management
         {
             List<IKeywordIndexItem> keywordIndexItems = new List<IKeywordIndexItem>();
 
-            keywordIndexItems.AddRange(this.codeLibrary.FindIndeces(commaDelimitedKeywords));
             keywordIndexItems.AddRange(this.codeGroupLibrary.FindIndeces(commaDelimitedKeywords));
 
             return keywordIndexItems.ToArray();
@@ -51,7 +45,6 @@ namespace CygSoft.CodeCat.Domain.Management
         public IndexExportImportData[] GetExportData(IKeywordIndexItem[] indexItems)
         {
             List<IndexExportImportData> indexExportData = new List<IndexExportImportData>();
-            indexExportData.AddRange(this.codeLibrary.GetExportData(indexItems));
             indexExportData.AddRange(this.codeGroupLibrary.GetExportData(indexItems));
 
             return indexExportData.ToArray();
@@ -65,10 +58,9 @@ namespace CygSoft.CodeCat.Domain.Management
             IKeywordIndexItem[] qikItems = new IKeywordIndexItem[0];
             IKeywordIndexItem[] codeGroupItems = new IKeywordIndexItem[0];
 
-            bool existA = this.codeGroupLibrary.ImportIndecesExist(exportData, out codeGroupItems);
-            bool existB = this.codeLibrary.ImportIndecesExist(exportData, out codeItems);
+            bool exist = this.codeGroupLibrary.ImportIndecesExist(exportData, out codeGroupItems);
 
-            if (existA || existB)
+            if (exist)
             {
                 items.AddRange(codeGroupItems);
                 items.AddRange(codeItems);
@@ -86,7 +78,6 @@ namespace CygSoft.CodeCat.Domain.Management
 
         public void ImportData(string sourceIndexFilePath, string destinationIndexFilePath, IndexExportImportData[] exportData, Version currentVersion)
         {
-            IKeywordIndexItem[] codeItems;
             IKeywordIndexItem[] codeGroupItems;
 
             // Use this to "move" items from one project to another:
@@ -94,8 +85,7 @@ namespace CygSoft.CodeCat.Domain.Management
             // ... will this delete the index? probably not...
 
             bool anyExist =
-                this.codeGroupLibrary.ImportIndecesExist(exportData, out codeGroupItems) &&
-                this.codeLibrary.ImportIndecesExist(exportData, out codeItems);
+                this.codeGroupLibrary.ImportIndecesExist(exportData, out codeGroupItems);
 
             if (anyExist)
                 throw new ApplicationException("they exist!");
@@ -103,10 +93,6 @@ namespace CygSoft.CodeCat.Domain.Management
             TopicLibrary codeGroupLibrary = new TopicLibrary();
             codeGroupLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
             codeGroupLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is ITopicKeywordIndexItem).ToArray());
-            
-            CodeLibrary codeLibrary = new CodeLibrary();
-            codeLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
-            codeLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is ICodeKeywordIndexItem).ToArray());
         }
     }
 }

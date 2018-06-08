@@ -1,5 +1,4 @@
 ﻿using CygSoft.CodeCat.DocumentManager.PathGenerators;
-using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 
@@ -9,16 +8,9 @@ namespace CygSoft.CodeCat.Domain.Base
     {
         public static IFile Create(IKeywordIndexItem indexItem, string folderPath)
         {
-            IFile workItem = null;
-            
-            if (indexItem is CodeKeywordIndexItem)
-                workItem = new CodeFile(new DocumentPathGenerator(folderPath, "xml", indexItem.Id), 
-                    indexItem as CodeKeywordIndexItem);
-
-            else if (indexItem is TopicKeywordIndexItem)
-                workItem = new TopicDocument(new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id),  
+            IFile workItem = new TopicDocument(new DocumentIndexPathGenerator(folderPath, "xml", indexItem.Id),
                     indexItem as TopicKeywordIndexItem);
-
+            
             return workItem;
         }
     }

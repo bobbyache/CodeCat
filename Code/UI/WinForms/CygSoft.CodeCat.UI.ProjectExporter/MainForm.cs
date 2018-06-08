@@ -1,5 +1,4 @@
 ﻿using CygSoft.CodeCat.Domain;
-using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
@@ -78,28 +77,14 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
         {
             ListViewItem listItem = new ListViewItem();
 
-            if (item is ICodeKeywordIndexItem)
-            {
-                ICodeKeywordIndexItem codeItem = item as ICodeKeywordIndexItem;
-                listItem.Name = item.Id;
-                listItem.Tag = item;
-                listItem.Text = item.Title;
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, "Snippet"));
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
-                listView.Items.Add(listItem);
-            }
-            else if (item is ITopicKeywordIndexItem)
-            {
-                ITopicKeywordIndexItem codeItem = item as ITopicKeywordIndexItem;
-                listItem.Name = item.Id;
-                listItem.Tag = item;
-                listItem.Text = item.Title;
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, "Code Group"));
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
-                listView.Items.Add(listItem);
-            }
+            ITopicKeywordIndexItem codeItem = item as ITopicKeywordIndexItem;
+            listItem.Name = item.Id;
+            listItem.Tag = item;
+            listItem.Text = item.Title;
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, "Code Group"));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
+            listView.Items.Add(listItem);
 
             if (select)
             {

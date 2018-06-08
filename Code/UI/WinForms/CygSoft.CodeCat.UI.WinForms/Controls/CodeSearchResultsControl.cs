@@ -1,5 +1,4 @@
-﻿using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.Topics;
+﻿using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using System;
@@ -109,14 +108,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
         private IImageOutput GetKeywordIndexItemImage(IKeywordIndexItem item)
         {
-            string imageKey = null;
-
-            if (item is ICodeKeywordIndexItem)
-                imageKey = (item as ICodeKeywordIndexItem).Syntax;
-
-            else if (item is ITopicKeywordIndexItem)
-                imageKey = Resources.ImageResources.TopicSections.CodeGroup;
-
+            string imageKey = Resources.ImageResources.TopicSections.CodeGroup;
             return imageResources.GetKeywordIndexItemImage(imageKey);
         }
 

@@ -1,7 +1,5 @@
 ﻿using CygSoft.CodeCat.Category;
 using CygSoft.CodeCat.Domain.Base;
-using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.Code.Base;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
@@ -16,7 +14,6 @@ namespace CygSoft.CodeCat.Domain
     public class AppFacade : IAppFacade
     {
         private SyntaxRepository syntaxRepository;
-        private CodeLibrary codeLibrary;
         private TopicLibrary topicLibrary;
 
         private Project project = new Project();
@@ -25,7 +22,6 @@ namespace CygSoft.CodeCat.Domain
         public AppFacade(string syntaxFilePath)
         {
             this.syntaxRepository = new SyntaxRepository(syntaxFilePath);
-            this.codeLibrary = new CodeLibrary();
             this.topicLibrary = new TopicLibrary();
         }
 
@@ -66,12 +62,12 @@ namespace CygSoft.CodeCat.Domain
 
         public bool Loaded
         {
-            get { return this.codeLibrary.Loaded && this.topicLibrary.Loaded; }
+            get { return this.topicLibrary.Loaded; }
         }
 
         public int GetIndexCount()
         {
-            return this.codeLibrary.IndexCount + this.topicLibrary.IndexCount;
+            return this.topicLibrary.IndexCount;
         }
 
         public void OpenContextFolder()
@@ -84,7 +80,6 @@ namespace CygSoft.CodeCat.Domain
             project.Open(filePath, currentVersion);
             this.categoryHierarchy.LoadProject(project.CategoryFilePath);
 
-            this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
             this.topicLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
         }
 
@@ -92,14 +87,12 @@ namespace CygSoft.CodeCat.Domain
         {
             project.Create(filePath, currentVersion);
             this.categoryHierarchy.CreateProject(project.CategoryFilePath);
-            this.codeLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
             this.topicLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
         }
 
         public IKeywordIndexItem[] GetLastOpenedIds()
         {
             List<IKeywordIndexItem> lastOpenedItems = new List<IKeywordIndexItem>();
-            lastOpenedItems.AddRange(this.codeLibrary.GetLastOpenedIds());
             lastOpenedItems.AddRange(this.topicLibrary.GetLastOpenedIds());
             return lastOpenedItems.ToArray();
         }
@@ -107,7 +100,6 @@ namespace CygSoft.CodeCat.Domain
         public void SetLastOpenedIds(IKeywordIndexItem[] keywordIndexItems)
         {
             // filter by type rather than just send in a bunch of ids.
-            this.codeLibrary.SetLastOpenedIds(keywordIndexItems.OfType<CodeKeywordIndexItem>().ToArray());
             this.topicLibrary.SetLastOpenedIds(keywordIndexItems.OfType<TopicKeywordIndexItem>().ToArray());
         }
 
@@ -130,7 +122,6 @@ namespace CygSoft.CodeCat.Domain
         {
             List<IKeywordIndexItem> keywordIndexItems = new List<IKeywordIndexItem>();
 
-            keywordIndexItems.AddRange(this.codeLibrary.FindIndeces(commaDelimitedKeywords));
             keywordIndexItems.AddRange(this.topicLibrary.FindIndeces(commaDelimitedKeywords));
 
             return keywordIndexItems.ToArray();
@@ -158,33 +149,25 @@ namespace CygSoft.CodeCat.Domain
 
         public void AddKeywords(IKeywordIndexItem[] indeces, string delimitedKeywordList)
         {
-            CodeKeywordIndexItem[] codeIndeces = indeces.OfType<CodeKeywordIndexItem>().ToArray();
             TopicKeywordIndexItem[] codeGroupIndeces = indeces.OfType<TopicKeywordIndexItem>().ToArray();
-
-            this.codeLibrary.AddKeywords(codeIndeces, delimitedKeywordList);
             this.topicLibrary.AddKeywords(codeGroupIndeces, delimitedKeywordList);
         }
 
         public bool RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidIndeces)
         {
-            CodeKeywordIndexItem[] codeIndeces = indeces.OfType<CodeKeywordIndexItem>().ToArray();
             TopicKeywordIndexItem[] codeGroupIndeces = indeces.OfType<TopicKeywordIndexItem>().ToArray();
 
-            IKeywordIndexItem[] invalidCodeIndeces;
             IKeywordIndexItem[] invalidCodeGroupIndeces;
 
-            bool canRemoveCodeKeywords = codeLibrary.CanRemoveKeywords(codeIndeces, keywords, out invalidCodeIndeces);
             bool canRemoveCodeGroupKeywords = this.topicLibrary.CanRemoveKeywords(codeGroupIndeces, keywords, out invalidCodeGroupIndeces);
 
             List<IKeywordIndexItem> allInvalidIndeces = new List<IKeywordIndexItem>();
-            allInvalidIndeces.AddRange(invalidCodeIndeces);
             allInvalidIndeces.AddRange(invalidCodeGroupIndeces);
 
             invalidIndeces = allInvalidIndeces.ToArray();
 
-            if (canRemoveCodeKeywords && canRemoveCodeGroupKeywords)
+            if (canRemoveCodeGroupKeywords)
             {
-                this.codeLibrary.RemoveKeywords(codeIndeces, keywords);
                 this.topicLibrary.RemoveKeywords(codeGroupIndeces, keywords);
                 return true;
             }
@@ -224,42 +207,18 @@ namespace CygSoft.CodeCat.Domain
 
         public IFile OpenWorkItem(IKeywordIndexItem keywordIndexItem)
         {
-            if (keywordIndexItem is ICodeKeywordIndexItem)
-                return this.codeLibrary.GetWorkItem(keywordIndexItem);
-            else if (keywordIndexItem is ITopicKeywordIndexItem)
-                return this.topicLibrary.GetWorkItem(keywordIndexItem);
-            else
-                return null;
+            return this.topicLibrary.GetWorkItem(keywordIndexItem);
         }
 
         public IFile CreateWorkItem(string syntax, WorkItemType itemType)
         {
-            switch (itemType)
-            {
-                case WorkItemType.CodeFile:
-                    return this.codeLibrary.CreateWorkItem(new CodeKeywordIndexItem("New Code",
-                        syntax, string.Empty));
-                case WorkItemType.Topic:
-                    return this.topicLibrary.CreateWorkItem(new TopicKeywordIndexItem("New Topic",
-                        syntax, string.Empty));
-                default:
-                    return null;
-            }
+            return this.topicLibrary.CreateWorkItem(new TopicKeywordIndexItem("New Topic",
+                syntax, string.Empty));
         }
 
         public void DeleteWorkItem(IKeywordIndexItem keywordIndexItem)
         {
-            IFile workItem = null;
-
-            if (keywordIndexItem is ICodeKeywordIndexItem)
-            {
-                workItem = this.codeLibrary.GetWorkItem(keywordIndexItem);
-            }
-            else if (keywordIndexItem is ITopicKeywordIndexItem)
-            {
-                workItem = this.topicLibrary.GetWorkItem(keywordIndexItem);
-            }
-
+            IFile workItem = this.topicLibrary.GetWorkItem(keywordIndexItem);
             workItem.Delete();
         }
 
@@ -309,7 +268,6 @@ namespace CygSoft.CodeCat.Domain
                 string[] itemIds = catItems.Select(r => r.ItemId).ToArray();
 
                 List<IKeywordIndexItem> indexItems = new List<IKeywordIndexItem>();
-                indexItems.AddRange(codeLibrary.FindByIds(itemIds));
                 indexItems.AddRange(topicLibrary.FindByIds(itemIds));
 
                 List<ICategorizedKeywordIndexItem> categoryIndexItems = new List<ICategorizedKeywordIndexItem>();
