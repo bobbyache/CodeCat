@@ -41,8 +41,8 @@ namespace CygSoft.CodeCat.UI.WinForms
 
             this.registrySettings = new RegistrySettings(ConfigSettings.RegistryPath);
             this.application = new AppFacade(ConfigSettings.SyntaxFilePath);
-            
 
+            InitializePlugins();
             InitializeFileIcons();
             InitializeIconImages();
 
@@ -63,6 +63,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             EnableControls();
 
             searchForm.Activate();
+        }
+
+        private void InitializePlugins()
+        {
+            throw new NotImplementedException();
         }
 
         private void InitializeFileIcons()
