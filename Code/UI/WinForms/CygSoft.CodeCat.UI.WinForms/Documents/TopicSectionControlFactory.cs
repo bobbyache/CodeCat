@@ -14,11 +14,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
         {
             ITopicSectionBaseControl topicSectionControl = null;
 
-            if (topicSection is IWebReferencesTopicSection)
-                topicSectionControl = new WebReferencesTopicSectionControl(application, imageResources, workItem as ITopicDocument, topicSection as IWebReferencesTopicSection);
+            //if (topicSection is IWebReferencesTopicSection)
+            //    topicSectionControl = new WebReferencesTopicSectionControl(application, imageResources, workItem as ITopicDocument, topicSection as IWebReferencesTopicSection);
 
-            else
-                return null;
+            //else
+            //    return null;
 
             if (topicSectionControl != null)
                 topicSectionControl.Modified += modifiedEventHandler;

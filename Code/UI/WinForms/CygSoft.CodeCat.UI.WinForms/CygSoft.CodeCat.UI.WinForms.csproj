@@ -106,12 +106,6 @@
     <Compile Include="Controls\RtfEditorControl.designer.cs">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TopicSections\SimpleCodeTopicSectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TopicSections\SimpleCodeTopicSectionControl.Designer.cs">
-      <DependentUpon>SimpleCodeTopicSectionControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\CodeSearchResultsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -227,9 +221,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RtfEditorControl.resx">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\SimpleCodeTopicSectionControl.resx">
-      <DependentUpon>SimpleCodeTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AboutBoxDialog.resx">
       <DependentUpon>AboutBoxDialog.cs</DependentUpon>

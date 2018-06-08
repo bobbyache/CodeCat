@@ -30,10 +30,11 @@ namespace CygSoft.CodeCat.Domain.TopicSections
 
         private static ITopicSection CreateCodeTopicSection(TopicSectionArgs topicSectionArgs)
         {
-            if (topicSectionArgs.Id == null)
-                return new CodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Syntax);
-            else
-                return new CodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description, topicSectionArgs.Syntax);
+            //if (topicSectionArgs.Id == null)
+            //    return new CodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Syntax);
+            //else
+            //    return new CodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description, topicSectionArgs.Syntax);
+            return null;
         }
     }
 }

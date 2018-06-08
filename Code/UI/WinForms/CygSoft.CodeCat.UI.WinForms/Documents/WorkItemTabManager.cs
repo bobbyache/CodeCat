@@ -152,13 +152,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             item.Name = topicSection.Id;
             item.Text = topicSection.Title;
 
-            if (topicSection is ICodeTopicSection)
-                item.Image = imageResources.Get((topicSection as ICodeTopicSection).Syntax).Image;
-            else if (topicSection is IWebReferencesTopicSection)
-                item.Image = imageResources.Get(ImageResources.TopicSections.WebReferences).Image;
-
-            else
-                item.Image = imageResources.Get(ImageResources.TopicSections.Unknown).Image;
+            item.Image = imageResources.Get(ImageResources.TopicSections.Unknown).Image;
 
             item.Click += item_Click;
             this.tabMenuButton.DropDownItems.Add(item);

@@ -51,7 +51,6 @@
     <Compile Include="ICategorizedKeywordIndexItem.cs" />
     <Compile Include="ICategorizedListItem.cs" />
     <Compile Include="ITopicDocument.cs" />
-    <Compile Include="TopicSections\ICodeTopicSection.cs" />
     <Compile Include="IdentityItem.cs" />
     <Compile Include="IDocumentIndexRepository.cs" />
     <Compile Include="IFile.cs" />
@@ -65,7 +64,6 @@
     <Compile Include="TopicSections\ITopicSection.cs" />
     <Compile Include="IVersionableFile.cs" />
     <Compile Include="IVersionedFileRepository.cs" />
-    <Compile Include="TopicSections\IWebReferencesTopicSection.cs" />
     <Compile Include="Keywords\IKeywordIndexItem.cs" />
     <Compile Include="Keywords\IKeywordSearchIndex.cs" />
     <Compile Include="Keywords\IKeywordSearchIndexRepository.cs" />

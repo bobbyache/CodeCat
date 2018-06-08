@@ -79,7 +79,7 @@ namespace CygSoft.CodeCat.Domain.Topics
 
         public ITopicSection GetTopicSection(string id)
         {
-            return this.documentIndex.GetTopicSection(id) as ICodeTopicSection;
+            return this.documentIndex.GetTopicSection(id);
         }
 
 

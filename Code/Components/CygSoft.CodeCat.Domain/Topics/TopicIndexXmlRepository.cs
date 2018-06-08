@@ -70,31 +70,14 @@ namespace CygSoft.CodeCat.Domain.Topics
 
             foreach (ITopicSection topicSection in topicSections)
             {
-                if (topicSection is ICodeTopicSection)
-                {
-                    ICodeTopicSection writableTopicSection = topicSection as ICodeTopicSection;
-
-                    filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", writableTopicSection.Id),
-                        new XAttribute("Title", writableTopicSection.Title),
-                        new XAttribute("DocType", writableTopicSection.DocumentType),
-                        new XAttribute("Description", writableTopicSection.Description == null ? "" : writableTopicSection.Description),
-                        new XAttribute("Ext", writableTopicSection.FileExtension),
-                        new XAttribute("Syntax", writableTopicSection.Syntax),
-                        new XAttribute("Ordinal", writableTopicSection.Ordinal.ToString())
-                        ));
-                }
-                else
-                {
-                    filesElement.Add(new XElement("Document",
-                        new XAttribute("Id", topicSection.Id),
-                        new XAttribute("Title", topicSection.Title),
-                        new XAttribute("DocType", topicSection.DocumentType),
-                        new XAttribute("Description", topicSection.Description == null ? "" : topicSection.Description),
-                        new XAttribute("Ext", topicSection.FileExtension),
-                        new XAttribute("Ordinal", topicSection.Ordinal.ToString())
-                        ));
-                }
+                filesElement.Add(new XElement("Document",
+                    new XAttribute("Id", topicSection.Id),
+                    new XAttribute("Title", topicSection.Title),
+                    new XAttribute("DocType", topicSection.DocumentType),
+                    new XAttribute("Description", topicSection.Description == null ? "" : topicSection.Description),
+                    new XAttribute("Ext", topicSection.FileExtension),
+                    new XAttribute("Ordinal", topicSection.Ordinal.ToString())
+                    ));
             }
 
             indexDocument.Save(this.filePath);
