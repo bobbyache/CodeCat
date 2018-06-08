@@ -83,6 +83,10 @@
       <Project>{afeba5fa-637c-4680-9d19-39b5ddc3843b}</Project>
       <Name>CygSoft.CodeCat.Plugins.TopicSections.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Plugins.WebReferences.Domain\CygSoft.CodeCat.Plugins.WebReferences.Domain.csproj">
+      <Project>{8cf477c3-0faa-496a-a6dc-c2d58363b92c}</Project>
+      <Name>CygSoft.CodeCat.Plugins.WebReferences.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.TopicSectionBase\CygSoft.CodeCat.UI.WinForms.TopicSectionBase.csproj">
       <Project>{3638D6A4-8FCE-4DF2-8D31-DD3AA1DCA126}</Project>
       <Name>CygSoft.CodeCat.UI.WinForms.TopicSectionBase</Name>
