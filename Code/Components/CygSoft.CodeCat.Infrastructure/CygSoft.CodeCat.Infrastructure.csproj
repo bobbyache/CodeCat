@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums.cs" />
     <Compile Include="FileEventArgs.cs" />
     <Compile Include="FileSys.cs" />
     <Compile Include="Graphics\IImageOutput.cs" />

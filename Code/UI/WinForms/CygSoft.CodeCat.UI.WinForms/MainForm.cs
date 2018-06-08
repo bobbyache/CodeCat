@@ -77,7 +77,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             mnuFileOpen.Image = imageResources.GetImage(ImageKeys.OpenProject);
             mnuFileCreateNew.Image = imageResources.GetImage(ImageKeys.NewProject);
             mnuViewWorkItem.Image = imageResources.GetImage(ImageKeys.EditSnippet);
-            mnuAddCodeItem.Image = imageResources.GetImage(ImageKeys.AddSnippet);
             mnuAddTopic.Image = imageResources.Get(ImageResources.TopicSections.CodeGroup).Image;
             mnuWindowKeywordSearch.Image = imageResources.GetImage(ImageKeys.FindSnippets);
             mnuCurrentTasks.Image = imageResources.GetImage(ImageKeys.EditText);
@@ -89,7 +88,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             mnuFileOpen.Click += mnuFileOpen_Click;
             mnuWindowKeywordSearch.Click += mnuWindowKeywordSearch_Click;
             mnuCurrentTasks.Click += mnuCurrentTasks_Click;
-            mnuAddCodeItem.Click += mnuAddCodeFile_Click;
             mnuAddTopic.Click += mnuAddTopic_Click;
             mnuViewWorkItem.Click += mnuWorkItemView_Click;
             mnuGenerators.Click += MnuGenerators_Click;
@@ -370,12 +368,12 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void CreateWorkItemFormIfNone()
         {
             if (!this.dockPanel.Contents.OfType<IWorkItemForm>().Any())
-                CreateWorkItem(WorkItemType.CodeFile);
+                CreateWorkItem();
         }
 
-        private void CreateWorkItem(WorkItemType workItemType)
+        private void CreateWorkItem()
         {
-            IFile workItem = application.CreateWorkItem(ConfigSettings.DefaultSyntax, workItemType);
+            IFile workItem = application.CreateWorkItem(ConfigSettings.DefaultSyntax);
             IWorkItemForm workItemForm = new TopicWorkItemForm(workItem, application, imageResources, true);
 
             workItemForm.Deleted += workItemForm_DocumentDeleted;
@@ -556,19 +554,9 @@ namespace CygSoft.CodeCat.UI.WinForms
             searchForm.Activate();
         }
 
-        private void mnuAddCodeFile_Click(object sender, EventArgs e)
-        {
-            CreateWorkItem(WorkItemType.CodeFile);
-        }
-
-        private void mnuAddQikGenerator_Click(object sender, EventArgs e)
-        {
-            CreateWorkItem(WorkItemType.QikGenerator);
-        }
-
         private void mnuAddTopic_Click(object sender, EventArgs e)
         {
-            CreateWorkItem(WorkItemType.Topic);
+            CreateWorkItem();
         }
 
         private void mnuWorkItemView_Click(object sender, EventArgs e)

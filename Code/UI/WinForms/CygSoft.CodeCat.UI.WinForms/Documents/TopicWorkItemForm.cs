@@ -160,7 +160,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnMenu.Image = imageResources.GetImage(ImageKeys.GroupMenu);
 
             btnAddHyperlinks.Image = imageResources.Get(ImageResources.TopicSections.WebReferences).Image;
-            btnAddCode.Image = imageResources.Get(ImageResources.TopicSections.CodeFile).Image;
+
             btnOpenFolder.Image = imageResources.GetImage(ImageKeys.Folder);
 
             this.Icon = imageResources.CodeGroupIcon;
@@ -186,7 +186,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnDelete.Click += btnDelete_Click;
             btnDiscardChange.Click += btnDiscardChange_Click;
 
-            btnAddCode.Click += (s, e) => CreateTopicSection(TopicSectionType.Code);
             btnAddHyperlinks.Click += (s, e) => CreateTopicSection(TopicSectionType.WebReferences);
 
             btnOpenFolder.Click += (s, e) => FileSys.OpenFolder(topicDocument.Folder);

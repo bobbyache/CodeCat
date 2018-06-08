@@ -21,7 +21,7 @@ namespace CygSoft.CodeCat.Infrastructure
         void Create(string filePath, Version currentVersion);
         IItemCategory CreateCategory();
         ITitledEntity CreateCategoryItem(string id, string title);
-        IFile CreateWorkItem(string syntax, WorkItemType itemType);
+        IFile CreateWorkItem(string syntax);
         void DeleteCategoryOrItem(ITitledEntity item);
         void DeleteWorkItem(IKeywordIndexItem keywordIndexItem);
         IKeywordIndexItem[] FindIndeces(string commaDelimitedKeywords);

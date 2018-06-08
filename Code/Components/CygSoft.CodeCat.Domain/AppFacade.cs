@@ -210,7 +210,7 @@ namespace CygSoft.CodeCat.Domain
             return this.topicLibrary.GetWorkItem(keywordIndexItem);
         }
 
-        public IFile CreateWorkItem(string syntax, WorkItemType itemType)
+        public IFile CreateWorkItem(string syntax)
         {
             return this.topicLibrary.CreateWorkItem(new TopicKeywordIndexItem("New Topic",
                 syntax, string.Empty));

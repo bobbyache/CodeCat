@@ -49,8 +49,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.btnMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAddItem = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnAddCode = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAddHyperlinks = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnRemoveCodeItem = new System.Windows.Forms.ToolStripButton();
@@ -214,8 +212,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             // btnAddItem
             // 
             this.btnAddItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAddCode,
-            this.toolStripMenuItem1,
             this.btnAddHyperlinks,
             this.toolStripMenuItem2});
             this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
@@ -224,27 +220,16 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.btnAddItem.Size = new System.Drawing.Size(104, 24);
             this.btnAddItem.Text = "Add Section";
             // 
-            // btnAddCode
-            // 
-            this.btnAddCode.Name = "btnAddCode";
-            this.btnAddCode.Size = new System.Drawing.Size(199, 22);
-            this.btnAddCode.Text = "Single Code Snippet";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(196, 6);
-            // 
             // btnAddHyperlinks
             // 
             this.btnAddHyperlinks.Name = "btnAddHyperlinks";
-            this.btnAddHyperlinks.Size = new System.Drawing.Size(199, 22);
+            this.btnAddHyperlinks.Size = new System.Drawing.Size(158, 22);
             this.btnAddHyperlinks.Text = "Web References";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(196, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(155, 6);
             // 
             // btnRemoveCodeItem
             // 
@@ -356,9 +341,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private ToolStripSpringTextBox txtToolStripTitle;
         private System.Windows.Forms.ToolStripDropDownButton btnAddItem;
-        private System.Windows.Forms.ToolStripMenuItem btnAddCode;
         private System.Windows.Forms.ToolStripMenuItem btnAddHyperlinks;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripButton btnOpenFolder;
     }

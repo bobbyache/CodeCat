@@ -56,7 +56,6 @@
             this.mnuSnippets = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuViewWorkItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAddWorkItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAddCodeItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAddTopic = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindowKeywordSearch = new System.Windows.Forms.ToolStripMenuItem();
@@ -169,17 +168,10 @@
             // mnuAddWorkItem
             // 
             this.mnuAddWorkItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuAddCodeItem,
             this.mnuAddTopic});
             this.mnuAddWorkItem.Name = "mnuAddWorkItem";
             this.mnuAddWorkItem.Size = new System.Drawing.Size(192, 22);
             this.mnuAddWorkItem.Text = "Add";
-            // 
-            // mnuAddCodeItem
-            // 
-            this.mnuAddCodeItem.Name = "mnuAddCodeItem";
-            this.mnuAddCodeItem.Size = new System.Drawing.Size(152, 22);
-            this.mnuAddCodeItem.Text = "Code Item";
             // 
             // mnuAddTopic
             // 
@@ -388,7 +380,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem mnuGenerators;
         private System.Windows.Forms.ToolStripMenuItem mnuAddWorkItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuAddCodeItem;
         private System.Windows.Forms.ToolStripMenuItem mnuAddTopic;
     }
 }
