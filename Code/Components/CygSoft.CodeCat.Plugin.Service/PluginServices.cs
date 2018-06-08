@@ -1,3 +1,4 @@
+using CygSoft.CodeCat.Plugin.Infrastructure;
 using System;
 using System.IO;
 using System.Reflection;
@@ -68,7 +69,7 @@ namespace CygSoft.CodeCat.Plugin.Service
 				//Close all plugin instances
 				//We call the plugins Dispose sub first incase it has to do 
 				//Its own cleanup stuff
-				pluginOn.Instance.Dispose(); 
+				pluginOn.Instance.Unload(); 
 				
 				//After we give the plugin a chance to tidy up, get rid of it
 				pluginOn.Instance = null;
@@ -91,7 +92,7 @@ namespace CygSoft.CodeCat.Plugin.Service
 					if (!pluginType.IsAbstract)  //Only look at non-abstract types
 					{
 						//Gets a type object of the interface we need the plugins to match
-						Type typeInterface = pluginType.GetInterface("PluginInterface.IPlugin", true);
+						Type typeInterface = pluginType.GetInterface("CygSoft.CodeCat.Plugin.Infrastructure.IPlugin", true);
 						
 						//Make sure the interface we want to use actually exists
 						if (typeInterface != null)
@@ -109,11 +110,11 @@ namespace CygSoft.CodeCat.Plugin.Service
 							//For now we'll just make an instance of all the plugins
 							newPlugin.Instance = (IPlugin)Activator.CreateInstance(pluginAssembly.GetType(pluginType.ToString()));
 							
-							//Set the Plugin's host to this class which inherited IPluginHost
-							newPlugin.Instance.Host = this;
+							////Set the Plugin's host to this class which inherited IPluginHost
+							//newPlugin.Instance.Host = this;
 
 							//Call the initialization sub of the plugin
-							newPlugin.Instance.Initialize();
+							newPlugin.Instance.Load();
 							
 							//Add the new plugin to our collection here
 							this.availablePluginsCollection.Add(newPlugin);
