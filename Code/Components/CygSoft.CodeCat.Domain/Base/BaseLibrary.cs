@@ -82,7 +82,7 @@ namespace CygSoft.CodeCat.Domain.Base
 
         public IFile CreateWorkItem(IKeywordIndexItem indexItem)
         {
-            IFile workItem = WorkItemFactory.Create(indexItem, this.FolderPath);
+            IFile workItem = null; // WorkItemFactory.Create(indexItem, this.FolderPath);
             OpenWorkItem(workItem);
 
             return workItem;

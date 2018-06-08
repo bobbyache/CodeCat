@@ -289,9 +289,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void AddTopicSection(ITopicSection topicSection, bool selected)
         {
-            tabManager.AddTab(topicSection,
-                TopicSectionControlFactory.Create(topicSection, imageResources, this.topicDocument, this.application, codeItemCtrl_Modified),
-                true, selected);
+            //tabManager.AddTab(topicSection,
+            //    TopicSectionControlFactory.Create(topicSection, imageResources, this.topicDocument, this.application, codeItemCtrl_Modified),
+            //    true, selected);
         }
 
         #region Document Control Events

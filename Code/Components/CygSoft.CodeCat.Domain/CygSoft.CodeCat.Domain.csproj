@@ -44,8 +44,6 @@
     <Compile Include="AppFacade.cs" />
     <Compile Include="Base\BaseLibrary.cs" />
     <Compile Include="Base\CategorizedKeywordIndexItem.cs" />
-    <Compile Include="Base\CDATAConflictDetectionException.cs" />
-    <Compile Include="Base\WorkItemFactory.cs" />
     <Compile Include="LastCodeFileRepository.cs" />
     <Compile Include="Management\IWorkItemExporter.cs" />
     <Compile Include="Topics\TopicDocument.cs" />

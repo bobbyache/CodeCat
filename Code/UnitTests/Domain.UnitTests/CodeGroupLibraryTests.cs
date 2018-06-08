@@ -35,7 +35,7 @@ namespace Domain.UnitTests
         public void TopicLibrary_OpenWithTopicKeywordIndex_Returns_Topic()
         {
             IKeywordIndexItem indexItem = new TopicKeywordIndexItem();
-            IFile workItem = WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
+            IFile workItem = null; // WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
 
             Assert.That(workItem, Is.Not.Null);
             Assert.That(workItem, Is.TypeOf(typeof(TopicDocument)));

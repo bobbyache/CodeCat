@@ -155,7 +155,6 @@
     <Compile Include="Documents\TopicWorkItemForm.Designer.cs">
       <DependentUpon>TopicWorkItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Documents\TopicSectionControlFactory.cs" />
     <Compile Include="Documents\WorkItemTabEventArgs.cs" />
     <Compile Include="Documents\WorkItemTabManager.cs" />
     <Compile Include="Documents\IWorkItemForm.cs" />

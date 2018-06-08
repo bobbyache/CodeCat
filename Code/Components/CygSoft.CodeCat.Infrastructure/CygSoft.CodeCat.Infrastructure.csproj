@@ -52,7 +52,6 @@
     <Compile Include="ITopicDocument.cs" />
     <Compile Include="IdentityItem.cs" />
     <Compile Include="IDocumentIndexRepository.cs" />
-    <Compile Include="IImageItem.cs" />
     <Compile Include="IItemCategory.cs" />
     <Compile Include="ISyntaxFile.cs" />
     <Compile Include="ITitledEntity.cs" />
