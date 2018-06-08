@@ -105,10 +105,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                     topicDocument.AddTopicSection(TopicSectionType.Code, "Code Snippet", ConfigSettings.DefaultSyntax, "txt");
                     break;
 
-                case TopicSectionType.WebReferences:
-                    topicDocument.AddTopicSection(TopicSectionType.WebReferences, "Web References");
-                    break;
-
                 default:
                     break;
             }
@@ -176,8 +172,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             btnMoveRight.Image = imageResources.GetImage(ImageKeys.MoveRight);
             btnMenu.Image = imageResources.GetImage(ImageKeys.GroupMenu);
 
-            btnAddHyperlinks.Image = imageResources.Get(ImageResources.TopicSections.WebReferences).Image;
-
             btnOpenFolder.Image = imageResources.GetImage(ImageKeys.Folder);
 
             this.Icon = imageResources.CodeGroupIcon;
@@ -202,8 +196,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             txtKeywords.TextChanged += SetModified;
             btnDelete.Click += btnDelete_Click;
             btnDiscardChange.Click += btnDiscardChange_Click;
-
-            btnAddHyperlinks.Click += (s, e) => CreateTopicSection(TopicSectionType.WebReferences);
 
             btnOpenFolder.Click += (s, e) => FileSys.OpenFolder(topicDocument.Folder);
         }

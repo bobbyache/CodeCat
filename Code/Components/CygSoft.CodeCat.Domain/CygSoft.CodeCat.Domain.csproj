@@ -49,8 +49,6 @@
     <Compile Include="LastCodeFileRepository.cs" />
     <Compile Include="Management\IWorkItemExporter.cs" />
     <Compile Include="TopicSections\TopicSectionFactory.cs" />
-    <Compile Include="TopicSections\WebReference\WebReference.cs" />
-    <Compile Include="TopicSections\WebReference\WebReferencesTopicSection.cs" />
     <Compile Include="Topics\TopicDocument.cs" />
     <Compile Include="Topics\TopicExporter.cs" />
     <Compile Include="Topics\TopicIndex.cs" />

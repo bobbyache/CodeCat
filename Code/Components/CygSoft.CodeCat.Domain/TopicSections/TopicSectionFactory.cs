@@ -1,5 +1,4 @@
 ﻿using CygSoft.CodeCat.DocumentManager.TopicSections;
-using CygSoft.CodeCat.Domain.TopicSections.WebReference;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 
 namespace CygSoft.CodeCat.Domain.TopicSections
@@ -26,18 +25,7 @@ namespace CygSoft.CodeCat.Domain.TopicSections
             if (topicSectionArgs.DocumentType == SectionTypes.CODE_TOPIC_SECTION)
                 return CreateCodeTopicSection(topicSectionArgs);
 
-            if (topicSectionArgs.DocumentType == SectionTypes.WEB_REFERENCES_TOPIC_SECTION)
-                return CreateWebReferencesTopicSection(topicSectionArgs);
-
             return null;
-        }
-
-        private static ITopicSection CreateWebReferencesTopicSection(TopicSectionArgs topicSectionArgs)
-        {
-            if (topicSectionArgs.Id == null)
-                return new WebReferencesTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title);
-            else
-                return new WebReferencesTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Ordinal, topicSectionArgs.Description);
         }
 
         private static ITopicSection CreateCodeTopicSection(TopicSectionArgs topicSectionArgs)

@@ -49,8 +49,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.btnMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAddItem = new System.Windows.Forms.ToolStripDropDownButton();
-            this.btnAddHyperlinks = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnRemoveCodeItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveLeft = new System.Windows.Forms.ToolStripButton();
@@ -211,25 +209,11 @@ namespace CygSoft.CodeCat.UI.WinForms
             // 
             // btnAddItem
             // 
-            this.btnAddItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAddHyperlinks,
-            this.toolStripMenuItem2});
             this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
             this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(104, 24);
             this.btnAddItem.Text = "Add Section";
-            // 
-            // btnAddHyperlinks
-            // 
-            this.btnAddHyperlinks.Name = "btnAddHyperlinks";
-            this.btnAddHyperlinks.Size = new System.Drawing.Size(158, 22);
-            this.btnAddHyperlinks.Text = "Web References";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(155, 6);
             // 
             // btnRemoveCodeItem
             // 
@@ -340,8 +324,6 @@ namespace CygSoft.CodeCat.UI.WinForms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private ToolStripSpringTextBox txtToolStripTitle;
         private System.Windows.Forms.ToolStripDropDownButton btnAddItem;
-        private System.Windows.Forms.ToolStripMenuItem btnAddHyperlinks;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripButton btnOpenFolder;
     }
 }
