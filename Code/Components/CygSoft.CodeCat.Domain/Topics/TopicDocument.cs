@@ -1,6 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Base;
 using CygSoft.CodeCat.DocumentManager.PathGenerators;
-using CygSoft.CodeCat.Domain.TopicSections;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System;
@@ -120,10 +119,11 @@ namespace CygSoft.CodeCat.Domain.Topics
             this.documentIndex.MoveUp(topicSection);
         }
 
-        public ITopicSection AddTopicSection(TopicSectionType documentType, string title = "New Document", string syntax = null, string extension = "txt")
+        public ITopicSection AddTopicSection(string title = "New Document", string syntax = null, string extension = "txt")
         {
-            return this.documentIndex.AddTopicSection(TopicSectionFactory.Create(documentType, documentIndex.Folder,
-                title, null, 0, null, extension, syntax));
+            return null;
+            //return this.documentIndex.AddTopicSection(TopicSectionFactory.Create(documentType, documentIndex.Folder,
+            //    title, null, 0, null, extension, syntax));
         }
 
         public void RemoveTopicSection(string id)

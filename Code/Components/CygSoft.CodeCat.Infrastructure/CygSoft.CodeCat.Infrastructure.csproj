@@ -58,7 +58,6 @@
     <Compile Include="IItemCategory.cs" />
     <Compile Include="IPositionedItem.cs" />
     <Compile Include="ISyntaxFile.cs" />
-    <Compile Include="TopicSections\ITextTopicSection.cs" />
     <Compile Include="ITitledEntity.cs" />
     <Compile Include="ITopic.cs" />
     <Compile Include="TopicSections\ITopicSection.cs" />
@@ -73,7 +72,6 @@
     <Compile Include="PositionableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TopicSections\TopicSectionEventArgs.cs" />
-    <Compile Include="TopicSections\TopicSectionType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

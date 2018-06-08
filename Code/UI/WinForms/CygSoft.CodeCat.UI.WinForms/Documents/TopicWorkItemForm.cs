@@ -97,20 +97,20 @@ namespace CygSoft.CodeCat.UI.WinForms
             }
         }
 
-        public void CreateTopicSection(TopicSectionType topicSectionType)
-        {
-            switch (topicSectionType)
-            {
-                case TopicSectionType.Code:
-                    topicDocument.AddTopicSection(TopicSectionType.Code, "Code Snippet", ConfigSettings.DefaultSyntax, "txt");
-                    break;
+        //public void CreateTopicSection(TopicSectionType topicSectionType)
+        //{
+        //    switch (topicSectionType)
+        //    {
+        //        case TopicSectionType.Code:
+        //            topicDocument.AddTopicSection(TopicSectionType.Code, "Code Snippet", ConfigSettings.DefaultSyntax, "txt");
+        //            break;
 
-                default:
-                    break;
-            }
+        //        default:
+        //            break;
+        //    }
 
-            this.IsModified = true;
-        }
+        //    this.IsModified = true;
+        //}
 
         #endregion
 

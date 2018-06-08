@@ -20,7 +20,7 @@ namespace CygSoft.CodeCat.Infrastructure
         ITopicSection[] TopicSections { get; }
         ITopicSection GetTopicSection(string id);
 
-        ITopicSection AddTopicSection(TopicSectionType documentType, string title = "New Document", string syntax = null, string extension = null);
+        ITopicSection AddTopicSection(string title = "New Document", string syntax = null, string extension = null);
         void RemoveTopicSection(string id);
 
         void MoveTopicSectionLeft(string id);

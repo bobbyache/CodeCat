@@ -58,7 +58,6 @@
     <Compile Include="PositionableListTests.cs" />
     <Compile Include="DocumentIndexPathGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextTopicSectionTests.cs" />
     <Compile Include="TopicSectionTests.cs" />
   </ItemGroup>
   <ItemGroup>

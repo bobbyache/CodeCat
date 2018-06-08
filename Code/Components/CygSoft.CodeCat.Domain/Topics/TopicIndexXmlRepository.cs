@@ -1,6 +1,4 @@
 ﻿using CygSoft.CodeCat.DocumentManager.PathGenerators;
-using CygSoft.CodeCat.DocumentManager.TopicSections;
-using CygSoft.CodeCat.Domain.TopicSections;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using System.Collections.Generic;
@@ -38,7 +36,7 @@ namespace CygSoft.CodeCat.Domain.Topics
                 string documentExt = documentElement.Attribute("Ext") != null ? (string)documentElement.Attribute("Ext") : null;
                 string documentSyntax = documentElement.Attribute("Syntax") != null ? (string)documentElement.Attribute("Syntax") : null;
 
-                templateDocument = TopicSectionFactory.Create(SectionTypes.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
+                //templateDocument = TopicSectionFactory.Create(SectionTypes.GetDocumentType(documentType), this.folder, documentTitle, documentId, documentOrdinal, documentDesc, documentExt, documentSyntax);
 
                 topicSections.Add(templateDocument);
             }
