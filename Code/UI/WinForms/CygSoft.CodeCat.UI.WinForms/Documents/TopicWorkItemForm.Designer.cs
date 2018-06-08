@@ -301,7 +301,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             this.Controls.Add(this.toolstripTitle);
             this.Controls.Add(this.toolstripKeywords);
             this.Controls.Add(this.toolstripCommands);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TopicWorkItemForm";
             this.Text = "TopicDocumentForm";

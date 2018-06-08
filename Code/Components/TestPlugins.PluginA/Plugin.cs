@@ -29,6 +29,14 @@ namespace TestPlugins.PluginA
             }
         }
 
+        public string Title
+        {
+            get
+            {
+                return "Test Plugin A";
+            }
+        }
+
         public string Version
         {
             get

@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
+using CygSoft.CodeCat.Plugin.Service;
 using CygSoft.CodeCat.UI.Resources;
 using CygSoft.CodeCat.UI.WinForms.Docked;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
@@ -25,6 +26,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private CategoryForm categoryForm;
         private PluginsForm pluginsForm;
         private IImageResources imageResources;
+        private PluginServices pluginService;
 
         // need this because we don't want to create a new document when
         // when all documents are closing because we're either creating
@@ -67,7 +69,9 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         private void InitializePlugins()
         {
-            throw new NotImplementedException();
+            pluginService = new PluginServices();
+            //throw new NotImplementedException();
+            pluginService.FindPlugins(Application.StartupPath + @"\Plugins");
         }
 
         private void InitializeFileIcons()
@@ -354,7 +358,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             if (!WorkItemFormIsOpen(keywordIndexItem))
             {
                 IFile workItem = application.OpenWorkItem(keywordIndexItem);
-                IWorkItemForm workItemForm = new TopicWorkItemForm(workItem, application, imageResources);
+                IWorkItemForm workItemForm = new TopicWorkItemForm(pluginService, workItem, application, imageResources);
 
                 if (workItemForm == null)
                     throw new Exception("IContentDocument has not been defined and cannot be opened.");
@@ -379,7 +383,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void CreateWorkItem()
         {
             IFile workItem = application.CreateWorkItem(ConfigSettings.DefaultSyntax);
-            IWorkItemForm workItemForm = new TopicWorkItemForm(workItem, application, imageResources, true);
+            IWorkItemForm workItemForm = new TopicWorkItemForm(pluginService, workItem, application, imageResources, true);
 
             workItemForm.Deleted += workItemForm_DocumentDeleted;
             workItemForm.Saved += workItemForm_DocumentSaved;

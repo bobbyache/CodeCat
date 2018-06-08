@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.Plugin.Service;
 using CygSoft.CodeCat.UI.Resources;
 using CygSoft.CodeCat.UI.WinForms.Controls;
 using CygSoft.CodeCat.UI.WinForms.Documents;
@@ -12,14 +13,20 @@ namespace CygSoft.CodeCat.UI.WinForms
 {
     public partial class TopicWorkItemForm : BaseWorkItemForm, IWorkItemForm
     {
+        private PluginServices pluginService;
         private ITopicDocument topicDocument = null;
         private WorkItemTabManager tabManager = null;
 
         #region Constructors
 
-        public TopicWorkItemForm(IFile workItem, IAppFacade application, IImageResources imageResources, bool isNew = false)
+        public TopicWorkItemForm(PluginServices pluginService, IFile workItem, IAppFacade application, IImageResources imageResources, bool isNew = false)
         {
             InitializeComponent();
+
+            if (pluginService == null)
+                throw new ArgumentNullException("Plugin service must be provided.");
+
+            this.pluginService = pluginService;
 
             if (imageResources == null)
                 throw new ArgumentNullException("Image Repository is a required constructor parameter and cannot be null");
@@ -39,7 +46,8 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.workItem = workItem;
             this.Tag = ((ITitledEntity)workItem).Id;
             this.tabManager = new WorkItemTabManager(this.tabControlFile, this.btnMenu, imageResources);
-  
+
+            CreateSectionMenu();
             RebuildTabs();
             InitializeImages();
             InitializeControls();
@@ -140,6 +148,15 @@ namespace CygSoft.CodeCat.UI.WinForms
         #endregion
 
         #region Private Methods
+
+        private void CreateSectionMenu()
+        {
+            foreach (AvailablePlugin item in pluginService.AvailablePlugins)
+            {
+                ToolStripMenuItem menuItem = new ToolStripMenuItem(item.Instance.Title);
+                btnAddItem.DropDownItems.Add(menuItem);
+            }
+        }
 
         private void SetModified(object sender, EventArgs e)
         {

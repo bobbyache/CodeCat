@@ -14,6 +14,7 @@ namespace CygSoft.CodeCat.Plugin.Infrastructure
 	public interface IPlugin
 	{
 		string Name {get;}
+        string Title { get; }
 		string Description {get;}
 		string Author {get;}
 		string Version {get;}
