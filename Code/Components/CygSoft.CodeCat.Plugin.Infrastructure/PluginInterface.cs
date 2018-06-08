@@ -3,12 +3,8 @@ using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.Plugin.Infrastructure
 {
-    public interface IPluginControl
+    public interface IPluginControl: ITopicSection
     {
-        void Save();
-        void Revert();
-        void Close();
-        void Delete();
     }
 
 	public interface IPlugin
