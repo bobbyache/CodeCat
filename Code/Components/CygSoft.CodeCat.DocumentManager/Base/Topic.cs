@@ -1,5 +1,5 @@
 ﻿using CygSoft.CodeCat.Infrastructure;
-using CygSoft.CodeCat.Infrastructure.TopicSections;
+using CygSoft.CodeCat.Plugin.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;

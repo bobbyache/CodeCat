@@ -90,6 +90,13 @@
     <Compile Include="PluginInterface.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TopicSection\FileEventArgs.cs" />
+    <Compile Include="TopicSection\IFile.cs" />
+    <Compile Include="TopicSection\IPositionedItem.cs" />
+    <Compile Include="TopicSection\ITopicSection.cs" />
+    <Compile Include="TopicSection\NonMatchingOrdinalReferenceException.cs" />
+    <Compile Include="TopicSection\PositionableList.cs" />
+    <Compile Include="TopicSection\TopicSectionEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Plugin.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
 using Moq;
 using NUnit.Framework;

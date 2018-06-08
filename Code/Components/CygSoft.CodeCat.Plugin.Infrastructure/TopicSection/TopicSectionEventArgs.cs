@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CygSoft.CodeCat.Infrastructure.TopicSections
+namespace CygSoft.CodeCat.Plugin.Infrastructure
 {
     public class TopicSectionEventArgs : EventArgs
     {

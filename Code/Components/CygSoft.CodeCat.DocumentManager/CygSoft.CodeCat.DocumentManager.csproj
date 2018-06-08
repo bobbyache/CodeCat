@@ -57,6 +57,14 @@
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Plugin.Infrastructure\CygSoft.CodeCat.Plugin.Infrastructure.csproj">
+      <Project>{00D0C21D-D94C-4B0F-A710-1EFBABB4C4C6}</Project>
+      <Name>CygSoft.CodeCat.Plugin.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.Plugins.TopicSections.Infrastructure\CygSoft.CodeCat.Plugins.TopicSections.Infrastructure.csproj">
+      <Project>{afeba5fa-637c-4680-9d19-39b5ddc3843b}</Project>
+      <Name>CygSoft.CodeCat.Plugins.TopicSections.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="BaseDocManager.cd" />

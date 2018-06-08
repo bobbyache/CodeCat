@@ -1,4 +1,4 @@
-﻿using CygSoft.CodeCat.Infrastructure.TopicSections;
+﻿using CygSoft.CodeCat.Plugin.Infrastructure;
 using System.Collections.Generic;
 
 namespace CygSoft.CodeCat.Infrastructure

@@ -1,6 +1,7 @@
 ﻿using CygSoft.CodeCat.DocumentManager.PathGenerators;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Plugin.Infrastructure;
 
 namespace CygSoft.CodeCat.Domain.Base
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace CygSoft.CodeCat.Infrastructure
+namespace CygSoft.CodeCat.Plugin.Infrastructure
 {
     public sealed class NonMatchingOrdinalReferenceException : ApplicationException, ISerializable
     {

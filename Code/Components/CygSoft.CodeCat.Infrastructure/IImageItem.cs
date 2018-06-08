@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CygSoft.CodeCat.Plugin.Infrastructure;
+using System;
 
 namespace CygSoft.CodeCat.Infrastructure
 {

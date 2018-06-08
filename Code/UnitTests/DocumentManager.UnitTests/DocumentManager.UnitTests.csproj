@@ -69,6 +69,10 @@
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Components\CygSoft.CodeCat.Plugin.Infrastructure\CygSoft.CodeCat.Plugin.Infrastructure.csproj">
+      <Project>{00d0c21d-d94c-4b0f-a710-1efbabb4c4c6}</Project>
+      <Name>CygSoft.CodeCat.Plugin.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

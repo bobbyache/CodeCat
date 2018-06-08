@@ -1,4 +1,5 @@
 ﻿using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Plugin.Infrastructure;
 using System;
 using System.IO;
 

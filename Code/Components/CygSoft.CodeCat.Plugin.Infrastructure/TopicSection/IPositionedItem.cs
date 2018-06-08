@@ -1,4 +1,4 @@
-﻿namespace CygSoft.CodeCat.Infrastructure
+﻿namespace CygSoft.CodeCat.Plugin.Infrastructure
 {
     public interface IPositionedItem
     {

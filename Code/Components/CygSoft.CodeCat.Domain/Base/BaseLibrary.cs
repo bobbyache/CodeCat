@@ -1,5 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain.Management;
 using CygSoft.CodeCat.Infrastructure;
+using CygSoft.CodeCat.Plugin.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;

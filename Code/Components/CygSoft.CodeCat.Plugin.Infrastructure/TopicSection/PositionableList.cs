@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace CygSoft.CodeCat.Infrastructure
+namespace CygSoft.CodeCat.Plugin.Infrastructure
 {
     public class PositionableList<T> where T : class, IPositionedItem
     {

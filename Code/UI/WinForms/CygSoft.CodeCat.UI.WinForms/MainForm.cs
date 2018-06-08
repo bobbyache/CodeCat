@@ -2,6 +2,7 @@
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
+using CygSoft.CodeCat.Plugin.Infrastructure;
 using CygSoft.CodeCat.Plugin.Service;
 using CygSoft.CodeCat.UI.Resources;
 using CygSoft.CodeCat.UI.WinForms.Docked;

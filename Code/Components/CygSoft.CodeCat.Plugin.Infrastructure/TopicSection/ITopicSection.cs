@@ -1,4 +1,5 @@
-﻿namespace CygSoft.CodeCat.Infrastructure.TopicSections
+﻿
+namespace CygSoft.CodeCat.Plugin.Infrastructure
 {
     public interface ITopicSection  : IPositionedItem, IFile
     {
