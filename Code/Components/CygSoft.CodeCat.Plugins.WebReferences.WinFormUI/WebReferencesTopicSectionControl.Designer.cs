@@ -1,4 +1,4 @@
-﻿namespace WebReferencesTopicSectionPlugin
+﻿namespace CygSoft.CodeCat.Plugins.WebReferences.WinFormUI
 {
     partial class WebReferencesTopicSectionControl
     {

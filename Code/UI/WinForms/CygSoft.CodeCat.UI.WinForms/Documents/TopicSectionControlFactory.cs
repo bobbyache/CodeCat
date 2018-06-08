@@ -2,8 +2,8 @@
 using CygSoft.CodeCat.Infrastructure.Graphics;
 using CygSoft.CodeCat.Infrastructure.TopicSections;
 using CygSoft.CodeCat.Plugins.TopicSections.Infrastructure;
+using CygSoft.CodeCat.Plugins.WebReferences.WinFormUI;
 using System;
-using WebReferencesTopicSectionPlugin;
 
 namespace CygSoft.CodeCat.UI.WinForms.Documents
 {

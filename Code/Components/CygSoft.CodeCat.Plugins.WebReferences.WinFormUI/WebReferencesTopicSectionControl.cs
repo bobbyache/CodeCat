@@ -8,7 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace WebReferencesTopicSectionPlugin
+namespace CygSoft.CodeCat.Plugins.WebReferences.WinFormUI
 {
     public partial class WebReferencesTopicSectionControl : BaseTopicSectionControl
     {

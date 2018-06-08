@@ -399,9 +399,9 @@
       <Project>{9C4CD292-113E-40F3-B32E-F8F14A7DA29E}</Project>
       <Name>CygSoft.CodeCat.UI.WinForms.CustomControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Components\WebReferencesTopicSectionPlugin\WebReferencesTopicSectionPlugin.csproj">
+    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Plugins.WebReferences.WinFormUI\CygSoft.CodeCat.Plugins.WebReferences.WinFormUI.csproj">
       <Project>{BA132BB0-EB4D-4310-AA1F-0C3CDD9A5A32}</Project>
-      <Name>WebReferencesTopicSectionPlugin</Name>
+      <Name>CygSoft.CodeCat.Plugins.WebReferences.WinFormUI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
