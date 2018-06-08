@@ -93,7 +93,6 @@
     <Compile Include="TopicSection\FileEventArgs.cs" />
     <Compile Include="TopicSection\IFile.cs" />
     <Compile Include="TopicSection\IPositionedItem.cs" />
-    <Compile Include="TopicSection\ITopicSection.cs" />
     <Compile Include="TopicSection\NonMatchingOrdinalReferenceException.cs" />
     <Compile Include="TopicSection\PositionableList.cs" />
     <Compile Include="TopicSection\TopicSectionEventArgs.cs" />
