@@ -55,6 +55,9 @@
             this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSnippets = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuViewWorkItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAddWorkItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAddCodeItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAddTopic = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWindowKeywordSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCurrentTasks = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,10 +72,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.indexCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.mnuAddWorkItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAddCodeItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAddQikGenerator = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAddTopic = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -160,12 +159,33 @@
             this.mnuSnippets.Size = new System.Drawing.Size(79, 20);
             this.mnuSnippets.Text = "Work Items";
             // 
-            // mnuSnippetsViewModify
+            // mnuViewWorkItem
             // 
-            this.mnuViewWorkItem.Name = "mnuSnippetsViewModify";
+            this.mnuViewWorkItem.Name = "mnuViewWorkItem";
             this.mnuViewWorkItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
             this.mnuViewWorkItem.Size = new System.Drawing.Size(192, 22);
             this.mnuViewWorkItem.Text = "View/Modify...";
+            // 
+            // mnuAddWorkItem
+            // 
+            this.mnuAddWorkItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuAddCodeItem,
+            this.mnuAddTopic});
+            this.mnuAddWorkItem.Name = "mnuAddWorkItem";
+            this.mnuAddWorkItem.Size = new System.Drawing.Size(192, 22);
+            this.mnuAddWorkItem.Text = "Add";
+            // 
+            // mnuAddCodeItem
+            // 
+            this.mnuAddCodeItem.Name = "mnuAddCodeItem";
+            this.mnuAddCodeItem.Size = new System.Drawing.Size(152, 22);
+            this.mnuAddCodeItem.Text = "Code Item";
+            // 
+            // mnuAddTopic
+            // 
+            this.mnuAddTopic.Name = "mnuAddTopic";
+            this.mnuAddTopic.Size = new System.Drawing.Size(152, 22);
+            this.mnuAddTopic.Text = "Topic";
             // 
             // mnuWindow
             // 
@@ -317,34 +337,6 @@
             this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 7;
             // 
-            // mnuAddWorkItem
-            // 
-            this.mnuAddWorkItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuAddCodeItem,
-            this.mnuAddTopic,
-            this.mnuAddQikGenerator});
-            this.mnuAddWorkItem.Name = "mnuAddWorkItem";
-            this.mnuAddWorkItem.Size = new System.Drawing.Size(192, 22);
-            this.mnuAddWorkItem.Text = "Add";
-            // 
-            // mnuAddCodeItem
-            // 
-            this.mnuAddCodeItem.Name = "mnuAddCodeItem";
-            this.mnuAddCodeItem.Size = new System.Drawing.Size(152, 22);
-            this.mnuAddCodeItem.Text = "Code Item";
-            // 
-            // mnuAddQikGenerator
-            // 
-            this.mnuAddQikGenerator.Name = "mnuAddQikGenerator";
-            this.mnuAddQikGenerator.Size = new System.Drawing.Size(152, 22);
-            this.mnuAddQikGenerator.Text = "Qik Generator";
-            // 
-            // mnuAddTopic
-            // 
-            this.mnuAddTopic.Name = "mnuAddTopic";
-            this.mnuAddTopic.Size = new System.Drawing.Size(152, 22);
-            this.mnuAddTopic.Text = "Topic";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -398,7 +390,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuAddWorkItem;
         private System.Windows.Forms.ToolStripMenuItem mnuAddCodeItem;
         private System.Windows.Forms.ToolStripMenuItem mnuAddTopic;
-        private System.Windows.Forms.ToolStripMenuItem mnuAddQikGenerator;
     }
 }
 

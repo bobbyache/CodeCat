@@ -7,8 +7,8 @@
     <ProjectGuid>{BA132BB0-EB4D-4310-AA1F-0C3CDD9A5A32}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebReferencesTopicSectionPlugin</RootNamespace>
-    <AssemblyName>WebReferencesTopicSectionPlugin</AssemblyName>
+    <RootNamespace>CygSoft.CodeCat.Plugins.WebReferences.WinFormUI</RootNamespace>
+    <AssemblyName>CygSoft.CodeCat.Plugins.WebReferences.WinFormUI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

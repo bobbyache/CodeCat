@@ -2,7 +2,6 @@
 using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Code.Base;
-using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
@@ -18,7 +17,6 @@ namespace CygSoft.CodeCat.Domain
     {
         private SyntaxRepository syntaxRepository;
         private CodeLibrary codeLibrary;
-        private QikTemplateLibrary qikLibrary;
         private TopicLibrary topicLibrary;
 
         private Project project = new Project();
@@ -28,7 +26,6 @@ namespace CygSoft.CodeCat.Domain
         {
             this.syntaxRepository = new SyntaxRepository(syntaxFilePath);
             this.codeLibrary = new CodeLibrary();
-            this.qikLibrary = new QikTemplateLibrary();
             this.topicLibrary = new TopicLibrary();
         }
 
@@ -69,12 +66,12 @@ namespace CygSoft.CodeCat.Domain
 
         public bool Loaded
         {
-            get { return this.codeLibrary.Loaded && this.qikLibrary.Loaded && this.topicLibrary.Loaded; }
+            get { return this.codeLibrary.Loaded && this.topicLibrary.Loaded; }
         }
 
         public int GetIndexCount()
         {
-            return this.codeLibrary.IndexCount + this.qikLibrary.IndexCount + this.topicLibrary.IndexCount;
+            return this.codeLibrary.IndexCount + this.topicLibrary.IndexCount;
         }
 
         public void OpenContextFolder()
@@ -88,7 +85,6 @@ namespace CygSoft.CodeCat.Domain
             this.categoryHierarchy.LoadProject(project.CategoryFilePath);
 
             this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
-            this.qikLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
             this.topicLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
         }
 
@@ -97,7 +93,6 @@ namespace CygSoft.CodeCat.Domain
             project.Create(filePath, currentVersion);
             this.categoryHierarchy.CreateProject(project.CategoryFilePath);
             this.codeLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
-            this.qikLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
             this.topicLibrary.Create(Path.GetDirectoryName(filePath), currentVersion);
         }
 
@@ -105,7 +100,6 @@ namespace CygSoft.CodeCat.Domain
         {
             List<IKeywordIndexItem> lastOpenedItems = new List<IKeywordIndexItem>();
             lastOpenedItems.AddRange(this.codeLibrary.GetLastOpenedIds());
-            lastOpenedItems.AddRange(this.qikLibrary.GetLastOpenedIds());
             lastOpenedItems.AddRange(this.topicLibrary.GetLastOpenedIds());
             return lastOpenedItems.ToArray();
         }
@@ -114,7 +108,6 @@ namespace CygSoft.CodeCat.Domain
         {
             // filter by type rather than just send in a bunch of ids.
             this.codeLibrary.SetLastOpenedIds(keywordIndexItems.OfType<CodeKeywordIndexItem>().ToArray());
-            this.qikLibrary.SetLastOpenedIds(keywordIndexItems.OfType<QikTemplateKeywordIndexItem>().ToArray());
             this.topicLibrary.SetLastOpenedIds(keywordIndexItems.OfType<TopicKeywordIndexItem>().ToArray());
         }
 
@@ -138,7 +131,6 @@ namespace CygSoft.CodeCat.Domain
             List<IKeywordIndexItem> keywordIndexItems = new List<IKeywordIndexItem>();
 
             keywordIndexItems.AddRange(this.codeLibrary.FindIndeces(commaDelimitedKeywords));
-            keywordIndexItems.AddRange(this.qikLibrary.FindIndeces(commaDelimitedKeywords));
             keywordIndexItems.AddRange(this.topicLibrary.FindIndeces(commaDelimitedKeywords));
 
             return keywordIndexItems.ToArray();
@@ -167,39 +159,32 @@ namespace CygSoft.CodeCat.Domain
         public void AddKeywords(IKeywordIndexItem[] indeces, string delimitedKeywordList)
         {
             CodeKeywordIndexItem[] codeIndeces = indeces.OfType<CodeKeywordIndexItem>().ToArray();
-            QikTemplateKeywordIndexItem[] qikIndeces = indeces.OfType<QikTemplateKeywordIndexItem>().ToArray();
             TopicKeywordIndexItem[] codeGroupIndeces = indeces.OfType<TopicKeywordIndexItem>().ToArray();
 
             this.codeLibrary.AddKeywords(codeIndeces, delimitedKeywordList);
-            this.qikLibrary.AddKeywords(qikIndeces, delimitedKeywordList);
             this.topicLibrary.AddKeywords(codeGroupIndeces, delimitedKeywordList);
         }
 
         public bool RemoveKeywords(IKeywordIndexItem[] indeces, string[] keywords, out IKeywordIndexItem[] invalidIndeces)
         {
             CodeKeywordIndexItem[] codeIndeces = indeces.OfType<CodeKeywordIndexItem>().ToArray();
-            QikTemplateKeywordIndexItem[] qikIndeces = indeces.OfType<QikTemplateKeywordIndexItem>().ToArray();
             TopicKeywordIndexItem[] codeGroupIndeces = indeces.OfType<TopicKeywordIndexItem>().ToArray();
 
             IKeywordIndexItem[] invalidCodeIndeces;
-            IKeywordIndexItem[] invalidQikIndeces;
             IKeywordIndexItem[] invalidCodeGroupIndeces;
 
             bool canRemoveCodeKeywords = codeLibrary.CanRemoveKeywords(codeIndeces, keywords, out invalidCodeIndeces);
-            bool canRemoveQikKeywords = this.qikLibrary.CanRemoveKeywords(qikIndeces, keywords, out invalidQikIndeces);
             bool canRemoveCodeGroupKeywords = this.topicLibrary.CanRemoveKeywords(codeGroupIndeces, keywords, out invalidCodeGroupIndeces);
 
             List<IKeywordIndexItem> allInvalidIndeces = new List<IKeywordIndexItem>();
             allInvalidIndeces.AddRange(invalidCodeIndeces);
-            allInvalidIndeces.AddRange(invalidQikIndeces);
             allInvalidIndeces.AddRange(invalidCodeGroupIndeces);
 
             invalidIndeces = allInvalidIndeces.ToArray();
 
-            if (canRemoveCodeKeywords && canRemoveQikKeywords && canRemoveCodeGroupKeywords)
+            if (canRemoveCodeKeywords && canRemoveCodeGroupKeywords)
             {
                 this.codeLibrary.RemoveKeywords(codeIndeces, keywords);
-                this.qikLibrary.RemoveKeywords(qikIndeces, keywords);
                 this.topicLibrary.RemoveKeywords(codeGroupIndeces, keywords);
                 return true;
             }
@@ -241,8 +226,6 @@ namespace CygSoft.CodeCat.Domain
         {
             if (keywordIndexItem is ICodeKeywordIndexItem)
                 return this.codeLibrary.GetWorkItem(keywordIndexItem);
-            else if (keywordIndexItem is IQikTemplateKeywordIndexItem)
-                return this.qikLibrary.GetWorkItem(keywordIndexItem);
             else if (keywordIndexItem is ITopicKeywordIndexItem)
                 return this.topicLibrary.GetWorkItem(keywordIndexItem);
             else
@@ -255,9 +238,6 @@ namespace CygSoft.CodeCat.Domain
             {
                 case WorkItemType.CodeFile:
                     return this.codeLibrary.CreateWorkItem(new CodeKeywordIndexItem("New Code",
-                        syntax, string.Empty));
-                case WorkItemType.QikGenerator:
-                    return this.qikLibrary.CreateWorkItem(new QikTemplateKeywordIndexItem("New Qik Template",
                         syntax, string.Empty));
                 case WorkItemType.Topic:
                     return this.topicLibrary.CreateWorkItem(new TopicKeywordIndexItem("New Topic",
@@ -274,10 +254,6 @@ namespace CygSoft.CodeCat.Domain
             if (keywordIndexItem is ICodeKeywordIndexItem)
             {
                 workItem = this.codeLibrary.GetWorkItem(keywordIndexItem);
-            }
-            else if (keywordIndexItem is IQikTemplateKeywordIndexItem)
-            {
-                workItem = this.qikLibrary.GetWorkItem(keywordIndexItem);
             }
             else if (keywordIndexItem is ITopicKeywordIndexItem)
             {
@@ -334,7 +310,6 @@ namespace CygSoft.CodeCat.Domain
 
                 List<IKeywordIndexItem> indexItems = new List<IKeywordIndexItem>();
                 indexItems.AddRange(codeLibrary.FindByIds(itemIds));
-                indexItems.AddRange(qikLibrary.FindByIds(itemIds));
                 indexItems.AddRange(topicLibrary.FindByIds(itemIds));
 
                 List<ICategorizedKeywordIndexItem> categoryIndexItems = new List<ICategorizedKeywordIndexItem>();

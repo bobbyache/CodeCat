@@ -97,26 +97,8 @@
     <Compile Include="Controls\SyntaxComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\InputPropertyGrid.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\InputPropertyGrid.designer.cs">
-      <DependentUpon>InputPropertyGrid.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ListViewSorter.cs" />
     <Compile Include="Controls\PropertyControlAttribute.cs" />
-    <Compile Include="Controls\QikScriptCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\QikScriptCtrl.Designer.cs">
-      <DependentUpon>QikScriptCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\QikTemplateCodeCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\QikTemplateCodeCtrl.Designer.cs">
-      <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\RichTextboxExtensions.cs" />
     <Compile Include="Controls\RtfEditorControl.cs">
       <SubType>UserControl</SubType>
@@ -189,12 +171,6 @@
     <Compile Include="Documents\WorkItemTabEventArgs.cs" />
     <Compile Include="Documents\WorkItemTabManager.cs" />
     <Compile Include="Documents\IWorkItemForm.cs" />
-    <Compile Include="Documents\QikWorkItemForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Documents\QikWorkItemForm.Designer.cs">
-      <DependentUpon>QikWorkItemForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Settings\ConfigSettings.cs" />
     <Compile Include="Dialogs\EnterKeywordsDialog.cs">
       <SubType>Form</SubType>
@@ -267,15 +243,6 @@
     <EmbeddedResource Include="Controls\CodeSearchResultsControl.resx">
       <DependentUpon>CodeSearchResultsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\InputPropertyGrid.resx">
-      <DependentUpon>InputPropertyGrid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\QikScriptCtrl.resx">
-      <DependentUpon>QikScriptCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\QikTemplateCodeCtrl.resx">
-      <DependentUpon>QikTemplateCodeCtrl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\RtfEditorControl.resx">
       <DependentUpon>RtfEditorControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -308,9 +275,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Documents\TopicWorkItemForm.resx">
       <DependentUpon>TopicWorkItemForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Documents\QikWorkItemForm.resx">
-      <DependentUpon>QikWorkItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -382,10 +346,6 @@
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Plugins.TopicSections.Infrastructure\CygSoft.CodeCat.Plugins.TopicSections.Infrastructure.csproj">
       <Project>{AFEBA5FA-637C-4680-9D19-39B5DDC3843B}</Project>
       <Name>CygSoft.CodeCat.Plugins.TopicSections.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure.csproj">
-      <Project>{E73234B4-5BFA-40AD-B1FD-A35226CA0BB4}</Project>
-      <Name>CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Components\CygSoft.CodeCat.TopicSectionBase\CygSoft.CodeCat.UI.WinForms.TopicSectionBase.csproj">
       <Project>{3638D6A4-8FCE-4DF2-8D31-DD3AA1DCA126}</Project>

@@ -1,5 +1,4 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
@@ -114,9 +113,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls
 
             if (item is ICodeKeywordIndexItem)
                 imageKey = (item as ICodeKeywordIndexItem).Syntax;
-
-            else if (item is IQikTemplateKeywordIndexItem)
-                imageKey = Resources.ImageResources.TopicSections.QikGroup;
 
             else if (item is ITopicKeywordIndexItem)
                 imageKey = Resources.ImageResources.TopicSections.CodeGroup;

@@ -1,6 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Code.Base;
-using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using System;
@@ -13,13 +12,12 @@ namespace CygSoft.CodeCat.Domain.Management
     public class ManageableProject
     {
         private CodeLibrary codeLibrary;
-        private QikTemplateLibrary qikLibrary;
         private TopicLibrary codeGroupLibrary;
         private Project project = new Project();
 
         public bool Loaded
         {
-            get { return this.codeLibrary.Loaded && this.qikLibrary.Loaded && this.codeGroupLibrary.Loaded; }
+            get { return this.codeLibrary.Loaded && this.codeGroupLibrary.Loaded; }
         }
 
         public string RootFilePath
@@ -30,7 +28,6 @@ namespace CygSoft.CodeCat.Domain.Management
         public ManageableProject()
         {
             this.codeLibrary = new CodeLibrary();
-            this.qikLibrary = new QikTemplateLibrary();
             this.codeGroupLibrary = new TopicLibrary();
         }
 
@@ -38,7 +35,6 @@ namespace CygSoft.CodeCat.Domain.Management
         {
             project.Open(filePath, currentVersion);
             this.codeLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
-            this.qikLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
             this.codeGroupLibrary.Open(Path.GetDirectoryName(filePath), currentVersion);
         }
 
@@ -47,7 +43,6 @@ namespace CygSoft.CodeCat.Domain.Management
             List<IKeywordIndexItem> keywordIndexItems = new List<IKeywordIndexItem>();
 
             keywordIndexItems.AddRange(this.codeLibrary.FindIndeces(commaDelimitedKeywords));
-            keywordIndexItems.AddRange(this.qikLibrary.FindIndeces(commaDelimitedKeywords));
             keywordIndexItems.AddRange(this.codeGroupLibrary.FindIndeces(commaDelimitedKeywords));
 
             return keywordIndexItems.ToArray();
@@ -57,7 +52,6 @@ namespace CygSoft.CodeCat.Domain.Management
         {
             List<IndexExportImportData> indexExportData = new List<IndexExportImportData>();
             indexExportData.AddRange(this.codeLibrary.GetExportData(indexItems));
-            indexExportData.AddRange(this.qikLibrary.GetExportData(indexItems));
             indexExportData.AddRange(this.codeGroupLibrary.GetExportData(indexItems));
 
             return indexExportData.ToArray();
@@ -73,9 +67,8 @@ namespace CygSoft.CodeCat.Domain.Management
 
             bool existA = this.codeGroupLibrary.ImportIndecesExist(exportData, out codeGroupItems);
             bool existB = this.codeLibrary.ImportIndecesExist(exportData, out codeItems);
-            bool existC = this.qikLibrary.ImportIndecesExist(exportData, out qikItems);
 
-            if (existA || existB || existC)
+            if (existA || existB)
             {
                 items.AddRange(codeGroupItems);
                 items.AddRange(codeItems);
@@ -94,7 +87,6 @@ namespace CygSoft.CodeCat.Domain.Management
         public void ImportData(string sourceIndexFilePath, string destinationIndexFilePath, IndexExportImportData[] exportData, Version currentVersion)
         {
             IKeywordIndexItem[] codeItems;
-            IKeywordIndexItem[] qikItems;
             IKeywordIndexItem[] codeGroupItems;
 
             // Use this to "move" items from one project to another:
@@ -103,8 +95,7 @@ namespace CygSoft.CodeCat.Domain.Management
 
             bool anyExist =
                 this.codeGroupLibrary.ImportIndecesExist(exportData, out codeGroupItems) &&
-                this.codeLibrary.ImportIndecesExist(exportData, out codeItems) &&
-                this.qikLibrary.ImportIndecesExist(exportData, out qikItems);
+                this.codeLibrary.ImportIndecesExist(exportData, out codeItems);
 
             if (anyExist)
                 throw new ApplicationException("they exist!");
@@ -116,10 +107,6 @@ namespace CygSoft.CodeCat.Domain.Management
             CodeLibrary codeLibrary = new CodeLibrary();
             codeLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
             codeLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is ICodeKeywordIndexItem).ToArray());
-
-            QikTemplateLibrary qikLibrary = new QikTemplateLibrary();
-            qikLibrary.Open(Path.GetDirectoryName(destinationIndexFilePath), currentVersion);
-            qikLibrary.Import(exportData.Where(ex => ex.KeywordIndexItem is IQikTemplateKeywordIndexItem).ToArray());
         }
     }
 }

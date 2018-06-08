@@ -16,6 +16,7 @@ namespace CygSoft.CodeCat.UI.WinForms.TopicSectionBase
 
         public Image GetImage(string key)
         {
+            
             return (Image)resourceManager.GetObject(key);
         }
 

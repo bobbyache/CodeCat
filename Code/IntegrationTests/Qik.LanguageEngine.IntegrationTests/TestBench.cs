@@ -1,6 +1,4 @@
-﻿using CygSoft.CodeCat.Qik.LanguageEngine;
-using CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Qik.LanguageEngine.IntegrationTests.Helpers;
 using System;
 

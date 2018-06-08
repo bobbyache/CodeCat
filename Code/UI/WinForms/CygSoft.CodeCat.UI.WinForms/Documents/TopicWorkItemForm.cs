@@ -39,7 +39,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             base.workItem = workItem;
             this.Tag = ((ITitledEntity)workItem).Id;
             this.tabManager = new WorkItemTabManager(this.tabControlFile, this.btnMenu, imageResources);
-            this.tabManager.BeforeDeleteTab += tabManager_BeforeDeleteTab;
   
             RebuildTabs();
             InitializeImages();
@@ -216,24 +215,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             foreach (ITopicSection topicSection in topicDocument.TopicSections)
             {
                 AddTopicSection(topicSection, false);
-            }
-        }
-
-        #endregion
-
-        #region Tab Manager Events
-
-        private void tabManager_BeforeDeleteTab(object sender, WorkItemTabEventArgs e)
-        {
-            if (e.TabUserControl is QikScriptCtrl)
-            {
-                QikScriptCtrl scriptCtrl = e.TabUserControl as QikScriptCtrl;
-                scriptCtrl.Modified -= scriptCtrl_Modified;
-            }
-            else if (e.TabUserControl is QikTemplateCodeCtrl)
-            {
-                QikTemplateCodeCtrl codeItemCtrl = e.TabUserControl as QikTemplateCodeCtrl;
-                codeItemCtrl.Modified -= codeItemCtrl_Modified;
             }
         }
 

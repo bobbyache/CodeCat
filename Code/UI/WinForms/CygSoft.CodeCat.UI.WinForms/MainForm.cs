@@ -1,6 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Infrastructure.Graphics;
@@ -81,7 +80,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             mnuViewWorkItem.Image = imageResources.GetImage(ImageKeys.EditSnippet);
             mnuAddCodeItem.Image = imageResources.GetImage(ImageKeys.AddSnippet);
             mnuAddTopic.Image = imageResources.Get(ImageResources.TopicSections.CodeGroup).Image;
-            mnuAddQikGenerator.Image = imageResources.Get(ImageResources.TopicSections.QikGroup).Image;
             mnuWindowKeywordSearch.Image = imageResources.GetImage(ImageKeys.FindSnippets);
             mnuCurrentTasks.Image = imageResources.GetImage(ImageKeys.EditText);
             mnuCategories.Image = imageResources.GetImage(ImageKeys.OpenCategory);
@@ -93,7 +91,6 @@ namespace CygSoft.CodeCat.UI.WinForms
             mnuWindowKeywordSearch.Click += mnuWindowKeywordSearch_Click;
             mnuCurrentTasks.Click += mnuCurrentTasks_Click;
             mnuAddCodeItem.Click += mnuAddCodeFile_Click;
-            mnuAddQikGenerator.Click += mnuAddQikGenerator_Click;
             mnuAddTopic.Click += mnuAddTopic_Click;
             mnuViewWorkItem.Click += mnuWorkItemView_Click;
             mnuGenerators.Click += MnuGenerators_Click;
@@ -360,9 +357,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                 if (keywordIndexItem is ICodeKeywordIndexItem)
                     workItemForm = new CodeWorkItemForm(workItem, application, imageResources);
 
-                else if (keywordIndexItem is IQikTemplateKeywordIndexItem)
-                    workItemForm = new QikWorkItemForm(workItem, application, imageResources);
-
                 else if (keywordIndexItem is ITopicKeywordIndexItem)
                     workItemForm = new TopicWorkItemForm(workItem, application, imageResources);
 
@@ -398,9 +392,6 @@ namespace CygSoft.CodeCat.UI.WinForms
                     break;
                 case WorkItemType.Topic:
                     workItemForm = new TopicWorkItemForm(workItem, application, imageResources, true);
-                    break;
-                case WorkItemType.QikGenerator:
-                    workItemForm = new QikWorkItemForm(workItem, application, imageResources, true);
                     break;
             }
 

@@ -1,7 +1,6 @@
 ﻿using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Code;
 using CygSoft.CodeCat.Domain.Management;
-using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using System;
@@ -86,17 +85,6 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
                 listItem.Tag = item;
                 listItem.Text = item.Title;
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, "Snippet"));
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
-                listView.Items.Add(listItem);
-            }
-            else if (item is IQikTemplateKeywordIndexItem)
-            {
-                IQikTemplateKeywordIndexItem codeItem = item as IQikTemplateKeywordIndexItem;
-                listItem.Name = item.Id;
-                listItem.Tag = item;
-                listItem.Text = item.Title;
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, "Qik Template"));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateModified.ToShortDateString()));
                 listView.Items.Add(listItem);

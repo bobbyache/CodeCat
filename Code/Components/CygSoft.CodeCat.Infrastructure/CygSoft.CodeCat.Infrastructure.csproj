@@ -59,7 +59,6 @@
     <Compile Include="IImageItem.cs" />
     <Compile Include="IItemCategory.cs" />
     <Compile Include="IPositionedItem.cs" />
-    <Compile Include="TopicSections\IQikScriptTopicSection.cs" />
     <Compile Include="ISyntaxFile.cs" />
     <Compile Include="TopicSections\ITextTopicSection.cs" />
     <Compile Include="ITitledEntity.cs" />

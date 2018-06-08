@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr4.Runtime.net45, Version=4.3.0.0, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\External\Antlr4.Runtime.net45.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -54,8 +50,6 @@
     <Compile Include="Code\ICodeFile.cs" />
     <Compile Include="LastCodeFileRepository.cs" />
     <Compile Include="Management\IWorkItemExporter.cs" />
-    <Compile Include="Qik\QikTemplateExporter.cs" />
-    <Compile Include="TopicSections\QikScriptTopicSection.cs" />
     <Compile Include="TopicSections\TopicSectionFactory.cs" />
     <Compile Include="TopicSections\WebReference\WebReference.cs" />
     <Compile Include="TopicSections\WebReference\WebReferencesTopicSection.cs" />
@@ -78,14 +72,6 @@
     <Compile Include="Management\IndexExportImportData.cs" />
     <Compile Include="Management\ManageableProject.cs" />
     <Compile Include="ProjManFacade.cs" />
-    <Compile Include="Qik\QikTemplateDocumentIndexXmlRepository.cs" />
-    <Compile Include="Qik\IQikTemplateDocumentSet.cs" />
-    <Compile Include="Qik\IQikTemplateKeywordIndexItem.cs" />
-    <Compile Include="Qik\QikTemplateDocumentIndex.cs" />
-    <Compile Include="Qik\QikTemplateDocumentSet.cs" />
-    <Compile Include="Qik\QikTemplateKeywordIndexItem.cs" />
-    <Compile Include="Qik\QikTemplateKeywordSearchIndexRepository.cs" />
-    <Compile Include="Qik\QikTemplateLibrary.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -102,14 +88,6 @@
       <Project>{8c992a57-bcbf-4b78-9f69-c88a30e39963}</Project>
       <Name>CygSoft.CodeCat.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure\CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure.csproj">
-      <Project>{e73234b4-5bfa-40ad-b1fd-a35226ca0bb4}</Project>
-      <Name>CygSoft.CodeCat.Qik.LanguageEngine.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CygSoft.CodeCat.Qik.LanguageEngine\CygSoft.CodeCat.Qik.LanguageEngine.csproj">
-      <Project>{fade2bf1-6916-457c-9b0c-442227c59e62}</Project>
-      <Name>CygSoft.CodeCat.Qik.LanguageEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CygSoft.CodeCat.SearchIndex\CygSoft.CodeCat.Search.KeywordIndex.csproj">
       <Project>{a75e419a-7df9-466e-8f5a-351310672ce6}</Project>
       <Name>CygSoft.CodeCat.Search.KeywordIndex</Name>
@@ -117,10 +95,6 @@
     <ProjectReference Include="..\CygSoft.CodeCat.Syntax\CygSoft.CodeCat.Syntax.csproj">
       <Project>{ebe3c549-dbdd-4d42-9a59-d0e529041ace}</Project>
       <Name>CygSoft.CodeCat.Syntax</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CygSoft.CodeCat.TaskListing\CygSoft.CodeCat.TaskListing.csproj">
-      <Project>{b89ffbd2-fbb3-40c2-ba43-cc793ac4f841}</Project>
-      <Name>CygSoft.CodeCat.TaskListing</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

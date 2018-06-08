@@ -29,9 +29,6 @@ namespace CygSoft.CodeCat.Domain.TopicSections
             if (topicSectionArgs.DocumentType == SectionTypes.WEB_REFERENCES_TOPIC_SECTION)
                 return CreateWebReferencesTopicSection(topicSectionArgs);
 
-            if (topicSectionArgs.DocumentType == SectionTypes.QIK_SCRIPT_TOPIC_SECTION)
-                return CreateQikScriptTopicSection(topicSectionArgs);
-
             return null;
         }
 
@@ -49,14 +46,6 @@ namespace CygSoft.CodeCat.Domain.TopicSections
                 return new CodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Syntax);
             else
                 return new CodeTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description, topicSectionArgs.Syntax);
-        }
-
-        private static ITopicSection CreateQikScriptTopicSection(TopicSectionArgs topicSectionArgs)
-        {
-            if (topicSectionArgs.Id == null)
-                return new QikScriptTopicSection(topicSectionArgs.Folder, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Syntax);
-            else
-                return new QikScriptTopicSection(topicSectionArgs.Folder, topicSectionArgs.Id, topicSectionArgs.Title, topicSectionArgs.Extension, topicSectionArgs.Ordinal, topicSectionArgs.Description, topicSectionArgs.Syntax);
         }
     }
 }

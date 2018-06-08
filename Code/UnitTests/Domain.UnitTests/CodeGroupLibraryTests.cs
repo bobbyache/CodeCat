@@ -1,6 +1,5 @@
 ﻿using CygSoft.CodeCat.Domain.Base;
 using CygSoft.CodeCat.Domain.Code;
-using CygSoft.CodeCat.Domain.Qik;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Search.KeywordIndex;
@@ -40,16 +39,6 @@ namespace Domain.UnitTests
 
             Assert.That(workItem, Is.Not.Null);
             Assert.That(workItem, Is.TypeOf(typeof(CodeFile)));
-        }
-
-        [Test]
-        public void TopicLibrary_OpenWithQikTemplateKeywordIndex_Returns_QikTemplate()
-        {
-            IKeywordIndexItem indexItem = new QikTemplateKeywordIndexItem();
-            IFile workItem = WorkItemFactory.Create(indexItem, @"C:\TestFolder\");
-
-            Assert.That(workItem, Is.Not.Null);
-            Assert.That(workItem, Is.TypeOf(typeof(QikTemplateDocumentSet)));
         }
 
         [Test]
