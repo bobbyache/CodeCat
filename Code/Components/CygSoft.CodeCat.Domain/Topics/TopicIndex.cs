@@ -14,7 +14,7 @@ namespace CygSoft.CodeCat.Domain.Topics
         {
         }
 
-        protected override List<ITopicSection> LoadTopicSections()
+        protected override List<IPluginControl> LoadTopicSections()
         {
             return base.indexRepository.LoadDocuments();
         }

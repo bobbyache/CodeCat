@@ -16,26 +16,26 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         public string Id { get; private set; }
 
-        protected PositionableList<ITopicSection> topicSections = new PositionableList<ITopicSection>();
-        private List<ITopicSection> removedTopicSections = new List<ITopicSection>();
+        protected PositionableList<IPluginControl> topicSections = new PositionableList<IPluginControl>();
+        private List<IPluginControl> removedTopicSections = new List<IPluginControl>();
         protected IDocumentIndexRepository indexRepository;
 
-        public ITopicSection[] TopicSections
+        public IPluginControl[] TopicSections
         {
             get { return topicSections.ItemsList.ToArray(); }
         }
 
-        public ITopicSection FirstTopicSection
+        public IPluginControl FirstTopicSection
         {
             get { return topicSections.FirstItem; }
         }
 
-        public ITopicSection LastTopicSection
+        public IPluginControl LastTopicSection
         {
             get { return topicSections.LastItem; }
         }
 
-        protected abstract List<ITopicSection> LoadTopicSections();
+        protected abstract List<IPluginControl> LoadTopicSections();
         protected abstract void SaveDocumentIndex();
 
         public Topic(IDocumentIndexRepository indexRepository, BaseFilePathGenerator filePathGenerator) : base(filePathGenerator)
@@ -65,7 +65,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         // IDocumentFile could be of a different type, so it needs to be created
         // elsewhere such as a IDocumentFile factory.
-        public ITopicSection AddTopicSection(ITopicSection topicSection)
+        public IPluginControl AddTopicSection(IPluginControl topicSection)
         {
             this.topicSections.Insert(topicSection);
             AfterAddTopicSection();
@@ -78,7 +78,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         public void RemoveTopicSection(string id)
         {
-            ITopicSection topicSection = this.topicSections.ItemsList.Where(f => f.Id == id).SingleOrDefault();
+            IPluginControl topicSection = this.topicSections.ItemsList.Where(f => f.Id == id).SingleOrDefault();
             removedTopicSections.Add(topicSection);
             topicSections.Remove(topicSection);
             topicSection.Ordinal = -1;
@@ -95,7 +95,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         protected override void OnBeforeRevert()
         {
-            foreach (ITopicSection topicSection in this.TopicSections)
+            foreach (IPluginControl topicSection in this.TopicSections)
                 topicSection.Revert();
         }
 
@@ -104,58 +104,58 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             this.removedTopicSections.Clear();
         }
 
-        public ITopicSection GetTopicSection(string id)
+        public IPluginControl GetTopicSection(string id)
         {
             return this.topicSections.ItemsList.Where(f => f.Id == id).SingleOrDefault();
         }
 
-        public bool CanMoveDown(ITopicSection topicSection)
+        public bool CanMoveDown(IPluginControl topicSection)
         {
             return topicSections.CanMoveDown(topicSection);
         }
 
-        public bool CanMoveTo(ITopicSection topicSection, int ordinal)
+        public bool CanMoveTo(IPluginControl topicSection, int ordinal)
         {
             return topicSections.CanMoveTo(topicSection, ordinal);
         }
 
-        public bool CanMoveUp(ITopicSection topicSection)
+        public bool CanMoveUp(IPluginControl topicSection)
         {
             return topicSections.CanMoveUp(topicSection);
         }
 
-        public virtual void MoveDown(ITopicSection topicSection)
+        public virtual void MoveDown(IPluginControl topicSection)
         {
             topicSections.MoveDown(topicSection);
             TopicSectionMovedDown?.Invoke(this, new TopicSectionEventArgs(topicSection));
         }
 
-        public void MoveTo(ITopicSection topicSection, int ordinal)
+        public void MoveTo(IPluginControl topicSection, int ordinal)
         {
             topicSections.MoveTo(topicSection, ordinal);
         }
 
-        public virtual void MoveUp(ITopicSection topicSection)
+        public virtual void MoveUp(IPluginControl topicSection)
         {
             topicSections.MoveUp(topicSection);
             TopicSectionMovedUp?.Invoke(this, new TopicSectionEventArgs(topicSection));
         }
 
-        public void MoveLast(ITopicSection topicSection)
+        public void MoveLast(IPluginControl topicSection)
         {
             topicSections.MoveLast(topicSection);
         }
 
-        public void MoveFirst(ITopicSection topicSection)
+        public void MoveFirst(IPluginControl topicSection)
         {
             topicSections.MoveFirst(topicSection);
         }
 
         private void OpenTopicSections()
         {
-            List<ITopicSection> topicSections = LoadTopicSections();
+            List<IPluginControl> topicSections = LoadTopicSections();
 
-            foreach (ITopicSection topicSection in topicSections)
+            foreach (IPluginControl topicSection in topicSections)
                 topicSection.Open();
 
             this.topicSections.InitializeList(topicSections);
@@ -163,18 +163,18 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         private void SaveTopicSections()
         {
-            foreach (ITopicSection topicSection in this.TopicSections)
+            foreach (IPluginControl topicSection in this.TopicSections)
                 topicSection.Save();
         }
 
         private void DeleteTopicSections()
         {
-            foreach (ITopicSection topicSection in this.topicSections.ItemsList)
+            foreach (IPluginControl topicSection in this.topicSections.ItemsList)
                 topicSection.Delete();
             
             topicSections.Clear();
 
-            foreach (ITopicSection topicSection in this.removedTopicSections)
+            foreach (IPluginControl topicSection in this.removedTopicSections)
                 topicSection.Delete();
             
             removedTopicSections.Clear();
@@ -182,7 +182,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         private void DeleteRemovedTopicSections()
         {
-            foreach (ITopicSection topicSection in removedTopicSections)
+            foreach (IPluginControl topicSection in removedTopicSections)
                 topicSection.Delete();
             
             removedTopicSections.Clear();

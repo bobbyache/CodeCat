@@ -39,7 +39,7 @@ namespace CygSoft.CodeCat.Domain.Topics
         public string Text { get; set; }
 
         // would like to remove this at some point see... TemplateFiles property below...
-        public ITopicSection[] TopicSections { get { return this.documentIndex.TopicSections.ToArray(); } }
+        public IPluginControl[] TopicSections { get { return this.documentIndex.TopicSections.ToArray(); } }
 
         public string Id { get { return this.IndexItem.Id; } }
 
@@ -76,7 +76,7 @@ namespace CygSoft.CodeCat.Domain.Topics
             return this.documentIndex.TopicSectionExists(id);
         }
 
-        public ITopicSection GetTopicSection(string id)
+        public IPluginControl GetTopicSection(string id)
         {
             return this.documentIndex.GetTopicSection(id);
         }
@@ -109,17 +109,17 @@ namespace CygSoft.CodeCat.Domain.Topics
 
         public void MoveTopicSectionRight(string id)
         {
-            ITopicSection topicSection = this.documentIndex.GetTopicSection(id);
+            IPluginControl topicSection = this.documentIndex.GetTopicSection(id);
             this.documentIndex.MoveDown(topicSection);
         }
 
         public void MoveTopicSectionLeft(string id)
         {
-            ITopicSection topicSection = this.documentIndex.GetTopicSection(id);
+            IPluginControl topicSection = this.documentIndex.GetTopicSection(id);
             this.documentIndex.MoveUp(topicSection);
         }
 
-        public ITopicSection AddTopicSection(string title = "New Document", string syntax = null, string extension = "txt")
+        public IPluginControl AddTopicSection(string title = "New Document", string syntax = null, string extension = "txt")
         {
             return null;
             //return this.documentIndex.AddTopicSection(TopicSectionFactory.Create(documentType, documentIndex.Folder,

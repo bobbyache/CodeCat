@@ -19,14 +19,14 @@ namespace CygSoft.CodeCat.Domain.Topics
             this.folder = Path.GetDirectoryName(indexPathGenerator.FilePath);
         }
 
-        public List<ITopicSection> LoadDocuments()
+        public List<IPluginControl> LoadDocuments()
         {
-            List<ITopicSection> topicSections = new List<ITopicSection>();
+            List<IPluginControl> topicSections = new List<IPluginControl>();
 
             XDocument indexDocument = XDocument.Load(this.filePath);
             foreach (XElement documentElement in indexDocument.Element("CodeGroup").Element("Documents").Elements())
             {
-                ITopicSection templateDocument = null;
+                IPluginControl templateDocument = null;
 
                 string documentId = (string)documentElement.Attribute("Id");
                 string documentTitle = (string)documentElement.Attribute("Title");
@@ -41,10 +41,10 @@ namespace CygSoft.CodeCat.Domain.Topics
                 topicSections.Add(templateDocument);
             }
 
-            return topicSections.OfType<ITopicSection>().ToList();
+            return topicSections.OfType<IPluginControl>().ToList();
         }
 
-        public void WriteDocuments(List<ITopicSection> topicSections)
+        public void WriteDocuments(List<IPluginControl> topicSections)
         {
             if (!Directory.Exists(this.folder))
                 CreateFile();
@@ -60,13 +60,13 @@ namespace CygSoft.CodeCat.Domain.Topics
             xDocument.Save(this.filePath);
         }
 
-        private void WriteFile(List<ITopicSection> topicSections)
+        private void WriteFile(List<IPluginControl> topicSections)
         {
             XDocument indexDocument = XDocument.Load(this.filePath);
             XElement filesElement = indexDocument.Element("CodeGroup").Element("Documents");
             filesElement.RemoveNodes();
 
-            foreach (ITopicSection topicSection in topicSections)
+            foreach (IPluginControl topicSection in topicSections)
             {
                 filesElement.Add(new XElement("Document",
                     new XAttribute("Id", topicSection.Id),

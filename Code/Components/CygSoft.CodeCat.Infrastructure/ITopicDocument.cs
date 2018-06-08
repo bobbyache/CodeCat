@@ -17,10 +17,10 @@ namespace CygSoft.CodeCat.Infrastructure
 
         // don't like this... should not be returning "all" documents.
         // should be treating a collection of Template and a collection of Script.
-        ITopicSection[] TopicSections { get; }
-        ITopicSection GetTopicSection(string id);
+        IPluginControl[] TopicSections { get; }
+        IPluginControl GetTopicSection(string id);
 
-        ITopicSection AddTopicSection(string title = "New Document", string syntax = null, string extension = null);
+        IPluginControl AddTopicSection(string title = "New Document", string syntax = null, string extension = null);
         void RemoveTopicSection(string id);
 
         void MoveTopicSectionLeft(string id);

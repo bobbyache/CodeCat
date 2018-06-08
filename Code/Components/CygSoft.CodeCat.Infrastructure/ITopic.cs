@@ -13,25 +13,25 @@ namespace CygSoft.CodeCat.Infrastructure
         string Id { get; }
 
         // files within the document group
-        ITopicSection[] TopicSections { get; }
+        IPluginControl[] TopicSections { get; }
 
         bool TopicSectionExists(string id);
 
-        ITopicSection AddTopicSection(ITopicSection topicSection); // necessary, because document files could be of different types...
+        IPluginControl AddTopicSection(IPluginControl topicSection); // necessary, because document files could be of different types...
                                                           // need to be created elsewhere like a document factory.
         void RemoveTopicSection(string id);
-        ITopicSection GetTopicSection(string id);
+        IPluginControl GetTopicSection(string id);
 
-        ITopicSection FirstTopicSection { get; }
-        ITopicSection LastTopicSection { get; }
+        IPluginControl FirstTopicSection { get; }
+        IPluginControl LastTopicSection { get; }
 
-        bool CanMoveDown(ITopicSection topicSection);
-        bool CanMoveTo(ITopicSection topicSection, int ordinal);
-        bool CanMoveUp(ITopicSection topicSection);
-        void MoveDown(ITopicSection topicSection);
-        void MoveTo(ITopicSection topicSection, int ordinal);
-        void MoveUp(ITopicSection topicSection);
-        void MoveLast(ITopicSection topicSection);
-        void MoveFirst(ITopicSection topicSection);
+        bool CanMoveDown(IPluginControl topicSection);
+        bool CanMoveTo(IPluginControl topicSection, int ordinal);
+        bool CanMoveUp(IPluginControl topicSection);
+        void MoveDown(IPluginControl topicSection);
+        void MoveTo(IPluginControl topicSection, int ordinal);
+        void MoveUp(IPluginControl topicSection);
+        void MoveLast(IPluginControl topicSection);
+        void MoveFirst(IPluginControl topicSection);
     }
 }

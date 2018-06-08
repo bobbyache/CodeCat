@@ -5,7 +5,7 @@ namespace CygSoft.CodeCat.Infrastructure
 {
     public interface IDocumentIndexRepository
     {
-        List<ITopicSection> LoadDocuments();
-        void WriteDocuments(List<ITopicSection> documents);
+        List<IPluginControl> LoadDocuments();
+        void WriteDocuments(List<IPluginControl> documents);
     }
 }

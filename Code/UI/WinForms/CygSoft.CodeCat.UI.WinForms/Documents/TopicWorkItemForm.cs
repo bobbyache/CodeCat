@@ -218,7 +218,7 @@ namespace CygSoft.CodeCat.UI.WinForms
         private void RebuildTabs()
         {
             tabManager.Clear();
-            foreach (ITopicSection topicSection in topicDocument.TopicSections)
+            foreach (IPluginControl topicSection in topicDocument.TopicSections)
             {
                 AddTopicSection(topicSection, false);
             }
@@ -287,7 +287,7 @@ namespace CygSoft.CodeCat.UI.WinForms
 
         #endregion
 
-        private void AddTopicSection(ITopicSection topicSection, bool selected)
+        private void AddTopicSection(IPluginControl topicSection, bool selected)
         {
             //tabManager.AddTab(topicSection,
             //    TopicSectionControlFactory.Create(topicSection, imageResources, this.topicDocument, this.application, codeItemCtrl_Modified),

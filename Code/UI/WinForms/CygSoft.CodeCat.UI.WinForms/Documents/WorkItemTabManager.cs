@@ -42,17 +42,17 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             return tabPageDictionary[Id].Controls[0] as ITopicSectionBaseControl;
         }
 
-        public void OrderTabs(ITopicSection[] topicSections)
+        public void OrderTabs(IPluginControl[] topicSections)
         {
             tabControl.TabPages.Clear();
-            foreach (ITopicSection topicSection in topicSections)
+            foreach (IPluginControl topicSection in topicSections)
             {
                 TabPage tabPage = tabPageDictionary[topicSection.Id];
                 tabControl.TabPages.Add(tabPage);
             }
         }
 
-        public TabPage AddTab(ITopicSection topicSection, ITopicSectionBaseControl tabUserControl, bool visible = true, bool select = false)
+        public TabPage AddTab(IPluginControl topicSection, ITopicSectionBaseControl tabUserControl, bool visible = true, bool select = false)
         {
             TabPage tabPage = new TabPage(topicSection.Title);
             tabPage.Name = topicSection.Id;
@@ -146,7 +146,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Documents
             this.tabMenuButton.DropDownItems.Add(item);
         }
 
-        private void AddTabMenuItem(ITopicSection topicSection)
+        private void AddTabMenuItem(IPluginControl topicSection)
         {
             ToolStripMenuItem item = new ToolStripMenuItem();
             item.Name = topicSection.Id;
