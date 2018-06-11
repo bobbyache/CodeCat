@@ -1,4 +1,6 @@
-﻿using CygSoft.CodeCat.Domain.Management;
+﻿using CygSoft.CodeCat.DocumentManager.PathGenerators;
+using CygSoft.CodeCat.Domain.Management;
+using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.Infrastructure;
 using CygSoft.CodeCat.Plugin.Infrastructure;
 using System;
@@ -82,7 +84,9 @@ namespace CygSoft.CodeCat.Domain.Base
 
         public IFile CreateWorkItem(IKeywordIndexItem indexItem)
         {
-            IFile workItem = null; // WorkItemFactory.Create(indexItem, this.FolderPath);
+            IFile workItem = new TopicDocument(new DocumentIndexPathGenerator(this.FolderPath, "xml", indexItem.Id), 
+                indexItem as TopicKeywordIndexItem);
+
             OpenWorkItem(workItem);
 
             return workItem;
