@@ -116,7 +116,7 @@ namespace CygSoft.CodeCat.Domain.TopicSections.VersionedCode
 
         public IFileVersion CreateVersion(string description = "")
         {
-            return CreateVersion(DateTime.Now, this.FilePath);
+            return CreateVersion(DateTime.Now, description);
         }
 
         public IFileVersion CreateVersion(DateTime timeStamp, string description = "")
