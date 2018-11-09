@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Domain", "Components\CygSoft.CodeCat.Domain\CygSoft.CodeCat.Domain.csproj", "{7A97514D-BB47-49AA-8785-260F355D6F96}"
 EndProject
@@ -12,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.Infrastructure", "Components\CygSoft.CodeCat.Infrastructure\CygSoft.CodeCat.Infrastructure.csproj", "{8C992A57-BCBF-4B78-9F69-C88A30E39963}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.UI.WinForms", "UI\WinForms\CygSoft.CodeCat.UI.WinForms\CygSoft.CodeCat.UI.WinForms.csproj", "{4FDD2CB6-3FFE-458B-A186-2C57375F4AC0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CygSoft.CodeCat.ProjectConverter", "Components\CygSoft.CodeCat.ProjectConverter\CygSoft.CodeCat.ProjectConverter.csproj", "{C908F626-1812-4119-B551-E14840100203}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Etier.IconHelper", "Components\Etier.IconHelper\Etier.IconHelper.csproj", "{44368ACC-95E7-4BE0-ADE4-ABB8AAE9B9D0}"
 EndProject
@@ -105,10 +103,6 @@ Global
 		{4FDD2CB6-3FFE-458B-A186-2C57375F4AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FDD2CB6-3FFE-458B-A186-2C57375F4AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FDD2CB6-3FFE-458B-A186-2C57375F4AC0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C908F626-1812-4119-B551-E14840100203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C908F626-1812-4119-B551-E14840100203}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C908F626-1812-4119-B551-E14840100203}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C908F626-1812-4119-B551-E14840100203}.Release|Any CPU.Build.0 = Release|Any CPU
 		{44368ACC-95E7-4BE0-ADE4-ABB8AAE9B9D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{44368ACC-95E7-4BE0-ADE4-ABB8AAE9B9D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44368ACC-95E7-4BE0-ADE4-ABB8AAE9B9D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -246,5 +240,8 @@ Global
 		{D60471A8-6FAA-4A0F-A681-A7E779F0C060} = {8C7396E9-AD41-446D-81DE-565D6D3A669D}
 		{E9761572-E46C-40C4-9C6C-387433B2668B} = {8C7396E9-AD41-446D-81DE-565D6D3A669D}
 		{E698F06F-71FC-4184-8EBD-D3524697EB4E} = {A78E1C5A-3EC8-40B0-9CAA-ADFE337FF541}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67512856-9497-4801-9415-6035A356EB41}
 	EndGlobalSection
 EndGlobal

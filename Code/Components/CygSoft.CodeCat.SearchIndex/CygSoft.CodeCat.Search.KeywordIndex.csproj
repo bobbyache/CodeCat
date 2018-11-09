@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="IndexFileFunctions.cs" />
     <Compile Include="IIndexFileFunctions.cs" />
     <Compile Include="InvalidFileIndexVersionException.cs" />
