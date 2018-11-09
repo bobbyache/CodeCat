@@ -218,7 +218,7 @@ namespace CygSoft.CodeCat.UI.WinForms
             try
             {
                 string lastProject = ConfigSettings.LastProject;
-                if (!string.IsNullOrEmpty(lastProject))
+                if (!string.IsNullOrEmpty(lastProject) && File.Exists(lastProject))
                 {
                     OpenProject(lastProject);
                     return true;
