@@ -6,8 +6,8 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine.Antlr
 {
     internal class UserInputVisitor : QikTemplateBaseVisitor<string>
     {
-        private GlobalTable scopeTable;
-        private IErrorReport errorReport;
+        private readonly GlobalTable scopeTable;
+        private readonly IErrorReport errorReport;
 
         internal UserInputVisitor(GlobalTable scopeTable, IErrorReport errorReport)
         {

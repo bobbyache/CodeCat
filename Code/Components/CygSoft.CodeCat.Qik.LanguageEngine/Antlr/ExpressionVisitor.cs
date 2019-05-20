@@ -9,8 +9,8 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine.Antlr
 {
     internal class ExpressionVisitor : QikTemplateBaseVisitor<BaseFunction>
     {
-        private GlobalTable scopeTable;
-        private IErrorReport errorReport;
+        private readonly GlobalTable scopeTable;
+        private readonly IErrorReport errorReport;
 
         internal ExpressionVisitor(GlobalTable scopeTable, IErrorReport errorReport)
         {
@@ -35,7 +35,6 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine.Antlr
             }
             else if (context.optExpr() != null)
             {
-                var expr = context.optExpr();
                 BaseFunction ifFunc = VisitOptExpr(context.optExpr());
 
                 ExpressionSymbol expression = new ExpressionSymbol(errorReport, id, symbolArguments.Title, symbolArguments.Description,

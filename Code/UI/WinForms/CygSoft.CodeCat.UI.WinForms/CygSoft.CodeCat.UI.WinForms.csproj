@@ -708,13 +708,8 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Plugins.SqlExtraction\bin\debug\CygSoft.CodeCat.Plugins.SqlExtraction.dll $(TargetDir)Plugins
-xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Plugins.ManualXess\bin\debug\CygSoft.CodeCat.Plugins.ManualXess.dll $(TargetDir)Plugins
-xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Plugins.XmlFormatter\bin\debug\CygSoft.CodeCat.Plugins.XmlFormatter.dll $(TargetDir)Plugins
- xcopy /y $(SolutionDir)External\LinqBridge.dll $(TargetDir)Plugins
- xcopy /y $(SolutionDir)External\PoorMansTSqlFormatterLib.dll $(TargetDir)Plugins
-xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Qik.LanguageEngine\bin\Debug\Antlr4.Runtime.net45.dll $(TargetDir)
-xcopy /y $(SolutionDir)Components\CygSoft.CodeCat.Qik.LanguageEngine\bin\Debug\Antlr4.Runtime.net45.xml $(TargetDir)</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
