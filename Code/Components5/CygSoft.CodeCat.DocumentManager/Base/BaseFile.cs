@@ -1,6 +1,5 @@
 ﻿using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using System;
-using System.IO;
 
 namespace CygSoft.CodeCat.DocumentManager.Base
 {
@@ -8,15 +7,15 @@ namespace CygSoft.CodeCat.DocumentManager.Base
     {
         public virtual string Folder
         {
-            get { return Path.GetDirectoryName(this.FilePath); }
+            get { return fileRepository.GetDirectory(); }
         }
 
         public virtual bool FolderExists
         {
-            get { return Directory.Exists(Path.GetDirectoryName(this.FilePath)); }
+            get { return fileRepository.DirectoryExists(); }
         }
 
-        public virtual bool Exists { get { return File.Exists(this.FilePath); } }
+        public virtual bool Exists { get { return fileRepository.FileExists(); } }
         public virtual bool Loaded { get; private set; }
 
         public virtual string FilePath { get; protected set; }
@@ -35,13 +34,15 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public event EventHandler<FileEventArgs> BeforeSave;
 
         protected BaseFilePathGenerator filePathGenerator;
+        protected IFileRepository fileRepository;
 
-        public BaseFile(BaseFilePathGenerator filePathGenerator)
+        public BaseFile(IFileRepository fileRepository, BaseFilePathGenerator filePathGenerator)
         {
             this.FileName = filePathGenerator.FileName;
             this.FileExtension = filePathGenerator.FileExtension;
             this.FilePath = filePathGenerator.FilePath;
             this.filePathGenerator = filePathGenerator;
+            this.fileRepository = fileRepository;
         }
 
         protected virtual void OnBeforeDelete() { }
@@ -58,7 +59,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         protected virtual void OnRevert()
         {
-            if (File.Exists(this.FilePath))
+            if (fileRepository.FileExists())
                 OnOpen();
         }
 
@@ -66,8 +67,8 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         protected virtual void OnDelete()
         {
-            if (File.Exists(this.FilePath))
-                File.Delete(this.FilePath);
+            if (fileRepository.FileExists())
+                fileRepository.Delete();
         }
 
         public void Open()

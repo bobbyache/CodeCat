@@ -66,20 +66,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Components\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
-      <Project>{70ba46ba-7055-4e29-96a1-725a30b00b61}</Project>
-      <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Components\CygSoft.CodeCat.DocumentManager\CygSoft.CodeCat.DocumentManager.csproj">
-      <Project>{d3c89aa0-fd50-4d0e-9492-15efd952958a}</Project>
-      <Name>CygSoft.CodeCat.DocumentManager</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">
+      <Project>{70ba46ba-7055-4e29-96a1-725a30b00b61}</Project>
+      <Name>CygSoft.CodeCat.DocumentManager.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CygSoft.CodeCat.DocumentManager\CygSoft.CodeCat.DocumentManager.csproj">
+      <Project>{d3c89aa0-fd50-4d0e-9492-15efd952958a}</Project>
+      <Name>CygSoft.CodeCat.DocumentManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

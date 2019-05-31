@@ -280,13 +280,13 @@ namespace DocumentManager.UnitTests
             public bool OnDeleteCalled = false;
             public bool OnCloseCalled = false;
 
-            public TestTextTopicSection(BaseFilePathGenerator filePathGenerator, string title) : base(filePathGenerator, title)
+            public TestTextTopicSection(BaseFilePathGenerator filePathGenerator, string title) : base(new FileRepository(filePathGenerator), filePathGenerator, title)
             {
 
             }
 
             public TestTextTopicSection(BaseFilePathGenerator filePathGenerator, string title, int ordinal, string description) 
-                : base(filePathGenerator, title, ordinal, description)
+                : base(new FileRepository(filePathGenerator), filePathGenerator, title, ordinal, description)
             {
 
             }

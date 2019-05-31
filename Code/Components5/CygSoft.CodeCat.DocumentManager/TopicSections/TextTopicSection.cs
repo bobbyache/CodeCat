@@ -9,25 +9,25 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
     {
         public string Text { get; set; }
 
-        public TextTopicSection(BaseFilePathGenerator filePathGenerator, string title) : base(filePathGenerator, title, null)
+        public TextTopicSection(IFileRepository fileRepository, BaseFilePathGenerator filePathGenerator, string title) : base(fileRepository, filePathGenerator, title, null)
         {
             this.Text = null;
         }
 
-        public TextTopicSection(BaseFilePathGenerator filePathGenerator, string title, int ordinal, string description)
-            : base(filePathGenerator, title, description, ordinal)
+        public TextTopicSection(IFileRepository fileRepository, BaseFilePathGenerator filePathGenerator, string title, int ordinal, string description)
+            : base(fileRepository, filePathGenerator, title, description, ordinal)
         {
             this.Text = null;
         }
 
         // Only create these documents internally.
-        public TextTopicSection(string folder, string title, string extension) : base(new DocumentPathGenerator(folder, extension), title, null)
+        public TextTopicSection(IFileRepository fileRepository, string folder, string title, string extension) : base(fileRepository, new DocumentPathGenerator(folder, extension), title, null)
         {
             this.Text = null;
         }
 
-        public TextTopicSection(string folder, string id, string title, string extension, int ordinal, string description)
-            : base(new DocumentPathGenerator(folder, extension, id), title, description, ordinal)
+        public TextTopicSection(IFileRepository fileRepository, string folder, string id, string title, string extension, int ordinal, string description)
+            : base(fileRepository, new DocumentPathGenerator(folder, extension, id), title, description, ordinal)
         {
             this.Text = null;
         }

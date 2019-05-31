@@ -10,16 +10,16 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public string Description { get; set; }
         public string DocumentType { get; set; }
 
-        public TopicSection(BaseFilePathGenerator filePathGenerator, string title, string description = null) 
-            : base(filePathGenerator)
+        public TopicSection(IFileRepository fileRepository, BaseFilePathGenerator filePathGenerator, string title, string description = null) 
+            : base(fileRepository, filePathGenerator)
         {
             Ordinal = -1;
             Title = title;
             Description = description;
         }
 
-        public TopicSection(BaseFilePathGenerator filePathGenerator, string title, string description = null, int ordinal = -1) 
-            : base(filePathGenerator)
+        public TopicSection(IFileRepository fileRepository, BaseFilePathGenerator filePathGenerator, string title, string description = null, int ordinal = -1) 
+            : base(fileRepository, filePathGenerator)
         {
             Ordinal = -1;
             Title = title;

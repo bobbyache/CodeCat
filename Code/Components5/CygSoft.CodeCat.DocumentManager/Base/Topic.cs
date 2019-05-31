@@ -37,7 +37,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         protected abstract List<ITopicSection> LoadTopicSections();
         protected abstract void SaveDocumentIndex();
 
-        public Topic(IDocumentIndexRepository indexRepository, BaseFilePathGenerator filePathGenerator) : base(filePathGenerator)
+        public Topic(IDocumentIndexRepository indexRepository, IFileRepository fileRepository,  BaseFilePathGenerator filePathGenerator) : base(fileRepository, filePathGenerator)
         {
             this.indexRepository = indexRepository;
             this.Id = filePathGenerator.Id;

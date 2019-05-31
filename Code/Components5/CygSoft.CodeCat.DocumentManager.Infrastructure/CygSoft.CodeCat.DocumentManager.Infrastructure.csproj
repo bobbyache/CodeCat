@@ -47,6 +47,7 @@
     <Compile Include="FileEventArgs.cs" />
     <Compile Include="ICategorizedListItem.cs" />
     <Compile Include="ICodeTemplateTopicSection.cs" />
+    <Compile Include="IFileRepository.cs" />
     <Compile Include="IVersionableFile.cs" />
     <Compile Include="IVersionedCodeTopicSection.cs" />
     <Compile Include="IVersionedFileRepository.cs" />
