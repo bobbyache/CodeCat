@@ -6,14 +6,15 @@ namespace CygSoft.CodeCat.DocumentManager.TopicSections
     {
         public string Syntax { get; set; }
 
-        public CodeTopicSection(IFileRepository fileRepository, string folder, string title, string extension, string syntax) : base(fileRepository, folder, title, extension)
+        public CodeTopicSection(IFileRepository fileRepository, string title, string syntax) 
+            : base(fileRepository, title)
         {
             this.Syntax = syntax;
             this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.Code);
         }
 
-        public CodeTopicSection(IFileRepository fileRepository, string folder, string id, string title, string extension, int ordinal, string description, string syntax)
-            : base(fileRepository, folder, id, title, extension, ordinal, description)
+        public CodeTopicSection(IFileRepository fileRepository, string title, int ordinal, string description, string syntax)
+            : base(fileRepository, title, ordinal, description)
         {
             this.Syntax = syntax;
             this.DocumentType = SectionTypes.GetDocumentType(TopicSectionType.Code);

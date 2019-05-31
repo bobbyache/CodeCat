@@ -33,15 +33,13 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public event EventHandler<FileEventArgs> BeforeRevert;
         public event EventHandler<FileEventArgs> BeforeSave;
 
-        protected BaseFilePathGenerator filePathGenerator;
         protected IFileRepository fileRepository;
 
-        public BaseFile(IFileRepository fileRepository, BaseFilePathGenerator filePathGenerator)
+        public BaseFile(IFileRepository fileRepository)
         {
-            this.FileName = filePathGenerator.FileName;
-            this.FileExtension = filePathGenerator.FileExtension;
-            this.FilePath = filePathGenerator.FilePath;
-            this.filePathGenerator = filePathGenerator;
+            this.FileName = fileRepository.FileName;
+            this.FileExtension = fileRepository.Extension;
+            this.FilePath = fileRepository.FilePath;
             this.fileRepository = fileRepository;
         }
 

@@ -286,7 +286,7 @@ namespace DocumentManager.UnitTests
         public bool OnCloseCalled = false;
 
         public StubTopicSection(BaseFilePathGenerator filePathGenerator, string title)
-            : base(new FileRepository(filePathGenerator), filePathGenerator, title, "", -1)
+            : base(new FileRepository(filePathGenerator), title, "", -1)
         {
 
         }

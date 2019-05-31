@@ -17,6 +17,8 @@ namespace CygSoft.CodeCat.DocumentManager.Base
             this.filePathGenerator = filePathGenerator;
         }
 
+        public string Id => filePathGenerator.Id;
+
         public bool Loaded { get; private set; }
 
         public string FilePath => filePathGenerator.FilePath;

@@ -13,7 +13,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         public event EventHandler<TopicSectionEventArgs> TopicSectionMovedUp;
         public event EventHandler<TopicSectionEventArgs> TopicSectionMovedDown;
 
-        public string Id { get; private set; }
+        public string Id => fileRepository.Id;
 
         protected PositionableList<ITopicSection> topicSections = new PositionableList<ITopicSection>();
         private List<ITopicSection> removedTopicSections = new List<ITopicSection>();
@@ -37,10 +37,9 @@ namespace CygSoft.CodeCat.DocumentManager.Base
         protected abstract List<ITopicSection> LoadTopicSections();
         protected abstract void SaveDocumentIndex();
 
-        public Topic(IDocumentIndexRepository indexRepository, IFileRepository fileRepository,  BaseFilePathGenerator filePathGenerator) : base(fileRepository, filePathGenerator)
+        public Topic(IDocumentIndexRepository indexRepository, IFileRepository fileRepository) : base(fileRepository)
         {
             this.indexRepository = indexRepository;
-            this.Id = filePathGenerator.Id;
         }
 
         protected override void OnOpen()

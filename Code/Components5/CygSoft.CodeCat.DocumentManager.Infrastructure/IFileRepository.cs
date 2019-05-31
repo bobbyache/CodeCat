@@ -8,6 +8,8 @@ namespace CygSoft.CodeCat.DocumentManager.Infrastructure
 {
     public interface IFileRepository
     {
+        string Id { get; }
+
         bool Loaded { get; }
 
         string FilePath { get; }

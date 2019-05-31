@@ -244,7 +244,7 @@ namespace DocumentManager.UnitTests
             public bool OnBeforeDeleteCalled = false;
             public bool OnCloseCalled = false;
 
-            public TestCodeTopicSection() : base(new FileRepository(new FilePathGenerator(@"C:\TestFolder", "Test Code Section.cs")),  @"C:\TestFolder", "Test Code Section", "cs", "C#") { }
+            public TestCodeTopicSection() : base(new FileRepository(new FilePathGenerator(@"C:\TestFolder", "Test Code Section.cs")),  "Test Code Section", "C#") { }
 
             protected override void OnAfterDelete() { OnAfterDeleteCalled = true; }
             protected override void OnBeforeDelete() { OnBeforeDeleteCalled = true; }
