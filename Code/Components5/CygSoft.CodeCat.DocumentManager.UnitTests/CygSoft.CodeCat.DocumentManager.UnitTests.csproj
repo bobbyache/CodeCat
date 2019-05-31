@@ -63,12 +63,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeTopicSectionTests.cs" />
+    <Compile Include="DocumentPathGeneratorTests.cs" />
+    <Compile Include="FilePathGeneratorTests.cs" />
+    <Compile Include="ImagePagerPathGeneratorTests.cs" />
+    <Compile Include="HelperFuncs.cs" />
+    <Compile Include="ImagePathGeneratorTests.cs" />
     <Compile Include="PositionableListTests.cs" />
     <Compile Include="DocumentIndexPathGeneratorTests.cs" />
     <Compile Include="TestBench.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextTopicSectionTests.cs" />
     <Compile Include="TopicSectionTests.cs" />
+    <Compile Include="VersionPathGeneratorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Components\CygSoft.CodeCat.DocumentManager.Infrastructure\CygSoft.CodeCat.DocumentManager.Infrastructure.csproj">

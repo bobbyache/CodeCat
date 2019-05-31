@@ -10,16 +10,15 @@ using System.Threading.Tasks;
 namespace DocumentManager.UnitTests
 {
     [TestFixture]
-    public class DocumentIndexPathGeneratorTests
+    public class DocumentPathGeneratorTests
     {
         [Test]
         public void FullPathGeneratedCorrectly()
         {
-            DocumentIndexPathGenerator pathGenerator = new DocumentIndexPathGenerator(@"C:\MyRootFolder\SubFolder", "index");
+            DocumentPathGenerator pathGenerator = new DocumentPathGenerator(@"C:\MyRootFolder\DocumentFolder", "index");
             Assert.That(pathGenerator.FileExtension, Is.EqualTo("index"));
             Assert.That(HelperFuncs.FileNameIsGuid(pathGenerator.FileName), Is.True);
-            Assert.That(Path.GetExtension(pathGenerator.FileName), Is.EqualTo(".index"));
-            Assert.That(pathGenerator.FolderPath, Is.EqualTo(Path.Combine(@"C:\MyRootFolder\SubFolder", pathGenerator.Id)));
+            Assert.That(pathGenerator.FolderPath, Is.EqualTo(@"C:\MyRootFolder\DocumentFolder"));
             Assert.That(pathGenerator.FilePath, Is.EqualTo(Path.Combine(pathGenerator.FolderPath, pathGenerator.FileName)));
             Assert.That(pathGenerator.Id, Is.EqualTo(HelperFuncs.GetIdFromFileName(pathGenerator.FilePath)));
         }
@@ -27,13 +26,14 @@ namespace DocumentManager.UnitTests
         [Test]
         public void RelativePathGeneratedCorrectly()
         {
-            DocumentIndexPathGenerator pathGenerator = new DocumentIndexPathGenerator(@"\SubFolder", "index");
+            DocumentPathGenerator pathGenerator = new DocumentPathGenerator(@"\DocumentFolder", "index");
             Assert.That(pathGenerator.FileExtension, Is.EqualTo("index"));
             Assert.That(HelperFuncs.FileNameIsGuid(pathGenerator.FileName), Is.True);
-            Assert.That(Path.GetExtension(pathGenerator.FileName), Is.EqualTo(".index"));
-            Assert.That(pathGenerator.FolderPath, Is.EqualTo(Path.Combine(@"\SubFolder", pathGenerator.Id)));
+            Assert.That(pathGenerator.FolderPath, Is.EqualTo(@"\DocumentFolder"));
             Assert.That(pathGenerator.FilePath, Is.EqualTo(Path.Combine(pathGenerator.FolderPath, pathGenerator.FileName)));
             Assert.That(pathGenerator.Id, Is.EqualTo(HelperFuncs.GetIdFromFileName(pathGenerator.FilePath)));
         }
+
+
     }
 }
