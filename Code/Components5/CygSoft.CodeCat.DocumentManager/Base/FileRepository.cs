@@ -41,7 +41,7 @@ namespace CygSoft.CodeCat.DocumentManager.Base
 
         public void Delete()
         {
-            throw new NotImplementedException();
+            File.Delete(this.FilePath);
         }
 
         public bool DirectoryExists()
