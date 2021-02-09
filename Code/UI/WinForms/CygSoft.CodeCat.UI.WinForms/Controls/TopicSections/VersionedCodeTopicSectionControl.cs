@@ -3,29 +3,17 @@ using CygSoft.CodeCat.Domain;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     public partial class VersionedCodeTopicSectionControl : BaseCodeTopicSectionControl
     {
-        private ToolStripButton btnTakeSnapshot;
-        private ToolStripButton btnDeleteSnapshot;
-
+        private readonly ToolStripButton btnDeleteSnapshot;
         public string TemplateText { get { return this.syntaxDocument.Text; } }
         public string SyntaxFile { get { return application.GetSyntaxFile(base.Syntax); } }
-
-        private IVersionedCodeTopicSection VersionedCodeTopicSection
-        {
-            get { return base.topicSection as IVersionedCodeTopicSection; }
-        }
-
-        public VersionedCodeTopicSectionControl()
-            : this(null, null, null)
-        {
-
-        }
+        private IVersionedCodeTopicSection VersionedCodeTopicSection => base.topicSection as IVersionedCodeTopicSection;
+        public VersionedCodeTopicSectionControl() : this(null, null, null) { }
 
         public VersionedCodeTopicSectionControl(AppFacade application, ITopicDocument topicDocument, IVersionedCodeTopicSection topicSection)
             : base(application, topicDocument, topicSection)
@@ -34,13 +22,12 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
             tabControl.Alignment = TabAlignment.Left;
 
-            btnTakeSnapshot = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add Snapshot", Constants.ImageKeys.AddSnapshot, CreateSnapshot);
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Add Snapshot", Constants.ImageKeys.AddSnapshot, CreateSnapshot);
             btnDeleteSnapshot = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete Snapshot", Constants.ImageKeys.DeleteSnapshot, DeleteSnapshot);
 
             if (topicDocument == null)
                 return;
 
-            //syntaxBox.Document.Text = VersionedCodeTopicSection.Text;
             syntaxDocument.Text = VersionedCodeTopicSection.Text;
             syntaxDocument.SyntaxFile = SyntaxFile;
             snapshotListCtrl1.SyntaxFile = SyntaxFile;
@@ -74,9 +61,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 return;
             }
 
-            // ok to continue...
-            SnapshotDescDialog frm = new SnapshotDescDialog();
-            DialogResult result = frm.ShowDialog(this);
+            var frm = new SnapshotDescDialog();
+            var result = frm.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
@@ -107,20 +93,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
         }
 
-        private void Base_RegisterFieldEvents(object sender, EventArgs e)
-        {
-            syntaxBox.TextChanged += SetModified;
-        }
-
-        private void Base_UnregisterFieldEvents(object sender, EventArgs e)
-        {
-            syntaxBox.TextChanged -= SetModified;
-        }
-
-        private void Base_Reverted(object sender, EventArgs e)
-        {
-            syntaxBox.Document.Text = VersionedCodeTopicSection.Text;
-        }
+        private void Base_RegisterFieldEvents(object sender, EventArgs e) => syntaxBox.TextChanged += SetModified;
+        private void Base_UnregisterFieldEvents(object sender, EventArgs e) => syntaxBox.TextChanged -= SetModified;
+        private void Base_Reverted(object sender, EventArgs e) => syntaxBox.Document.Text = VersionedCodeTopicSection.Text;
 
         private void Base_ContentSaved(object sender, EventArgs e)
         {

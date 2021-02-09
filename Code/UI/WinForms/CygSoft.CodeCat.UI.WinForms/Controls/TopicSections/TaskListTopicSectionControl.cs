@@ -11,11 +11,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     public partial class TaskListTopicSectionControl : BaseTopicSectionControl
     {
-        public TaskListTopicSectionControl()
-        {
-            InitializeComponent();
-        }
-
+        private ITasksTopicSection TaskTopicSection => (ITasksTopicSection)topicSection;
+        public TaskListTopicSectionControl() => InitializeComponent();
         public TaskListTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ITasksTopicSection topicSection) 
             : base(application, topicDocument, topicSection)
         {
@@ -34,14 +31,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             taskListControl1.NewTask += TaskListControl1_NewTask;
             taskListControl1.PriorityChanged += TaskListControl1_PriorityChanged;
         }
-
-        private void TaskListControl1_PriorityChanged(object sender, TaskEventArgs e)
-        {
-            Modify();
-        }
-
-        private ITasksTopicSection TaskTopicSection => (ITasksTopicSection)topicSection;
-
+        private void TaskListControl1_PriorityChanged(object sender, TaskEventArgs e) => Modify();
         private void TaskListControl1_NewTask(object sender, EventArgs e)
         {
             ITask task = TaskTopicSection.CreateTask();
@@ -55,15 +45,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 Modify();
             }
         }
-
         private void TaskListControl1_EditTask(object sender, TaskEventArgs e)
         {
-            ITask task = taskListControl1.SelectedTask;
+            var task = taskListControl1.SelectedTask;
 
             if (task != null)
             {
-                TaskEditDialog dialog = new TaskEditDialog(application, task, application.TaskPriorities);
-                DialogResult result = dialog.ShowDialog(this);
+                var dialog = new TaskEditDialog(application, task, application.TaskPriorities);
+                var result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.Cancel)
                 {
@@ -77,14 +66,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void TaskListControl1_DeleteTasks(object sender, TaskListEventArgs e)
         {
-            ITask[] tasks = e.TaskList;
+            var tasks = e.TaskList;
             TaskTopicSection.DeleteTasks(tasks);
             Modify();
         }
 
-        private void TaskListControl1_CompleteTask(object sender, TaskEventArgs e)
-        {
-            Modify();
-        }
+        private void TaskListControl1_CompleteTask(object sender, TaskEventArgs e) => Modify();
     }
 }

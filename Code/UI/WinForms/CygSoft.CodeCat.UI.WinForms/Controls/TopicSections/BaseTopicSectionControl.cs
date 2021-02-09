@@ -20,20 +20,15 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         protected ITopicDocument topicDocument;
 
         public string Id { get; private set; }
-        public string Title { get { return this.txtTitle.Text; } }
+        public string Title => this.txtTitle.Text;
 
-        public virtual int ImageKey {  get { return IconRepository.Get("TEXT").Index; } }
-        public virtual Icon ImageIcon {  get { return IconRepository.Get("TEXT").Icon; } }
-        public virtual Image IconImage { get { return IconRepository.Get("TEXT").Image; } }
+        public virtual int ImageKey => IconRepository.Get("TEXT").Index;
+        public virtual Icon ImageIcon => IconRepository.Get("TEXT").Icon;
+        public virtual Image IconImage => IconRepository.Get("TEXT").Image;
+        public bool FileExists => topicSection.Exists;
 
         public bool IsModified { get; protected set; }
-        public bool FileExists { get { return topicSection.Exists; } }
-
-        public BaseTopicSectionControl()
-            : this(null, null, null)
-        {
-
-        }
+        public BaseTopicSectionControl() : this(null, null, null) { }
 
         public BaseTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ITopicSection topicSection)
         {
@@ -51,17 +46,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             txtTitle.Text = topicSection.Title;
             this.IsModified = false;
 
-            topicDocument.BeforeSave += topicDocument_BeforeContentSaved;
-            topicDocument.AfterSave += topicDocument_AfterSave;
+            topicDocument.BeforeSave += BeforeContentSaved;
+            topicDocument.AfterSave += AfterSave;
             txtTitle.TextChanged += (s, e) => Modify(forceInvoke: true);
 
             SetChangeStatus();
         }
 
-        public void SetStateImage(Image image)
-        {
-            this.lblEditStatus.Image = image;
-        }
+        public void SetStateImage(Image image) => this.lblEditStatus.Image = image;
 
         public void Modify(bool forceInvoke = false)
         {
@@ -80,15 +72,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             RegisterFieldEvents?.Invoke(this, new EventArgs());
         }
 
-        protected void SetModified(object sender, EventArgs e)
-        {
-            Modify();
-        }
-
-        private ICodeTopicSection CodeTopicSection()
-        {
-            return topicSection as ICodeTopicSection;
-        }
+        protected void SetModified(object sender, EventArgs e) => Modify();
+        private ICodeTopicSection CodeTopicSection() => topicSection as ICodeTopicSection;
 
         private void SetChangeStatus()
         {
@@ -96,13 +81,13 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             lblEditStatus.ForeColor = this.IsModified ? Color.DarkRed : Color.Black;
         }
 
-        private void topicDocument_AfterSave(object sender, FileEventArgs e)
+        private void AfterSave(object sender, FileEventArgs e)
         {
             this.IsModified = false;
             SetChangeStatus();
         }
 
-        private void topicDocument_BeforeContentSaved(object sender, FileEventArgs e)
+        private void BeforeContentSaved(object sender, FileEventArgs e)
         {
             this.topicSection.Title = Title;
             ContentSaved?.Invoke(this, new EventArgs());

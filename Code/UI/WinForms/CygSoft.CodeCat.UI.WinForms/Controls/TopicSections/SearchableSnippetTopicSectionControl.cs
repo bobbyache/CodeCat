@@ -10,25 +10,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     public partial class SearchableSnippetTopicSectionControl : BaseCodeTopicSectionControl
     {
-        private ListViewSorter listViewSorter;
-
-        private ToolStripButton btnEdit;
-        private ToolStripButton btnAdd;
-        private ToolStripButton btnDelete;
-
-        public string SyntaxFile { get { return application.GetSyntaxFile(base.Syntax); } }
-
-        private ISearchableSnippetTopicSection SearchableSnippetTopicSection
-        {
-            get { return base.topicSection as ISearchableSnippetTopicSection; }
-        }
-
-        public SearchableSnippetTopicSectionControl()
-            : this(null, null, null)
-        {
-
-        }
-
+        private readonly ListViewSorter listViewSorter;
+        public string SyntaxFile => application.GetSyntaxFile(base.Syntax);
+        private ISearchableSnippetTopicSection SearchableSnippetTopicSection => base.topicSection as ISearchableSnippetTopicSection;
+        public SearchableSnippetTopicSectionControl() : this(null, null, null) { }
         public SearchableSnippetTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ISearchableSnippetTopicSection topicSection)
             : base(application, topicDocument, topicSection)
         {
@@ -45,9 +30,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
             btnFind.Click += (s, e) => ReloadListview();
 
-            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
-            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
-            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
 
             keywordsTextBox.CurrentTermCommitted += (s, e) => ReloadListview();
             keywordsTextBox.DropDownList = lstAutoComplete;
@@ -59,7 +44,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             mnuNew.Click += (s, e) => Add();
             mnuCopyCode.Click += (s, e) => CopyCodeToClipboard();
             
-            listView.MouseUp += listView_MouseUp;
+            listView.MouseUp += ListView_MouseUp;
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
             listView.SelectedIndexChanged += (s, e) => DisplaySourceCode();
 
@@ -171,30 +156,30 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private ListViewItem CreateListviewItem(ListView listView, ISearchableSnippetKeywordIndexItem item, bool select)
         {
-            ListViewItem listItem = new ListViewItem();
+            var listItem = new ListViewItem
+            {
+                ImageKey = item.Syntax,
+                Name = item.Id,
+                Tag = item,
+                Text = item.Title
+            };
 
-            listItem.ImageKey = item.Syntax;
-            listItem.Name = item.Id;
-            listItem.Tag = item;
-            listItem.Text = item.Title;
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Syntax));
             listView.Items.Add(listItem);
 
             return listItem;
         }
 
-        private void listView_MouseUp(object sender, MouseEventArgs e)
+        private void ListView_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                int cnt = listView.SelectedItems.Count;
-                bool onItem = false;
-                ISearchableSnippetKeywordIndexItem item = null;
+                var cnt = listView.SelectedItems.Count;
+                var onItem = false;
 
                 if (listView.FocusedItem != null)
                 {
                     onItem = listView.FocusedItem.Bounds.Contains(e.Location);
-                    item = listView.FocusedItem.Tag as ISearchableSnippetKeywordIndexItem;
                 }
 
                 mnuEdit.Enabled = cnt == 1 && onItem;
@@ -238,8 +223,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void Base_ContentSaved(object sender, EventArgs e)
         {
-            this.SearchableSnippetTopicSection.Text = string.Empty;
-            this.SearchableSnippetTopicSection.Syntax = Syntax;
+            SearchableSnippetTopicSection.Text = string.Empty;
+            SearchableSnippetTopicSection.Syntax = Syntax;
         }
     }
 }

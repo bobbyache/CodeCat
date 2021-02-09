@@ -14,35 +14,21 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     public partial class FileAttachmentsTopicSectionControl : BaseTopicSectionControl
     {
-        private ListViewSorter listViewSorter;
-
-        private ToolStripButton btnEdit;
-        private ToolStripButton btnAdd;
-        private ToolStripButton btnDelete;
-
-        public override int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.FileAttachments).Index; } }
-        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.FileAttachments).Icon; } }
-        public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.FileAttachments).Image; } }
-
-        private IFileAttachmentsTopicSection FileAttachmentsTopicSection
-        {
-            get { return topicSection as IFileAttachmentsTopicSection; }
-        }
-
-        public FileAttachmentsTopicSectionControl()
-            : this(null, null, null)
-        {
-
-        }
+        private readonly ListViewSorter listViewSorter;
+        public override int ImageKey => IconRepository.Get(IconRepository.TopicSections.FileAttachments).Index;
+        public override Icon ImageIcon => IconRepository.Get(IconRepository.TopicSections.FileAttachments).Icon;
+        public override Image IconImage => IconRepository.Get(IconRepository.TopicSections.FileAttachments).Image;
+        private IFileAttachmentsTopicSection FileAttachmentsTopicSection => topicSection as IFileAttachmentsTopicSection;
+        public FileAttachmentsTopicSectionControl() : this(null, null, null) { }
 
         public FileAttachmentsTopicSectionControl(AppFacade application, ITopicDocument topicDocument, IFileAttachmentsTopicSection topicSection)
             : base(application, topicDocument, topicSection)
         {
             InitializeComponent();
             
-            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
-            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
-            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
 
             listView.SmallImageList = IconRepository.ImageList;
             listViewSorter = new ListViewSorter(this.listView);
@@ -51,7 +37,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             ReloadListview();
 
             listView.ColumnClick += (s, e) => listViewSorter.Sort(e.Column);
-            listView.MouseUp += listView_MouseUp;
+            listView.MouseUp += ListView_MouseUp;
             mnuEdit.Click += (s, e) => Edit();
             mnuDelete.Click += (s, e) => Delete();
             mnuSaveAs.Click += (s, e) => SaveAs();
@@ -62,8 +48,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             try
             {
-                
-                IFileAttachment item = Gui.GroupedListView.SelectedItem<IFileAttachment>(listView);
+                var item = Gui.GroupedListView.SelectedItem<IFileAttachment>(listView);
                 if (item != null)
                     item.Open();
             }
@@ -75,21 +60,22 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void SaveAs()
         {
-            IFileAttachment fileAttachment = Gui.GroupedListView.SelectedItem<IFileAttachment>(listView);
+            var fileAttachment = Gui.GroupedListView.SelectedItem<IFileAttachment>(listView);
 
             if (fileAttachment != null)
             {
-                SaveFileDialog saveDialog = new SaveFileDialog();
-                saveDialog.Filter = string.Format("File *{0} (*{0})|*{0}", fileAttachment.FileExtension);
-                saveDialog.DefaultExt = "*{0}";
-                saveDialog.Title = string.Format("Save File");
-                saveDialog.AddExtension = true;
-                saveDialog.FilterIndex = 0;
-                saveDialog.OverwritePrompt = true;
-                saveDialog.FileName = fileAttachment.FileName;
+                var saveDialog = new SaveFileDialog
+                {
+                    Filter = string.Format("File *{0} (*{0})|*{0}", fileAttachment.FileExtension),
+                    DefaultExt = "*{0}",
+                    Title = string.Format("Save File"),
+                    AddExtension = true,
+                    FilterIndex = 0,
+                    OverwritePrompt = true,
+                    FileName = fileAttachment.FileName
+                };
 
-                DialogResult result = saveDialog.ShowDialog(this);
-                string filePath = saveDialog.FileName;
+                var result = saveDialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
@@ -98,14 +84,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
         }
 
-        private void listView_MouseUp(object sender, MouseEventArgs e)
+        private void ListView_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
                 int cnt = listView.SelectedItems.Count;
                 if (cnt > 0)
                 {
-                    bool onItem = false;
+                    var onItem = false;
                     IFileAttachment item = null;
 
                     if (listView.FocusedItem != null)
@@ -114,7 +100,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                         item = listView.FocusedItem.Tag as IFileAttachment;
                     }
 
-                    bool fileExists = item != null && item.FileExists;
+                    var fileExists = item != null && item.FileExists;
                     mnuOpen.Enabled = cnt == 1 && onItem && item.AllowOpenOrExecute && fileExists;
                     mnuOpenWith.Enabled = false && onItem && item.AllowOpenOrExecute && fileExists;
                     mnuSaveAs.Enabled = cnt == 1 && onItem && fileExists;
@@ -128,8 +114,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private void Add()
         {
-            FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(FileAttachmentsTopicSection);
-            DialogResult result = dialog.ShowDialog(this);
+            var dialog = new FileGroupFileEditDialog(FileAttachmentsTopicSection);
+            var result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
@@ -143,10 +129,10 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             if (listView.SelectedItems.Count == 1)
             {
-                IFileAttachment fileAttachment = Gui.GroupedListView.SelectedItem<IFileAttachment>(listView);
+                var fileAttachment = Gui.GroupedListView.SelectedItem<IFileAttachment>(listView);
 
-                FileGroupFileEditDialog dialog = new FileGroupFileEditDialog(fileAttachment, FileAttachmentsTopicSection);
-                DialogResult result = dialog.ShowDialog(this);
+                var dialog = new FileGroupFileEditDialog(fileAttachment, FileAttachmentsTopicSection);
+                var result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
@@ -160,7 +146,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             if (listView.SelectedItems.Count >= 1)
             {
-                DialogResult result = Gui.Dialogs.DeleteMultipleItemsMessageBox(this, "files");
+                var result = Gui.Dialogs.DeleteMultipleItemsMessageBox(this, "files");
 
                 if (result == DialogResult.Yes)
                 {
@@ -175,13 +161,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 
         private ListViewItem CreateListviewItem(ListView listView, IFileAttachment item, bool select = false)
         {
-            ListViewItem listItem = new ListViewItem();
-
-            listItem.Name = item.Id;
-            listItem.ImageKey = item.FileExtension;
-            listItem.Tag = item;
-            listItem.ToolTipText = item.FileName;
-            listItem.Text = item.Title;
+            var listItem = new ListViewItem
+            {
+                Name = item.Id,
+                ImageKey = item.FileExtension,
+                Tag = item,
+                ToolTipText = item.FileName,
+                Text = item.Title
+            };
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Description));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.FileName));
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.DateCreated.ToShortDateString()));

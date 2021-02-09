@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.Domain.TopicSections.SearchableEventDiary;
 using CygSoft.CodeCat.Domain;
@@ -17,25 +11,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     public partial class SearchableEventTopicSectionControl : BaseTopicSectionControl
     {
-        private ToolStripButton btnEdit;
-        private ToolStripButton btnAdd;
-        private ToolStripButton btnDelete;
-
-        public override int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.EventDiary).Index; } }
-        public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.EventDiary).Icon; } }
-        public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.EventDiary).Image; } }
-
-        private ISearchableEventTopicSection SearchableEventTopicSection
-        {
-            get { return base.topicSection as ISearchableEventTopicSection; }
-        }
-
-        public SearchableEventTopicSectionControl()
-            : this(null, null, null)
-        {
-
-        }
-
+        public override int ImageKey => IconRepository.Get(IconRepository.TopicSections.EventDiary).Index;
+        public override Icon ImageIcon => IconRepository.Get(IconRepository.TopicSections.EventDiary).Icon;
+        public override Image IconImage => IconRepository.Get(IconRepository.TopicSections.EventDiary).Image;
+        private ISearchableEventTopicSection SearchableEventTopicSection => base.topicSection as ISearchableEventTopicSection;
+        public SearchableEventTopicSectionControl() : this(null, null, null) { }
         public SearchableEventTopicSectionControl(AppFacade application, ITopicDocument topicDocument, ISearchableEventTopicSection topicSection)
             : base(application, topicDocument, topicSection)
         {
@@ -53,9 +33,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             btnFind.Image = Gui.Resources.GetImage(Constants.ImageKeys.FindSnippets);
             btnFind.Click += (s, e) => ReloadListview();
 
-            btnDelete = Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
-            btnAdd = Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
-            btnEdit = Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Delete", Constants.ImageKeys.DeleteSnippet, (s, e) => Delete());
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Add", Constants.ImageKeys.AddSnippet, (s, e) => Add());
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Edit", Constants.ImageKeys.EditSnippet, (s, e) => Edit());
 
             keywordsTextBox.CurrentTermCommitted += (s, e) => ReloadListview();
             keywordsTextBox.DropDownList = lstAutoComplete;
@@ -66,7 +46,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             mnuDelete.Click += (s, e) => Delete();
             mnuNew.Click += (s, e) => Add();
 
-            listView.MouseUp += listView_MouseUp;
+            listView.MouseUp += ListView_MouseUp;
             listView.SelectedIndexChanged += (s, e) => DisplayRtf();
 
             Reverted += Base_Reverted;
@@ -77,7 +57,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             if (listView.Items.Count > 0)
                 listView.Items[0].Selected = true;
         }
-
         private void DisplayRtf()
         {
             if (!Gui.GroupedListView.SingleItemSelected<ISearchableEventKeywordIndexItem>(listView))
@@ -93,7 +72,6 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 }
             }
         }
-
         private void Add()
         {
             if (!this.FileExists)
@@ -102,9 +80,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 return;
             }
 
-            ISearchableEventKeywordIndexItem newItem = SearchableEventTopicSection.NewEvent(string.Empty);
-            SearchableEventEditDialog dialog = new SearchableEventEditDialog(application, newItem);
-            DialogResult result = dialog.ShowDialog(this);
+            var newItem = SearchableEventTopicSection.NewEvent(string.Empty);
+            var dialog = new SearchableEventEditDialog(application, newItem);
+            var result = dialog.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
@@ -114,15 +92,14 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 Gui.GroupedListView.Select(listView, dialog.DiaryEvent.Id);
             }
         }
-
         private void Edit()
         {
             if (Gui.GroupedListView.SingleItemSelected<ISearchableEventKeywordIndexItem>(listView))
             {
-                ISearchableEventKeywordIndexItem selectedItem = Gui.GroupedListView.SelectedItem<ISearchableEventKeywordIndexItem>(listView);
+                var selectedItem = Gui.GroupedListView.SelectedItem<ISearchableEventKeywordIndexItem>(listView);
 
-                SearchableEventEditDialog dialog = new SearchableEventEditDialog(application, selectedItem);
-                DialogResult result = dialog.ShowDialog(this);
+                var dialog = new SearchableEventEditDialog(application, selectedItem);
+                var result = dialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                 {
@@ -133,12 +110,11 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 }
             }
         }
-
         private void Delete()
         {
             if (Gui.GroupedListView.ItemsSelected<ISearchableEventKeywordIndexItem>(listView))
             {
-                DialogResult result = Gui.Dialogs.DeleteMultipleItemsMessageBox(this, "events");
+                var result = Gui.Dialogs.DeleteMultipleItemsMessageBox(this, "events");
 
                 if (result == DialogResult.Yes)
                 {
@@ -148,43 +124,37 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 }
             }
         }
-
         private void ReloadListview()
         {
-            string[] categories = SearchableEventTopicSection.Categories;
+            var categories = SearchableEventTopicSection.Categories;
             Gui.GroupedListView.LoadAllItems(this.listView, SearchableEventTopicSection.Find(keywordsTextBox.Text),
                 categories, this.CreateListviewItem);
 
             keywordsTextBox.ResetList(SearchableEventTopicSection.Keywords);
         }
-
         private ListViewItem CreateListviewItem(ListView listView, ISearchableEventKeywordIndexItem item, bool select)
         {
-            ListViewItem listItem = new ListViewItem();
-
-            listItem.ImageKey = null; //IconRepository.ImageList.Get; // item.Syntax;
-            listItem.Name = item.Id;
-            listItem.Tag = item;
-            listItem.Text = item.DateCreated.ToString(); // item.Title;
+            var listItem = new ListViewItem
+            {
+                ImageKey = null,
+                Name = item.Id,
+                Tag = item,
+                Text = item.DateCreated.ToString()
+            };
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, item.Title));
             listView.Items.Add(listItem);
 
             return listItem;
         }
-
-        private void listView_MouseUp(object sender, MouseEventArgs e)
+        private void ListView_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                int cnt = listView.SelectedItems.Count;
-                bool onItem = false;
-                ISearchableEventKeywordIndexItem item = null;
+                var cnt = listView.SelectedItems.Count;
+                var onItem = false;
 
                 if (listView.FocusedItem != null)
-                {
                     onItem = listView.FocusedItem.Bounds.Contains(e.Location);
-                    item = listView.FocusedItem.Tag as ISearchableEventKeywordIndexItem;
-                }
 
                 mnuEdit.Enabled = cnt == 1 && onItem;
                 mnuDelete.Enabled = cnt >= 1;
@@ -197,26 +167,9 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 contextMenu.Show(Cursor.Position);
             }
         }
-
-
-        private void Base_RegisterFieldEvents(object sender, EventArgs e)
-        {
-            richTextBox.TextChanged += SetModified;
-        }
-
-        private void Base_UnregisterFieldEvents(object sender, EventArgs e)
-        {
-            richTextBox.TextChanged -= SetModified;
-        }
-
-        private void Base_Reverted(object sender, EventArgs e)
-        {
-            richTextBox.Text = string.Empty;
-        }
-
-        private void Base_ContentSaved(object sender, EventArgs e)
-        {
-            this.SearchableEventTopicSection.Text = string.Empty;
-        }
+        private void Base_RegisterFieldEvents(object sender, EventArgs e) => richTextBox.TextChanged += SetModified;
+        private void Base_UnregisterFieldEvents(object sender, EventArgs e) => richTextBox.TextChanged -= SetModified;
+        private void Base_Reverted(object sender, EventArgs e) => richTextBox.Text = string.Empty;
+        private void Base_ContentSaved(object sender, EventArgs e) => this.SearchableEventTopicSection.Text = string.Empty;
     }
 }

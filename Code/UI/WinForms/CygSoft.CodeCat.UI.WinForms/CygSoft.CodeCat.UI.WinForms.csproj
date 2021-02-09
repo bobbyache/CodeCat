@@ -212,14 +212,6 @@
     <Compile Include="Controls\TopicSections\SimpleCodeTopicSectionControl.Designer.cs">
       <DependentUpon>SimpleCodeTopicSectionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TopicSections\BaseImageTopicSectionControl.cs" />
-    <Compile Include="Controls\TopicSections\BaseImageTopicSectionControl.Designer.cs">
-      <DependentUpon>BaseImageTopicSectionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TopicSections\SingleImageTopicSectionControl.cs" />
-    <Compile Include="Controls\TopicSections\SingleImageTopicSectionControl.Designer.cs">
-      <DependentUpon>SingleImageTopicSectionControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\TopicSections\TaskListTopicSectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -468,12 +460,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\SimpleCodeTopicSectionControl.resx">
       <DependentUpon>SimpleCodeTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\BaseImageTopicSectionControl.resx">
-      <DependentUpon>BaseImageTopicSectionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TopicSections\SingleImageTopicSectionControl.resx">
-      <DependentUpon>SingleImageTopicSectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TopicSections\TaskListTopicSectionControl.resx">
       <DependentUpon>TaskListTopicSectionControl.cs</DependentUpon>

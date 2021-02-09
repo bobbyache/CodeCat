@@ -1,31 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CygSoft.CodeCat.DocumentManager.Infrastructure;
 using CygSoft.CodeCat.Domain;
 using System.IO;
 using CygSoft.CodeCat.Domain.Topics;
 using CygSoft.CodeCat.UI.WinForms.UiHelpers;
-using CygSoft.CodeCat.UI.WinForms.Controls.TopicSections;
 using PdfiumViewer;
 
 namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
 {
     // Try this: https://github.com/pvginkel/PdfiumViewer
-
     // TODO: Try and understand this for when your PDF document just dies on you when changing panes.
     // https://sourceforge.net/p/dockpanelsuite/discussion/402316/thread/f29acfe2/
     public partial class PdfDocumentControl : BaseTopicSectionControl
     {
-        private ToolStripButton btnReload;
-        private ToolStripButton btnImport;
-
         public override int ImageKey { get { return IconRepository.Get(IconRepository.TopicSections.PDF).Index; } }
         public override Icon ImageIcon { get { return IconRepository.Get(IconRepository.TopicSections.PDF).Icon; } }
         public override Image IconImage { get { return IconRepository.Get(IconRepository.TopicSections.PDF).Image; } }
@@ -35,8 +24,8 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
         {
             InitializeComponent();
 
-            btnImport = Gui.ToolBar.CreateButton(HeaderToolstrip, "Import", Constants.ImageKeys.OpenProject, btnImport_Click);
-            btnReload = Gui.ToolBar.CreateButton(HeaderToolstrip, "Reload", Constants.ImageKeys.NewProject, btnReload_Click);
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Import", Constants.ImageKeys.OpenProject, ImportButton_Click);
+            Gui.ToolBar.CreateButton(HeaderToolstrip, "Reload", Constants.ImageKeys.NewProject, ReloadButton_Click);
             
             LoadIfExists();
         }
@@ -50,7 +39,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
         }
 
-        private void btnImport_Click(object sender, EventArgs e)
+        private void ImportButton_Click(object sender, EventArgs e)
         {
             if (!topicSection.FolderExists)
             {
@@ -58,16 +47,18 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 return;
             }
 
-            OpenFileDialog openDialog = new OpenFileDialog();
-            openDialog.Filter = "PDF Files *.pdf (*.pdf)|*.pdf";
-            openDialog.DefaultExt = "*.pdf";
-            openDialog.Title = string.Format("Open PDF");
-            openDialog.AddExtension = true;
-            openDialog.FilterIndex = 0;
-            openDialog.CheckPathExists = true;
+            var openDialog = new OpenFileDialog
+            {
+                Filter = "PDF Files *.pdf (*.pdf)|*.pdf",
+                DefaultExt = "*.pdf",
+                Title = string.Format("Open PDF"),
+                AddExtension = true,
+                FilterIndex = 0,
+                CheckPathExists = true
+            };
 
-            DialogResult result = openDialog.ShowDialog(this);
-            string filePath = openDialog.FileName;
+            var result = openDialog.ShowDialog(this);
+            var filePath = openDialog.FileName;
 
             if (result == DialogResult.OK)
             {
@@ -76,7 +67,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
             }
         }
 
-        private void btnReload_Click(object sender, EventArgs e)
+        private void ReloadButton_Click(object sender, EventArgs e)
         {
             // hack to reload the control when it loses itself when changing panes.
             LoadIfExists();
