@@ -156,6 +156,10 @@ namespace CygSoft.CodeCat.Qik.LanguageEngine.Antlr
                         PadRightFunction padRightFunction = new PadRightFunction(funcInfo, scopeTable, functionArguments);
                         func = padRightFunction;
                         break;
+                    case "abbreviate":
+                        AbbreviateFunction abbreviateFunction = new AbbreviateFunction(funcInfo, scopeTable, functionArguments);
+                        func = abbreviateFunction;
+                        break;
 
                     default:
                         throw new NotSupportedException(string.Format("Function \"{0}\" is not supported in this context.", funcIdentifier));

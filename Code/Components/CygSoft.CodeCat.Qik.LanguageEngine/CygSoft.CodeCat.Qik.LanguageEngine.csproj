@@ -60,6 +60,7 @@
     <Compile Include="CompileEngine.cs" />
     <Compile Include="Compiler.cs" />
     <Compile Include="ErrorReport.cs" />
+    <Compile Include="Funcs\AbbreviationFunction.cs" />
     <Compile Include="Funcs\BaseFunction.cs" />
     <Compile Include="Funcs\CamelCaseFunction.cs" />
     <Compile Include="Funcs\ConcatenateFunction.cs" />
