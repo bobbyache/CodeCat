@@ -96,6 +96,7 @@ namespace CygSoft.CodeCat.UI.WinForms.Controls.TopicSections
                 ISearchableSnippetKeywordIndexItem item = Gui.GroupedListView.SelectedItem<ISearchableSnippetKeywordIndexItem>(listView);
                 if (item != null)
                 {
+                    syntaxBox.ScrollIntoView(0);
                     syntaxDocument.SyntaxFile = application.GetSyntaxFile(item.Syntax);
                     syntaxBox.Document.Text = item.Text;
                 }

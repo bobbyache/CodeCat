@@ -81,7 +81,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitter.Location = new System.Drawing.Point(3, 52);
             this.splitter.Name = "splitter";
-            this.splitter.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitter.Orientation = System.Windows.Forms.Orientation.Vertical;
             // 
             // splitter.Panel1
             // 
