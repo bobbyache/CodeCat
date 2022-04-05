@@ -13,7 +13,7 @@ namespace CygSoft.CodeCat.UI.ProjectExporter
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new ProjectToFileTreeExporter());
         }
     }
 }

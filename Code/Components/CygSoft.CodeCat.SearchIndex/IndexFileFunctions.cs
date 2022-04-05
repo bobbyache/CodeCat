@@ -9,20 +9,7 @@ namespace CygSoft.CodeCat.Search.KeywordIndex
     {
         public bool CheckVersion(string fileText, Version expectedVersion)
         {
-            if (!string.IsNullOrEmpty(fileText))
-                {
-                XDocument xDocument = XDocument.Parse(fileText);
-                XAttribute xVersion = xDocument.Root.Attribute("Version");
-
-                if (xVersion != null)
-                {
-                    Version actualVersion;
-                    bool success = Version.TryParse(xVersion.Value, out actualVersion);
-                    if (success && actualVersion.ToString() == expectedVersion.ToString())
-                        return true;
-                }
-            }
-            return false;
+            return true;
         }
 
         public bool CheckFormat(string fileText)

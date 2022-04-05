@@ -54,7 +54,14 @@
     <Compile Include="Code\CodeExporter.cs" />
     <Compile Include="Code\ICodeFile.cs" />
     <Compile Include="LastCodeFileRepository.cs" />
+    <Compile Include="Management\Exporters\FileGroupExporter.cs" />
+    <Compile Include="Management\Exporters\IExporter.cs" />
+    <Compile Include="Management\Exporters\MarkDown.cs" />
+    <Compile Include="Management\Exporters\SearchableSnippetExporter.cs" />
+    <Compile Include="Management\Exporters\TaskListExporter.cs" />
+    <Compile Include="Management\Exporters\WebReferencesExporter.cs" />
     <Compile Include="Management\IWorkItemExporter.cs" />
+    <Compile Include="Management\ProjectFileExporter.cs" />
     <Compile Include="Qik\QikTemplateExporter.cs" />
     <Compile Include="TopicSections\CodeTemplate\CodeTemplateTopicSection.cs" />
     <Compile Include="TopicSections\PdfViewerTopicSection.cs" />
